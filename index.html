@@ -223,7 +223,7 @@ html[data-theme="light"] .seg button.on { color: #fff; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "1.6.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "1.7.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -366,6 +366,19 @@ const UI = {
     sourceInfo: "Quellenlage",
     creed: "Glaubensbekenntnis",
     menu: "Menü",
+    calTitle: "Kirchenkalender",
+    calIntro: "Nach dem julianischen Kalender (z. B. Serbische Kirche), umgerechnet in bürgerliche Daten. Die örtliche Praxis kann abweichen.",
+    calToday: "Heute",
+    calNextFeast: "Nächstes großes Fest",
+    calInDays: "in {n} Tagen",
+    calTomorrow: "morgen",
+    calPascha: "Ostern {y}",
+    calUpcoming: "Kommende Feste",
+    calFastPeriods: "Fastenzeiten {y}",
+    calFastNote: "Wie streng du fastest, besprichst du mit deinem Priester.",
+    calGreat: "Großes Fest",
+    calOpen: "Kalender öffnen",
+    calApostlesNone: "In diesem Jahr fällt das Apostelfasten aus.",
     feastNote: "Gedenktage: erstes Datum nach dem kirchlichen (julianischen) Kalender, in Klammern das bürgerliche Datum.",
     noFreeText: "Für diese Version wurde noch kein freier, rechtmäßiger Volltext geprüft.",
   },
@@ -504,6 +517,19 @@ const UI = {
     sourceInfo: "Стање извора",
     creed: "Символ вере",
     menu: "Мени",
+    calTitle: "Црквени календар",
+    calIntro: "По јулијанском календару (нпр. Српска Црква), прерачунато у грађанске датуме. Месна пракса може да се разликује.",
+    calToday: "Данас",
+    calNextFeast: "Следећи велики празник",
+    calInDays: "за {n} дана",
+    calTomorrow: "сутра",
+    calPascha: "Васкрс {y}.",
+    calUpcoming: "Предстојећи празници",
+    calFastPeriods: "Постови {y}.",
+    calFastNote: "Колико строго постите, договорите са својим свештеником.",
+    calGreat: "Велики празник",
+    calOpen: "Отвори календар",
+    calApostlesNone: "Ове године Петровског поста нема.",
     feastNote: "Спомени: први датум по црквеном (јулијанском), други по грађанском календару.",
     noFreeText: "За ово издање још није проверен слободан, законито доступан цео текст.",
   }
@@ -3588,6 +3614,97 @@ const EXTRA_CARDS = [
 ];
 
 
+/* src/calendar.js */
+/* OrthodoxPath – Kirchenkalender (julianischer Kalender, umgerechnet in bürgerliche Daten; gültig 1900–2099).
+   Reine Rechenfunktionen ohne Netzwerk. */
+
+/* Orthodoxes Osterdatum (julianische Osterrechnung nach Meeus), Ergebnis als bürgerliches Datum (UTC-Mitternacht) */
+function orthodoxPascha(year) {
+  const a = year % 4, b = year % 7, c = year % 19;
+  const d = (19 * c + 15) % 30;
+  const e = (2 * a + 4 * b - d + 34) % 7;
+  const month = Math.floor((d + e + 114) / 31); // 3 = März, 4 = April (julianisch)
+  const day = ((d + e + 114) % 31) + 1;
+  return Date.UTC(year, month - 1, day) + 13 * 86400000; // +13 Tage (1900–2099)
+}
+const DAY = 86400000;
+function utcDay(y, m, d) { return Date.UTC(y, m - 1, d); }
+function addD(t, n) { return t + n * DAY; }
+
+/* Große Feste: feste Daten (bürgerlich, für Kirchen mit julianischem Kalender) und bewegliche (Abstand zu Ostern) */
+const CAL_FEASTS = [
+  { id: "pascha", rel: 0, great: true, name: { de: "Ostern – Auferstehung Christi (Pascha)", sr: "Васкрс – Васкрсење Христово (Пасха)" } },
+  { id: "palm", rel: -7, great: true, name: { de: "Einzug in Jerusalem (Palmsonntag)", sr: "Улазак Господа у Јерусалим (Цвети)" } },
+  { id: "ascension", rel: 39, great: true, name: { de: "Christi Himmelfahrt", sr: "Вазнесење Господње (Спасовдан)" } },
+  { id: "pentecost", rel: 49, great: true, name: { de: "Pfingsten – Fest der Dreifaltigkeit", sr: "Педесетница – Света Тројица (Духови)" } },
+  { id: "theotokos-birth", m: 9, d: 21, great: true, name: { de: "Mariä Geburt", sr: "Рођење Пресвете Богородице (Мала Госпојина)" } },
+  { id: "exaltation", m: 9, d: 27, great: true, name: { de: "Kreuzerhöhung", sr: "Воздвижење Часног Крста (Крстовдан)" } },
+  { id: "entry", m: 12, d: 4, great: true, name: { de: "Einführung Marias in den Tempel", sr: "Ваведење Пресвете Богородице" } },
+  { id: "nativity", m: 1, d: 7, great: true, name: { de: "Christi Geburt (Weihnachten)", sr: "Рођење Христово (Божић)" } },
+  { id: "theophany", m: 1, d: 19, great: true, name: { de: "Theophanie – Taufe Christi", sr: "Богојављење" } },
+  { id: "meeting", m: 2, d: 15, great: true, name: { de: "Darstellung des Herrn (Begegnung)", sr: "Сретење Господње" } },
+  { id: "annunciation", m: 4, d: 7, great: true, name: { de: "Verkündigung an die Gottesgebärerin", sr: "Благовести" } },
+  { id: "transfiguration", m: 8, d: 19, great: true, name: { de: "Verklärung des Herrn", sr: "Преображење Господње" } },
+  { id: "dormition", m: 8, d: 28, great: true, name: { de: "Entschlafung der Gottesgebärerin", sr: "Успење Пресвете Богородице (Велика Госпојина)" } },
+  { id: "sava", m: 1, d: 27, great: false, name: { de: "Hl. Sava von Serbien", sr: "Свети Сава (Савиндан)" } },
+  { id: "basil-ostrog", m: 5, d: 12, great: false, name: { de: "Hl. Vasilije von Ostrog", sr: "Свети Василије Острошки" } },
+  { id: "vidovdan", m: 6, d: 28, great: false, name: { de: "Hl. Fürst Lazar (Vidovdan)", sr: "Свети кнез Лазар (Видовдан)" } },
+  { id: "peter-paul", m: 7, d: 12, great: false, name: { de: "Hl. Apostel Petrus und Paulus", sr: "Свети апостоли Петар и Павле (Петровдан)" } },
+  { id: "nicholas", m: 12, d: 19, great: false, name: { de: "Hl. Nikolaus", sr: "Свети Никола (Никољдан)" } }
+];
+
+const CAL_FASTS = {
+  lent: { de: "Große Fastenzeit", sr: "Велики (Часни) пост" },
+  apostles: { de: "Apostelfasten", sr: "Петровски пост" },
+  dormition: { de: "Entschlafungsfasten", sr: "Госпојински пост" },
+  nativity: { de: "Weihnachtsfasten", sr: "Божићни пост" },
+  single: { de: "Einzelner Fasttag", sr: "Посни дан" },
+  wedfri: { de: "Mittwoch/Freitag – Fasttag", sr: "Среда/петак – посни дан" },
+  cheese: { de: "Käsewoche – ohne Fleisch", sr: "Сиропусна седмица – без меса" },
+  free: { de: "Fastenfreie Zeit", sr: "Мрсна седмица" },
+  none: { de: "Kein Fasttag", sr: "Није посни дан" }
+};
+
+/* Liefert alle Feste mit Datum für ein Jahr */
+function feastsOfYear(year) {
+  const P = orthodoxPascha(year);
+  return CAL_FEASTS.map(f => ({ ...f, t: f.rel != null ? addD(P, f.rel) : utcDay(year, f.m, f.d) })).sort((a, b) => a.t - b.t);
+}
+
+/* Fastenstatus für einen Tag (t = UTC-Mitternacht). Vereinfachte, übliche Regel. */
+function fastInfo(t) {
+  const dt = new Date(t); const y = dt.getUTCFullYear(); const P = orthodoxPascha(y);
+  const between = (a, b) => t >= a && t <= b;
+  const wd = dt.getUTCDay(); // 0 = Sonntag
+  // fastenfreie Zeiten
+  if (between(P, addD(P, 6))) return { kind: "free" };                       // Lichte Woche
+  if (between(utcDay(y, 1, 7), utcDay(y, 1, 17))) return { kind: "free" };   // Weihnachten bis vor Theophanie
+  if (between(addD(P, 50), addD(P, 56))) return { kind: "free" };            // Woche nach Pfingsten
+  if (between(addD(P, -69), addD(P, -64))) return { kind: "free" };          // Woche nach dem Sonntag des Zöllners
+  // Fastenzeiten
+  if (between(addD(P, -48), addD(P, -1))) return { kind: "lent" };
+  if (between(addD(P, -55), addD(P, -49))) return { kind: "cheese" };
+  const apStart = addD(P, 57), apEnd = utcDay(y, 7, 11);
+  if (apStart <= apEnd && between(apStart, apEnd)) return { kind: "apostles" };
+  if (between(utcDay(y, 8, 14), utcDay(y, 8, 27))) return { kind: "dormition" };
+  if (t >= utcDay(y, 11, 28) || t <= utcDay(y, 1, 6)) return { kind: "nativity" };
+  if (t === utcDay(y, 1, 18) || t === utcDay(y, 9, 11) || t === utcDay(y, 9, 27)) return { kind: "single" };
+  if (wd === 3 || wd === 5) return { kind: "wedfri" };
+  return { kind: "none" };
+}
+
+/* Feste an einem Tag und nächstes großes Fest ab einem Tag */
+function feastsOn(t) {
+  const y = new Date(t).getUTCFullYear();
+  return feastsOfYear(y).filter(f => f.t === t);
+}
+function nextGreatFeast(t) {
+  const y = new Date(t).getUTCFullYear();
+  const list = feastsOfYear(y).concat(feastsOfYear(y + 1)).filter(f => f.great && f.t > t);
+  return list[0];
+}
+
+
 /* src/app.js */
 /* OrthodoxPath – Anwendungslogik. Keine externen Abhängigkeiten, keine Netzwerkzugriffe. */
 (function () {
@@ -3711,7 +3828,7 @@ const EXTRA_CARDS = [
     if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed") return "theology";
     if (r.startsWith("person-") || r === "saints") return "saints";
     if (r === "cards" || r === "review") return "cards";
-    if (r === "home" || r === "ask") return "home";
+    if (r === "home" || r === "ask" || r === "calendar") return "home";
     return "more";
   }
   function parentOf(r) {
@@ -3723,6 +3840,7 @@ const EXTRA_CARDS = [
     if (r === "review") return "cards";
     if (r === "ask") return "home";
     if (["books", "progress", "notes", "glossary", "prefs"].includes(r)) return "more";
+    if (r === "calendar") return "home";
     return null;
   }
 
@@ -3776,6 +3894,7 @@ const EXTRA_CARDS = [
       else if (r === "ask") html = viewAsk();
       else if (r === "prefs") html = viewPrefs();
       else if (r === "more") html = viewMore();
+      else if (r === "calendar") html = viewCalendar();
       else html = `<div class="card"><p>${esc(t("notFound"))}</p><a class="btn" href="#home">${esc(t("home"))}</a></div>`;
       app.innerHTML = shell(html, r);
       bindCommon();
@@ -3855,6 +3974,7 @@ const EXTRA_CARDS = [
         ${nl ? `<h2>${E(nl.title)}</h2>${nl.ref ? `<p class="muted">${E(nl.ref)}</p>` : ""}
           <a class="btn block" href="#lesson-${nl.id}">${esc(t("continue"))} ›</a>` : `<p>${esc(t("allDone"))}</p>`}
       </div>
+      ${calCard()}
       <div class="grid2">
         <div class="card stat"><b>${st}</b><span class="small muted">${esc(t("streak"))} · ${esc(st === 1 ? t("day") : t("days"))}</span></div>
         <div class="card stat"><b>${wk}/${goal}</b><span class="small muted">${esc(t("weekGoal"))}</span>
@@ -3872,6 +3992,55 @@ const EXTRA_CARDS = [
         <li><a class="item" href="#progress"><span class="grow"><span class="t">${esc(t("progressTitle"))}</span></span><span class="chev">›</span></a></li>
       </ul>
       <p class="small muted">${esc(t("disclaimer"))}</p>`;
+  }
+
+
+  /* ---------- Kirchenkalender ---------- */
+  function todayUTC() { const d = new Date(); return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function locale() { return lang() === "de" ? "de-DE" : (lang() === "sr-lat" ? "sr-Latn-RS" : "sr-Cyrl-RS"); }
+  function fmtDate(t, withWeekday) {
+    try { return new Date(t).toLocaleDateString(locale(), Object.assign({ timeZone: "UTC", day: "numeric", month: "long" }, withWeekday ? { weekday: "long" } : {})); }
+    catch (e) { const d = new Date(t); return d.getUTCDate() + "." + (d.getUTCMonth() + 1) + "."; }
+  }
+  function inDays(ts) { const n = Math.round((ts - todayUTC()) / 86400000); return n === 1 ? t("calTomorrow") : t("calInDays").replace("{n}", n); }
+  function fastBadge(k) { const tag = { none: "", free: "tag-counsel", wedfri: "tag-uncertain" }[k]; return `<span class="badge ${tag === undefined ? "tag-uncertain" : tag}">${E(CAL_FASTS[k])}</span>`; }
+  function calCard() {
+    const td = todayUTC(); const fi = fastInfo(td); const fe = feastsOn(td); const nx = nextGreatFeast(td);
+    return `<a class="card" href="#calendar" style="display:block;text-decoration:none;color:inherit">
+      <div class="eyebrow">${esc(t("calToday"))} · ${esc(fmtDate(td, true))}</div>
+      ${fe.map(f => `<p><b>${E(f.name)}</b></p>`).join("")}
+      ${fastBadge(fi.kind)}
+      ${nx ? `<p class="small muted" style="margin:6px 0 0">${esc(t("calNextFeast"))}: <b>${E(nx.name)}</b> – ${esc(fmtDate(nx.t))} (${esc(inDays(nx.t))})</p>` : ""}
+    </a>`;
+  }
+  function viewCalendar() {
+    const td = todayUTC(); const y = new Date(td).getUTCFullYear();
+    const fi = fastInfo(td); const fe = feastsOn(td);
+    const upcoming = feastsOfYear(y).concat(feastsOfYear(y + 1)).filter(f => f.t >= td && f.t < td + 366 * 86400000);
+    const P = orthodoxPascha(y), P2 = orthodoxPascha(y + 1);
+    const D = 86400000; const ap1 = P + 57 * D, ap2 = Date.UTC(y, 6, 11);
+    const range = (a, b) => `${esc(fmtDate(a))} – ${esc(fmtDate(b))}`;
+    return `<h1>${esc(t("calTitle"))}</h1><p class="muted small">${esc(t("calIntro"))}</p>
+      <div class="card hero"><div class="eyebrow">${esc(t("calToday"))} · ${esc(fmtDate(td, true))}</div>
+        ${fe.map(f => `<h3>${E(f.name)}</h3>`).join("")}${fastBadge(fi.kind)}
+        <p class="small muted" style="margin-top:8px">${esc(t("calFastNote"))}</p></div>
+      <div class="grid2">
+        <div class="card stat"><b style="font-size:1.2em">${esc(fmtDate(P))}</b><span class="small muted">${esc(t("calPascha").replace("{y}", y))}</span></div>
+        <div class="card stat"><b style="font-size:1.2em">${esc(fmtDate(P2))}</b><span class="small muted">${esc(t("calPascha").replace("{y}", y + 1))}</span></div>
+      </div>
+      <h2>${esc(t("calUpcoming"))}</h2>
+      <ul class="list">${upcoming.map(f => `<li class="item" style="cursor:default"><span class="grow"><span class="t">${E(f.name)}</span><span class="s">${esc(fmtDate(f.t, true))} · ${esc(f.t === td ? t("calToday") : inDays(f.t))}</span></span>${f.great ? `<span class="badge tag-dogma">${esc(t("calGreat"))}</span>` : ""}</li>`).join("")}</ul>
+      <h2>${esc(t("calFastPeriods").replace("{y}", y))}</h2>
+      <div class="card">
+        <div class="refline"><b>${E(CAL_FASTS.lent)}</b><span class="grow">${range(P - 48 * D, P - D)}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.apostles)}</b><span class="grow">${ap1 <= ap2 ? range(ap1, ap2) : esc(t("calApostlesNone"))}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.dormition)}</b><span class="grow">${range(Date.UTC(y, 7, 14), Date.UTC(y, 7, 27))}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.nativity)}</b><span class="grow">${range(Date.UTC(y, 10, 28), Date.UTC(y + 1, 0, 6))}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.wedfri)}</b><span class="grow">${E(CAL_FASTS.free)}: ${range(P, P + 6 * D)}; ${range(P + 50 * D, P + 56 * D)}</span></div>
+        <p class="small muted" style="margin-top:8px">${esc(t("calFastNote"))}</p>
+      </div>
+      <a class="item" href="#lesson-li-fasting"><span class="grow"><span class="t">${E(ALL_LESSONS["li-fasting"].title)}</span></span><span class="chev">›</span></a>
+      <a class="item" href="#lesson-li-feasts"><span class="grow"><span class="t">${E(ALL_LESSONS["li-feasts"].title)}</span></span><span class="chev">›</span></a>`;
   }
 
   /* ---------- Bibel ---------- */
@@ -3980,6 +4149,7 @@ const EXTRA_CARDS = [
     const ls = THEOLOGY.filter(l => l.course === cid);
     return `<h1>${esc(t(c.title))}</h1><p class="muted">${E(c.desc)}</p>
       <ul class="list">${ls.map((l, i) => lessonItem(l, i + 1)).join("")}</ul>
+      ${cid === "L" ? `<a class="item" href="#calendar"><span class="grow"><span class="t">${esc(t("calTitle"))}</span></span><span class="chev">›</span></a>` : ""}
       ${cid === "P" ? `<a class="item" href="#person-s-paisios"><span class="grow"><span class="t">${E(PEOPLE["s-paisios"].name)}</span><span class="s">${esc(t("saints"))}</span></span><span class="chev">›</span></a>` : ""}`;
   }
   function viewCreed() {
@@ -4302,7 +4472,7 @@ const EXTRA_CARDS = [
   function viewMore() {
     const it = (h, k, s) => `<li><a class="item" href="#${h}"><span class="grow"><span class="t">${esc(t(k))}</span>${s ? `<span class="s">${esc(s)}</span>` : ""}</span><span class="chev">›</span></a></li>`;
     return `<h1>${esc(t("navMore"))}</h1><ul class="list">
-      ${it("books", "navBooks", t("booksIntro"))}${it("progress", "navProgress")}${it("notes", "notebook")}${it("glossary", "glossary")}${it("ask", "askTitle")}${it("prefs", "navSettings")}
+      ${it("books", "navBooks", t("booksIntro"))}${it("progress", "navProgress")}${it("notes", "notebook")}${it("glossary", "glossary")}${it("ask", "askTitle")}${it("calendar", "calTitle")}${it("prefs", "navSettings")}
     </ul>`;
   }
 
