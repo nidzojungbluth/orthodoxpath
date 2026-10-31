@@ -223,7 +223,7 @@ html[data-theme="light"] .seg button.on { color: #fff; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "1.7.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "1.8.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -366,6 +366,13 @@ const UI = {
     sourceInfo: "Quellenlage",
     creed: "Glaubensbekenntnis",
     menu: "Menü",
+    prayersTitle: "Gebete",
+    prayersIntro: "Eine kurze Gebetsordnung für Morgen und Abend und weitere Gebete. Wie lang deine tägliche Gebetsregel ist, besprichst du am besten mit deinem Priester.",
+    prMorning: "Morgen", prEvening: "Abend", prOther: "Weitere Gebete",
+    prTimes: "{n}× beten",
+    prTransDe: "Deutsche Texte: Arbeitsübersetzung dieser App, keine offizielle kirchliche Übersetzung.",
+    prTransSr: "Српски текстови: у црквеној употреби раширен текст; у молитвеницима могу постојати мала одступања.",
+    prPs50: "Psalm 50 – das große Bußgebet (in deiner Bibel lesen oder beten)",
     calTitle: "Kirchenkalender",
     calIntro: "Nach dem julianischen Kalender (z. B. Serbische Kirche), umgerechnet in bürgerliche Daten. Die örtliche Praxis kann abweichen.",
     calToday: "Heute",
@@ -517,6 +524,13 @@ const UI = {
     sourceInfo: "Стање извора",
     creed: "Символ вере",
     menu: "Мени",
+    prayersTitle: "Молитве",
+    prayersIntro: "Кратак поредак јутарњих и вечерњих молитава и друге молитве. Колико дуго да траје ваше свакодневно молитвено правило, најбоље је договорити са свештеником.",
+    prMorning: "Јутро", prEvening: "Вече", prOther: "Друге молитве",
+    prTimes: "Молити {n} пута",
+    prTransDe: "Немачки текстови: радни превод ове апликације, није званичан црквени превод.",
+    prTransSr: "Српски текстови: у црквеној употреби раширен текст; у молитвеницима могу постојати мала одступања.",
+    prPs50: "Псалам 50 – велика покајна молитва (прочитајте или молите из своје Библије)",
     calTitle: "Црквени календар",
     calIntro: "По јулијанском календару (нпр. Српска Црква), прерачунато у грађанске датуме. Месна пракса може да се разликује.",
     calToday: "Данас",
@@ -3614,6 +3628,57 @@ const EXTRA_CARDS = [
 ];
 
 
+/* src/content/prayers.js */
+/* OrthodoxPath – Gebete. Serbisch: im kirchlichen Gebrauch verbreiteter Wortlaut (kleine Abweichungen je nach Gebetbuch möglich).
+   Deutsch: Arbeitsübersetzung dieser App, keine offizielle kirchliche Übersetzung. */
+
+const PRAYER_TEXTS = {
+  cross: { title: { de: "Kreuzzeichen", sr: "Знак крста" },
+    text: { de: "Im Namen des Vaters und des Sohnes und des Heiligen Geistes. Amen.", sr: "У име Оца и Сина и Светога Духа. Амин." } },
+  glorythee: { title: { de: "Lobpreis", sr: "Славословље" },
+    text: { de: "Ehre sei dir, unser Gott, Ehre sei dir.", sr: "Слава Теби, Боже наш, слава Теби." } },
+  heavenlyking: { title: { de: "Himmlischer König – Gebet zum Heiligen Geist", sr: "Царе Небески – молитва Духу Светом" },
+    text: { de: "Himmlischer König, Tröster, Geist der Wahrheit, der du überall bist und alles erfüllst, Schatz der Güter und Spender des Lebens: Komm und wohne in uns, reinige uns von jedem Makel und rette, Gütiger, unsere Seelen.", sr: "Царе Небески, Утешитељу, Душе истине, Који си свуда и све испуњаваш, Ризницо добара и Даваоче живота, дођи и усели се у нас, и очисти нас од сваке нечистоте, и спаси, Благи, душе наше." } },
+  trisagion: { title: { de: "Trisagion (Dreimal-Heilig)", sr: "Трисвета песма" }, repeat: 3,
+    text: { de: "Heiliger Gott, heiliger Starker, heiliger Unsterblicher, erbarme dich unser.", sr: "Свети Боже, Свети Крепки, Свети Бесмртни, помилуј нас." } },
+  gloria: { title: { de: "Ehre sei dem Vater", sr: "Слава Оцу" },
+    text: { de: "Ehre sei dem Vater und dem Sohn und dem Heiligen Geist, jetzt und immerdar und in die Ewigkeit der Ewigkeiten. Amen.", sr: "Слава Оцу и Сину и Светоме Духу, и сада и увек и у векове векова. Амин." } },
+  alltrinity: { title: { de: "Gebet zur Heiligen Dreifaltigkeit", sr: "Молитва Пресветој Тројици" },
+    text: { de: "Allheilige Dreifaltigkeit, erbarme dich unser. Herr, vergib uns unsere Sünden. Gebieter, verzeih uns unsere Übertretungen. Heiliger, sieh auf uns und heile unsere Schwächen um deines Namens willen.", sr: "Пресвета Тројице, помилуј нас; Господе, очисти грехе наше; Владико, опрости безакоња наша; Свети, посети и исцели немоћи наше, имена Твога ради." } },
+  kyrie: { title: { de: "Herr, erbarme dich", sr: "Господе, помилуј" }, repeat: 3,
+    text: { de: "Herr, erbarme dich.", sr: "Господе, помилуј." } },
+  ourfather: { title: { de: "Vaterunser", sr: "Оче наш" },
+    text: { de: "Vater unser, der du bist in den Himmeln, geheiligt werde dein Name. Dein Reich komme. Dein Wille geschehe, wie im Himmel, so auf Erden. Unser tägliches Brot gib uns heute. Und vergib uns unsere Schulden, wie auch wir vergeben unseren Schuldnern. Und führe uns nicht in Versuchung, sondern erlöse uns von dem Bösen.\n\nDenn dein ist das Reich und die Kraft und die Herrlichkeit, des Vaters und des Sohnes und des Heiligen Geistes, jetzt und immerdar und in die Ewigkeit der Ewigkeiten. Amen.", sr: "Оче наш, Који си на небесима, да се свети име Твоје, да дође Царство Твоје, да буде воља Твоја и на земљи као на небу; хлеб наш насушни дај нам данас, и опрости нам дугове наше као што и ми опраштамо дужницима својим; и не уведи нас у искушење, но избави нас од злога.\n\nЈер је Твоје Царство и сила и слава, Оца и Сина и Светога Духа, сада и увек и у векове векова. Амин." },
+    note: { de: "Den Schluss („Denn dein ist das Reich …“) spricht im Gottesdienst der Priester.", sr: "Завршетак („Јер је Твоје Царство …“) на богослужењу говори свештеник." } },
+  theotokos: { title: { de: "Gottesgebärerin, Jungfrau, freue dich", sr: "Богородице Дјево" },
+    text: { de: "Gottesgebärerin, Jungfrau, freue dich, begnadete Maria, der Herr ist mit dir. Gesegnet bist du unter den Frauen, und gesegnet ist die Frucht deines Leibes, denn du hast den Retter unserer Seelen geboren.", sr: "Богородице Дјево, радуј се, благодатна Марија, Господ је с тобом; благословена си ти међу женама и благословен је плод утробе твоје, јер си родила Спаса душа наших." } },
+  axion: { title: { de: "Würdig ist es", sr: "Достојно јест" },
+    text: { de: "Würdig ist es wahrhaft, dich selig zu preisen, Gottesgebärerin, die allzeit selige und ganz untadelige Mutter unseres Gottes. Die du ehrwürdiger bist als die Cherubim und unvergleichlich herrlicher als die Seraphim, die du unversehrt Gott das Wort geboren hast, wahrhafte Gottesgebärerin, dich preisen wir hoch.", sr: "Достојно је ваистину да блажимо Тебе, Богородицу, увек блажену и свенепорочну и Мајку Бога нашега. Тебе, часнију од Херувима и неупоредиво славнију од Серафима, која си без истлења родила Бога Логоса, ваистину Богородицу, величамо." } },
+  jesus: { title: { de: "Jesusgebet", sr: "Исусова молитва" },
+    text: { de: "Herr Jesus Christus, Sohn Gottes, erbarme dich meiner.", sr: "Господе Исусе Христе, Сине Божији, помилуј ме." },
+    note: { de: "Kann jederzeit still wiederholt werden. Für eine intensive Übung frage deinen Priester.", sr: "Може се у свако доба тихо понављати. За интензивну праксу питајте свог свештеника." } },
+  ephrem: { title: { de: "Gebet des hl. Ephräm (Große Fastenzeit)", sr: "Молитва светог Јефрема (Велики пост)" },
+    text: { de: "Herr und Gebieter meines Lebens, den Geist der Trägheit, der Verzagtheit, der Herrschsucht und der Geschwätzigkeit gib mir nicht. Den Geist der Lauterkeit, der Demut, der Geduld und der Liebe schenke mir, deinem Knecht. Ja, Herr und König, gib mir, meine eigenen Verfehlungen zu sehen und meinen Bruder nicht zu verurteilen, denn gesegnet bist du in die Ewigkeit der Ewigkeiten. Amen.", sr: "Господе и Владико живота мога, дух лењости, малодушности, властољубља и празнословља не дај ми. Дух целомудрености, смиреноумља, трпљења и љубави даруј мени, слузи Своме. Да, Господе Царе, даруј ми да видим своја сагрешења и да не осуђујем брата свога, јер си благословен у векове векова. Амин." },
+    note: { de: "Wird traditionell an den Wochentagen der Großen Fastenzeit mit Verneigungen gebetet.", sr: "Традиционално се моли радним данима Великог поста са метанијама." } },
+  study: { title: { de: "Gebet vor dem Lernen", sr: "Молитва пре учења" },
+    text: { de: "Allgütiger Herr, sende uns die Gnade deines Heiligen Geistes herab, die unsere geistigen Kräfte schenkt und stärkt, damit wir, aufmerksam auf die Lehre hörend, die uns gegeben wird, heranwachsen zu deiner Ehre, unserem Schöpfer, unseren Eltern zur Freude, der Kirche und dem Vaterland zum Nutzen.", sr: "Преблаги Господе, ниспошљи нам благодат Светога Твога Духа, која дарује и укрепљује душевне наше силе, да бисмо, пажљиво слушајући предавано нам учење, узрасли Теби, Творцу нашем, на славу, родитељима нашим на утеху, а Цркви и отаџбини на корист." },
+    note: { de: "Traditionelles Schulgebet; der Wortlaut kann je nach Gebetbuch leicht abweichen.", sr: "Традиционална школска молитва; текст се може мало разликовати зависно од молитвеника." } },
+  meal: { title: { de: "Gebet vor dem Essen", sr: "Молитва пре јела" },
+    text: { de: "Die Augen aller warten auf dich, o Herr, und du gibst ihnen ihre Speise zur rechten Zeit. Du öffnest deine Hand und sättigst alles, was lebt, mit Wohlgefallen. (Ps 144,15–16)", sr: "Очи свију у Тебе, Господе, уздају се, и Ти им дајеш храну у своје време; отвараш руку Своју и испуњаваш свако живо биће благовољењем. (Пс 144,15–16)" },
+    note: { de: "Danach betet man das Vaterunser und bekreuzigt sich.", sr: "После тога се моли Оче наш и крсти се." } },
+  personal: { title: { de: "Für die Lebenden und die Verstorbenen", sr: "За живе и уснуле" },
+    text: { de: "Herr, gedenke und erbarme dich meiner Eltern, meiner Familie, meiner Freunde und aller, die ich dir jetzt nenne … Behüte sie und schenke ihnen, was sie zum Heil brauchen.\n\nGib Ruhe, Herr, den Seelen deiner entschlafenen Diener … und vergib ihnen alle Sünden. Amen.", sr: "Помени, Господе, и помилуј моје родитеље, моју породицу, моје пријатеље и све које Ти сада наводим … Сачувај их и даруј им све што им је потребно за спасење.\n\nУпокој, Господе, душе уснулих слугу Твојих … и опрости им сва сагрешења. Амин." },
+    note: { de: "Vorschlag der App für das persönliche Gebet mit eigenen Worten – kein festgelegter kirchlicher Text. An den Stellen „…“ nennst du die Namen.", sr: "Предлог апликације за личну молитву сопственим речима – није утврђени црквени текст. На местима „…“ наводите имена." } }
+};
+
+/* Gebetsordnungen: Reihenfolge der Gebete. "creed" und "ps50" verweisen auf vorhandene Inhalte. */
+const PRAYER_RULES = {
+  morning: ["cross", "glorythee", "heavenlyking", "trisagion", "gloria", "alltrinity", "kyrie", "gloria", "ourfather", "creed", "theotokos", "personal"],
+  evening: ["cross", "glorythee", "heavenlyking", "trisagion", "gloria", "alltrinity", "kyrie", "gloria", "ourfather", "ps50", "axion", "personal", "jesus"],
+  other: ["study", "meal", "jesus", "ephrem"]
+};
+
+
 /* src/calendar.js */
 /* OrthodoxPath – Kirchenkalender (julianischer Kalender, umgerechnet in bürgerliche Daten; gültig 1900–2099).
    Reine Rechenfunktionen ohne Netzwerk. */
@@ -3828,7 +3893,7 @@ function nextGreatFeast(t) {
     if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed") return "theology";
     if (r.startsWith("person-") || r === "saints") return "saints";
     if (r === "cards" || r === "review") return "cards";
-    if (r === "home" || r === "ask" || r === "calendar") return "home";
+    if (r === "home" || r === "ask" || r === "calendar" || r === "prayers") return "home";
     return "more";
   }
   function parentOf(r) {
@@ -3840,7 +3905,7 @@ function nextGreatFeast(t) {
     if (r === "review") return "cards";
     if (r === "ask") return "home";
     if (["books", "progress", "notes", "glossary", "prefs"].includes(r)) return "more";
-    if (r === "calendar") return "home";
+    if (r === "calendar" || r === "prayers") return "home";
     return null;
   }
 
@@ -3895,6 +3960,7 @@ function nextGreatFeast(t) {
       else if (r === "prefs") html = viewPrefs();
       else if (r === "more") html = viewMore();
       else if (r === "calendar") html = viewCalendar();
+      else if (r === "prayers") html = viewPrayers();
       else html = `<div class="card"><p>${esc(t("notFound"))}</p><a class="btn" href="#home">${esc(t("home"))}</a></div>`;
       app.innerHTML = shell(html, r);
       bindCommon();
@@ -3980,6 +4046,7 @@ function nextGreatFeast(t) {
         <div class="card stat"><b>${wk}/${goal}</b><span class="small muted">${esc(t("weekGoal"))}</span>
           <div class="progressbar" style="margin-top:8px"><i style="width:${Math.min(100, Math.round(wk / goal * 100))}%"></i></div></div>
       </div>
+      <a class="item" href="#prayers"><span class="grow"><span class="t">${esc(t("prayersTitle"))}</span><span class="s">${esc(t("prMorning"))} · ${esc(t("prEvening"))} · ${esc(t("prOther"))}</span></span><span class="chev">›</span></a>
       <a class="item" href="#review"><span class="grow"><span class="t">${esc(t("cardsDue"))}: ${dueCount()}</span><span class="s">${esc(t("reviewNow"))}</span></span><span class="chev">›</span></a>
       <a class="item" href="#ask"><span class="grow"><span class="t">${esc(t("askTitle"))}</span><span class="s">${esc(t("askHint"))}</span></span><span class="chev">›</span></a>
       <div class="divider">${CROSS}</div>
@@ -3994,6 +4061,25 @@ function nextGreatFeast(t) {
       <p class="small muted">${esc(t("disclaimer"))}</p>`;
   }
 
+
+
+  /* ---------- Gebete ---------- */
+  let prayerTab = (new Date().getHours() >= 15) ? "evening" : "morning";
+  function viewPrayers() {
+    const tabs = [["morning", "prMorning"], ["evening", "prEvening"], ["other", "prOther"]];
+    const card = id => {
+      if (id === "creed") return `<div class="card"><h3>${esc(t("creed"))}</h3><p class="creed">${E(CREED)}</p></div>`;
+      if (id === "ps50") return `<a class="item" href="#lesson-bib-ps50"><span class="grow"><span class="t">${esc(t("prPs50"))}</span></span><span class="chev">›</span></a>`;
+      const p = PRAYER_TEXTS[id];
+      return `<div class="card"><h3>${E(p.title)}</h3>${p.repeat ? `<span class="badge tag-history">${esc(t("prTimes").replace("{n}", p.repeat))}</span>` : ""}
+        <p class="creed">${E(p.text)}</p>${p.note ? `<p class="small muted">${E(p.note)}</p>` : ""}</div>`;
+    };
+    return `<h1>${esc(t("prayersTitle"))}</h1><p class="muted small">${esc(t("prayersIntro"))}</p>
+      <div class="seg" style="margin-bottom:14px">${tabs.map(([id, k]) => `<button data-ptab="${id}" class="${prayerTab === id ? "on" : ""}">${esc(t(k))}</button>`).join("")}</div>
+      ${PRAYER_RULES[prayerTab].map(card).join("")}
+      <p class="small muted">${esc(lang() === "de" ? t("prTransDe") : t("prTransSr"))}</p>`;
+  }
+  function bindPrayers() { app.querySelectorAll("[data-ptab]").forEach(b => b.onclick = () => { prayerTab = b.getAttribute("data-ptab"); render(); window.scrollTo(0, 0); }); }
 
   /* ---------- Kirchenkalender ---------- */
   function todayUTC() { const d = new Date(); return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()); }
@@ -4472,7 +4558,7 @@ function nextGreatFeast(t) {
   function viewMore() {
     const it = (h, k, s) => `<li><a class="item" href="#${h}"><span class="grow"><span class="t">${esc(t(k))}</span>${s ? `<span class="s">${esc(s)}</span>` : ""}</span><span class="chev">›</span></a></li>`;
     return `<h1>${esc(t("navMore"))}</h1><ul class="list">
-      ${it("books", "navBooks", t("booksIntro"))}${it("progress", "navProgress")}${it("notes", "notebook")}${it("glossary", "glossary")}${it("ask", "askTitle")}${it("calendar", "calTitle")}${it("prefs", "navSettings")}
+      ${it("books", "navBooks", t("booksIntro"))}${it("progress", "navProgress")}${it("notes", "notebook")}${it("glossary", "glossary")}${it("prayers", "prayersTitle")}${it("ask", "askTitle")}${it("calendar", "calTitle")}${it("prefs", "navSettings")}
     </ul>`;
   }
 
@@ -4548,7 +4634,7 @@ function nextGreatFeast(t) {
   function bindLesson(r) { const b = document.getElementById("donebtn"); if (b) b.onclick = () => toggleDone(r.slice(7)); }
   function bindBooks() { app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { bookCat = b.getAttribute("data-cat"); render(); }); }
 
-  const BINDERS = { lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks };
+  const BINDERS = { prayers: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };
