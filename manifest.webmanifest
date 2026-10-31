@@ -1,0 +1,23 @@
+{
+  "name": "OrthodoxPath",
+  "short_name": "OrthodoxPath",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#12100e",
+  "theme_color": "#12100e",
+  "lang": "de",
+  "description": "Zweisprachige orthodoxe Lernakademie – Deutsch und Serbisch",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
