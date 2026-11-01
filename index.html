@@ -237,7 +237,7 @@ main > .wrap { animation: opFade .28s ease-out; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "2.2.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "2.3.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -2955,6 +2955,230 @@ const BIBLE = {
         { q: { de: "Wann ist der Gedenktag der makkabäischen Märtyrer?", sr: "Када је спомен мученика Макавеја?" },
           options: [{ de: "1. August (14. August)", sr: "1. августа (14. августа)" }, { de: "25. März (7. April)", sr: "25. марта (7. априла)" }, { de: "14. September (27. September)", sr: "14. септембра (27. септембра)" }], correct: 0 }
       ]
+    },
+  {
+      id: "bib-eph6", book: "eph", order: 31,
+      title: { de: "Die Waffenrüstung Gottes", sr: "Свеоружје Божије" },
+      ref: { de: "Epheser 6,10–20", sr: "Ефесцима 6,10–20" },
+      intro: {
+        de: "Der Apostel Paulus schrieb den Epheserbrief nach kirchlicher Überlieferung aus der Gefangenschaft. Am Ende des Briefes beschreibt er das Leben des Christen als geistlichen Kampf und gebraucht dafür das Bild der Rüstung eines Soldaten.",
+        sr: "Апостол Павле је, према црквеном предању, написао Посланицу Ефесцима из тамнице. На крају посланице описује живот хришћанина као духовну борбу и за то користи слику оружја једног војника."
+      },
+      introTag: "history",
+      context: {
+        de: "Ephesus war eine große Stadt mit dem berühmten Tempel der Artemis; Magie und Götzendienst waren dort verbreitet (vgl. Apg 19). Paulus erinnert die Christen daran, dass ihr eigentlicher Kampf nicht gegen Menschen geht.",
+        sr: "Ефес је био велики град са чувеним Артемидиним храмом; магија и идолопоклонство су тамо били раширени (уп. Дап 19). Павле подсећа хришћане да њихова права борба није против људи."
+      },
+      reading: [
+        { ref: { de: "Eph 6,10–13", sr: "Еф 6,10–13" }, note: { de: "Der Kampf geht nicht gegen Fleisch und Blut.", sr: "Борба није против крви и тела." } },
+        { ref: { de: "Eph 6,14–17", sr: "Еф 6,14–17" }, note: { de: "Die einzelnen Teile der Rüstung.", sr: "Поједини делови оружја." } },
+        { ref: { de: "Eph 6,18–20", sr: "Еф 6,18–20" }, note: { de: "Betet allezeit im Geist.", sr: "Молите се у свако време Духом." } }
+      ],
+      summary: {
+        de: "Paulus ruft die Gläubigen auf, stark zu werden im Herrn und die ganze Waffenrüstung Gottes anzulegen, um den Listen des Teufels zu widerstehen. Der Kampf richtet sich nicht gegen Menschen, sondern gegen die geistigen Mächte der Bosheit. Er nennt den Gürtel der Wahrheit, den Panzer der Gerechtigkeit, die Schuhe der Bereitschaft für das Evangelium des Friedens, den Schild des Glaubens, mit dem man die feurigen Pfeile des Bösen auslöscht, den Helm des Heils und das Schwert des Geistes, das Wort Gottes. Zum Schluss fordert er auf, allezeit im Geist zu beten und wachsam zu sein, auch für ihn selbst, damit er das Evangelium freimütig verkünden kann.",
+        sr: "Павле позива вернике да се оснаже у Господу и обуку у све оружје Божије, да би се одупрли лукавствима ђавољим. Борба није уперена против људи, него против духовних сила злобе. Наводи појас истине, оклоп правде, обућу спремности за јеванђеље мира, штит вере којим се гасе огњене стреле злога, шлем спасења и мач духовни, који је реч Божија. На крају позива да се у свако време молимо Духом и да бдимо, и за њега самог, да би слободно проповедао јеванђеље."
+      },
+      interp: {
+        simple: {
+          de: "Der Christ kämpft nicht mit Gewalt gegen andere Menschen, sondern gegen die Sünde und gegen das Böse. Die Waffen dafür sind Wahrheit, Gerechtigkeit, Glaube, das Wort Gottes und vor allem das Gebet.",
+          sr: "Хришћанин се не бори силом против других људи, него против греха и зла. Оружје за то су истина, правда, вера, реч Божија и пре свега молитва."
+        },
+        deeper: {
+          de: "Die orthodoxe Überlieferung spricht oft vom „unsichtbaren Kampf“ gegen Gedanken und Leidenschaften. Eph 6 ist eine wichtige biblische Grundlage dafür. Auffällig ist, dass fast alle Teile der Rüstung zur Verteidigung dienen; nur das Wort Gottes ist ein Schwert. Das erinnert daran, dass Christus selbst den Versucher in der Wüste mit Worten der Schrift abwies (Mt 4,1–11). Das Gebet steht am Ende und hält alles zusammen. Wer Feinde unter Menschen sucht, hat nach diesem Text den eigentlichen Kampf verfehlt.",
+          sr: "Православно предање често говори о „невидљивој борби“ против помисли и страсти. Еф 6 је важан библијски темељ за то. Упадљиво је да скоро сви делови оружја служе за одбрану; само је реч Божија мач. То подсећа да је сам Христос у пустињи одбио кушача речима Писма (Мт 4,1–11). Молитва стоји на крају и све повезује. Ко тражи непријатеље међу људима, по овом тексту је промашио праву борбу."
+        },
+        tag: "counsel"
+      },
+      christ: {
+        de: "Die Kraft für diesen Kampf kommt nicht aus uns, sondern aus dem Herrn (Eph 6,10). Christus hat die Mächte schon besiegt (Kol 2,15); der Christ nimmt durch Taufe und Gebet an seinem Sieg teil.",
+        sr: "Снага за ову борбу не долази из нас, него од Господа (Еф 6,10). Христос је силе већ победио (Кол 2,15); хришћанин кроз крштење и молитву учествује у Његовој победи."
+      },
+      links: [
+        { ref: { de: "Jes 59,17", sr: "Ис 59,17" }, note: { de: "Gott selbst legt Gerechtigkeit an wie einen Panzer.", sr: "Сам Бог облачи правду као оклоп." } },
+        { ref: { de: "Mt 4,1–11", sr: "Мт 4,1–11" }, note: { de: "Christus widersteht dem Versucher mit dem Wort Gottes.", sr: "Христос се речју Божијом супротставља кушачу." } },
+        { ref: { de: "1 Petr 5,8–9", sr: "1 Пт 5,8–9" }, note: { de: "Seid nüchtern und wacht; widersteht fest im Glauben.", sr: "Будите трезвени и бдите; противите се тврди у вери." } },
+        { ref: { de: "Hebr 4,12", sr: "Јев 4,12" }, note: { de: "Das Wort Gottes ist schärfer als jedes zweischneidige Schwert.", sr: "Реч Божија оштрија је од сваког мача са две оштрице." } }
+      ],
+      fathers: {
+        de: "Der hl. Johannes Chrysostomus legte den Epheserbrief in Homilien aus. Der englische Text steht in der Reihe NPNF I/13. Wörtliche Zitate gibt diese App nicht wieder.",
+        sr: "Свети Јован Златоуст тумачио је Посланицу Ефесцима у беседама. Енглески текст налази се у збирци NPNF I/13. Ова апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Gegen wen richtet sich nach Eph 6,12 der Kampf des Christen?", sr: "Против кога је, по Еф 6,12, уперена борба хришћанина?" },
+          a: { de: "Nicht gegen Menschen, sondern gegen die geistigen Mächte der Bosheit.", sr: "Не против људи, него против духовних сила злобе." } },
+        { q: { de: "Welches Teil der Rüstung ist eine Angriffswaffe?", sr: "Који део оружја служи за напад?" },
+          a: { de: "Das Schwert des Geistes, das Wort Gottes.", sr: "Мач духовни, који је реч Божија." } },
+        { q: { de: "Was steht am Ende der Aufzählung und hält alles zusammen?", sr: "Шта стоји на крају набрајања и све повезује?" },
+          a: { de: "Das unablässige Gebet im Geist und die Wachsamkeit.", sr: "Непрестана молитва Духом и бдење." } }
+      ],
+      practice: {
+        de: "Lerne einen kurzen Bibelvers auswendig, zum Beispiel Eph 6,10. Wenn diese Woche ein böser Gedanke kommt, sprich ihn innerlich – und bete das Jesusgebet.",
+        sr: "Научите напамет кратак библијски стих, на пример Еф 6,10. Када ове недеље дође лоша помисао, изговорите га у себи – и помолите се Исусовом молитвом."
+      },
+      review: {
+        de: "Der Christ kämpft nicht gegen Menschen, sondern gegen das Böse. Seine Rüstung sind Wahrheit, Gerechtigkeit, Friedensbereitschaft, Glaube, Heil und das Wort Gottes – getragen vom Gebet.",
+        sr: "Хришћанин се не бори против људи, него против зла. Његово оружје су истина, правда, спремност за мир, вера, спасење и реч Божија – ношени молитвом."
+      },
+      quiz: [
+        { q: { de: "Was ist nach Eph 6,17 das Schwert des Geistes?", sr: "Шта је, по Еф 6,17, мач духовни?" },
+          options: [{ de: "Das Wort Gottes", sr: "Реч Божија" }, { de: "Die eigene Kraft", sr: "Сопствена снага" }, { de: "Ein echtes Schwert", sr: "Прави мач" }], correct: 0 },
+        { q: { de: "Womit löscht man die feurigen Pfeile des Bösen?", sr: "Чиме се гасе огњене стреле злога?" },
+          options: [{ de: "Mit dem Schild des Glaubens", sr: "Штитом вере" }, { de: "Mit dem Helm", sr: "Шлемом" }, { de: "Mit dem Gürtel", sr: "Појасом" }], correct: 0 },
+        { q: { de: "Gegen wen kämpft der Christ nach Eph 6,12 nicht?", sr: "Против кога се хришћанин, по Еф 6,12, не бори?" },
+          options: [{ de: "Gegen Fleisch und Blut, also Menschen", sr: "Против крви и тела, дакле људи" }, { de: "Gegen die Mächte der Bosheit", sr: "Против сила злобе" }, { de: "Gegen die Listen des Teufels", sr: "Против лукавстава ђавољих" }], correct: 0 },
+        { q: { de: "Wozu ruft Paulus am Schluss auf?", sr: "На шта Павле позива на крају?" },
+          options: [{ de: "Allezeit im Geist zu beten und zu wachen", sr: "Да се у свако време молимо Духом и бдимо" }, { de: "Zu den Waffen zu greifen", sr: "Да се лаћамо оружја" }, { de: "Ephesus zu verlassen", sr: "Да напустимо Ефес" }], correct: 0 }
+      ]
+    },
+  {
+      id: "bib-thess4", book: "thess", order: 32,
+      title: { de: "Hoffnung für die Entschlafenen", sr: "Нада за уснуле" },
+      ref: { de: "1. Thessalonicher 4,13–18", sr: "1. Солуњанима 4,13–18" },
+      intro: {
+        de: "Der 1. Thessalonicherbrief gilt als einer der ältesten Briefe des Paulus, geschrieben um das Jahr 50. Die junge Gemeinde in Thessaloniki war unsicher, was mit ihren Verstorbenen geschieht.",
+        sr: "Прва посланица Солуњанима сматра се једном од најстаријих Павлових посланица, написаном око 50. године. Млада заједница у Солуну није била сигурна шта бива са њиховим упокојенима."
+      },
+      introTag: "history",
+      context: {
+        de: "Paulus hatte in Thessaloniki nur kurz gepredigt und musste die Stadt verlassen (Apg 17,1–10). Inzwischen waren Gemeindemitglieder gestorben, und die Lebenden trauerten, als hätten sie keine Hoffnung.",
+        sr: "Павле је у Солуну проповедао кратко и морао је да напусти град (Дап 17,1–10). У међувремену су неки чланови заједнице умрли, а живи су туговали као да немају наде."
+      },
+      reading: [
+        { ref: { de: "1 Thess 4,13–14", sr: "1 Сол 4,13–14" }, note: { de: "Nicht trauern wie die, die keine Hoffnung haben.", sr: "Не туговати као они који немају наде." } },
+        { ref: { de: "1 Thess 4,15–18", sr: "1 Сол 4,15–18" }, note: { de: "Die Wiederkunft des Herrn; tröstet einander.", sr: "Други долазак Господњи; тешите једни друге." } }
+      ],
+      summary: {
+        de: "Paulus will nicht, dass die Gläubigen über die Entschlafenen trauern wie die anderen, die keine Hoffnung haben. Wenn wir glauben, dass Jesus gestorben und auferstanden ist, dann wird Gott auch die Entschlafenen durch Jesus mit ihm führen. Wenn der Herr selbst vom Himmel herabkommt, beim Ruf des Erzengels und beim Schall der Posaune Gottes, werden zuerst die in Christus Verstorbenen auferstehen. Dann werden die Lebenden mit ihnen dem Herrn entgegengehen, und so werden wir allezeit beim Herrn sein. Paulus schließt: Tröstet einander mit diesen Worten.",
+        sr: "Павле не жели да верници тугују за уснулима као остали који немају наде. Ако верујемо да је Исус умро и васкрсао, онда ће Бог и уснуле кроз Исуса довести с Њим. Када сам Господ сиђе с неба, на зов арханђела и на трубу Божију, прво ће васкрснути мртви у Христу. Затим ће живи заједно с њима поћи у сусрет Господу, и тако ћемо свагда са Господом бити. Павле завршава: Тешите дакле једни друге овим речима."
+      },
+      interp: {
+        simple: {
+          de: "Christen dürfen trauern, wenn ein Mensch stirbt. Aber ihre Trauer ist voller Hoffnung, weil Christus auferstanden ist und auch die Verstorbenen auferwecken wird.",
+          sr: "Хришћани смеју да тугују када неко умре. Али њихова туга је пуна наде, јер је Христос васкрсао и васкрснуће и упокојене."
+        },
+        deeper: {
+          de: "Paulus nennt die Verstorbenen „Entschlafene“. Daher spricht die Kirche vom Entschlafen und betet für die Verstorbenen, besonders bei Totengedenken (Parastos/Panichida). Die Bilder in 1 Thess 4,16–17 – Ruf, Posaune, Wolken – beschreiben ein Geschehen, das unsere Vorstellung übersteigt. Die Kirche lehnt Spekulationen über Termine der Wiederkunft ab (vgl. 1 Thess 5,1–2: Der Tag des Herrn kommt wie ein Dieb in der Nacht). Gewiss ist das Ziel: allezeit beim Herrn sein.",
+          sr: "Павле упокојене назива „уснулима“. Зато Црква говори о уснућу и моли се за упокојене, нарочито на парастосима и поменима. Слике у 1 Сол 4,16–17 – зов, труба, облаци – описују догађај који надилази нашу представу. Црква одбацује нагађања о времену Другог доласка (уп. 1 Сол 5,1–2: Дан Господњи долази као лопов ноћу). Сигуран је циљ: свагда бити са Господом."
+        },
+        tag: "dogma"
+      },
+      christ: {
+        de: "Der Grund der Hoffnung ist Christi eigener Tod und seine Auferstehung (1 Thess 4,14). Weil er den Tod besiegt hat, ist der Tod für die Gläubigen ein Schlaf.",
+        sr: "Темељ наде је сама Христова смрт и Његово васкрсење (1 Сол 4,14). Пошто је Он победио смрт, смрт је за вернике сан."
+      },
+      links: [
+        { ref: { de: "Joh 11,11–26", sr: "Јн 11,11–26" }, note: { de: "Lazarus schläft; ich bin die Auferstehung und das Leben.", sr: "Лазар спава; ја сам васкрсење и живот." } },
+        { ref: { de: "1 Kor 15,51–55", sr: "1 Кор 15,51–55" }, note: { de: "Tod, wo ist dein Stachel?", sr: "Где ти је, смрти, жалац?" } },
+        { ref: { de: "Mt 24,30–31", sr: "Мт 24,30–31" }, note: { de: "Der Menschensohn kommt auf den Wolken.", sr: "Син Човечији долази на облацима." } },
+        { ref: { de: "1 Thess 5,1–2", sr: "1 Сол 5,1–2" }, note: { de: "Der Tag des Herrn kommt wie ein Dieb.", sr: "Дан Господњи долази као лопов." } }
+      ],
+      fathers: {
+        de: "Der hl. Johannes Chrysostomus legte die Thessalonicherbriefe in Homilien aus (englisch in NPNF I/13). Wörtliche Zitate gibt diese App nicht wieder.",
+        sr: "Свети Јован Златоуст тумачио је посланице Солуњанима у беседама (на енглеском у NPNF I/13). Ова апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Verbietet Paulus die Trauer um Verstorbene?", sr: "Да ли Павле забрањује тугу за упокојенима?" },
+          a: { de: "Nein. Er sagt, Christen sollen nicht trauern wie die, die keine Hoffnung haben.", sr: "Не. Он каже да хришћани не треба да тугују као они који немају наде." } },
+        { q: { de: "Warum nennt Paulus die Toten „Entschlafene“?", sr: "Зашто Павле мртве назива „уснулима“?" },
+          a: { de: "Weil der Tod durch Christi Auferstehung kein Ende mehr ist, sondern wie ein Schlaf bis zur Auferstehung.", sr: "Зато што смрт, због Христовог васкрсења, више није крај, него као сан до васкрсења." } },
+        { q: { de: "Was soll man laut 1 Thess 4,18 mit diesen Worten tun?", sr: "Шта, по 1 Сол 4,18, треба чинити овим речима?" },
+          a: { de: "Einander trösten.", sr: "Тешити једни друге." } }
+      ],
+      practice: {
+        de: "Denke an einen verstorbenen Menschen, der dir lieb war. Bete für ihn – etwa „Gedenke, o Herr, der Seele deines Dieners/deiner Dienerin …“ –, und frage deinen Priester, wie du ihn beim Totengedenken nennen kannst.",
+        sr: "Помислите на неког упокојеног ко вам је био драг. Помолите се за њега – на пример „Помени, Господе, душу слуге Твога/слушкиње Твоје …“ – и питајте свештеника како да га поменете на парастосу."
+      },
+      review: {
+        de: "Christen trauern mit Hoffnung: Weil Christus auferstanden ist, werden die Entschlafenen auferstehen, und wir werden allezeit beim Herrn sein.",
+        sr: "Хришћани тугују са надом: пошто је Христос васкрсао, уснули ће васкрснути, и свагда ћемо бити са Господом."
+      },
+      quiz: [
+        { q: { de: "Wie sollen Christen nach 1 Thess 4,13 nicht trauern?", sr: "Како, по 1 Сол 4,13, хришћани не треба да тугују?" },
+          options: [{ de: "Wie die, die keine Hoffnung haben", sr: "Као они који немају наде" }, { de: "Überhaupt nicht – Trauer ist verboten", sr: "Никако – туга је забрањена" }, { de: "Nur heimlich", sr: "Само тајно" }], correct: 0 },
+        { q: { de: "Wer steht bei der Wiederkunft zuerst auf?", sr: "Ко ће при Другом доласку прво васкрснути?" },
+          options: [{ de: "Die in Christus Verstorbenen", sr: "Мртви у Христу" }, { de: "Die Engel", sr: "Анђели" }, { de: "Niemand", sr: "Нико" }], correct: 0 },
+        { q: { de: "Wann wurde der 1. Thessalonicherbrief etwa geschrieben?", sr: "Када је отприлике написана Прва посланица Солуњанима?" },
+          options: [{ de: "Um das Jahr 50", sr: "Око 50. године" }, { de: "Um das Jahr 300", sr: "Око 300. године" }, { de: "Vor Christi Geburt", sr: "Пре Христовог рођења" }], correct: 0 },
+        { q: { de: "Was sagt Paulus über den Termin des Tages des Herrn (1 Thess 5,2)?", sr: "Шта Павле каже о времену Дана Господњег (1 Сол 5,2)?" },
+          options: [{ de: "Er kommt wie ein Dieb in der Nacht", sr: "Долази као лопов ноћу" }, { de: "Er lässt sich genau berechnen", sr: "Може се тачно израчунати" }, { de: "Er kommt nie", sr: "Никада неће доћи" }], correct: 0 }
+      ]
+    },
+  {
+      id: "bib-prov9", book: "prov", order: 33,
+      title: { de: "Die Weisheit baut ihr Haus", sr: "Премудрост сазида себи дом" },
+      ref: { de: "Sprichwörter 8,22–31 und 9,1–11", sr: "Приче Соломонове 8,22–31 и 9,1–11" },
+      intro: {
+        de: "Das Buch der Sprichwörter (Sprüche Salomos) sammelt Lebensweisheiten Israels. In Kapitel 8 und 9 spricht die Weisheit selbst wie eine Person. Die Kirche liest Spr 9,1–11 in der Vesper an Festen der Gottesgebärerin.",
+        sr: "Књига Прича Соломонових сабира мудрост живота Израиља. У 8. и 9. глави сама Премудрост говори као личност. Црква чита Прич 9,1–11 на вечерњи на празнике Богородице."
+      },
+      introTag: "history",
+      context: {
+        de: "Das Buch richtet sich an junge Menschen und lehrt: Die Furcht des Herrn ist der Anfang der Weisheit (Spr 1,7; 9,10). Weisheit ist hier nicht bloß Wissen, sondern ein Leben im Einklang mit Gott.",
+        sr: "Књига се обраћа младима и учи: Почетак мудрости је страх Господњи (Прич 1,7; 9,10). Мудрост овде није само знање, него живот у складу са Богом."
+      },
+      reading: [
+        { ref: { de: "Spr 8,22–31", sr: "Прич 8,22–31" }, note: { de: "Die Weisheit war bei Gott vor der Schöpfung.", sr: "Премудрост је била код Бога пре стварања." } },
+        { ref: { de: "Spr 9,1–6", sr: "Прич 9,1–6" }, note: { de: "Die Weisheit baut ihr Haus und lädt zum Mahl.", sr: "Премудрост зида дом и позива на трпезу." } },
+        { ref: { de: "Spr 9,7–11", sr: "Прич 9,7–11" }, note: { de: "Die Furcht des Herrn ist der Anfang der Weisheit.", sr: "Почетак мудрости је страх Господњи." } }
+      ],
+      summary: {
+        de: "In Kapitel 8 erzählt die Weisheit, dass sie schon vor der Erschaffung der Welt beim Herrn war: Als er den Himmel bereitete und dem Meer seine Grenze setzte, war sie bei ihm und freute sich an den Menschen. In Kapitel 9 hat die Weisheit ihr Haus gebaut und sieben Säulen aufgestellt. Sie hat ihr Mahl bereitet, Wein gemischt und ihre Mägde ausgesandt. Sie lädt die Unerfahrenen ein: Kommt, esst von meinem Brot und trinkt von dem Wein, den ich gemischt habe; lasst ab von der Torheit, so werdet ihr leben. Die Furcht des Herrn ist der Anfang der Weisheit.",
+        sr: "У 8. глави Премудрост приповеда да је била код Господа још пре стварања света: када је уређивао небо и мору постављао границу, она је била код Њега и радовала се људима. У 9. глави Премудрост је сазидала себи дом и поставила седам стубова. Припремила је трпезу, растворила вино и послала слушкиње. Позива неискусне: Ходите, једите мој хлеб и пијте вино које сам растворила; оставите лудост, и живећете. Почетак мудрости је страх Господњи."
+      },
+      interp: {
+        simple: {
+          de: "Gott lädt jeden Menschen ein, weise zu werden. Wahre Weisheit beginnt mit Ehrfurcht vor Gott und führt zum Leben.",
+          sr: "Бог позива сваког човека да постане мудар. Права мудрост почиње страхопоштовањем пред Богом и води у живот."
+        },
+        deeper: {
+          de: "Die Kirchenväter deuteten die personifizierte Weisheit auf Christus, „Gottes Kraft und Gottes Weisheit“ (1 Kor 1,24). Arianer beriefen sich auf Spr 8,22 („Der Herr schuf mich“), um zu behaupten, der Sohn sei ein Geschöpf. Der hl. Athanasius antwortete in seinen Reden gegen die Arianer (Rede II), der Vers beziehe sich auf die Menschwerdung, nicht auf das ewige Sein des Sohnes. Das „Haus mit sieben Säulen“ wird in der Überlieferung unterschiedlich gedeutet: auf die Kirche, auf die Gottesgebärerin, in der die Weisheit Fleisch annahm, oder auf den Leib Christi. Das Mahl aus Brot und Wein sehen viele Väter als Vorausbild der Eucharistie. Diese Deutungen sind Auslegungen der Väter, keine Worterklärungen des hebräischen Textes.",
+          sr: "Свети оци су персонификовану Премудрост тумачили као Христа, „Божију силу и Божију премудрост“ (1 Кор 1,24). Аријанци су се позивали на Прич 8,22 („Господ ме створи“) да би тврдили да је Син створење. Свети Атанасије је у Беседама против аријанаца (беседа II) одговорио да се стих односи на оваплоћење, а не на вечно постојање Сина. „Дом са седам стубова“ предање тумачи различито: као Цркву, као Богородицу, у којој је Премудрост примила тело, или као тело Христово. Трпезу од хлеба и вина многи оци виде као праслику Евхаристије. Ова тумачења су тумачења отаца, а не објашњење речи јеврејског текста."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Christus ist die Weisheit Gottes in Person (1 Kor 1,24.30). Er hat sich in der Gottesgebärerin ein „Haus“ gebaut und lädt zu seinem Mahl ein: „Nehmt, esst …“ (Mt 26,26).",
+        sr: "Христос је Премудрост Божија у личности (1 Кор 1,24.30). Он је себи у Богородици сазидао „дом“ и позива на своју трпезу: „Узмите, једите …“ (Мт 26,26)."
+      },
+      links: [
+        { ref: { de: "1 Kor 1,24", sr: "1 Кор 1,24" }, note: { de: "Christus, Gottes Kraft und Gottes Weisheit.", sr: "Христос, Божија сила и Божија премудрост." } },
+        { ref: { de: "Joh 1,1–3", sr: "Јн 1,1–3" }, note: { de: "Das Wort war im Anfang bei Gott; alles ist durch es geworden.", sr: "У почетку беше Реч … и све кроз Њу постаде." } },
+        { ref: { de: "Mt 22,1–10", sr: "Мт 22,1–10" }, note: { de: "Das Gleichnis vom Hochzeitsmahl: Die Diener laden ein.", sr: "Прича о свадби: слуге позивају." } },
+        { ref: { de: "Ps 110,10 (LXX; hebr. 111,10)", sr: "Пс 110,10 (по Септуагинти; јевр. 111,10)" }, note: { de: "Der Anfang der Weisheit ist die Furcht des Herrn.", sr: "Почетак мудрости је страх Господњи." } }
+      ],
+      fathers: {
+        de: "Der hl. Athanasius behandelt Spr 8,22 ausführlich in der zweiten Rede gegen die Arianer (englisch in NPNF II/4). Die Lesung Spr 9,1–11 gehört zur Vesper an Festen der Gottesgebärerin; die genaue Leseordnung kann sich zwischen Ortskirchen unterscheiden.",
+        sr: "Свети Атанасије опширно обрађује Прич 8,22 у другој беседи против аријанаца (на енглеском у NPNF II/4). Читање Прич 9,1–11 припада вечерњу на празнике Богородице; тачан поредак читања може се разликовати међу помесним Црквама."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Womit beginnt nach Spr 9,10 die Weisheit?", sr: "Чиме, по Прич 9,10, почиње мудрост?" },
+          a: { de: "Mit der Furcht des Herrn, also mit Ehrfurcht vor Gott.", sr: "Страхом Господњим, дакле страхопоштовањем пред Богом." } },
+        { q: { de: "Auf wen deuten die Kirchenväter die Weisheit in Spr 8–9?", sr: "Како свети оци тумаче Премудрост у Прич 8–9?" },
+          a: { de: "Auf Christus, die Weisheit Gottes (1 Kor 1,24).", sr: "Као Христа, Премудрост Божију (1 Кор 1,24)." } },
+        { q: { de: "Wie antwortete der hl. Athanasius auf die arianische Deutung von Spr 8,22?", sr: "Како је свети Атанасије одговорио на аријанско тумачење Прич 8,22?" },
+          a: { de: "Der Vers beziehe sich auf die Menschwerdung, nicht auf ein Geschaffensein des ewigen Sohnes.", sr: "Стих се односи на оваплоћење, а не на то да је вечни Син створен." } }
+      ],
+      practice: {
+        de: "Lies diese Woche jeden Tag ein Kapitel aus den Sprichwörtern (das Buch hat 31 Kapitel – ungefähr eines pro Tag im Monat). Notiere einen Satz, der dich anspricht.",
+        sr: "Ове недеље читајте сваког дана по једну главу из Прича Соломонових (књига има 31 главу – отприлике по једна за сваки дан у месецу). Запишите једну реченицу која вам говори."
+      },
+      review: {
+        de: "Die Weisheit war bei Gott vor der Schöpfung und lädt alle zu ihrem Mahl ein. Die Väter erkennen in ihr Christus. Der Anfang der Weisheit ist die Furcht des Herrn.",
+        sr: "Премудрост је била код Бога пре стварања и све позива на своју трпезу. Оци у њој препознају Христа. Почетак мудрости је страх Господњи."
+      },
+      quiz: [
+        { q: { de: "Wie viele Säulen stellt die Weisheit in Spr 9,1 auf?", sr: "Колико стубова поставља Премудрост у Прич 9,1?" },
+          options: [{ de: "Sieben", sr: "Седам" }, { de: "Zwölf", sr: "Дванаест" }, { de: "Drei", sr: "Три" }], correct: 0 },
+        { q: { de: "An welchen Festen liest die Kirche Spr 9,1–11 in der Vesper?", sr: "На које празнике Црква чита Прич 9,1–11 на вечерњи?" },
+          options: [{ de: "An Festen der Gottesgebärerin", sr: "На празнике Богородице" }, { de: "Nur an Ostern", sr: "Само на Васкрс" }, { de: "Nie", sr: "Никада" }], correct: 0 },
+        { q: { de: "Welche Irrlehrer beriefen sich auf Spr 8,22?", sr: "Који јеретици су се позивали на Прич 8,22?" },
+          options: [{ de: "Die Arianer", sr: "Аријанци" }, { de: "Die Ikonoklasten", sr: "Иконоборци" }, { de: "Die Monophysiten", sr: "Монофизити" }], correct: 0 },
+        { q: { de: "Wen nennt Paulus „Gottes Weisheit“ (1 Kor 1,24)?", sr: "Кога Павле назива „Божијом премудрошћу“ (1 Кор 1,24)?" },
+          options: [{ de: "Christus", sr: "Христа" }, { de: "Salomo", sr: "Соломона" }, { de: "Mose", sr: "Мојсија" }], correct: 0 }
+      ]
     }
   ]
 };
@@ -4285,7 +4509,37 @@ const SAINTS = [
     life: { de: "Blagoje Popović wurde 1894 am Fest der Verkündigung (25. März julianisch) in Vranje als Sohn einer Priesterfamilie geboren; das bürgerliche Datum wird in Quellen unterschiedlich angegeben. Am 1. Januar 1916 wurde er in Shkodër Mönch und erhielt den Namen Justin. Er studierte unter anderem in Oxford (Arbeit über Dostojewski) und Athen und wurde vom hl. Nikolaj Velimirović stark geprägt. Später war er Archimandrit des Klosters Ćelije bei Valjevo, wo er 1979 starb. Die Serbische Kirche sprach ihn am 2. Mai 2010 heilig.", sr: "Благоје Поповић рођен је 1894. на празник Благовести (25. март по јулијанском) у Врању у свештеничкој породици; грађански датум у изворима се наводи различито. Монашио се 1. јануара 1916. у Скадру и добио име Јустин. Студирао је, између осталог, у Оксфорду (рад о Достојевском) и Атини и био је снажно обликован светим Николајем Велимировићем. Касније је био архимандрит манастира Ћелије код Ваљева, где се упокојио 1979. Српска Црква га је канонизовала 2. маја 2010." },
     teaching: { de: "Sein Hauptwerk ist die „Dogmatik der Orthodoxen Kirche“, in der er Glaubenslehre eng mit dem geistlichen Leben verbindet. Er schrieb außerdem über Heilige und die Philosophie des Glaubens.", sr: "Његово главно дело је „Догматика Православне Цркве“, у којој веру тесно повезује са духовним животом. Писао је и о светитељима и философији вере." },
     meaning: { de: "Er gilt als einer der wichtigsten serbischen Theologen des 20. Jahrhunderts.", sr: "Сматра се једним од најзначајнијих српских богослова 20. века." },
-    read: ["svJustin"] }
+    read: ["svJustin"] },
+  { id: "s-nicholas", name: { de: "Hl. Nikolaus von Myra", sr: "Свети Николај Мирликијски" },
+    lived: { de: "3./4. Jahrhundert (genaue Daten unsicher)", sr: "3/4. век (тачни датуми несигурни)" }, feast: { de: "6. Dez. (19. Dez.); Übertragung der Reliquien 9. Mai (22. Mai)", sr: "6/19. децембар; пренос моштију 9/22. мај" },
+    life: { de: "Nikolaus war Bischof von Myra in Lykien (im Süden der heutigen Türkei). Sichere historische Einzelheiten sind wenige; seine Lebensbeschreibungen entstanden erst Jahrhunderte später. Nach der Überlieferung half er im Verborgenen Armen – bekannt ist die Erzählung von drei Mädchen, denen er heimlich die Mitgift schenkte – und nahm 325 am Konzil von Nizäa teil. 1087 brachten Seeleute seine Reliquien nach Bari in Italien; daran erinnert das Fest am 9. Mai.", sr: "Николај је био епископ града Мира у Ликији (на југу данашње Турске). Сигурних историјских појединости има мало; његова житија настала су тек вековима касније. Према предању, тајно је помагао сиромашнима – позната је прича о три девојке којима је потајно дао мираз – и учествовао је 325. на Никејском сабору. Године 1087. морепловци су пренели његове мошти у Бари у Италији; на то подсећа празник 9. маја." },
+    teaching: { de: "Die Kirche besingt ihn als „Richtschnur des Glaubens und Bild der Sanftmut“. Er gilt als Vorbild barmherziger, verborgener Hilfe und als Helfer der Reisenden, Seeleute und Bedrängten. Viele Wunderberichte gehören zur frommen Überlieferung.", sr: "Црква га опева као „правило вере и образ кротости“. Сматра се узором милосрдне, скривене помоћи и помоћником путника, морнара и невољних. Многа казивања о чудима припадају благочестивом предању." },
+    meaning: { de: "Der Nikolaustag (Nikoljdan) ist eine der häufigsten Slavas in Serbien. Er ist einer der am meisten verehrten Heiligen der ganzen Orthodoxie; jeden Donnerstag gedenkt die Kirche der Apostel und des hl. Nikolaus.", sr: "Никољдан је једна од најчешћих слава у Србији. Он је један од најпоштованијих светитеља у целом Православљу; сваког четвртка Црква спомиње апостоле и светог Николаја." },
+    tag: "uncertain", read: ["svProlog"] },
+  { id: "s-george", name: { de: "Hl. Großmärtyrer Georg", sr: "Свети великомученик Георгије" },
+    lived: { de: "† um 303 (nach der Überlieferung)", sr: "† око 303. (према предању)" }, feast: { de: "23. April (6. Mai); Weihe seiner Kirche in Lydda 3. Nov. (16. Nov.)", sr: "23. април/6. мај (Ђурђевдан); освећење његовог храма у Лиди 3/16. новембар (Ђурђиц)" },
+    life: { de: "Nach der Überlieferung war Georg ein christlicher Offizier im römischen Heer, stammte aus Kappadokien und erlitt unter Kaiser Diokletian um 303 in Nikomedien schwere Folter und den Tod, weil er Christus nicht verleugnete. Begraben wurde er nach der Überlieferung in Lydda (heute Lod). Seine Verehrung ist sehr alt und weit verbreitet; die einzelnen Angaben seiner Lebensbeschreibung lassen sich historisch kaum prüfen.", sr: "Према предању, Георгије је био хришћански официр у римској војсци, пореклом из Кападокије, и под царем Диоклецијаном око 303. у Никомидији претрпео тешка мучења и смрт, јер се није одрекао Христа. Сахрањен је, према предању, у Лиди (данас Лод). Његово поштовање је веома старо и широко раширено; поједини подаци његовог житија тешко се могу историјски проверити." },
+    teaching: { de: "Er ist ein Vorbild des mutigen Bekenntnisses. Die Ikone mit dem Drachen ist ein Bild: Sie zeigt den Sieg des Glaubens über das Böse. Die Erzählung vom Drachen ist eine spätere Legende und nicht Teil der ältesten Märtyrerberichte.", sr: "Он је узор храброг исповедања. Икона са аждајом је слика: показује победу вере над злом. Прича о аждаји је каснија легенда и није део најстаријих казивања о његовом мучеништву." },
+    meaning: { de: "Đurđevdan ist in Serbien eine sehr verbreitete Slava und ein großes Volksfest im Frühling. Fällt der 23. April vor Ostern, wird das Gedenken nach dem Typikon liturgisch meist auf den Ostermontag verlegt; die Praxis kann sich unterscheiden.", sr: "Ђурђевдан је у Србији веома раширена слава и велики пролећни народни празник. Ако 23. април падне пре Васкрса, спомен се по Типику богослужбено обично премешта на Васкрсни понедељак; пракса може да се разликује." },
+    tag: "uncertain", read: ["svProlog"] },
+  { id: "s-demetrios", name: { de: "Hl. Großmärtyrer Demetrios von Thessaloniki", sr: "Свети великомученик Димитрије Солунски" },
+    lived: { de: "† um 306", sr: "† око 306." }, feast: { de: "26. Okt. (8. Nov.)", sr: "26. октобар/8. новембар (Митровдан)" },
+    life: { de: "Nach der Überlieferung stammte Demetrios aus einer vornehmen Familie in Thessaloniki und hatte ein hohes Amt inne. Statt die Christen zu verfolgen, bekannte er selbst Christus. Unter Kaiser Maximian wurde er eingekerkert und um 306 im Gefängnis mit Lanzen durchbohrt. Über seinem Grab entstand eine Kirche; die heutige große Demetrios-Basilika in Thessaloniki gehört zum UNESCO-Welterbe.", sr: "Према предању, Димитрије је потицао из угледне породице у Солуну и имао је високу службу. Уместо да гони хришћане, сам је исповедао Христа. Под царем Максимијаном бачен је у тамницу и око 306. у тамници прободен копљима. Над његовим гробом подигнута је црква; данашња велика базилика Светог Димитрија у Солуну налази се на Унесковој листи светске баштине." },
+    teaching: { de: "Er heißt „der Myrrhestrahlende“, weil nach der Überlieferung von seinen Reliquien duftendes Myron ausging. Mit ihm wird der junge Märtyrer Nestor verbunden, den er nach der Überlieferung im Glauben stärkte.", sr: "Назива се „Мироточиви“, јер је, према предању, из његових моштију текло миомирисно миро. Са њим се повезује млади мученик Нестор, кога је, према предању, утврдио у вери." },
+    meaning: { de: "Er ist Schutzpatron von Thessaloniki und wird bei den Serben besonders verehrt: Mitrovdan ist eine häufige Slava. Im serbischen Volksbrauch teilt Mitrovdan das Jahr mit Đurđevdan in eine Sommer- und eine Winterhälfte.", sr: "Он је заштитник Солуна и код Срба се посебно поштује: Митровдан је честа слава. У српском народном обичају Митровдан и Ђурђевдан деле годину на летњу и зимску половину." },
+    tag: "uncertain", read: ["svProlog"] },
+  { id: "s-petka", name: { de: "Hl. Paraskeva (Petka)", sr: "Света Петка (Параскева)" },
+    lived: { de: "11. Jahrhundert", sr: "11. век" }, feast: { de: "14. Okt. (27. Okt.)", sr: "14/27. октобар (Петковдан)" },
+    life: { de: "Paraskeva wurde im 11. Jahrhundert in Epivat zwischen Selymbria und Konstantinopel in einer frommen, wohlhabenden Familie geboren; ihr Bruder Euthymios wurde Bischof von Madytos. Der hl. Nikolaj Velimirović schreibt im Prolog von Ohrid, sie sei serbischer Herkunft gewesen. Sie lebte zunächst in Konstantinopel, dann lange als Asketin in der Wüste am Jordan. Später kehrte sie nach Epivat zurück und starb dort; über ihr Alter berichten die Quellen unterschiedlich. Ihre Reliquien wanderten über Tarnovo, Belgrad und Konstantinopel und ruhen seit 1641 in Iași (Rumänien).", sr: "Параскева је рођена у 11. веку у Епивату, између Силимврије и Цариграда, у побожној и имућној породици; њен брат Јевтимије постао је епископ мадитски. Свети Николај Велимировић пише у Охридском прологу да је била српског порекла. Најпре је живела у Цариграду, а затим дуго као подвижница у пустињи код Јордана. Касније се вратила у Епиват и тамо се упокојила; о њеним годинама извори говоре различито. Њене мошти пренете су преко Трнова, Београда и Цариграда и од 1641. почивају у Јашију (Румунија)." },
+    teaching: { de: "Ihr Name kommt vom griechischen Wort für „Freitag“ (paraskevi); daher heißt sie auf Serbisch Petka. Sie ist ein Vorbild des Verzichts aus Liebe zu Christus. Nach der Überlieferung begann ihr asketischer Weg mit dem Wort des Herrn: Wer mir nachfolgen will, der verleugne sich selbst (Mt 16,24).", sr: "Њено име долази од грчке речи за „петак“ (параскеви); зато се на српском зове Петка. Она је узор одрицања из љубави према Христу. Према предању, њен подвижнички пут започео је речју Господњом: Ко хоће за мном да иде, нека се одрекне себе (Мт 16,24)." },
+    meaning: { de: "Petkovdan ist eine häufige Slava. In Belgrad besuchen viele Gläubige die Kapelle der hl. Petka mit ihrer Quelle an der Festung Kalemegdan und bitten um Fürsprache bei Krankheit.", sr: "Петковдан је честа слава. У Београду многи верници посећују капелу Свете Петке са извором на Калемегдану и моле за заступништво у болести." },
+    read: ["svProlog"] },
+  { id: "s-stefan", name: { de: "Hl. König Stefan Dečanski", sr: "Свети краљ Стефан Дечански" },
+    lived: { de: "um 1276/1285–1331", sr: "око 1276/1285–1331" }, feast: { de: "11. Nov. (24. Nov.)", sr: "11/24. новембар (Мратиндан)" },
+    life: { de: "Stefan Uroš III. war der Sohn von König Milutin und der Vater von Zar Dušan. Als junger Mann war er Geisel bei den Tataren. Nach einem Aufstand gegen seinen Vater wurde er auf dessen Befehl geblendet und lebte einige Jahre im Exil in Konstantinopel. Nach der Überlieferung erschien ihm der hl. Nikolaus und gab ihm später das Augenlicht zurück. Ab 1321/1322 war er König von Serbien und besiegte 1330 bei Velbužd die Bulgaren. Er stiftete das Kloster Visoki Dečani im Kosovo. 1331 wurde er von seinem Sohn Dušan gestürzt und starb in der Festung Zvečan; seine Reliquien ruhen in Dečani.", sr: "Стефан Урош III био је син краља Милутина и отац цара Душана. Као млад био је талац код Татара. После побуне против оца ослепљен је по његовом наређењу и неколико година живео у изгнанству у Цариграду. Према предању, јавио му се свети Николај и касније му вратио вид. Од 1321/1322. био је краљ Србије и 1330. победио Бугаре код Велбужда. Подигао је манастир Високи Дечани на Косову. Године 1331. збацио га је син Душан и упокојио се у тврђави Звечан; његове мошти почивају у Дечанима." },
+    teaching: { de: "Er gilt als Vorbild der Geduld und Sanftmut im Leiden, auch gegenüber der eigenen Familie. Gläubige bitten ihn besonders um Fürsprache bei Augenleiden. Die Umstände seines Todes werden in den Quellen unterschiedlich beschrieben.", sr: "Сматра се узором трпљења и кроткости у страдању, и према сопственој породици. Верници му се посебно моле за заступништво код болести очију. Околности његове смрти извори описују различито." },
+    meaning: { de: "Die Klosterkirche von Visoki Dečani ist eines der größten mittelalterlichen Bauwerke Serbiens mit reichen Fresken und gehört zum UNESCO-Welterbe. Sein Gedenktag heißt im Volk Mratindan.", sr: "Манастирска црква Високих Дечана једна је од највећих средњовековних грађевина Србије, са богатим фрескама, и налази се на Унесковој листи светске баштине. Његов спомен народ назива Мратиндан." },
+    tag: "uncertain", read: [], readNote: { de: "Für diese Version wurde keine einzelne freie, rechtmäßige Quelle geprüft. Auskunft gibt dein Priester oder das Kloster Visoki Dečani.", sr: "За ово издање није проверен ниједан појединачан слободан, законито доступан извор. Обавештења даје ваш свештеник или манастир Високи Дечани." } }
 ];
 
 /* Fragen und Quiz für die Heiligen-Profile (Kurs C) */
@@ -4456,6 +4710,61 @@ const SAINT_EXTRA = {
       qz("In welchem Kloster war er Archimandrit?", "У ком манастиру је био архимандрит?", [["Ćelije bei Valjevo", "У Ћелијама код Ваљева"], ["Ostrog", "У Острогу"], ["Studenica", "У Студеници"]], 0),
       qz("In welchem Jahr wurde er heiliggesprochen?", "Које године је канонизован?", [["2010", "2010."], ["1979", "1979."], ["2003", "2003."]], 0),
       qz("Nach wem wählte er bei der Mönchsweihe seinen Namen?", "По коме је изабрао име при монашењу?", [["Nach dem Märtyrer Justin dem Philosophen", "По мученику Јустину Философу"], ["Nach Kaiser Justinian", "По цару Јустинијану"], ["Nach seinem Vater", "По свом оцу"]], 0)
+    ]
+  },
+  "s-nicholas": {
+    questions: [
+      qa("Warum sind sichere Angaben über das Leben des hl. Nikolaus selten?", "Зашто су сигурни подаци о животу светог Николаја ретки?", "Weil seine Lebensbeschreibungen erst Jahrhunderte nach seinem Tod entstanden; vieles gehört zur frommen Überlieferung.", "Зато што су његова житија настала тек вековима после његове смрти; много тога припада благочестивом предању."),
+      qa("Woran erinnert das Fest am 9. Mai (22. Mai)?", "На шта подсећа празник 9. маја (22. маја)?", "An die Übertragung seiner Reliquien nach Bari im Jahr 1087.", "На пренос његових моштију у Бари 1087. године.")
+    ],
+    quiz: [
+      qz("Wo war der hl. Nikolaus Bischof?", "Где је свети Николај био епископ?", [["In Myra in Lykien", "У Мири Ликијској"], ["In Rom", "У Риму"], ["In Belgrad", "У Београду"]], 0),
+      qz("Wann ist der Nikolaustag (Nikoljdan)?", "Када је Никољдан?", [["6. Dezember (19. Dezember)", "6. децембра (19. децембра)"], ["23. April (6. Mai)", "23. априла (6. маја)"], ["14. Oktober (27. Oktober)", "14. октобра (27. октобра)"]], 0),
+      qz("In welche Stadt wurden seine Reliquien 1087 gebracht?", "У који град су његове мошти пренете 1087?", [["Bari", "Бари"], ["Venedig", "Венеција"], ["Konstantinopel", "Цариград"]], 0)
+    ]
+  },
+  "s-george": {
+    questions: [
+      qa("Was bedeutet der Drache auf der Ikone des hl. Georg?", "Шта значи аждаја на икони светог Георгија?", "Er ist ein Bild für das Böse; die Ikone zeigt den Sieg des Glaubens. Die Drachenerzählung ist eine spätere Legende.", "Она је слика зла; икона показује победу вере. Прича о аждаји је каснија легенда."),
+      qa("Welche zwei Feste des hl. Georg kennt die Serbische Kirche?", "Која два празника светог Георгија познаје Српска Црква?", "Đurđevdan am 23. April (6. Mai) und Đurđic am 3. November (16. November).", "Ђурђевдан 23. априла (6. маја) и Ђурђиц 3. новембра (16. новембра).")
+    ],
+    quiz: [
+      qz("Unter welchem Kaiser starb der hl. Georg nach der Überlieferung?", "Под којим царем је, према предању, пострадао свети Георгије?", [["Diokletian", "Диоклецијан"], ["Konstantin", "Константин"], ["Justinian", "Јустинијан"]], 0),
+      qz("Welchen Beruf hatte er nach der Überlieferung?", "Које занимање је имао према предању?", [["Offizier im römischen Heer", "Официр у римској војсци"], ["Fischer", "Рибар"], ["Bischof", "Епископ"]], 0),
+      qz("Wann ist Đurđevdan?", "Када је Ђурђевдан?", [["23. April (6. Mai)", "23. априла (6. маја)"], ["26. Oktober (8. November)", "26. октобра (8. новембра)"], ["6. Dezember (19. Dezember)", "6. децембра (19. децембра)"]], 0)
+    ]
+  },
+  "s-demetrios": {
+    questions: [
+      qa("Warum heißt der hl. Demetrios „der Myrrhestrahlende“?", "Зашто се свети Димитрије назива „Мироточиви“?", "Weil nach der Überlieferung von seinen Reliquien duftendes Myron ausging.", "Зато што је, према предању, из његових моштију текло миомирисно миро."),
+      qa("Welche Bedeutung haben Mitrovdan und Đurđevdan im serbischen Volksbrauch?", "Какав значај имају Митровдан и Ђурђевдан у српском народном обичају?", "Sie teilen das Jahr in eine Sommer- und eine Winterhälfte.", "Деле годину на летњу и зимску половину.")
+    ],
+    quiz: [
+      qz("Von welcher Stadt ist der hl. Demetrios Schutzpatron?", "Ког града је свети Димитрије заштитник?", [["Thessaloniki", "Солуна"], ["Athen", "Атине"], ["Moskau", "Москве"]], 0),
+      qz("Wann ist Mitrovdan?", "Када је Митровдан?", [["26. Oktober (8. November)", "26. октобра (8. новембра)"], ["11. November (24. November)", "11. новембра (24. новембра)"], ["1. Juni (14. Juni)", "1. јуна (14. јуна)"]], 0),
+      qz("Wie starb er nach der Überlieferung?", "Како је пострадао према предању?", [["Im Gefängnis mit Lanzen durchbohrt", "Прободен копљима у тамници"], ["Auf dem Scheiterhaufen", "На ломачи"], ["Er starb hochbetagt im Kloster", "Упокојио се у дубокој старости у манастиру"]], 0)
+    ]
+  },
+  "s-petka": {
+    questions: [
+      qa("Woher kommt der Name „Petka“?", "Одакле потиче име „Петка“?", "Vom griechischen Wort Paraskevi für „Freitag“ – serbisch petak.", "Од грчке речи параскеви, што значи „петак“."),
+      qa("Wo ruhen ihre Reliquien heute?", "Где данас почивају њене мошти?", "Seit 1641 in Iași in Rumänien.", "Од 1641. у Јашију у Румунији.")
+    ],
+    quiz: [
+      qz("In welchem Jahrhundert lebte die hl. Petka?", "У ком веку је живела света Петка?", [["Im 11. Jahrhundert", "У 11. веку"], ["Im 4. Jahrhundert", "У 4. веку"], ["Im 18. Jahrhundert", "У 18. веку"]], 0),
+      qz("Wo lebte sie lange als Asketin?", "Где је дуго живела као подвижница?", [["In der Wüste am Jordan", "У пустињи код Јордана"], ["Auf dem Athos", "На Светој Гори"], ["In Rom", "У Риму"]], 0),
+      qz("Wann ist Petkovdan?", "Када је Петковдан?", [["14. Oktober (27. Oktober)", "14. октобра (27. октобра)"], ["8. November (21. November)", "8. новембра (21. новембра)"], ["20. Juli (2. August)", "20. јула (2. августа)"]], 0)
+    ]
+  },
+  "s-stefan": {
+    questions: [
+      qa("Welcher Heilige half König Stefan nach der Überlieferung, sein Augenlicht wiederzuerlangen?", "Који светитељ је, према предању, помогао краљу Стефану да поврати вид?", "Der hl. Nikolaus von Myra.", "Свети Николај Мирликијски."),
+      qa("Welches Kloster stiftete er?", "Који манастир је подигао?", "Visoki Dečani im Kosovo, wo seine Reliquien ruhen.", "Високе Дечане на Косову, где почивају његове мошти.")
+    ],
+    quiz: [
+      qz("Wer war der Vater von Stefan Dečanski?", "Ко је био отац Стефана Дечанског?", [["König Milutin", "Краљ Милутин"], ["Zar Dušan", "Цар Душан"], ["Fürst Lazar", "Кнез Лазар"]], 0),
+      qz("Wann ist sein Gedenktag?", "Када је његов спомен?", [["11. November (24. November)", "11. новембра (24. новембра)"], ["6. Dezember (19. Dezember)", "6. децембра (19. децембра)"], ["15. Juni (28. Juni)", "15. јуна (28. јуна)"]], 0),
+      qz("Wen besiegte er 1330 bei Velbužd?", "Кога је победио 1330. код Велбужда?", [["Die Bulgaren", "Бугаре"], ["Die Osmanen", "Османлије"], ["Die Ungarn", "Угре"]], 0)
     ]
   }
 };
@@ -4757,6 +5066,10 @@ const EXTRA_CARDS = [
   ["d-bible", "Wie begegnete Gott Elija am Horeb?", "Како се Бог јавио Илији на Хориву?", "In einem sanften, leisen Säuseln – in der Stille.", "У тихом и благом ћарлијању – у тишини."],
   ["d-bible", "Was bedeutet das hebräische ruach?", "Шта значи јеврејска реч руах?", "Wind, Atem und Geist zugleich (Ez 37).", "Ветар, дах и дух истовремено (Јез 37)."],
   ["d-bible", "Was bezeugt 2 Makk 7 besonders?", "Шта посебно сведочи 2 Мак 7?", "Die Hoffnung auf die Auferstehung und die Schöpfung aus dem Nichts.", "Наду у васкрсење и стварање ни из чега."],
+  ["d-bible", "Was ist das Schwert des Geistes (Eph 6,17)?", "Шта је мач духовни (Еф 6,17)?", "Das Wort Gottes.", "Реч Божија."],
+  ["d-bible", "Gegen wen kämpft der Christ nach Eph 6,12?", "Против кога се бори хришћанин по Еф 6,12?", "Nicht gegen Menschen, sondern gegen die geistigen Mächte der Bosheit.", "Не против људи, него против духовних сила злобе."],
+  ["d-bible", "Wie sollen Christen um Verstorbene trauern (1 Thess 4,13)?", "Како хришћани треба да тугују за упокојенима (1 Сол 4,13)?", "Nicht wie die, die keine Hoffnung haben.", "Не као они који немају наде."],
+  ["d-bible", "Womit beginnt die Weisheit (Spr 9,10)?", "Чиме почиње мудрост (Прич 9,10)?", "Mit der Furcht des Herrn.", "Страхом Господњим."],
   ["d-history", "Nizäa 325 – worum ging es?", "Никеја 325 – о чему је било реч?", "Gegen Arius: Der Sohn ist eines Wesens mit dem Vater.", "Против Арија: Син је једносуштан Оцу."],
   ["d-history", "Konstantinopel 381 – worum ging es?", "Цариград 381 – о чему је било реч?", "Gottheit des Heiligen Geistes; Ergänzung des Glaubensbekenntnisses.", "Божанство Духа Светога; допуна Символа вере."],
   ["d-history", "Ephesus 431 – worum ging es?", "Ефес 431 – о чему је било реч?", "Gegen Nestorius: Maria ist Gottesgebärerin.", "Против Несторија: Марија је Богородица."],
@@ -4781,6 +5094,11 @@ const EXTRA_CARDS = [
   ["d-saints", "Wann ist der Gedenktag des hl. Justin von Ćelije?", "Када је спомен светог Јустина Ћелијског?", "1. Juni (bürgerlich 14. Juni).", "1. јуна (по грађанском 14. јуна)."],
   ["d-saints", "Welches Vorbild stellt die Kirche am 5. Sonntag der Fastenzeit vor Augen?", "Који узор Црква истиче пете недеље поста?", "Die hl. Maria von Ägypten – Vorbild der Umkehr.", "Свету Марију Египћанку – узор покајања."],
   ["d-saints", "Wer war der hl. Lukas von Simferopol?", "Ко је био свети Лука Кримски?", "Chirurg, Professor und Erzbischof der Krim (1877–1961), Bekenner in der Sowjetzeit.", "Хирург, професор и архиепископ кримски (1877–1961), исповедник у совјетско време."],
+  ["d-saints", "Wann ist Nikoljdan?", "Када је Никољдан?", "6. Dezember (19. Dezember) – Gedenken an den hl. Nikolaus von Myra.", "6/19. децембра – спомен светог Николаја Мирликијског."],
+  ["d-saints", "Was bedeutet der Drache auf der Georgs-Ikone?", "Шта значи аждаја на икони светог Георгија?", "Ein Bild für das Böse, das durch den Glauben besiegt wird.", "Слика зла које се побеђује вером."],
+  ["d-saints", "Warum heißt der hl. Demetrios „Myrrhestrahlender“?", "Зашто се свети Димитрије назива „Мироточиви“?", "Nach der Überlieferung ging von seinen Reliquien duftendes Myron aus.", "Према предању, из његових моштију текло је миро."],
+  ["d-saints", "Woher kommt der Name der hl. Petka?", "Одакле потиче име свете Петке?", "Von Paraskevi, griechisch „Freitag“.", "Од параскеви, што на грчком значи „петак“."],
+  ["d-saints", "Welches Kloster stiftete der hl. Stefan Dečanski?", "Који манастир је подигао свети Стефан Дечански?", "Visoki Dečani.", "Високе Дечане."],
   ["d-saints", "Wer sind die Drei Hierarchen?", "Ко су Три Јерарха?", "Basilius der Große, Gregor der Theologe, Johannes Chrysostomus (Fest 30. Jan.).", "Василије Велики, Григорије Богослов, Јован Златоуст (празник 30. јануар)."],
   ["d-saints", "Wer schrieb „Über die Menschwerdung des Wortes“?", "Ко је написао „О оваплоћењу Логоса“?", "Der hl. Athanasius der Große.", "Свети Атанасије Велики."],
   ["d-saints", "Wer verteidigte die zwei Willen Christi bis zum Martyrium?", "Ко је бранио две воље Христове до мучеништва?", "Der hl. Maximus der Bekenner.", "Свети Максим Исповедник."],
@@ -5124,9 +5442,9 @@ const CAL_FEASTS = [
   { id: "peter-paul", m: 6, d: 29, name: { de: "Hl. Apostel Petrus und Paulus", sr: "Свети апостоли Петар и Павле (Петровдан)" }, mean: { de: "Fest der beiden großen Apostel; Ende des Apostelfastens.", sr: "Празник два велика апостола; крај Петровског поста." }, lesson: "bib-acts9" },
   { id: "elijah", m: 7, d: 20, name: { de: "Hl. Prophet Elija", sr: "Свети пророк Илија (Илиндан)" }, mean: { de: "Gedenken an den großen Propheten (3 Kön 18–19).", sr: "Спомен великог пророка (3 Цар 18–19)." }, lesson: "bib-elijah" },
   { id: "maccabees", m: 8, d: 1, name: { de: "Hl. makkabäische Märtyrer", sr: "Свети мученици Макавеји" }, mean: { de: "Gedenken an die Märtyrer vor Christus (2 Makk 7); erster Tag des Entschlafungsfastens.", sr: "Спомен мученика пре Христа (2 Мак 7); први дан Госпојинског поста." }, lesson: "bib-macc7" },
-  { id: "nicholas", m: 12, d: 6, name: { de: "Hl. Nikolaus", sr: "Свети Никола (Никољдан)" }, mean: { de: "Gedenken an den hl. Nikolaus, Bischof von Myra; eine der häufigsten serbischen Slavas.", sr: "Спомен светог Николаја, архиепископа мирликијског; једна од најчешћих српских слава." } },
+  { id: "nicholas", m: 12, d: 6, name: { de: "Hl. Nikolaus", sr: "Свети Никола (Никољдан)" }, mean: { de: "Gedenken an den hl. Nikolaus, Bischof von Myra; eine der häufigsten serbischen Slavas.", sr: "Спомен светог Николаја, архиепископа мирликијског; једна од најчешћих српских слава." }, saint: "s-nicholas" },
   { id: "archangels", m: 11, d: 8, name: { de: "Synaxis des Erzengels Michael und aller Engel", sr: "Сабор Светог архангела Михаила (Аранђеловдан)" }, mean: { de: "Gedenken an die Erzengel und die himmlischen Mächte.", sr: "Спомен архангела и небеских сила." } },
-  { id: "george", m: 4, d: 23, name: { de: "Hl. Großmärtyrer Georg", sr: "Свети великомученик Георгије (Ђурђевдан)" }, mean: { de: "Gedenken an den heiligen Märtyrer Georg.", sr: "Спомен светог мученика Георгија." } },
+  { id: "george", m: 4, d: 23, name: { de: "Hl. Großmärtyrer Georg", sr: "Свети великомученик Георгије (Ђурђевдан)" }, mean: { de: "Gedenken an den heiligen Märtyrer Georg.", sr: "Спомен светог мученика Георгија." }, saint: "s-george" },
   { id: "john-theologian", m: 9, d: 26, name: { de: "Hl. Apostel Johannes der Theologe", sr: "Свети апостол и јеванђелист Јован Богослов" }, mean: { de: "Gedenken an das Entschlafen des Apostels und Evangelisten Johannes.", sr: "Спомен упокојења апостола и јеванђелисте Јована." }, lesson: "bib-jn1" }
 ];
 
@@ -5138,7 +5456,8 @@ const SAINT_DAYS = [
   ["s-paisios", 7, 12], ["s-porphyrios", 12, 2], ["s-sophrony", 7, 11], ["s-silouan", 9, 24], ["s-nektarios", 11, 9],
   ["s-seraphim", 1, 2], ["s-seraphim", 7, 19], ["s-kronstadt", 12, 20], ["s-nikolaj", 3, 5], ["s-nikolaj", 4, 20],
   ["s-sava", 1, 14], ["s-lazar", 6, 15], ["s-simeon", 2, 13], ["s-vasilije", 4, 29], ["s-justin", 6, 1],
-  ["s-maryegypt", 4, 1], ["s-luke", 5, 29]
+  ["s-maryegypt", 4, 1], ["s-luke", 5, 29],
+  ["s-nicholas", 5, 9], ["s-george", 11, 3], ["s-demetrios", 10, 26], ["s-petka", 10, 14], ["s-stefan", 11, 11]
 ];
 
 const CAL_FASTS = {
