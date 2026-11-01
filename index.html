@@ -353,11 +353,18 @@ main > .wrap { animation: opFade .3s var(--ease); }
 .ring span { width: 112px; height: 112px; border-radius: 50%; background: var(--card); display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .ring b { font-family: var(--serif); font-size: 2.4em; line-height: 1; color: var(--gold2); font-variant-numeric: lining-nums; }
 .ring small { color: var(--muted); font-size: .8em; }
+
+/* Glossar */
+.glo { display: block; padding: 13px 16px; position: relative; }
+.list > li.glo + li.glo::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 1px; background: var(--hair); }
+.glo[hidden], .glgroup[hidden] { display: none; }
+.glo .gt { display: block; font-family: var(--serif); font-size: 1.22em; font-weight: 600; color: var(--gold2); line-height: 1.25; }
+.glo .gd { display: block; color: var(--text); font-size: .95em; margin-top: 3px; }
 </style>
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "2.4.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "2.5.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -501,6 +508,7 @@ const UI = {
     creed: "Glaubensbekenntnis",
     menu: "Menü",
     quizAgain: "Noch einmal", quizGentle: "Fehler gehören zum Lernen. Beim Wiederholen festigt sich das Wissen.",
+    glossSearch: "Begriff suchen …", glossNone: "Kein passender Begriff gefunden.",
     hExplore: "Entdecken", hToday: "Heute", tileCal: "Kalender", tileReview: "Wiederholen", tileAsk: "Fragen",
     gLearn: "Lernen", gFaith: "Glaube und Gottesdienst", gPersonal: "Persönlich", gApp: "App",
     sAbout: "Über die App", aboutText: "OrthodoxPath ist kostenlos, werbefrei und funktioniert ohne Konto. Alle Daten bleiben auf deinem Gerät. Die Inhalte ersetzen nicht das Gespräch mit deinem Priester.",
@@ -702,6 +710,7 @@ const UI = {
     creed: "Символ вере",
     menu: "Мени",
     quizAgain: "Још једном", quizGentle: "Грешке су део учења. Понављањем се знање учвршћује.",
+    glossSearch: "Претражи појам …", glossNone: "Није пронађен одговарајући појам.",
     hExplore: "Истражи", hToday: "Данас", tileCal: "Календар", tileReview: "Понављање", tileAsk: "Питања",
     gLearn: "Учење", gFaith: "Вера и богослужење", gPersonal: "Лично", gApp: "Апликација",
     sAbout: "О апликацији", aboutText: "OrthodoxPath је бесплатан, без реклама и ради без налога. Сви подаци остају на вашем уређају. Садржаји не замењују разговор са вашим свештеником.",
@@ -3457,6 +3466,156 @@ const BIBLE = {
         { q: { de: "Wo hält Mose diese Reden?", sr: "Где Мојсије држи ове беседе?" },
           options: [{ de: "Vor dem Einzug ins verheißene Land", sr: "Пред улазак у обећану земљу" }, { de: "In Babylon", sr: "У Вавилону" }, { de: "In Jerusalem", sr: "У Јерусалиму" }], correct: 0 }
       ]
+    },
+  {
+      id: "bib-gen22", book: "gen", order: 36,
+      title: { de: "Abraham und Isaak", sr: "Авраам и Исак" },
+      ref: { de: "Genesis 22,1–19", sr: "Постање 22,1–19" },
+      intro: {
+        de: "Abraham gilt als Vater der Glaubenden (Röm 4,11). Gott hatte ihm im hohen Alter den verheißenen Sohn Isaak geschenkt. In Genesis 22 wird Abrahams Glaube auf die schwerste Probe gestellt.",
+        sr: "Авраам се сматра оцем верних (Рим 4,11). Бог му је у дубокој старости даровао обећаног сина Исака. У 22. глави Постања Авраамова вера бива стављена на најтежу пробу."
+      },
+      introTag: "history",
+      context: {
+        de: "Gott hatte Abraham versprochen, dass aus Isaak ein großes Volk hervorgehen werde (Gen 17,19; 21,12). Die Forderung, gerade diesen Sohn zu opfern, scheint der Verheißung zu widersprechen. In der Umwelt Israels gab es Kinderopfer; Gottes Gesetz verbietet sie später ausdrücklich (Lev 18,21; Dtn 12,31).",
+        sr: "Бог је Аврааму обећао да ће од Исака произаћи велики народ (Пост 17,19; 21,12). Захтев да принесе баш тог сина изгледа као да противречи обећању. У окружењу Израиља постојале су жртве деце; Божији закон их касније изричито забрањује (Лев 18,21; Пнз 12,31)."
+      },
+      reading: [
+        { ref: { de: "Gen 22,1–8", sr: "Пост 22,1–8" }, note: { de: "Gott wird sich das Lamm ersehen.", sr: "Бог ће се постарати за јагње." } },
+        { ref: { de: "Gen 22,9–14", sr: "Пост 22,9–14" }, note: { de: "Der Engel hält Abrahams Hand zurück.", sr: "Анђео задржава Авраамову руку." } },
+        { ref: { de: "Gen 22,15–19", sr: "Пост 22,15–19" }, note: { de: "Die Verheißung wird erneuert.", sr: "Обећање се обнавља." } }
+      ],
+      summary: {
+        de: "Gott prüft Abraham und spricht: Nimm deinen Sohn, deinen einzigen, den du liebst, Isaak, und bring ihn auf einem Berg im Land Morija als Opfer dar. Abraham macht sich früh am Morgen auf. Isaak trägt das Holz und fragt: Wo ist das Lamm für das Opfer? Abraham antwortet: Gott wird sich das Lamm ersehen, mein Sohn. Am Ort angekommen, baut Abraham einen Altar und bindet Isaak. Als er das Messer erhebt, ruft ihn der Engel des Herrn: Tu dem Knaben nichts; nun weiß ich, dass du Gott fürchtest. Abraham sieht einen Widder, der sich im Gestrüpp verfangen hat, und opfert ihn anstelle seines Sohnes. Er nennt den Ort „Der Herr sieht“. Gott erneuert seine Verheißung: In deinem Nachkommen sollen alle Völker der Erde gesegnet werden.",
+        sr: "Бог куша Авраама и говори: Узми сина свога, јединца свога, кога љубиш, Исака, и принеси га на жртву на гори у земљи Морији. Авраам устаје рано ујутру. Исак носи дрва и пита: Где је јагње за жртву? Авраам одговара: Бог ће се постарати за јагње, сине мој. Када стигну, Авраам гради жртвеник и везује Исака. Када подигне нож, виче му анђео Господњи: Не чини ништа детету; сад знам да се бојиш Бога. Авраам угледа овна заплетеног у грмљу и принесе га уместо сина. Место назива „Господ види“. Бог обнавља своје обећање: У семену твоме благословиће се сви народи на земљи."
+      },
+      interp: {
+        simple: {
+          de: "Abraham vertraut Gott ganz, auch wenn er nicht versteht. Gott will aber kein Menschenopfer: Er selbst sorgt für das Opfer. So zeigt die Geschichte, dass Gott treu ist.",
+          sr: "Авраам се потпуно поверава Богу, и када не разуме. Али Бог не жели људску жртву: Он сам се стара за жртву. Тако прича показује да је Бог веран."
+        },
+        deeper: {
+          de: "Der Hebräerbrief deutet Abrahams Gehorsam als Glauben an die Auferstehung: Er dachte, Gott könne auch von den Toten erwecken (Hebr 11,17–19). Die Kirchenväter sehen in Isaak ein Vorausbild Christi: der einzige, geliebte Sohn, der das Holz trägt wie Christus das Kreuz; im Widder, der stellvertretend geopfert wird, sehen sie ebenfalls Christus. Der Unterschied ist entscheidend: Isaak wird verschont, den eigenen Sohn aber hat Gott nicht verschont (Röm 8,32). Genesis 22 gehört zu den alttestamentlichen Lesungen der Vesper am Großen Samstag.",
+          sr: "Посланица Јеврејима тумачи Авраамову послушност као веру у васкрсење: мислио је да Бог може и из мртвих подићи (Јев 11,17–19). Свети оци у Исаку виде праслику Христа: јединог, вољеног сина, који носи дрва као Христос крст; и у овну, који бива принесен уместо њега, такође виде Христа. Разлика је пресудна: Исак бива поштеђен, а свога Сина Бог није поштедео (Рим 8,32). 22. глава Постања спада у старозаветна читања на вечерњу Велике суботе."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Was Abraham nicht tun musste, hat Gott selbst getan: Er gab seinen einzigen Sohn aus Liebe zur Welt (Joh 3,16). Christus ist das Lamm Gottes, das Gott „ersehen“ hat (Joh 1,29).",
+        sr: "Оно што Авраам није морао да учини, учинио је сам Бог: дао је Сина свога Јединороднога из љубави према свету (Јн 3,16). Христос је Јагње Божије, за које се Бог „постарао“ (Јн 1,29)."
+      },
+      links: [
+        { ref: { de: "Hebr 11,17–19", sr: "Јев 11,17–19" }, note: { de: "Abraham glaubte, dass Gott auch von den Toten erwecken kann.", sr: "Авраам је веровао да Бог може и из мртвих подићи." } },
+        { ref: { de: "Röm 8,32", sr: "Рим 8,32" }, note: { de: "Gott hat seinen eigenen Sohn nicht verschont.", sr: "Бог свога Сина није поштедео." } },
+        { ref: { de: "Joh 3,16", sr: "Јн 3,16" }, note: { de: "So sehr hat Gott die Welt geliebt.", sr: "Јер Бог тако заволе свет." } },
+        { ref: { de: "Jak 2,21–23", sr: "Јак 2,21–23" }, note: { de: "Glaube und Werke wirken zusammen.", sr: "Вера и дела делују заједно." } }
+      ],
+      fathers: {
+        de: "Viele Kirchenväter, darunter der hl. Johannes Chrysostomus in seinen Homilien zur Genesis, legen Gen 22 als Vorausbild des Kreuzes aus. Für diese Version wurde kein freier, rechtmäßiger Link zu diesen Homilien geprüft; wörtliche Zitate gibt die App nicht wieder.",
+        sr: "Многи свети оци, међу њима свети Јован Златоуст у беседама на Постање, тумаче Пост 22 као праслику крста. За ово издање није проверена слободна, законито доступна веза ка тим беседама; апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Was antwortete Abraham auf Isaaks Frage nach dem Lamm?", sr: "Шта је Авраам одговорио на Исаково питање о јагњету?" },
+          a: { de: "Gott wird sich das Lamm ersehen, mein Sohn.", sr: "Бог ће се постарати за јагње, сине мој." } },
+        { q: { de: "Wie deutet der Hebräerbrief Abrahams Gehorsam?", sr: "Како Посланица Јеврејима тумачи Авраамову послушност?" },
+          a: { de: "Als Glauben, dass Gott auch von den Toten erwecken kann (Hebr 11,19).", sr: "Као веру да Бог може и из мртвих подићи (Јев 11,19)." } },
+        { q: { de: "Worin unterscheidet sich das Opfer Christi von Gen 22?", sr: "По чему се Христова жртва разликује од Пост 22?" },
+          a: { de: "Isaak wurde verschont; Gott aber hat seinen eigenen Sohn nicht verschont (Röm 8,32).", sr: "Исак је поштеђен; а Бог свога Сина није поштедео (Рим 8,32)." } }
+      ],
+      practice: {
+        de: "Gibt es etwas, das du Gott schwer anvertrauen kannst – einen Menschen, eine Sorge, einen Plan? Sprich diese Woche jeden Abend: „Herr, du siehst. Dir vertraue ich es an.“",
+        sr: "Постоји ли нешто што тешко поверавате Богу – неку особу, бригу, план? Говорите ове недеље сваке вечери: „Господе, Ти видиш. Теби то поверавам.“"
+      },
+      review: {
+        de: "Abraham vertraut Gott bis zum Äußersten; Gott selbst sorgt für das Opfer. Die Väter sehen in Isaak und im Widder Vorausbilder Christi.",
+        sr: "Авраам се до краја поверава Богу; сам Бог се стара за жртву. Оци у Исаку и овну виде праслике Христа."
+      },
+      quiz: [
+        { q: { de: "Was trug Isaak auf den Berg?", sr: "Шта је Исак носио на гору?" },
+          options: [{ de: "Das Holz für das Opfer", sr: "Дрва за жртву" }, { de: "Ein Lamm", sr: "Јагње" }, { de: "Wasser", sr: "Воду" }], correct: 0 },
+        { q: { de: "Was opferte Abraham an Isaaks Stelle?", sr: "Шта је Авраам принео уместо Исака?" },
+          options: [{ de: "Einen Widder", sr: "Овна" }, { de: "Eine Taube", sr: "Голуба" }, { de: "Nichts", sr: "Ништа" }], correct: 0 },
+        { q: { de: "Wie nannte Abraham den Ort?", sr: "Како је Авраам назвао место?" },
+          options: [{ de: "„Der Herr sieht“", sr: "„Господ види“" }, { de: "„Bethel“", sr: "„Ветиљ“" }, { de: "„Golgota“", sr: "„Голгота“" }], correct: 0 },
+        { q: { de: "Wann liest die Kirche Gen 22 im Gottesdienst?", sr: "Када Црква чита Пост 22 на богослужењу?" },
+          options: [{ de: "In der Vesper am Großen Samstag", sr: "На вечерњу Велике суботе" }, { de: "Nur zu Weihnachten", sr: "Само на Божић" }, { de: "Nie", sr: "Никада" }], correct: 0 }
+      ]
+    },
+  {
+      id: "bib-ex3", book: "ex", order: 37,
+      title: { de: "Der brennende Dornbusch", sr: "Неопалима купина" },
+      ref: { de: "Exodus 3,1–15", sr: "Излазак 3,1–15" },
+      intro: {
+        de: "Mose war aus Ägypten geflohen und hütete in der Wüste die Schafe seines Schwiegervaters. Am Gottesberg Horeb begegnet ihm Gott in einem Dornbusch, der brennt und doch nicht verbrennt.",
+        sr: "Мојсије је побегао из Египта и у пустињи пасао овце свога таста. На Божијој гори Хориву јавља му се Бог у купини која гори, а не сагорева."
+      },
+      introTag: "history",
+      context: {
+        de: "Das Volk Israel litt in Ägypten unter schwerer Zwangsarbeit und schrie zu Gott (Ex 2,23–25). Gott hat das Elend gesehen und beruft Mose, um sein Volk zu befreien.",
+        sr: "Народ Израиљски је у Египту патио под тешким принудним радом и вапио Богу (Изл 2,23–25). Бог је видео невољу и позива Мојсија да ослободи Његов народ."
+      },
+      reading: [
+        { ref: { de: "Ex 3,1–6", sr: "Изл 3,1–6" }, note: { de: "Zieh deine Schuhe aus – heiliger Boden.", sr: "Изуј обућу – света земља." } },
+        { ref: { de: "Ex 3,7–12", sr: "Изл 3,7–12" }, note: { de: "Ich habe das Elend meines Volkes gesehen.", sr: "Видео сам невољу народа свога." } },
+        { ref: { de: "Ex 3,13–15", sr: "Изл 3,13–15" }, note: { de: "Ich bin der Seiende.", sr: "Ја сам Који јесам." } }
+      ],
+      summary: {
+        de: "Mose sieht einen Dornbusch, der im Feuer brennt und doch nicht verbrennt. Als er näher tritt, ruft Gott ihn aus dem Busch: Komm nicht näher; zieh deine Schuhe aus, denn der Ort, auf dem du stehst, ist heiliger Boden. Ich bin der Gott Abrahams, Isaaks und Jakobs. Mose verhüllt sein Gesicht. Gott sagt: Ich habe das Elend meines Volkes gesehen und bin herabgestiegen, um es zu befreien. Er sendet Mose zum Pharao. Mose fragt, wer er sei, und fragt nach seinem Namen. Gott antwortet: Ich bin, der ich bin (nach der Septuaginta: Ich bin der Seiende). Das ist mein Name für immer.",
+        sr: "Мојсије види купину која гори у огњу, а не сагорева. Када приђе, Бог га дозива из купине: Не прилази ближе; изуј обућу своју, јер је место на коме стојиш света земља. Ја сам Бог Авраамов, Исаков и Јаковљев. Мојсије заклања лице своје. Бог говори: Видео сам невољу народа свога и сишао сам да га избавим. Шаље Мојсија фараону. Мојсије пита ко је Он и пита за Његово име. Бог одговара: Ја сам Који јесам (по Септуагинти: Ја сам Онај Који јесте). То је име моје довека."
+      },
+      interp: {
+        simple: {
+          de: "Gott sieht das Leid der Menschen und handelt. Er offenbart sich als der, der wirklich ist und immer bleibt. Vor Gott steht man mit Ehrfurcht.",
+          sr: "Бог види патњу људи и делује. Он се открива као Онај који истински јесте и увек остаје. Пред Богом се стоји са страхопоштовањем."
+        },
+        deeper: {
+          de: "Die Septuaginta übersetzt den Gottesnamen mit „Ich bin der Seiende“ (griechisch ho ōn). Diese Worte stehen auf orthodoxen Ikonen im Heiligenschein Christi (ὁ ὤν): Die Kirche bekennt, dass der Sohn, der Mensch wurde, derselbe Gott ist, der sich Mose offenbarte. In Hymnen und auf Ikonen deutet die Kirche den Dornbusch als Vorausbild der Gottesgebärerin: Wie der Busch das Feuer trug und nicht verbrannte, so trug sie den Sohn Gottes und blieb Jungfrau. Das Ausziehen der Schuhe wird oft als Bild für das Ablegen irdischer Sorgen vor Gott gedeutet.",
+          sr: "Септуагинта Божије име преводи са „Ја сам Онај Који јесте“ (грчки хо он). Те речи стоје на православним иконама у Христовом ореолу (ὁ ὤν): Црква исповеда да је Син, који је постао човек, исти Бог који се открио Мојсију. У химнама и на иконама Црква купину тумачи као праслику Богородице: као што је купина носила огањ и није сагорела, тако је она носила Сина Божијег и остала Дјева. Изување обуће често се тумачи као слика одбацивања земаљских брига пред Богом."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Christus sagt von sich: „Ehe Abraham wurde, bin ich“ (Joh 8,58). Der Gott des Dornbuschs ist in Christus Mensch geworden, um sein Volk aus der Knechtschaft der Sünde zu befreien.",
+        sr: "Христос говори о себи: „Пре него што Авраам постаде, ја јесам“ (Јн 8,58). Бог неопалиме купине постао је у Христу човек да би свој народ ослободио ропства греха."
+      },
+      links: [
+        { ref: { de: "Joh 8,58", sr: "Јн 8,58" }, note: { de: "Ehe Abraham wurde, bin ich.", sr: "Пре него што Авраам постаде, ја јесам." } },
+        { ref: { de: "Apg 7,30–34", sr: "Дап 7,30–34" }, note: { de: "Stephanus erzählt vom Dornbusch.", sr: "Стефан приповеда о купини." } },
+        { ref: { de: "Lk 20,37–38", sr: "Лк 20,37–38" }, note: { de: "Gott ist ein Gott der Lebenden.", sr: "Бог је Бог живих." } },
+        { ref: { de: "Offb 1,8", sr: "Отк 1,8" }, note: { de: "Der da ist, der da war und der da kommt.", sr: "Који јесте и који беше и који долази." } }
+      ],
+      fathers: {
+        de: "Der hl. Gregor von Nyssa deutet den Dornbusch in seinem „Leben des Mose“ als Bild für die jungfräuliche Geburt und für den geistlichen Aufstieg zu Gott. Für diese Version wurde kein freier, rechtmäßiger Link geprüft; wörtliche Zitate gibt die App nicht wieder.",
+        sr: "Свети Григорије Ниски у делу „Живот Мојсијев“ тумачи купину као слику девственог рођења и духовног узрастања ка Богу. За ово издање није проверена слободна, законито доступна веза; апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Warum soll Mose seine Schuhe ausziehen?", sr: "Зашто Мојсије треба да изује обућу?" },
+          a: { de: "Weil der Ort, an dem Gott sich offenbart, heiliger Boden ist.", sr: "Зато што је место на коме се Бог открива света земља." } },
+        { q: { de: "Welche Worte stehen im Heiligenschein Christi auf Ikonen?", sr: "Које речи стоје у Христовом ореолу на иконама?" },
+          a: { de: "ὁ ὤν – „der Seiende“, nach Ex 3,14 in der Septuaginta.", sr: "ὁ ὤν – „Онај Који јесте“, по Изл 3,14 у Септуагинти." } },
+        { q: { de: "Warum ist der Dornbusch ein Bild der Gottesgebärerin?", sr: "Зашто је купина слика Богородице?" },
+          a: { de: "Wie der Busch brannte und nicht verbrannte, trug sie Gott und blieb Jungfrau.", sr: "Као што је купина горела и није сагорела, тако је она носила Бога и остала Дјева." } }
+      ],
+      practice: {
+        de: "Wenn du diese Woche eine Kirche betrittst, halte einen Moment an der Tür inne, bekreuzige dich und denke: „Dies ist heiliger Boden.“ Schau dir auf einer Christus-Ikone die Buchstaben im Heiligenschein an.",
+        sr: "Када ове недеље уђете у храм, застаните тренутак на вратима, прекрстите се и помислите: „Ово је света земља.“ Погледајте на Христовој икони слова у ореолу."
+      },
+      review: {
+        de: "Gott offenbart sich Mose im brennenden, nicht verbrennenden Dornbusch als „der Seiende“ und sendet ihn, Israel zu befreien. Die Kirche sieht im Busch ein Bild der Gottesgebärerin.",
+        sr: "Бог се открива Мојсију у купини која гори, а не сагорева, као „Онај Који јесте“ и шаље га да ослободи Израиљ. Црква у купини види слику Богородице."
+      },
+      quiz: [
+        { q: { de: "An welchem Berg begegnete Mose Gott im Dornbusch?", sr: "На којој гори је Мојсије срео Бога у купини?" },
+          options: [{ de: "Am Horeb", sr: "На Хориву" }, { de: "Am Tabor", sr: "На Тавору" }, { de: "Am Ölberg", sr: "На Маслинској гори" }], correct: 0 },
+        { q: { de: "Was ist am Dornbusch besonders?", sr: "Шта је посебно на купини?" },
+          options: [{ de: "Er brennt und verbrennt nicht", sr: "Гори, а не сагорева" }, { de: "Er trägt Früchte", sr: "Доноси плодове" }, { de: "Er spricht mit Engeln", sr: "Разговара са анђелима" }], correct: 0 },
+        { q: { de: "Wie übersetzt die Septuaginta den Gottesnamen?", sr: "Како Септуагинта преводи Божије име?" },
+          options: [{ de: "„Ich bin der Seiende“", sr: "„Ја сам Онај Који јесте“" }, { de: "„Ich bin der Starke“", sr: "„Ја сам Јаки“" }, { de: "„Ich bin der König“", sr: "„Ја сам Цар“" }], correct: 0 },
+        { q: { de: "Wofür wird der Dornbusch als Vorausbild gedeutet?", sr: "Чега праслика је, према тумачењу, купина?" },
+          options: [{ de: "Für die Gottesgebärerin", sr: "Богородице" }, { de: "Für die Arche Noah", sr: "Нојеве барке" }, { de: "Für den Turm von Babel", sr: "Вавилонске куле" }], correct: 0 }
+      ]
     }
   ]
 };
@@ -4869,6 +5028,18 @@ const SAINTS = [
     life: { de: "Spyridon lebte auf Zypern, war nach der Überlieferung Hirte, verheiratet und Vater einer Tochter. Wegen seiner Frömmigkeit wurde er Bischof von Trimythous. Nach der Überlieferung nahm er am Konzil von Nizäa 325 teil. Seine Reliquien kamen über Konstantinopel im 15. Jahrhundert nach Korfu, wo sie bis heute verehrt werden.", sr: "Спиридон је живео на Кипру и био је, према предању, пастир, ожењен и отац једне кћери. Због своје побожности постао је епископ тримитунтски. Према предању, учествовао је на Никејском сабору 325. Његове мошти пренете су преко Цариграда у 15. веку на Крф, где се и данас поштују." },
     teaching: { de: "Er gilt als Vorbild eines einfachen, demütigen Bischofs, der ein Hirte blieb – für Tiere wie für Menschen. Viele Wunderberichte gehören zur Überlieferung; die Kirche ehrt ihn als Wundertäter.", sr: "Сматра се узором једноставног, смиреног епископа који је остао пастир – и стоке и људи. Многа казивања о чудима припадају предању; Црква га поштује као чудотворца." },
     meaning: { de: "Er ist der Schutzpatron von Korfu. Bei den Serben ist er bekannt, weil serbische Soldaten im Ersten Weltkrieg auf Korfu Zuflucht fanden.", sr: "Он је заштитник Крфа. Код Срба је познат и зато што су српски војници у Првом светском рату нашли уточиште на Крфу." },
+    tag: "uncertain", read: ["svProlog"] },
+  { id: "s-catherine", name: { de: "Hl. Großmärtyrerin Katharina von Alexandrien", sr: "Света великомученица Екатерина" },
+    lived: { de: "† um 305 (nach der Überlieferung)", sr: "† око 305. (према предању)" }, feast: { de: "24. Nov. (7. Dez.)", sr: "24. новембар/7. децембар" },
+    life: { de: "Nach der Überlieferung war Katharina eine junge, sehr gebildete Frau aus vornehmer Familie in Alexandrien. Sie bekannte Christus vor dem Kaiser (meist wird Maximinus genannt), widerlegte in einem Streitgespräch heidnische Philosophen und starb um 305 als Märtyrerin. Ihre Lebensbeschreibung ist erst Jahrhunderte später schriftlich bezeugt; historische Einzelheiten sind unsicher. Nach der Überlieferung wurden ihre Reliquien auf den Sinai gebracht; das Kloster am Fuß des Berges trägt heute ihren Namen.", sr: "Према предању, Екатерина је била млада, веома образована девојка из угледне породице у Александрији. Исповедила је Христа пред царем (обично се наводи Максимин), у расправи оборила незнабожачке философе и око 305. пострадала као мученица. Њено житије писмено је посведочено тек вековима касније; историјске појединости су несигурне. Према предању, њене мошти пренете су на Синај; манастир у подножју горе данас носи њено име." },
+    teaching: { de: "Sie ist ein Vorbild dafür, dass Glaube und Bildung zusammengehören: Wissen soll in den Dienst der Wahrheit Christi gestellt werden. Sie wird von Schülern und Studierenden um Fürsprache gebeten.", sr: "Она је узор тога да вера и образовање иду заједно: знање треба ставити у службу Христове истине. Ђаци и студенти моле је за заступништво." },
+    meaning: { de: "Das Katharinenkloster auf dem Sinai ist eines der ältesten ununterbrochen bewohnten Klöster der Welt und gehört zum UNESCO-Welterbe.", sr: "Манастир Свете Екатерине на Синају један је од најстаријих непрекидно насељених манастира на свету и налази се на Унесковој листи светске баштине." },
+    tag: "uncertain", read: ["svProlog"] },
+  { id: "s-prokopije", name: { de: "Hl. Großmärtyrer Prokopios", sr: "Свети великомученик Прокопије" },
+    lived: { de: "† 303", sr: "† 303." }, feast: { de: "8. Juli (21. Juli)", sr: "8/21. јул (Прокопијевдан)" },
+    life: { de: "Der Kirchenhistoriker Eusebius von Caesarea berichtet, dass Prokopios aus Skythopolis stammte, in der Kirche als Lektor diente und ein sehr asketisches Leben führte. Im Jahr 303 wurde er in Caesarea in Palästina als erster Märtyrer der diokletianischen Verfolgung in dieser Gegend enthauptet, weil er sich weigerte, den Göttern und dem Kaiser zu opfern. Spätere Lebensbeschreibungen machen ihn zu einem Heerführer; diese Erweiterungen sind historisch nicht gesichert.", sr: "Црквени историчар Јевсевије Кесаријски пише да је Прокопије био из Скитопоља, да је у Цркви служио као чтец и водио веома подвижнички живот. Године 303. посечен је у Кесарији Палестинској као први мученик Диоклецијановог гоњења у тој области, јер је одбио да принесе жртву боговима и цару. Каснија житија праве од њега војсковођу; та проширења историјски нису потврђена." },
+    teaching: { de: "Er zeigt, dass auch ein einfacher Dienst in der Kirche – Lesen der Schrift – zu großer Treue führen kann. Er bekannte, es gebe nur einen Gott.", sr: "Он показује да и једноставна служба у Цркви – читање Писма – може водити ка великој верности. Исповедао је да постоји само један Бог." },
+    meaning: { de: "Die serbische Stadt Prokuplje trägt seinen Namen; nach der Überlieferung wurden Reliquien von ihm dorthin gebracht. Prokopijevdan ist in einigen serbischen Familien Slava.", sr: "Српски град Прокупље носи његово име; према предању, тамо су донете његове мошти. Прокопијевдан је у неким српским породицама слава." },
     tag: "uncertain", read: ["svProlog"] }
 ];
 
@@ -5117,6 +5288,28 @@ const SAINT_EXTRA = {
       qz("Auf welcher Insel war er Bischof?", "На ком острву је био епископ?", [["Zypern", "На Кипру"], ["Kreta", "На Криту"], ["Sizilien", "На Сицилији"]], 0),
       qz("Wann ist sein Gedenktag?", "Када је његов спомен?", [["12. Dezember (25. Dezember)", "12. децембра (25. децембра)"], ["30. November (13. Dezember)", "30. новембра (13. децембра)"], ["9. Mai (22. Mai)", "9. маја (22. маја)"]], 0),
       qz("Von welcher Insel ist er Schutzpatron?", "Ког острва је заштитник?", [["Korfu", "Крфа"], ["Zypern", "Кипра"], ["Malta", "Малте"]], 0)
+    ]
+  },
+  "s-catherine": {
+    questions: [
+      qa("Warum wird die hl. Katharina von Schülern und Studierenden angerufen?", "Зашто се ђаци и студенти моле светој Екатерини?", "Weil sie nach der Überlieferung sehr gebildet war und ihr Wissen in den Dienst Christi stellte.", "Зато што је, према предању, била веома образована и своје знање ставила у службу Христу."),
+      qa("Welches berühmte Kloster trägt ihren Namen?", "Који чувени манастир носи њено име?", "Das Katharinenkloster auf dem Sinai.", "Манастир Свете Екатерине на Синају.")
+    ],
+    quiz: [
+      qz("Aus welcher Stadt stammte sie nach der Überlieferung?", "Из ког града је, према предању, потицала?", [["Alexandrien", "Из Александрије"], ["Rom", "Из Рима"], ["Antiochien", "Из Антиохије"]], 0),
+      qz("Wann ist ihr Gedenktag?", "Када је њен спомен?", [["24. November (7. Dezember)", "24. новембра (7. децембра)"], ["14. Oktober (27. Oktober)", "14. октобра (27. октобра)"], ["1. April (14. April)", "1. априла (14. априла)"]], 0),
+      qz("Wen widerlegte sie nach der Überlieferung im Streitgespräch?", "Кога је, према предању, оборила у расправи?", [["Heidnische Philosophen", "Незнабожачке философе"], ["Bischöfe", "Епископе"], ["Mönche", "Монахе"]], 0)
+    ]
+  },
+  "s-prokopije": {
+    questions: [
+      qa("Welcher frühe Geschichtsschreiber berichtet über den hl. Prokopios?", "Који рани историчар пише о светом Прокопију?", "Eusebius von Caesarea.", "Јевсевије Кесаријски."),
+      qa("Welchen Dienst hatte Prokopios nach Eusebius in der Kirche?", "Коју службу је Прокопије, по Јевсевију, имао у Цркви?", "Er war Lektor, also Vorleser der Heiligen Schrift.", "Био је чтец, дакле читач Светог Писма.")
+    ],
+    quiz: [
+      qz("Wo starb er 303 als Märtyrer?", "Где је пострадао 303?", [["In Caesarea in Palästina", "У Кесарији Палестинској"], ["In Rom", "У Риму"], ["In Belgrad", "У Београду"]], 0),
+      qz("Welche serbische Stadt trägt seinen Namen?", "Који српски град носи његово име?", [["Prokuplje", "Прокупље"], ["Kragujevac", "Крагујевац"], ["Novi Sad", "Нови Сад"]], 0),
+      qz("Wann ist sein Gedenktag?", "Када је његов спомен?", [["8. Juli (21. Juli)", "8. јула (21. јула)"], ["26. Oktober (8. November)", "26. октобра (8. новембра)"], ["30. November (13. Dezember)", "30. новембра (13. децембра)"]], 0)
     ]
   }
 };
@@ -5424,6 +5617,8 @@ const EXTRA_CARDS = [
   ["d-bible", "Womit beginnt die Weisheit (Spr 9,10)?", "Чиме почиње мудрост (Прич 9,10)?", "Mit der Furcht des Herrn.", "Страхом Господњим."],
   ["d-bible", "Was ist nach Kol 3,14 das Band der Vollkommenheit?", "Шта је по Кол 3,14 свеза савршенства?", "Die Liebe.", "Љубав."],
   ["d-bible", "Wie beginnt das Grundbekenntnis Israels (Dtn 6,4)?", "Како почиње основно исповедање Израиља (Пнз 6,4)?", "Höre, Israel, der Herr, unser Gott, ist ein einziger Herr.", "Чуј, Израиљу, Господ Бог наш је једини Господ."],
+  ["d-bible", "Was antwortet Abraham auf Isaaks Frage nach dem Lamm (Gen 22,8)?", "Шта Авраам одговара на Исаково питање о јагњету (Пост 22,8)?", "Gott wird sich das Lamm ersehen.", "Бог ће се постарати за јагње."],
+  ["d-bible", "Was steht im Heiligenschein Christi auf Ikonen?", "Шта стоји у Христовом ореолу на иконама?", "ὁ ὤν – „der Seiende“ (Ex 3,14 nach der Septuaginta).", "ὁ ὤν – „Онај Који јесте“ (Изл 3,14 по Септуагинти)."],
   ["d-history", "Nizäa 325 – worum ging es?", "Никеја 325 – о чему је било реч?", "Gegen Arius: Der Sohn ist eines Wesens mit dem Vater.", "Против Арија: Син је једносуштан Оцу."],
   ["d-history", "Konstantinopel 381 – worum ging es?", "Цариград 381 – о чему је било реч?", "Gottheit des Heiligen Geistes; Ergänzung des Glaubensbekenntnisses.", "Божанство Духа Светога; допуна Символа вере."],
   ["d-history", "Ephesus 431 – worum ging es?", "Ефес 431 – о чему је било реч?", "Gegen Nestorius: Maria ist Gottesgebärerin.", "Против Несторија: Марија је Богородица."],
@@ -5457,6 +5652,8 @@ const EXTRA_CARDS = [
   ["d-saints", "Wo ruhen die Reliquien des hl. Spyridon?", "Где почивају мошти светог Спиридона?", "Auf Korfu.", "На Крфу."],
   ["d-history", "Wann wird die Basilius-Liturgie gefeiert?", "Када се служи Василијева литургија?", "Etwa zehnmal im Jahr: 1. Jan., vor Weihnachten und Theophanie, fünf Fastensonntage, Großer Donnerstag und Samstag.", "Десетак пута годишње: 1. јан., уочи Божића и Богојављења, пет недеља поста, Велики четвртак и субота."],
   ["d-history", "Was ist die Liturgie der Vorgeweihten Gaben?", "Шта је Литургија Пређеосвећених Дарова?", "Vesper mit Kommunion aus am Sonntag geweihten Gaben – an Wochentagen der Fastenzeit.", "Вечерње са причешћем Даровима освећеним у недељу – радним данима поста."],
+  ["d-saints", "Welches Kloster trägt den Namen der hl. Katharina?", "Који манастир носи име свете Екатерине?", "Das Katharinenkloster auf dem Sinai.", "Манастир Свете Екатерине на Синају."],
+  ["d-saints", "Nach welchem Heiligen ist die Stadt Prokuplje benannt?", "По ком светитељу је назван град Прокупље?", "Nach dem hl. Großmärtyrer Prokopios.", "По светом великомученику Прокопију."],
   ["d-saints", "Wer sind die Drei Hierarchen?", "Ко су Три Јерарха?", "Basilius der Große, Gregor der Theologe, Johannes Chrysostomus (Fest 30. Jan.).", "Василије Велики, Григорије Богослов, Јован Златоуст (празник 30. јануар)."],
   ["d-saints", "Wer schrieb „Über die Menschwerdung des Wortes“?", "Ко је написао „О оваплоћењу Логоса“?", "Der hl. Athanasius der Große.", "Свети Атанасије Велики."],
   ["d-saints", "Wer verteidigte die zwei Willen Christi bis zum Martyrium?", "Ко је бранио две воље Христове до мучеништва?", "Der hl. Maximus der Bekenner.", "Свети Максим Исповедник."],
@@ -5815,7 +6012,7 @@ const SAINT_DAYS = [
   ["s-seraphim", 1, 2], ["s-seraphim", 7, 19], ["s-kronstadt", 12, 20], ["s-nikolaj", 3, 5], ["s-nikolaj", 4, 20],
   ["s-sava", 1, 14], ["s-lazar", 6, 15], ["s-simeon", 2, 13], ["s-vasilije", 4, 29], ["s-justin", 6, 1],
   ["s-maryegypt", 4, 1], ["s-luke", 5, 29],
-  ["s-nicholas", 5, 9], ["s-george", 11, 3], ["s-demetrios", 10, 26], ["s-petka", 10, 14], ["s-stefan", 11, 11], ["s-andrew", 11, 30], ["s-spyridon", 12, 12]
+  ["s-nicholas", 5, 9], ["s-george", 11, 3], ["s-demetrios", 10, 26], ["s-petka", 10, 14], ["s-stefan", 11, 11], ["s-andrew", 11, 30], ["s-spyridon", 12, 12], ["s-catherine", 11, 24], ["s-prokopije", 7, 8]
 ];
 
 const CAL_FASTS = {
@@ -6848,7 +7045,16 @@ function fastPeriods(y, cal) {
     const items = GLOSSARY.map(g => ({ term: isSr() ? L({ de: g[1], sr: g[2] }) : g[1], def: isSr() ? L({ de: g[3], sr: g[4] }) : g[3] }))
       .sort((a, b) => a.term.localeCompare(b.term, lang() === "de" ? "de" : "sr"));
     return `<h1>${esc(t("glossary"))}</h1><p class="muted">${esc(t("glossaryIntro"))}</p>
-      ${items.map(i => `<div class="card"><h3>${esc(i.term)}</h3><p>${esc(i.def)}</p></div>`).join("")}`;
+      <input type="search" id="glossq" placeholder="${esc(t("glossSearch"))}" aria-label="${esc(t("glossSearch"))}" style="margin-bottom:4px">
+      ${(() => { const groups = []; items.forEach(i => { const k = i.term.charAt(0).toUpperCase(); let g = groups.find(x => x.k === k); if (!g) groups.push(g = { k, list: [] }); g.list.push(i); });
+        return groups.map(g => `<div class="glgroup"><div class="sh">${esc(g.k)}</div><ul class="list">${g.list.map(i => `<li class="glo" data-q="${esc(norm(i.term + " " + i.def))}"><span class="gt">${esc(i.term)}</span><span class="gd">${esc(i.def)}</span></li>`).join("")}</ul></div>`).join(""); })()}
+      <p class="muted" id="glossnone" hidden>${esc(t("glossNone"))}</p>`;
+  }
+  function bindGlossary() {
+    const q = document.getElementById("glossq"); if (!q) return;
+    q.oninput = () => { const v = norm(q.value.trim()); let any = false;
+      app.querySelectorAll(".glgroup").forEach(g => { let n = 0; g.querySelectorAll(".glo").forEach(li => { const ok = !v || li.getAttribute("data-q").includes(v); li.hidden = !ok; if (ok) n++; }); g.hidden = !n; if (n) any = true; });
+      document.getElementById("glossnone").hidden = any; };
   }
 
   /* ---------- Fragenhilfe (regelbasierte Suche, keine KI) ---------- */
@@ -6993,7 +7199,7 @@ function fastPeriods(y, cal) {
   function bindBooks() { app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { bookCat = b.getAttribute("data-cat"); render(); }); }
 
   function bindHome() { const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };
