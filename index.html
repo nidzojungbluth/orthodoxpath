@@ -237,7 +237,7 @@ main > .wrap { animation: opFade .28s ease-out; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "2.0.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "2.1.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -380,6 +380,11 @@ const UI = {
     sourceInfo: "Quellenlage",
     creed: "Glaubensbekenntnis",
     menu: "Menü",
+    litTitle: "Die Liturgie Schritt für Schritt", litIntro: "Die Göttliche Liturgie des hl. Johannes Chrysostomus in 16 Schritten: was geschieht, was es bedeutet und was du tun kannst. Einzelheiten unterscheiden sich je nach Gemeinde und Ortskirche.",
+    litWhat: "Was geschieht?", litMean: "Bedeutung", litDo: "Was tue ich?", litNote: "Liturgische Rufe: serbisch im kirchlichen Gebrauch verbreiteter Wortlaut, deutsch Arbeitsübersetzung der App.",
+    plansTitle: "Lesepläne", plansIntro: "Lies die Heilige Schrift in deinem eigenen Tempo. Es gibt keine Termine – tippe eine Lesung an, wenn du sie gelesen hast.",
+    planNext: "Nächste Lesung", planDone: "Plan abgeschlossen – Ehre sei Gott!", planReadings: "Lesungen", planMark: "Als gelesen markieren", planReset: "Plan zurücksetzen",
+    planShowAll: "Alle Lesungen anzeigen", planShowLess: "Weniger anzeigen",
     greetMorning: "Guten Morgen", greetDay: "Guten Tag", greetEvening: "Guten Abend",
     weekTitle: "Diese Woche", weekText: "{n} von 7 Tagen mit Gebet oder Lernen",
     weekGentle: "Kein Wettbewerb und kein Druck – jeder Tag ist ein neuer Anfang.",
@@ -570,6 +575,11 @@ const UI = {
     sourceInfo: "Стање извора",
     creed: "Символ вере",
     menu: "Мени",
+    litTitle: "Литургија корак по корак", litIntro: "Света Литургија светог Јована Златоуста у 16 корака: шта се збива, шта значи и шта можете да чините. Појединости се разликују зависно од парохије и помесне Цркве.",
+    litWhat: "Шта се збива?", litMean: "Значење", litDo: "Шта ја чиним?", litNote: "Литургијски возгласи: на српском у црквеној употреби раширен текст, на немачком радни превод апликације.",
+    plansTitle: "Планови читања", plansIntro: "Читајте Свето Писмо сопственим темпом. Нема рокова – додирните читање када га прочитате.",
+    planNext: "Следеће читање", planDone: "План завршен – слава Богу!", planReadings: "читања", planMark: "Означи као прочитано", planReset: "Поништи план",
+    planShowAll: "Прикажи сва читања", planShowLess: "Прикажи мање",
     greetMorning: "Добро јутро", greetDay: "Добар дан", greetEvening: "Добро вече",
     weekTitle: "Ове недеље", weekText: "{n} од 7 дана са молитвом или учењем",
     weekGentle: "Без такмичења и без притиска – сваки дан је нови почетак.",
@@ -4894,6 +4904,114 @@ const PRAYER_CATS = [
 ];
 
 
+/* src/content/plans.js */
+/* OrthodoxPath – Lesepläne. Nur Stellenangaben, keine Bibeltexte. Freies Tempo ohne Datum. */
+const NT_BOOKS = [
+  ["Matthäus", "Матеј", 28], ["Markus", "Марко", 16], ["Lukas", "Лука", 24], ["Johannes", "Јован", 21],
+  ["Apostelgeschichte", "Дела апостолска", 28], ["Römer", "Римљанима", 16], ["1. Korinther", "1. Коринћанима", 16],
+  ["2. Korinther", "2. Коринћанима", 13], ["Galater", "Галатима", 6], ["Epheser", "Ефесцима", 6], ["Philipper", "Филипљанима", 4],
+  ["Kolosser", "Колошанима", 4], ["1. Thessalonicher", "1. Солуњанима", 5], ["2. Thessalonicher", "2. Солуњанима", 3],
+  ["1. Timotheus", "1. Тимотеју", 6], ["2. Timotheus", "2. Тимотеју", 4], ["Titus", "Титу", 3], ["Philemon", "Филимону", 1],
+  ["Hebräer", "Јеврејима", 13], ["Jakobus", "Јаковљева", 5], ["1. Petrus", "1. Петрова", 5], ["2. Petrus", "2. Петрова", 3],
+  ["1. Johannes", "1. Јованова", 5], ["2. Johannes", "2. Јованова", 1], ["3. Johannes", "3. Јованова", 1], ["Judas", "Јудина", 1],
+  ["Offenbarung", "Откривење", 22]
+];
+function chapterPlan(books) {
+  const days = [];
+  books.forEach(([de, sr, n]) => { for (let c = 1; c <= n; c++) days.push({ de: de + " " + c, sr: sr + " " + c }); });
+  return days;
+}
+/* Kathismen des Psalters (Septuaginta-Zählung) */
+const KATHISMATA = [[1, 8], [9, 16], [17, 23], [24, 31], [32, 36], [37, 45], [46, 54], [55, 63], [64, 69], [70, 76], [77, 84], [85, 90], [91, 100], [101, 104], [105, 108], [109, 117], [118, 118], [119, 133], [134, 142], [143, 150]];
+
+const PLANS = [
+  { id: "gospels", title: { de: "Die vier Evangelien", sr: "Четири Јеванђеља" },
+    desc: { de: "Ein Kapitel pro Tag – Matthäus, Markus, Lukas und Johannes in 89 Lesungen.", sr: "Једна глава дневно – Матеј, Марко, Лука и Јован у 89 читања." },
+    days: chapterPlan(NT_BOOKS.slice(0, 4)) },
+  { id: "nt", title: { de: "Das ganze Neue Testament", sr: "Цео Нови Завет" },
+    desc: { de: "Ein Kapitel pro Tag – alle 27 Bücher in 260 Lesungen.", sr: "Једна глава дневно – свих 27 књига у 260 читања." },
+    days: chapterPlan(NT_BOOKS) },
+  { id: "psalter", title: { de: "Der Psalter in 20 Kathismen", sr: "Псалтир у 20 катизми" },
+    desc: { de: "Die Kirche teilt die 150 Psalmen in 20 Abschnitte (Kathismen), die in den Gottesdiensten gelesen werden. Eine Kathisma pro Tag; Zählung nach der Septuaginta.", sr: "Црква дели 150 псалама на 20 одељака (катизми), који се читају на богослужењима. Једна катизма дневно; нумерација по Септуагинти." },
+    days: KATHISMATA.map(([a, b], i) => ({ de: `Kathisma ${i + 1}: Psalm ${a === b ? a : a + "–" + b}`, sr: `Катизма ${i + 1}: псалам ${a === b ? a : a + "–" + b}` })) }
+];
+
+
+/* src/content/liturgysteps.js */
+/* OrthodoxPath – Göttliche Liturgie des hl. Johannes Chrysostomus, Schritt für Schritt.
+   Kurze liturgische Rufe: serbisch im kirchlichen Gebrauch verbreiteter Wortlaut, deutsch Arbeitsübersetzung. Einzelheiten unterscheiden sich je nach Ortskirche. */
+const LITURGY_STEPS = [
+  { part: 1, title: { de: "Proskomidie – die Vorbereitung", sr: "Проскомидија – припрема" },
+    what: { de: "Vor Beginn bereitet der Priester am Rüsttisch (links im Altarraum) Brot (Prosphoren) und Wein vor. Für die Lebenden und Verstorbenen werden kleine Teilchen aus dem Brot genommen.", sr: "Пре почетка свештеник на проскомидијском столу (лево у олтару) припрема хлеб (просфоре) и вино. За живе и упокојене из хлеба се ваде мале честице." },
+    mean: { de: "Die ganze Kirche – die Gottesgebärerin, die Heiligen, Lebende und Verstorbene – versammelt sich um Christus, das Lamm.", sr: "Цела Црква – Богородица, светитељи, живи и упокојени – сабира се око Христа, Јагњета." },
+    do: { de: "Du kannst vor der Liturgie Namen von Lebenden und Verstorbenen auf einen Zettel schreiben und mit einer Prosphore abgeben, wie es in deiner Gemeinde üblich ist.", sr: "Пре Литургије можете написати имена живих и упокојених на цедуљу и предати је уз просфору, како је уобичајено у вашој парохији." } },
+  { part: 2, title: { de: "Eröffnung: „Gesegnet ist das Reich …“", sr: "Почетак: „Благословено Царство …“" },
+    what: { de: "Der Priester ruft: „Gesegnet ist das Reich des Vaters und des Sohnes und des Heiligen Geistes, jetzt und immerdar und in die Ewigkeit der Ewigkeiten.“ Das Volk antwortet: „Amen.“", sr: "Свештеник возглашава: „Благословено Царство Оца и Сина и Светога Духа, сада и увек и у векове векова.“ Народ одговара: „Амин.“" },
+    mean: { de: "Die Liturgie ist von Anfang an auf das Reich Gottes ausgerichtet: Wir treten schon jetzt in seine Gegenwart.", sr: "Литургија је од почетка усмерена ка Царству Божијем: већ сада улазимо у његово присуство." },
+    do: { de: "Bekreuzige dich und stimme in das „Amen“ ein.", sr: "Прекрстите се и придружите се „Амин“." } },
+  { part: 2, title: { de: "Große Ektenie (Friedensbitten)", sr: "Велика (мирна) јектенија" },
+    what: { de: "Der Diakon oder Priester spricht Bitten „in Frieden“ – für die Kirche, die Bischöfe, das Land, die Reisenden, Kranken und Notleidenden. Auf jede Bitte antwortet der Chor: „Herr, erbarme dich.“", sr: "Ђакон или свештеник изговара прозбе „у миру“ – за Цркву, епископе, земљу, путнике, болесне и невољне. На сваку прозбу хор одговара: „Господе, помилуј.“" },
+    mean: { de: "Die Kirche betet für die ganze Welt. „Herr, erbarme dich“ ist kein ängstlicher Ruf, sondern Vertrauen auf Gottes liebende Barmherzigkeit.", sr: "Црква се моли за цео свет. „Господе, помилуј“ није страшљив вапај, него поверење у Божију милостиву љубав." },
+    do: { de: "Bete still mit; bekreuzige dich, wenn du möchtest, bei „Herr, erbarme dich“.", sr: "Тихо се молите заједно; ако желите, прекрстите се на „Господе, помилуј“." } },
+  { part: 2, title: { de: "Antiphonen", sr: "Антифони" },
+    what: { de: "Drei Gesänge, meist aus Psalmen; an vielen Tagen werden als drittes Antiphon die Seligpreisungen gesungen. An großen Festen gibt es eigene Festantiphonen.", sr: "Три песме, обично из псалама; многим данима се као трећи антифон певају блаженства. На велике празнике постоје посебни празнични антифони." },
+    mean: { de: "Lob Gottes mit den Worten der Heiligen Schrift; die Seligpreisungen zeigen den Weg Christi.", sr: "Хваљење Бога речима Светог Писма; блаженства показују Христов пут." },
+    do: { de: "Hör auf die Worte; viele Gläubige singen leise mit.", sr: "Слушајте речи; многи верници тихо певају." } },
+  { part: 2, title: { de: "Kleiner Einzug mit dem Evangelium", sr: "Мали вход са Јеванђељем" },
+    what: { de: "Der Priester trägt das Evangelienbuch in einer Prozession durch die nördliche Tür und durch die Königlichen Türen zum Altar. Gesungen wird: „Kommt, lasst uns anbeten und niederfallen vor Christus …“", sr: "Свештеник у литији износи Јеванђеље кроз северне двери и кроз царске двери уноси га у олтар. Пева се: „Ходите, поклонимо се и припаднимо Христу …“" },
+    mean: { de: "Christus, das lebendige Wort Gottes, kommt zu uns, um uns zu lehren.", sr: "Христос, жива Реч Божија, долази к нама да нас поучи." },
+    do: { de: "Bekreuzige dich und verneige dich, wenn das Evangelium vorbeigetragen wird.", sr: "Прекрстите се и поклоните се када се Јеванђеље проноси." } },
+  { part: 2, title: { de: "Troparien, Kontakien und Trisagion", sr: "Тропари, кондаци и Трисвета песма" },
+    what: { de: "Kurze Hymnen des Tages, des Festes und des Heiligen der Kirche. Danach wird dreimal das Trisagion gesungen: „Heiliger Gott, heiliger Starker, heiliger Unsterblicher, erbarme dich unser.“ (An einigen großen Festen wird stattdessen „Alle, die ihr auf Christus getauft seid …“ gesungen.)", sr: "Кратке химне дана, празника и светитеља храма. Затим се три пута пева Трисвета песма: „Свети Боже, Свети Крепки, Свети Бесмртни, помилуј нас.“ (На неке велике празнике уместо ње пева се „Који се у Христа крстисте …“.)" },
+    mean: { de: "Die Kirche vereint ihren Gesang mit dem Lob der Engel.", sr: "Црква сједињује своју песму са хвалом анђела." },
+    do: { de: "Bekreuzige dich beim Trisagion.", sr: "Прекрстите се на Трисвету песму." } },
+  { part: 2, title: { de: "Apostellesung", sr: "Апостол" },
+    what: { de: "Nach dem Prokimenon (einem Psalmvers) liest der Lektor einen Abschnitt aus der Apostelgeschichte oder einem Apostelbrief.", sr: "После прокимена (стиха из псалма) чтец чита одељак из Дела апостолских или неке апостолске посланице." },
+    mean: { de: "Die Kirche hört die Lehre der Apostel, auf der sie gegründet ist.", sr: "Црква слуша апостолско учење на коме је основана." },
+    do: { de: "Hör aufmerksam zu; du kannst die Stelle zu Hause noch einmal lesen.", sr: "Пажљиво слушајте; одељак можете код куће прочитати још једном." } },
+  { part: 2, title: { de: "Evangelium", sr: "Јеванђеље" },
+    what: { de: "Nach dem dreifachen Alleluja liest der Diakon oder Priester das Evangelium. Davor: „Weisheit! Steht aufrecht! Lasst uns das heilige Evangelium hören.“", sr: "После троструког Алилуја ђакон или свештеник чита Јеванђеље. Пре тога: „Премудрост! Смерно стојмо! Чујмо свето Јеванђеље.“" },
+    mean: { de: "Christus selbst spricht zu seiner Kirche.", sr: "Сам Христос говори својој Цркви." },
+    do: { de: "Steh aufmerksam, bekreuzige dich zu Beginn und am Ende. Oft folgt eine Predigt.", sr: "Стојте пажљиво, прекрстите се на почетку и на крају. Често следи проповед." } },
+  { part: 2, title: { de: "Fürbitten und Bitten für die Katechumenen", sr: "Сугуба јектенија и јектенија за оглашене" },
+    what: { de: "Inständige Bitten (mit dreifachem „Herr, erbarme dich“), oft Bitten für die Verstorbenen und Bitten für die Katechumenen – Menschen, die sich auf die Taufe vorbereiten.", sr: "Усрдне прозбе (са троструким „Господе, помилуј“), често прозбе за упокојене и прозбе за оглашене – људе који се припремају за крштење." },
+    mean: { de: "Früher verließen die Katechumenen danach die Kirche; nun beginnt die Liturgie der Gläubigen.", sr: "Некада су оглашени после тога напуштали храм; сада почиње Литургија верних." },
+    do: { de: "Nenne im Herzen die Namen von Menschen, für die du beten möchtest.", sr: "У срцу наведите имена људи за које желите да се молите." } },
+  { part: 3, title: { de: "Cherubimhymnus und Großer Einzug", sr: "Херувимска песма и Велики вход" },
+    what: { de: "Der Chor singt den Cherubimhymnus. Priester und Diakon tragen die Gaben (Brot und Wein) vom Rüsttisch in einer Prozession zum Altar und gedenken dabei der Kirche und der Gläubigen.", sr: "Хор пева Херувимску песму. Свештеник и ђакон у литији преносе дарове (хлеб и вино) са проскомидијског стола на часну трпезу и при томе помињу Цркву и вернике." },
+    mean: { de: "Wir „legen alle irdischen Sorgen ab“, um den König aller zu empfangen – so sagt es der Hymnus.", sr: "„Одлажемо сваку земаљску бригу“ да бисмо примили Цара свих – како каже песма." },
+    do: { de: "Steh still und andächtig; viele verneigen sich, wenn die Gaben vorbeigetragen werden.", sr: "Стојте мирно и побожно; многи се поклоне када се дарови проносе." } },
+  { part: 3, title: { de: "Friedensgruß und Glaubensbekenntnis", sr: "Целив мира и Символ вере" },
+    what: { de: "Nach weiteren Bitten ruft der Priester: „Lasst uns einander lieben, damit wir einmütig bekennen …“ Dann wird gemeinsam das Glaubensbekenntnis gesprochen oder gesungen.", sr: "После нових прозби свештеник возглашава: „Возљубимо једни друге, да бисмо једнодушно исповедали …“ Затим се заједно чита или пева Символ вере." },
+    mean: { de: "Ohne Liebe zueinander und ohne den gemeinsamen Glauben gibt es keine Eucharistie.", sr: "Без љубави једних према другима и без заједничке вере нема Евхаристије." },
+    do: { de: "Sprich das Glaubensbekenntnis mit (in der App unter Theologie → Glaubensbekenntnis).", sr: "Изговарајте заједно Символ вере (у апликацији под Богословље → Символ вере)." } },
+  { part: 3, title: { de: "Anaphora – das eucharistische Hochgebet", sr: "Анафора – евхаристијски канон" },
+    what: { de: "„Lasst uns aufrecht stehen …“ – Der Priester dankt Gott für die Schöpfung und die Erlösung; der Chor singt das „Heilig, heilig, heilig“. Es folgen die Worte Christi beim Abendmahl und die Epiklese: die Herabrufung des Heiligen Geistes auf die Gemeinde und auf die Gaben.", sr: "„Станимо смерно …“ – Свештеник благодари Богу за стварање и спасење; хор пева „Свет, свет, свет“. Следе Христове речи са Тајне вечере и епиклеза: призивање Духа Светога на сабрање и на дарове." },
+    mean: { de: "Das Herz der Liturgie: Durch den Heiligen Geist werden Brot und Wein Leib und Blut Christi.", sr: "Срце Литургије: Духом Светим хлеб и вино постају Тело и Крв Христова." },
+    do: { de: "Dies ist der heiligste Moment. Viele Gläubige knien oder verneigen sich tief, je nach Brauch der Gemeinde und Tag (an Sonntagen und in der Osterzeit wird traditionell nicht gekniet).", sr: "Ово је најсветији тренутак. Многи верници клече или се дубоко поклоне, зависно од обичаја парохије и дана (недељом и у васкршње време традиционално се не клечи)." } },
+  { part: 3, title: { de: "„Würdig ist es“ und Gedächtnis", sr: "„Достојно јест“ и помен" },
+    what: { de: "Der Chor singt das Lob der Gottesgebärerin „Würdig ist es“ (an großen Festen ein Festgesang). Der Priester gedenkt der Heiligen, der Verstorbenen, der Bischöfe und aller Lebenden.", sr: "Хор пева похвалу Богородици „Достојно јест“ (на велике празнике празнична песма). Свештеник помиње светитеље, упокојене, епископе и све живе." },
+    mean: { de: "In der Eucharistie ist die ganze Kirche im Himmel und auf Erden vereint.", sr: "У Евхаристији је цела Црква на небу и на земљи сједињена." },
+    do: { de: "Gedenke deiner Lieben, Lebender und Verstorbener.", sr: "Помените своје ближње, живе и упокојене." } },
+  { part: 3, title: { de: "Vaterunser", sr: "Оче наш" },
+    what: { de: "Nach weiteren Bitten singt oder spricht die ganze Gemeinde das Gebet des Herrn.", sr: "После нових прозби цело сабрање пева или изговара Молитву Господњу." },
+    mean: { de: "Als Kinder Gottes treten wir gemeinsam zum Tisch des Vaters.", sr: "Као деца Божија заједно приступамо Очевој трпези." },
+    do: { de: "Bete laut oder leise mit.", sr: "Молите се гласно или тихо заједно." } },
+  { part: 3, title: { de: "„Das Heilige den Heiligen“ und Kommunion", sr: "„Светиње светима“ и причешће" },
+    what: { de: "Der Priester erhebt das Lamm: „Das Heilige den Heiligen!“ Nach der Kommunion der Geistlichen ruft er: „Mit Gottesfurcht, Glauben und Liebe tretet herzu!“ Die vorbereiteten Gläubigen empfangen Leib und Blut Christi mit dem Löffel.", sr: "Свештеник уздиже Агнец: „Светиње светима!“ После причешћа свештенства возглашава: „Са страхом Божијим, вером и љубављу приступите!“ Припремљени верни примају Тело и Крв Христову кашичицом." },
+    mean: { de: "Die Vereinigung mit Christus – Ziel des christlichen Lebens.", sr: "Сједињење са Христом – циљ хришћанског живота." },
+    do: { de: "Wer kommunizieren möchte, bereitet sich nach Absprache mit dem Priester vor (Gebet, Fasten, oft Beichte). Kreuze die Arme vor der Brust und nenne deinen Taufnamen. Wer nicht kommuniziert, kann am Ende das Antidoron empfangen.", sr: "Ко жели да се причести, припрема се уз договор са свештеником (молитва, пост, често исповест). Прекрстите руке на грудима и реците своје крштено име. Ко се не причешћује, може на крају примити нафору." } },
+  { part: 3, title: { de: "Dank und Entlassung", sr: "Благодарење и отпуст" },
+    what: { de: "Der Chor singt „Wir haben das wahre Licht gesehen …“. Es folgen Dankbitten, das Gebet vor dem Ambo und die Entlassung. Am Ende küssen die Gläubigen das Kreuz und erhalten oft das Antidoron (gesegnetes Brot).", sr: "Хор пева „Видесмо светлост истиниту …“. Следе благодарне прозбе, заамвона молитва и отпуст. На крају верни целивају крст и често примају нафору (благословени хлеб)." },
+    mean: { de: "Die Liturgie endet nicht: Wir werden in die Welt gesandt, um das Empfangene zu leben.", sr: "Литургија се не завршава: бивамо послати у свет да живимо оно што смо примили." },
+    do: { de: "Küsse das Kreuz in der Hand des Priesters und danke Gott. Viele bleiben nach der Liturgie noch für die Dankgebete.", sr: "Целивајте крст у руци свештеника и захвалите Богу. Многи после Литургије остају још ради благодарних молитава." } }
+];
+const LITURGY_PARTS = {
+  1: { de: "Teil 1: Vorbereitung", sr: "Први део: припрема" },
+  2: { de: "Teil 2: Liturgie des Wortes (der Katechumenen)", sr: "Други део: Литургија оглашених" },
+  3: { de: "Teil 3: Liturgie der Gläubigen", sr: "Трећи део: Литургија верних" }
+};
+
 /* src/calendar.js */
 /* OrthodoxPath – Kirchenkalender.
    Feste Daten werden nach dem kirchlichen Kalender (Monat/Tag) gespeichert und je nach Einstellung umgerechnet:
@@ -5073,7 +5191,7 @@ function fastPeriods(y, cal) {
     lang: null, theme: "dark", font: 1, onboarded: false,
     done: {}, quiz: {}, cards: {}, newToday: { date: "", n: 0 },
     newPerDay: 10, lessonsPerWeek: 3, activity: [], verses: [],
-    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian"
+    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}
   };
   function load() {
     try {
@@ -5204,18 +5322,20 @@ function fastPeriods(y, cal) {
 
   function tabFor(r) {
     if (r.startsWith("quiz-")) return tabFor(backHref(r.slice(5)).slice(1));
-    if (r.startsWith("lesson-bib") || r === "bible" || r.startsWith("book-")) return "bible";
-    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed") return "theology";
+    if (r.startsWith("lesson-bib") || r === "bible" || r.startsWith("book-") || r === "plans" || r.startsWith("plan-")) return "bible";
+    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy") return "theology";
     if (r.startsWith("person-") || r === "saints") return "saints";
     if (r === "cards" || r === "review") return "cards";
     if (r === "home" || r === "ask" || r === "calendar" || r === "prayers" || r.startsWith("prayercat-")) return "home";
     return "more";
   }
   function parentOf(r) {
-    if (r.startsWith("lesson-bib") || r.startsWith("book-")) return "bible";
+    if (r.startsWith("lesson-bib") || r.startsWith("book-") || r === "plans") return "bible";
+    if (r.startsWith("plan-")) return "plans";
     if (r.startsWith("lesson-")) { const l = ALL_LESSONS[r.slice(7)]; return l ? "course-" + l.course : "theology"; }
     if (r.startsWith("quiz-")) return backHref(r.slice(5)).slice(1);
     if (r.startsWith("course-") || r === "creed") return "theology";
+    if (r === "liturgy") return "course-L";
     if (r.startsWith("person-")) return "saints";
     if (r === "review") return "cards";
     if (r === "ask") return "home";
@@ -5277,6 +5397,9 @@ function fastPeriods(y, cal) {
       else if (r === "more") html = viewMore();
       else if (r === "calendar") html = viewCalendar();
       else if (r.startsWith("book-")) html = viewBook(r.slice(5));
+      else if (r === "plans") html = viewPlans();
+      else if (r === "liturgy") html = viewLiturgy();
+      else if (r.startsWith("plan-")) html = viewPlan(r.slice(5));
       else if (r === "prayers") html = viewPrayers();
       else if (r.startsWith("prayercat-")) html = viewPrayerCat(r.slice(10));
       else html = `<div class="card"><p>${esc(t("notFound"))}</p><a class="btn" href="#home">${esc(t("home"))}</a></div>`;
@@ -5503,6 +5626,7 @@ function fastPeriods(y, cal) {
     const doneN = BIBLE_LESSONS.filter(l => S.done[l.id]).length;
     let html = `<h1>${esc(t("biblePlan"))}</h1><p class="muted">${esc(t("bibleIntro"))}</p>
       <div class="progressbar" style="margin:6px 0 16px"><i style="width:${Math.round(doneN / BIBLE_LESSONS.length * 100)}%"></i></div>
+      <a class="item" href="#plans"><span class="grow"><span class="t">${esc(t("plansTitle"))}</span><span class="s">${PLANS.map(p => E(p.title)).join(" · ")}</span></span><span class="chev">›</span></a>
       <ul class="list">${BIBLE_LESSONS.map((l, i) => lessonItem(l, i + 1)).join("")}</ul>
       <details class="card"><summary>${esc(t("canonNoteTitle"))}</summary><p>${E(BIBLE.canonNote)}</p><p class="muted small">${E(BIBLE.readingNote)}</p></details>
       <h2>${esc(t("bookOverview"))}</h2>`;
@@ -5522,6 +5646,61 @@ function fastPeriods(y, cal) {
     return `<li><a class="item" href="#lesson-${l.id}"><span class="check ${d ? "on" : ""}">${d ? "✓" : n}</span><span class="grow"><span class="t">${E(l.title)}</span>${l.ref ? `<span class="s">${E(l.ref)}</span>` : ""}</span><span class="chev">›</span></a></li>`;
   }
 
+
+
+  /* ---------- Lesepläne ---------- */
+  function planState(id) { S.plans = S.plans || {}; return S.plans[id] || (S.plans[id] = { done: [] }); }
+  function planNext(p) { const st = planState(p.id); return p.days.findIndex((d, i) => !st.done.includes(i)); }
+  function planItem(p) {
+    const st = planState(p.id); const n = st.done.length; const nx = planNext(p);
+    return `<li><a class="item" href="#plan-${p.id}"><span class="grow"><span class="t">${E(p.title)}</span>
+      <span class="s">${n}/${p.days.length} ${esc(t("planReadings"))}${nx >= 0 ? ` · ${esc(t("planNext"))}: ${E(p.days[nx])}` : ` · ${esc(t("planDone"))}`}</span>
+      <span class="progressbar" style="display:block;margin-top:6px"><i style="width:${Math.round(n / p.days.length * 100)}%"></i></span></span><span class="chev">›</span></a></li>`;
+  }
+  function viewPlans() {
+    return `<h1>${esc(t("plansTitle"))}</h1><p class="muted">${esc(t("plansIntro"))}</p><ul class="list">${PLANS.map(planItem).join("")}</ul>
+      ${LINKS.svNT ? `<p class="small"><a href="${esc(LINKS.svNT.url)}" target="_blank" rel="noopener">${E(LINKS.svNT.label)} ↗</a></p>` : ""}
+      <p class="small muted">${E(BIBLE.readingNote)}</p>`;
+  }
+  let planShowAll = false;
+  function viewPlan(id) {
+    const p = PLANS.find(x => x.id === id); if (!p) return `<p>${esc(t("notFound"))}</p>`;
+    const st = planState(id); const nx = planNext(p);
+    const from = planShowAll ? 0 : Math.max(0, (nx < 0 ? p.days.length : nx) - 3);
+    const to = planShowAll ? p.days.length : Math.min(p.days.length, from + 12);
+    return `<div class="eyebrow">${esc(t("plansTitle"))}</div><h1>${E(p.title)}</h1><p class="muted">${E(p.desc)}</p>
+      <div class="card hero"><div class="eyebrow">${esc(t(nx >= 0 ? "planNext" : "planDone"))}</div>
+        ${nx >= 0 ? `<h2>${E(p.days[nx])}</h2><button class="btn block" data-plan="${id}" data-day="${nx}">✓ ${esc(t("planMark"))}</button>` : ""}
+        <div class="progressbar" style="margin-top:12px"><i style="width:${Math.round(st.done.length / p.days.length * 100)}%"></i></div>
+        <p class="small muted" style="margin:6px 0 0">${st.done.length}/${p.days.length} ${esc(t("planReadings"))}</p></div>
+      <ul class="list">${p.days.slice(from, to).map((d, k) => { const i = from + k; const on = st.done.includes(i);
+        return `<li><button class="item" data-plan="${id}" data-day="${i}"><span class="check ${on ? "on" : ""}">${on ? "✓" : i + 1}</span><span class="grow"><span class="t">${E(d)}</span></span></button></li>`; }).join("")}</ul>
+      <div class="btnrow"><button class="btn ghost" id="planall">${esc(t(planShowAll ? "planShowLess" : "planShowAll"))}</button>
+      <button class="btn danger" id="planreset">${esc(t("planReset"))}</button></div>`;
+  }
+  function bindPlan(r) {
+    const id = r.slice(5);
+    app.querySelectorAll("[data-day]").forEach(b => b.onclick = () => {
+      const st = planState(b.getAttribute("data-plan")); const i = +b.getAttribute("data-day"); const k = st.done.indexOf(i);
+      if (k >= 0) st.done.splice(k, 1); else { st.done.push(i); markActivity(); }
+      save(); render();
+    });
+    const all = document.getElementById("planall"); if (all) all.onclick = () => { planShowAll = !planShowAll; render(); };
+    const rs = document.getElementById("planreset"); if (rs) rs.onclick = () => confirmBox(t("confirmDelete"), () => { S.plans[id] = { done: [] }; save(); render(); });
+  }
+
+
+  /* ---------- Liturgie Schritt für Schritt ---------- */
+  function viewLiturgy() {
+    let part = 0; let html = `<div class="eyebrow">${esc(t("courseL"))}</div><h1>${esc(t("litTitle"))}</h1><p class="muted">${esc(t("litIntro"))}</p>`;
+    LITURGY_STEPS.forEach((s, i) => {
+      if (s.part !== part) { part = s.part; html += `<div class="divider">${E(LITURGY_PARTS[part])}</div>`; }
+      html += `<section class="card sec"><h3><span class="num">${i + 1}</span>${E(s.title)}</h3>
+        <p><b>${esc(t("litWhat"))}</b> ${E(s.what)}</p><p><b>${esc(t("litMean"))}:</b> ${E(s.mean)}</p>
+        <div class="simple"><div class="eyebrow">${esc(t("litDo"))}</div><p style="margin:0">${E(s.do)}</p></div></section>`;
+    });
+    return html + `<a class="item" href="#lesson-li-liturgy"><span class="grow"><span class="t">${E(ALL_LESSONS["li-liturgy"].title)}</span></span><span class="chev">›</span></a><p class="small muted">${esc(t("litNote"))}</p>`;
+  }
 
   /* ---------- Buchüberblick ---------- */
   function viewBook(bid) {
@@ -5624,6 +5803,7 @@ function fastPeriods(y, cal) {
     const ls = THEOLOGY.filter(l => l.course === cid);
     return `<h1>${esc(t(c.title))}</h1><p class="muted">${E(c.desc)}</p>
       <ul class="list">${ls.map((l, i) => lessonItem(l, i + 1)).join("")}</ul>
+      ${cid === "L" ? `<a class="item" href="#liturgy"><span class="grow"><span class="t">${esc(t("litTitle"))}</span></span><span class="chev">›</span></a>` : ""}
       ${cid === "L" ? `<a class="item" href="#calendar"><span class="grow"><span class="t">${esc(t("calTitle"))}</span></span><span class="chev">›</span></a>` : ""}
       ${cid === "P" ? `<a class="item" href="#person-s-paisios"><span class="grow"><span class="t">${E(PEOPLE["s-paisios"].name)}</span><span class="s">${esc(t("saints"))}</span></span><span class="chev">›</span></a>` : ""}`;
   }
@@ -5953,7 +6133,7 @@ function fastPeriods(y, cal) {
   function viewMore() {
     const it = (h, k, s) => `<li><a class="item" href="#${h}"><span class="grow"><span class="t">${esc(t(k))}</span>${s ? `<span class="s">${esc(s)}</span>` : ""}</span><span class="chev">›</span></a></li>`;
     return `<h1>${esc(t("navMore"))}</h1><ul class="list">
-      ${it("books", "navBooks", t("booksIntro"))}${it("progress", "navProgress")}${it("notes", "notebook")}${it("glossary", "glossary")}${it("prayers", "prayersTitle")}${it("ask", "askTitle")}${it("calendar", "calTitle")}${it("prefs", "navSettings")}
+      ${it("books", "navBooks", t("booksIntro"))}${it("progress", "navProgress")}${it("notes", "notebook")}${it("glossary", "glossary")}${it("prayers", "prayersTitle")}${it("liturgy", "litTitle")}${it("ask", "askTitle")}${it("calendar", "calTitle")}${it("prefs", "navSettings")}
     </ul>`;
   }
 
@@ -6031,7 +6211,7 @@ function fastPeriods(y, cal) {
   function bindBooks() { app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { bookCat = b.getAttribute("data-cat"); render(); }); }
 
   function bindHome() { const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };
