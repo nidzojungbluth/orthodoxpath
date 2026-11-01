@@ -371,7 +371,7 @@ main > .wrap { animation: opFade .3s var(--ease); }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "2.8.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "2.9.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -516,6 +516,7 @@ const UI = {
     menu: "Menü",
     quizAgain: "Noch einmal", quizGentle: "Fehler gehören zum Lernen. Beim Wiederholen festigt sich das Wissen.",
     glossSearch: "Begriff suchen …", glossNone: "Kein passender Begriff gefunden.",
+    notesExport: "Notizen teilen oder kopieren", notesExported: "Notizen kopiert", notesExportHint: "Text zum Kopieren:",
     prevLesson: "Vorherige Lektion", nextLessonL: "Nächste Lektion", lastOpened: "Zuletzt geöffnet",
     remTitle: "Gebetserinnerungen", remText: "Web-Apps können auf dem iPhone keine zuverlässigen täglichen Erinnerungen senden. Mit der App „Erinnerungen“ geht es trotzdem – ganz ohne Datenweitergabe:",
     remS1: "Tippe unten auf „Link kopieren“ – das ist der Link zum Gebetsbuch.", remS2: "Öffne die App „Erinnerungen“ und lege eine neue Erinnerung an, z. B. „Morgengebet“.", remS3: "Tippe auf „i“ (Details), aktiviere Datum und Uhrzeit und wähle bei „Wiederholen“ „Täglich“.", remS4: "Füge den Link im Feld „URL“ ein. Beim Tippen auf die Erinnerung öffnet sich das Gebetsbuch.",
@@ -722,6 +723,7 @@ const UI = {
     menu: "Мени",
     quizAgain: "Још једном", quizGentle: "Грешке су део учења. Понављањем се знање учвршћује.",
     glossSearch: "Претражи појам …", glossNone: "Није пронађен одговарајући појам.",
+    notesExport: "Подели или копирај белешке", notesExported: "Белешке копиране", notesExportHint: "Текст за копирање:",
     prevLesson: "Претходна лекција", nextLessonL: "Следећа лекција", lastOpened: "Последње отворено",
     remTitle: "Подсетници за молитву", remText: "Веб-апликације на ајфону не могу да шаљу поуздане дневне подсетнике. Помоћу апликације „Подсетници“ ипак иде – без слања података:",
     remS1: "Додирните доле „Копирај везу“ – то је веза ка молитвенику.", remS2: "Отворите апликацију „Подсетници“ и направите нови подсетник, нпр. „Јутарња молитва“.", remS3: "Додирните „i“ (детаљи), укључите датум и време и код „Понављај“ изаберите „Дневно“.", remS4: "Налепите везу у поље „URL“. Када додирнете подсетник, отвара се молитвеник.",
@@ -4153,7 +4155,1072 @@ const BIBLE = {
         { q: { de: "Welches Buch Mose ist Levitikus?", sr: "Која књига Мојсијева је Левитска?" },
           options: [{ de: "Das dritte", sr: "Трећа" }, { de: "Das erste", sr: "Прва" }, { de: "Das fünfte", sr: "Пета" }], correct: 0 }
       ]
-    }
+    },
+  {
+    "id": "bib-num21",
+    "book": "num",
+    "order": 45,
+    "title": {
+      "de": "Die eherne Schlange",
+      "sr": "Бронзана змија"
+    },
+    "ref": {
+      "de": "Numeri 21,4–9",
+      "sr": "Бројеви 21,4–9"
+    },
+    "intro": {
+      "de": "Numeri (4. Mose) erzählt von der Wanderung Israels durch die Wüste. Das Volk murrt immer wieder gegen Gott und Mose. In Kapitel 21 schenkt Gott Rettung durch ein ungewöhnliches Zeichen.",
+      "sr": "Књига Бројева (Четврта Мојсијева) приповеда о путовању Израиља кроз пустињу. Народ изнова ропће на Бога и Мојсија. У 21. глави Бог дарује спасење кроз необичан знак."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Das Volk ist müde vom langen Weg und klagt: Es gibt kein Brot und kein Wasser, und uns ekelt vor dieser elenden Speise – gemeint ist das Manna, das Gott täglich schenkte.",
+      "sr": "Народ је уморан од дугог пута и жали се: нема хлеба ни воде, и гади нам се ово бедно јело – мисли се на ману, коју је Бог свакодневно давао."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Num 21,4–9",
+          "sr": "Бр 21,4–9"
+        },
+        "note": {
+          "de": "Die Schlange an der Stange.",
+          "sr": "Змија на мотки."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 3,14–15",
+          "sr": "Јн 3,14–15"
+        },
+        "note": {
+          "de": "So muss der Menschensohn erhöht werden.",
+          "sr": "Тако треба да се подигне Син Човечији."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Das Volk redet gegen Gott und Mose. Da kommen giftige Schlangen, und viele sterben. Das Volk erkennt seine Sünde und bittet Mose um Fürbitte. Gott sagt zu Mose: Mach dir eine Schlange und häng sie an einer Stange auf; wer gebissen ist und sie ansieht, soll leben. Mose macht eine Schlange aus Bronze. Wer gebissen wurde und auf die bronzene Schlange schaute, blieb am Leben.",
+      "sr": "Народ говори против Бога и Мојсија. Тада долазе отровне змије, и многи умиру. Народ увиђа свој грех и моли Мојсија да се помоли. Бог каже Мојсију: Начини змију и метни је на мотку; ко буде уједен и погледа је, остаће жив. Мојсије начини змију од бронзе. Ко је био уједен и погледао бронзану змију, остао је жив."
+    },
+    "interp": {
+      "simple": {
+        "de": "Undankbarkeit und Murren bringen Unheil, aber Gott bietet Rettung an. Der Blick auf das Zeichen, das Gott gegeben hat, heilt.",
+        "sr": "Незахвалност и роптање доносе несрећу, али Бог нуди спасење. Поглед на знак који је Бог дао исцељује."
+      },
+      "deeper": {
+        "de": "Christus selbst deutet die Schlange auf sich: Wie Mose die Schlange erhöhte, so muss der Menschensohn erhöht werden, damit jeder, der glaubt, ewiges Leben hat (Joh 3,14–15). Die Kirchenväter sehen darin ein Vorausbild des Kreuzes. Später verehrte das Volk die Schlange selbst wie einen Götzen; König Hiskija zerschlug sie darum (2 Kön 18,4). Das zeigt den Unterschied: Nicht das Bild heilt aus sich selbst, sondern Gott, auf den das Zeichen verweist. Das gilt auch für die Ikonen: Die Verehrung geht auf den Dargestellten über, Anbetung gebührt Gott allein.",
+        "sr": "Сам Христос змију тумачи на себе: као што је Мојсије подигао змију, тако треба да се подигне Син Човечији, да сваки који верује има живот вечни (Јн 3,14–15). Свети оци у томе виде праслику крста. Касније је народ саму змију поштовао као идола; зато ју је цар Језекија разбио (2 Цар 18,4 – у православним издањима 4 Цар 18,4). То показује разлику: не исцељује слика сама по себи, него Бог на кога знак упућује. То важи и за иконе: поштовање прелази на онога који је насликан, а поклоњење припада само Богу."
+      },
+      "tag": "dogma"
+    },
+    "christ": {
+      "de": "Am Kreuz erhöht, ist Christus das Zeichen des Heils für alle, die zu ihm aufschauen. Deshalb nennt die Kirche das Kreuz „lebenspendend“.",
+      "sr": "Подигнут на крсту, Христос је знак спасења за све који Га погледају. Зато Црква крст назива „животворним“."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Joh 3,14–15",
+          "sr": "Јн 3,14–15"
+        },
+        "note": {
+          "de": "Wie Mose die Schlange erhöhte.",
+          "sr": "Као што Мојсије подиже змију."
+        }
+      },
+      {
+        "ref": {
+          "de": "2 Kön 18,4 (in orthodoxen Ausgaben 4 Kön)",
+          "sr": "4 Цар 18,4"
+        },
+        "note": {
+          "de": "Hiskija zerschlägt die zum Götzen gewordene Schlange.",
+          "sr": "Језекија разбија змију која је постала идол."
+        }
+      },
+      {
+        "ref": {
+          "de": "1 Kor 10,9–10",
+          "sr": "1 Кор 10,9–10"
+        },
+        "note": {
+          "de": "Murrt nicht, wie einige von ihnen murrten.",
+          "sr": "Не ропћите као што неки од њих роптаху."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Viele Väter deuten die eherne Schlange im Licht von Joh 3,14 auf das Kreuz. Wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Многи оци бронзану змију у светлости Јн 3,14 тумаче као крст. Апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Warum kamen die Schlangen über das Volk?",
+          "sr": "Зашто су змије дошле на народ?"
+        },
+        "a": {
+          "de": "Weil das Volk gegen Gott und Mose murrte und das Manna verachtete.",
+          "sr": "Зато што је народ роптао на Бога и Мојсија и презрео ману."
+        }
+      },
+      {
+        "q": {
+          "de": "Wie deutet Christus die eherne Schlange?",
+          "sr": "Како Христос тумачи бронзану змију?"
+        },
+        "a": {
+          "de": "Als Bild seiner Erhöhung am Kreuz (Joh 3,14–15).",
+          "sr": "Као слику свог подизања на крст (Јн 3,14–15)."
+        }
+      },
+      {
+        "q": {
+          "de": "Warum zerschlug König Hiskija die Schlange später?",
+          "sr": "Зашто је цар Језекија касније разбио змију?"
+        },
+        "a": {
+          "de": "Weil das Volk sie wie einen Götzen verehrte.",
+          "sr": "Зато што ју је народ поштовао као идола."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Achte diese Woche darauf, wann du murrst. Ersetze jedes Murren durch einen kurzen Dank: „Ehre sei dir, Gott, für alles.“",
+      "sr": "Обратите пажњу ове недеље када ропћете. Замените свако роптање кратком захвалношћу: „Слава Теби, Боже, за све.“"
+    },
+    "review": {
+      "de": "Wer von den Schlangen gebissen war und auf die eherne Schlange schaute, lebte. Christus deutet sie auf sein Kreuz.",
+      "sr": "Ко је био уједен и погледао бронзану змију, остао је жив. Христос је тумачи на свој крст."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Woraus machte Mose die Schlange?",
+          "sr": "Од чега је Мојсије начинио змију?"
+        },
+        "options": [
+          {
+            "de": "Aus Bronze",
+            "sr": "Од бронзе"
+          },
+          {
+            "de": "Aus Gold",
+            "sr": "Од злата"
+          },
+          {
+            "de": "Aus Holz",
+            "sr": "Од дрвета"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Was musste ein Gebissener tun, um zu leben?",
+          "sr": "Шта је уједени морао да учини да би живео?"
+        },
+        "options": [
+          {
+            "de": "Die Schlange ansehen",
+            "sr": "Да погледа змију"
+          },
+          {
+            "de": "Ein Opfer bringen",
+            "sr": "Да принесе жртву"
+          },
+          {
+            "de": "Fliehen",
+            "sr": "Да бежи"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Auf welches Ereignis deutet Joh 3,14 die Schlange?",
+          "sr": "На који догађај Јн 3,14 тумачи змију?"
+        },
+        "options": [
+          {
+            "de": "Die Kreuzigung Christi",
+            "sr": "Распеће Христово"
+          },
+          {
+            "de": "Die Geburt Christi",
+            "sr": "Рођење Христово"
+          },
+          {
+            "de": "Pfingsten",
+            "sr": "Педесетницу"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-2chr6",
+    "book": "chr",
+    "order": 46,
+    "title": {
+      "de": "Salomos Gebet bei der Tempelweihe",
+      "sr": "Соломонова молитва при освећењу храма"
+    },
+    "ref": {
+      "de": "2. Chronik 6,12–21 und 7,1–3.14",
+      "sr": "2. Дневника 6,12–21 и 7,1–3.14"
+    },
+    "intro": {
+      "de": "Die Bücher der Chronik erzählen die Geschichte Israels von Adam bis zum Exil noch einmal, mit besonderem Blick auf den Tempel und den Gottesdienst. Ein Höhepunkt ist die Weihe des Tempels durch König Salomo.",
+      "sr": "Књиге Дневника поново приповедају историју Израиља од Адама до изгнанства, са посебним освртом на храм и богослужење. Врхунац је освећење храма од цара Соломона."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "David wollte Gott ein Haus bauen; sein Sohn Salomo vollendete den Tempel in Jerusalem. Nun wird die Bundeslade hineingetragen, und Salomo betet vor dem ganzen Volk.",
+      "sr": "Давид је хтео да сагради дом Богу; његов син Соломон довршио је храм у Јерусалиму. Сада се уноси ковчег завета, а Соломон се моли пред свим народом."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "2 Chr 6,12–21",
+          "sr": "2 Дн 6,12–21"
+        },
+        "note": {
+          "de": "Die Himmel können dich nicht fassen.",
+          "sr": "Небеса Те не могу обухватити."
+        }
+      },
+      {
+        "ref": {
+          "de": "2 Chr 7,1–3",
+          "sr": "2 Дн 7,1–3"
+        },
+        "note": {
+          "de": "Die Herrlichkeit des Herrn erfüllt das Haus.",
+          "sr": "Слава Господња испуни дом."
+        }
+      },
+      {
+        "ref": {
+          "de": "2 Chr 7,14",
+          "sr": "2 Дн 7,14"
+        },
+        "note": {
+          "de": "Wenn mein Volk sich demütigt und betet.",
+          "sr": "Ако се народ мој смири и помоли."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Salomo kniet vor dem Altar nieder, breitet die Hände zum Himmel aus und betet: Herr, Gott Israels, es gibt keinen Gott wie dich. Sollte Gott wirklich bei den Menschen auf der Erde wohnen? Die Himmel und aller Himmel Himmel können dich nicht fassen, wie viel weniger dieses Haus. Doch wende dich dem Gebet deines Knechtes zu: Lass deine Augen Tag und Nacht offen sein über diesem Haus; höre die Gebete, die hier gesprochen werden, und vergib. Als Salomo aufhört zu beten, fällt Feuer vom Himmel, und die Herrlichkeit des Herrn erfüllt das Haus. Gott verspricht: Wenn mein Volk sich demütigt, betet und umkehrt, will ich vom Himmel hören und vergeben.",
+      "sr": "Соломон клече пред олтаром, пружа руке ка небу и моли се: Господе Боже Израиљев, нема Бога као што си Ти. Хоће ли заиста Бог становати са људима на земљи? Небеса и небеса над небесима не могу Те обухватити, а камоли овај дом. Ипак, погледај на молитву слуге свога: нека очи Твоје буду отворене дан и ноћ над овим домом; чуј молитве које се овде изговарају и опрости. Када Соломон престане да се моли, огањ сиђе с неба, и слава Господња испуни дом. Бог обећава: Ако се народ мој смири, помоли и обрати, чућу с неба и опростићу."
+    },
+    "interp": {
+      "simple": {
+        "de": "Gott ist größer als jedes Gebäude, und doch will er an einem Ort mit seinem Volk sein und Gebete hören. Demut und Umkehr öffnen den Weg zu seiner Vergebung.",
+        "sr": "Бог је већи од сваке грађевине, а ипак жели да на једном месту буде са својим народом и да слуша молитве. Смирење и покајање отварају пут ка Његовом опроштају."
+      },
+      "deeper": {
+        "de": "Die orthodoxe Kirche versteht den Kirchenraum als Haus Gottes und Ort seiner besonderen Gegenwart, ohne zu meinen, Gott sei darin eingeschlossen. Salomos Haltung – Knien, ausgebreitete Hände – entspricht alten Gebetsgesten. Die Herrlichkeit, die den Tempel erfüllt, findet ihre Vollendung in Christus, in dem die Fülle der Gottheit leibhaftig wohnt (Kol 2,9). 2 Chr 7,14 ist ein bekannter Vers über gemeinsame Umkehr eines ganzen Volkes.",
+        "sr": "Православна Црква храм схвата као дом Божији и место Његовог посебног присуства, а не мисли да је Бог у њему затворен. Соломоново држање – клечање, раширене руке – одговара древним молитвеним покретима. Слава која испуњава храм налази испуњење у Христу, у коме обитава сва пунина Божанства телесно (Кол 2,9). 2 Дн 7,14 познат је стих о заједничком покајању целог народа."
+      },
+      "tag": "dogma"
+    },
+    "christ": {
+      "de": "Christus nennt seinen Leib den Tempel (Joh 2,19–21). In ihm wohnt Gott wirklich unter den Menschen, und durch ihn werden die Gläubigen selbst zum Tempel des Heiligen Geistes (1 Kor 6,19).",
+      "sr": "Христос своје тело назива храмом (Јн 2,19–21). У Њему Бог заиста борави међу људима, а кроз Њега и сами верни постају храм Духа Светога (1 Кор 6,19)."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Joh 2,19–21",
+          "sr": "Јн 2,19–21"
+        },
+        "note": {
+          "de": "Er sprach vom Tempel seines Leibes.",
+          "sr": "Говораше за храм тела свога."
+        }
+      },
+      {
+        "ref": {
+          "de": "1 Kor 6,19",
+          "sr": "1 Кор 6,19"
+        },
+        "note": {
+          "de": "Euer Leib ist ein Tempel des Heiligen Geistes.",
+          "sr": "Тело ваше је храм Духа Светога."
+        }
+      },
+      {
+        "ref": {
+          "de": "Apg 7,48–50",
+          "sr": "Дап 7,48–50"
+        },
+        "note": {
+          "de": "Der Höchste wohnt nicht in Werken von Händen.",
+          "sr": "Вишњи не живи у рукотвореним храмовима."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Für diese Version wurde kein einzelner freier Väterkommentar zu dieser Stelle geprüft; wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "За ово издање није проверен ниједан појединачан слободан коментар отаца на ово место; апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Was sagt Salomo über die Größe Gottes?",
+          "sr": "Шта Соломон каже о величини Божијој?"
+        },
+        "a": {
+          "de": "Selbst die Himmel können Gott nicht fassen, erst recht nicht der Tempel.",
+          "sr": "Ни небеса не могу обухватити Бога, а камоли храм."
+        }
+      },
+      {
+        "q": {
+          "de": "Was geschah nach Salomos Gebet?",
+          "sr": "Шта се десило после Соломонове молитве?"
+        },
+        "a": {
+          "de": "Feuer fiel vom Himmel, und die Herrlichkeit des Herrn erfüllte das Haus.",
+          "sr": "Огањ је сишао с неба, и слава Господња испунила је дом."
+        }
+      },
+      {
+        "q": {
+          "de": "Welche Bedingung nennt Gott in 2 Chr 7,14 für seine Vergebung?",
+          "sr": "Који услов Бог наводи у 2 Дн 7,14 за свој опроштај?"
+        },
+        "a": {
+          "de": "Dass das Volk sich demütigt, betet und umkehrt.",
+          "sr": "Да се народ смири, помоли и обрати."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Wenn du das nächste Mal in eine Kirche gehst, nimm dir einen Moment, still zu stehen und zu sagen: „Herr, höre mein Gebet an diesem Ort.“",
+      "sr": "Када следећи пут уђете у храм, одвојите тренутак да тихо станете и кажете: „Господе, чуј молитву моју на овом месту.“"
+    },
+    "review": {
+      "de": "Salomo weiht den Tempel und bittet Gott, die Gebete dort zu hören. Die Herrlichkeit des Herrn erfüllt das Haus. Christus ist der wahre Tempel.",
+      "sr": "Соломон освећује храм и моли Бога да чује молитве у њему. Слава Господња испуњава дом. Христос је истински храм."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Wer weihte den Tempel in Jerusalem?",
+          "sr": "Ко је осветио храм у Јерусалиму?"
+        },
+        "options": [
+          {
+            "de": "König Salomo",
+            "sr": "Цар Соломон"
+          },
+          {
+            "de": "König Saul",
+            "sr": "Цар Саул"
+          },
+          {
+            "de": "Mose",
+            "sr": "Мојсије"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Was erfüllte nach dem Gebet das Haus?",
+          "sr": "Шта је после молитве испунило дом?"
+        },
+        "options": [
+          {
+            "de": "Die Herrlichkeit des Herrn",
+            "sr": "Слава Господња"
+          },
+          {
+            "de": "Wasser",
+            "sr": "Вода"
+          },
+          {
+            "de": "Stille Dunkelheit",
+            "sr": "Тиха тама"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Was nennt Christus nach Joh 2,21 den Tempel?",
+          "sr": "Шта Христос по Јн 2,21 назива храмом?"
+        },
+        "options": [
+          {
+            "de": "Seinen Leib",
+            "sr": "Своје тело"
+          },
+          {
+            "de": "Den Berg Sinai",
+            "sr": "Гору Синај"
+          },
+          {
+            "de": "Das Haus des Petrus",
+            "sr": "Петрову кућу"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-neh8",
+    "book": "ezr",
+    "order": 47,
+    "title": {
+      "de": "Esra liest das Gesetz vor",
+      "sr": "Јездра чита Закон"
+    },
+    "ref": {
+      "de": "Nehemia 8,1–12",
+      "sr": "Немија 8,1–12"
+    },
+    "intro": {
+      "de": "Die Bücher Esra und Nehemia erzählen von der Rückkehr aus dem babylonischen Exil, vom Wiederaufbau des Tempels und der Mauern Jerusalems. Nach dem Mauerbau versammelt sich das ganze Volk, um Gottes Wort zu hören.",
+      "sr": "Књиге Јездре и Немије приповедају о повратку из вавилонског ропства, обнови храма и зидина Јерусалима. После градње зидина сав народ се сабира да чује реч Божију."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Viele Rückkehrer kannten das Gesetz kaum noch. Mauern allein machen noch kein Volk Gottes – dazu gehört das Hören und Verstehen seines Wortes.",
+      "sr": "Многи повратници једва су још познавали Закон. Саме зидине још не чине народ Божији – за то је потребно слушање и разумевање Његове речи."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Neh 8,1–6",
+          "sr": "Нем 8,1–6"
+        },
+        "note": {
+          "de": "Das Volk steht auf, als das Buch geöffnet wird.",
+          "sr": "Народ устаје када се књига отвори."
+        }
+      },
+      {
+        "ref": {
+          "de": "Neh 8,7–8",
+          "sr": "Нем 8,7–8"
+        },
+        "note": {
+          "de": "Die Leviten erklären den Sinn.",
+          "sr": "Левити објашњавају смисао."
+        }
+      },
+      {
+        "ref": {
+          "de": "Neh 8,9–12",
+          "sr": "Нем 8,9–12"
+        },
+        "note": {
+          "de": "Die Freude am Herrn ist eure Stärke.",
+          "sr": "Радост Господња је ваша снага."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Das ganze Volk versammelt sich wie ein Mann auf dem Platz vor dem Wassertor. Der Priester und Schriftgelehrte Esra bringt das Buch des Gesetzes und liest daraus vom Morgen bis zum Mittag vor. Als er das Buch öffnet, steht das ganze Volk auf. Esra preist den Herrn, und alle antworten: Amen, Amen! Die Leviten erklären das Gesetz, sodass das Volk verstand, was vorgelesen wurde. Das Volk weint, als es die Worte hört. Doch Nehemia und Esra sagen: Dieser Tag ist dem Herrn heilig; seid nicht traurig, denn die Freude am Herrn ist eure Stärke. Da geht das Volk hin, um zu essen, zu teilen und ein großes Freudenfest zu feiern.",
+      "sr": "Сав народ сабира се као један човек на тргу пред Воденим вратима. Свештеник и књижевник Јездра доноси књигу Закона и чита из ње од јутра до подне. Када отвори књигу, сав народ устаје. Јездра благосиља Господа, а сви одговарају: Амин, амин! Левити објашњавају Закон, тако да је народ разумео шта се читало. Народ плаче када чује речи. Али Немија и Јездра кажу: Овај дан је свет Господу; не тугујте, јер радост Господња је ваша снага. Тада народ одлази да једе, да дели и да слави велико весеље."
+    },
+    "interp": {
+      "simple": {
+        "de": "Gottes Wort will gehört und verstanden werden. Es kann zu Tränen der Reue führen – aber am Ende schenkt es Freude und Kraft.",
+        "sr": "Реч Божија жели да буде саслушана и схваћена. Може довести до суза покајања – али на крају дарује радост и снагу."
+      },
+      "deeper": {
+        "de": "Diese Szene ähnelt in vielem dem christlichen Gottesdienst: Das Volk steht, wenn das Wort Gottes gelesen wird, antwortet mit „Amen“, und die Lesung wird ausgelegt. Auch in der Liturgie steht die Gemeinde beim Evangelium, und die Predigt erklärt die Schrift. Neh 8,8 zeigt, dass die Kirche die Schrift nie nur vorliest, sondern im Glauben der Gemeinschaft erklärt. Das Weinen und die Freude gehören zusammen wie Umkehr und Fest.",
+        "sr": "Овај призор у много чему личи на хришћанско богослужење: народ стоји када се чита реч Божија, одговара са „Амин“, а читање се тумачи. И на Литургији сабрање стоји при Јеванђељу, а проповед објашњава Писмо. Нем 8,8 показује да Црква Писмо никад само не чита, него га тумачи у вери заједнице. Плач и радост иду заједно као покајање и празник."
+      },
+      "tag": "counsel"
+    },
+    "christ": {
+      "de": "In der Synagoge von Nazareth las Christus aus dem Buch Jesaja vor und erklärte: Heute ist dieses Schriftwort erfüllt (Lk 4,16–21). Er selbst ist das lebendige Wort Gottes.",
+      "sr": "У синагоги у Назарету Христос је читао из књиге Исаије и објаснио: Данас се испуни ово писмо (Лк 4,16–21). Он сам је жива Реч Божија."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Lk 4,16–21",
+          "sr": "Лк 4,16–21"
+        },
+        "note": {
+          "de": "Heute ist dieses Schriftwort erfüllt.",
+          "sr": "Данас се испуни ово писмо."
+        }
+      },
+      {
+        "ref": {
+          "de": "Lk 24,27",
+          "sr": "Лк 24,27"
+        },
+        "note": {
+          "de": "Er legte ihnen die Schrift aus.",
+          "sr": "Тумачио им је Писмо."
+        }
+      },
+      {
+        "ref": {
+          "de": "Apg 8,30–31",
+          "sr": "Дап 8,30–31"
+        },
+        "note": {
+          "de": "Wie kann ich verstehen, wenn mich niemand anleitet?",
+          "sr": "Како бих могао разумети ако ме ко не упути?"
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Für diese Version wurde kein einzelner freier Väterkommentar zu dieser Stelle geprüft; wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "За ово издање није проверен ниједан појединачан слободан коментар отаца на ово место; апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Was tat das Volk, als Esra das Buch öffnete?",
+          "sr": "Шта је народ учинио када је Јездра отворио књигу?"
+        },
+        "a": {
+          "de": "Es stand auf.",
+          "sr": "Устао је."
+        }
+      },
+      {
+        "q": {
+          "de": "Welche Aufgabe hatten die Leviten?",
+          "sr": "Који задатак су имали левити?"
+        },
+        "a": {
+          "de": "Sie erklärten das Gesetz, damit das Volk es verstand.",
+          "sr": "Објашњавали су Закон да би га народ разумео."
+        }
+      },
+      {
+        "q": {
+          "de": "Was ist nach Neh 8,10 die Stärke des Volkes?",
+          "sr": "Шта је, по Нем 8,10, снага народа?"
+        },
+        "a": {
+          "de": "Die Freude am Herrn.",
+          "sr": "Радост Господња."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Lies diese Woche das Evangelium des kommenden Sonntags vorher zu Hause. Wenn dir etwas unklar ist, notiere es und frage deinen Priester.",
+      "sr": "Прочитајте ове недеље унапред код куће Јеванђеље наредне недеље. Ако вам нешто није јасно, запишите и питајте свештеника."
+    },
+    "review": {
+      "de": "Esra liest dem Volk das Gesetz vor, die Leviten erklären es. Das Volk weint, doch die Freude am Herrn ist seine Stärke.",
+      "sr": "Јездра чита народу Закон, левити га објашњавају. Народ плаче, али радост Господња је његова снага."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Wer las dem Volk das Gesetz vor?",
+          "sr": "Ко је народу читао Закон?"
+        },
+        "options": [
+          {
+            "de": "Esra",
+            "sr": "Јездра"
+          },
+          {
+            "de": "Jona",
+            "sr": "Јона"
+          },
+          {
+            "de": "David",
+            "sr": "Давид"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wie lange las er vor?",
+          "sr": "Колико дуго је читао?"
+        },
+        "options": [
+          {
+            "de": "Vom Morgen bis zum Mittag",
+            "sr": "Од јутра до подне"
+          },
+          {
+            "de": "Drei Tage",
+            "sr": "Три дана"
+          },
+          {
+            "de": "Eine Minute",
+            "sr": "Један минут"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Womit antwortete das Volk auf den Lobpreis?",
+          "sr": "Чиме је народ одговорио на благосиљање?"
+        },
+        "options": [
+          {
+            "de": "Amen, Amen",
+            "sr": "Амин, амин"
+          },
+          {
+            "de": "Mit Schweigen",
+            "sr": "Ћутањем"
+          },
+          {
+            "de": "Mit Protest",
+            "sr": "Протестом"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-bar3",
+    "book": "bar",
+    "order": 48,
+    "title": {
+      "de": "Gott erschien auf Erden",
+      "sr": "Бог се јави на земљи"
+    },
+    "ref": {
+      "de": "Baruch 3,9–4,4",
+      "sr": "Варух 3,9–4,4"
+    },
+    "intro": {
+      "de": "Das Buch Baruch wird nach der Überlieferung Baruch, dem Schreiber des Propheten Jeremia, zugeschrieben. Es gehört zu den Büchern der Septuaginta. Der Abschnitt 3,9–4,4 ist ein Lob der göttlichen Weisheit.",
+      "sr": "Књига пророка Варуха се, према предању, приписује Варуху, писару пророка Јеремије. Спада у књиге Септуагинте. Одељак 3,9–4,4 је похвала божанској мудрости."
+    },
+    "introTag": "uncertain",
+    "context": {
+      "de": "Israel lebt in der Verbannung und fragt, warum es so weit gekommen ist. Die Antwort: Es hat die Quelle der Weisheit verlassen.",
+      "sr": "Израиљ живи у изгнанству и пита зашто је дотле дошло. Одговор: оставио је извор мудрости."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Bar 3,9–14",
+          "sr": "Вар 3,9–14"
+        },
+        "note": {
+          "de": "Höre, Israel, die Gebote des Lebens.",
+          "sr": "Чуј, Израиљу, заповести живота."
+        }
+      },
+      {
+        "ref": {
+          "de": "Bar 3,29–38",
+          "sr": "Вар 3,29–38"
+        },
+        "note": {
+          "de": "Danach erschien sie auf Erden.",
+          "sr": "Потом се јави на земљи."
+        }
+      },
+      {
+        "ref": {
+          "de": "Bar 4,1–4",
+          "sr": "Вар 4,1–4"
+        },
+        "note": {
+          "de": "Selig sind wir, Israel.",
+          "sr": "Блажени смо, Израиљу."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Höre, Israel, die Gebote des Lebens! Warum bist du im Land der Feinde? Weil du die Quelle der Weisheit verlassen hast; wärst du auf Gottes Weg gegangen, würdest du in Frieden wohnen. Wer ist in den Himmel hinaufgestiegen und hat die Weisheit geholt? Keiner kennt ihren Weg, doch der Allwissende kennt sie. Er ist unser Gott, kein anderer ist mit ihm zu vergleichen. Er hat den ganzen Weg der Erkenntnis gefunden und ihn Jakob, seinem Knecht, gegeben. Danach erschien er auf Erden und verkehrte unter den Menschen. Die Weisheit ist das Buch der Gebote Gottes; wer an ihr festhält, wird leben.",
+      "sr": "Чуј, Израиљу, заповести живота! Зашто си у земљи непријатеља? Зато што си оставио извор мудрости; да си ходио путем Божијим, живео би у миру. Ко се попео на небо и донео мудрост? Нико не зна њен пут, али Свезнајући је зна. Он је Бог наш, нико се с Њим не може упоредити. Нашао је сав пут знања и дао га Јакову, слуги своме. Потом се јави на земљи и поживе међу људима. Мудрост је књига заповести Божијих; ко је се држи, живеће."
+    },
+    "interp": {
+      "simple": {
+        "de": "Wahre Weisheit kommt von Gott. Wer sich von ihm abwendet, verliert den Weg; wer seine Gebote hält, findet das Leben.",
+        "sr": "Права мудрост долази од Бога. Ко се од Њега одврати, губи пут; ко држи Његове заповести, налази живот."
+      },
+      "deeper": {
+        "de": "Der Satz „Danach erschien er auf Erden und verkehrte unter den Menschen“ (Bar 3,38 LXX) wird von den Kirchenvätern als Weissagung der Menschwerdung gelesen. Bar 3,36–4,4 gehört zu den alttestamentlichen Lesungen am Vorabend von Christi Geburt. Ob sich der griechische Satz ursprünglich auf Gott oder auf die Weisheit bezieht, wird unterschiedlich verstanden; die kirchliche Lesung bezieht ihn auf den menschgewordenen Sohn Gottes.",
+        "sr": "Реченицу „Потом се јави на земљи и поживе међу људима“ (Вар 3,38 по Септуагинти) свети оци читају као пророштво оваплоћења. Вар 3,36–4,4 спада у старозаветна читања уочи Рождества Христовог. Да ли се грчка реченица првобитно односи на Бога или на мудрост, схвата се различито; црквено читање је односи на оваплоћеног Сина Божијег."
+      },
+      "tag": "opinion"
+    },
+    "christ": {
+      "de": "Christus ist die Weisheit Gottes in Person, die auf Erden erschien und unter den Menschen lebte: „Das Wort ist Fleisch geworden und hat unter uns gewohnt“ (Joh 1,14).",
+      "sr": "Христос је Премудрост Божија у личности, која се јави на земљи и поживе међу људима: „И Реч постаде тело и настани се међу нама“ (Јн 1,14)."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Joh 1,14",
+          "sr": "Јн 1,14"
+        },
+        "note": {
+          "de": "Das Wort ist Fleisch geworden.",
+          "sr": "Реч постаде тело."
+        }
+      },
+      {
+        "ref": {
+          "de": "1 Kor 1,24",
+          "sr": "1 Кор 1,24"
+        },
+        "note": {
+          "de": "Christus, Gottes Weisheit.",
+          "sr": "Христос, Божија премудрост."
+        }
+      },
+      {
+        "ref": {
+          "de": "Röm 10,6–8",
+          "sr": "Рим 10,6–8"
+        },
+        "note": {
+          "de": "Wer wird in den Himmel hinaufsteigen?",
+          "sr": "Ко ће узићи на небо?"
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Mehrere Väter führen Bar 3,36–38 als Zeugnis für die Gottheit Christi an. Für diese Version wurde kein einzelner freier Link zu diesen Stellen geprüft; wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Више отаца наводи Вар 3,36–38 као сведочанство о Христовом Божанству. За ово издање није проверена појединачна слободна веза ка тим местима; апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Warum lebt Israel nach Baruch in der Fremde?",
+          "sr": "Зашто, по Варуху, Израиљ живи у туђини?"
+        },
+        "a": {
+          "de": "Weil es die Quelle der Weisheit verlassen hat.",
+          "sr": "Зато што је оставио извор мудрости."
+        }
+      },
+      {
+        "q": {
+          "de": "Wie lesen die Väter Bar 3,38?",
+          "sr": "Како оци читају Вар 3,38?"
+        },
+        "a": {
+          "de": "Als Weissagung der Menschwerdung Christi.",
+          "sr": "Као пророштво оваплоћења Христовог."
+        }
+      },
+      {
+        "q": {
+          "de": "Wann liest die Kirche Bar 3,36–4,4?",
+          "sr": "Када Црква чита Вар 3,36–4,4?"
+        },
+        "a": {
+          "de": "Am Vorabend von Christi Geburt.",
+          "sr": "Уочи Рождества Христовог."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Denke diese Woche über Joh 1,14 nach: Gott ist einer von uns geworden. Wo kannst du ihm heute in einem Menschen begegnen?",
+      "sr": "Размишљајте ове недеље о Јн 1,14: Бог је постао један од нас. Где Га данас можете срести у неком човеку?"
+    },
+    "review": {
+      "de": "Baruch lobt die Weisheit Gottes, die Israel verlassen hat. Der Satz „Er erschien auf Erden“ wird von der Kirche auf die Menschwerdung bezogen.",
+      "sr": "Варух хвали мудрост Божију, коју је Израиљ оставио. Реченицу „Јави се на земљи“ Црква односи на оваплоћење."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Wessen Schreiber war Baruch nach der Überlieferung?",
+          "sr": "Чији писар је, према предању, био Варух?"
+        },
+        "options": [
+          {
+            "de": "Des Propheten Jeremia",
+            "sr": "Пророка Јеремије"
+          },
+          {
+            "de": "König Davids",
+            "sr": "Цара Давида"
+          },
+          {
+            "de": "Des Apostels Paulus",
+            "sr": "Апостола Павла"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "An welchem Fest wird Bar 3,36–4,4 gelesen?",
+          "sr": "На који празник се чита Вар 3,36–4,4?"
+        },
+        "options": [
+          {
+            "de": "Am Vorabend von Christi Geburt",
+            "sr": "Уочи Рождества Христовог"
+          },
+          {
+            "de": "An Pfingsten",
+            "sr": "На Педесетницу"
+          },
+          {
+            "de": "Am Großen Freitag",
+            "sr": "На Велики петак"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Was ist nach Bar 4,1 die Weisheit?",
+          "sr": "Шта је, по Вар 4,1, мудрост?"
+        },
+        "options": [
+          {
+            "de": "Das Buch der Gebote Gottes",
+            "sr": "Књига заповести Божијих"
+          },
+          {
+            "de": "Reichtum",
+            "sr": "Богатство"
+          },
+          {
+            "de": "Macht",
+            "sr": "Моћ"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-esd4",
+    "book": "esd",
+    "order": 49,
+    "title": {
+      "de": "Die Wahrheit ist am stärksten",
+      "sr": "Истина је најјача"
+    },
+    "ref": {
+      "de": "3. Esra (1. Esdras) 3,1–4,41",
+      "sr": "2. Јездрина (1. Ездра) 3,1–4,41"
+    },
+    "intro": {
+      "de": "Dieses Buch steht in der Septuaginta; in orthodoxen Bibeln heißt es je nach Ausgabe „1. Esdras“, „2. Esra“ oder „3. Esra“. Eigenständig ist die Erzählung vom Wettstreit dreier Leibwächter am Hof des Perserkönigs Darius.",
+      "sr": "Ова књига стоји у Септуагинти; у православним Библијама зове се, зависно од издања, „1. Ездра“, „Друга Јездрина“ или „Трећа Јездрина“. Самостална је повест о надметању три телохранитеља на двору персијског цара Дарија."
+    },
+    "introTag": "uncertain",
+    "context": {
+      "de": "Die Juden lebten noch unter persischer Herrschaft; der Tempel in Jerusalem lag in Trümmern. Einer der drei jungen Leibwächter ist Serubbabel, der später die Heimkehr anführt.",
+      "sr": "Јудејци су још живели под персијском влашћу; храм у Јерусалиму био је у рушевинама. Један од три млада телохранитеља је Зоровавељ, који касније предводи повратак."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "3 Esra 3,1–12",
+          "sr": "2 Језд 3,1–12"
+        },
+        "note": {
+          "de": "Was ist das Stärkste?",
+          "sr": "Шта је најјаче?"
+        }
+      },
+      {
+        "ref": {
+          "de": "3 Esra 4,13–32",
+          "sr": "2 Језд 4,13–32"
+        },
+        "note": {
+          "de": "Frauen sind stark – doch …",
+          "sr": "Жене су јаке – али …"
+        }
+      },
+      {
+        "ref": {
+          "de": "3 Esra 4,33–41",
+          "sr": "2 Језд 4,33–41"
+        },
+        "note": {
+          "de": "Groß ist die Wahrheit.",
+          "sr": "Велика је истина."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Drei junge Leibwächter des Königs Darius schreiben je eine Antwort auf die Frage, was das Stärkste sei. Der erste schreibt: der Wein, denn er verwirrt jeden Verstand. Der zweite: der König, denn ihm gehorchen alle. Der dritte, Serubbabel, schreibt: die Frauen sind stärker, über allem aber siegt die Wahrheit. Er erklärt: Wein, König, Frauen und alle Menschen sind ungerecht und vergänglich; die Wahrheit aber bleibt und ist stark in Ewigkeit; bei ihr gibt es kein Ansehen der Person. Da ruft das ganze Volk: Groß ist die Wahrheit und stärker als alles! Der König ehrt Serubbabel und erlaubt ihm, Jerusalem und den Tempel wieder aufzubauen.",
+      "sr": "Три млада телохранитеља цара Дарија пишу сваки по један одговор на питање шта је најјаче. Први пише: вино, јер помути сваки ум. Други: цар, јер га сви слушају. Трећи, Зоровавељ, пише: жене су јаче, а изнад свега побеђује истина. Објашњава: вино, цар, жене и сви људи су неправедни и пролазни; истина пак остаје и јака је довека; код ње нема гледања ко је ко. Тада сав народ виче: Велика је истина и јача од свега! Цар одаје почаст Зоровавељу и дозвољава му да обнови Јерусалим и храм."
+    },
+    "interp": {
+      "simple": {
+        "de": "Macht, Genuss und menschliche Liebe sind stark, aber vergänglich. Die Wahrheit bleibt. Wer an der Wahrheit festhält, steht auf festem Grund.",
+        "sr": "Моћ, уживање и људска љубав су јаки, али пролазни. Истина остаје. Ко се држи истине, стоји на чврстом темељу."
+      },
+      "deeper": {
+        "de": "Die Erzählung ist eine Weisheitsgeschichte, die zeigt, dass Gottes Wahrheit über menschlichen Mächten steht. Für Christen erhält sie eine tiefere Bedeutung, weil Christus von sich sagt: „Ich bin der Weg, die Wahrheit und das Leben“ (Joh 14,6). Die Stellung des Buches im Kanon ist in den orthodoxen Kirchen nicht einheitlich: Es steht in der Septuaginta und in vielen orthodoxen Bibeln, wird aber im Gottesdienst kaum gelesen.",
+        "sr": "Повест је прича мудрости која показује да Божија истина стоји изнад људских сила. За хришћане добија дубље значење, јер Христос каже о себи: „Ја сам пут и истина и живот“ (Јн 14,6). Место књиге у канону није јединствено у православним Црквама: стоји у Септуагинти и у многим православним Библијама, али се на богослужењу ретко чита."
+      },
+      "tag": "uncertain"
+    },
+    "christ": {
+      "de": "Vor Pilatus, dem Vertreter der Macht, bezeugt Christus: „Ich bin dazu geboren, dass ich für die Wahrheit Zeugnis ablege“ (Joh 18,37). Er ist die Wahrheit in Person.",
+      "sr": "Пред Пилатом, представником власти, Христос сведочи: „Ја сам за то рођен да сведочим за истину“ (Јн 18,37). Он је Истина у личности."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Joh 14,6",
+          "sr": "Јн 14,6"
+        },
+        "note": {
+          "de": "Ich bin der Weg, die Wahrheit und das Leben.",
+          "sr": "Ја сам пут и истина и живот."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 18,37–38",
+          "sr": "Јн 18,37–38"
+        },
+        "note": {
+          "de": "Was ist Wahrheit?",
+          "sr": "Шта је истина?"
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 8,32",
+          "sr": "Јн 8,32"
+        },
+        "note": {
+          "de": "Die Wahrheit wird euch frei machen.",
+          "sr": "Истина ће вас ослободити."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Für diese Version wurde kein einzelner freier Väterkommentar zu dieser Stelle geprüft; wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "За ово издање није проверен ниједан појединачан слободан коментар отаца на ово место; апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Welche vier Antworten werden im Wettstreit genannt?",
+          "sr": "Која четири одговора се наводе у надметању?"
+        },
+        "a": {
+          "de": "Wein, König, Frauen – und über allem die Wahrheit.",
+          "sr": "Вино, цар, жене – а изнад свега истина."
+        }
+      },
+      {
+        "q": {
+          "de": "Warum siegt nach Serubbabel die Wahrheit?",
+          "sr": "Зашто, по Зоровавељу, побеђује истина?"
+        },
+        "a": {
+          "de": "Weil alles andere vergänglich und ungerecht ist, die Wahrheit aber in Ewigkeit bleibt.",
+          "sr": "Зато што је све остало пролазно и неправедно, а истина остаје довека."
+        }
+      },
+      {
+        "q": {
+          "de": "Was erlaubte der König Serubbabel?",
+          "sr": "Шта је цар дозволио Зоровавељу?"
+        },
+        "a": {
+          "de": "Jerusalem und den Tempel wieder aufzubauen.",
+          "sr": "Да обнови Јерусалим и храм."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Achte diese Woche darauf, auch in kleinen Dingen ehrlich zu sein – keine „kleinen Notlügen“. Bete dazu: „Herr, führe mich in deiner Wahrheit.“",
+      "sr": "Пазите ове недеље да будете искрени и у малим стварима – без „малих лажи“. Молите се: „Господе, води ме у истини Твојој.“"
+    },
+    "review": {
+      "de": "Im Wettstreit am Perserhof siegt die Wahrheit über Wein, König und Frauen. Serubbabel darf Jerusalem wieder aufbauen. Christus ist die Wahrheit.",
+      "sr": "У надметању на персијском двору истина побеђује вино, цара и жене. Зоровавељ сме да обнови Јерусалим. Христос је Истина."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Am Hof welches Königs fand der Wettstreit statt?",
+          "sr": "На двору ког цара се одиграло надметање?"
+        },
+        "options": [
+          {
+            "de": "Darius",
+            "sr": "Дарија"
+          },
+          {
+            "de": "Nebukadnezar",
+            "sr": "Навуходоносора"
+          },
+          {
+            "de": "Herodes",
+            "sr": "Ирода"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Was ist nach Serubbabel am stärksten?",
+          "sr": "Шта је, по Зоровавељу, најјаче?"
+        },
+        "options": [
+          {
+            "de": "Die Wahrheit",
+            "sr": "Истина"
+          },
+          {
+            "de": "Der Wein",
+            "sr": "Вино"
+          },
+          {
+            "de": "Der König",
+            "sr": "Цар"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Was sagt Christus in Joh 14,6?",
+          "sr": "Шта Христос каже у Јн 14,6?"
+        },
+        "options": [
+          {
+            "de": "Ich bin der Weg, die Wahrheit und das Leben",
+            "sr": "Ја сам пут и истина и живот"
+          },
+          {
+            "de": "Ich bin der König der Welt",
+            "sr": "Ја сам цар света"
+          },
+          {
+            "de": "Ich bin ein Lehrer",
+            "sr": "Ја сам учитељ"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  }
   ]
 };
 
@@ -7629,7 +8696,16 @@ function fastPeriods(y, cal) {
       ${list.length ? list.map(n => `<div class="card"><div class="eyebrow">${esc(n.date)}</div><h3>${esc(n.title || "—")}</h3><p class="pre">${esc(n.body)}</p>
         <div class="btnrow"><button class="btn ghost" data-edit="${n.id}">${esc(t("edit"))}</button><button class="btn danger" data-del="${n.id}">${esc(t("delete"))}</button></div></div>`).join("") : `<p class="muted">${esc(t("noNotes"))}</p>`}
       ${verses}
+      ${list.length || S.verses.length ? `<button class="btn ghost block" id="notesexp">${ic("note")} ${esc(t("notesExport"))}</button><textarea id="expbox" rows="6" readonly hidden style="margin-top:10px"></textarea><div style="height:12px"></div>` : ""}
       <p class="small muted">${esc(S.enc ? t("encActive") : t("encInactive"))} ${esc(t("privacyText"))}</p>`;
+  }
+  /* Notizen und gespeicherte Bibelstellen als einfachen Text ausgeben (Teilen-Menü des iPhones oder Zwischenablage) */
+  function notesText() {
+    const list = notesList().slice().sort((a, b) => b.date.localeCompare(a.date));
+    let out = "OrthodoxPath – " + t("notebook") + "\n\n";
+    list.forEach(n => { out += n.date + " – " + (n.title || "—") + "\n" + (n.body || "") + "\n\n"; });
+    if (S.verses.length) out += t("savedVerses") + ":\n" + S.verses.map(v => "• " + v.ref + (ALL_LESSONS[v.lid] ? " (" + L(ALL_LESSONS[v.lid].title) + ")" : "")).join("\n") + "\n";
+    return out;
   }
   function bindNotes() {
     const ub = document.getElementById("unlock");
@@ -7641,6 +8717,13 @@ function fastPeriods(y, cal) {
       ub.onclick = doUnlock; document.getElementById("pw").onkeydown = e => { if (e.key === "Enter") doUnlock(); };
     }
     const lk = document.getElementById("lock"); if (lk) lk.onclick = () => { unlockedNotes = null; encKey = null; render(); };
+    const ex = document.getElementById("notesexp");
+    if (ex) ex.onclick = async () => {
+      const txt = notesText();
+      try { if (navigator.share) { await navigator.share({ title: "OrthodoxPath", text: txt }); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+      try { await navigator.clipboard.writeText(txt); toast(t("notesExported")); }
+      catch (e) { const box = document.getElementById("expbox"); box.hidden = false; box.value = txt; box.focus(); box.select(); }
+    };
     app.querySelectorAll("[data-edit]").forEach(b => b.onclick = () => openNoteEditor(b.getAttribute("data-edit")));
     app.querySelectorAll("[data-del]").forEach(b => b.onclick = () => confirmBox(t("confirmDelete"), async () => {
       await persistNotes(notesList().filter(n => n.id !== b.getAttribute("data-del"))); render();
