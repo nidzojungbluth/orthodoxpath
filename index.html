@@ -219,11 +219,25 @@ html[data-theme="light"] .seg button.on { color: #fff; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .flash .inner { transition: none; } }
+
+/* Wochenübersicht */
+.weekdots { display: flex; justify-content: space-between; gap: 6px; margin-top: 8px; }
+.wd { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+.wd i { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--line); display: block; }
+.wd.on i { background: var(--gold); border-color: var(--gold); }
+.wd.today i { box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 35%, transparent); }
+.wd small { font-size: .7em; color: var(--muted); }
+/* sanfte Übergänge */
+@keyframes opFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+main > .wrap { animation: opFade .28s ease-out; }
+.card, .item { transition: border-color .2s ease, transform .15s ease; }
+.item:active, .btn:active, .opt:active { transform: scale(.985); }
+@media (prefers-reduced-motion: reduce) { main > .wrap { animation: none; } .item:active, .btn:active, .opt:active { transform: none; } }
 </style>
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "1.11.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "2.0.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -366,6 +380,32 @@ const UI = {
     sourceInfo: "Quellenlage",
     creed: "Glaubensbekenntnis",
     menu: "Menü",
+    greetMorning: "Guten Morgen", greetDay: "Guten Tag", greetEvening: "Guten Abend",
+    weekTitle: "Diese Woche", weekText: "{n} von 7 Tagen mit Gebet oder Lernen",
+    weekGentle: "Kein Wettbewerb und kein Druck – jeder Tag ist ein neuer Anfang.",
+    prayedToday: "Ich habe heute gebetet", prayedDone: "Heute gebetet – Ehre sei Gott", prayedUndo: "Rückgängig",
+    impulseTitle: "Impuls des Tages", impulseFrom: "Aus der Lektion",
+    askPriest: "Für persönliche Fragen zu Beichte, schweren inneren Kämpfen oder Entscheidungen in deinem Leben sprich bitte mit einem orthodoxen Priester. Diese App ersetzt keinen geistlichen Vater.",
+    askCrisis: "Wenn du daran denkst, dir etwas anzutun, bist du damit nicht allein. Bitte sprich jetzt mit jemandem: In Deutschland erreichst du die Telefonseelsorge rund um die Uhr kostenlos unter 0800 111 0 111 oder 0800 111 0 222. In akuter Gefahr: Notruf 112.",
+    calSaintsToday: "Heilige des Tages (in dieser App)",
+    calNoSaintsApp: "Für heute ist in dieser App kein Heiliger hinterlegt. Die Heiligen jedes Tages findest du im Prolog von Ohrid.",
+    calFastRule: "Fastenregel (überliefert, vereinfacht)",
+    calMeaning: "Bedeutung",
+    calSetting: "Kirchenkalender",
+    calJulian: "Julianisch", calRevised: "Neujulianisch",
+    calSettingHelp: "Julianisch: z. B. Serbische, Russische, Georgische Kirche, Jerusalem, Athos. Neujulianisch: z. B. Konstantinopel, Griechenland, Rumänien, Bulgarien – dort fallen die festen Feste auf das Datum des bürgerlichen Kalenders. Ostern ist in beiden Fällen gleich.",
+    calIntroRevised: "Nach dem neujulianischen Kalender (z. B. Griechenland, Rumänien): Feste Feste fallen auf das bürgerliche Datum; Ostern nach der gemeinsamen orthodoxen Berechnung. Die örtliche Praxis kann abweichen.",
+    calToLesson: "Zur passenden Lektion",
+    calReadingsNote: "Die täglichen Schriftlesungen der Kirche sind noch nicht in der App enthalten.",
+    prTopics: "Themen", prMine: "Mein Gebetsbuch",
+    prFavs: "Gespeicherte Gebete", prNoFavs: "Tippe bei einem Gebet auf ☆, um es hier zu speichern.",
+    prIntentions: "Meine Gebetsanliegen",
+    prIntentHint: "Notiere Menschen und Anliegen, für die du beten möchtest. Alles bleibt auf diesem Gerät.",
+    prIntentPlaceholder: "z. B. Gesundheit für meine Großmutter",
+    prIntentAdd: "Hinzufügen", prIntentDone: "Erledigt", prIntentReopen: "Wieder öffnen", prNoIntent: "Noch keine Anliegen eingetragen.",
+    prKindTrad: "Traditionelles Gebet", prKindBible: "Bibelvers", prKindSuggest: "Vorschlag der App – freie Worte",
+    prSaveFav: "Gebet speichern", prSavedFav: "Gebet gespeichert", prRemovedFav: "Gebet entfernt",
+    prTopicsIntro: "Gebete für verschiedene Lebenslagen. Jedes Gebet ist gekennzeichnet: traditionelles Gebet, Bibelvers oder Vorschlag der App.",
     ovLabel: "Überblick",
     ovAbout: "Worum geht es?",
     ovKeys: "Wichtige Stellen",
@@ -530,6 +570,32 @@ const UI = {
     sourceInfo: "Стање извора",
     creed: "Символ вере",
     menu: "Мени",
+    greetMorning: "Добро јутро", greetDay: "Добар дан", greetEvening: "Добро вече",
+    weekTitle: "Ове недеље", weekText: "{n} од 7 дана са молитвом или учењем",
+    weekGentle: "Без такмичења и без притиска – сваки дан је нови почетак.",
+    prayedToday: "Данас сам се помолио", prayedDone: "Данас сам се помолио – слава Богу", prayedUndo: "Поништи",
+    impulseTitle: "Подстицај дана", impulseFrom: "Из лекције",
+    askPriest: "За лична питања о исповести, тешким унутрашњим борбама или одлукама у животу, молимо вас, разговарајте са православним свештеником. Ова апликација не замењује духовника.",
+    askCrisis: "Ако помишљате да себи нешто учините, нисте сами у томе. Молимо вас, разговарајте одмах са неким: у Немачкој је телефонска служба помоћи (Telefonseelsorge) доступна даноноћно и бесплатно на 0800 111 0 111 или 0800 111 0 222. У хитној опасности позовите хитну помоћ.",
+    calSaintsToday: "Светитељи дана (у овој апликацији)",
+    calNoSaintsApp: "За данас у овој апликацији није унет ниједан светитељ. Светитеље сваког дана наћи ћете у Охридском прологу.",
+    calFastRule: "Правило поста (предано, поједностављено)",
+    calMeaning: "Значење",
+    calSetting: "Црквени календар",
+    calJulian: "Јулијански", calRevised: "Новојулијански",
+    calSettingHelp: "Јулијански: нпр. Српска, Руска, Грузијска Црква, Јерусалим, Света Гора. Новојулијански: нпр. Цариград, Грчка, Румунија, Бугарска – тамо непокретни празници падају на датум грађанског календара. Васкрс је у оба случаја исти.",
+    calIntroRevised: "По новојулијанском календару (нпр. Грчка, Румунија): непокретни празници падају на грађански датум; Васкрс по заједничком православном рачунању. Месна пракса може да се разликује.",
+    calToLesson: "До одговарајуће лекције",
+    calReadingsNote: "Свакодневна црквена читања из Писма још нису садржана у апликацији.",
+    prTopics: "Теме", prMine: "Мој молитвеник",
+    prFavs: "Сачуване молитве", prNoFavs: "Додирните ☆ код молитве да бисте је сачували овде.",
+    prIntentions: "Моје молитвене намере",
+    prIntentHint: "Запишите људе и намере за које желите да се молите. Све остаје на овом уређају.",
+    prIntentPlaceholder: "нпр. здравље за моју баку",
+    prIntentAdd: "Додај", prIntentDone: "Испуњено", prIntentReopen: "Поново отвори", prNoIntent: "Још нема уписаних намера.",
+    prKindTrad: "Традиционална молитва", prKindBible: "Стих из Писма", prKindSuggest: "Предлог апликације – слободне речи",
+    prSaveFav: "Сачувај молитву", prSavedFav: "Молитва сачувана", prRemovedFav: "Молитва уклоњена",
+    prTopicsIntro: "Молитве за различите животне прилике. Свака молитва је означена: традиционална молитва, стих из Писма или предлог апликације.",
     ovLabel: "Преглед",
     ovAbout: "О чему говори књига?",
     ovKeys: "Важна места",
@@ -4177,6 +4243,18 @@ const SAINTS = [
     life: { de: "Serbischer Fürst, Stifter der Klöster Ravanica und Lazarica. Er fiel 1389 in der Schlacht auf dem Amselfeld (Kosovo) gegen das Osmanische Reich. Die Kirche verehrt ihn als Märtyrer.", sr: "Српски кнез, ктитор манастира Раванице и Лазарице. Погинуо је 1389. у Косовском боју против Османског царства. Црква га поштује као мученика." },
     teaching: { de: "In der kirchlichen Überlieferung steht er für die Wahl des himmlischen Reiches vor dem irdischen. Historisch gesicherte Tatsachen und spätere Volksüberlieferung (z. B. Epen) sind zu unterscheiden.", sr: "У црквеном предању он представља избор Царства Небеског пре земаљског. Треба разликовати историјски потврђене чињенице од каснијег народног предања (нпр. епских песама)." },
     tag: "uncertain", read: [] },
+  { id: "s-maryegypt", name: { de: "Hl. Maria von Ägypten", sr: "Света Марија Египћанка" },
+    lived: { de: "5./6. Jahrhundert (genaue Zeit unsicher)", sr: "5/6. век (тачно време несигурно)" }, feast: { de: "1. April (14. April) und 5. Sonntag der Großen Fastenzeit", sr: "1/14. април и пета недеља Великог поста" },
+    life: { de: "Nach ihrer Lebensbeschreibung lebte Maria als junge Frau viele Jahre in Alexandria ein ausschweifendes Leben. Sie reiste nach Jerusalem zum Fest der Kreuzerhöhung, wurde aber von einer unsichtbaren Kraft am Betreten der Kirche gehindert. Vor einer Ikone der Gottesgebärerin kehrte sie um, verehrte das Kreuz und zog in die Wüste jenseits des Jordan. Dort lebte sie nach der Überlieferung 47 Jahre in Buße. Der Mönch Zosimas begegnete ihr, hörte ihre Geschichte und brachte ihr die heilige Kommunion; ein Jahr später fand er sie tot und begrub sie.", sr: "Према њеном житију, Марија је као млада жена много година у Александрији живела развратним животом. Отпутовала је у Јерусалим на празник Воздвижења Крста, али ју је невидљива сила спречила да уђе у храм. Пред иконом Богородице се покајала, поклонила се Крсту и отишла у пустињу с оне стране Јордана. Тамо је, према предању, 47 година живела у покајању. Монах Зосима ју је срео, чуо њену повест и донео јој свето причешће; годину дана касније нашао ју је упокојену и сахранио." },
+    teaching: { de: "Sie ist das große Vorbild der Umkehr: Kein Mensch ist zu tief gefallen, um durch Reue und Gottes Gnade geheilt zu werden. Darum stellt die Kirche sie am Ende der Großen Fastenzeit allen vor Augen.", sr: "Она је велики узор покајања: ниједан човек није пао тако дубоко да не би могао бити исцељен покајањем и Божијом благодаћу. Зато је Црква на крају Великог поста ставља свима пред очи." },
+    meaning: { de: "Ihre Lebensbeschreibung wird nach der Überlieferung dem hl. Sophronius, Patriarch von Jerusalem (7. Jh.), zugeschrieben; manche Forscher bezweifeln diese Zuschreibung. Sie wird in der fünften Woche der Großen Fastenzeit zusammen mit dem Großen Bußkanon des hl. Andreas von Kreta gelesen.", sr: "Њено житије се према предању приписује светом Софронију, патријарху јерусалимском (7. век); неки истраживачи сумњају у то. Чита се у петој седмици Великог поста заједно са Великим покајним каноном светог Андреја Критског." },
+    tag: "uncertain", read: ["svProlog"] },
+  { id: "s-luke", name: { de: "Hl. Lukas von Simferopol (der heilige Chirurg)", sr: "Свети Лука Кримски (свети хирург)" },
+    lived: { de: "1877–1961", sr: "1877–1961" }, feast: { de: "29. Mai (11. Juni)", sr: "29. мај/11. јун" },
+    life: { de: "Valentin Woino-Jasenezki wurde 1877 in Kertsch auf der Krim geboren. Er wurde ein bedeutender Chirurg und Professor und schrieb grundlegende medizinische Werke, unter anderem über die Behandlung eitriger Infektionen. In der Sowjetzeit wurde er Priester und Bischof mit dem Namen Lukas. Er wurde mehrfach verhaftet und verbrachte insgesamt etwa elf Jahre in der Verbannung, operierte aber weiter. Von 1946 bis 1961 war er Erzbischof von Simferopol und der Krim. Er starb am 11. Juni 1961; seine Reliquien ruhen in der Dreifaltigkeitskathedrale in Simferopol.", sr: "Валентин Војно-Јасењецки рођен је 1877. у Керчу на Криму. Постао је значајан хирург и професор и написао темељна медицинска дела, између осталог о лечењу гнојних инфекција. У совјетско време постао је свештеник и епископ са именом Лука. Више пута је хапшен и провео је укупно око једанаест година у изгнанству, али је наставио да оперише. Од 1946. до 1961. био је архиепископ симферопољски и кримски. Упокојио се 11. јуна 1961; његове мошти почивају у Саборном храму Свете Тројице у Симферопољу." },
+    teaching: { de: "Er verband Glauben und Wissenschaft und sah im Dienst am kranken Menschen einen Dienst an Christus. In seinem Buch „Geist, Seele und Leib“ schrieb er über den Menschen als Einheit. Viele Gläubige bitten ihn um Fürsprache bei Krankheit und vor Operationen.", sr: "Повезивао је веру и науку и у служењу болесном човеку видео служење Христу. У књизи „Дух, душа и тело“ писао је о човеку као целини. Многи верници га моле за заступништво у болести и пред операције." },
+    meaning: { de: "Die Ukrainische Orthodoxe Kirche verehrte ihn ab 1995 als Heiligen; die Russische Orthodoxe Kirche nahm ihn im Jahr 2000 in die Schar der Neumärtyrer und Bekenner auf.", sr: "Украјинска Православна Црква поштује га као светитеља од 1995; Руска Православна Црква уврстила га је 2000. године у сабор новомученика и исповедника." },
+    read: [] },
   { id: "s-simeon", name: { de: "Hl. Simeon der Myrrhestrahlende (Stefan Nemanja)", sr: "Свети Симеон Мироточиви (Стефан Немања)" },
     lived: { de: "um 1113–1199", sr: "око 1113–1199" }, feast: { de: "13. Feb. (26. Feb.)", sr: "13/26. фебруар" },
     life: { de: "Stefan Nemanja wurde um 1113 in Ribnica (Zeta, nahe dem heutigen Podgorica) geboren und war von 1166 bis 1196 Großžupan von Serbien. Er einte die serbischen Gebiete und stiftete Klöster, darunter Studenica. 1196 dankte er zugunsten seines Sohnes Stefan ab, wurde Mönch und ging zu seinem Sohn Sava auf den Athos. Gemeinsam erneuerten sie 1198/99 das Kloster Hilandar. Er starb am 13. Februar 1199 in Hilandar.", sr: "Стефан Немања рођен је око 1113. у Рибници (Зета, код данашње Подгорице) и био је велики жупан Србије од 1166. до 1196. Уједињавао је српске земље и подизао манастире, међу њима Студеницу. Године 1196. одрекао се престола у корист сина Стефана, постао монах и отишао сину Сави на Свету Гору. Заједно су 1198/99. обновили манастир Хиландар. Упокојио се 13. фебруара 1199. у Хиландару." },
@@ -4309,6 +4387,28 @@ const SAINT_EXTRA = {
       qz("Welches Kloster stiftete Fürst Lazar?", "Који манастир је подигао кнез Лазар?", [["Ravanica", "Раваницу"], ["Studenica", "Студеницу"], ["Hilandar", "Хиландар"]], 0),
       qz("Wann ist der Vidovdan?", "Када је Видовдан?", [["15. Juni (28. Juni)", "15. јуна (28. јуна)"], ["14. Januar (27. Januar)", "14. јануара (27. јануара)"], ["13. Februar (26. Februar)", "13. фебруара (26. фебруара)"]], 0),
       qz("In welchem Jahr fiel er auf dem Amselfeld?", "Које године је погинуо на Косову пољу?", [["1389", "1389."], ["1219", "1219."], ["1453", "1453."]], 0)
+    ]
+  },
+  "s-maryegypt": {
+    questions: [
+      qa("Was lehrt das Leben der hl. Maria von Ägypten?", "Чему учи живот свете Марије Египћанке?", "Dass kein Mensch zu tief gefallen ist, um durch Umkehr und Gottes Gnade geheilt zu werden.", "Да ниједан човек није пао тако дубоко да не би могао бити исцељен покајањем и Божијом благодаћу."),
+      qa("Wann gedenkt die Kirche ihrer besonders?", "Када је Црква посебно прославља?", "Am 1. April (14. April) und am 5. Sonntag der Großen Fastenzeit; ihre Lebensbeschreibung wird mit dem Großen Kanon des hl. Andreas gelesen.", "1/14. априла и пете недеље Великог поста; њено житије чита се уз Велики канон светог Андреја.")
+    ],
+    quiz: [
+      qz("Wer begegnete Maria in der Wüste?", "Ко је срео Марију у пустињи?", [["Der Mönch Zosimas", "Монах Зосима"], ["Der hl. Antonius", "Свети Антоније"], ["Der Apostel Paulus", "Апостол Павле"]], 0),
+      qz("Vor welcher Ikone kehrte sie in Jerusalem um?", "Пред којом иконом се покајала у Јерусалиму?", [["Der Gottesgebärerin", "Богородице"], ["Des hl. Georg", "Светог Георгија"], ["Des Erzengels Michael", "Архангела Михаила"]], 0),
+      qz("An welchem Sonntag der Großen Fastenzeit wird sie gefeiert?", "Које недеље Великог поста се прославља?", [["Am 5. Sonntag", "Пете недеље"], ["Am 1. Sonntag", "Прве недеље"], ["Am Palmsonntag", "На Цвети"]], 0)
+    ]
+  },
+  "s-luke": {
+    questions: [
+      qa("Welchen Beruf übte der hl. Lukas neben seinem Bischofsamt aus?", "Којим занимањем се свети Лука бавио поред епископске службе?", "Er war Chirurg und Professor der Medizin und operierte auch in der Verbannung weiter.", "Био је хирург и професор медицине и наставио је да оперише и у изгнанству."),
+      qa("Wie verband er Glaube und Wissenschaft?", "Како је повезивао веру и науку?", "Er sah im Dienst am kranken Menschen einen Dienst an Christus und schrieb über den Menschen als Einheit von Geist, Seele und Leib.", "У служењу болесном човеку видео је служење Христу и писао о човеку као јединству духа, душе и тела.")
+    ],
+    quiz: [
+      qz("Wo wurde der hl. Lukas geboren?", "Где је рођен свети Лука?", [["In Kertsch auf der Krim", "У Керчу на Криму"], ["In Moskau", "У Москви"], ["In Kiew", "У Кијеву"]], 0),
+      qz("Wessen Erzbischof war er von 1946 bis 1961?", "Чији архиепископ је био од 1946. до 1961?", [["Von Simferopol und der Krim", "Симферопољски и кримски"], ["Von Belgrad", "Београдски"], ["Von Athen", "Атински"]], 0),
+      qz("Wann ist sein Gedenktag?", "Када је његов спомен?", [["29. Mai (11. Juni)", "29. маја (11. јуна)"], ["1. April (14. April)", "1. априла (14. априла)"], ["6. Dezember (19. Dezember)", "6. децембра (19. децембра)"]], 0)
     ]
   },
   "s-simeon": {
@@ -4665,6 +4765,8 @@ const EXTRA_CARDS = [
   ["d-saints", "Wann ist der Gedenktag des hl. Vasilije von Ostrog?", "Када је спомен светог Василија Острошког?", "29. April (bürgerlich 12. Mai).", "29. априла (по грађанском 12. маја)."],
   ["d-saints", "Wer war Blagoje Popović?", "Ко је био Благоје Поповић?", "Der hl. Justin von Ćelije, Theologe und Archimandrit (1894–1979).", "Свети Јустин Ћелијски, богослов и архимандрит (1894–1979)."],
   ["d-saints", "Wann ist der Gedenktag des hl. Justin von Ćelije?", "Када је спомен светог Јустина Ћелијског?", "1. Juni (bürgerlich 14. Juni).", "1. јуна (по грађанском 14. јуна)."],
+  ["d-saints", "Welches Vorbild stellt die Kirche am 5. Sonntag der Fastenzeit vor Augen?", "Који узор Црква истиче пете недеље поста?", "Die hl. Maria von Ägypten – Vorbild der Umkehr.", "Свету Марију Египћанку – узор покајања."],
+  ["d-saints", "Wer war der hl. Lukas von Simferopol?", "Ко је био свети Лука Кримски?", "Chirurg, Professor und Erzbischof der Krim (1877–1961), Bekenner in der Sowjetzeit.", "Хирург, професор и архиепископ кримски (1877–1961), исповедник у совјетско време."],
   ["d-saints", "Wer sind die Drei Hierarchen?", "Ко су Три Јерарха?", "Basilius der Große, Gregor der Theologe, Johannes Chrysostomus (Fest 30. Jan.).", "Василије Велики, Григорије Богослов, Јован Златоуст (празник 30. јануар)."],
   ["d-saints", "Wer schrieb „Über die Menschwerdung des Wortes“?", "Ко је написао „О оваплоћењу Логоса“?", "Der hl. Athanasius der Große.", "Свети Атанасије Велики."],
   ["d-saints", "Wer verteidigte die zwei Willen Christi bis zum Martyrium?", "Ко је бранио две воље Христове до мучеништва?", "Der hl. Maximus der Bekenner.", "Свети Максим Исповедник."],
@@ -4714,12 +4816,56 @@ const PRAYER_TEXTS = {
   study: { title: { de: "Gebet vor dem Lernen", sr: "Молитва пре учења" },
     text: { de: "Allgütiger Herr, sende uns die Gnade deines Heiligen Geistes herab, die unsere geistigen Kräfte schenkt und stärkt, damit wir, aufmerksam auf die Lehre hörend, die uns gegeben wird, heranwachsen zu deiner Ehre, unserem Schöpfer, unseren Eltern zur Freude, der Kirche und dem Vaterland zum Nutzen.", sr: "Преблаги Господе, ниспошљи нам благодат Светога Твога Духа, која дарује и укрепљује душевне наше силе, да бисмо, пажљиво слушајући предавано нам учење, узрасли Теби, Творцу нашем, на славу, родитељима нашим на утеху, а Цркви и отаџбини на корист." },
     note: { de: "Traditionelles Schulgebet; der Wortlaut kann je nach Gebetbuch leicht abweichen.", sr: "Традиционална школска молитва; текст се може мало разликовати зависно од молитвеника." } },
-  meal: { title: { de: "Gebet vor dem Essen", sr: "Молитва пре јела" },
+  meal: { kind: "bible", title: { de: "Gebet vor dem Essen", sr: "Молитва пре јела" },
     text: { de: "Die Augen aller warten auf dich, o Herr, und du gibst ihnen ihre Speise zur rechten Zeit. Du öffnest deine Hand und sättigst alles, was lebt, mit Wohlgefallen. (Ps 144,15–16)", sr: "Очи свију у Тебе, Господе, уздају се, и Ти им дајеш храну у своје време; отвараш руку Своју и испуњаваш свако живо биће благовољењем. (Пс 144,15–16)" },
     note: { de: "Danach betet man das Vaterunser und bekreuzigt sich.", sr: "После тога се моли Оче наш и крсти се." } },
-  personal: { title: { de: "Für die Lebenden und die Verstorbenen", sr: "За живе и уснуле" },
+  personal: { kind: "suggest", title: { de: "Für die Lebenden und die Verstorbenen", sr: "За живе и уснуле" },
     text: { de: "Herr, gedenke und erbarme dich meiner Eltern, meiner Familie, meiner Freunde und aller, die ich dir jetzt nenne … Behüte sie und schenke ihnen, was sie zum Heil brauchen.\n\nGib Ruhe, Herr, den Seelen deiner entschlafenen Diener … und vergib ihnen alle Sünden. Amen.", sr: "Помени, Господе, и помилуј моје родитеље, моју породицу, моје пријатеље и све које Ти сада наводим … Сачувај их и даруј им све што им је потребно за спасење.\n\nУпокој, Господе, душе уснулих слугу Твојих … и опрости им сва сагрешења. Амин." },
-    note: { de: "Vorschlag der App für das persönliche Gebet mit eigenen Worten – kein festgelegter kirchlicher Text. An den Stellen „…“ nennst du die Namen.", sr: "Предлог апликације за личну молитву сопственим речима – није утврђени црквени текст. На местима „…“ наводите имена." } }
+    note: { de: "Vorschlag der App für das persönliche Gebet mit eigenen Worten – kein festgelegter kirchlicher Text. An den Stellen „…“ nennst du die Namen.", sr: "Предлог апликације за личну молитву сопственим речима – није утврђени црквени текст. На местима „…“ наводите имена." } },
+  aftermeal: { title: { de: "Gebet nach dem Essen", sr: "Молитва после јела" },
+    text: { de: "Wir danken dir, Christus, unser Gott, dass du uns mit deinen irdischen Gaben gesättigt hast. Entziehe uns auch nicht dein himmlisches Reich; sondern wie du zu deinen Jüngern gekommen bist, Erlöser, und ihnen Frieden gegeben hast, so komm auch zu uns und rette uns.", sr: "Благодаримо Ти, Христе Боже наш, што си нас наситио земаљских Твојих добара; не лиши нас ни Небеског Твог Царства, но као што си међу ученике Своје дошао, Спасе, мир дајући им, дођи и к нама и спаси нас." },
+    note: { de: "Traditionelles Tischgebet; der Wortlaut kann je nach Gebetbuch leicht abweichen.", sr: "Традиционална молитва после јела; текст се може мало разликовати зависно од молитвеника." } },
+  taxcollector: { kind: "bible", title: { de: "Gebet des Zöllners", sr: "Молитва цариника" },
+    text: { de: "Gott, sei mir Sünder gnädig.", sr: "Боже, милостив буди мени грешноме." },
+    note: { de: "Lk 18,13 – das kürzeste Bußgebet der Bibel; Grundlage auch des Jesusgebets.", sr: "Лк 18,13 – најкраћа покајна молитва у Библији; основ и Исусове молитве." } },
+  theotokossave: { title: { de: "Ruf zur Gottesgebärerin", sr: "Призив Богородици" },
+    text: { de: "Allheilige Gottesgebärerin, rette uns.", sr: "Пресвета Богородице, спаси нас." },
+    note: { de: "Kurzer Ruf, der in vielen Gottesdiensten wiederholt wird und jederzeit gebetet werden kann.", sr: "Кратак призив који се понавља на многим богослужењима и може се молити у свако доба." } },
+  subtuum: { title: { de: "Unter dein Erbarmen", sr: "Под Твоју милост" },
+    text: { de: "Unter dein Erbarmen fliehen wir, Gottesgebärerin, Jungfrau. Verachte nicht unsere Bitten in der Not, sondern erlöse uns aus den Gefahren, du einzig Reine und Gesegnete.", sr: "Под Твоју милост прибегавамо, Богородице Дјево; молитве наше не презри у невољама, него нас избави од беда, једина Чиста и Благословена." },
+    note: { de: "Eines der ältesten Gebete zur Gottesgebärerin; der älteste bekannte Textzeuge ist ein Papyrus, der meist ins 3. oder 4. Jahrhundert datiert wird.", sr: "Једна од најстаријих молитава Богородици; најстарији познати запис је папирус који се обично датира у 3. или 4. век." } },
+  allsaints: { title: { de: "Ruf zu allen Heiligen", sr: "Призив свим светима" },
+    text: { de: "Alle Heiligen, bittet Gott für uns.", sr: "Сви свети, молите Бога за нас." } },
+  saintcall: { title: { de: "Ruf zu einem Heiligen", sr: "Призив светитељу" },
+    text: { de: "Heiliger (Name), bitte Gott für uns.", sr: "Свети (име), моли Бога за нас." },
+    note: { de: "Für den Namenspatron, den Heiligen der Familie (Slava) oder den Heiligen des Tages. Bei einer Heiligen: „Heilige (Name) …“.", sr: "За светитеља чије име носите, крсну славу или светитеља дана. За светитељку: „Света (име) …“." } },
+  gloryall: { title: { de: "Ehre sei Gott für alles", sr: "Слава Богу за све" },
+    text: { de: "Ehre sei Gott für alles.", sr: "Слава Богу за све." },
+    note: { de: "Kurzes Dankgebet; nach der Überlieferung die letzten Worte des hl. Johannes Chrysostomus in der Verbannung.", sr: "Кратка благодарна молитва; према предању последње речи светог Јована Златоуста у изгнанству." } },
+  departed: { title: { de: "Mit den Heiligen lass ruhen", sr: "Са светима упокој" },
+    text: { de: "Mit den Heiligen lass ruhen, Christus, die Seelen deiner Diener, wo kein Schmerz ist, keine Trauer und kein Seufzen, sondern unendliches Leben.", sr: "Са светима упокој, Христе, душе слугу Твојих, где нема болести, ни туге, ни уздисања, него живот бесконачни." },
+    note: { de: "Kontakion für die Verstorbenen, das beim Begräbnis und beim Totengedenken (Parastos) gesungen wird.", sr: "Кондак за упокојене, који се пева на опелу и парастосу." } },
+  memory: { title: { de: "Ewiges Gedenken", sr: "Вечан помен" },
+    text: { de: "Ewiges Gedenken.", sr: "Вечан помен." },
+    note: { de: "Ruf am Ende des Totengedenkens, oft dreimal gesungen.", sr: "Призив на крају парастоса, често се пева три пута." } },
+  help: { kind: "bible", title: { de: "O Gott, komm mir zu Hilfe", sr: "Боже, приклони се у помоћ моју" },
+    text: { de: "O Gott, komm mir zu Hilfe; Herr, eile mir zu helfen.", sr: "Боже, приклони се у помоћ моју; Господе, похитај да ми помогнеш." },
+    note: { de: "Ps 69 (70),2. Die Wüstenväter empfahlen diesen Vers als kurzes Gebet in jeder Versuchung (überliefert beim hl. Johannes Cassian, Unterredungen 10).", sr: "Пс 69 (70),2. Пустињски оци су препоручивали овај стих као кратку молитву у сваком искушењу (предао свети Јован Касијан, Разговори 10)." } },
+  fear: { kind: "bible", title: { de: "Der Herr ist mein Licht", sr: "Господ је светлост моја" },
+    text: { de: "Der Herr ist mein Licht und mein Heil – vor wem sollte ich mich fürchten? Der Herr ist der Schutz meines Lebens – vor wem sollte ich erschrecken?", sr: "Господ је светлост моја и спасење моје – кога да се бојим? Господ је заштитник живота мога – од кога да страхујем?" },
+    note: { de: "Ps 26 (27),1 – freie Übertragung dieser App.", sr: "Пс 26 (27),1 – слободан превод ове апликације." } },
+  sick: { kind: "suggest", title: { de: "Für einen Kranken", sr: "За болесника" },
+    text: { de: "Herr Jesus Christus, Arzt der Seelen und der Leiber, sieh auf deinen Diener (Name), der krank ist. Lindere seine Schmerzen, stärke ihn an Seele und Leib und schenke ihm, wenn es dein Wille ist, Genesung. Amen.", sr: "Господе Исусе Христе, Лекару душа и тела, погледај на слугу Свога (име), који је болестан. Ублажи његове болове, укрепи га душевно и телесно и даруј му, ако је Твоја воља, оздрављење. Амин." },
+    note: { de: "Vorschlag der App mit freien Worten. Die Kirche betet für Kranke besonders im Mysterium der Krankensalbung (Jak 5,14–15); sprich dazu mit deinem Priester.", sr: "Предлог апликације слободним речима. Црква се за болесне моли нарочито у Светој тајни јелеосвећења (Јак 5,14–15); о томе разговарајте са својим свештеником." } },
+  family: { kind: "suggest", title: { de: "Für Familie und Freunde", sr: "За породицу и пријатеље" },
+    text: { de: "Herr, segne meine Familie und meine Freunde: (Namen). Bewahre sie vor allem Bösen, schenke ihnen Frieden und Liebe zueinander und führe sie auf dem Weg zu dir. Amen.", sr: "Господе, благослови моју породицу и моје пријатеље: (имена). Сачувај их од сваког зла, даруј им мир и љубав једних према другима и води их путем ка Теби. Амин." },
+    note: { de: "Vorschlag der App mit freien Worten.", sr: "Предлог апликације слободним речима." } },
+  forgive: { kind: "suggest", title: { de: "Um die Kraft zu vergeben", sr: "За снагу да опростим" },
+    text: { de: "Herr, du hast am Kreuz für die gebetet, die dich kreuzigten. Hilf mir, (Name) von Herzen zu vergeben, und vergib auch mir meine Schuld. Amen.", sr: "Господе, Ти си се на крсту молио за оне који су Те распели. Помози ми да од срца опростим (име) и опрости и мени моја сагрешења. Амин." },
+    note: { de: "Vorschlag der App, angelehnt an Lk 23,34 und das Vaterunser.", sr: "Предлог апликације, по узору на Лк 23,34 и Оче наш." } },
+  grief: { kind: "suggest", title: { de: "In der Trauer", sr: "У тузи" },
+    text: { de: "Herr, du hast am Grab des Lazarus geweint. Du kennst meinen Schmerz. Tröste mich, stärke meine Hoffnung auf die Auferstehung und nimm (Name) in dein Reich auf. Amen.", sr: "Господе, Ти си плакао на гробу Лазаревом. Ти знаш мој бол. Утеши ме, укрепи моју наду у васкрсење и прими (име) у Своје Царство. Амин." },
+    note: { de: "Vorschlag der App, angelehnt an Joh 11,35. In schwerer Trauer kann ein Gespräch mit dem Priester oder einem vertrauten Menschen helfen.", sr: "Предлог апликације, по узору на Јн 11,35. У тешкој тузи може помоћи разговор са свештеником или блиским човеком." } }
 };
 
 /* Gebetsordnungen: Reihenfolge der Gebete. "creed" und "ps50" verweisen auf vorhandene Inhalte. */
@@ -4729,44 +4875,104 @@ const PRAYER_RULES = {
   other: ["study", "meal", "jesus", "ephrem"]
 };
 
+/* Gebetskategorien. Einträge: Gebets-ID oder [ID, Hinweis DE, Hinweis SR] für die Verwendung. */
+const PRAYER_CATS = [
+  { id: "meal", title: { de: "Vor und nach dem Essen", sr: "Пре и после јела" }, items: [["meal", "Vor dem Essen", "Пре јела"], "ourfather", ["aftermeal", "Nach dem Essen", "После јела"]] },
+  { id: "work", title: { de: "Vor und nach der Arbeit", sr: "Пре и после рада" }, items: [["heavenlyking", "Vor der Arbeit oder dem Lernen", "Пре рада или учења"], "study", ["axion", "Nach der Arbeit", "После рада"], "gloryall"] },
+  { id: "fear", title: { de: "Bei Angst und Sorgen", sr: "У страху и бригама" }, items: ["fear", "jesus", "theotokossave", "subtuum"] },
+  { id: "temptation", title: { de: "In Versuchungen", sr: "У искушењима" }, items: ["help", "jesus", "kyrie"] },
+  { id: "forgiveness", title: { de: "Um Vergebung", sr: "За опроштај" }, items: ["taxcollector", "ps50", "forgive", "ephrem"] },
+  { id: "family", title: { de: "Für Familie und Freunde", sr: "За породицу и пријатеље" }, items: ["family", "personal"] },
+  { id: "sick", title: { de: "Für Kranke", sr: "За болесне" }, items: ["sick", "theotokossave"] },
+  { id: "grief", title: { de: "In der Trauer", sr: "У тузи" }, items: ["grief", "departed", "memory"] },
+  { id: "departed", title: { de: "Für die Verstorbenen", sr: "За упокојене" }, items: ["departed", "memory", "personal"] },
+  { id: "christ", title: { de: "Zu Jesus Christus", sr: "Исусу Христу" }, items: ["jesus", "taxcollector", "ourfather"] },
+  { id: "theotokos", title: { de: "Zur Gottesgebärerin", sr: "Пресветој Богородици" }, items: ["theotokos", "subtuum", "axion", "theotokossave"] },
+  { id: "saints", title: { de: "Zu den Heiligen", sr: "Светима" }, items: ["saintcall", "allsaints"] },
+  { id: "thanks", title: { de: "Dank", sr: "Благодарност" }, items: ["gloryall", "glorythee", "gloria"] },
+  { id: "lent", title: { de: "In der Fastenzeit", sr: "У време поста" }, items: ["ephrem", "taxcollector"] }
+];
+
 
 /* src/calendar.js */
-/* OrthodoxPath – Kirchenkalender (julianischer Kalender, umgerechnet in bürgerliche Daten; gültig 1900–2099).
-   Reine Rechenfunktionen ohne Netzwerk. */
+/* OrthodoxPath – Kirchenkalender.
+   Feste Daten werden nach dem kirchlichen Kalender (Monat/Tag) gespeichert und je nach Einstellung umgerechnet:
+   - "julian":  julianischer Kalender (z. B. Serbien, Russland, Georgien, Jerusalem, Athos): +13 Tage (gültig 1900–2099)
+   - "revised": revidierter julianischer („neuer“) Kalender (z. B. Konstantinopel, Griechenland, Rumänien, Bulgarien): +0 Tage
+   Ostern wird in beiden Fällen nach der julianischen Osterrechnung bestimmt (Ausnahme: die Kirche von Finnland). */
+
+const DAY = 86400000;
+function calOffset(cal) { return cal === "revised" ? 0 : 13; }
 
 /* Orthodoxes Osterdatum (julianische Osterrechnung nach Meeus), Ergebnis als bürgerliches Datum (UTC-Mitternacht) */
 function orthodoxPascha(year) {
   const a = year % 4, b = year % 7, c = year % 19;
   const d = (19 * c + 15) % 30;
   const e = (2 * a + 4 * b - d + 34) % 7;
-  const month = Math.floor((d + e + 114) / 31); // 3 = März, 4 = April (julianisch)
+  const month = Math.floor((d + e + 114) / 31);
   const day = ((d + e + 114) % 31) + 1;
-  return Date.UTC(year, month - 1, day) + 13 * 86400000; // +13 Tage (1900–2099)
+  return Date.UTC(year, month - 1, day) + 13 * DAY;
 }
-const DAY = 86400000;
-function utcDay(y, m, d) { return Date.UTC(y, m - 1, d); }
 function addD(t, n) { return t + n * DAY; }
+/* kirchliches Datum (Monat/Tag im Jahr ny) -> bürgerliches Datum */
+function churchDate(ny, m, d, cal) { return Date.UTC(ny, m - 1, d) + calOffset(cal) * DAY; }
+/* alle bürgerlichen Termine eines kirchlichen Datums, die in das bürgerliche Jahr y fallen */
+function churchDatesInYear(y, m, d, cal) {
+  return [y - 1, y].map(ny => churchDate(ny, m, d, cal)).filter(t => new Date(t).getUTCFullYear() === y);
+}
 
-/* Große Feste: feste Daten (bürgerlich, für Kirchen mit julianischem Kalender) und bewegliche (Abstand zu Ostern) */
+/* Feste und besondere Tage. rel = Abstand zu Ostern; m/d = kirchliches Datum. */
 const CAL_FEASTS = [
-  { id: "pascha", rel: 0, great: true, name: { de: "Ostern – Auferstehung Christi (Pascha)", sr: "Васкрс – Васкрсење Христово (Пасха)" } },
-  { id: "palm", rel: -7, great: true, name: { de: "Einzug in Jerusalem (Palmsonntag)", sr: "Улазак Господа у Јерусалим (Цвети)" } },
-  { id: "ascension", rel: 39, great: true, name: { de: "Christi Himmelfahrt", sr: "Вазнесење Господње (Спасовдан)" } },
-  { id: "pentecost", rel: 49, great: true, name: { de: "Pfingsten – Fest der Dreifaltigkeit", sr: "Педесетница – Света Тројица (Духови)" } },
-  { id: "theotokos-birth", m: 9, d: 21, great: true, name: { de: "Mariä Geburt", sr: "Рођење Пресвете Богородице (Мала Госпојина)" } },
-  { id: "exaltation", m: 9, d: 27, great: true, name: { de: "Kreuzerhöhung", sr: "Воздвижење Часног Крста (Крстовдан)" } },
-  { id: "entry", m: 12, d: 4, great: true, name: { de: "Einführung Marias in den Tempel", sr: "Ваведење Пресвете Богородице" } },
-  { id: "nativity", m: 1, d: 7, great: true, name: { de: "Christi Geburt (Weihnachten)", sr: "Рођење Христово (Божић)" } },
-  { id: "theophany", m: 1, d: 19, great: true, name: { de: "Theophanie – Taufe Christi", sr: "Богојављење" } },
-  { id: "meeting", m: 2, d: 15, great: true, name: { de: "Darstellung des Herrn (Begegnung)", sr: "Сретење Господње" } },
-  { id: "annunciation", m: 4, d: 7, great: true, name: { de: "Verkündigung an die Gottesgebärerin", sr: "Благовести" } },
-  { id: "transfiguration", m: 8, d: 19, great: true, name: { de: "Verklärung des Herrn", sr: "Преображење Господње" } },
-  { id: "dormition", m: 8, d: 28, great: true, name: { de: "Entschlafung der Gottesgebärerin", sr: "Успење Пресвете Богородице (Велика Госпојина)" } },
-  { id: "sava", m: 1, d: 27, great: false, name: { de: "Hl. Sava von Serbien", sr: "Свети Сава (Савиндан)" } },
-  { id: "basil-ostrog", m: 5, d: 12, great: false, name: { de: "Hl. Vasilije von Ostrog", sr: "Свети Василије Острошки" } },
-  { id: "vidovdan", m: 6, d: 28, great: false, name: { de: "Hl. Fürst Lazar (Vidovdan)", sr: "Свети кнез Лазар (Видовдан)" } },
-  { id: "peter-paul", m: 7, d: 12, great: false, name: { de: "Hl. Apostel Petrus und Paulus", sr: "Свети апостоли Петар и Павле (Петровдан)" } },
-  { id: "nicholas", m: 12, d: 19, great: false, name: { de: "Hl. Nikolaus", sr: "Свети Никола (Никољдан)" } }
+  { id: "pascha", rel: 0, great: true, name: { de: "Ostern – Auferstehung Christi (Pascha)", sr: "Васкрс – Васкрсење Христово (Пасха)" }, mean: { de: "Das Fest der Feste: Christus ist von den Toten auferstanden.", sr: "Празник над празницима: Христос је васкрсао из мртвих." }, lesson: "th-cross" },
+  { id: "palm", rel: -7, great: true, name: { de: "Einzug in Jerusalem (Palmsonntag)", sr: "Улазак Господа у Јерусалим (Цвети)" }, mean: { de: "Christus zieht als demütiger König in Jerusalem ein; Beginn der Karwoche.", sr: "Христос улази у Јерусалим као смирени Цар; почетак Страсне седмице." } },
+  { id: "ascension", rel: 39, great: true, name: { de: "Christi Himmelfahrt", sr: "Вазнесење Господње (Спасовдан)" }, mean: { de: "Am 40. Tag nach Ostern fährt Christus in den Himmel auf (Apg 1).", sr: "Четрдесетог дана после Васкрса Христос се вазноси на небо (Дап 1)." } },
+  { id: "pentecost", rel: 49, great: true, name: { de: "Pfingsten – Fest der Dreifaltigkeit", sr: "Педесетница – Света Тројица (Духови)" }, mean: { de: "Der Heilige Geist kommt auf die Apostel herab – Geburtstag der Kirche.", sr: "Дух Свети силази на апостоле – рођендан Цркве." }, lesson: "bib-acts2" },
+  { id: "publican", rel: -70, name: { de: "Sonntag vom Zöllner und Pharisäer", sr: "Недеља о митару и фарисеју" }, mean: { de: "Beginn der Vorfastenzeit: Demut statt Selbstgerechtigkeit (Lk 18,9–14).", sr: "Почетак припреме за пост: смирење уместо самоправедности (Лк 18,9–14)." } },
+  { id: "prodigal", rel: -63, name: { de: "Sonntag vom verlorenen Sohn", sr: "Недеља о блудном сину" }, mean: { de: "Einladung zur Umkehr (Lk 15,11–32).", sr: "Позив на покајање (Лк 15,11–32)." }, lesson: "bib-lk15" },
+  { id: "meatfare", rel: -56, name: { de: "Sonntag vom Jüngsten Gericht (Fleischverzicht)", sr: "Недеља месопусна (о Страшном суду)" }, mean: { de: "Erinnerung an das Gericht und die Werke der Barmherzigkeit (Mt 25,31–46); letzter Tag mit Fleisch vor Ostern.", sr: "Сећање на суд и дела милосрђа (Мт 25,31–46); последњи мрсни дан са месом пред Васкрс." } },
+  { id: "forgiveness", rel: -49, name: { de: "Sonntag der Vergebung (Käseverzicht)", sr: "Недеља сиропусна – Опроштајна недеља" }, mean: { de: "Gedenken der Vertreibung Adams; abends bitten die Gläubigen einander um Vergebung, bevor die Große Fastenzeit beginnt.", sr: "Спомен Адамовог изгнања; увече верни моле једни друге за опроштај пред почетак Великог поста." }, lesson: "bib-gen3" },
+  { id: "orthodoxy", rel: -42, name: { de: "Sonntag der Orthodoxie", sr: "Недеља православља" }, mean: { de: "Gedenken an den Sieg der Ikonenverehrung im Jahr 843.", sr: "Спомен победе поштовања икона 843. године." }, lesson: "dg-icons" },
+  { id: "palamas", rel: -35, name: { de: "Sonntag des hl. Gregor Palamas", sr: "Недеља светог Григорија Паламе" }, mean: { de: "Gedenken an den Verteidiger des Herzensgebets und der ungeschaffenen Energien Gottes.", sr: "Спомен браниоца молитве срца и нестворених енергија Божијих." }, lesson: "th-theosis" },
+  { id: "cross", rel: -28, name: { de: "Sonntag der Kreuzverehrung", sr: "Крстопоклона недеља" }, mean: { de: "In der Mitte der Fastenzeit wird das Kreuz zur Verehrung in die Mitte der Kirche gebracht.", sr: "Усред поста крст се износи на средину храма ради поклоњења." } },
+  { id: "climacus", rel: -21, name: { de: "Sonntag des hl. Johannes Klimakos", sr: "Недеља светог Јована Лествичника" }, mean: { de: "Gedenken an den Verfasser der „Leiter“ des geistlichen Aufstiegs.", sr: "Спомен писца „Лествице“ духовног узрастања." } },
+  { id: "maryegypt", rel: -14, name: { de: "Sonntag der hl. Maria von Ägypten", sr: "Недеља свете Марије Египћанке" }, mean: { de: "Vorbild der Umkehr am Ende der Großen Fastenzeit.", sr: "Узор покајања на крају Великог поста." }, saint: "s-maryegypt" },
+  { id: "lazarus", rel: -8, name: { de: "Lazarus-Samstag", sr: "Лазарева субота" }, mean: { de: "Christus erweckt Lazarus – Vorzeichen der Auferstehung (Joh 11).", sr: "Христос васкрсава Лазара – наговештај Васкрсења (Јн 11)." } },
+  { id: "thursday", rel: -3, name: { de: "Großer Donnerstag", sr: "Велики четвртак" }, mean: { de: "Gedenken an das Letzte Abendmahl und die Einsetzung der Eucharistie.", sr: "Спомен Тајне вечере и установљења Евхаристије." } },
+  { id: "friday", rel: -2, name: { de: "Großer Freitag", sr: "Велики петак" }, mean: { de: "Gedenken an Leiden, Kreuzigung und Grablegung Christi; strengster Fasttag des Jahres.", sr: "Спомен страдања, распећа и погребења Христовог; најстрожи посни дан у години." }, lesson: "bib-jn19" },
+  { id: "saturday", rel: -1, name: { de: "Großer Samstag", sr: "Велика субота" }, mean: { de: "Christus ruht im Grab und steigt in das Totenreich hinab.", sr: "Христос почива у гробу и силази у ад." }, lesson: "bib-ezek37" },
+  { id: "thomas", rel: 7, name: { de: "Thomassonntag (Antipascha)", sr: "Томина недеља" }, mean: { de: "Der Auferstandene erscheint Thomas (Joh 20,19–31).", sr: "Васкрсли се јавља Томи (Јн 20,19–31)." }, lesson: "bib-jn20" },
+  { id: "midpentecost", rel: 24, name: { de: "Mittpfingsten", sr: "Преполовљење Педесетнице" }, mean: { de: "Die Mitte zwischen Ostern und Pfingsten; Christus, der Lehrer und das Wasser des Lebens.", sr: "Средина између Васкрса и Педесетнице; Христос, Учитељ и вода живота." } },
+  { id: "allsaints", rel: 56, name: { de: "Sonntag Aller Heiligen", sr: "Недеља свих светих" }, mean: { de: "Gedenken an alle Heiligen; am Tag danach beginnt das Apostelfasten.", sr: "Спомен свих светих; сутрадан почиње Петровски пост." } },
+  { id: "theotokos-birth", m: 9, d: 8, great: true, name: { de: "Mariä Geburt", sr: "Рођење Пресвете Богородице (Мала Госпојина)" }, mean: { de: "Geburt der Gottesgebärerin, Tochter von Joachim und Anna.", sr: "Рођење Богородице, кћери Јоакима и Ане." } },
+  { id: "exaltation", m: 9, d: 14, great: true, name: { de: "Kreuzerhöhung", sr: "Воздвижење Часног Крста (Крстовдан)" }, mean: { de: "Verehrung des Kreuzes Christi, des Zeichens des Sieges über den Tod; Fasttag.", sr: "Поклоњење Крсту Христовом, знаку победе над смрћу; посни дан." } },
+  { id: "entry", m: 11, d: 21, great: true, name: { de: "Einführung Marias in den Tempel", sr: "Ваведење Пресвете Богородице" }, mean: { de: "Die junge Maria wird in den Tempel geführt und Gott geweiht.", sr: "Млада Марија бива уведена у храм и посвећена Богу." } },
+  { id: "nativity", m: 12, d: 25, great: true, name: { de: "Christi Geburt (Weihnachten)", sr: "Рођење Христово (Божић)" }, mean: { de: "Der Sohn Gottes wird in Bethlehem als Mensch geboren.", sr: "Син Божији рађа се као човек у Витлејему." }, lesson: "th-incarnation" },
+  { id: "theophany", m: 1, d: 6, great: true, name: { de: "Theophanie – Taufe Christi", sr: "Богојављење" }, mean: { de: "Bei der Taufe Christi im Jordan offenbart sich die Heilige Dreifaltigkeit; große Wasserweihe.", sr: "При Христовом крштењу у Јордану открива се Света Тројица; велико освећење воде." }, lesson: "bib-mk1" },
+  { id: "meeting", m: 2, d: 2, great: true, name: { de: "Darstellung des Herrn (Begegnung)", sr: "Сретење Господње" }, mean: { de: "Der greise Simeon empfängt das Christuskind im Tempel (Lk 2,22–40).", sr: "Старац Симеон прима Богомладенца у храму (Лк 2,22–40)." } },
+  { id: "annunciation", m: 3, d: 25, great: true, name: { de: "Verkündigung an die Gottesgebärerin", sr: "Благовести" }, mean: { de: "Der Erzengel Gabriel verkündet Maria die Geburt des Sohnes Gottes.", sr: "Архангел Гаврило благовести Марији рођење Сина Божијег." }, lesson: "bib-lk1" },
+  { id: "transfiguration", m: 8, d: 6, great: true, name: { de: "Verklärung des Herrn", sr: "Преображење Господње" }, mean: { de: "Christus zeigt auf dem Berg Tabor seine göttliche Herrlichkeit (Mt 17,1–9).", sr: "Христос на гори Тавору показује своју божанску славу (Мт 17,1–9)." }, lesson: "bib-elijah" },
+  { id: "dormition", m: 8, d: 15, great: true, name: { de: "Entschlafung der Gottesgebärerin", sr: "Успење Пресвете Богородице (Велика Госпојина)" }, mean: { de: "Gedenken an das Entschlafen der Gottesgebärerin und ihre Aufnahme in die Herrlichkeit ihres Sohnes.", sr: "Спомен уснућа Богородице и њеног пресељења у славу њеног Сина." } },
+  { id: "circumcision", m: 1, d: 1, name: { de: "Beschneidung des Herrn; hl. Basilius der Große", sr: "Обрезање Господње; Свети Василије Велики" }, mean: { de: "Achter Tag nach Christi Geburt; zugleich Gedenktag des hl. Basilius.", sr: "Осми дан после Рођења Христовог; уједно спомен светог Василија." } },
+  { id: "beheading", m: 8, d: 29, name: { de: "Enthauptung Johannes des Täufers", sr: "Усековање главе Светог Јована Крститеља" }, mean: { de: "Gedenken an das Martyrium des Täufers (Mk 6,17–29); Fasttag.", sr: "Спомен мучеништва Крститеља (Мк 6,17–29); посни дан." } },
+  { id: "protection", m: 10, d: 1, name: { de: "Schutz der Gottesgebärerin (Pokrov)", sr: "Покров Пресвете Богородице" }, mean: { de: "Gedenken an den Schutz der Gottesgebärerin über die Gläubigen.", sr: "Спомен заштите Богородице над вернима." } },
+  { id: "peter-paul", m: 6, d: 29, name: { de: "Hl. Apostel Petrus und Paulus", sr: "Свети апостоли Петар и Павле (Петровдан)" }, mean: { de: "Fest der beiden großen Apostel; Ende des Apostelfastens.", sr: "Празник два велика апостола; крај Петровског поста." }, lesson: "bib-acts9" },
+  { id: "elijah", m: 7, d: 20, name: { de: "Hl. Prophet Elija", sr: "Свети пророк Илија (Илиндан)" }, mean: { de: "Gedenken an den großen Propheten (3 Kön 18–19).", sr: "Спомен великог пророка (3 Цар 18–19)." }, lesson: "bib-elijah" },
+  { id: "maccabees", m: 8, d: 1, name: { de: "Hl. makkabäische Märtyrer", sr: "Свети мученици Макавеји" }, mean: { de: "Gedenken an die Märtyrer vor Christus (2 Makk 7); erster Tag des Entschlafungsfastens.", sr: "Спомен мученика пре Христа (2 Мак 7); први дан Госпојинског поста." }, lesson: "bib-macc7" },
+  { id: "nicholas", m: 12, d: 6, name: { de: "Hl. Nikolaus", sr: "Свети Никола (Никољдан)" }, mean: { de: "Gedenken an den hl. Nikolaus, Bischof von Myra; eine der häufigsten serbischen Slavas.", sr: "Спомен светог Николаја, архиепископа мирликијског; једна од најчешћих српских слава." } },
+  { id: "archangels", m: 11, d: 8, name: { de: "Synaxis des Erzengels Michael und aller Engel", sr: "Сабор Светог архангела Михаила (Аранђеловдан)" }, mean: { de: "Gedenken an die Erzengel und die himmlischen Mächte.", sr: "Спомен архангела и небеских сила." } },
+  { id: "george", m: 4, d: 23, name: { de: "Hl. Großmärtyrer Georg", sr: "Свети великомученик Георгије (Ђурђевдан)" }, mean: { de: "Gedenken an den heiligen Märtyrer Georg.", sr: "Спомен светог мученика Георгија." } },
+  { id: "john-theologian", m: 9, d: 26, name: { de: "Hl. Apostel Johannes der Theologe", sr: "Свети апостол и јеванђелист Јован Богослов" }, mean: { de: "Gedenken an das Entschlafen des Apostels und Evangelisten Johannes.", sr: "Спомен упокојења апостола и јеванђелисте Јована." }, lesson: "bib-jn1" }
+];
+
+/* Heilige und Kirchenväter dieser App mit ihrem kirchlichen Gedenkdatum (Monat/Tag). */
+const SAINT_DAYS = [
+  ["f-athanasius", 1, 18], ["f-athanasius", 5, 2], ["f-basil", 1, 1], ["f-basil", 1, 30], ["f-gregnaz", 1, 25], ["f-gregnaz", 1, 30],
+  ["f-gregnys", 1, 10], ["f-chrysostom", 11, 13], ["f-chrysostom", 1, 27], ["f-chrysostom", 1, 30], ["f-cyril", 1, 18], ["f-cyril", 6, 9],
+  ["f-maximus", 1, 21], ["f-maximus", 8, 13], ["f-damascus", 12, 4], ["f-ephrem", 1, 28], ["f-isaac", 1, 28],
+  ["s-paisios", 7, 12], ["s-porphyrios", 12, 2], ["s-sophrony", 7, 11], ["s-silouan", 9, 24], ["s-nektarios", 11, 9],
+  ["s-seraphim", 1, 2], ["s-seraphim", 7, 19], ["s-kronstadt", 12, 20], ["s-nikolaj", 3, 5], ["s-nikolaj", 4, 20],
+  ["s-sava", 1, 14], ["s-lazar", 6, 15], ["s-simeon", 2, 13], ["s-vasilije", 4, 29], ["s-justin", 6, 1],
+  ["s-maryegypt", 4, 1], ["s-luke", 5, 29]
 ];
 
 const CAL_FASTS = {
@@ -4781,43 +4987,77 @@ const CAL_FASTS = {
   none: { de: "Kein Fasttag", sr: "Није посни дан" }
 };
 
-/* Liefert alle Feste mit Datum für ein Jahr */
-function feastsOfYear(year) {
-  const P = orthodoxPascha(year);
-  return CAL_FEASTS.map(f => ({ ...f, t: f.rel != null ? addD(P, f.rel) : utcDay(year, f.m, f.d) })).sort((a, b) => a.t - b.t);
+/* Allgemeine, überlieferte Fastenregeln (vereinfacht). Die Praxis unterscheidet sich zwischen Ortskirchen, Klöstern und Gemeinden. */
+const CAL_FAST_RULES = {
+  lent: { de: "Strengste Fastenzeit: traditionell ohne Fleisch, Milchprodukte und Eier, meist auch ohne Fisch; nach dem Typikon an Wochentagen oft auch ohne Wein und Öl. Fisch ist traditionell an der Verkündigung und am Palmsonntag erlaubt.", sr: "Најстрожи пост: традиционално без меса, млечних производа и јаја, обично и без рибе; по Типику радним данима често и без вина и уља. Риба је традиционално дозвољена на Благовести и Цвети." },
+  apostles: { de: "Traditionell ohne Fleisch, Milchprodukte und Eier; Fisch ist an vielen Tagen erlaubt, meist nicht am Mittwoch und Freitag.", sr: "Традиционално без меса, млечних производа и јаја; риба је дозвољена многим данима, обично не средом и петком." },
+  dormition: { de: "Strenges Fasten wie in der Großen Fastenzeit; Fisch ist traditionell an der Verklärung des Herrn erlaubt.", sr: "Строг пост као у Великом посту; риба је традиционално дозвољена на Преображење." },
+  nativity: { de: "Traditionell ohne Fleisch, Milchprodukte und Eier; Fisch ist an bestimmten Tagen erlaubt, die letzten Tage vor Weihnachten sind strenger.", sr: "Традиционално без меса, млечних производа и јаја; риба је дозвољена одређеним данима, последњи дани пред Божић су строжи." },
+  single: { de: "Strenger Fasttag: traditionell ohne Fleisch, Milchprodukte, Eier und Fisch.", sr: "Строг посни дан: традиционално без меса, млечних производа, јаја и рибе." },
+  wedfri: { de: "Traditionell ohne Fleisch, Milchprodukte und Eier; je nach Überlieferung auch ohne Fisch, Wein und Öl.", sr: "Традиционално без меса, млечних производа и јаја; зависно од предања и без рибе, вина и уља." },
+  cheese: { de: "Kein Fleisch mehr; Milchprodukte, Eier und Fisch sind erlaubt – auch am Mittwoch und Freitag.", sr: "Више без меса; млечни производи, јаја и риба су дозвољени – и средом и петком." },
+  free: { de: "Fastenfreie Zeit: Auch am Mittwoch und Freitag wird nicht gefastet.", sr: "Мрсна седмица: ни средом ни петком се не пости." },
+  none: { de: "Heute ist kein besonderer Fasttag.", sr: "Данас није посебан посни дан." }
+};
+
+/* Liefert alle Feste mit bürgerlichem Datum für ein bürgerliches Jahr */
+function feastsOfYear(year, cal) {
+  const P = orthodoxPascha(year); const out = [];
+  CAL_FEASTS.forEach(f => {
+    if (f.rel != null) out.push({ ...f, t: addD(P, f.rel) });
+    else churchDatesInYear(year, f.m, f.d, cal).forEach(t => out.push({ ...f, t }));
+  });
+  return out.sort((a, b) => a.t - b.t);
 }
 
 /* Fastenstatus für einen Tag (t = UTC-Mitternacht). Vereinfachte, übliche Regel. */
-function fastInfo(t) {
+function fastInfo(t, cal) {
   const dt = new Date(t); const y = dt.getUTCFullYear(); const P = orthodoxPascha(y);
   const between = (a, b) => t >= a && t <= b;
-  const wd = dt.getUTCDay(); // 0 = Sonntag
-  // fastenfreie Zeiten
-  if (between(P, addD(P, 6))) return { kind: "free" };                       // Lichte Woche
-  if (between(utcDay(y, 1, 7), utcDay(y, 1, 17))) return { kind: "free" };   // Weihnachten bis vor Theophanie
-  if (between(addD(P, 50), addD(P, 56))) return { kind: "free" };            // Woche nach Pfingsten
-  if (between(addD(P, -69), addD(P, -64))) return { kind: "free" };          // Woche nach dem Sonntag des Zöllners
-  // Fastenzeiten
+  /* liegt t in einem kirchlichen Zeitraum (m1/d1 bis m2/d2, ggf. über den Jahreswechsel)? */
+  const inChurch = (m1, d1, m2, d2) => [y - 1, y].some(ny => {
+    const a = churchDate(ny, m1, d1, cal); const b = churchDate(m2 < m1 ? ny + 1 : ny, m2, d2, cal);
+    return between(a, b);
+  });
+  const isChurchDay = (m, d) => churchDatesInYear(y, m, d, cal).includes(t);
+  const wd = dt.getUTCDay();
+  if (between(P, addD(P, 6))) return { kind: "free" };                 // Lichte Woche
+  if (inChurch(12, 25, 1, 4)) return { kind: "free" };                // Weihnachten bis vor Theophanie
+  if (between(addD(P, 50), addD(P, 56))) return { kind: "free" };      // Woche nach Pfingsten
+  if (between(addD(P, -69), addD(P, -64))) return { kind: "free" };    // Woche nach dem Sonntag des Zöllners
   if (between(addD(P, -48), addD(P, -1))) return { kind: "lent" };
   if (between(addD(P, -55), addD(P, -49))) return { kind: "cheese" };
-  const apStart = addD(P, 57), apEnd = utcDay(y, 7, 11);
-  if (apStart <= apEnd && between(apStart, apEnd)) return { kind: "apostles" };
-  if (between(utcDay(y, 8, 14), utcDay(y, 8, 27))) return { kind: "dormition" };
-  if (t >= utcDay(y, 11, 28) || t <= utcDay(y, 1, 6)) return { kind: "nativity" };
-  if (t === utcDay(y, 1, 18) || t === utcDay(y, 9, 11) || t === utcDay(y, 9, 27)) return { kind: "single" };
+  const apStart = addD(P, 57); const apEnd = churchDatesInYear(y, 6, 28, cal)[0];
+  if (apEnd != null && apStart <= apEnd && between(apStart, apEnd)) return { kind: "apostles" };
+  if (inChurch(8, 1, 8, 14)) return { kind: "dormition" };
+  if (inChurch(11, 15, 12, 24)) return { kind: "nativity" };
+  if (isChurchDay(1, 5) || isChurchDay(8, 29) || isChurchDay(9, 14)) return { kind: "single" };
   if (wd === 3 || wd === 5) return { kind: "wedfri" };
   return { kind: "none" };
 }
 
-/* Feste an einem Tag und nächstes großes Fest ab einem Tag */
-function feastsOn(t) {
+function feastsOn(t, cal) { return feastsOfYear(new Date(t).getUTCFullYear(), cal).filter(f => f.t === t); }
+function nextGreatFeast(t, cal) {
   const y = new Date(t).getUTCFullYear();
-  return feastsOfYear(y).filter(f => f.t === t);
+  return feastsOfYear(y, cal).concat(feastsOfYear(y + 1, cal)).filter(f => f.great && f.t > t)[0];
 }
-function nextGreatFeast(t) {
-  const y = new Date(t).getUTCFullYear();
-  const list = feastsOfYear(y).concat(feastsOfYear(y + 1)).filter(f => f.great && f.t > t);
-  return list[0];
+/* IDs der Heiligen dieser App, deren Gedenktag auf t fällt */
+function saintsOn(t, cal) {
+  const y = new Date(t).getUTCFullYear(); const ids = [];
+  SAINT_DAYS.forEach(([id, m, d]) => { if (churchDatesInYear(y, m, d, cal).includes(t) && !ids.includes(id)) ids.push(id); });
+  return ids;
+}
+/* Zeiträume der Fastenzeiten eines Jahres (für die Übersicht) */
+function fastPeriods(y, cal) {
+  const P = orthodoxPascha(y);
+  const ap1 = addD(P, 57), ap2 = churchDatesInYear(y, 6, 28, cal)[0];
+  return {
+    lent: [addD(P, -48), addD(P, -1)],
+    apostles: ap2 != null && ap1 <= ap2 ? [ap1, ap2] : null,
+    dormition: [churchDate(y, 8, 1, cal), churchDate(y, 8, 14, cal)],
+    nativity: [churchDate(y, 11, 15, cal), churchDate(y, 12, 24, cal)],
+    bright: [P, addD(P, 6)], trinity: [addD(P, 50), addD(P, 56)]
+  };
 }
 
 
@@ -4833,7 +5073,7 @@ function nextGreatFeast(t) {
     lang: null, theme: "dark", font: 1, onboarded: false,
     done: {}, quiz: {}, cards: {}, newToday: { date: "", n: 0 },
     newPerDay: 10, lessonsPerWeek: 3, activity: [], verses: [],
-    notes: [], enc: null
+    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian"
   };
   function load() {
     try {
@@ -4882,6 +5122,28 @@ function nextGreatFeast(t) {
     if (!set.has(d)) d = addDays(d, -1);
     while (set.has(d)) { n++; d = addDays(d, -1); }
     return n;
+  }
+  function weekDays() {
+    const ws = weekStart(today()); const set = new Set(S.activity.concat(S.prayed || []));
+    return Array.from({ length: 7 }, (_, i) => { const d = addDays(ws, i); return { d, on: set.has(d), isToday: d === today() }; });
+  }
+  function weekCard() {
+    const days = weekDays(); const n = days.filter(x => x.on).length;
+    const labels = days.map(x => { try { return new Date(x.d + "T12:00:00").toLocaleDateString(locale(), { weekday: "narrow" }); } catch (e) { return ""; } });
+    const prayed = (S.prayed || []).includes(today());
+    return `<div class="card"><div class="eyebrow">${esc(t("weekTitle"))}</div>
+      <div class="weekdots">${days.map((x, i) => `<span class="wd ${x.on ? "on" : ""} ${x.isToday ? "today" : ""}"><i></i><small>${esc(labels[i])}</small></span>`).join("")}</div>
+      <p class="small" style="margin:8px 0 4px">${esc(t("weekText").replace("{n}", n))}</p>
+      <p class="small muted" style="margin:0 0 10px">${esc(t("weekGentle"))}</p>
+      ${prayed ? `<div class="row"><span class="grow small">✓ ${esc(t("prayedDone"))}</span><button class="iconbtn" id="prayedbtn">${esc(t("prayedUndo"))}</button></div>`
+        : `<button class="btn ghost block" id="prayedbtn">☩ ${esc(t("prayedToday"))}</button>`}</div>`;
+  }
+  function impulse() {
+    const items = []; Object.values(ALL_LESSONS).forEach(l => { if (l.practice) items.push(l); });
+    const d = new Date(); const doy = Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - Date.UTC(d.getFullYear(), 0, 0)) / 86400000);
+    const l = items[doy % items.length];
+    return `<div class="card"><div class="eyebrow">${esc(t("impulseTitle"))}</div><p style="margin-bottom:6px">${E(l.practice)}</p>
+      <a class="small" href="#lesson-${l.id}">${esc(t("impulseFrom"))}: ${E(l.title)} ›</a></div>`;
   }
   function lessonsThisWeek() { const ws = weekStart(today()); return Object.values(S.done).filter(x => x >= ws).length; }
 
@@ -4946,7 +5208,7 @@ function nextGreatFeast(t) {
     if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed") return "theology";
     if (r.startsWith("person-") || r === "saints") return "saints";
     if (r === "cards" || r === "review") return "cards";
-    if (r === "home" || r === "ask" || r === "calendar" || r === "prayers") return "home";
+    if (r === "home" || r === "ask" || r === "calendar" || r === "prayers" || r.startsWith("prayercat-")) return "home";
     return "more";
   }
   function parentOf(r) {
@@ -4959,6 +5221,7 @@ function nextGreatFeast(t) {
     if (r === "ask") return "home";
     if (["books", "progress", "notes", "glossary", "prefs"].includes(r)) return "more";
     if (r === "calendar" || r === "prayers") return "home";
+    if (r.startsWith("prayercat-")) return "prayers";
     return null;
   }
 
@@ -5015,6 +5278,7 @@ function nextGreatFeast(t) {
       else if (r === "calendar") html = viewCalendar();
       else if (r.startsWith("book-")) html = viewBook(r.slice(5));
       else if (r === "prayers") html = viewPrayers();
+      else if (r.startsWith("prayercat-")) html = viewPrayerCat(r.slice(10));
       else html = `<div class="card"><p>${esc(t("notFound"))}</p><a class="btn" href="#home">${esc(t("home"))}</a></div>`;
       app.innerHTML = shell(html, r);
       bindCommon();
@@ -5087,20 +5351,20 @@ function nextGreatFeast(t) {
   function viewHome() {
     const nid = nextLesson(); const nl = nid ? ALL_LESSONS[nid] : null;
     const wk = lessonsThisWeek(); const goal = S.lessonsPerWeek;
-    const st = streak();
+    const hr = new Date().getHours(); const greet = t(hr < 11 ? "greetMorning" : hr < 18 ? "greetDay" : "greetEvening");
     return `
+      <h1 style="margin-bottom:12px">${esc(greet)}</h1>
       <div class="card hero">
         <div class="eyebrow">${esc(t("todayLesson"))}</div>
         ${nl ? `<h2>${E(nl.title)}</h2>${nl.ref ? `<p class="muted">${E(nl.ref)}</p>` : ""}
           <a class="btn block" href="#lesson-${nl.id}">${esc(t("continue"))} ›</a>` : `<p>${esc(t("allDone"))}</p>`}
       </div>
       ${calCard()}
-      <div class="grid2">
-        <div class="card stat"><b>${st}</b><span class="small muted">${esc(t("streak"))} · ${esc(st === 1 ? t("day") : t("days"))}</span></div>
-        <div class="card stat"><b>${wk}/${goal}</b><span class="small muted">${esc(t("weekGoal"))}</span>
-          <div class="progressbar" style="margin-top:8px"><i style="width:${Math.min(100, Math.round(wk / goal * 100))}%"></i></div></div>
-      </div>
-      <a class="item" href="#prayers"><span class="grow"><span class="t">${esc(t("prayersTitle"))}</span><span class="s">${esc(t("prMorning"))} · ${esc(t("prEvening"))} · ${esc(t("prOther"))}</span></span><span class="chev">›</span></a>
+      ${weekCard()}
+      <div class="card"><div class="row"><span class="grow"><span class="eyebrow">${esc(t("weekGoal"))}</span><br><b>${wk}/${goal}</b> <span class="small muted">${esc(t("lessonsThisWeek"))}</span></span></div>
+        <div class="progressbar" style="margin-top:8px"><i style="width:${Math.min(100, Math.round(wk / goal * 100))}%"></i></div></div>
+      ${impulse()}
+      <a class="item" href="#prayers"><span class="grow"><span class="t">${esc(t("prayersTitle"))}</span><span class="s">${esc(t("prMorning"))} · ${esc(t("prEvening"))} · ${esc(t("prTopics"))} · ${esc(t("prMine"))}</span></span><span class="chev">›</span></a>
       <a class="item" href="#review"><span class="grow"><span class="t">${esc(t("cardsDue"))}: ${dueCount()}</span><span class="s">${esc(t("reviewNow"))}</span></span><span class="chev">›</span></a>
       <a class="item" href="#ask"><span class="grow"><span class="t">${esc(t("askTitle"))}</span><span class="s">${esc(t("askHint"))}</span></span><span class="chev">›</span></a>
       <div class="divider">${CROSS}</div>
@@ -5119,21 +5383,58 @@ function nextGreatFeast(t) {
 
   /* ---------- Gebete ---------- */
   let prayerTab = (new Date().getHours() >= 15) ? "evening" : "morning";
+  function prayerCard(id, label) {
+    if (id === "creed") return `<div class="card"><h3>${esc(t("creed"))}</h3><p class="creed">${E(CREED)}</p></div>`;
+    if (id === "ps50") return `<a class="item" href="#lesson-bib-ps50"><span class="grow"><span class="t">${esc(t("prPs50"))}</span></span><span class="chev">›</span></a>`;
+    const p = PRAYER_TEXTS[id]; if (!p) return "";
+    const kind = p.kind || "trad";
+    const kindBadge = `<span class="badge ${kind === "trad" ? "tag-dogma" : kind === "bible" ? "tag-history" : "tag-counsel"}">${esc(t(kind === "trad" ? "prKindTrad" : kind === "bible" ? "prKindBible" : "prKindSuggest"))}</span>`;
+    const fav = S.prayerFavs.includes(id);
+    return `<div class="card">${label ? `<div class="eyebrow">${E(label)}</div>` : ""}
+      <div class="row"><h3 class="grow" style="margin:0">${E(p.title)}</h3><button class="star ${fav ? "on" : ""}" data-pfav="${id}" aria-label="${esc(t("prSaveFav"))}">${fav ? "★" : "☆"}</button></div>
+      ${kindBadge}${p.repeat ? `<span class="badge tag-history">${esc(t("prTimes").replace("{n}", p.repeat))}</span>` : ""}
+      <p class="creed">${E(p.text)}</p>${p.note ? `<p class="small muted">${E(p.note)}</p>` : ""}</div>`;
+  }
+  function prayerTabs() {
+    const tabs = [["morning", "prMorning"], ["evening", "prEvening"], ["topics", "prTopics"], ["mine", "prMine"]];
+    return `<div class="seg" style="margin-bottom:14px">${tabs.map(([id, k]) => `<button data-ptab="${id}" class="${prayerTab === id ? "on" : ""}">${esc(t(k))}</button>`).join("")}</div>`;
+  }
   function viewPrayers() {
-    const tabs = [["morning", "prMorning"], ["evening", "prEvening"], ["other", "prOther"]];
-    const card = id => {
-      if (id === "creed") return `<div class="card"><h3>${esc(t("creed"))}</h3><p class="creed">${E(CREED)}</p></div>`;
-      if (id === "ps50") return `<a class="item" href="#lesson-bib-ps50"><span class="grow"><span class="t">${esc(t("prPs50"))}</span></span><span class="chev">›</span></a>`;
-      const p = PRAYER_TEXTS[id];
-      return `<div class="card"><h3>${E(p.title)}</h3>${p.repeat ? `<span class="badge tag-history">${esc(t("prTimes").replace("{n}", p.repeat))}</span>` : ""}
-        <p class="creed">${E(p.text)}</p>${p.note ? `<p class="small muted">${E(p.note)}</p>` : ""}</div>`;
-    };
-    return `<h1>${esc(t("prayersTitle"))}</h1><p class="muted small">${esc(t("prayersIntro"))}</p>
-      <div class="seg" style="margin-bottom:14px">${tabs.map(([id, k]) => `<button data-ptab="${id}" class="${prayerTab === id ? "on" : ""}">${esc(t(k))}</button>`).join("")}</div>
-      ${PRAYER_RULES[prayerTab].map(card).join("")}
+    let body = "";
+    if (prayerTab === "morning" || prayerTab === "evening") body = PRAYER_RULES[prayerTab].map(id => prayerCard(id)).join("");
+    else if (prayerTab === "topics") body = `<p class="small muted">${esc(t("prTopicsIntro"))}</p><ul class="list">${PRAYER_CATS.map(c => `<li><a class="item" href="#prayercat-${c.id}"><span class="grow"><span class="t">${E(c.title)}</span><span class="s">${c.items.length} ${esc(t("prayersTitle"))}</span></span><span class="chev">›</span></a></li>`).join("")}</ul>`;
+    else {
+      const favs = S.prayerFavs.filter(id => PRAYER_TEXTS[id]);
+      const ints = S.intentions.slice().sort((x, y) => (x.done === y.done ? y.date.localeCompare(x.date) : x.done ? 1 : -1));
+      body = `<h2>${esc(t("prIntentions"))}</h2><p class="small muted">${esc(t("prIntentHint"))}</p>
+        <div class="card"><form id="intentform"><label for="intent" class="sr-only">${esc(t("prIntentions"))}</label>
+          <input type="text" id="intent" placeholder="${esc(t("prIntentPlaceholder"))}" maxlength="200">
+          <div class="btnrow"><button class="btn" type="submit">＋ ${esc(t("prIntentAdd"))}</button></div></form></div>
+        ${ints.length ? `<ul class="list">${ints.map(i => `<li class="item" style="cursor:default;${i.done ? "opacity:.6" : ""}"><span class="grow"><span class="t" style="${i.done ? "text-decoration:line-through" : ""}">${esc(i.text)}</span><span class="s">${esc(i.date)}</span></span>
+            <button class="iconbtn" data-idone="${i.id}">${esc(i.done ? t("prIntentReopen") : t("prIntentDone"))}</button><button class="iconbtn" data-idel="${i.id}" aria-label="${esc(t("delete"))}">✕</button></li>`).join("")}</ul>` : `<p class="muted">${esc(t("prNoIntent"))}</p>`}
+        <h2>${esc(t("prFavs"))}</h2>${favs.length ? favs.map(id => prayerCard(id)).join("") : `<p class="muted">${esc(t("prNoFavs"))}</p>`}`;
+    }
+    return `<h1>${esc(t("prayersTitle"))}</h1><p class="muted small">${esc(t("prayersIntro"))}</p>${prayerTabs()}${body}
       <p class="small muted">${esc(lang() === "de" ? t("prTransDe") : t("prTransSr"))}</p>`;
   }
-  function bindPrayers() { app.querySelectorAll("[data-ptab]").forEach(b => b.onclick = () => { prayerTab = b.getAttribute("data-ptab"); render(); window.scrollTo(0, 0); }); }
+  function viewPrayerCat(cid) {
+    const c = PRAYER_CATS.find(x => x.id === cid); if (!c) return `<p>${esc(t("notFound"))}</p>`;
+    return `<div class="eyebrow">${esc(t("prayersTitle"))}</div><h1>${E(c.title)}</h1>
+      ${c.items.map(it => Array.isArray(it) ? prayerCard(it[0], { de: it[1], sr: it[2] }) : prayerCard(it)).join("")}
+      <p class="small muted">${esc(lang() === "de" ? t("prTransDe") : t("prTransSr"))}</p>`;
+  }
+  function bindPrayers() {
+    app.querySelectorAll("[data-ptab]").forEach(b => b.onclick = () => { prayerTab = b.getAttribute("data-ptab"); render(); window.scrollTo(0, 0); });
+    app.querySelectorAll("[data-pfav]").forEach(b => b.onclick = () => {
+      const id = b.getAttribute("data-pfav"); const i = S.prayerFavs.indexOf(id);
+      if (i >= 0) { S.prayerFavs.splice(i, 1); toast(t("prRemovedFav")); } else { S.prayerFavs.push(id); toast(t("prSavedFav")); }
+      save(); render();
+    });
+    const f = document.getElementById("intentform");
+    if (f) f.onsubmit = e => { e.preventDefault(); const v = document.getElementById("intent").value.trim(); if (!v) return; S.intentions.push({ id: "i" + Date.now().toString(36), text: v.slice(0, 200), date: today(), done: false }); save(); render(); };
+    app.querySelectorAll("[data-idone]").forEach(b => b.onclick = () => { const it = S.intentions.find(x => x.id === b.getAttribute("data-idone")); if (it) { it.done = !it.done; save(); render(); } });
+    app.querySelectorAll("[data-idel]").forEach(b => b.onclick = () => confirmBox(t("confirmDelete"), () => { S.intentions = S.intentions.filter(x => x.id !== b.getAttribute("data-idel")); save(); render(); }));
+  }
 
   /* ---------- Kirchenkalender ---------- */
   function todayUTC() { const d = new Date(); return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()); }
@@ -5144,44 +5445,57 @@ function nextGreatFeast(t) {
   }
   function inDays(ts) { const n = Math.round((ts - todayUTC()) / 86400000); return n === 1 ? t("calTomorrow") : t("calInDays").replace("{n}", n); }
   function fastBadge(k) { const tag = { none: "", free: "tag-counsel", wedfri: "tag-uncertain" }[k]; return `<span class="badge ${tag === undefined ? "tag-uncertain" : tag}">${E(CAL_FASTS[k])}</span>`; }
+  function cal() { return S.calendar === "revised" ? "revised" : "julian"; }
+  function feastLine(f) {
+    const link = f.lesson && ALL_LESSONS[f.lesson] ? `<a class="small" href="#lesson-${f.lesson}">${esc(t("calToLesson"))} ›</a>` : (f.saint && PEOPLE[f.saint] ? `<a class="small" href="#person-${f.saint}">${E(PEOPLE[f.saint].name)} ›</a>` : "");
+    return `<h3 style="margin-bottom:4px">${E(f.name)}</h3>${f.mean ? `<p class="small" style="margin-bottom:4px">${E(f.mean)}</p>` : ""}${link}`;
+  }
   function calCard() {
-    const td = todayUTC(); const fi = fastInfo(td); const fe = feastsOn(td); const nx = nextGreatFeast(td);
+    const td = todayUTC(); const fi = fastInfo(td, cal()); const fe = feastsOn(td, cal()); const nx = nextGreatFeast(td, cal()); const sts = saintsOn(td, cal());
     return `<a class="card" href="#calendar" style="display:block;text-decoration:none;color:inherit">
       <div class="eyebrow">${esc(t("calToday"))} · ${esc(fmtDate(td, true))}</div>
-      ${fe.map(f => `<p><b>${E(f.name)}</b></p>`).join("")}
+      ${fe.map(f => `<p style="margin-bottom:4px"><b>${E(f.name)}</b></p>`).join("")}
+      ${sts.length ? `<p class="small" style="margin-bottom:6px">☩ ${sts.map(id => E(PEOPLE[id].name)).join(" · ")}</p>` : ""}
       ${fastBadge(fi.kind)}
       ${nx ? `<p class="small muted" style="margin:6px 0 0">${esc(t("calNextFeast"))}: <b>${E(nx.name)}</b> – ${esc(fmtDate(nx.t))} (${esc(inDays(nx.t))})</p>` : ""}
     </a>`;
   }
   function viewCalendar() {
-    const td = todayUTC(); const y = new Date(td).getUTCFullYear();
-    const fi = fastInfo(td); const fe = feastsOn(td);
-    const upcoming = feastsOfYear(y).concat(feastsOfYear(y + 1)).filter(f => f.t >= td && f.t < td + 366 * 86400000);
-    const P = orthodoxPascha(y), P2 = orthodoxPascha(y + 1);
-    const D = 86400000; const ap1 = P + 57 * D, ap2 = Date.UTC(y, 6, 11);
-    const range = (a, b) => `${esc(fmtDate(a))} – ${esc(fmtDate(b))}`;
-    return `<h1>${esc(t("calTitle"))}</h1><p class="muted small">${esc(t("calIntro"))}</p>
+    const td = todayUTC(); const y = new Date(td).getUTCFullYear(); const c = cal();
+    const fi = fastInfo(td, c); const fe = feastsOn(td, c); const sts = saintsOn(td, c);
+    const upcoming = feastsOfYear(y, c).concat(feastsOfYear(y + 1, c)).filter(f => f.t >= td && f.t < td + 366 * 86400000);
+    const P = orthodoxPascha(y), P2 = orthodoxPascha(y + 1); const fp = fastPeriods(y, c);
+    const range = r => `${esc(fmtDate(r[0]))} – ${esc(fmtDate(r[1]))}`;
+    const seg = `<div class="seg" style="margin:8px 0 14px">${[["julian", "calJulian"], ["revised", "calRevised"]].map(([v, k]) => `<button data-cal="${v}" class="${c === v ? "on" : ""}">${esc(t(k))}</button>`).join("")}</div>`;
+    return `<h1>${esc(t("calTitle"))}</h1><p class="muted small">${esc(c === "revised" ? t("calIntroRevised") : t("calIntro"))}</p>${seg}
       <div class="card hero"><div class="eyebrow">${esc(t("calToday"))} · ${esc(fmtDate(td, true))}</div>
-        ${fe.map(f => `<h3>${E(f.name)}</h3>`).join("")}${fastBadge(fi.kind)}
-        <p class="small muted" style="margin-top:8px">${esc(t("calFastNote"))}</p></div>
+        ${fe.map(feastLine).join("<div style='height:10px'></div>")}
+        <div style="margin-top:10px">${fastBadge(fi.kind)}</div>
+        <p class="small" style="margin:6px 0 0"><b>${esc(t("calFastRule"))}:</b> ${E(CAL_FAST_RULES[fi.kind])}</p>
+        <p class="small muted" style="margin-top:6px">${esc(t("calFastNote"))}</p></div>
+      <div class="card"><h3>${esc(t("calSaintsToday"))}</h3>
+        ${sts.length ? `<ul class="list">${sts.map(id => `<li><a class="item" href="#person-${id}"><span class="grow"><span class="t">${E(PEOPLE[id].name)}</span><span class="s">${E(PEOPLE[id].lived)}</span></span><span class="chev">›</span></a></li>`).join("")}</ul>` : `<p class="small muted">${esc(t("calNoSaintsApp"))}</p>`}
+        ${LINKS.svProlog ? `<p class="small"><a href="${esc(LINKS.svProlog.url)}" target="_blank" rel="noopener">${E(LINKS.svProlog.label)} ↗</a></p>` : ""}
+        <p class="small muted">${esc(t("calReadingsNote"))}</p></div>
       <div class="grid2">
         <div class="card stat"><b style="font-size:1.2em">${esc(fmtDate(P))}</b><span class="small muted">${esc(t("calPascha").replace("{y}", y))}</span></div>
         <div class="card stat"><b style="font-size:1.2em">${esc(fmtDate(P2))}</b><span class="small muted">${esc(t("calPascha").replace("{y}", y + 1))}</span></div>
       </div>
       <h2>${esc(t("calUpcoming"))}</h2>
-      <ul class="list">${upcoming.map(f => `<li class="item" style="cursor:default"><span class="grow"><span class="t">${E(f.name)}</span><span class="s">${esc(fmtDate(f.t, true))} · ${esc(f.t === td ? t("calToday") : inDays(f.t))}</span></span>${f.great ? `<span class="badge tag-dogma">${esc(t("calGreat"))}</span>` : ""}</li>`).join("")}</ul>
+      <ul class="list">${upcoming.map(f => `<li class="item" style="cursor:default;align-items:flex-start"><span class="grow"><span class="t">${E(f.name)}</span><span class="s">${esc(fmtDate(f.t, true))} · ${esc(f.t === td ? t("calToday") : inDays(f.t))}</span>${f.mean ? `<span class="s">${E(f.mean)}</span>` : ""}</span>${f.great ? `<span class="badge tag-dogma">${esc(t("calGreat"))}</span>` : ""}</li>`).join("")}</ul>
       <h2>${esc(t("calFastPeriods").replace("{y}", y))}</h2>
       <div class="card">
-        <div class="refline"><b>${E(CAL_FASTS.lent)}</b><span class="grow">${range(P - 48 * D, P - D)}</span></div>
-        <div class="refline"><b>${E(CAL_FASTS.apostles)}</b><span class="grow">${ap1 <= ap2 ? range(ap1, ap2) : esc(t("calApostlesNone"))}</span></div>
-        <div class="refline"><b>${E(CAL_FASTS.dormition)}</b><span class="grow">${range(Date.UTC(y, 7, 14), Date.UTC(y, 7, 27))}</span></div>
-        <div class="refline"><b>${E(CAL_FASTS.nativity)}</b><span class="grow">${range(Date.UTC(y, 10, 28), Date.UTC(y + 1, 0, 6))}</span></div>
-        <div class="refline"><b>${E(CAL_FASTS.wedfri)}</b><span class="grow">${E(CAL_FASTS.free)}: ${range(P, P + 6 * D)}; ${range(P + 50 * D, P + 56 * D)}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.lent)}</b><span class="grow">${range(fp.lent)}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.apostles)}</b><span class="grow">${fp.apostles ? range(fp.apostles) : esc(t("calApostlesNone"))}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.dormition)}</b><span class="grow">${range(fp.dormition)}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.nativity)}</b><span class="grow">${range(fp.nativity)}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.wedfri)}</b><span class="grow">${E(CAL_FASTS.free)}: ${range(fp.bright)}; ${range(fp.trinity)}</span></div>
         <p class="small muted" style="margin-top:8px">${esc(t("calFastNote"))}</p>
       </div>
       <a class="item" href="#lesson-li-fasting"><span class="grow"><span class="t">${E(ALL_LESSONS["li-fasting"].title)}</span></span><span class="chev">›</span></a>
-      <a class="item" href="#lesson-li-feasts"><span class="grow"><span class="t">${E(ALL_LESSONS["li-feasts"].title)}</span></span><span class="chev">›</span></a>`;
+      <a class="item" href="#lesson-li-calendar"><span class="grow"><span class="t">${E(ALL_LESSONS["li-calendar"].title)}</span></span><span class="chev">›</span></a>`;
   }
+  function bindCalendar() { app.querySelectorAll("[data-cal]").forEach(b => b.onclick = () => { S.calendar = b.getAttribute("data-cal"); save(); render(); }); }
 
   /* ---------- Bibel ---------- */
   function viewBible() {
@@ -5495,7 +5809,7 @@ function nextGreatFeast(t) {
         <div class="card stat"><b>${done}/${total}</b><span class="small muted">${esc(t("lessonsDone"))}</span></div>
         <div class="card stat"><b>${learned}/${CARDS.length}</b><span class="small muted">${esc(t("cardsLearned"))}</span></div>
         <div class="card stat"><b>${avg}%</b><span class="small muted">${esc(t("quizAvg"))}</span></div>
-        <div class="card stat"><b>${streak()}</b><span class="small muted">${esc(t("streak"))}</span></div>
+        <div class="card stat"><b>${weekDays().filter(x => x.on).length}/7</b><span class="small muted">${esc(t("weekTitle"))}</span></div>
       </div>
       <div class="card"><h3>${esc(t("lessonsThisWeek"))}: ${lessonsThisWeek()} / ${S.lessonsPerWeek}</h3>
         <div class="progressbar"><i style="width:${Math.min(100, Math.round(lessonsThisWeek() / S.lessonsPerWeek * 100))}%"></i></div></div>
@@ -5617,11 +5931,16 @@ function nextGreatFeast(t) {
   }
   function viewAsk() {
     const res = lastQuery ? runSearch(lastQuery) : null;
+    const nq = lastQuery ? norm(lastQuery) : "";
+    const crisis = /suizid|selbstmord|umbringen|nicht mehr leben|samoubist|ubiti se|ubijem se/.test(nq);
+    const priest = /beicht|sunde|priester|geistlich|ispovest|ispoved|greh|svestenik|duhovnik|pricest/.test(nq);
     return `<h1>${esc(t("askTitle"))}</h1><p class="muted">${esc(t("askHint"))}</p>
       <div class="card"><form id="askform"><label for="q" class="sr-only">${esc(t("search"))}</label>
         <input type="search" id="q" placeholder="${esc(t("askPlaceholder"))}" value="${esc(lastQuery)}" enterkeyhint="search">
         <div class="btnrow"><button class="btn" type="submit">${esc(t("search"))}</button></div></form>
         <p class="small muted" style="margin-top:10px">${esc(t("askNotAi"))}</p></div>
+      ${crisis ? `<div class="banner" role="alert">${esc(t("askCrisis"))}</div>` : ""}
+      ${priest ? `<div class="card"><p class="small" style="margin:0">☩ ${esc(t("askPriest"))}</p></div>` : ""}
       ${res ? (res.length ? `<h3>${esc(t("results"))}</h3><ul class="list">${res.map(e => `<li><a class="item" href="${e.href}"><span class="grow"><span class="t">${E(e.title)}</span><span class="s">${E(e.text)}</span></span><span class="chev">›</span></a></li>`).join("")}</ul>`
         : `<div class="card"><p>${esc(t("askNoResult"))}</p></div>`) + `<button class="btn ghost block" data-newnote="${esc(lastQuery)}">✎ ${esc(t("askSaveNote"))}</button>` : ""}`;
   }
@@ -5643,6 +5962,7 @@ function nextGreatFeast(t) {
     const seg = (name, opts, cur) => `<div class="seg" data-seg="${name}">${opts.map(([v, label]) => `<button data-v="${v}" class="${String(cur) === String(v) ? "on" : ""}">${esc(label)}</button>`).join("")}</div>`;
     return `<h1>${esc(t("settingsTitle"))}</h1>
       <div class="card"><h3>${esc(t("sLanguage"))}</h3>${seg("lang", [["de", "Deutsch"], ["sr-cyr", "Ћирилица"], ["sr-lat", "Latinica"]], lang())}</div>
+      <div class="card"><h3>${esc(t("calSetting"))}</h3>${seg("calendar", [["julian", t("calJulian")], ["revised", t("calRevised")]], cal())}<p class="small muted" style="margin-top:8px">${esc(t("calSettingHelp"))}</p></div>
       <div class="card"><h3>${esc(t("sTheme"))}</h3>${seg("theme", [["dark", t("themeDark")], ["light", t("themeLight")]], S.theme)}
         <h3 style="margin-top:14px">${esc(t("sFont"))}</h3>${seg("font", [["0.9", "A−"], ["1", "A"], ["1.15", "A+"], ["1.3", "A++"]], S.font)}</div>
       <div class="card"><h3>${esc(t("sPace"))}</h3><label>${esc(t("sCardsPerDay"))}</label>${seg("newPerDay", [[5, "5"], [10, "10"], [20, "20"], [40, "40"]], S.newPerDay)}
@@ -5710,7 +6030,8 @@ function nextGreatFeast(t) {
   function bindLesson(r) { const b = document.getElementById("donebtn"); if (b) b.onclick = () => toggleDone(r.slice(7)); }
   function bindBooks() { app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { bookCat = b.getAttribute("data-cat"); render(); }); }
 
-  const BINDERS = { prayers: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks };
+  function bindHome() { const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
+  const BINDERS = { home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };
