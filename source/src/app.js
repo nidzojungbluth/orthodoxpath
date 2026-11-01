@@ -1,0 +1,1155 @@
+/* OrthodoxPath – Anwendungslogik. Keine externen Abhängigkeiten, keine Netzwerkzugriffe. */
+(function () {
+  "use strict";
+
+  /* ---------- Speicher ---------- */
+  const KEY = "orthodoxpath_v1";
+  let storageOk = true;
+  const DEFAULT = {
+    lang: null, theme: "dark", font: 1, onboarded: false,
+    done: {}, quiz: {}, cards: {}, newToday: { date: "", n: 0 },
+    newPerDay: 10, lessonsPerWeek: 3, activity: [], verses: [],
+    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null
+  };
+  function load() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (!raw) return JSON.parse(JSON.stringify(DEFAULT));
+      return Object.assign(JSON.parse(JSON.stringify(DEFAULT)), JSON.parse(raw));
+    } catch (e) { storageOk = false; return JSON.parse(JSON.stringify(DEFAULT)); }
+  }
+  let S = load();
+  let unlockedNotes = null; // entschlüsselte Notizen im Arbeitsspeicher
+  let encKey = null;
+  function save() {
+    try {
+      const copy = Object.assign({}, S);
+      if (S.enc) copy.notes = []; // Klartext nie speichern, wenn verschlüsselt
+      localStorage.setItem(KEY, JSON.stringify(copy));
+    } catch (e) { storageOk = false; }
+  }
+
+  /* ---------- Sprache ---------- */
+  function lang() { return S.lang || "de"; }
+  function isSr() { return lang() !== "de"; }
+  function L(o) {
+    if (o == null) return "";
+    if (typeof o === "string") return o;
+    if (lang() === "de") return o.de || "";
+    const s = o.sr || "";
+    return lang() === "sr-lat" ? translit(s) : s;
+  }
+  function t(k) {
+    const base = lang() === "de" ? UI.de : UI.sr;
+    const v = base[k];
+    if (v == null) { console.warn("missing ui key", k); return k; }
+    return lang() === "sr-lat" ? translit(v) : v;
+  }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+  function E(o) { return esc(L(o)); }
+
+  /* ---------- Datum ---------- */
+  function today(d) { d = d || new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function addDays(iso, n) { const d = new Date(iso + "T12:00:00"); d.setDate(d.getDate() + n); return today(d); }
+  function weekStart(iso) { const d = new Date(iso + "T12:00:00"); const wd = (d.getDay() + 6) % 7; d.setDate(d.getDate() - wd); return today(d); }
+  function markActivity() { const d = today(); if (!S.activity.includes(d)) { S.activity.push(d); S.activity = S.activity.slice(-400); } }
+  function streak() {
+    const set = new Set(S.activity); let d = today(); let n = 0;
+    if (!set.has(d)) d = addDays(d, -1);
+    while (set.has(d)) { n++; d = addDays(d, -1); }
+    return n;
+  }
+  function weekDays() {
+    const ws = weekStart(today()); const set = new Set(S.activity.concat(S.prayed || []));
+    return Array.from({ length: 7 }, (_, i) => { const d = addDays(ws, i); return { d, on: set.has(d), isToday: d === today() }; });
+  }
+  function weekCard() {
+    const days = weekDays(); const n = days.filter(x => x.on).length;
+    const labels = days.map(x => { try { return new Date(x.d + "T12:00:00").toLocaleDateString(locale(), { weekday: "narrow" }); } catch (e) { return ""; } });
+    const prayed = (S.prayed || []).includes(today());
+    return `<div class="card"><div class="eyebrow">${esc(t("weekTitle"))}</div>
+      <div class="weekdots">${days.map((x, i) => `<span class="wd ${x.on ? "on" : ""} ${x.isToday ? "today" : ""}"><i></i><small>${esc(labels[i])}</small></span>`).join("")}</div>
+      <p class="small" style="margin:8px 0 4px">${esc(t("weekText").replace("{n}", n))}</p>
+      <p class="small muted" style="margin:0 0 10px">${esc(t("weekGentle"))}</p>
+      ${prayed ? `<div class="row"><span class="grow small okline">${ic("check")} ${esc(t("prayedDone"))}</span><button class="iconbtn" id="prayedbtn">${esc(t("prayedUndo"))}</button></div>`
+        : `<button class="btn ghost block" id="prayedbtn">${ic("candle")} ${esc(t("prayedToday"))}</button>`}</div>`;
+  }
+  function impulse() {
+    const items = []; Object.values(ALL_LESSONS).forEach(l => { if (l.practice) items.push(l); });
+    const d = new Date(); const doy = Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - Date.UTC(d.getFullYear(), 0, 0)) / 86400000);
+    const l = items[doy % items.length];
+    return `<div class="card"><div class="eyebrow">${esc(t("impulseTitle"))}</div><p style="margin-bottom:6px">${E(l.practice)}</p>
+      <a class="small" href="#lesson-${l.id}">${esc(t("impulseFrom"))}: ${E(l.title)} ›</a></div>`;
+  }
+  function lessonsThisWeek() { const ws = weekStart(today()); return Object.values(S.done).filter(x => x >= ws).length; }
+
+  /* ---------- Inhalte ---------- */
+  const BIBLE_LESSONS = BIBLE.lessons.slice().sort((a, b) => a.order - b.order);
+  const ALL_LESSONS = {};
+  BIBLE_LESSONS.forEach(l => ALL_LESSONS[l.id] = Object.assign({ kind: "bible" }, l));
+  THEOLOGY.forEach(l => ALL_LESSONS[l.id] = Object.assign({ kind: "theo" }, l));
+  const OV_BY_BOOK = {}, OV_BY_ID = {};
+  OVERVIEWS.forEach(o => { const b = BIBLE.books.find(x => x[0] === o.book); o.title = { de: b[2], sr: b[3] }; OV_BY_BOOK[o.book] = o; OV_BY_ID[o.id] = o; });
+  const PEOPLE = {};
+  FATHERS.forEach(p => PEOPLE[p.id] = Object.assign({ kind: "father" }, p));
+  SAINTS.forEach(p => PEOPLE[p.id] = Object.assign({ kind: "saint" }, p));
+  const CARDS = [];
+  GLOSSARY.forEach(g => CARDS.push({ id: "g-" + g[0], deck: "d-basics", front: { de: g[1], sr: g[2] }, back: { de: g[3], sr: g[4] } }));
+  EXTRA_CARDS.forEach((c, i) => CARDS.push({ id: "x-" + i, deck: c[0], front: { de: c[1], sr: c[2] }, back: { de: c[3], sr: c[4] } }));
+  const LEARN_PATH = BIBLE_LESSONS.map(l => l.id).concat(THEOLOGY.filter(l => l.course === "A").map(l => l.id), THEOLOGY.filter(l => l.course === "P").map(l => l.id), THEOLOGY.filter(l => l.course === "D").map(l => l.id), THEOLOGY.filter(l => l.course === "L").map(l => l.id));
+
+  /* ---------- Hilfen UI ---------- */
+  const app = document.getElementById("app");
+  function tagBadge(tag) {
+    if (!tag) return "";
+    const map = { dogma: "tagDogma", history: "tagHistory", opinion: "tagOpinion", counsel: "tagCounsel", uncertain: "tagUncertain" };
+    return `<span class="badge tag-${tag}">${esc(t(map[tag]))}</span>`;
+  }
+  function toast(msg) {
+    const el = document.createElement("div"); el.className = "toast"; el.setAttribute("role", "status"); el.textContent = msg;
+    document.body.appendChild(el); setTimeout(() => el.remove(), 2200);
+  }
+  function sheet(html, onMount) {
+    const bg = document.createElement("div"); bg.className = "sheet-bg";
+    bg.innerHTML = `<div class="sheet" role="dialog" aria-modal="true">${html}</div>`;
+    bg.addEventListener("click", e => { if (e.target === bg) bg.remove(); });
+    document.body.appendChild(bg); if (onMount) onMount(bg.firstElementChild, () => bg.remove());
+    return bg;
+  }
+  function confirmBox(text, onYes) {
+    sheet(`<p><b>${esc(text)}</b></p><div class="btnrow"><button class="btn danger" data-y>${esc(t("yes"))}</button><button class="btn ghost" data-n>${esc(t("no"))}</button></div>`,
+      (el, close) => { el.querySelector("[data-y]").onclick = () => { close(); onYes(); }; el.querySelector("[data-n]").onclick = close; });
+  }
+  const CROSS = `<svg width="22" height="28" viewBox="0 0 22 28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M11 1v26"/><path d="M6 5h10"/><path d="M2 11h18"/><path d="M6 21l10 -3"/></g></svg>`;
+  const ICONS = {
+    home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+    bible: '<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/><path d="M12 7v5M9.5 9h5"/>',
+    theology: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M6 10v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>',
+    saints: '<circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/><path d="M7 5.5a6.5 3 0 0 1 10 0"/>',
+    cards: '<rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/>',
+    more: '<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>',
+    chev: '<path d="M9.5 5.5l6.5 6.5-6.5 6.5"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>',
+    star: '<path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/>',
+    starFill: '<path fill="currentColor" d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/>',
+    check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    pen: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+    lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    close: '<path d="M6 6l12 12M18 6L6 18"/>',
+    calendar: '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+    candle: '<path d="M12 2.6c2.1 2.2 2.4 4.3 0 6-2.4-1.7-2.1-3.8 0-6z"/><path d="M9.5 11h5v9.5h-5z"/><path d="M6 21h12"/>',
+    library: '<path d="M4 4h4v16H4zM10 4h4v16h-4z"/><path d="M16.5 4.6l3.6-.9 3 15.6-3.6.9z" transform="translate(-2 0)"/>',
+    chart: '<path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/>',
+    note: '<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h5"/>',
+    text: '<path d="M5 6h14M5 10h14M5 14h9M5 18h6"/>',
+    chalice: '<path d="M6 4h12c0 5-2.7 8-6 8s-6-3-6-8z"/><path d="M12 12v6M8 21h8M9.5 18h5"/>',
+    frame: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 6.5v8M9.5 8.5h5"/><circle cx="12" cy="17" r="1"/>',
+    search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>',
+    list: '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>',
+    repeat: '<path d="M4 12a8 8 0 0 1 14-5.3L20 9"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5.3L4 15"/><path d="M4 20v-5h5"/>',
+    scroll: '<path d="M7 4h11a2 2 0 0 1 2 2v1h-4"/><path d="M16 7v11a3 3 0 0 1-3 3H6a2 2 0 0 1-2-2v-1h9"/><path d="M7 4a2 2 0 0 0-2 2v12"/><path d="M9 9h4M9 13h4"/>',
+    cross: '<path d="M12 2.5v19M8.5 6h7M5.5 10.5h13M8.5 17.5l7-2"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/>',
+    bell: '<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
+    moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>'
+  };
+  function ic(n, extra) { return `<svg class="ic ${extra || ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`; }
+  function starIc(on) { return ic(on ? "starFill" : "star"); }
+  /* Listeneintrag mit Symbol */
+  function navItem(href, iconName, title, sub) {
+    return `<li><a class="item" href="#${href}"><span class="ico">${ic(iconName)}</span><span class="grow"><span class="t">${esc(title)}</span>${sub ? `<span class="s">${esc(sub)}</span>` : ""}</span><span class="chev">${ic("chev")}</span></a></li>`;
+  }
+  function icon(n) { return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`; }
+  function langLabel() { return lang() === "de" ? "DE" : (lang() === "sr-lat" ? "SR·L" : "СР·Ћ"); }
+
+  /* ---------- Router ---------- */
+  const TOP = ["home", "bible", "theology", "saints", "cards", "more"];
+  function route() { return (location.hash || "#home").slice(1) || "home"; }
+  function go(r) { if (location.hash === "#" + r) render(); else location.hash = r; }
+  window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
+
+  function tabFor(r) {
+    if (r.startsWith("quiz-")) return tabFor(backHref(r.slice(5)).slice(1));
+    if (r.startsWith("lesson-bib") || r === "bible" || r.startsWith("book-") || r === "plans" || r.startsWith("plan-")) return "bible";
+    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons") return "theology";
+    if (r.startsWith("person-") || r === "saints") return "saints";
+    if (r === "cards" || r === "review") return "cards";
+    if (r === "home" || r === "ask" || r === "calendar" || r === "prayers" || r.startsWith("prayercat-")) return "home";
+    return "more";
+  }
+  function parentOf(r) {
+    if (r.startsWith("lesson-bib") || r.startsWith("book-") || r === "plans") return "bible";
+    if (r.startsWith("plan-")) return "plans";
+    if (r.startsWith("lesson-")) { const l = ALL_LESSONS[r.slice(7)]; return l ? "course-" + l.course : "theology"; }
+    if (r.startsWith("quiz-")) return backHref(r.slice(5)).slice(1);
+    if (r.startsWith("course-") || r === "creed") return "theology";
+    if (r === "liturgy") return "course-L";
+    if (r === "icons") return "theology";
+    if (r.startsWith("person-")) return "saints";
+    if (r === "review") return "cards";
+    if (r === "ask") return "home";
+    if (["books", "progress", "notes", "glossary", "prefs"].includes(r)) return "more";
+    if (r === "calendar" || r === "prayers") return "home";
+    if (r.startsWith("prayercat-")) return "prayers";
+    return null;
+  }
+
+  function shell(inner, r) {
+    const parent = parentOf(r);
+    const active = tabFor(r);
+    const tabs = [["home", "navHome"], ["bible", "navBible"], ["theology", "navTheology"], ["saints", "navSaints"], ["cards", "navCards"], ["more", "navMore"]];
+    return `
+      <header class="top"><div class="wrap">
+        ${parent ? `<a class="iconbtn backbtn" href="#${parent}" aria-label="${esc(t("back"))}">${ic("chev", "flip")}<span>${esc(t("back"))}</span></a>` : ""}
+        <a class="brand" href="#home">${CROSS}<span>${parent ? "" : esc(t("appName"))}</span></a>
+        <button class="iconbtn" id="langbtn" aria-label="${esc(t("sLanguage"))}">${ic("globe")}<span>${langLabel()}</span></button>
+      </div></header>
+      <main><div class="wrap">
+        ${storageOk ? "" : `<div class="banner">${esc(t("storageWarn"))}</div>`}
+        ${inner}
+      </div></main>
+      <nav class="tabs" aria-label="${esc(t("menu"))}"><div class="wrap">
+        ${tabs.map(([id, k]) => `<a class="tab ${active === id ? "active" : ""}" href="#${id}" ${active === id ? 'aria-current="page"' : ""}>${icon(id)}<span>${esc(t(k))}</span></a>`).join("")}
+      </div></nav>`;
+  }
+
+  function applyPrefs() {
+    document.documentElement.setAttribute("data-theme", S.theme);
+    document.documentElement.style.setProperty("--fs", S.font);
+    document.documentElement.lang = lang() === "de" ? "de" : (lang() === "sr-lat" ? "sr-Latn" : "sr-Cyrl");
+    document.title = "OrthodoxPath";
+  }
+
+  function render() {
+    applyPrefs();
+    try {
+      if (!S.lang || !S.onboarded) { app.innerHTML = viewOnboarding(); bindOnboarding(); return; }
+      const r = route();
+      let html;
+      if (r === "home") html = viewHome();
+      else if (r === "bible") html = viewBible();
+      else if (r === "theology") html = viewTheology();
+      else if (r.startsWith("course-")) html = viewCourse(r.slice(7));
+      else if (r.startsWith("lesson-")) html = viewLesson(r.slice(7));
+      else if (r.startsWith("quiz-")) html = viewQuiz(r.slice(5));
+      else if (r === "creed") html = viewCreed();
+      else if (r === "saints") html = viewSaints();
+      else if (r.startsWith("person-")) html = viewPerson(r.slice(7));
+      else if (r === "books") html = viewBooks();
+      else if (r === "cards") html = viewCards();
+      else if (r === "review") html = viewReview();
+      else if (r === "progress") html = viewProgress();
+      else if (r === "notes") html = viewNotes();
+      else if (r === "glossary") html = viewGlossary();
+      else if (r === "ask") html = viewAsk();
+      else if (r === "prefs") html = viewPrefs();
+      else if (r === "more") html = viewMore();
+      else if (r === "calendar") html = viewCalendar();
+      else if (r.startsWith("book-")) html = viewBook(r.slice(5));
+      else if (r === "plans") html = viewPlans();
+      else if (r === "liturgy") html = viewLiturgy();
+      else if (r === "icons") html = viewIcons();
+      else if (r.startsWith("plan-")) html = viewPlan(r.slice(5));
+      else if (r === "prayers") html = viewPrayers();
+      else if (r.startsWith("prayercat-")) html = viewPrayerCat(r.slice(10));
+      else html = `<div class="card"><p>${esc(t("notFound"))}</p><a class="btn" href="#home">${esc(t("home"))}</a></div>`;
+      app.innerHTML = shell(html, r);
+      bindCommon();
+      const binder = BINDERS[r.split("-")[0]] || BINDERS[r];
+      if (binder) binder(r);
+    } catch (e) {
+      console.error(e);
+      app.innerHTML = `<div class="wrap"><div class="card"><p>${esc(t("error"))}</p><p class="small muted">${esc(e.message)}</p><a class="btn" href="#home">${esc(t("home"))}</a></div></div>`;
+    }
+  }
+
+  function bindCommon() {
+    const lb = document.getElementById("langbtn");
+    if (lb) lb.onclick = openLangSheet;
+    app.querySelectorAll("[data-toggle-answer]").forEach(b => b.onclick = () => {
+      const a = b.parentElement.querySelector(".answer"); const hidden = a.hidden; a.hidden = !hidden;
+      b.textContent = hidden ? t("hideAnswer") : t("showAnswer");
+    });
+    app.querySelectorAll("[data-verse]").forEach(b => b.onclick = () => {
+      const ref = b.getAttribute("data-verse"); const lid = b.getAttribute("data-lid");
+      const i = S.verses.findIndex(v => v.ref === ref);
+      if (i >= 0) { S.verses.splice(i, 1); b.classList.remove("on"); b.innerHTML = starIc(false); }
+      else { S.verses.push({ ref, lid, date: today() }); b.classList.add("on"); b.innerHTML = starIc(true); toast(t("verseSaved")); }
+      save();
+    });
+    app.querySelectorAll("[data-newnote]").forEach(b => b.onclick = () => openNoteEditor(null, b.getAttribute("data-newnote")));
+  }
+
+  function openLangSheet() {
+    sheet(`<h3>${esc(t("chooseLang"))}</h3>
+      <ul class="list">
+        ${[["de", "langDe"], ["sr-cyr", "langSrC"], ["sr-lat", "langSrL"]].map(([v, k]) => `<li><button class="item" data-lang="${v}"><span class="grow"><span class="t">${esc(UI.de[k])}</span></span>${lang() === v ? ic("check", "gold") : ""}</button></li>`).join("")}
+      </ul>`, (el, close) => el.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => { S.lang = b.getAttribute("data-lang"); save(); close(); render(); }));
+  }
+
+  /* ---------- Onboarding ---------- */
+  function viewOnboarding() {
+    if (!S.lang) {
+      return `<div class="wrap onb">
+        <div class="logo" style="color:var(--gold2)">${CROSS.replace('width="22" height="28"', 'width="44" height="56"')}</div>
+        <h1 style="text-align:center">OrthodoxPath</h1>
+        <p class="muted" style="text-align:center">Orthodoxe Lernakademie · Православна академија</p>
+        <div class="card">
+          <h3>Sprache wählen · Изаберите језик · Izaberite jezik</h3>
+          <ul class="list">
+            <li><button class="item" data-lang="de"><span class="grow"><span class="t">Deutsch</span></span><span class="chev">${ic("chev")}</span></button></li>
+            <li><button class="item" data-lang="sr-cyr"><span class="grow"><span class="t">Српски (ћирилица)</span></span><span class="chev">${ic("chev")}</span></button></li>
+            <li><button class="item" data-lang="sr-lat"><span class="grow"><span class="t">Srpski (latinica)</span></span><span class="chev">${ic("chev")}</span></button></li>
+          </ul>
+        </div></div>`;
+    }
+    return `<div class="wrap onb">
+      <div class="logo" style="color:var(--gold2)">${CROSS.replace('width="22" height="28"', 'width="44" height="56"')}</div>
+      <h1 style="text-align:center">${esc(t("welcomeTitle"))}</h1>
+      <div class="card hero"><p>${esc(t("welcomeText"))}</p><p class="muted small">${esc(t("disclaimer"))}</p>
+      <p class="muted small">${esc(t("privacyText"))}</p></div>
+      <button class="btn block" id="onbstart">${esc(t("start"))}</button>
+      <div class="btnrow"><button class="btn ghost block" id="onbback">${ic("globe")} ${esc(t("chooseLang"))}</button></div>
+    </div>`;
+  }
+  function bindOnboarding() {
+    app.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => { S.lang = b.getAttribute("data-lang"); save(); render(); });
+    const s = document.getElementById("onbstart"); if (s) s.onclick = () => { S.onboarded = true; save(); location.hash = "home"; render(); };
+    const bk = document.getElementById("onbback"); if (bk) bk.onclick = () => { S.lang = null; save(); render(); };
+  }
+
+  /* ---------- Startseite ---------- */
+  function nextLesson() { return LEARN_PATH.find(id => !S.done[id]); }
+  function dueCount() { return dueCards(false).length; }
+  function viewHome() {
+    const nid = nextLesson(); const nl = nid ? ALL_LESSONS[nid] : null;
+    const wk = lessonsThisWeek(); const goal = S.lessonsPerWeek;
+    const hr = new Date().getHours(); const greet = t(hr < 11 ? "greetMorning" : hr < 18 ? "greetDay" : "greetEvening");
+    const due = dueCount();
+    const tile = (href, iconName, label, badge) => `<a class="tile" href="#${href}"><span class="ico">${ic(iconName)}</span><span class="tl">${esc(label)}</span>${badge ? `<span class="pill">${badge}</span>` : ""}</a>`;
+    return `
+      <div class="pagehead"><div class="eyebrow">${esc(fmtDate(todayUTC(), true))}</div><h1>${esc(greet)}</h1></div>
+      <div class="card hero">
+        <div class="eyebrow">${esc(t("todayLesson"))}</div>
+        ${nl ? `<h2 class="herotitle">${E(nl.title)}</h2>${nl.ref ? `<p class="muted">${E(nl.ref)}</p>` : ""}
+          <a class="btn block" href="#lesson-${nl.id}">${esc(t("continue"))}</a>` : `<p>${esc(t("allDone"))}</p>`}
+      </div>
+      ${(() => { const lo = S.lastLesson; return lo && ALL_LESSONS[lo] && lo !== nid && !S.done[lo] ? `<ul class="list">${navItem("lesson-" + lo, "bible", L(ALL_LESSONS[lo].title), t("lastOpened"))}</ul>` : ""; })()}
+      <div class="tiles">
+        ${tile("prayers", "candle", t("prayersTitle"))}${tile("calendar", "calendar", t("tileCal"))}${tile("review", "repeat", t("tileReview"), due || "")}${tile("ask", "search", t("tileAsk"))}
+      </div>
+      ${calCard()}
+      ${weekCard()}
+      <div class="card"><div class="row"><span class="grow"><span class="eyebrow">${esc(t("weekGoal"))}</span><br><b class="big">${wk}/${goal}</b> <span class="small muted">${esc(t("lessonsThisWeek"))}</span></span></div>
+        <div class="progressbar" style="margin-top:10px"><i style="width:${Math.min(100, Math.round(wk / goal * 100))}%"></i></div></div>
+      ${impulse()}
+      <div class="sh">${esc(t("hExplore"))}</div>
+      <ul class="list">
+        ${navItem("bible", "bible", t("navBible"), t("biblePlan"))}
+        ${navItem("theology", "theology", t("navTheology"), t("theologyTitle"))}
+        ${navItem("course-P", "scroll", t("coursePaisios"))}
+        ${navItem("saints", "saints", t("saintsTitle"))}
+        ${navItem("books", "library", t("booksTitle"))}
+        ${navItem("progress", "chart", t("progressTitle"))}
+      </ul>
+      <div class="ornament">${CROSS}</div>
+      <p class="small muted center">${esc(t("disclaimer"))}</p>`;
+  }
+
+  /* ---------- Gebete ---------- */
+  let prayerTab = (new Date().getHours() >= 15) ? "evening" : "morning";
+  function prayerCard(id, label) {
+    if (id === "creed") return `<div class="card"><h3>${esc(t("creed"))}</h3><p class="creed">${E(CREED)}</p></div>`;
+    if (id === "ps50") return `<a class="item" href="#lesson-bib-ps50"><span class="grow"><span class="t">${esc(t("prPs50"))}</span></span><span class="chev">${ic("chev")}</span></a>`;
+    const p = PRAYER_TEXTS[id]; if (!p) return "";
+    const kind = p.kind || "trad";
+    const kindBadge = `<span class="badge ${kind === "trad" ? "tag-dogma" : kind === "bible" ? "tag-history" : "tag-counsel"}">${esc(t(kind === "trad" ? "prKindTrad" : kind === "bible" ? "prKindBible" : "prKindSuggest"))}</span>`;
+    const fav = S.prayerFavs.includes(id);
+    return `<div class="card">${label ? `<div class="eyebrow">${E(label)}</div>` : ""}
+      <div class="row"><h3 class="grow" style="margin:0">${E(p.title)}</h3><button class="star ${fav ? "on" : ""}" data-pfav="${id}" aria-label="${esc(t("prSaveFav"))}">${starIc(fav)}</button></div>
+      ${kindBadge}${p.repeat ? `<span class="badge tag-history">${esc(t("prTimes").replace("{n}", p.repeat))}</span>` : ""}
+      <p class="creed">${E(p.text)}</p>${p.note ? `<p class="small muted">${E(p.note)}</p>` : ""}</div>`;
+  }
+  function prayerTabs() {
+    const tabs = [["morning", "prMorning"], ["evening", "prEvening"], ["topics", "prTopics"], ["mine", "prMineShort"]];
+    return `<div class="seg" style="margin-bottom:14px">${tabs.map(([id, k]) => `<button data-ptab="${id}" class="${prayerTab === id ? "on" : ""}">${esc(t(k))}</button>`).join("")}</div>`;
+  }
+  function viewPrayers() {
+    let body = "";
+    if (prayerTab === "morning" || prayerTab === "evening") body = PRAYER_RULES[prayerTab].map(id => prayerCard(id)).join("");
+    else if (prayerTab === "topics") body = `<p class="small muted">${esc(t("prTopicsIntro"))}</p><ul class="list">${PRAYER_CATS.map(c => `<li><a class="item" href="#prayercat-${c.id}"><span class="grow"><span class="t">${E(c.title)}</span><span class="s">${c.items.length} ${esc(t("prayersTitle"))}</span></span><span class="chev">${ic("chev")}</span></a></li>`).join("")}</ul>`;
+    else {
+      const favs = S.prayerFavs.filter(id => PRAYER_TEXTS[id]);
+      const ints = S.intentions.slice().sort((x, y) => (x.done === y.done ? y.date.localeCompare(x.date) : x.done ? 1 : -1));
+      body = `<h2>${esc(t("prIntentions"))}</h2><p class="small muted">${esc(t("prIntentHint"))}</p>
+        <div class="card"><form id="intentform"><label for="intent" class="sr-only">${esc(t("prIntentions"))}</label>
+          <input type="text" id="intent" placeholder="${esc(t("prIntentPlaceholder"))}" maxlength="200">
+          <div class="btnrow"><button class="btn" type="submit">${ic("plus")} ${esc(t("prIntentAdd"))}</button></div></form></div>
+        ${ints.length ? `<ul class="list">${ints.map(i => `<li class="item" style="cursor:default;${i.done ? "opacity:.6" : ""}"><span class="grow"><span class="t" style="${i.done ? "text-decoration:line-through" : ""}">${esc(i.text)}</span><span class="s">${esc(i.date)}</span></span>
+            <button class="iconbtn" data-idone="${i.id}">${esc(i.done ? t("prIntentReopen") : t("prIntentDone"))}</button><button class="iconbtn" data-idel="${i.id}" aria-label="${esc(t("delete"))}">${ic("close")}</button></li>`).join("")}</ul>` : `<p class="muted">${esc(t("prNoIntent"))}</p>`}
+        <h2>${esc(t("prFavs"))}</h2>${favs.length ? favs.map(id => prayerCard(id)).join("") : `<p class="muted">${esc(t("prNoFavs"))}</p>`}`;
+    }
+    return `<h1>${esc(t("prayersTitle"))}</h1><p class="muted small">${esc(t("prayersIntro"))}</p>${prayerTabs()}${body}
+      <p class="small muted">${esc(lang() === "de" ? t("prTransDe") : t("prTransSr"))}</p>`;
+  }
+  function viewPrayerCat(cid) {
+    const c = PRAYER_CATS.find(x => x.id === cid); if (!c) return `<p>${esc(t("notFound"))}</p>`;
+    return `<div class="eyebrow">${esc(t("prayersTitle"))}</div><h1>${E(c.title)}</h1>
+      ${c.items.map(it => Array.isArray(it) ? prayerCard(it[0], { de: it[1], sr: it[2] }) : prayerCard(it)).join("")}
+      <p class="small muted">${esc(lang() === "de" ? t("prTransDe") : t("prTransSr"))}</p>`;
+  }
+  function bindPrayers() {
+    app.querySelectorAll("[data-ptab]").forEach(b => b.onclick = () => { prayerTab = b.getAttribute("data-ptab"); render(); window.scrollTo(0, 0); });
+    app.querySelectorAll("[data-pfav]").forEach(b => b.onclick = () => {
+      const id = b.getAttribute("data-pfav"); const i = S.prayerFavs.indexOf(id);
+      if (i >= 0) { S.prayerFavs.splice(i, 1); toast(t("prRemovedFav")); } else { S.prayerFavs.push(id); toast(t("prSavedFav")); }
+      save(); render();
+    });
+    const f = document.getElementById("intentform");
+    if (f) f.onsubmit = e => { e.preventDefault(); const v = document.getElementById("intent").value.trim(); if (!v) return; S.intentions.push({ id: "i" + Date.now().toString(36), text: v.slice(0, 200), date: today(), done: false }); save(); render(); };
+    app.querySelectorAll("[data-idone]").forEach(b => b.onclick = () => { const it = S.intentions.find(x => x.id === b.getAttribute("data-idone")); if (it) { it.done = !it.done; save(); render(); } });
+    app.querySelectorAll("[data-idel]").forEach(b => b.onclick = () => confirmBox(t("confirmDelete"), () => { S.intentions = S.intentions.filter(x => x.id !== b.getAttribute("data-idel")); save(); render(); }));
+  }
+
+  /* ---------- Kirchenkalender ---------- */
+  function todayUTC() { const d = new Date(); return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function locale() { return lang() === "de" ? "de-DE" : (lang() === "sr-lat" ? "sr-Latn-RS" : "sr-Cyrl-RS"); }
+  function fmtDate(t, withWeekday) {
+    try { return new Date(t).toLocaleDateString(locale(), Object.assign({ timeZone: "UTC", day: "numeric", month: "long" }, withWeekday ? { weekday: "long" } : {})); }
+    catch (e) { const d = new Date(t); return d.getUTCDate() + "." + (d.getUTCMonth() + 1) + "."; }
+  }
+  function inDays(ts) { const n = Math.round((ts - todayUTC()) / 86400000); return n === 1 ? t("calTomorrow") : t("calInDays").replace("{n}", n); }
+  function fastBadge(k) { const tag = { none: "", free: "tag-counsel", wedfri: "tag-uncertain" }[k]; return `<span class="badge ${tag === undefined ? "tag-uncertain" : tag}">${E(CAL_FASTS[k])}</span>`; }
+  function cal() { return S.calendar === "revised" ? "revised" : "julian"; }
+  function feastLine(f) {
+    const link = f.lesson && ALL_LESSONS[f.lesson] ? `<a class="small" href="#lesson-${f.lesson}">${esc(t("calToLesson"))} ›</a>` : (f.saint && PEOPLE[f.saint] ? `<a class="small" href="#person-${f.saint}">${E(PEOPLE[f.saint].name)} ›</a>` : "");
+    return `<h3 style="margin-bottom:4px">${E(f.name)}</h3>${f.mean ? `<p class="small" style="margin-bottom:4px">${E(f.mean)}</p>` : ""}${link}`;
+  }
+  function calCard() {
+    const td = todayUTC(); const fi = fastInfo(td, cal()); const fe = feastsOn(td, cal()); const nx = nextGreatFeast(td, cal()); const sts = saintsOn(td, cal());
+    return `<a class="card" href="#calendar" style="display:block;text-decoration:none;color:inherit">
+      <div class="eyebrow">${esc(t("calTitle"))}</div>
+      ${fe.map(f => `<p style="margin-bottom:4px"><b>${E(f.name)}</b></p>`).join("")}
+      ${sts.length ? `<p class="small" style="margin-bottom:6px">${ic("cross", "gold")} ${sts.map(id => E(PEOPLE[id].name)).join(" · ")}</p>` : ""}
+      ${fastBadge(fi.kind)}
+      ${nx ? `<p class="small muted" style="margin:6px 0 0">${esc(t("calNextFeast"))}: <b>${E(nx.name)}</b> – ${esc(fmtDate(nx.t))} (${esc(inDays(nx.t))})</p>` : ""}
+    </a>`;
+  }
+  function viewCalendar() {
+    const td = todayUTC(); const y = new Date(td).getUTCFullYear(); const c = cal();
+    const fi = fastInfo(td, c); const fe = feastsOn(td, c); const sts = saintsOn(td, c);
+    const upcoming = feastsOfYear(y, c).concat(feastsOfYear(y + 1, c)).filter(f => f.t >= td && f.t < td + 366 * 86400000);
+    const P = orthodoxPascha(y), P2 = orthodoxPascha(y + 1); const fp = fastPeriods(y, c);
+    const range = r => `${esc(fmtDate(r[0]))} – ${esc(fmtDate(r[1]))}`;
+    const seg = `<div class="seg" style="margin:8px 0 14px">${[["julian", "calJulian"], ["revised", "calRevised"]].map(([v, k]) => `<button data-cal="${v}" class="${c === v ? "on" : ""}">${esc(t(k))}</button>`).join("")}</div>`;
+    return `<h1>${esc(t("calTitle"))}</h1><p class="muted small">${esc(c === "revised" ? t("calIntroRevised") : t("calIntro"))}</p>${seg}
+      <div class="card hero"><div class="eyebrow">${esc(t("calToday"))} · ${esc(fmtDate(td, true))}</div>
+        ${fe.map(feastLine).join("<div style='height:10px'></div>")}
+        <div style="margin-top:10px">${fastBadge(fi.kind)}</div>
+        <p class="small" style="margin:6px 0 0"><b>${esc(t("calFastRule"))}:</b> ${E(CAL_FAST_RULES[fi.kind])}</p>
+        <p class="small muted" style="margin-top:6px">${esc(t("calFastNote"))}</p></div>
+      <div class="card"><h3>${esc(t("calSaintsToday"))}</h3>
+        ${sts.length ? `<ul class="list">${sts.map(id => `<li><a class="item" href="#person-${id}"><span class="grow"><span class="t">${E(PEOPLE[id].name)}</span><span class="s">${E(PEOPLE[id].lived)}</span></span><span class="chev">${ic("chev")}</span></a></li>`).join("")}</ul>` : `<p class="small muted">${esc(t("calNoSaintsApp"))}</p>`}
+        ${LINKS.svProlog ? `<p class="small"><a href="${esc(LINKS.svProlog.url)}" target="_blank" rel="noopener">${E(LINKS.svProlog.label)} ↗</a></p>` : ""}
+        <p class="small muted">${esc(t("calReadingsNote"))}</p></div>
+      <div class="grid2">
+        <div class="card stat"><b style="font-size:1.2em">${esc(fmtDate(P))}</b><span class="small muted">${esc(t("calPascha").replace("{y}", y))}</span></div>
+        <div class="card stat"><b style="font-size:1.2em">${esc(fmtDate(P2))}</b><span class="small muted">${esc(t("calPascha").replace("{y}", y + 1))}</span></div>
+      </div>
+      <h2>${esc(t("calUpcoming"))}</h2>
+      <ul class="list">${upcoming.map(f => `<li class="item" style="cursor:default;align-items:flex-start"><span class="grow"><span class="t">${E(f.name)}</span><span class="s">${esc(fmtDate(f.t, true))} · ${esc(f.t === td ? t("calToday") : inDays(f.t))}</span>${f.mean ? `<span class="s">${E(f.mean)}</span>` : ""}${f.great ? `<span class="badge tag-dogma" style="margin:6px 0 0">${esc(t("calGreat"))}</span>` : ""}</span></li>`).join("")}</ul>
+      <h2>${esc(t("calFastPeriods").replace("{y}", y))}</h2>
+      <div class="card">
+        <div class="refline"><b>${E(CAL_FASTS.lent)}</b><span class="grow">${range(fp.lent)}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.apostles)}</b><span class="grow">${fp.apostles ? range(fp.apostles) : esc(t("calApostlesNone"))}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.dormition)}</b><span class="grow">${range(fp.dormition)}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.nativity)}</b><span class="grow">${range(fp.nativity)}</span></div>
+        <div class="refline"><b>${E(CAL_FASTS.wedfri)}</b><span class="grow">${E(CAL_FASTS.free)}: ${range(fp.bright)}; ${range(fp.trinity)}</span></div>
+        <p class="small muted" style="margin-top:8px">${esc(t("calFastNote"))}</p>
+      </div>
+      <a class="item" href="#lesson-li-fasting"><span class="grow"><span class="t">${E(ALL_LESSONS["li-fasting"].title)}</span></span><span class="chev">${ic("chev")}</span></a>
+      <a class="item" href="#lesson-li-calendar"><span class="grow"><span class="t">${E(ALL_LESSONS["li-calendar"].title)}</span></span><span class="chev">${ic("chev")}</span></a>`;
+  }
+  function bindCalendar() { app.querySelectorAll("[data-cal]").forEach(b => b.onclick = () => { S.calendar = b.getAttribute("data-cal"); save(); render(); }); }
+
+  /* ---------- Bibel ---------- */
+  function viewBible() {
+    const byBook = {}; BIBLE_LESSONS.forEach(l => (byBook[l.book] = byBook[l.book] || []).push(l));
+    const doneN = BIBLE_LESSONS.filter(l => S.done[l.id]).length;
+    let html = `<h1>${esc(t("biblePlan"))}</h1><p class="muted">${esc(t("bibleIntro"))}</p>
+      <div class="progressbar" style="margin:6px 0 16px"><i style="width:${Math.round(doneN / BIBLE_LESSONS.length * 100)}%"></i></div>
+      <a class="item" href="#plans"><span class="grow"><span class="t">${esc(t("plansTitle"))}</span><span class="s">${PLANS.map(p => E(p.title)).join(" · ")}</span></span><span class="chev">${ic("chev")}</span></a>
+      <ul class="list">${BIBLE_LESSONS.map((l, i) => lessonItem(l, i + 1)).join("")}</ul>
+      <details class="card"><summary>${esc(t("canonNoteTitle"))}</summary><p>${E(BIBLE.canonNote)}</p><p class="muted small">${E(BIBLE.readingNote)}</p></details>
+      <h2>${esc(t("bookOverview"))}</h2>`;
+    BIBLE.groups.forEach(g => {
+      const books = BIBLE.books.filter(b => b[1] === g.id);
+      html += `<div class="card"><h3>${E(g.name)}</h3><ul class="list">` + books.map(b => {
+        const ls = byBook[b[0]] || [];
+        const name = isSr() ? L({ de: b[2], sr: b[3] }) : b[2];
+        const label = ls.length ? `${ls.length} ${esc(t("lessons"))}` : (OV_BY_BOOK[b[0]] ? esc(t("ovLabel")) : esc(t("inPreparation")));
+        return `<li><a class="refline" href="#book-${b[0]}" style="text-decoration:none;color:inherit;min-height:44px;align-items:center"><span class="grow">${esc(name)}</span><span class="small muted">${label}</span><span class="chev">${ic("chev")}</span></a></li>`;
+      }).join("") + `</ul></div>`;
+    });
+    return html;
+  }
+  function lessonItem(l, n) {
+    const d = !!S.done[l.id];
+    return `<li><a class="item" href="#lesson-${l.id}"><span class="check ${d ? "on" : ""}">${d ? ic("check") : n}</span><span class="grow"><span class="t">${E(l.title)}</span>${l.ref ? `<span class="s">${E(l.ref)}</span>` : ""}</span><span class="chev">${ic("chev")}</span></a></li>`;
+  }
+
+
+
+  /* ---------- Lesepläne ---------- */
+  function planState(id) { S.plans = S.plans || {}; return S.plans[id] || (S.plans[id] = { done: [] }); }
+  function planNext(p) { const st = planState(p.id); return p.days.findIndex((d, i) => !st.done.includes(i)); }
+  function planItem(p) {
+    const st = planState(p.id); const n = st.done.length; const nx = planNext(p);
+    return `<li><a class="item" href="#plan-${p.id}"><span class="grow"><span class="t">${E(p.title)}</span>
+      <span class="s">${n}/${p.days.length} ${esc(t("planReadings"))}${nx >= 0 ? ` · ${esc(t("planNext"))}: ${E(p.days[nx])}` : ` · ${esc(t("planDone"))}`}</span>
+      <span class="progressbar" style="display:block;margin-top:6px"><i style="width:${Math.round(n / p.days.length * 100)}%"></i></span></span><span class="chev">${ic("chev")}</span></a></li>`;
+  }
+  function viewPlans() {
+    return `<h1>${esc(t("plansTitle"))}</h1><p class="muted">${esc(t("plansIntro"))}</p><ul class="list">${PLANS.map(planItem).join("")}</ul>
+      ${LINKS.svNT ? `<p class="small"><a href="${esc(LINKS.svNT.url)}" target="_blank" rel="noopener">${E(LINKS.svNT.label)} ↗</a></p>` : ""}
+      <p class="small muted">${E(BIBLE.readingNote)}</p>`;
+  }
+  let planShowAll = false;
+  function viewPlan(id) {
+    const p = PLANS.find(x => x.id === id); if (!p) return `<p>${esc(t("notFound"))}</p>`;
+    const st = planState(id); const nx = planNext(p);
+    const from = planShowAll ? 0 : Math.max(0, (nx < 0 ? p.days.length : nx) - 3);
+    const to = planShowAll ? p.days.length : Math.min(p.days.length, from + 12);
+    return `<div class="eyebrow">${esc(t("plansTitle"))}</div><h1>${E(p.title)}</h1><p class="muted">${E(p.desc)}</p>
+      <div class="card hero"><div class="eyebrow">${esc(t(nx >= 0 ? "planNext" : "planDone"))}</div>
+        ${nx >= 0 ? `<h2>${E(p.days[nx])}</h2><button class="btn block" data-plan="${id}" data-day="${nx}">${ic("check")} ${esc(t("planMark"))}</button>` : ""}
+        <div class="progressbar" style="margin-top:12px"><i style="width:${Math.round(st.done.length / p.days.length * 100)}%"></i></div>
+        <p class="small muted" style="margin:6px 0 0">${st.done.length}/${p.days.length} ${esc(t("planReadings"))}</p></div>
+      <ul class="list">${p.days.slice(from, to).map((d, k) => { const i = from + k; const on = st.done.includes(i);
+        return `<li><button class="item" data-plan="${id}" data-day="${i}"><span class="check ${on ? "on" : ""}">${on ? ic("check") : i + 1}</span><span class="grow"><span class="t">${E(d)}</span></span></button></li>`; }).join("")}</ul>
+      <div class="btnrow"><button class="btn ghost" id="planall">${esc(t(planShowAll ? "planShowLess" : "planShowAll"))}</button>
+      <button class="btn danger" id="planreset">${esc(t("planReset"))}</button></div>`;
+  }
+  function bindPlan(r) {
+    const id = r.slice(5);
+    app.querySelectorAll("[data-day]").forEach(b => b.onclick = () => {
+      const st = planState(b.getAttribute("data-plan")); const i = +b.getAttribute("data-day"); const k = st.done.indexOf(i);
+      if (k >= 0) st.done.splice(k, 1); else { st.done.push(i); markActivity(); }
+      save(); render();
+    });
+    const all = document.getElementById("planall"); if (all) all.onclick = () => { planShowAll = !planShowAll; render(); };
+    const rs = document.getElementById("planreset"); if (rs) rs.onclick = () => confirmBox(t("confirmDelete"), () => { S.plans[id] = { done: [] }; save(); render(); });
+  }
+
+
+  /* ---------- Liturgie Schritt für Schritt ---------- */
+  function viewLiturgy() {
+    let part = 0; let html = `<div class="eyebrow">${esc(t("courseL"))}</div><h1>${esc(t("litTitle"))}</h1><p class="muted">${esc(t("litIntro"))}</p>`;
+    LITURGY_STEPS.forEach((s, i) => {
+      if (s.part !== part) { part = s.part; html += `<div class="divider">${E(LITURGY_PARTS[part])}</div>`; }
+      html += `<section class="card sec"><h3><span class="num">${i + 1}</span>${E(s.title)}</h3>
+        <p><b>${esc(t("litWhat"))}</b> ${E(s.what)}</p><p><b>${esc(t("litMean"))}:</b> ${E(s.mean)}</p>
+        <div class="simple"><div class="eyebrow">${esc(t("litDo"))}</div><p style="margin:0">${E(s.do)}</p></div></section>`;
+    });
+    return html + `<a class="item" href="#lesson-li-liturgy"><span class="grow"><span class="t">${E(ALL_LESSONS["li-liturgy"].title)}</span></span><span class="chev">${ic("chev")}</span></a><p class="small muted">${esc(t("litNote"))}</p>`;
+  }
+
+
+  /* ---------- Ikonen-Lexikon ---------- */
+  function viewIcons() {
+    return `<div class="eyebrow">${esc(t("theologyTitle"))}</div><h1>${esc(t("iconsTitle"))}</h1><p class="muted">${esc(t("iconsIntro"))}</p>
+      ${ICONS_LEX.map(i => `<section class="card sec" id="icon-${i.id}"><h3>${E(i.name)}</h3>${i.tag ? tagBadge(i.tag) : ""}
+        <p><b>${esc(t("iconLook"))}:</b> ${E(i.look)}</p><p style="margin-bottom:${i.lesson ? "6px" : "0"}"><b>${esc(t("iconMean"))}:</b> ${E(i.mean)}</p>
+        ${i.lesson && ALL_LESSONS[i.lesson] ? `<a class="small" href="#lesson-${i.lesson}">${esc(t("calToLesson"))} ›</a>` : ""}</section>`).join("")}`;
+  }
+
+  /* ---------- Buchüberblick ---------- */
+  function viewBook(bid) {
+    const b = BIBLE.books.find(x => x[0] === bid); if (!b) return `<p>${esc(t("notFound"))}</p>`;
+    const o = OV_BY_BOOK[bid]; const ls = BIBLE_LESSONS.filter(l => l.book === bid);
+    const group = BIBLE.groups.find(g => g.id === b[1]);
+    let html = `<div class="eyebrow">${E(group.name)}</div><h1>${E({ de: b[2], sr: b[3] })}</h1>`;
+    if (ls.length) html += `<h2>${esc(t("ovLessons"))}</h2><ul class="list">${ls.map(l => lessonItem(l, BIBLE_LESSONS.indexOf(l) + 1)).join("")}</ul>`;
+    if (o) {
+      html += `<section class="card sec"><h3>${esc(t("ovAbout"))}</h3>${tagBadge("history")}<p>${E(o.about)}</p></section>
+        <section class="card sec"><h3>${esc(t("ovKeys"))}</h3>${refList(o.keys, o.id)}<p class="small muted" style="margin-top:8px">${E(BIBLE.readingNote)}</p></section>
+        <section class="card sec"><h3>${esc(t("secChrist"))}</h3>${tagBadge("opinion")}<p>${E(o.christ)}</p></section>
+        ${o.lit ? `<section class="card sec"><h3>${esc(t("ovLit"))}</h3>${tagBadge("history")}<p>${E(o.lit)}</p></section>` : ""}
+        <div class="card"><a class="btn block" href="#quiz-${o.id}">${esc(t("startQuiz"))} (${o.quiz.length})</a>
+        <div class="btnrow"><button class="btn ghost block" data-newnote="${esc(L(o.title))}">${ic("pen")} ${esc(t("addNote"))}</button></div></div>
+        ${ls.length ? "" : `<p class="small muted">${esc(t("ovMore"))}</p>`}`;
+    }
+    return html;
+  }
+
+  /* ---------- Lektionen ---------- */
+  function refList(arr, lid) {
+    return arr.map(x => {
+      const ref = L(x.ref); const on = S.verses.some(v => v.ref === ref);
+      return `<div class="refline"><b>${esc(ref)}</b><span class="grow">${E(x.note)}</span><button class="star ${on ? "on" : ""}" data-verse="${esc(ref)}" data-lid="${lid}" aria-label="${esc(t("saveVerse"))}">${starIc(on)}</button></div>`;
+    }).join("");
+  }
+  function questionsBlock(qs) {
+    return qs.map(q => `<div class="qa"><p><b>${E(q.q)}</b></p>
+      <label class="small muted">${esc(t("yourAnswer"))}<textarea rows="2"></textarea></label>
+      <button class="btn ghost" data-toggle-answer>${esc(t("showAnswer"))}</button>
+      <div class="answer" hidden><span class="small muted">${esc(t("modelAnswer"))}:</span><br>${E(q.a)}</div></div>`).join("");
+  }
+  function doneBar(id) {
+    const d = !!S.done[id]; const l = ALL_LESSONS[id];
+    return `<div class="card">
+      ${l.quiz && l.quiz.length ? `<a class="btn block" href="#quiz-${id}">${esc(t("startQuiz"))} (${l.quiz.length})</a><div style="height:10px"></div>` : ""}
+      <button class="btn ${d ? "ghost" : ""} block" id="donebtn">${d ? ic("check") + " " + esc(t("done")) + " · " + esc(t("undoDone")) : esc(t("markDone"))}</button>
+      <div class="btnrow"><button class="btn ghost block" data-newnote="${esc(L(l.title))}">${ic("pen")} ${esc(t("addNote"))}</button></div>
+    </div>${lessonNav(id)}`;
+  }
+  /* Vorherige/nächste Lektion innerhalb der Reihe (Bibel bzw. Kurs) */
+  function lessonSeq(id) { const l = ALL_LESSONS[id]; return l.kind === "bible" ? BIBLE_LESSONS.map(x => x.id) : THEOLOGY.filter(x => x.course === l.course).map(x => x.id); }
+  function lessonNav(id) {
+    const seq = lessonSeq(id); const i = seq.indexOf(id); const p = seq[i - 1], n = seq[i + 1];
+    if (!p && !n) return "";
+    const it = (lid, label, back) => `<li><a class="item" href="#lesson-${lid}">${back ? `<span class="chev">${ic("chev", "flip")}</span>` : ""}<span class="grow"><span class="s">${esc(label)}</span><span class="t">${E(ALL_LESSONS[lid].title)}</span></span>${back ? "" : `<span class="chev">${ic("chev")}</span>`}</a></li>`;
+    return `<ul class="list lnav">${p ? it(p, t("prevLesson"), true) : ""}${n ? it(n, t("nextLessonL"), false) : ""}</ul>`;
+  }
+  function viewLesson(id) {
+    const l = ALL_LESSONS[id]; if (!l) return `<p>${esc(t("notFound"))}</p>`;
+    if (S.lastLesson !== id) { S.lastLesson = id; save(); }
+    return l.kind === "bible" ? viewBibleLesson(l) : viewTheoLesson(l);
+  }
+  function viewBibleLesson(l) {
+    let n = 0; const sec = (title, body, tag) => `<section class="card sec"><h3><span class="num">${++n}</span>${esc(title)}</h3>${tag ? tagBadge(tag) : ""}${body}</section>`;
+    return `<div class="eyebrow">${esc(t("lesson"))} · ${E(l.ref)}</div><h1>${E(l.title)}</h1>
+      ${sec(t("secIntro"), `<p>${E(l.intro)}</p>`, l.introTag)}
+      ${sec(t("secContext"), `<p>${E(l.context)}</p>`)}
+      ${sec(t("secReading"), refList(l.reading, l.id) + `<p class="small muted" style="margin-top:8px">${E(BIBLE.readingNote)}</p>`)}
+      ${sec(t("secSummary"), `<p>${E(l.summary)}</p>`)}
+      ${sec(t("secInterp"), `<div class="simple"><div class="eyebrow">${esc(t("simple"))}</div><p>${E(l.interp.simple)}</p></div>
+          <details><summary>${esc(t("deeper"))}</summary><p>${E(l.interp.deeper)}</p></details>`, l.interp.tag)}
+      ${sec(t("secChrist"), `<p>${E(l.christ)}</p>`)}
+      ${sec(t("secLinks"), refList(l.links, l.id))}
+      ${sec(t("secFathers"), `<p>${E(l.fathers)}</p><p class="small muted">${esc(t("quotesNote"))}</p>`, l.fathersTag)}
+      ${sec(t("secQuestions"), questionsBlock(l.questions))}
+      ${sec(t("secPractice"), `<p>${E(l.practice)}</p>`, "counsel")}
+      ${sec(t("secReview"), `<p>${E(l.review)}</p>`)}
+      ${doneBar(l.id)}`;
+  }
+  function viewTheoLesson(l) {
+    const course = COURSES.find(c => c.id === l.course);
+    return `<div class="eyebrow">${esc(t(course.title))}</div><h1>${E(l.title)}</h1>
+      ${l.sections.map(s => `<section class="card sec"><h3>${E(s.h)}</h3>${tagBadge(s.tag)}
+        <div class="simple"><div class="eyebrow">${esc(t("simple"))}</div><p class="pre">${E(s.simple)}</p></div>
+        <details><summary>${esc(t("deeper"))}</summary><p class="pre">${E(s.deeper)}</p></details></section>`).join("")}
+      ${l.creed ? `<a class="item" href="#creed"><span class="grow"><span class="t">${esc(t("creed"))}</span></span><span class="chev">${ic("chev")}</span></a>` : ""}
+      <section class="card sec"><h3>${esc(t("keyPoints"))}</h3><ul>${l.keyPoints.map(k => `<li>${E(k)}</li>`).join("")}</ul></section>
+      ${l.bible && l.bible.length ? `<section class="card sec"><h3>${esc(t("secLinks"))}</h3>${refList(l.bible, l.id)}</section>` : ""}
+      <section class="card sec"><h3>${esc(t("practice"))}</h3>${tagBadge("counsel")}<p>${E(l.practice)}</p></section>
+      <section class="card sec"><h3>${esc(t("openQuestions"))}</h3>${questionsBlock(l.questions)}</section>
+      <section class="card sec"><h3>${esc(t("secSources"))}</h3><p class="small">${E(l.sources)}</p><p class="small muted">${esc(t("quotesNote"))}</p></section>
+      ${doneBar(l.id)}`;
+  }
+  function toggleDone(id) {
+    if (S.done[id]) delete S.done[id]; else { S.done[id] = today(); markActivity(); }
+    save(); render();
+  }
+
+  /* ---------- Theologie ---------- */
+  function viewTheology() {
+    const CI = { A: "theology", P: "scroll", D: "cross", L: "chalice" };
+    const ci = c => { const ls = THEOLOGY.filter(l => l.course === c.id); const d = ls.filter(l => S.done[l.id]).length;
+      return navItem("course-" + c.id, CI[c.id] || "theology", t(c.title), L(c.desc) + " · " + d + "/" + ls.length); };
+    const byId = id => COURSES.find(c => c.id === id);
+    return `<h1>${esc(t("theologyTitle"))}</h1><p class="muted">${esc(t("theologyIntro"))}</p>
+      <div class="sh">${esc(t("gLearn"))}</div><ul class="list">
+        ${ci(byId("A"))}${navItem("saints", "library", t("courseB"), FATHERS.length + " " + t("fathers"))}${navItem("saints", "saints", t("courseC"), SAINTS.length + " " + t("saints"))}${COURSES.filter(c => c.id !== "A").map(ci).join("")}
+      </ul>
+      <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
+        ${navItem("creed", "text", t("creed"))}${navItem("icons", "frame", t("iconsTitle"), String(ICONS_LEX.length))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("glossary", "list", t("glossary"), t("glossaryIntro"))}
+      </ul>
+      <div class="card legend"><h3>${esc(t("legendTitle"))}</h3>${["dogma", "history", "opinion", "counsel", "uncertain"].map(tagBadge).join("")}</div>`;
+  }
+  function viewCourse(cid) {
+    const c = COURSES.find(x => x.id === cid); if (!c) return `<p>${esc(t("notFound"))}</p>`;
+    const ls = THEOLOGY.filter(l => l.course === cid);
+    return `<h1>${esc(t(c.title))}</h1><p class="muted">${E(c.desc)}</p>
+      <ul class="list">${ls.map((l, i) => lessonItem(l, i + 1)).join("")}</ul>
+      ${cid === "L" ? `<a class="item" href="#liturgy"><span class="grow"><span class="t">${esc(t("litTitle"))}</span></span><span class="chev">${ic("chev")}</span></a>` : ""}
+      ${cid === "L" ? `<a class="item" href="#calendar"><span class="grow"><span class="t">${esc(t("calTitle"))}</span></span><span class="chev">${ic("chev")}</span></a>` : ""}
+      ${cid === "P" ? `<a class="item" href="#person-s-paisios"><span class="grow"><span class="t">${E(PEOPLE["s-paisios"].name)}</span><span class="s">${esc(t("saints"))}</span></span><span class="chev">${ic("chev")}</span></a>` : ""}`;
+  }
+  function viewCreed() {
+    return `<div class="eyebrow">${esc(t("courseD"))}</div><h1>${esc(t("creed"))}</h1>
+      <div class="card"><p class="creed">${E(CREED)}</p></div>
+      <div class="card"><h3>${esc(t("translationNote"))}</h3><p class="small">${E(THEOLOGY.find(l => l.id === "dg-creed").sources)}</p></div>
+      <a class="item" href="#lesson-dg-creed"><span class="grow"><span class="t">${E(ALL_LESSONS["dg-creed"].title)}</span></span><span class="chev">${ic("chev")}</span></a>`;
+  }
+
+  /* ---------- Quiz ---------- */
+  function quizSrc(id) { return ALL_LESSONS[id] || PEOPLE[id] || OV_BY_ID[id]; }
+  function quizTitle(l) { return l.title || l.name; }
+  function backHref(id) { return ALL_LESSONS[id] ? "#lesson-" + id : (OV_BY_ID[id] ? "#book-" + OV_BY_ID[id].book : "#person-" + id); }
+  let QZ = null;
+  function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+  function viewQuiz(id) {
+    const l = quizSrc(id); if (!l || !l.quiz) return `<p>${esc(t("notFound"))}</p>`;
+    if (!QZ || QZ.id !== id) QZ = { id, i: 0, score: 0, answered: null, order: l.quiz.map(q => shuffle(q.options.map((o, k) => k))) };
+    if (QZ.i >= l.quiz.length) {
+      const pct = Math.round(QZ.score / l.quiz.length * 100);
+      return `<div class="eyebrow">${esc(t("quiz"))}</div><h1>${esc(t("quizResult"))}</h1><div class="card hero center">
+          <div class="ring" style="--p:${pct}"><span><b>${QZ.score}</b><small>${esc(t("of"))} ${l.quiz.length}</small></span></div>
+          <h3 style="margin-top:14px">${E(quizTitle(l))}</h3><p class="small muted" style="margin:0">${esc(t("quizGentle"))}</p></div>
+        <a class="btn block" href="${backHref(id)}">${esc(t("back"))}</a><div class="btnrow"><button class="btn ghost block" id="qzagain">${esc(t("quizAgain"))}</button></div>`;
+    }
+    const q = l.quiz[QZ.i]; const ord = QZ.order[QZ.i];
+    return `<div class="eyebrow">${esc(t("quiz"))} · ${QZ.i + 1}/${l.quiz.length}</div><h1 style="font-size:1.4em">${E(q.q)}</h1>
+      <div class="progressbar" style="margin-bottom:12px"><i style="width:${Math.round(QZ.i / l.quiz.length * 100)}%"></i></div>
+      <div>${ord.map(k => {
+        let cls = "";
+        if (QZ.answered != null) { if (k === q.correct) cls = "correct"; else if (k === QZ.answered) cls = "wrong"; }
+        return `<button class="opt ${cls}" data-opt="${k}" ${QZ.answered != null ? "disabled" : ""}>${E(q.options[k])}</button>`;
+      }).join("")}</div>
+      ${QZ.answered != null ? `<div class="card" role="status"><b>${esc(QZ.answered === q.correct ? t("correct") : t("wrong"))}</b>
+        ${QZ.answered !== q.correct ? `<p>${esc(t("correctAnswer"))}: ${E(q.options[q.correct])}</p>` : ""}
+        <button class="btn block" id="qznext">${esc(QZ.i + 1 < l.quiz.length ? t("nextQuestion") : t("finish"))}</button></div>` : ""}`;
+  }
+  function bindQuiz(r) {
+    const id = r.slice(5); const l = quizSrc(id); if (!l) return;
+    app.querySelectorAll("[data-opt]").forEach(b => b.onclick = () => {
+      if (QZ.answered != null) return;
+      QZ.answered = +b.getAttribute("data-opt");
+      if (QZ.answered === l.quiz[QZ.i].correct) QZ.score++;
+      render();
+    });
+    const nx = document.getElementById("qznext");
+    if (nx) nx.onclick = () => {
+      QZ.i++; QZ.answered = null;
+      if (QZ.i >= l.quiz.length) {
+        const prev = S.quiz[id] || { best: 0, attempts: 0, wrong: 0 };
+        const wrong = l.quiz.length - QZ.score;
+        S.quiz[id] = { best: Math.max(prev.best, QZ.score), last: QZ.score, total: l.quiz.length, attempts: prev.attempts + 1, wrong };
+        markActivity(); save();
+      }
+      render();
+    };
+    const ag = document.getElementById("qzagain"); if (ag) ag.onclick = () => { QZ = null; render(); };
+  }
+
+  /* ---------- Heilige ---------- */
+  function initialOf(p) { const n = L(p.name).replace(/^(Hl\.|Свети|Света|Sveti|Sveta|Преподобни|Prepodobni)\s+/, "").replace(/^(Großmärtyrer|König|Fürst|великомученик|краљ|кнез|velikomučenik|kralj|knez|владика|vladika)\s+/, ""); return n.charAt(0); }
+  function viewSaints() {
+    const item = p => `<li><a class="item" href="#person-${p.id}"><span class="medal">${esc(initialOf(p))}</span><span class="grow"><span class="t">${E(p.name)}</span><span class="s">${E(p.lived)} · ${esc(t("feast"))}: ${E(p.feast)}</span></span><span class="chev">${ic("chev")}</span></a></li>`;
+    return `<h1>${esc(t("saintsTitle"))}</h1>
+      <h2>${esc(t("courseB"))}</h2><ul class="list">${FATHERS.map(item).join("")}</ul>
+      <h2>${esc(t("courseC"))}</h2><ul class="list">${SAINTS.map(item).join("")}</ul>
+      <p class="small muted">${esc(t("feastNote"))}</p>`;
+  }
+  function linkList(keys) {
+    return keys.map(k => LINKS[k]).filter(Boolean).map(x => `<div class="refline"><span class="grow"><a href="${esc(x.url)}" target="_blank" rel="noopener">${E(x.label)}</a></span></div>`).join("");
+  }
+  function viewPerson(id) {
+    const p = PEOPLE[id]; if (!p) return `<p>${esc(t("notFound"))}</p>`;
+    const block = (h, body, tag) => body ? `<section class="card sec"><h3>${esc(h)}</h3>${tag ? tagBadge(tag) : ""}${body}</section>` : "";
+    const read = (p.read && p.read.length) ? linkList(p.read) + `<p class="small muted">${esc(t("linkCheckNote"))}</p>` : `<p>${(p.readNote ? E(p.readNote) : esc(t("noFreeText")))}</p>`;
+    let html = `<div class="eyebrow">${esc(p.kind === "father" ? t("fathers") : t("saints"))}</div><h1>${E(p.name)}</h1>
+      <div class="card"><div class="refline"><b>${esc(t("lived"))}</b><span class="grow">${E(p.lived)}</span></div><div class="refline"><b>${esc(t("feast"))}</b><span class="grow">${E(p.feast)}</span></div></div>`;
+    if (p.kind === "father") {
+      html += block(t("qWho"), `<p>${E(p.who)}</p>`) + block(t("qWhen"), `<p>${E(p.when)}</p>`, "history") + block(t("qTaught"), `<p>${E(p.taught)}</p>`, "dogma")
+        + block(t("qWorks"), `<p>${E(p.works)}</p>`, "history") + block(t("qMeaning"), `<p>${E(p.meaning)}</p>`) + block(t("qBible"), `<p>${E(p.bible)}</p>`)
+        + block(t("qRead"), read) + block(t("qQuotes"), `<p>${esc(t("quotesNote"))}</p>`);
+      if (p.questions) html += block(t("openQuestions"), questionsBlock(p.questions));
+      if (p.quiz) html += `<div class="card"><a class="btn block" href="#quiz-${id}">${esc(t("startQuiz"))} (${p.quiz.length})</a></div>`;
+    } else {
+      html += block(t("qWhen"), `<p>${E(p.life)}</p>`, "history") + block(t("qTaught"), `<p>${E(p.teaching)}</p>`, p.tag || "counsel")
+        + (p.meaning ? block(t("qMeaning"), `<p>${E(p.meaning)}</p>`) : "")
+        + (p.course ? `<a class="item" href="#course-${p.course}"><span class="grow"><span class="t">${esc(t("coursePaisios"))}</span></span><span class="chev">${ic("chev")}</span></a>` : "")
+        + block(t("qRead"), read) + block(t("qQuotes"), `<p>${esc(t("quotesNote"))}</p>`);
+      if (p.questions) html += block(t("openQuestions"), questionsBlock(p.questions));
+      if (p.quiz) html += `<div class="card"><a class="btn block" href="#quiz-${id}">${esc(t("startQuiz"))} (${p.quiz.length})</a></div>`;
+    }
+    return html;
+  }
+
+  /* ---------- Bücher ---------- */
+  let bookCat = "all";
+  function viewBooks() {
+    const lv = { 1: "levelEasy", 2: "levelMid", 3: "levelHard" };
+    const list = BOOKS.filter(b => bookCat === "all" || b.cat === bookCat);
+    return `<h1>${esc(t("booksTitle"))}</h1><p class="muted">${esc(t("booksIntro"))}</p>
+      <div class="chips" role="tablist"><button class="chip ${bookCat === "all" ? "on" : ""}" data-cat="all">${esc(t("allCategories"))}</button>
+        ${BOOK_CATEGORIES.map(c => `<button class="chip ${bookCat === c.id ? "on" : ""}" data-cat="${c.id}">${E(c.name)}</button>`).join("")}</div>
+      <input type="search" id="bookq" placeholder="${esc(t("bookSearch"))}" aria-label="${esc(t("bookSearch"))}" style="margin-bottom:12px">
+      ${list.map(b => { const ln = b.link ? LINKS[b.link] : null; const cat = BOOK_CATEGORIES.find(c => c.id === b.cat);
+        return `<div class="card bookcard" data-q="${esc(norm(L(b.title) + " " + L(b.author) + " " + L(b.desc)))}"><div class="eyebrow">${E(cat.name)}</div><h3>${E(b.title)}</h3>
+        <p class="small"><b>${esc(t("author"))}:</b> ${E(b.author)}<br><b>${esc(t("language"))}:</b> ${E(b.lang)}<br><b>${esc(t("level"))}:</b> ${esc(t(lv[b.level]))}</p>
+        <p>${E(b.desc)}</p>
+        <span class="badge ${b.full ? "tag-counsel" : "tag-uncertain"}">${esc(b.full ? t("fullText") : t("summaryOnly"))}</span>
+        ${ln ? `<div class="btnrow"><a class="btn ghost" href="${esc(ln.url)}" target="_blank" rel="noopener">${esc(t("openSource"))} ↗</a></div>` : ""}</div>`; }).join("")}
+      <p class="muted" id="booknone" hidden>${esc(t("glossNone"))}</p>
+      <p class="small muted">${esc(t("booksEdNote"))}</p>
+      <p class="small muted">${esc(t("linkCheckNote"))}</p>`;
+  }
+
+  /* ---------- Lernkarten (verteilte Wiederholung) ---------- */
+  let deckSel = "all";
+  function cardState(id) { return S.cards[id]; }
+  function dueCards(includeNew) {
+    const d = today();
+    const due = CARDS.filter(c => (deckSel === "all" || c.deck === deckSel) && cardState(c.id) && cardState(c.id).due <= d);
+    if (!includeNew) {
+      const room = newRoom();
+      const fresh = CARDS.filter(c => (deckSel === "all" || c.deck === deckSel) && !cardState(c.id)).slice(0, room);
+      return due.concat(fresh);
+    }
+    return due;
+  }
+  function newRoom() { const d = today(); if (S.newToday.date !== d) return S.newPerDay; return Math.max(0, S.newPerDay - S.newToday.n); }
+  function rateCard(id, r) {
+    const d = today();
+    let s = S.cards[id];
+    if (!s) { s = { ef: 2.5, int: 0, reps: 0, lapses: 0, due: d }; if (S.newToday.date !== d) S.newToday = { date: d, n: 0 }; S.newToday.n++; }
+    if (r === 0) { s.reps = 0; s.int = 0; s.lapses++; s.ef = Math.max(1.3, s.ef - 0.2); s.due = d; }
+    else if (r === 1) { s.int = s.reps === 0 ? 1 : Math.max(1, Math.round(s.int * 1.2)); s.ef = Math.max(1.3, s.ef - 0.15); s.reps++; s.due = addDays(d, s.int); }
+    else if (r === 2) { s.int = s.reps === 0 ? 1 : (s.reps === 1 ? 3 : Math.round(s.int * s.ef)); s.reps++; s.due = addDays(d, s.int); }
+    else { s.int = s.reps === 0 ? 3 : Math.round(Math.max(1, s.int) * s.ef * 1.3); s.ef += 0.15; s.reps++; s.due = addDays(d, s.int); }
+    S.cards[id] = s; markActivity(); save();
+  }
+  function viewCards() {
+    const inDeck = c => deckSel === "all" || c.deck === deckSel;
+    const all = CARDS.filter(inDeck); const due = all.filter(c => cardState(c.id) && cardState(c.id).due <= today()).length;
+    const nw = all.filter(c => !cardState(c.id)).length;
+    return `<h1>${esc(t("cardsTitle"))}</h1><p class="muted">${esc(t("cardsIntro"))}</p>
+      <div class="chips"><button class="chip ${deckSel === "all" ? "on" : ""}" data-deck="all">${esc(t("allDecks"))}</button>
+        ${DECKS.map(d => `<button class="chip ${deckSel === d.id ? "on" : ""}" data-deck="${d.id}">${E(d.name)}</button>`).join("")}</div>
+      <div class="grid2"><div class="card stat"><b>${due}</b><span class="small muted">${esc(t("dueToday"))}</span></div>
+        <div class="card stat"><b>${Math.min(nw, newRoom())}</b><span class="small muted">${esc(t("newCards"))} (${nw} ${esc(t("total"))})</span></div></div>
+      <a class="btn block" href="#review" id="startrev">${esc(t("startReview"))}</a>
+      <div class="btnrow"><button class="btn ghost block" id="practiceall">${esc(t("practiceAll"))}</button></div>`;
+  }
+  let RV = null;
+  function viewReview() {
+    if (!RV) RV = { queue: dueCards(false).map(c => c.id), flipped: false, n: 0, free: false };
+    if (!RV.queue.length) {
+      const msg = RV.n ? `<div class="card hero stat"><b>${RV.n}</b><p>${esc(t("sessionDone"))}</p></div>` : `<div class="card"><p>${esc(t("noCardsDue"))}</p></div>`;
+      return `<h1>${esc(t("cardsTitle"))}</h1>${msg}<div class="btnrow"><a class="btn" href="#cards" id="revback">${esc(t("back"))}</a><button class="btn ghost" id="practiceall">${esc(t("practiceAll"))}</button></div>`;
+    }
+    const c = CARDS.find(x => x.id === RV.queue[0]); const deck = DECKS.find(d => d.id === c.deck);
+    return `<div class="eyebrow">${E(deck.name)} · ${RV.queue.length}</div>
+      <div class="flash ${RV.flipped ? "flipped" : ""}" id="flash"><div class="inner" role="button" tabindex="0" aria-label="${esc(t("tapToFlip"))}">
+        <div class="face front"><div class="main">${E(c.front)}</div><p class="small muted" style="margin-top:14px">${esc(t("tapToFlip"))}</p></div>
+        <div class="face back"><div class="q">${E(c.front)}</div><div>${E(c.back)}</div></div></div></div>
+      ${RV.flipped ? `<div class="rate"><button class="r0" data-rate="0">${esc(t("again"))}</button><button data-rate="1">${esc(t("hard"))}</button><button data-rate="2">${esc(t("good"))}</button><button class="r3" data-rate="3">${esc(t("easy"))}</button></div>` : `<button class="btn block" id="flipbtn">${esc(t("showAnswer"))}</button>`}`;
+  }
+  function bindReview() {
+    const f = document.getElementById("flash");
+    const flip = () => { RV.flipped = true; render(); };
+    if (f) { f.onclick = flip; f.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } }; }
+    const fb = document.getElementById("flipbtn"); if (fb) fb.onclick = flip;
+    app.querySelectorAll("[data-rate]").forEach(b => b.onclick = () => {
+      const r = +b.getAttribute("data-rate"); const id = RV.queue.shift();
+      if (!RV.free) rateCard(id, r); else markActivity();
+      if (r === 0) RV.queue.push(id);
+      RV.n++; RV.flipped = false; render();
+    });
+    const rb = document.getElementById("revback"); if (rb) rb.onclick = () => { RV = null; };
+    const pa = document.getElementById("practiceall"); if (pa) pa.onclick = () => { RV = { queue: shuffle(CARDS.filter(c => deckSel === "all" || c.deck === deckSel).map(c => c.id)), flipped: false, n: 0, free: true }; go("review"); };
+  }
+
+  /* ---------- Fortschritt ---------- */
+  function viewProgress() {
+    const total = Object.keys(ALL_LESSONS).length; const done = Object.keys(S.done).filter(k => ALL_LESSONS[k]).length;
+    const learned = Object.values(S.cards).filter(s => s.reps >= 2).length;
+    const qs = Object.values(S.quiz); const avg = qs.length ? Math.round(qs.reduce((a, q) => a + q.last / q.total, 0) / qs.length * 100) : 0;
+    const difficult = Object.entries(S.quiz).filter(([, q]) => q.last / q.total < 0.75).map(([id]) => id).filter(id => quizSrc(id));
+    const hardCards = CARDS.filter(c => S.cards[c.id] && S.cards[c.id].lapses >= 2);
+    return `<h1>${esc(t("progressTitle"))}</h1>
+      <div class="grid2">
+        <div class="card stat"><b>${done}/${total}</b><span class="small muted">${esc(t("lessonsDone"))}</span></div>
+        <div class="card stat"><b>${learned}/${CARDS.length}</b><span class="small muted">${esc(t("cardsLearned"))}</span></div>
+        <div class="card stat"><b>${avg}%</b><span class="small muted">${esc(t("quizAvg"))}</span></div>
+        <div class="card stat"><b>${weekDays().filter(x => x.on).length}/7</b><span class="small muted">${esc(t("weekTitle"))}</span></div>
+      </div>
+      <div class="card"><h3>${esc(t("lessonsThisWeek"))}: ${lessonsThisWeek()} / ${S.lessonsPerWeek}</h3>
+        <div class="progressbar"><i style="width:${Math.min(100, Math.round(lessonsThisWeek() / S.lessonsPerWeek * 100))}%"></i></div></div>
+      <div class="card"><h3>${esc(t("difficultTopics"))}</h3>
+        ${difficult.length || hardCards.length ? `<ul class="list">${difficult.map(id => `<li><a class="item" href="${backHref(id)}"><span class="grow"><span class="t">${E(quizTitle(quizSrc(id)))}</span><span class="s">${esc(t("quiz"))}: ${S.quiz[id].last}/${S.quiz[id].total}</span></span><span class="chev">${ic("chev")}</span></a></li>`).join("")}
+          ${hardCards.map(c => `<li class="refline"><span class="grow">${E(c.front)}</span><span class="small muted">${esc(t("cardsTitle"))}</span></li>`).join("")}</ul>` : `<p class="muted">${esc(t("noDifficult"))}</p>`}
+      </div>
+      <a class="item" href="#notes"><span class="grow"><span class="t">${esc(t("notebook"))}</span><span class="s">${esc(t("savedVerses"))}: ${S.verses.length}</span></span><span class="chev">${ic("chev")}</span></a>`;
+  }
+
+  /* ---------- Notizbuch (optional verschlüsselt mit AES-GCM) ---------- */
+  const enc = new TextEncoder(), dec = new TextDecoder();
+  const b64 = buf => btoa(String.fromCharCode.apply(null, new Uint8Array(buf)));
+  const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  async function deriveKey(pw, salt) {
+    const base = await crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveKey"]);
+    return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: 200000, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+  }
+  async function encryptNotes(notes) {
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, encKey, enc.encode(JSON.stringify(notes)));
+    S.enc.iv = b64(iv); S.enc.ct = b64(ct);
+  }
+  async function decryptNotes(pw) {
+    const key = await deriveKey(pw, unb64(S.enc.salt));
+    const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(S.enc.iv) }, key, unb64(S.enc.ct));
+    encKey = key; return JSON.parse(dec.decode(pt));
+  }
+  function notesList() { return S.enc ? unlockedNotes : S.notes; }
+  async function persistNotes(list) {
+    if (S.enc) { unlockedNotes = list; await encryptNotes(list); } else S.notes = list;
+    save();
+  }
+  function viewNotes() {
+    const verses = S.verses.length ? `<div class="card"><h3>${esc(t("savedVerses"))}</h3>${S.verses.map(v => `<div class="refline"><b>${esc(v.ref)}</b><span class="grow small muted">${ALL_LESSONS[v.lid] ? E(ALL_LESSONS[v.lid].title) : ""}</span><button class="star on" data-verse="${esc(v.ref)}" data-lid="${esc(v.lid)}" aria-label="${esc(t("delete"))}">${starIc(true)}</button></div>`).join("")}</div>` : "";
+    if (S.enc && !unlockedNotes) {
+      return `<h1>${esc(t("notebook"))}</h1><div class="card"><p class="okline">${ic("lock", "gold")} ${esc(t("notesLocked"))}</p>
+        <label for="pw">${esc(t("password"))}</label><input type="password" id="pw" autocomplete="current-password">
+        <div class="btnrow"><button class="btn" id="unlock">${esc(t("unlock"))}</button></div><p class="small" id="pwerr" role="alert"></p></div>${verses}`;
+    }
+    const list = notesList().slice().sort((a, b) => b.date.localeCompare(a.date));
+    return `<h1>${esc(t("notebook"))}</h1>
+      <div class="btnrow" style="margin-bottom:12px"><button class="btn" data-newnote="">${ic("plus")} ${esc(t("newNote"))}</button>${S.enc ? `<button class="btn ghost" id="lock">${ic("lock")} ${esc(t("lock"))}</button>` : ""}</div>
+      ${list.length ? list.map(n => `<div class="card"><div class="eyebrow">${esc(n.date)}</div><h3>${esc(n.title || "—")}</h3><p class="pre">${esc(n.body)}</p>
+        <div class="btnrow"><button class="btn ghost" data-edit="${n.id}">${esc(t("edit"))}</button><button class="btn danger" data-del="${n.id}">${esc(t("delete"))}</button></div></div>`).join("") : `<p class="muted">${esc(t("noNotes"))}</p>`}
+      ${verses}
+      ${list.length || S.verses.length ? `<button class="btn ghost block" id="notesexp">${ic("note")} ${esc(t("notesExport"))}</button><textarea id="expbox" rows="6" readonly hidden style="margin-top:10px"></textarea><div style="height:12px"></div>` : ""}
+      <p class="small muted">${esc(S.enc ? t("encActive") : t("encInactive"))} ${esc(t("privacyText"))}</p>`;
+  }
+  /* Notizen und gespeicherte Bibelstellen als einfachen Text ausgeben (Teilen-Menü des iPhones oder Zwischenablage) */
+  function notesText() {
+    const list = notesList().slice().sort((a, b) => b.date.localeCompare(a.date));
+    let out = "OrthodoxPath – " + t("notebook") + "\n\n";
+    list.forEach(n => { out += n.date + " – " + (n.title || "—") + "\n" + (n.body || "") + "\n\n"; });
+    if (S.verses.length) out += t("savedVerses") + ":\n" + S.verses.map(v => "• " + v.ref + (ALL_LESSONS[v.lid] ? " (" + L(ALL_LESSONS[v.lid].title) + ")" : "")).join("\n") + "\n";
+    return out;
+  }
+  function bindNotes() {
+    const ub = document.getElementById("unlock");
+    if (ub) {
+      const doUnlock = async () => {
+        try { unlockedNotes = await decryptNotes(document.getElementById("pw").value); render(); }
+        catch (e) { document.getElementById("pwerr").textContent = t("wrongPassword"); }
+      };
+      ub.onclick = doUnlock; document.getElementById("pw").onkeydown = e => { if (e.key === "Enter") doUnlock(); };
+    }
+    const lk = document.getElementById("lock"); if (lk) lk.onclick = () => { unlockedNotes = null; encKey = null; render(); };
+    const ex = document.getElementById("notesexp");
+    if (ex) ex.onclick = async () => {
+      const txt = notesText();
+      try { if (navigator.share) { await navigator.share({ title: "OrthodoxPath", text: txt }); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+      try { await navigator.clipboard.writeText(txt); toast(t("notesExported")); }
+      catch (e) { const box = document.getElementById("expbox"); box.hidden = false; box.value = txt; box.focus(); box.select(); }
+    };
+    app.querySelectorAll("[data-edit]").forEach(b => b.onclick = () => openNoteEditor(b.getAttribute("data-edit")));
+    app.querySelectorAll("[data-del]").forEach(b => b.onclick = () => confirmBox(t("confirmDelete"), async () => {
+      await persistNotes(notesList().filter(n => n.id !== b.getAttribute("data-del"))); render();
+    }));
+  }
+  function openNoteEditor(id, presetTitle) {
+    if (S.enc && !unlockedNotes) { go("notes"); return; }
+    const n = id ? notesList().find(x => x.id === id) : { title: presetTitle || "", body: "" };
+    sheet(`<h3>${esc(id ? t("edit") : t("newNote"))}</h3>
+      <label for="nt">${esc(t("noteTitle"))}</label><input type="text" id="nt" value="${esc(n.title)}">
+      <label for="nb">${esc(t("noteBody"))}</label><textarea id="nb" rows="8">${esc(n.body)}</textarea>
+      <div class="btnrow"><button class="btn" id="nsave">${esc(t("save"))}</button><button class="btn ghost" id="ncancel">${esc(t("cancel"))}</button></div>`,
+      (el, close) => {
+        el.querySelector("#ncancel").onclick = close;
+        el.querySelector("#nsave").onclick = async () => {
+          const title = el.querySelector("#nt").value.trim(), body = el.querySelector("#nb").value;
+          let list = notesList().slice();
+          if (id) list = list.map(x => x.id === id ? Object.assign({}, x, { title, body, date: today() }) : x);
+          else list.push({ id: "n" + Date.now().toString(36), title, body, date: today() });
+          await persistNotes(list); close(); toast(t("save")); if (route() === "notes") render();
+        };
+      });
+  }
+
+  /* ---------- Glossar ---------- */
+  function viewGlossary() {
+    const items = GLOSSARY.map(g => ({ term: isSr() ? L({ de: g[1], sr: g[2] }) : g[1], def: isSr() ? L({ de: g[3], sr: g[4] }) : g[3] }))
+      .sort((a, b) => a.term.localeCompare(b.term, lang() === "de" ? "de" : "sr"));
+    return `<h1>${esc(t("glossary"))}</h1><p class="muted">${esc(t("glossaryIntro"))}</p>
+      <input type="search" id="glossq" placeholder="${esc(t("glossSearch"))}" aria-label="${esc(t("glossSearch"))}" style="margin-bottom:4px">
+      ${(() => { const groups = []; items.forEach(i => { const k = i.term.charAt(0).toUpperCase(); let g = groups.find(x => x.k === k); if (!g) groups.push(g = { k, list: [] }); g.list.push(i); });
+        return groups.map(g => `<div class="glgroup"><div class="sh">${esc(g.k)}</div><ul class="list">${g.list.map(i => `<li class="glo" data-q="${esc(norm(i.term + " " + i.def))}"><span class="gt">${esc(i.term)}</span><span class="gd">${esc(i.def)}</span></li>`).join("")}</ul></div>`).join(""); })()}
+      <p class="muted" id="glossnone" hidden>${esc(t("glossNone"))}</p>`;
+  }
+  function bindGlossary() {
+    const q = document.getElementById("glossq"); if (!q) return;
+    q.oninput = () => { const v = norm(q.value.trim()); let any = false;
+      app.querySelectorAll(".glgroup").forEach(g => { let n = 0; g.querySelectorAll(".glo").forEach(li => { const ok = !v || li.getAttribute("data-q").includes(v); li.hidden = !ok; if (ok) n++; }); g.hidden = !n; if (n) any = true; });
+      document.getElementById("glossnone").hidden = any; };
+  }
+
+  /* ---------- Fragenhilfe (regelbasierte Suche, keine KI) ---------- */
+  function norm(s) {
+    return translit(String(s).toLowerCase()).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "dj").replace(/[^a-z0-9äöüß ]/g, " ");
+  }
+  function searchIndex() {
+    const idx = [];
+    const both = o => (o && typeof o === "object") ? (o.de || "") + " " + (o.sr || "") : "";
+    GLOSSARY.forEach(g => idx.push({ type: "glossary", title: { de: g[1], sr: g[2] }, text: { de: g[3], sr: g[4] }, hay: norm(g.join(" ")), href: "#glossary" }));
+    Object.values(ALL_LESSONS).forEach(l => {
+      const parts = [both(l.title), both(l.summary), both(l.intro)];
+      (l.sections || []).forEach(s => parts.push(both(s.h), both(s.simple)));
+      (l.keyPoints || []).forEach(k => parts.push(both(k)));
+      idx.push({ type: "lesson", title: l.title, text: l.ref || (l.sections && l.sections[0].h), hay: norm(parts.join(" ")), href: "#lesson-" + l.id });
+    });
+    ICONS_LEX.forEach(i => idx.push({ type: "icon", title: i.name, text: { de: "", sr: "" }, hay: norm([both(i.name), both(i.look), both(i.mean)].join(" ")), href: "#icons" }));
+    OVERVIEWS.forEach(o => idx.push({ type: "book", title: o.title, text: { de: o.keys[0].ref.de, sr: o.keys[0].ref.sr }, hay: norm([both(o.title), both(o.about), both(o.christ)].join(" ")), href: "#book-" + o.book }));
+    Object.values(PEOPLE).forEach(p => idx.push({ type: "person", title: p.name, text: p.lived, hay: norm([both(p.name), both(p.who), both(p.taught), both(p.life), both(p.teaching)].join(" ")), href: "#person-" + p.id }));
+    return idx;
+  }
+  let IDX = null; let lastQuery = "";
+  function runSearch(q) {
+    IDX = IDX || searchIndex();
+    const toks = norm(q).split(/\s+/).filter(w => w.length > 2);
+    if (!toks.length) return [];
+    return IDX.map(e => {
+      let sc = 0; const ht = norm((e.title.de || "") + " " + (e.title.sr || ""));
+      toks.forEach(w => { const stem = w.length > 5 ? w.slice(0, w.length - 2) : w; if (e.hay.includes(stem)) sc += 1; if (ht.includes(stem)) sc += 2; });
+      return { e, sc };
+    }).filter(x => x.sc > 0).sort((a, b) => b.sc - a.sc).slice(0, 10).map(x => x.e);
+  }
+  function viewAsk() {
+    const res = lastQuery ? runSearch(lastQuery) : null;
+    const nq = lastQuery ? norm(lastQuery) : "";
+    const crisis = /suizid|selbstmord|umbringen|nicht mehr leben|samoubist|ubiti se|ubijem se/.test(nq);
+    const priest = /beicht|sunde|priester|geistlich|ispovest|ispoved|greh|svestenik|duhovnik|pricest/.test(nq);
+    return `<h1>${esc(t("askTitle"))}</h1><p class="muted">${esc(t("askHint"))}</p>
+      <div class="card"><form id="askform"><label for="q" class="sr-only">${esc(t("search"))}</label>
+        <input type="search" id="q" placeholder="${esc(t("askPlaceholder"))}" value="${esc(lastQuery)}" enterkeyhint="search">
+        <div class="btnrow"><button class="btn" type="submit">${esc(t("search"))}</button></div></form>
+        <p class="small muted" style="margin-top:10px">${esc(t("askNotAi"))}</p></div>
+      ${crisis ? `<div class="banner" role="alert">${esc(t("askCrisis"))}</div>` : ""}
+      ${priest ? `<div class="card"><p class="small" style="margin:0">${ic("cross", "gold")} ${esc(t("askPriest"))}</p></div>` : ""}
+      ${res ? (res.length ? `<h3>${esc(t("results"))}</h3><ul class="list">${res.map(e => `<li><a class="item" href="${e.href}"><span class="grow"><span class="t">${E(e.title)}</span><span class="s">${E(e.text)}</span></span><span class="chev">${ic("chev")}</span></a></li>`).join("")}</ul>`
+        : `<div class="card"><p>${esc(t("askNoResult"))}</p></div>`) + `<button class="btn ghost block" data-newnote="${esc(lastQuery)}">${ic("pen")} ${esc(t("askSaveNote"))}</button>` : ""}`;
+  }
+  function bindAsk() {
+    const f = document.getElementById("askform");
+    if (f) f.onsubmit = e => { e.preventDefault(); lastQuery = document.getElementById("q").value.trim(); render(); };
+  }
+
+  /* ---------- Mehr ---------- */
+  function viewMore() {
+    return `<h1>${esc(t("navMore"))}</h1>
+      <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
+        ${navItem("prayers", "candle", t("prayersTitle"))}${navItem("calendar", "calendar", t("calTitle"))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("icons", "frame", t("iconsTitle"))}
+      </ul>
+      <div class="sh">${esc(t("gLearn"))}</div><ul class="list">
+        ${navItem("books", "library", t("navBooks"), t("booksIntro"))}${navItem("glossary", "text", t("glossary"))}${navItem("ask", "search", t("askTitle"))}
+      </ul>
+      <div class="sh">${esc(t("gPersonal"))}</div><ul class="list">
+        ${navItem("progress", "chart", t("navProgress"))}${navItem("notes", "note", t("notebook"))}
+      </ul>
+      <div class="sh">${esc(t("gApp"))}</div><ul class="list">
+        ${navItem("prefs", "gear", t("navSettings"))}
+      </ul>
+      <div class="card"><h3>${esc(t("sAbout"))}</h3><p class="small muted" style="margin:0">${esc(t("aboutText"))}</p><p class="small muted" style="margin:8px 0 0">Version ${esc(window.OP_VERSION || "")}</p></div>`;
+  }
+
+  /* ---------- Einstellungen ---------- */
+  function viewPrefs() {
+    const seg = (name, opts, cur) => `<div class="seg" data-seg="${name}">${opts.map(([v, label]) => `<button data-v="${v}" class="${String(cur) === String(v) ? "on" : ""}">${esc(label)}</button>`).join("")}</div>`;
+    return `<h1>${esc(t("settingsTitle"))}</h1>
+      <div class="card"><h3>${esc(t("sLanguage"))}</h3>${seg("lang", [["de", "Deutsch"], ["sr-cyr", "Ћирилица"], ["sr-lat", "Latinica"]], lang())}</div>
+      <div class="card"><h3>${esc(t("calSetting"))}</h3>${seg("calendar", [["julian", t("calJulian")], ["revised", t("calRevised")]], cal())}<p class="small muted" style="margin-top:8px">${esc(t("calSettingHelp"))}</p></div>
+      <div class="card"><h3>${esc(t("sTheme"))}</h3>${seg("theme", [["dark", t("themeDark")], ["light", t("themeLight")]], S.theme)}
+        <h3 style="margin-top:14px">${esc(t("sFont"))}</h3>${seg("font", [["0.9", "A−"], ["1", "A"], ["1.15", "A+"], ["1.3", "A++"]], S.font)}</div>
+      <div class="card"><h3>${esc(t("sPace"))}</h3><label>${esc(t("sCardsPerDay"))}</label>${seg("newPerDay", [[5, "5"], [10, "10"], [20, "20"], [40, "40"]], S.newPerDay)}
+        <label>${esc(t("sLessonsPerWeek"))}</label>${seg("lessonsPerWeek", [[1, "1"], [3, "3"], [5, "5"], [7, "7"]], S.lessonsPerWeek)}</div>
+      <div class="card"><h3>${esc(t("sPrivacy"))}</h3><p class="small">${esc(t("privacyText"))}</p>
+        <p><b>${esc(S.enc ? t("encActive") : t("encInactive"))}</b></p>
+        ${S.enc ? `<button class="btn ghost" id="encoff">${esc(t("encOff"))}</button>` : `<label for="p1">${esc(t("password"))}</label><input type="password" id="p1" autocomplete="new-password"><label for="p2">${esc(t("password"))} (2×)</label><input type="password" id="p2" autocomplete="new-password"><div class="btnrow"><button class="btn" id="encon">${esc(t("encOn"))}</button></div>`}
+        <p class="small muted">${esc(t("encWarn"))}</p><p class="small" id="encmsg" role="alert"></p></div>
+      <div class="card"><h3>${esc(t("remTitle"))}</h3><p class="small">${esc(t("remText"))}</p>
+        <ol class="steps">${["remS1", "remS2", "remS3", "remS4"].map(k => `<li>${esc(t(k))}</li>`).join("")}</ol>
+        <button class="btn ghost block" id="copylink">${ic("bell")} ${esc(t("remCopy"))}</button>
+        <input type="text" id="linkbox" readonly hidden style="margin-top:8px">
+        <p class="small muted" style="margin:8px 0 0">${esc(t("remNote"))}</p></div>
+      <div class="card"><h3>${esc(t("sBackup"))}</h3><p class="small">${esc(t("backupText"))}</p>
+        <button class="btn ghost block" id="copyb">${esc(t("copyBackup"))}</button>
+        <textarea id="backupbox" rows="4" readonly hidden></textarea>
+        <label for="importbox">${esc(t("importBackup"))}</label><textarea id="importbox" rows="3"></textarea>
+        <div class="btnrow"><button class="btn ghost" id="importb">${esc(t("importNow"))}</button></div></div>
+      <div class="card"><h3>${esc(t("sAbout"))}</h3><p class="small">${esc(t("aboutText"))}</p><p class="small">${esc(t("disclaimer"))}</p>
+        <p class="small muted">${esc(lang() === "de" ? t("deTranslationNote") : t("srTranslationNote"))}</p>
+        <button class="btn danger" id="reset">${esc(t("resetAll"))}</button></div>`;
+  }
+  function bindPrefs() {
+    const cl = document.getElementById("copylink");
+    if (cl) cl.onclick = async () => {
+      const url = location.href.split("#")[0] + "#prayers"; const box = document.getElementById("linkbox");
+      try { await navigator.clipboard.writeText(url); toast(t("remCopied")); }
+      catch (e) { box.hidden = false; box.value = url; box.focus(); box.select(); }
+    };
+    app.querySelectorAll("[data-seg]").forEach(sg => sg.querySelectorAll("button").forEach(b => b.onclick = () => {
+      const name = sg.getAttribute("data-seg"); let v = b.getAttribute("data-v");
+      if (["font"].includes(name)) v = parseFloat(v); if (["newPerDay", "lessonsPerWeek"].includes(name)) v = parseInt(v, 10);
+      S[name] = v; save(); IDX = null; render();
+    }));
+    const msg = m => { const el = document.getElementById("encmsg"); if (el) el.textContent = m; };
+    const on = document.getElementById("encon");
+    if (on) on.onclick = async () => {
+      const p1 = document.getElementById("p1").value, p2 = document.getElementById("p2").value;
+      if (!p1 || p1 !== p2) { msg(t("wrongPassword")); return; }
+      if (!window.crypto || !crypto.subtle) { msg(t("error")); return; }
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      encKey = await deriveKey(p1, salt);
+      const plain = S.notes.slice();
+      S.enc = { salt: b64(salt) }; unlockedNotes = plain; await encryptNotes(plain); S.notes = []; save(); render();
+    };
+    const off = document.getElementById("encoff");
+    if (off) off.onclick = () => {
+      if (!unlockedNotes) { go("notes"); return; }
+      S.notes = unlockedNotes; S.enc = null; unlockedNotes = null; encKey = null; save(); render();
+    };
+    document.getElementById("copyb").onclick = async () => {
+      const copy = Object.assign({}, S); if (S.enc) copy.notes = [];
+      const text = JSON.stringify({ app: "OrthodoxPath", v: 1, data: copy });
+      const box = document.getElementById("backupbox"); box.value = text; box.hidden = false;
+      try { await navigator.clipboard.writeText(text); toast(t("copied")); }
+      catch (e) { box.focus(); box.select(); toast(t("copyFailed")); }
+    };
+    document.getElementById("importb").onclick = () => {
+      try {
+        const obj = JSON.parse(document.getElementById("importbox").value);
+        if (!obj || obj.app !== "OrthodoxPath" || !obj.data) throw new Error("format");
+        S = Object.assign(JSON.parse(JSON.stringify(DEFAULT)), obj.data); unlockedNotes = null; encKey = null; save(); toast(t("importOk")); render();
+      } catch (e) { toast(t("importFail")); }
+    };
+    document.getElementById("reset").onclick = () => confirmBox(t("confirmDelete"), () => {
+      try { localStorage.removeItem(KEY); } catch (e) { }
+      S = JSON.parse(JSON.stringify(DEFAULT)); unlockedNotes = null; encKey = null; QZ = null; RV = null; location.hash = "home"; render();
+    });
+  }
+
+  function bindCards() {
+    app.querySelectorAll("[data-deck]").forEach(b => b.onclick = () => { deckSel = b.getAttribute("data-deck"); RV = null; render(); });
+    const sr = document.getElementById("startrev"); if (sr) sr.onclick = () => { RV = null; };
+    const pa = document.getElementById("practiceall"); if (pa) pa.onclick = () => { RV = { queue: shuffle(CARDS.filter(c => deckSel === "all" || c.deck === deckSel).map(c => c.id)), flipped: false, n: 0, free: true }; go("review"); };
+  }
+  function bindLesson(r) { const b = document.getElementById("donebtn"); if (b) b.onclick = () => toggleDone(r.slice(7)); }
+  function bindBooks() {
+    app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { bookCat = b.getAttribute("data-cat"); render(); });
+    const q = document.getElementById("bookq");
+    if (q) q.oninput = () => { const v = norm(q.value.trim()); let n = 0;
+      app.querySelectorAll(".bookcard").forEach(c => { const ok = !v || c.getAttribute("data-q").includes(v); c.hidden = !ok; if (ok) n++; });
+      document.getElementById("booknone").hidden = n > 0; };
+  }
+
+  function bindHome() { const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary };
+
+  /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
+  window.__OP = { get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };
+
+  /* PWA: Service Worker nur in der eigenständigen Version */
+  if (window.OP_PWA && "serviceWorker" in navigator) {
+    try { navigator.serviceWorker.register("sw.js").catch(() => { }); } catch (e) { }
+  }
+  render();
+})();
