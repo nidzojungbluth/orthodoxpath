@@ -16,7 +16,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 | Datenmodell | Ein JSON-Objekt im `localStorage` (Schlüssel `orthodoxpath_v1`): Sprache, Einstellungen, erledigte Lektionen, Quizwerte, Lernkarten-Zustand, Notizen (optional verschlüsselt), Gebetsfavoriten, Anliegen, Lesepläne, Aktivität |
 | Datenbank / API | Keine. Keine Server-Schnittstellen, keine Drittanbieter-Aufrufe zur Laufzeit |
 | Authentifizierung | Keine (bewusst). Optionales Passwort nur für die lokale Verschlüsselung der Notizen (AES-GCM, PBKDF2 200 000 Runden) |
-| Hosting | GitHub Pages (Repo `nidzojungbluth/orthodoxpath`, nur die gebaute PWA) + privates Claude-Artefakt |
+| Hosting | GitHub Pages (Repo `nidzojungbluth/orthodoxpath`: gebaute PWA im Hauptverzeichnis, Quellcode in `source/`) + privates Claude-Artefakt |
 | Offline | Service Worker „cache first“; Offline-Test im Browser bestanden |
 | Tests | `tests/content.test.js` (~13 300 Inhaltsprüfungen), `tests/e2e.js` (47 Bedienungsprüfungen, Chromium, simuliertes iPhone 390×844), `tests/pwa-offline.js` |
 
@@ -50,7 +50,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 
 ## 4. Bekannte Probleme und Risiken (nach Schwere)
 
-1. **Quellcode liegt nur in der Arbeitsumgebung.** Im GitHub-Repo ist nur die gebaute App. Geht die Umgebung verloren, ist nur die gebündelte `index.html` übrig (rekonstruierbar, aber mühsam). → ROADMAP P1-01
+1. ~~Quellcode nur in der Arbeitsumgebung~~ – **erledigt (1.11.2026):** Quellcode, Tests und Build-Skript liegen im Repo unter `source/`; frischer Klon baut eine identische App, Tests grün.
 2. **Datenverlust-Risiko im Browser:** Safari kann Website-Daten löschen, wenn die Seite länger nicht genutzt und **nicht** zum Home-Bildschirm hinzugefügt wurde. Die Sicherung ist manuell. → P1-03
 3. **Serbische Texte nicht muttersprachlich geprüft** (theologische Fachbegriffe, Grammatik). → P1-04
 4. **Kein Test auf echtem iPhone/Safari** durch Claude möglich (nur Chromium-Simulation). → P1-05

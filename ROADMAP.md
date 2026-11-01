@@ -10,7 +10,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 
 ## Priorität 1 – Fundament
 
-**P1-01 Quellcode sichern** (Abhängigkeit: keine · Aufwand S)
+**P1-01 Quellcode sichern** ✅ erledigt 1.11.2026 (Abhängigkeit: keine · Aufwand S)
 - Ziel: Quellcode, Tests und Projektdokumente dauerhaft im GitHub-Repo.
 - Umsetzung: `src/`, `tests/`, `build.js`, die 4 Planungsdokumente in einen Ordner `source/` des Repos (GitHub Pages liefert weiterhin `index.html` im Hauptverzeichnis aus). Backups (`.tgz`) nicht ins Repo.
 - Test: frischer Klon → `node build.js` → Tests grün.
