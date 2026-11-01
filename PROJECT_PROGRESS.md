@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 2.7.0 (1. November 2026)
+**Aktuelle Version:** 2.8.0 (1. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -20,7 +20,7 @@
 
 | Bereich | Stand |
 |---|---|
-| Bibelschule | 41 volle Lektionen (je 11 Teile, Fragen, Quiz) + 27 Kurzüberblicke → alle 39 Bucheinträge abgedeckt |
+| Bibelschule | 44 volle Lektionen (je 11 Teile, Fragen, Quiz) + 27 Kurzüberblicke → alle 39 Bucheinträge abgedeckt |
 | Theologie-Akademie | Kurs A (7), Paisios-Kurs (9), Kurs D (4), Kurs E Liturgie & Kirchenjahr (6, neu: Chrysostomus-, Basilius- und Vorgeweihte Liturgie), Glaubensbekenntnis |
 | Heilige & Kirchenväter | 10 Kirchenväter, 28 Heilige (inkl. Maria von Ägypten, Lukas von Simferopol, Nikolaus, Georg, Demetrios, Petka, Stefan Dečanski, Apostel Andreas, Spyridon, Katharina, Prokopios, Antonius der Große, Arsenije Sremac, Ignatius von Antiochien, Johannes von Rila), alle mit Fragen und Quiz |
 | Gebetsbuch | Morgen- und Abendordnung, 14 Themen (Essen, Arbeit, Angst, Versuchung, Vergebung, Familie, Kranke, Trauer, Verstorbene, Christus, Gottesgebärerin, Heilige, Dank, Fastenzeit), 30 Gebete, gespeicherte Gebete, Gebetsanliegen |
@@ -32,6 +32,14 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 2.8
+
+- Bibellektionen Josua 3 (Durch den Jordan), 1 Timotheus 2 (Betet für alle Menschen), Levitikus 19 (Seid heilig).
+- Neu: Vor-/Zurück-Navigation am Ende jeder Lektion (innerhalb Bibelschule bzw. Kurs).
+- Neu: „Zuletzt geöffnet“ auf der Startseite, wenn eine angefangene Lektion nicht die nächste im Lernweg ist.
+- Neu: Anleitung für Gebetserinnerungen über die iPhone-App „Erinnerungen“ mit Knopf zum Kopieren des Gebetsbuch-Links (Einstellungen).
+- 3 neue Bedienungstests (45 insgesamt).
 
 ## Version 2.7
 
@@ -94,8 +102,8 @@
 
 ## Tests
 
-- `node tests/content.test.js` – ca. 12 000 Prüfungen: Vollständigkeit DE/SR, keine gemischten Schriften, Quiz-Konsistenz, Links, Kalenderberechnung (Ostern 2024–2030, Fastenzeiten, beide Kalender), Gebete, Heilige des Tages.
-- `node tests/e2e.js` – 42 Prüfungen im simulierten iPhone-Viewport (Chromium): alle Ansichten in 3 Sprachvarianten, Quiz, Karten, Notizen inkl. Verschlüsselung, Gebetsbuch, Kalenderumschaltung, Fragenhilfe, Speichern nach Neuladen.
+- `node tests/content.test.js` – ca. 12 300 Prüfungen: Vollständigkeit DE/SR, keine gemischten Schriften, Quiz-Konsistenz, Links, Kalenderberechnung (Ostern 2024–2030, Fastenzeiten, beide Kalender), Gebete, Heilige des Tages.
+- `node tests/e2e.js` – 45 Prüfungen im simulierten iPhone-Viewport (Chromium): alle Ansichten in 3 Sprachvarianten, Quiz, Karten, Notizen inkl. Verschlüsselung, Gebetsbuch, Kalenderumschaltung, Fragenhilfe, Speichern nach Neuladen.
 - Offline-Test des Service Workers (Chromium).
 - Nicht automatisiert möglich: Test auf echtem iPhone/Safari – erfolgt durch den Nutzer.
 
@@ -105,14 +113,14 @@
 - **Tägliche Schriftlesungen** (Leseordnung der Kirche) fehlen noch.
 - **Heilige des Tages:** nur Heilige, die in der App ein Profil haben; vollständiger Kalender über den Prolog von Ohrid (Link).
 - **Vollständiger Bibeltext** in der App: keine frei lizenzierte deutsche orthodoxe Bibel verfügbar; Verweis auf die eigene Bibel bzw. serbisches NT (Svetosavlje).
-- **Erinnerungen an Gebetszeiten:** Web-Apps auf dem iPhone können nur eingeschränkt benachrichtigen; noch nicht umgesetzt.
-- 8 Bibelbücher haben erst einen Kurzüberblick, noch keine volle Lektion (past, lev, num, josh, chr, ezr, bar, esd).
+- **Erinnerungen an Gebetszeiten:** Web-Apps auf dem iPhone können nicht zuverlässig benachrichtigen; stattdessen Anleitung in den Einstellungen (Erinnerungen-App mit Link zum Gebetsbuch).
+- 5 Bibelbücher haben erst einen Kurzüberblick, noch keine volle Lektion (num, chr, ezr, bar, esd).
 - Serbische Texte sollten von einem Muttersprachler bzw. Priester gegengelesen werden.
 
 ## Nächste Schritte (Reihenfolge)
 
-1. Weitere volle Bibellektionen für die 8 Bücher mit Kurzüberblick (z. B. Josua 3, 1 Tim 2, Levitikus 19, Numeri 21, Esra/Nehemia, Baruch 3).
-2. Weitere Heilige mit Gedenktagen (z. B. hl. Jovan Vladimir, hl. Petar Cetinjski, hl. Polykarp, hl. Theodosius der Große).
+1. Volle Bibellektionen für die letzten 5 Bücher mit Kurzüberblick (Numeri 21, 2 Chronik / Nehemia, Baruch 3, 3 Esra).
+2. Auf Wunsch des Nutzers vorerst **keine weiteren Heiligen**; Schwerpunkt auf Bibelbücher und Funktionen (z. B. Lesezeichen/Weiterlesen in Leseplänen, Notizen exportieren, Bibliothek ausbauen).
 3. Gebetsbuch erweitern (z. B. Gebete vor und nach der Kommunion – nur mit geprüftem Wortlaut); echter Test auf dem iPhone durch den Nutzer.
 4. Tägliche Schriftlesungen (Leseordnung) – nur, wenn eine verlässliche Quelle eingebunden werden kann.
 5. Anleitung für Gebetserinnerungen über die iOS-Kurzbefehle-App.

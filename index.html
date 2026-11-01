@@ -360,11 +360,18 @@ main > .wrap { animation: opFade .3s var(--ease); }
 .glo[hidden], .glgroup[hidden] { display: none; }
 .glo .gt { display: block; font-family: var(--serif); font-size: 1.22em; font-weight: 600; color: var(--gold2); line-height: 1.25; }
 .glo .gd { display: block; color: var(--text); font-size: .95em; margin-top: 3px; }
+
+/* Schritt-Anleitung */
+.steps { margin: 6px 0 12px; padding-left: 0; list-style: none; counter-reset: st; }
+.steps li { counter-increment: st; position: relative; padding: 6px 0 6px 38px; font-size: .94em; }
+.steps li::before { content: counter(st); position: absolute; left: 0; top: 5px; width: 26px; height: 26px; border-radius: 50%; background: var(--goldsoft); color: var(--gold2); font-weight: 700; font-size: .82em; display: flex; align-items: center; justify-content: center; }
+/* Lektionsnavigation */
+.lnav .item .s { margin: 0 0 2px; text-transform: uppercase; letter-spacing: .1em; font-size: .68em; font-weight: 700; color: var(--gold); }
 </style>
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "2.7.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "2.8.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -509,6 +516,10 @@ const UI = {
     menu: "Menü",
     quizAgain: "Noch einmal", quizGentle: "Fehler gehören zum Lernen. Beim Wiederholen festigt sich das Wissen.",
     glossSearch: "Begriff suchen …", glossNone: "Kein passender Begriff gefunden.",
+    prevLesson: "Vorherige Lektion", nextLessonL: "Nächste Lektion", lastOpened: "Zuletzt geöffnet",
+    remTitle: "Gebetserinnerungen", remText: "Web-Apps können auf dem iPhone keine zuverlässigen täglichen Erinnerungen senden. Mit der App „Erinnerungen“ geht es trotzdem – ganz ohne Datenweitergabe:",
+    remS1: "Tippe unten auf „Link kopieren“ – das ist der Link zum Gebetsbuch.", remS2: "Öffne die App „Erinnerungen“ und lege eine neue Erinnerung an, z. B. „Morgengebet“.", remS3: "Tippe auf „i“ (Details), aktiviere Datum und Uhrzeit und wähle bei „Wiederholen“ „Täglich“.", remS4: "Füge den Link im Feld „URL“ ein. Beim Tippen auf die Erinnerung öffnet sich das Gebetsbuch.",
+    remNote: "Die Bezeichnungen können je nach iOS-Version leicht abweichen.", remCopy: "Link kopieren", remCopied: "Link kopiert",
     hExplore: "Entdecken", hToday: "Heute", tileCal: "Kalender", tileReview: "Wiederholen", tileAsk: "Fragen",
     gLearn: "Lernen", gFaith: "Glaube und Gottesdienst", gPersonal: "Persönlich", gApp: "App",
     sAbout: "Über die App", aboutText: "OrthodoxPath ist kostenlos, werbefrei und funktioniert ohne Konto. Alle Daten bleiben auf deinem Gerät. Die Inhalte ersetzen nicht das Gespräch mit deinem Priester.",
@@ -711,6 +722,10 @@ const UI = {
     menu: "Мени",
     quizAgain: "Још једном", quizGentle: "Грешке су део учења. Понављањем се знање учвршћује.",
     glossSearch: "Претражи појам …", glossNone: "Није пронађен одговарајући појам.",
+    prevLesson: "Претходна лекција", nextLessonL: "Следећа лекција", lastOpened: "Последње отворено",
+    remTitle: "Подсетници за молитву", remText: "Веб-апликације на ајфону не могу да шаљу поуздане дневне подсетнике. Помоћу апликације „Подсетници“ ипак иде – без слања података:",
+    remS1: "Додирните доле „Копирај везу“ – то је веза ка молитвенику.", remS2: "Отворите апликацију „Подсетници“ и направите нови подсетник, нпр. „Јутарња молитва“.", remS3: "Додирните „i“ (детаљи), укључите датум и време и код „Понављај“ изаберите „Дневно“.", remS4: "Налепите везу у поље „URL“. Када додирнете подсетник, отвара се молитвеник.",
+    remNote: "Називи се могу мало разликовати зависно од верзије система.", remCopy: "Копирај везу", remCopied: "Веза копирана",
     hExplore: "Истражи", hToday: "Данас", tileCal: "Календар", tileReview: "Понављање", tileAsk: "Питања",
     gLearn: "Учење", gFaith: "Вера и богослужење", gPersonal: "Лично", gApp: "Апликација",
     sAbout: "О апликацији", aboutText: "OrthodoxPath је бесплатан, без реклама и ради без налога. Сви подаци остају на вашем уређају. Садржаји не замењују разговор са вашим свештеником.",
@@ -3914,6 +3929,230 @@ const BIBLE = {
         { q: { de: "Welche Stelle unter dem Kreuz erinnert an Weish 2,18?", sr: "Које место под крстом подсећа на Прем 2,18?" },
           options: [{ de: "Mt 27,43: Er hat auf Gott vertraut …", sr: "Мт 27,43: Уздао се у Бога …" }, { de: "Joh 3,16", sr: "Јн 3,16" }, { de: "Gen 1,1", sr: "Пост 1,1" }], correct: 0 }
       ]
+    },
+  {
+      id: "bib-josh3", book: "josh", order: 42,
+      title: { de: "Durch den Jordan ins verheißene Land", sr: "Кроз Јордан у обећану земљу" },
+      ref: { de: "Josua 3,1–17 und 4,1–9", sr: "Исус Навин 3,1–17 и 4,1–9" },
+      intro: {
+        de: "Nach dem Tod des Mose führt Josua das Volk Israel. Sein Name ist auf Hebräisch derselbe wie der Name Jesus („Gott rettet“). Josua 3 erzählt, wie Israel durch den Jordan in das verheißene Land zieht.",
+        sr: "После Мојсијеве смрти Исус Навин води народ Израиљски. Његово име је на јеврејском исто као име Исус („Бог спасава“). 3. глава књиге Исуса Навина приповеда како Израиљ прелази Јордан у обећану земљу."
+      },
+      introTag: "history",
+      context: {
+        de: "Vierzig Jahre war Israel durch die Wüste gezogen. Nun steht es am Jordan, der zur Erntezeit über die Ufer getreten ist. Die Bundeslade, das Zeichen der Gegenwart Gottes, geht voran.",
+        sr: "Четрдесет година Израиљ је ишао кроз пустињу. Сада стоји на Јордану, који се у време жетве излио из корита. Ковчег завета, знак Божијег присуства, иде напред."
+      },
+      reading: [
+        { ref: { de: "Jos 3,1–8", sr: "Ис Нав 3,1–8" }, note: { de: "Die Lade geht voran.", sr: "Ковчег иде напред." } },
+        { ref: { de: "Jos 3,14–17", sr: "Ис Нав 3,14–17" }, note: { de: "Das Wasser bleibt stehen.", sr: "Вода се зауставља." } },
+        { ref: { de: "Jos 4,1–9", sr: "Ис Нав 4,1–9" }, note: { de: "Zwölf Steine zur Erinnerung.", sr: "Дванаест камења за спомен." } }
+      ],
+      summary: {
+        de: "Josua sagt dem Volk: Heiligt euch, denn morgen wird der Herr Wunder unter euch tun. Die Priester tragen die Bundeslade voran. Als ihre Füße das Wasser des Jordan berühren, bleibt das Wasser von oben her stehen wie ein Damm, und das Volk zieht auf trockenem Boden hindurch, während die Priester mit der Lade mitten im Fluss stehen. Danach lässt Josua zwölf Männer, einen aus jedem Stamm, zwölf Steine aus dem Jordan nehmen. Sie sollen ein Zeichen sein: Wenn eure Kinder fragen, was diese Steine bedeuten, sollt ihr sagen, dass das Wasser des Jordan vor der Lade des Herrn stehen blieb.",
+        sr: "Исус Навин каже народу: Осветите се, јер ће сутра Господ учинити чудеса међу вама. Свештеници носе ковчег завета напред. Када им ноге дотакну воду Јордана, вода одозго стане као насип, и народ прелази по сувом, док свештеници са ковчегом стоје усред реке. Затим Исус Навин наређује да дванаест људи, по један из сваког племена, узму дванаест камења из Јордана. Она треба да буду знак: када вас деца запитају шта значе ово камење, реците да је вода Јордана стала пред ковчегом Господњим."
+      },
+      interp: {
+        simple: {
+          de: "Gott führt sein Volk sicher durch das, was unmöglich scheint. Die Steine erinnern daran: Was Gott getan hat, soll man nicht vergessen, sondern den Kindern erzählen.",
+          sr: "Бог безбедно води свој народ кроз оно што изгледа немогуће. Камење подсећа: оно што је Бог учинио не треба заборавити, него причати деци."
+        },
+        deeper: {
+          de: "Die Kirchenväter sehen im Durchzug durch den Jordan ein Vorausbild der Taufe: Durch das Wasser tritt man in das verheißene Land ein, und der Anführer trägt denselben Namen wie Jesus. Am Jordan wurde später Christus getauft. In den Gottesdiensten der Theophanie erklingt Psalm 113 (LXX): „Das Meer sah es und floh, der Jordan wandte sich zurück.“ Jos 3 gehört zu den alttestamentlichen Lesungen am Vorabend der Theophanie.",
+          sr: "Свети оци у преласку преко Јордана виде праслику крштења: кроз воду се улази у обећану земљу, а вођа носи исто име као Исус. На Јордану се касније крстио Христос. На богослужењима Богојављења пева се Псалам 113 (по Септуагинти): „Море виде и побеже, Јордан се врати натраг.“ Ис Нав 3 спада у старозаветна читања уочи Богојављења."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Josua führte Israel ins Land, doch die wahre Ruhe schenkt erst Christus (Hebr 4,8–10). In seiner Taufe im Jordan heiligt er das Wasser und öffnet uns den Weg in das Reich Gottes.",
+        sr: "Исус Навин је увео Израиљ у земљу, али прави покој даје тек Христос (Јев 4,8–10). Својим крштењем на Јордану Он освећује воду и отвара нам пут у Царство Божије."
+      },
+      links: [
+        { ref: { de: "Ex 14,21–22", sr: "Изл 14,21–22" }, note: { de: "Der Durchzug durch das Rote Meer.", sr: "Прелазак преко Црвеног мора." } },
+        { ref: { de: "Mt 3,13–17", sr: "Мт 3,13–17" }, note: { de: "Die Taufe Christi im Jordan.", sr: "Крштење Христово на Јордану." } },
+        { ref: { de: "Ps 113,3 (LXX; hebr. 114,3)", sr: "Пс 113,3 (по Септуагинти; јевр. 114,3)" }, note: { de: "Der Jordan wandte sich zurück.", sr: "Јордан се врати натраг." } },
+        { ref: { de: "Hebr 4,8–10", sr: "Јев 4,8–10" }, note: { de: "Die Ruhe, die Josua nicht geben konnte.", sr: "Покој који Исус Навин није могао дати." } }
+      ],
+      fathers: {
+        de: "Die Deutung des Jordandurchzugs auf die Taufe ist bei vielen Vätern verbreitet. Für diese Version wurde kein einzelner freier Väterkommentar geprüft; wörtliche Zitate gibt die App nicht wieder.",
+        sr: "Тумачење преласка преко Јордана као праслике крштења раширено је код многих отаца. За ово издање није проверен ниједан појединачан слободан коментар отаца; апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Was geschah, als die Priester mit der Lade den Jordan betraten?", sr: "Шта се десило када су свештеници са ковчегом ушли у Јордан?" },
+          a: { de: "Das Wasser blieb stehen, und das Volk zog auf trockenem Boden hindurch.", sr: "Вода је стала, и народ је прешао по сувом." } },
+        { q: { de: "Wozu dienten die zwölf Steine?", sr: "Чему је служило дванаест камења?" },
+          a: { de: "Als Erinnerungszeichen, damit man den Kindern von Gottes Tat erzählt.", sr: "Као знак за спомен, да би се деци причало о Божијем делу." } },
+        { q: { de: "Warum sehen die Väter darin ein Bild der Taufe?", sr: "Зашто оци у томе виде слику крштења?" },
+          a: { de: "Durch das Wasser kommt man ins verheißene Land; der Anführer heißt wie Jesus; im Jordan wurde Christus getauft.", sr: "Кроз воду се долази у обећану земљу; вођа се зове као Исус; у Јордану се крстио Христос." } }
+      ],
+      practice: {
+        de: "Wähle einen „Erinnerungsstein“ für dich: Schreibe im Notizbuch eine Erfahrung auf, in der Gott dir geholfen hat, und lies sie in schweren Zeiten wieder.",
+        sr: "Изаберите свој „камен за спомен“: запишите у бележницу једно искуство у коме вам је Бог помогао и прочитајте га поново у тешким временима."
+      },
+      review: {
+        de: "Israel zieht durch den Jordan, der vor der Bundeslade stehen bleibt, ins verheißene Land. Die Väter sehen darin ein Bild der Taufe.",
+        sr: "Израиљ прелази Јордан, који стаје пред ковчегом завета, и улази у обећану земљу. Оци у томе виде слику крштења."
+      },
+      quiz: [
+        { q: { de: "Was bedeutet der Name Josua / Jesus?", sr: "Шта значи име Исус (Навин)?" },
+          options: [{ de: "Gott rettet", sr: "Бог спасава" }, { de: "Sohn des Lichts", sr: "Син светлости" }, { de: "Mann des Krieges", sr: "Ратник" }], correct: 0 },
+        { q: { de: "Was trugen die Priester in den Jordan?", sr: "Шта су свештеници унели у Јордан?" },
+          options: [{ de: "Die Bundeslade", sr: "Ковчег завета" }, { de: "Den Stab des Mose", sr: "Мојсијев штап" }, { de: "Brot", sr: "Хлеб" }], correct: 0 },
+        { q: { de: "Wie viele Steine wurden aus dem Jordan genommen?", sr: "Колико камења је узето из Јордана?" },
+          options: [{ de: "Zwölf", sr: "Дванаест" }, { de: "Sieben", sr: "Седам" }, { de: "Drei", sr: "Три" }], correct: 0 },
+        { q: { de: "An welchem Fest wird Jos 3 gelesen?", sr: "На који празник се чита Ис Нав 3?" },
+          options: [{ de: "Am Vorabend der Theophanie", sr: "Уочи Богојављења" }, { de: "An Mariä Entschlafung", sr: "На Успење" }, { de: "Am Palmsonntag", sr: "На Цвети" }], correct: 0 }
+      ]
+    },
+  {
+      id: "bib-1tim2", book: "past", order: 43,
+      title: { de: "Betet für alle Menschen", sr: "Молите се за све људе" },
+      ref: { de: "1. Timotheus 2,1–8", sr: "1. Тимотеју 2,1–8" },
+      intro: {
+        de: "Die Briefe an Timotheus und Titus heißen „Pastoralbriefe“, weil sie Hirten (Vorstehern) der Gemeinden Anweisungen geben. Timotheus war ein enger Mitarbeiter des Paulus und leitete nach der Überlieferung die Kirche in Ephesus.",
+        sr: "Посланице Тимотеју и Титу називају се „пастирске посланице“, јер дају упутства пастирима (старешинама) заједница. Тимотеј је био близак Павлов сарадник и, према предању, управљао је Црквом у Ефесу."
+      },
+      introTag: "history",
+      context: {
+        de: "Die Christen lebten als kleine Minderheit im Römischen Reich, oft verdächtigt und manchmal verfolgt. Trotzdem fordert Paulus sie auf, für alle zu beten – auch für die Herrscher.",
+        sr: "Хришћани су живели као мала мањина у Римском царству, често сумњичени, а понекад и гоњени. Ипак Павле их позива да се моле за све – и за владаре."
+      },
+      reading: [
+        { ref: { de: "1 Tim 2,1–4", sr: "1 Тим 2,1–4" }, note: { de: "Gott will, dass alle gerettet werden.", sr: "Бог хоће да се сви људи спасу." } },
+        { ref: { de: "1 Tim 2,5–8", sr: "1 Тим 2,5–8" }, note: { de: "Ein Mittler zwischen Gott und den Menschen.", sr: "Један посредник између Бога и људи." } }
+      ],
+      summary: {
+        de: "Paulus ermahnt, vor allem anderen Bitten, Gebete, Fürbitten und Danksagungen für alle Menschen zu halten, für die Könige und alle, die Verantwortung tragen, damit wir ein ruhiges und stilles Leben führen können in aller Frömmigkeit und Würde. Das ist gut und Gott, unserem Retter, wohlgefällig, der will, dass alle Menschen gerettet werden und zur Erkenntnis der Wahrheit kommen. Denn einer ist Gott, und einer ist Mittler zwischen Gott und den Menschen, der Mensch Christus Jesus, der sich selbst als Lösegeld für alle gegeben hat. Paulus wünscht, dass die Männer an jedem Ort beten und reine Hände erheben, ohne Zorn und Streit.",
+        sr: "Павле саветује да се пре свега чине молбе, молитве, мољења и благодарења за све људе, за цареве и за све који су на власти, да бисмо мирно и тихо живели у свакој побожности и честитости. То је добро и угодно пред Спаситељем нашим Богом, који хоће да се сви људи спасу и да дођу у познање истине. Јер је један Бог, и један посредник између Бога и људи, човек Христос Исус, који је дао себе као откуп за све. Павле жели да се мушкарци моле на сваком месту, подижући чисте руке без гнева и свађе."
+      },
+      interp: {
+        simple: {
+          de: "Christen beten nicht nur für sich und ihre Freunde, sondern für alle Menschen – auch für die, die regieren, und für die, die sie nicht mögen. Gott will, dass alle gerettet werden.",
+          sr: "Хришћани се не моле само за себе и своје пријатеље, него за све људе – и за оне који владају, и за оне које не воле. Бог хоће да се сви спасу."
+        },
+        deeper: {
+          de: "Dieser Text prägt bis heute den Gottesdienst: In den Ektenien (Fürbittreihen) der Liturgie betet die Kirche für das Land, die Regierenden, die Reisenden, die Kranken und für den Frieden der ganzen Welt. Der Satz „Gott will, dass alle Menschen gerettet werden“ (1 Tim 2,4) zeigt: Gottes Heilswille kennt keine Grenze. „Ein Mittler“ (2,5) betont, dass allein Christus als wahrer Gott und wahrer Mensch Gott und Menschen vereint; die Fürbitte der Heiligen geschieht immer in ihm und hebt diese Wahrheit nicht auf.",
+          sr: "Овај текст до данас обликује богослужење: на јектенијама Литургије Црква се моли за земљу, за власти, за путнике, за болесне и за мир целог света. Реч „Бог хоће да се сви људи спасу“ (1 Тим 2,4) показује: Божија воља за спасење нема граница. „Један посредник“ (2,5) наглашава да само Христос, као истинити Бог и истинити човек, сједињује Бога и људе; заступништво светих увек се збива у Њему и не укида ову истину."
+        },
+        tag: "dogma"
+      },
+      christ: {
+        de: "Christus ist der eine Mittler, der sich für alle hingegeben hat. Am Kreuz betete er sogar für die, die ihn kreuzigten (Lk 23,34).",
+        sr: "Христос је један посредник, који је себе предао за све. На крсту се молио чак и за оне који су Га распињали (Лк 23,34)."
+      },
+      links: [
+        { ref: { de: "Mt 5,44", sr: "Мт 5,44" }, note: { de: "Betet für die, die euch verfolgen.", sr: "Молите се за оне који вас гоне." } },
+        { ref: { de: "Lk 23,34", sr: "Лк 23,34" }, note: { de: "Vater, vergib ihnen.", sr: "Оче, опрости им." } },
+        { ref: { de: "Jer 29,7", sr: "Јер 29,7" }, note: { de: "Sucht das Wohl der Stadt und betet für sie.", sr: "Тражите добро граду и молите се за њега." } },
+        { ref: { de: "Hebr 7,25", sr: "Јев 7,25" }, note: { de: "Er lebt allezeit, um für uns einzutreten.", sr: "Свагда живи да посредује за нас." } }
+      ],
+      fathers: {
+        de: "Der hl. Johannes Chrysostomus legte die Timotheusbriefe in Homilien aus (englisch in NPNF I/13). Wörtliche Zitate gibt diese App nicht wieder.",
+        sr: "Свети Јован Златоуст тумачио је посланице Тимотеју у беседама (на енглеском у NPNF I/13). Ова апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Für wen sollen Christen nach 1 Tim 2,1–2 beten?", sr: "За кога хришћани, по 1 Тим 2,1–2, треба да се моле?" },
+          a: { de: "Für alle Menschen, auch für Könige und alle, die Verantwortung tragen.", sr: "За све људе, и за цареве и све који су на власти." } },
+        { q: { de: "Was will Gott nach 1 Tim 2,4?", sr: "Шта Бог хоће по 1 Тим 2,4?" },
+          a: { de: "Dass alle Menschen gerettet werden und zur Erkenntnis der Wahrheit kommen.", sr: "Да се сви људи спасу и дођу у познање истине." } },
+        { q: { de: "Wo begegnet dieses Gebet für alle im Gottesdienst?", sr: "Где се ова молитва за све сусреће на богослужењу?" },
+          a: { de: "In den Ektenien (Fürbittreihen) der Liturgie.", sr: "На јектенијама Литургије." } }
+      ],
+      practice: {
+        de: "Bete diese Woche jeden Tag für einen Menschen, mit dem du es schwer hast, und für die Verantwortlichen in deinem Land oder deiner Stadt.",
+        sr: "Молите се ове недеље сваког дана за једну особу са којом вам је тешко и за одговорне у вашој земљи или граду."
+      },
+      review: {
+        de: "Christen beten für alle Menschen, auch für die Regierenden. Gott will, dass alle gerettet werden; Christus ist der eine Mittler.",
+        sr: "Хришћани се моле за све људе, и за власти. Бог хоће да се сви спасу; Христос је један посредник."
+      },
+      quiz: [
+        { q: { de: "Warum heißen die Timotheus- und Titusbriefe „Pastoralbriefe“?", sr: "Зашто се посланице Тимотеју и Титу зову „пастирске“?" },
+          options: [{ de: "Sie geben Hirten der Gemeinden Anweisungen", sr: "Дају упутства пастирима заједница" }, { de: "Sie handeln von Schafen", sr: "Говоре о овцама" }, { de: "Sie wurden auf dem Land geschrieben", sr: "Написане су на селу" }], correct: 0 },
+        { q: { de: "Wer ist nach 1 Tim 2,5 der eine Mittler?", sr: "Ко је, по 1 Тим 2,5, један посредник?" },
+          options: [{ de: "Christus Jesus", sr: "Христос Исус" }, { de: "Mose", sr: "Мојсије" }, { de: "Ein Engel", sr: "Анђео" }], correct: 0 },
+        { q: { de: "Wo leitete Timotheus nach der Überlieferung die Kirche?", sr: "Где је, према предању, Тимотеј управљао Црквом?" },
+          options: [{ de: "In Ephesus", sr: "У Ефесу" }, { de: "In Rom", sr: "У Риму" }, { de: "In Jerusalem", sr: "У Јерусалиму" }], correct: 0 },
+        { q: { de: "Wie sollen die Betenden ihre Hände erheben (1 Tim 2,8)?", sr: "Како молитељи треба да подижу руке (1 Тим 2,8)?" },
+          options: [{ de: "Rein, ohne Zorn und Streit", sr: "Чисте, без гнева и свађе" }, { de: "Nur in der Kirche", sr: "Само у храму" }, { de: "Gar nicht", sr: "Никако" }], correct: 0 }
+      ]
+    },
+  {
+      id: "bib-lev19", book: "lev", order: 44,
+      title: { de: "Seid heilig, denn ich bin heilig", sr: "Будите свети, јер сам ја свет" },
+      ref: { de: "Levitikus 19,1–18 und 19,33–34", sr: "Левитска 19,1–18 и 19,33–34" },
+      intro: {
+        de: "Levitikus ist das dritte Buch Mose. Es enthält vor allem Vorschriften für Opfer, Priester und Reinheit. Kapitel 19 zeigt, dass Heiligkeit nicht nur im Tempel gelebt wird, sondern im Alltag mit anderen Menschen.",
+        sr: "Левитска је трећа књига Мојсијева. Садржи пре свега прописе о жртвама, свештеницима и чистоти. 19. глава показује да се светост не живи само у храму, него у свакодневици са другим људима."
+      },
+      introTag: "history",
+      context: {
+        de: "Israel lagert am Sinai. Gott hat sein Volk aus Ägypten befreit und will, dass es ihm ähnlich wird. Die Gebote verbinden Gottesdienst und Gerechtigkeit im Alltag.",
+        sr: "Израиљ је под Синајем. Бог је ослободио свој народ из Египта и жели да Му постане сличан. Заповести повезују богослужење и правду у свакодневици."
+      },
+      reading: [
+        { ref: { de: "Lev 19,1–4", sr: "Лев 19,1–4" }, note: { de: "Seid heilig.", sr: "Будите свети." } },
+        { ref: { de: "Lev 19,9–18", sr: "Лев 19,9–18" }, note: { de: "Für die Armen sorgen; den Nächsten lieben.", sr: "Бринути о сиромашнима; љубити ближњега." } },
+        { ref: { de: "Lev 19,33–34", sr: "Лев 19,33–34" }, note: { de: "Den Fremden lieben.", sr: "Љубити дошљака." } }
+      ],
+      summary: {
+        de: "Gott spricht: Seid heilig, denn ich, der Herr, euer Gott, bin heilig. Ehrt Vater und Mutter und haltet meine Sabbate. Wenn ihr erntet, sollt ihr den Rand eures Feldes nicht ganz abernten und keine Nachlese halten; lasst es für den Armen und den Fremden. Ihr sollt nicht stehlen, nicht lügen und einander nicht betrügen. Den Lohn des Tagelöhners sollst du nicht bis zum Morgen zurückhalten. Verfluche keinen Tauben und lege einem Blinden kein Hindernis in den Weg. Hasse deinen Bruder nicht in deinem Herzen; räche dich nicht und trage nichts nach. Du sollst deinen Nächsten lieben wie dich selbst. Auch den Fremden, der bei euch wohnt, sollst du lieben wie dich selbst, denn ihr wart selbst Fremde in Ägypten.",
+        sr: "Бог говори: Будите свети, јер сам ја, Господ Бог ваш, свет. Поштујте оца и мајку и држите моје суботе. Када жањете, не пожњите сасвим крај њиве и не пабирчите; оставите то сиромаху и дошљаку. Не крадите, не лажите и не варајте један другога. Плату надничара не задржавај до јутра. Не куни глувог и не мећи слепоме пред ноге шта би га спотакло. Не мрзи брата свога у срцу свом; не освећуј се и не памти зло. Љуби ближњега свога као самога себе. И дошљака који живи међу вама љуби као самога себе, јер сте и ви били дошљаци у Египту."
+      },
+      interp: {
+        simple: {
+          de: "Heilig sein heißt, Gott ähnlich zu werden. Das zeigt sich darin, wie wir mit Eltern, Armen, Arbeitern, Behinderten, Fremden und Feinden umgehen.",
+          sr: "Бити свет значи постати сличан Богу. То се показује у томе како се односимо према родитељима, сиромашнима, радницима, особама са инвалидитетом, дошљацима и непријатељима."
+        },
+        deeper: {
+          de: "Christus nennt Lev 19,18 das zweite große Gebot neben der Gottesliebe aus Dtn 6,5 (Mt 22,39). Petrus greift Lev 19,2 auf: „Seid heilig, denn ich bin heilig“ (1 Petr 1,15–16). Die Orthodoxie versteht Heiligkeit als Teilhabe an Gottes Leben (Theosis), die sich in tätiger Liebe zeigt. Viele Opfer- und Reinheitsvorschriften des Levitikus haben ihre Erfüllung in Christus gefunden (vgl. Hebr 9–10); das Gebot der Liebe aber bleibt und wird vertieft.",
+          sr: "Христос Лев 19,18 назива другом великом заповешћу поред љубави према Богу из Пнз 6,5 (Мт 22,39). Петар наводи Лев 19,2: „Будите свети, јер сам ја свет“ (1 Пт 1,15–16). Православље светост схвата као учешће у Божијем животу (обожење), које се показује у делатној љубави. Многи прописи Левитске о жртвама и чистоти нашли су испуњење у Христу (уп. Јев 9–10); заповест љубави остаје и продубљује се."
+        },
+        tag: "dogma"
+      },
+      christ: {
+        de: "Im Gleichnis vom barmherzigen Samariter (Lk 10,25–37) erklärt Christus, wer der Nächste ist: jeder, der Hilfe braucht. Er selbst hat die Liebe bis zum Kreuz gelebt.",
+        sr: "У причи о милостивом Самарјанину (Лк 10,25–37) Христос објашњава ко је ближњи: свако коме је потребна помоћ. Он сам је љубав живео до крста."
+      },
+      links: [
+        { ref: { de: "Mt 22,37–40", sr: "Мт 22,37–40" }, note: { de: "Das zweite Gebot ist ihm gleich.", sr: "Друга је као и ова." } },
+        { ref: { de: "1 Petr 1,15–16", sr: "1 Пт 1,15–16" }, note: { de: "Seid heilig, denn ich bin heilig.", sr: "Будите свети, јер сам ја свет." } },
+        { ref: { de: "Lk 10,25–37", sr: "Лк 10,25–37" }, note: { de: "Der barmherzige Samariter.", sr: "Милостиви Самарјанин." } },
+        { ref: { de: "Rut 2,1–9", sr: "Рута 2,1–9" }, note: { de: "Rut liest Ähren auf Boas’ Feld nach.", sr: "Рута пабирчи класје на Воозовој њиви." } }
+      ],
+      fathers: {
+        de: "Die Väter betonen, dass die Gebote über Opfer im Licht Christi geistlich zu verstehen sind, die Gebote der Liebe aber unverändert gelten. Für diese Version wurde kein einzelner freier Väterkommentar geprüft; wörtliche Zitate gibt die App nicht wieder.",
+        sr: "Оци наглашавају да заповести о жртвама треба духовно схватити у светлости Христовој, а да заповести љубави важе непромењено. За ово издање није проверен ниједан појединачан слободан коментар отаца; апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Warum soll Israel heilig sein?", sr: "Зашто Израиљ треба да буде свет?" },
+          a: { de: "Weil der Herr, sein Gott, heilig ist (Lev 19,2).", sr: "Зато што је Господ, његов Бог, свет (Лев 19,2)." } },
+        { q: { de: "Was soll man bei der Ernte für die Armen übrig lassen?", sr: "Шта треба при жетви оставити сиромашнима?" },
+          a: { de: "Den Rand des Feldes und die Nachlese.", sr: "Крај њиве и пабирке." } },
+        { q: { de: "Warum soll man den Fremden lieben?", sr: "Зашто треба љубити дошљака?" },
+          a: { de: "Weil Israel selbst Fremder in Ägypten war (Lev 19,34).", sr: "Зато што је и Израиљ био дошљак у Египту (Лев 19,34)." } }
+      ],
+      practice: {
+        de: "Wähle ein Gebot aus Lev 19,9–18 und setze es diese Woche bewusst um – zum Beispiel jemandem nichts mehr nachtragen oder einem Bedürftigen etwas „übrig lassen“.",
+        sr: "Изаберите једну заповест из Лев 19,9–18 и спроведите је ове недеље свесно – на пример престаните да памтите некоме зло или „оставите“ нешто неком ко је у потреби."
+      },
+      review: {
+        de: "„Seid heilig, denn ich bin heilig“: Heiligkeit zeigt sich in Gerechtigkeit und Liebe zum Nächsten und zum Fremden. Christus nennt Lev 19,18 das zweite große Gebot.",
+        sr: "„Будите свети, јер сам ја свет“: светост се показује у правди и љубави према ближњем и дошљаку. Христос Лев 19,18 назива другом великом заповешћу."
+      },
+      quiz: [
+        { q: { de: "Welches Gebot aus Lev 19,18 nennt Christus das zweite große Gebot?", sr: "Коју заповест из Лев 19,18 Христос назива другом великом заповешћу?" },
+          options: [{ de: "Liebe deinen Nächsten wie dich selbst", sr: "Љуби ближњега свога као самога себе" }, { de: "Halte den Sabbat", sr: "Држи суботу" }, { de: "Bringe Opfer dar", sr: "Приноси жртве" }], correct: 0 },
+        { q: { de: "Wer zitiert Lev 19,2 im Neuen Testament?", sr: "Ко у Новом завету наводи Лев 19,2?" },
+          options: [{ de: "Petrus (1 Petr 1,16)", sr: "Петар (1 Пт 1,16)" }, { de: "Judas", sr: "Јуда" }, { de: "Pilatus", sr: "Пилат" }], correct: 0 },
+        { q: { de: "Wann soll der Lohn des Tagelöhners gezahlt werden?", sr: "Када треба исплатити надницу надничару?" },
+          options: [{ de: "Noch am selben Tag", sr: "Још истог дана" }, { de: "Nach einem Jahr", sr: "После годину дана" }, { de: "Gar nicht", sr: "Никада" }], correct: 0 },
+        { q: { de: "Welches Buch Mose ist Levitikus?", sr: "Која књига Мојсијева је Левитска?" },
+          options: [{ de: "Das dritte", sr: "Трећа" }, { de: "Das erste", sr: "Прва" }, { de: "Das fünfte", sr: "Пета" }], correct: 0 }
+      ]
     }
   ]
 };
@@ -6488,7 +6727,7 @@ function fastPeriods(y, cal) {
     lang: null, theme: "dark", font: 1, onboarded: false,
     done: {}, quiz: {}, cards: {}, newToday: { date: "", n: 0 },
     newPerDay: 10, lessonsPerWeek: 3, activity: [], verses: [],
-    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}
+    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null
   };
   function load() {
     try {
@@ -6631,6 +6870,7 @@ function fastPeriods(y, cal) {
     scroll: '<path d="M7 4h11a2 2 0 0 1 2 2v1h-4"/><path d="M16 7v11a3 3 0 0 1-3 3H6a2 2 0 0 1-2-2v-1h9"/><path d="M7 4a2 2 0 0 0-2 2v12"/><path d="M9 9h4M9 13h4"/>',
     cross: '<path d="M12 2.5v19M8.5 6h7M5.5 10.5h13M8.5 17.5l7-2"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/>',
+    bell: '<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
     moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>'
   };
   function ic(n, extra) { return `<svg class="ic ${extra || ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`; }
@@ -6814,6 +7054,7 @@ function fastPeriods(y, cal) {
         ${nl ? `<h2 class="herotitle">${E(nl.title)}</h2>${nl.ref ? `<p class="muted">${E(nl.ref)}</p>` : ""}
           <a class="btn block" href="#lesson-${nl.id}">${esc(t("continue"))}</a>` : `<p>${esc(t("allDone"))}</p>`}
       </div>
+      ${(() => { const lo = S.lastLesson; return lo && ALL_LESSONS[lo] && lo !== nid && !S.done[lo] ? `<ul class="list">${navItem("lesson-" + lo, "bible", L(ALL_LESSONS[lo].title), t("lastOpened"))}</ul>` : ""; })()}
       <div class="tiles">
         ${tile("prayers", "candle", t("prayersTitle"))}${tile("calendar", "calendar", t("tileCal"))}${tile("review", "repeat", t("tileReview"), due || "")}${tile("ask", "search", t("tileAsk"))}
       </div>
@@ -7080,10 +7321,19 @@ function fastPeriods(y, cal) {
       ${l.quiz && l.quiz.length ? `<a class="btn block" href="#quiz-${id}">${esc(t("startQuiz"))} (${l.quiz.length})</a><div style="height:10px"></div>` : ""}
       <button class="btn ${d ? "ghost" : ""} block" id="donebtn">${d ? ic("check") + " " + esc(t("done")) + " · " + esc(t("undoDone")) : esc(t("markDone"))}</button>
       <div class="btnrow"><button class="btn ghost block" data-newnote="${esc(L(l.title))}">${ic("pen")} ${esc(t("addNote"))}</button></div>
-    </div>`;
+    </div>${lessonNav(id)}`;
+  }
+  /* Vorherige/nächste Lektion innerhalb der Reihe (Bibel bzw. Kurs) */
+  function lessonSeq(id) { const l = ALL_LESSONS[id]; return l.kind === "bible" ? BIBLE_LESSONS.map(x => x.id) : THEOLOGY.filter(x => x.course === l.course).map(x => x.id); }
+  function lessonNav(id) {
+    const seq = lessonSeq(id); const i = seq.indexOf(id); const p = seq[i - 1], n = seq[i + 1];
+    if (!p && !n) return "";
+    const it = (lid, label, back) => `<li><a class="item" href="#lesson-${lid}">${back ? `<span class="chev">${ic("chev", "flip")}</span>` : ""}<span class="grow"><span class="s">${esc(label)}</span><span class="t">${E(ALL_LESSONS[lid].title)}</span></span>${back ? "" : `<span class="chev">${ic("chev")}</span>`}</a></li>`;
+    return `<ul class="list lnav">${p ? it(p, t("prevLesson"), true) : ""}${n ? it(n, t("nextLessonL"), false) : ""}</ul>`;
   }
   function viewLesson(id) {
     const l = ALL_LESSONS[id]; if (!l) return `<p>${esc(t("notFound"))}</p>`;
+    if (S.lastLesson !== id) { S.lastLesson = id; save(); }
     return l.kind === "bible" ? viewBibleLesson(l) : viewTheoLesson(l);
   }
   function viewBibleLesson(l) {
@@ -7514,6 +7764,11 @@ function fastPeriods(y, cal) {
         <p><b>${esc(S.enc ? t("encActive") : t("encInactive"))}</b></p>
         ${S.enc ? `<button class="btn ghost" id="encoff">${esc(t("encOff"))}</button>` : `<label for="p1">${esc(t("password"))}</label><input type="password" id="p1" autocomplete="new-password"><label for="p2">${esc(t("password"))} (2×)</label><input type="password" id="p2" autocomplete="new-password"><div class="btnrow"><button class="btn" id="encon">${esc(t("encOn"))}</button></div>`}
         <p class="small muted">${esc(t("encWarn"))}</p><p class="small" id="encmsg" role="alert"></p></div>
+      <div class="card"><h3>${esc(t("remTitle"))}</h3><p class="small">${esc(t("remText"))}</p>
+        <ol class="steps">${["remS1", "remS2", "remS3", "remS4"].map(k => `<li>${esc(t(k))}</li>`).join("")}</ol>
+        <button class="btn ghost block" id="copylink">${ic("bell")} ${esc(t("remCopy"))}</button>
+        <input type="text" id="linkbox" readonly hidden style="margin-top:8px">
+        <p class="small muted" style="margin:8px 0 0">${esc(t("remNote"))}</p></div>
       <div class="card"><h3>${esc(t("sBackup"))}</h3><p class="small">${esc(t("backupText"))}</p>
         <button class="btn ghost block" id="copyb">${esc(t("copyBackup"))}</button>
         <textarea id="backupbox" rows="4" readonly hidden></textarea>
@@ -7524,6 +7779,12 @@ function fastPeriods(y, cal) {
         <button class="btn danger" id="reset">${esc(t("resetAll"))}</button></div>`;
   }
   function bindPrefs() {
+    const cl = document.getElementById("copylink");
+    if (cl) cl.onclick = async () => {
+      const url = location.href.split("#")[0] + "#prayers"; const box = document.getElementById("linkbox");
+      try { await navigator.clipboard.writeText(url); toast(t("remCopied")); }
+      catch (e) { box.hidden = false; box.value = url; box.focus(); box.select(); }
+    };
     app.querySelectorAll("[data-seg]").forEach(sg => sg.querySelectorAll("button").forEach(b => b.onclick = () => {
       const name = sg.getAttribute("data-seg"); let v = b.getAttribute("data-v");
       if (["font"].includes(name)) v = parseFloat(v); if (["newPerDay", "lessonsPerWeek"].includes(name)) v = parseInt(v, 10);
