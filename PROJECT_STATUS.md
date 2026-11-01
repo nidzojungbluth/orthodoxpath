@@ -51,7 +51,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 ## 4. Bekannte Probleme und Risiken (nach Schwere)
 
 1. ~~Quellcode nur in der Arbeitsumgebung~~ – **erledigt (1.11.2026):** Quellcode, Tests und Build-Skript liegen im Repo unter `source/`; frischer Klon baut eine identische App, Tests grün.
-2. **Datenverlust-Risiko im Browser** – entschärft (3.1): Hinweis „Zum Home-Bildschirm“ (nur iPhone-Safari, nicht installiert), Sicherung als Datei + Laden aus Datei, Erinnerung alle 30 Tage (abschaltbar), `navigator.storage.persist()`. Restrisiko: Nutzer muss Sicherungen selbst ablegen.
+2. **Datenverlust-Risiko im Browser** – entschärft (3.1): Hinweis „Zum Home-Bildschirm“ (nur iPhone-Safari, nicht installiert), Sicherung als Datei + Laden aus Datei, Erinnerung alle 30 Tage (abschaltbar), `navigator.storage.persist()`. Restrisiko: Nutzer muss Sicherungen selbst ablegen. Einschränkung: In der Claude-Artefakt-Version kann „Als Datei sichern“ per Download nicht funktionieren (Artefakt erlaubt keine Downloads); dort „Sicherung kopieren“ nutzen. Hauptversion ist die GitHub-PWA.
 3. **Serbische Texte nicht muttersprachlich geprüft** (theologische Fachbegriffe, Grammatik). → P1-04
 4. **Kein Test auf echtem iPhone/Safari** durch Claude möglich – Checkliste `TESTPLAN_IPHONE.md` liegt bereit, Durchführung durch den Nutzer offen.
 5. `src/app.js` ist eine große Datei (~1 200 Zeilen); wachsende Wartungskosten, aber stabil. Kein Umbau nötig, solange Tests grün sind.
