@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 2.0.0 (1. November 2026)
+**Aktuelle Version:** 2.2.0 (1. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -25,10 +25,20 @@
 | Heilige & Kirchenväter | 10 Kirchenväter, 15 Heilige (inkl. Maria von Ägypten, Lukas von Simferopol), alle mit Fragen und Quiz |
 | Gebetsbuch | Morgen- und Abendordnung, 14 Themen (Essen, Arbeit, Angst, Versuchung, Vergebung, Familie, Kranke, Trauer, Verstorbene, Christus, Gottesgebärerin, Heilige, Dank, Fastenzeit), 30 Gebete, gespeicherte Gebete, Gebetsanliegen |
 | Kirchenkalender | Julianisch / neujulianisch umschaltbar; Ostern selbst berechnet; 39 Feste und Tage (inkl. Triodion, Karwoche, Thomassonntag, Allerheiligen) mit Bedeutung und Lektionsverweis; Heilige des Tages (aus App-Daten); Fastenstatus und überlieferte Fastenregel; Fastenzeiten des Jahres |
+| Lesepläne | Evangelien (89 Lesungen), Neues Testament (260), Psalter in 20 Kathismen – freies Tempo, Fortschrittsanzeige |
+| Liturgie | Göttliche Liturgie Schritt für Schritt (16 Schritte: was geschieht, Bedeutung, was tue ich) |
+| Ikonen-Lexikon | 13 Ikonentypen in Worten (Darstellung, Bedeutung, Verweis auf Lektionen) |
 | Lernen | Lernkarten mit verteilter Wiederholung (113 Karten), Quiz, Glossar (37 Begriffe), Bibliothek (23 Bücher mit geprüften freien Quellen bzw. Beschreibungen) |
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Dunkles Design mit Goldakzenten, heller Modus, Schriftgrößen, sanfte Übergänge (abschaltbar über „Bewegung reduzieren“), Wochenpunkte |
+
+## Version 2.1 / 2.2
+
+- Lesepläne mit Fortschritt (Evangelien, NT, Psalter nach Kathismen); Leseplan-Zugang in der Bibel.
+- „Die Liturgie Schritt für Schritt“ (Kurs E, Theologie, Mehr).
+- Ikonen-Lexikon (Theologie, Mehr, durchsuchbar).
+- Tests erweitert (Kapitelzahlen NT = 260, Kathismen lückenlos 1–150, Liturgie- und Ikonendaten).
 
 ## Version 2.0 – Änderungen (Master-Auftrag)
 
@@ -48,8 +58,8 @@
 
 ## Tests
 
-- `node tests/content.test.js` – ca. 8 800 Prüfungen: Vollständigkeit DE/SR, keine gemischten Schriften, Quiz-Konsistenz, Links, Kalenderberechnung (Ostern 2024–2030, Fastenzeiten, beide Kalender), Gebete, Heilige des Tages.
-- `node tests/e2e.js` – 39 Prüfungen im simulierten iPhone-Viewport (Chromium): alle Ansichten in 3 Sprachvarianten, Quiz, Karten, Notizen inkl. Verschlüsselung, Gebetsbuch, Kalenderumschaltung, Fragenhilfe, Speichern nach Neuladen.
+- `node tests/content.test.js` – ca. 9 900 Prüfungen: Vollständigkeit DE/SR, keine gemischten Schriften, Quiz-Konsistenz, Links, Kalenderberechnung (Ostern 2024–2030, Fastenzeiten, beide Kalender), Gebete, Heilige des Tages.
+- `node tests/e2e.js` – 41 Prüfungen im simulierten iPhone-Viewport (Chromium): alle Ansichten in 3 Sprachvarianten, Quiz, Karten, Notizen inkl. Verschlüsselung, Gebetsbuch, Kalenderumschaltung, Fragenhilfe, Speichern nach Neuladen.
 - Offline-Test des Service Workers (Chromium).
 - Nicht automatisiert möglich: Test auf echtem iPhone/Safari – erfolgt durch den Nutzer.
 
@@ -65,12 +75,12 @@
 
 ## Nächste Schritte (Reihenfolge)
 
-1. Weitere volle Bibellektionen (Galater ist erledigt; als Nächstes z. B. Epheser 6, Kolosser 3, 1 Thess 4, Genesis 12/22 Abraham, Exodus 3 brennender Dornbusch).
-2. Leseplan „Neues Testament in einem Jahr“ mit Fortschrittsanzeige (nur Stellenangaben, keine Bibeltexte).
-3. Ikonografie-Lexikon (Beschreibungen ohne fremde Bilder).
-4. Erklärung der Göttlichen Liturgie Schritt für Schritt (Kurs E erweitern).
-5. Weitere Heilige mit Gedenktagen im Kalender.
-6. Prüfen, ob Erinnerungen über die iOS-Kurzbefehle-App sinnvoll beschrieben werden können.
+1. Weitere volle Bibellektionen für die 17 Bücher mit Kurzüberblick (z. B. Epheser 6, Kolosser 3, 1 Thess 4, Genesis 12/22 Abraham, Exodus 3 brennender Dornbusch).
+2. Weitere Heilige mit Gedenktagen im Kalender (z. B. hl. Nikolaus, hl. Georg, hl. Demetrios, hl. Petka/Paraskeva, hl. Stefan Dečanski).
+3. Liturgie des hl. Basilius und Liturgie der vorgeweihten Gaben: Unterschiede erklären.
+4. Tägliche Schriftlesungen (Leseordnung) – nur, wenn eine verlässliche Quelle eingebunden werden kann.
+5. Anleitung für Gebetserinnerungen über die iOS-Kurzbefehle-App.
+6. Gegenlesen der serbischen Texte durch Muttersprachler.
 
 ## Sicherungspunkte
 

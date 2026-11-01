@@ -237,7 +237,7 @@ main > .wrap { animation: opFade .28s ease-out; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "2.1.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "2.2.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -380,6 +380,8 @@ const UI = {
     sourceInfo: "Quellenlage",
     creed: "Glaubensbekenntnis",
     menu: "Menü",
+    iconsTitle: "Ikonen-Lexikon", iconsIntro: "Die wichtigsten Ikonentypen in Worten erklärt: was dargestellt ist und was es bedeutet. Schau dir die Ikonen in deiner Kirche an und entdecke sie wieder.",
+    iconLook: "Darstellung", iconMean: "Bedeutung",
     litTitle: "Die Liturgie Schritt für Schritt", litIntro: "Die Göttliche Liturgie des hl. Johannes Chrysostomus in 16 Schritten: was geschieht, was es bedeutet und was du tun kannst. Einzelheiten unterscheiden sich je nach Gemeinde und Ortskirche.",
     litWhat: "Was geschieht?", litMean: "Bedeutung", litDo: "Was tue ich?", litNote: "Liturgische Rufe: serbisch im kirchlichen Gebrauch verbreiteter Wortlaut, deutsch Arbeitsübersetzung der App.",
     plansTitle: "Lesepläne", plansIntro: "Lies die Heilige Schrift in deinem eigenen Tempo. Es gibt keine Termine – tippe eine Lesung an, wenn du sie gelesen hast.",
@@ -575,6 +577,8 @@ const UI = {
     sourceInfo: "Стање извора",
     creed: "Символ вере",
     menu: "Мени",
+    iconsTitle: "Лексикон икона", iconsIntro: "Најважнији типови икона објашњени речима: шта је приказано и шта значи. Погледајте иконе у свом храму и откријте их поново.",
+    iconLook: "Приказ", iconMean: "Значење",
     litTitle: "Литургија корак по корак", litIntro: "Света Литургија светог Јована Златоуста у 16 корака: шта се збива, шта значи и шта можете да чините. Појединости се разликују зависно од парохије и помесне Цркве.",
     litWhat: "Шта се збива?", litMean: "Значење", litDo: "Шта ја чиним?", litNote: "Литургијски возгласи: на српском у црквеној употреби раширен текст, на немачком радни превод апликације.",
     plansTitle: "Планови читања", plansIntro: "Читајте Свето Писмо сопственим темпом. Нема рокова – додирните читање када га прочитате.",
@@ -5012,6 +5016,50 @@ const LITURGY_PARTS = {
   3: { de: "Teil 3: Liturgie der Gläubigen", sr: "Трећи део: Литургија верних" }
 };
 
+/* src/content/icons.js */
+/* OrthodoxPath – Ikonen-Lexikon (nur Beschreibungen, keine Bilder). */
+const ICONS_LEX = [
+  { id: "pantokrator", name: { de: "Christus Pantokrator (Allherrscher)", sr: "Христос Пантократор (Сведржитељ)" },
+    look: { de: "Christus in Brustbild oder thronend, die rechte Hand segnend, in der linken das Evangelienbuch. Im Heiligenschein ein Kreuz mit den griechischen Buchstaben für „der Seiende“ (vgl. Ex 3,14).", sr: "Христос до појаса или на престолу, десном руком благосиља, у левој држи Јеванђеље. У ореолу је крст са грчким словима за „Који јесте“ (уп. Изл 3,14)." },
+    mean: { de: "Christus als Herr und Richter der Welt und zugleich als Lehrer und Erlöser. Oft in der Kuppel der Kirche dargestellt.", sr: "Христос као Господ и Судија света и уједно као Учитељ и Спаситељ. Често је насликан у куполи храма." } },
+  { id: "hodigitria", name: { de: "Gottesgebärerin Hodigitria (Wegweiserin)", sr: "Богородица Одигитрија (Путеводитељица)" },
+    look: { de: "Maria hält das Christuskind auf dem Arm und weist mit der Hand auf ihn hin.", sr: "Марија држи Богомладенца на руци и руком показује на Њега." },
+    mean: { de: "Die Gottesgebärerin zeigt uns den Weg: Christus. Sie lenkt den Blick nicht auf sich, sondern auf ihren Sohn.", sr: "Богородица нам показује пут: Христа. Она не усмерава поглед на себе, него на свог Сина." } },
+  { id: "eleousa", name: { de: "Gottesgebärerin Eleousa (Erbarmerin)", sr: "Богородица Елеуса (Милостива, Умиљење)" },
+    look: { de: "Mutter und Kind schmiegen Wange an Wange aneinander. Ein bekanntes Beispiel ist die Gottesmutter von Wladimir.", sr: "Мајка и Дете се приљубљују образ уз образ. Познат пример је Владимирска икона Богородице." },
+    mean: { de: "Die zärtliche Liebe zwischen Gott und Mensch; zugleich ahnt die Mutter schon das Leiden ihres Sohnes.", sr: "Нежна љубав између Бога и човека; мајка уједно већ наслућује страдање свог Сина." } },
+  { id: "platytera", name: { de: "Platytera („weiter als die Himmel“)", sr: "Платитера („шира од небеса“)" },
+    look: { de: "Maria mit erhobenen Händen im Gebet (Orante), vor ihrer Brust in einem Kreis Christus. Meist in der Apsis über dem Altar.", sr: "Марија са подигнутим рукама у молитви (оранта), пред њеним грудима у кругу Христос. Обично у апсиди изнад часне трпезе." },
+    mean: { de: "Sie trug in sich den Gott, den die Himmel nicht fassen können.", sr: "Она је у себи носила Бога, кога небеса не могу да обухвате." } },
+  { id: "deesis", name: { de: "Deesis (Fürbitte)", sr: "Деисис (Моление)" },
+    look: { de: "Christus in der Mitte, links die Gottesgebärerin, rechts Johannes der Täufer, beide ihm zugewandt im Gebet. Oft auf der Ikonostase.", sr: "Христос у средини, лево Богородица, десно Јован Крститељ, обоје окренути Њему у молитви. Често на иконостасу." },
+    mean: { de: "Die Heiligen treten fürbittend für die Welt vor Christus ein.", sr: "Свети се заузимају пред Христом за свет." } },
+  { id: "anastasis", name: { de: "Anastasis – die Auferstehung (Höllenfahrt)", sr: "Анастасис – Васкрсење (Силазак у ад)" },
+    look: { de: "Christus in leuchtendem Gewand steht auf den zerbrochenen Toren des Totenreichs und zieht Adam und Eva aus ihren Gräbern; um ihn Gerechte des Alten Bundes.", sr: "Христос у сјајној одећи стоји на разбијеним вратима ада и извлачи Адама и Еву из гробова; око Њега праведници Старог Завета." },
+    mean: { de: "Die orthodoxe Osterikone zeigt nicht das leere Grab, sondern den Sieg Christi über den Tod für die ganze Menschheit.", sr: "Православна васкршња икона не приказује празан гроб, него Христову победу над смрћу за цело човечанство." }, lesson: "th-cross" },
+  { id: "nativity", name: { de: "Geburt Christi", sr: "Рођење Христово" },
+    look: { de: "Das Kind liegt in Windeln in einer Krippe in einer dunklen Höhle, daneben Ochs und Esel (vgl. Jes 1,3). Maria ruht davor; Josef sitzt nachdenklich abseits. Engel, Hirten und Weise umgeben die Szene.", sr: "Дете повијено лежи у јаслама у тамној пећини, поред њега во и магарац (уп. Ис 1,3). Марија почива испред; Јосиф замишљено седи по страни. Анђели, пастири и мудраци окружују призор." },
+    mean: { de: "Gott kommt in die Dunkelheit der Welt. Windeln und Höhle erinnern schon an Grabtücher und Grab.", sr: "Бог долази у таму света. Пелене и пећина већ подсећају на покров и гроб." }, lesson: "th-incarnation" },
+  { id: "theophany", name: { de: "Theophanie – Taufe Christi", sr: "Богојављење – Крштење Христово" },
+    look: { de: "Christus steht im Jordan, Johannes legt ihm die Hand auf, oben die Taube des Heiligen Geistes und ein Strahl aus dem Himmel; am Ufer dienende Engel.", sr: "Христос стоји у Јордану, Јован полаже руку на Њега, горе голуб Духа Светога и зрак са неба; на обали анђели који служе." },
+    mean: { de: "Die Offenbarung der Heiligen Dreifaltigkeit.", sr: "Откривење Свете Тројице." }, lesson: "bib-mk1" },
+  { id: "transfiguration", name: { de: "Verklärung des Herrn", sr: "Преображење Господње" },
+    look: { de: "Christus in strahlendem Weiß auf dem Berg, neben ihm Mose und Elija; darunter die drei Jünger Petrus, Jakobus und Johannes, die erschrocken zu Boden fallen.", sr: "Христос у блиставо белом на гори, поред Њега Мојсије и Илија; испод тројица ученика Петар, Јаков и Јован, који уплашени падају на земљу." },
+    mean: { de: "Das ungeschaffene Licht der Gottheit wird sichtbar – Vorgeschmack der Theosis. Traditionell eine der ersten Ikonen, die ein Ikonenmaler malt.", sr: "Нестворена светлост Божанства постаје видљива – предокус обожења. Традиционално једна од првих икона коју иконописац слика." }, lesson: "bib-elijah" },
+  { id: "dormition", name: { de: "Entschlafung der Gottesgebärerin", sr: "Успење Пресвете Богородице" },
+    look: { de: "Maria liegt auf dem Totenbett, umgeben von den Aposteln. Hinter ihr steht Christus und hält ihre Seele in Gestalt eines kleinen, in Weiß gehüllten Kindes.", sr: "Марија лежи на одру, окружена апостолима. Иза ње стоји Христос и држи њену душу у облику малог детета повијеног у бело." },
+    mean: { de: "Der Tod der Gerechten ist ein Hinübergehen: Christus nimmt die Seele seiner Mutter auf, wie sie ihn einst als Kind trug.", sr: "Смрт праведника је прелазак: Христос прима душу своје Мајке, као што је она некада Њега носила као дете." } },
+  { id: "trinity", name: { de: "Die Dreifaltigkeit (Gastfreundschaft Abrahams)", sr: "Света Тројица (Гостољубље Аврамово)" },
+    look: { de: "Drei Engel sitzen an einem Tisch mit einem Kelch, wie die drei Besucher bei Abraham (Gen 18). Die berühmteste Fassung malte der hl. Andrej Rubljow im 15. Jahrhundert.", sr: "Три анђела седе за трпезом са чашом, као три посетиоца код Аврама (Пост 18). Најпознатију верзију насликао је свети Андреј Рубљов у 15. веку." },
+    mean: { de: "Ein Bild für die Gemeinschaft der drei göttlichen Personen; der unsichtbare Vater selbst wird in der Ikonographie nicht direkt dargestellt.", sr: "Слика заједнице три божанска Лица; невидљиви Отац сам у иконографији се не приказује непосредно." }, lesson: "th-trinity" },
+  { id: "mandylion", name: { de: "Das nicht von Händen gemachte Bild (Mandylion)", sr: "Нерукотворени образ (Мандилион)" },
+    look: { de: "Das Antlitz Christi auf einem Tuch.", sr: "Христово лице на убрусу." },
+    mean: { de: "Nach der Überlieferung drückte Christus sein Gesicht in ein Tuch für König Abgar von Edessa. Die Ikone bezeugt: Weil Gott Mensch wurde, darf er dargestellt werden.", sr: "Према предању, Христос је утиснуо своје лице у убрус за цара Авгара едеског. Икона сведочи: пошто је Бог постао човек, сме се изображавати." }, tag: "uncertain", lesson: "dg-icons" },
+  { id: "iconostasis", name: { de: "Aufbau der Ikonostase", sr: "Устројство иконостаса" },
+    look: { de: "In der Mitte die Königlichen Türen (oft mit Verkündigung und den Evangelisten), rechts Christus, links die Gottesgebärerin. Darüber, je nach Kirche, Reihen mit den Festen, den Aposteln (Deesis) und den Propheten.", sr: "У средини царске двери (често са Благовестима и јеванђелистима), десно Христос, лево Богородица. Изнад, зависно од храма, редови са празницима, апостолима (Деисис) и пророцима." },
+    mean: { de: "Die Ikonostase zeigt die ganze Heilsgeschichte und die Gemeinschaft der Heiligen.", sr: "Иконостас приказује целу историју спасења и заједницу светих." }, lesson: "li-liturgy" }
+];
+
 /* src/calendar.js */
 /* OrthodoxPath – Kirchenkalender.
    Feste Daten werden nach dem kirchlichen Kalender (Monat/Tag) gespeichert und je nach Einstellung umgerechnet:
@@ -5323,7 +5371,7 @@ function fastPeriods(y, cal) {
   function tabFor(r) {
     if (r.startsWith("quiz-")) return tabFor(backHref(r.slice(5)).slice(1));
     if (r.startsWith("lesson-bib") || r === "bible" || r.startsWith("book-") || r === "plans" || r.startsWith("plan-")) return "bible";
-    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy") return "theology";
+    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons") return "theology";
     if (r.startsWith("person-") || r === "saints") return "saints";
     if (r === "cards" || r === "review") return "cards";
     if (r === "home" || r === "ask" || r === "calendar" || r === "prayers" || r.startsWith("prayercat-")) return "home";
@@ -5336,6 +5384,7 @@ function fastPeriods(y, cal) {
     if (r.startsWith("quiz-")) return backHref(r.slice(5)).slice(1);
     if (r.startsWith("course-") || r === "creed") return "theology";
     if (r === "liturgy") return "course-L";
+    if (r === "icons") return "theology";
     if (r.startsWith("person-")) return "saints";
     if (r === "review") return "cards";
     if (r === "ask") return "home";
@@ -5399,6 +5448,7 @@ function fastPeriods(y, cal) {
       else if (r.startsWith("book-")) html = viewBook(r.slice(5));
       else if (r === "plans") html = viewPlans();
       else if (r === "liturgy") html = viewLiturgy();
+      else if (r === "icons") html = viewIcons();
       else if (r.startsWith("plan-")) html = viewPlan(r.slice(5));
       else if (r === "prayers") html = viewPrayers();
       else if (r.startsWith("prayercat-")) html = viewPrayerCat(r.slice(10));
@@ -5702,6 +5752,15 @@ function fastPeriods(y, cal) {
     return html + `<a class="item" href="#lesson-li-liturgy"><span class="grow"><span class="t">${E(ALL_LESSONS["li-liturgy"].title)}</span></span><span class="chev">›</span></a><p class="small muted">${esc(t("litNote"))}</p>`;
   }
 
+
+  /* ---------- Ikonen-Lexikon ---------- */
+  function viewIcons() {
+    return `<div class="eyebrow">${esc(t("theologyTitle"))}</div><h1>${esc(t("iconsTitle"))}</h1><p class="muted">${esc(t("iconsIntro"))}</p>
+      ${ICONS_LEX.map(i => `<section class="card sec" id="icon-${i.id}"><h3>${E(i.name)}</h3>${i.tag ? tagBadge(i.tag) : ""}
+        <p><b>${esc(t("iconLook"))}:</b> ${E(i.look)}</p><p style="margin-bottom:${i.lesson ? "6px" : "0"}"><b>${esc(t("iconMean"))}:</b> ${E(i.mean)}</p>
+        ${i.lesson && ALL_LESSONS[i.lesson] ? `<a class="small" href="#lesson-${i.lesson}">${esc(t("calToLesson"))} ›</a>` : ""}</section>`).join("")}`;
+  }
+
   /* ---------- Buchüberblick ---------- */
   function viewBook(bid) {
     const b = BIBLE.books.find(x => x[0] === bid); if (!b) return `<p>${esc(t("notFound"))}</p>`;
@@ -5794,6 +5853,8 @@ function fastPeriods(y, cal) {
             + `<li><a class="item" href="#saints"><span class="grow"><span class="t">${esc(t("courseC"))}</span><span class="s">${SAINTS.length} ${esc(t("saints"))}</span></span><span class="chev">›</span></a></li>`
             + COURSES.filter(c => c.id !== "A").map(ci).join(""); })()}
         <li><a class="item" href="#creed"><span class="grow"><span class="t">${esc(t("creed"))}</span></span><span class="chev">›</span></a></li>
+        <li><a class="item" href="#icons"><span class="grow"><span class="t">${esc(t("iconsTitle"))}</span><span class="s">${ICONS_LEX.length}</span></span><span class="chev">›</span></a></li>
+        <li><a class="item" href="#liturgy"><span class="grow"><span class="t">${esc(t("litTitle"))}</span></span><span class="chev">›</span></a></li>
         <li><a class="item" href="#glossary"><span class="grow"><span class="t">${esc(t("glossary"))}</span><span class="s">${esc(t("glossaryIntro"))}</span></span><span class="chev">›</span></a></li>
       </ul>
       <div class="card legend"><h3>${esc(t("legendTitle"))}</h3>${["dogma", "history", "opinion", "counsel", "uncertain"].map(tagBadge).join("")}</div>`;
@@ -6094,6 +6155,7 @@ function fastPeriods(y, cal) {
       (l.keyPoints || []).forEach(k => parts.push(both(k)));
       idx.push({ type: "lesson", title: l.title, text: l.ref || (l.sections && l.sections[0].h), hay: norm(parts.join(" ")), href: "#lesson-" + l.id });
     });
+    ICONS_LEX.forEach(i => idx.push({ type: "icon", title: i.name, text: { de: "", sr: "" }, hay: norm([both(i.name), both(i.look), both(i.mean)].join(" ")), href: "#icons" }));
     OVERVIEWS.forEach(o => idx.push({ type: "book", title: o.title, text: { de: o.keys[0].ref.de, sr: o.keys[0].ref.sr }, hay: norm([both(o.title), both(o.about), both(o.christ)].join(" ")), href: "#book-" + o.book }));
     Object.values(PEOPLE).forEach(p => idx.push({ type: "person", title: p.name, text: p.lived, hay: norm([both(p.name), both(p.who), both(p.taught), both(p.life), both(p.teaching)].join(" ")), href: "#person-" + p.id }));
     return idx;
@@ -6133,7 +6195,7 @@ function fastPeriods(y, cal) {
   function viewMore() {
     const it = (h, k, s) => `<li><a class="item" href="#${h}"><span class="grow"><span class="t">${esc(t(k))}</span>${s ? `<span class="s">${esc(s)}</span>` : ""}</span><span class="chev">›</span></a></li>`;
     return `<h1>${esc(t("navMore"))}</h1><ul class="list">
-      ${it("books", "navBooks", t("booksIntro"))}${it("progress", "navProgress")}${it("notes", "notebook")}${it("glossary", "glossary")}${it("prayers", "prayersTitle")}${it("liturgy", "litTitle")}${it("ask", "askTitle")}${it("calendar", "calTitle")}${it("prefs", "navSettings")}
+      ${it("books", "navBooks", t("booksIntro"))}${it("progress", "navProgress")}${it("notes", "notebook")}${it("glossary", "glossary")}${it("prayers", "prayersTitle")}${it("liturgy", "litTitle")}${it("icons", "iconsTitle")}${it("ask", "askTitle")}${it("calendar", "calTitle")}${it("prefs", "navSettings")}
     </ul>`;
   }
 
