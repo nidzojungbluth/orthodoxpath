@@ -364,7 +364,7 @@ main > .wrap { animation: opFade .3s var(--ease); }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "2.5.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "2.6.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -3616,6 +3616,155 @@ const BIBLE = {
         { q: { de: "Wofür wird der Dornbusch als Vorausbild gedeutet?", sr: "Чега праслика је, према тумачењу, купина?" },
           options: [{ de: "Für die Gottesgebärerin", sr: "Богородице" }, { de: "Für die Arche Noah", sr: "Нојеве барке" }, { de: "Für den Turm von Babel", sr: "Вавилонске куле" }], correct: 0 }
       ]
+    },
+  {
+      id: "bib-jer31", book: "jer", order: 38,
+      title: { de: "Der neue Bund", sr: "Нови завет" },
+      ref: { de: "Jeremia 31,15–34", sr: "Јеремија 31,15–34" },
+      intro: {
+        de: "Der Prophet Jeremia wirkte vor und während der Zerstörung Jerusalems durch die Babylonier (587 v. Chr.). Er musste viel Unheil ankündigen und litt selbst sehr. Kapitel 31 gehört zum „Trostbuch“: Gott verspricht einen neuen Bund.",
+        sr: "Пророк Јеремија деловао је пре и за време разарања Јерусалима од Вавилонаца (587. пре Христа). Морао је да најављује много несреће и сам је много страдао. 31. глава припада „књизи утехе“: Бог обећава нови завет."
+      },
+      introTag: "history",
+      context: {
+        de: "Das Volk hatte den Bund vom Sinai immer wieder gebrochen. Jetzt verliert es Tempel, König und Land und wird verschleppt. Mitten in diesem Zusammenbruch spricht Gott von Heimkehr und von einem neuen Anfang.",
+        sr: "Народ је изнова кршио Синајски завет. Сада губи храм, цара и земљу и бива одведен у ропство. Усред тог слома Бог говори о повратку и новом почетку."
+      },
+      reading: [
+        { ref: { de: "Jer 31,15–17", sr: "Јер 31,15–17" }, note: { de: "Rahel weint um ihre Kinder.", sr: "Рахиља плаче за децом својом." } },
+        { ref: { de: "Jer 31,31–34", sr: "Јер 31,31–34" }, note: { de: "Ich schreibe mein Gesetz in ihr Herz.", sr: "Записаћу закон свој у срце њихово." } }
+      ],
+      summary: {
+        de: "In Rama hört man Klage: Rahel weint um ihre Kinder und will sich nicht trösten lassen. Doch Gott spricht: Halte deine Stimme vom Weinen zurück; es gibt Hoffnung für deine Zukunft, die Kinder kehren heim. Dann kündigt Gott an: Es kommen Tage, da schließe ich einen neuen Bund mit dem Haus Israel – nicht wie den Bund, den ich mit ihren Vätern schloss, als ich sie aus Ägypten führte und den sie gebrochen haben. Ich lege mein Gesetz in ihr Inneres und schreibe es in ihr Herz. Ich werde ihr Gott sein, und sie werden mein Volk sein. Keiner muss den anderen mehr belehren: Erkennt den Herrn!, denn alle werden mich erkennen, vom Kleinsten bis zum Größten. Denn ich vergebe ihre Schuld und denke nicht mehr an ihre Sünde.",
+        sr: "У Рами се чује јаук: Рахиља плаче за децом својом и неће да се утеши. Али Бог говори: Устегни глас свој од плача; има наде за твоју будућност, деца се враћају. Затим Бог најављује: Ево иду дани када ћу учинити нови завет са домом Израиљевим – не као завет који сам учинио са оцима њиховим када сам их извео из Египта, а који су они раскинули. Метнућу закон свој у њих и записаћу га у срцу њиховом. Ја ћу бити њихов Бог, а они ће бити мој народ. Неће више учити један другога: Познај Господа!, јер ће ме сви познавати, од малог до великог. Јер ћу им опростити безакоње и греха њиховог нећу се више сећати."
+      },
+      interp: {
+        simple: {
+          de: "Gott gibt nicht auf, auch wenn sein Volk versagt. Er verspricht einen neuen Bund: Sein Gebot steht dann nicht nur auf Steintafeln, sondern im Herzen, und er vergibt die Sünden.",
+          sr: "Бог не одустаје, ни када Његов народ посрне. Обећава нови завет: Његова заповест тада неће стајати само на каменим плочама, него у срцу, и Он опрашта грехе."
+        },
+        deeper: {
+          de: "Jer 31,31–34 ist die längste alttestamentliche Stelle, die im Neuen Testament wörtlich angeführt wird (Hebr 8,8–12). Beim Abendmahl spricht Christus vom „neuen Bund in meinem Blut“ (Lk 22,20; 1 Kor 11,25). Daher stammt auch der Name „Neues Testament“ (Testament = Bund). Das Gesetz im Herzen wird in der Kirche mit der Gabe des Heiligen Geistes verbunden (vgl. Ez 36,26–27; 2 Kor 3,3). Matthäus bezieht die Klage Rahels auf den Kindermord in Betlehem (Mt 2,17–18).",
+          sr: "Јер 31,31–34 је најдуже старозаветно место које се у Новом завету наводи дословно (Јев 8,8–12). На Тајној вечери Христос говори о „новом завету у крви мојој“ (Лк 22,20; 1 Кор 11,25). Отуда и назив „Нови завет“. Закон у срцу Црква повезује са даром Духа Светога (уп. Јез 36,26–27; 2 Кор 3,3). Матеј плач Рахиљин односи на покољ деце у Витлејему (Мт 2,17–18)."
+        },
+        tag: "dogma"
+      },
+      christ: {
+        de: "Christus schließt den neuen Bund in seinem Blut. In jeder Göttlichen Liturgie erklingen seine Worte: „Dies ist mein Blut des Neuen Bundes“ – die Erfüllung von Jeremias Verheißung.",
+        sr: "Христос склапа нови завет у својој крви. На свакој Светој Литургији звуче Његове речи: „Ово је крв моја Новога завета“ – испуњење Јеремијиног обећања."
+      },
+      links: [
+        { ref: { de: "Hebr 8,6–13", sr: "Јев 8,6–13" }, note: { de: "Christus, Mittler eines besseren Bundes.", sr: "Христос, посредник бољег завета." } },
+        { ref: { de: "Lk 22,19–20", sr: "Лк 22,19–20" }, note: { de: "Der neue Bund in meinem Blut.", sr: "Нови завет у крви мојој." } },
+        { ref: { de: "2 Kor 3,3", sr: "2 Кор 3,3" }, note: { de: "Geschrieben mit dem Geist auf Tafeln aus Fleisch, ins Herz.", sr: "Написано Духом на плочама срца." } },
+        { ref: { de: "Mt 2,17–18", sr: "Мт 2,17–18" }, note: { de: "Rahel weint um ihre Kinder.", sr: "Рахиља плаче за децом својом." } }
+      ],
+      fathers: {
+        de: "Die Väter lesen Jer 31 durchgehend im Licht von Hebr 8 und dem Abendmahl. Der hl. Johannes Chrysostomus behandelt die Stelle in seinen Homilien zum Hebräerbrief (englisch in NPNF I/14). Wörtliche Zitate gibt die App nicht wieder.",
+        sr: "Оци Јер 31 читају у светлости Јев 8 и Тајне вечере. Свети Јован Златоуст обрађује ово место у беседама на Посланицу Јеврејима (на енглеском у NPNF I/14). Апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Wohin schreibt Gott im neuen Bund sein Gesetz?", sr: "Где Бог у новом завету записује свој закон?" },
+          a: { de: "In das Herz der Menschen (Jer 31,33).", sr: "У срце људи (Јер 31,33)." } },
+        { q: { de: "Wo zitiert das Neue Testament Jer 31,31–34?", sr: "Где Нови завет наводи Јер 31,31–34?" },
+          a: { de: "Im Hebräerbrief (Hebr 8,8–12).", sr: "У Посланици Јеврејима (Јев 8,8–12)." } },
+        { q: { de: "Woher kommt der Name „Neues Testament“?", sr: "Одакле потиче назив „Нови завет“?" },
+          a: { de: "Vom neuen Bund, den Christus in seinem Blut schließt (Lk 22,20).", sr: "Од новог завета који Христос склапа у својој крви (Лк 22,20)." } }
+      ],
+      practice: {
+        de: "Achte bei der nächsten Liturgie auf die Worte „Dies ist mein Blut des Neuen Bundes“. Denke daran: Gottes Bund gilt auch dir, trotz deiner Fehler.",
+        sr: "На следећој Литургији обратите пажњу на речи „Ово је крв моја Новога завета“. Помислите: Божији завет важи и за вас, упркос вашим грешкама."
+      },
+      review: {
+        de: "Gott verspricht durch Jeremia einen neuen Bund: das Gesetz im Herzen und die Vergebung der Sünden. Christus erfüllt ihn in seinem Blut.",
+        sr: "Бог преко Јеремије обећава нови завет: закон у срцу и опроштај греха. Христос га испуњава у својој крви."
+      },
+      quiz: [
+        { q: { de: "Wer weint nach Jer 31,15 um ihre Kinder?", sr: "Ко, по Јер 31,15, плаче за децом својом?" },
+          options: [{ de: "Rahel", sr: "Рахиља" }, { de: "Sara", sr: "Сара" }, { de: "Ruth", sr: "Рута" }], correct: 0 },
+        { q: { de: "Was verspricht Gott im neuen Bund?", sr: "Шта Бог обећава у новом завету?" },
+          options: [{ de: "Das Gesetz im Herzen und Vergebung", sr: "Закон у срцу и опроштај" }, { de: "Neue Steintafeln", sr: "Нове камене плоче" }, { de: "Einen neuen König", sr: "Новог цара" }], correct: 0 },
+        { q: { de: "Welches Ereignis erlebte Jeremia?", sr: "Који догађај је доживео Јеремија?" },
+          options: [{ de: "Die Zerstörung Jerusalems durch Babylon", sr: "Разарање Јерусалима од Вавилона" }, { de: "Den Auszug aus Ägypten", sr: "Излазак из Египта" }, { de: "Die Sintflut", sr: "Потоп" }], correct: 0 },
+        { q: { de: "Wo spricht Christus vom „neuen Bund in meinem Blut“?", sr: "Где Христос говори о „новом завету у крви мојој“?" },
+          options: [{ de: "Beim Abendmahl", sr: "На Тајној вечери" }, { de: "Bei der Taufe im Jordan", sr: "На крштењу на Јордану" }, { de: "Auf dem Tabor", sr: "На Тавору" }], correct: 0 }
+      ]
+    },
+  {
+      id: "bib-tob", book: "tob", order: 39,
+      title: { de: "Tobit und der Erzengel Raphael", sr: "Товит и арханђел Рафаило" },
+      ref: { de: "Tobit 1–3; 5; 11–12", sr: "Товит 1–3; 5; 11–12" },
+      intro: {
+        de: "Das Buch Tobit gehört zu den Büchern, die die orthodoxe Bibel aus der Septuaginta übernommen hat. Es erzählt von einer frommen Familie in der Verbannung in Ninive und davon, wie Gott durch den Erzengel Raphael hilft.",
+        sr: "Књига о Товиту спада у књиге које је православна Библија преузела из Септуагинте. Приповеда о побожној породици у изгнанству у Ниневији и о томе како Бог помаже преко арханђела Рафаила."
+      },
+      introTag: "history",
+      context: {
+        de: "Tobit lebt als Verschleppter unter den Assyrern. Obwohl es gefährlich ist, hilft er den Armen und begräbt heimlich die getöteten Landsleute. Er erblindet und gerät in Not. Zur gleichen Zeit leidet in Medien die junge Sara, deren sieben Bräutigame starben.",
+        sr: "Товит живи као изгнаник међу Асирцима. Иако је опасно, помаже сиромашнима и тајно сахрањује убијене сународнике. Ослепи и запада у невољу. У исто време у Мидији пати млада Сара, чијих је седам женика умрло."
+      },
+      reading: [
+        { ref: { de: "Tob 1,3; 2,1–10", sr: "Тов 1,3; 2,1–10" }, note: { de: "Tobits Barmherzigkeit und seine Erblindung.", sr: "Товитово милосрђе и његово слепило." } },
+        { ref: { de: "Tob 5,1–17", sr: "Тов 5,1–17" }, note: { de: "Ein Begleiter für die Reise.", sr: "Сапутник на путу." } },
+        { ref: { de: "Tob 11,7–15; 12,6–22", sr: "Тов 11,7–15; 12,6–22" }, note: { de: "Heilung und Offenbarung des Engels.", sr: "Исцељење и откривење анђела." } }
+      ],
+      summary: {
+        de: "Tobit und Sara beten beide in ihrer Not, und Gott erhört sie. Tobit schickt seinen Sohn Tobias auf eine weite Reise. Ein Begleiter bietet sich an – es ist der Erzengel Raphael, doch Tobias erkennt ihn nicht. Unterwegs hilft der Engel ihm, Sara zur Frau zu nehmen und sie von der dämonischen Bedrängnis zu befreien. In der Hochzeitsnacht beten Tobias und Sara gemeinsam zu Gott. Nach der Heimkehr heilt Tobias auf Raphaels Rat die Augen seines Vaters. Dann gibt sich Raphael zu erkennen: Er ist einer der sieben heiligen Engel, die vor dem Herrn stehen. Er mahnt: Gut ist Gebet mit Fasten, Almosen und Gerechtigkeit. Preist Gott!",
+        sr: "Товит и Сара се обоје моле у својој невољи, и Бог их услишава. Товит шаље сина Товију на далек пут. Нуди се један сапутник – то је арханђел Рафаило, али га Товија не препознаје. На путу му анђео помаже да узме Сару за жену и да је ослободи демонског узнемиравања. У свадбеној ноћи Товија и Сара заједно се моле Богу. После повратка Товија по Рафаиловом савету исцељује очи свога оца. Тада се Рафаило открива: он је један од седам светих анђела који стоје пред Господом. Опомиње: Добра је молитва са постом, милостињом и правдом. Благосиљајте Бога!"
+      },
+      interp: {
+        simple: {
+          de: "Gott sieht die Not der Menschen, die zu ihm beten, auch wenn sie es nicht merken. Er sendet Hilfe – manchmal unerkannt. Barmherzigkeit, Gebet und Fasten gehören zusammen.",
+          sr: "Бог види невољу људи који Му се моле, и када они то не примећују. Шаље помоћ – понекад непрепознатљиву. Милосрђе, молитва и пост иду заједно."
+        },
+        deeper: {
+          de: "Der Name Raphael bedeutet „Gott heilt“. Das Buch ist eine wichtige biblische Grundlage für den Glauben an Schutzengel und an die Fürbitte der Engel: Raphael bringt die Gebete vor Gott (Tob 12,12). Die Kirche gedenkt Raphaels am Fest der Synaxis des Erzengels Michael und aller Engel (8. Nov., julianisch 21. Nov.). Das Gebet von Tobias und Sara (Tob 8,5–8) zeigt die Ehe als Bund vor Gott. Die Orthodoxie zählt Tobit zu den „lesenswerten Büchern“ (Anagignoskomena), die im Gottesdienst und zur Erbauung gebraucht werden.",
+          sr: "Име Рафаило значи „Бог исцељује“. Књига је важан библијски темељ вере у анђеле чуваре и у заступништво анђела: Рафаило износи молитве пред Бога (Тов 12,12). Црква спомиње Рафаила на празник Сабора Светог архангела Михаила и свих анђела (8. новембар, по јулијанском 21. новембар). Молитва Товије и Саре (Тов 8,5–8) показује брак као савез пред Богом. Православље Товита убраја у „корисне за читање“ књиге (анагиноскомена), које се користе на богослужењу и за поуку."
+        },
+        tag: "history"
+      },
+      christ: {
+        de: "Raphael begleitet Tobias unerkannt auf dem Weg – so wie der auferstandene Christus die Jünger nach Emmaus begleitete, die ihn zuerst nicht erkannten (Lk 24,13–31). Christus ist der wahre Arzt der Seelen und Leiber.",
+        sr: "Рафаило непрепознат прати Товију на путу – као што је васкрсли Христос пратио ученике на путу у Емаус, који Га најпре нису препознали (Лк 24,13–31). Христос је истински лекар душа и тела."
+      },
+      links: [
+        { ref: { de: "Mt 18,10", sr: "Мт 18,10" }, note: { de: "Ihre Engel schauen das Angesicht des Vaters.", sr: "Анђели њихови гледају лице Оца." } },
+        { ref: { de: "Hebr 1,14", sr: "Јев 1,14" }, note: { de: "Engel sind dienende Geister.", sr: "Анђели су служебни духови." } },
+        { ref: { de: "Mt 6,1–18", sr: "Мт 6,1–18" }, note: { de: "Almosen, Gebet und Fasten im Verborgenen.", sr: "Милостиња, молитва и пост у тајности." } },
+        { ref: { de: "Lk 24,13–31", sr: "Лк 24,13–31" }, note: { de: "Der unerkannte Begleiter auf dem Weg nach Emmaus.", sr: "Непрепознати сапутник на путу у Емаус." } }
+      ],
+      fathers: {
+        de: "Die Väter zitieren Tobit häufig, besonders zu Almosen und Gebet (z. B. Tob 4 und 12). Für diese Version wurde kein einzelner freier Väterkommentar geprüft; wörtliche Zitate gibt die App nicht wieder.",
+        sr: "Оци често наводе Товита, нарочито о милостињи и молитви (нпр. Тов 4 и 12). За ово издање није проверен ниједан појединачан слободан коментар отаца; апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Was bedeutet der Name Raphael?", sr: "Шта значи име Рафаило?" },
+          a: { de: "„Gott heilt“.", sr: "„Бог исцељује“." } },
+        { q: { de: "Welche guten Werke Tobits werden besonders genannt?", sr: "Која добра дела Товитова се посебно наводе?" },
+          a: { de: "Almosen für die Armen und das Begraben der Toten.", sr: "Милостиња сиромашнима и сахрањивање мртвих." } },
+        { q: { de: "Was empfiehlt Raphael zum Schluss?", sr: "Шта Рафаило препоручује на крају?" },
+          a: { de: "Gebet mit Fasten, Almosen und Gerechtigkeit – und Gott zu preisen.", sr: "Молитву са постом, милостињом и правдом – и да се благосиља Бог." } }
+      ],
+      practice: {
+        de: "Bete diese Woche bewusst zu deinem Schutzengel und gib einem bedürftigen Menschen still eine Gabe, ohne darüber zu sprechen.",
+        sr: "Помолите се ове недеље свесно свом анђелу чувару и тихо дајте дар неком ко је у потреби, а да о томе не говорите."
+      },
+      review: {
+        de: "Gott erhört die Gebete von Tobit und Sara und sendet den Erzengel Raphael, der unerkannt begleitet, befreit und heilt. Gebet, Fasten und Almosen gehören zusammen.",
+        sr: "Бог услишава молитве Товита и Саре и шаље арханђела Рафаила, који непрепознат прати, ослобађа и исцељује. Молитва, пост и милостиња иду заједно."
+      },
+      quiz: [
+        { q: { de: "Wer begleitete Tobias auf der Reise?", sr: "Ко је пратио Товију на путу?" },
+          options: [{ de: "Der Erzengel Raphael", sr: "Арханђел Рафаило" }, { de: "Der Prophet Elija", sr: "Пророк Илија" }, { de: "Sein Vater", sr: "Његов отац" }], correct: 0 },
+        { q: { de: "In welcher Stadt lebte Tobit in der Verbannung?", sr: "У ком граду је Товит живео у изгнанству?" },
+          options: [{ de: "Ninive", sr: "У Ниневији" }, { de: "Rom", sr: "У Риму" }, { de: "Jerusalem", sr: "У Јерусалиму" }], correct: 0 },
+        { q: { de: "Woran litt Tobit?", sr: "Од чега је патио Товит?" },
+          options: [{ de: "An Blindheit", sr: "Од слепила" }, { de: "An Lähmung", sr: "Од одузетости" }, { de: "An Aussatz", sr: "Од губе" }], correct: 0 },
+        { q: { de: "An welchem Fest gedenkt die Kirche Raphaels?", sr: "На који празник Црква спомиње Рафаила?" },
+          options: [{ de: "Synaxis des Erzengels Michael und aller Engel", sr: "Сабор Светог архангела Михаила и свих анђела" }, { de: "Ostern", sr: "Васкрс" }, { de: "Kreuzerhöhung", sr: "Крстовдан" }], correct: 0 }
+      ]
     }
   ]
 };
@@ -5040,7 +5189,19 @@ const SAINTS = [
     life: { de: "Der Kirchenhistoriker Eusebius von Caesarea berichtet, dass Prokopios aus Skythopolis stammte, in der Kirche als Lektor diente und ein sehr asketisches Leben führte. Im Jahr 303 wurde er in Caesarea in Palästina als erster Märtyrer der diokletianischen Verfolgung in dieser Gegend enthauptet, weil er sich weigerte, den Göttern und dem Kaiser zu opfern. Spätere Lebensbeschreibungen machen ihn zu einem Heerführer; diese Erweiterungen sind historisch nicht gesichert.", sr: "Црквени историчар Јевсевије Кесаријски пише да је Прокопије био из Скитопоља, да је у Цркви служио као чтец и водио веома подвижнички живот. Године 303. посечен је у Кесарији Палестинској као први мученик Диоклецијановог гоњења у тој области, јер је одбио да принесе жртву боговима и цару. Каснија житија праве од њега војсковођу; та проширења историјски нису потврђена." },
     teaching: { de: "Er zeigt, dass auch ein einfacher Dienst in der Kirche – Lesen der Schrift – zu großer Treue führen kann. Er bekannte, es gebe nur einen Gott.", sr: "Он показује да и једноставна служба у Цркви – читање Писма – може водити ка великој верности. Исповедао је да постоји само један Бог." },
     meaning: { de: "Die serbische Stadt Prokuplje trägt seinen Namen; nach der Überlieferung wurden Reliquien von ihm dorthin gebracht. Prokopijevdan ist in einigen serbischen Familien Slava.", sr: "Српски град Прокупље носи његово име; према предању, тамо су донете његове мошти. Прокопијевдан је у неким српским породицама слава." },
-    tag: "uncertain", read: ["svProlog"] }
+    tag: "uncertain", read: ["svProlog"] },
+  { id: "s-antony", name: { de: "Hl. Antonius der Große", sr: "Свети Антоније Велики" },
+    lived: { de: "um 251–356", sr: "око 251–356" }, feast: { de: "17. Jan. (30. Jan.)", sr: "17/30. јануар" },
+    life: { de: "Antonius stammte aus einer christlichen Bauernfamilie in Oberägypten. Nach dem Tod seiner Eltern hörte er in der Kirche das Wort des Herrn: Willst du vollkommen sein, so verkaufe, was du hast, und gib es den Armen (Mt 19,21). Er gab sein Erbe weg und zog sich nach und nach immer tiefer in die Wüste zurück. Viele Menschen suchten seinen Rat, und um ihn sammelten sich Schüler. Er starb hochbetagt um 356. Sein Leben beschrieb der hl. Athanasius von Alexandrien kurz nach seinem Tod.", sr: "Антоније је потицао из хришћанске сељачке породице у Горњем Египту. После смрти родитеља чуо је у цркви реч Господњу: Ако хоћеш савршен да будеш, продај што имаш и подај сиромасима (Мт 19,21). Раздао је наследство и постепено се повлачио све дубље у пустињу. Многи људи су тражили његов савет, а око њега су се окупљали ученици. Упокојио се у дубокој старости око 356. Његово житије написао је свети Атанасије Александријски убрзо после његове смрти." },
+    teaching: { de: "Er lehrte Wachsamkeit über die Gedanken, Ausdauer im Gebet, Demut und Unterscheidung. Seine Kämpfe gegen Versuchungen sind im Leben des Athanasius beschrieben. Er gilt als „Vater der Mönche“.", sr: "Учио је будности над помислима, истрајности у молитви, смирењу и расуђивању. Његове борбе са искушењима описане су у Атанасијевом житију. Сматра се „оцем монаха“." },
+    meaning: { de: "Das „Leben des Antonius“ verbreitete das Mönchtum in der ganzen christlichen Welt und gehört zu den einflussreichsten Heiligenleben überhaupt.", sr: "„Житије Антонијево“ раширило је монаштво у целом хришћанском свету и спада у најутицајнија житија уопште." },
+    read: ["athAnt"] },
+  { id: "s-arsenije", name: { de: "Hl. Arsenije Sremac", sr: "Свети Арсеније Сремац" },
+    lived: { de: "† 1266", sr: "† 1266." }, feast: { de: "28. Okt. (10. Nov.)", sr: "28. октобар/10. новембар" },
+    life: { de: "Arsenije stammte nach der Überlieferung aus Srem (Syrmien), daher sein Beiname. Er war ein Schüler des hl. Sava und wurde von ihm zum Abt des Klosters Žiča bestimmt. 1233 folgte er Sava als zweiter Erzbischof der Serbischen Kirche nach. Unter ihm wurde der Sitz des Erzbistums nach Peć verlegt, wo er die Kirche der Heiligen Apostel errichten ließ. Er leitete die Kirche etwa drei Jahrzehnte. Seine Reliquien ruhen nach der Überlieferung im Kloster Ždrebaonik in Montenegro.", sr: "Арсеније је, према предању, потицао из Срема, отуда његов надимак. Био је ученик светог Саве, који га је поставио за игумана манастира Жиче. Године 1233. наследио је Саву као други архиепископ Српске Цркве. За његово време седиште архиепископије пренето је у Пећ, где је подигао храм Светих апостола. Управљао је Црквом око три деценије. Његове мошти, према предању, почивају у манастиру Ждребаоник у Црној Гори." },
+    teaching: { de: "Er führte das Werk des hl. Sava treu weiter: Ordnung der Kirche, Pflege der Klöster und des Gottesdienstes. Er ist ein Vorbild für treue Nachfolge im Dienst.", sr: "Верно је наставио дело светог Саве: уређење Цркве, бригу о манастирима и богослужењу. Узор је верног наслеђивања у служби." },
+    meaning: { de: "Die Patriarchenkirche in Peć wurde zum geistlichen Zentrum der Serbischen Kirche; das Patriarchat von Peć ist Teil des UNESCO-Welterbes „Mittelalterliche Denkmäler im Kosovo“.", sr: "Пећка патријаршија постала је духовни центар Српске Цркве; она је део Унесковог светског наслеђа „Средњовековни споменици на Косову“." },
+    tag: "uncertain", read: [], readNote: { de: "Für diese Version wurde keine einzelne freie, rechtmäßige Quelle geprüft. Auskunft gibt dein Priester.", sr: "За ово издање није проверен ниједан појединачан слободан, законито доступан извор. Обавештења даје ваш свештеник." } }
 ];
 
 /* Fragen und Quiz für die Heiligen-Profile (Kurs C) */
@@ -5310,6 +5471,28 @@ const SAINT_EXTRA = {
       qz("Wo starb er 303 als Märtyrer?", "Где је пострадао 303?", [["In Caesarea in Palästina", "У Кесарији Палестинској"], ["In Rom", "У Риму"], ["In Belgrad", "У Београду"]], 0),
       qz("Welche serbische Stadt trägt seinen Namen?", "Који српски град носи његово име?", [["Prokuplje", "Прокупље"], ["Kragujevac", "Крагујевац"], ["Novi Sad", "Нови Сад"]], 0),
       qz("Wann ist sein Gedenktag?", "Када је његов спомен?", [["8. Juli (21. Juli)", "8. јула (21. јула)"], ["26. Oktober (8. November)", "26. октобра (8. новембра)"], ["30. November (13. Dezember)", "30. новембра (13. децембра)"]], 0)
+    ]
+  },
+  "s-antony": {
+    questions: [
+      qa("Welches Bibelwort bewegte Antonius, alles aufzugeben?", "Која библијска реч је подстакла Антонија да све остави?", "Willst du vollkommen sein, so verkaufe, was du hast, und gib es den Armen (Mt 19,21).", "Ако хоћеш савршен да будеш, продај што имаш и подај сиромасима (Мт 19,21)."),
+      qa("Wer schrieb das Leben des Antonius?", "Ко је написао житије Антонијево?", "Der hl. Athanasius von Alexandrien.", "Свети Атанасије Александријски.")
+    ],
+    quiz: [
+      qz("In welchem Land lebte der hl. Antonius?", "У којој земљи је живео свети Антоније?", [["Ägypten", "У Египту"], ["Griechenland", "У Грчкој"], ["Serbien", "У Србији"]], 0),
+      qz("Welchen Ehrentitel trägt er?", "Коју почасну титулу носи?", [["Vater der Mönche", "Отац монаха"], ["Säule der Orthodoxie", "Стуб Православља"], ["Goldmund", "Златоусти"]], 0),
+      qz("Wann ist sein Gedenktag?", "Када је његов спомен?", [["17. Januar (30. Januar)", "17. јануара (30. јануара)"], ["30. Januar (12. Februar)", "30. јануара (12. фебруара)"], ["1. Januar (14. Januar)", "1. јануара (14. јануара)"]], 0)
+    ]
+  },
+  "s-arsenije": {
+    questions: [
+      qa("Wessen Nachfolger war der hl. Arsenije?", "Чији наследник је био свети Арсеније?", "Er folgte dem hl. Sava 1233 als zweiter Erzbischof der Serbischen Kirche.", "Наследио је светог Саву 1233. као други архиепископ Српске Цркве."),
+      qa("Wohin wurde unter ihm der Sitz des Erzbistums verlegt?", "Где је за његово време пренето седиште архиепископије?", "Nach Peć.", "У Пећ.")
+    ],
+    quiz: [
+      qz("Woher kommt sein Beiname „Sremac“?", "Одакле потиче његов надимак „Сремац“?", [["Aus der Gegend Srem (Syrmien)", "Из Срема"], ["Von einem Kloster", "Од манастира"], ["Von seinem Vater", "Од његовог оца"]], 0),
+      qz("Welche Kirche ließ er in Peć errichten?", "Који храм је подигао у Пећи?", [["Die Kirche der Heiligen Apostel", "Храм Светих апостола"], ["Die Hagia Sophia", "Свету Софију"], ["Die Kirche des hl. Sava", "Храм Светог Саве"]], 0),
+      qz("Wann ist sein Gedenktag?", "Када је његов спомен?", [["28. Oktober (10. November)", "28. октобра (10. новембра)"], ["14. Januar (27. Januar)", "14. јануара (27. јануара)"], ["11. November (24. November)", "11. новембра (24. новембра)"]], 0)
     ]
   }
 };
@@ -5619,6 +5802,8 @@ const EXTRA_CARDS = [
   ["d-bible", "Wie beginnt das Grundbekenntnis Israels (Dtn 6,4)?", "Како почиње основно исповедање Израиља (Пнз 6,4)?", "Höre, Israel, der Herr, unser Gott, ist ein einziger Herr.", "Чуј, Израиљу, Господ Бог наш је једини Господ."],
   ["d-bible", "Was antwortet Abraham auf Isaaks Frage nach dem Lamm (Gen 22,8)?", "Шта Авраам одговара на Исаково питање о јагњету (Пост 22,8)?", "Gott wird sich das Lamm ersehen.", "Бог ће се постарати за јагње."],
   ["d-bible", "Was steht im Heiligenschein Christi auf Ikonen?", "Шта стоји у Христовом ореолу на иконама?", "ὁ ὤν – „der Seiende“ (Ex 3,14 nach der Septuaginta).", "ὁ ὤν – „Онај Који јесте“ (Изл 3,14 по Септуагинти)."],
+  ["d-bible", "Wo zitiert das Neue Testament Jeremias Verheißung vom neuen Bund?", "Где Нови завет наводи Јеремијино обећање новог завета?", "In Hebr 8,8–12; Christus spricht beim Abendmahl vom neuen Bund in seinem Blut.", "У Јев 8,8–12; Христос на Тајној вечери говори о новом завету у својој крви."],
+  ["d-bible", "Was bedeutet der Name Raphael?", "Шта значи име Рафаило?", "„Gott heilt“ (Buch Tobit).", "„Бог исцељује“ (књига о Товиту)."],
   ["d-history", "Nizäa 325 – worum ging es?", "Никеја 325 – о чему је било реч?", "Gegen Arius: Der Sohn ist eines Wesens mit dem Vater.", "Против Арија: Син је једносуштан Оцу."],
   ["d-history", "Konstantinopel 381 – worum ging es?", "Цариград 381 – о чему је било реч?", "Gottheit des Heiligen Geistes; Ergänzung des Glaubensbekenntnisses.", "Божанство Духа Светога; допуна Символа вере."],
   ["d-history", "Ephesus 431 – worum ging es?", "Ефес 431 – о чему је било реч?", "Gegen Nestorius: Maria ist Gottesgebärerin.", "Против Несторија: Марија је Богородица."],
@@ -5654,6 +5839,8 @@ const EXTRA_CARDS = [
   ["d-history", "Was ist die Liturgie der Vorgeweihten Gaben?", "Шта је Литургија Пређеосвећених Дарова?", "Vesper mit Kommunion aus am Sonntag geweihten Gaben – an Wochentagen der Fastenzeit.", "Вечерње са причешћем Даровима освећеним у недељу – радним данима поста."],
   ["d-saints", "Welches Kloster trägt den Namen der hl. Katharina?", "Који манастир носи име свете Екатерине?", "Das Katharinenkloster auf dem Sinai.", "Манастир Свете Екатерине на Синају."],
   ["d-saints", "Nach welchem Heiligen ist die Stadt Prokuplje benannt?", "По ком светитељу је назван град Прокупље?", "Nach dem hl. Großmärtyrer Prokopios.", "По светом великомученику Прокопију."],
+  ["d-saints", "Wer gilt als „Vater der Mönche“?", "Ко се сматра „оцем монаха“?", "Der hl. Antonius der Große (Ägypten, † um 356).", "Свети Антоније Велики (Египат, † око 356)."],
+  ["d-saints", "Wer war der zweite Erzbischof der Serbischen Kirche?", "Ко је био други архиепископ Српске Цркве?", "Der hl. Arsenije Sremac, Nachfolger des hl. Sava (ab 1233).", "Свети Арсеније Сремац, наследник светог Саве (од 1233)."],
   ["d-saints", "Wer sind die Drei Hierarchen?", "Ко су Три Јерарха?", "Basilius der Große, Gregor der Theologe, Johannes Chrysostomus (Fest 30. Jan.).", "Василије Велики, Григорије Богослов, Јован Златоуст (празник 30. јануар)."],
   ["d-saints", "Wer schrieb „Über die Menschwerdung des Wortes“?", "Ко је написао „О оваплоћењу Логоса“?", "Der hl. Athanasius der Große.", "Свети Атанасије Велики."],
   ["d-saints", "Wer verteidigte die zwei Willen Christi bis zum Martyrium?", "Ко је бранио две воље Христове до мучеништва?", "Der hl. Maximus der Bekenner.", "Свети Максим Исповедник."],
@@ -6012,7 +6199,7 @@ const SAINT_DAYS = [
   ["s-seraphim", 1, 2], ["s-seraphim", 7, 19], ["s-kronstadt", 12, 20], ["s-nikolaj", 3, 5], ["s-nikolaj", 4, 20],
   ["s-sava", 1, 14], ["s-lazar", 6, 15], ["s-simeon", 2, 13], ["s-vasilije", 4, 29], ["s-justin", 6, 1],
   ["s-maryegypt", 4, 1], ["s-luke", 5, 29],
-  ["s-nicholas", 5, 9], ["s-george", 11, 3], ["s-demetrios", 10, 26], ["s-petka", 10, 14], ["s-stefan", 11, 11], ["s-andrew", 11, 30], ["s-spyridon", 12, 12], ["s-catherine", 11, 24], ["s-prokopije", 7, 8]
+  ["s-nicholas", 5, 9], ["s-george", 11, 3], ["s-demetrios", 10, 26], ["s-petka", 10, 14], ["s-stefan", 11, 11], ["s-andrew", 11, 30], ["s-spyridon", 12, 12], ["s-catherine", 11, 24], ["s-prokopije", 7, 8], ["s-antony", 1, 17], ["s-arsenije", 10, 28]
 ];
 
 const CAL_FASTS = {

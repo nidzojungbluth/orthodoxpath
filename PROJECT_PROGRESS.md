@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 2.5.0 (1. November 2026)
+**Aktuelle Version:** 2.6.0 (1. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -20,18 +20,24 @@
 
 | Bereich | Stand |
 |---|---|
-| Bibelschule | 37 volle Lektionen (je 11 Teile, Fragen, Quiz) + 27 Kurzüberblicke → alle 39 Bucheinträge abgedeckt |
+| Bibelschule | 39 volle Lektionen (je 11 Teile, Fragen, Quiz) + 27 Kurzüberblicke → alle 39 Bucheinträge abgedeckt |
 | Theologie-Akademie | Kurs A (7), Paisios-Kurs (9), Kurs D (4), Kurs E Liturgie & Kirchenjahr (6, neu: Chrysostomus-, Basilius- und Vorgeweihte Liturgie), Glaubensbekenntnis |
-| Heilige & Kirchenväter | 10 Kirchenväter, 24 Heilige (inkl. Maria von Ägypten, Lukas von Simferopol, Nikolaus, Georg, Demetrios, Petka, Stefan Dečanski, Apostel Andreas, Spyridon, Katharina, Prokopios), alle mit Fragen und Quiz |
+| Heilige & Kirchenväter | 10 Kirchenväter, 26 Heilige (inkl. Maria von Ägypten, Lukas von Simferopol, Nikolaus, Georg, Demetrios, Petka, Stefan Dečanski, Apostel Andreas, Spyridon, Katharina, Prokopios, Antonius der Große, Arsenije Sremac), alle mit Fragen und Quiz |
 | Gebetsbuch | Morgen- und Abendordnung, 14 Themen (Essen, Arbeit, Angst, Versuchung, Vergebung, Familie, Kranke, Trauer, Verstorbene, Christus, Gottesgebärerin, Heilige, Dank, Fastenzeit), 30 Gebete, gespeicherte Gebete, Gebetsanliegen |
 | Kirchenkalender | Julianisch / neujulianisch umschaltbar; Ostern selbst berechnet; 39 Feste und Tage (inkl. Triodion, Karwoche, Thomassonntag, Allerheiligen) mit Bedeutung und Lektionsverweis; Heilige des Tages (aus App-Daten); Fastenstatus und überlieferte Fastenregel; Fastenzeiten des Jahres |
 | Lesepläne | Evangelien (89 Lesungen), Neues Testament (260), Psalter in 20 Kathismen – freies Tempo, Fortschrittsanzeige |
 | Liturgie | Göttliche Liturgie Schritt für Schritt (16 Schritte: was geschieht, Bedeutung, was tue ich) |
 | Ikonen-Lexikon | 13 Ikonentypen in Worten (Darstellung, Bedeutung, Verweis auf Lektionen) |
-| Lernen | Lernkarten mit verteilter Wiederholung (132 Karten), Quiz, Glossar (37 Begriffe, mit Suche und Buchstabengruppen), Bibliothek (23 Bücher mit geprüften freien Quellen bzw. Beschreibungen) |
+| Lernen | Lernkarten mit verteilter Wiederholung (136 Karten), Quiz, Glossar (37 Begriffe, mit Suche und Buchstabengruppen), Bibliothek (23 Bücher mit geprüften freien Quellen bzw. Beschreibungen) |
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 2.6
+
+- Bibellektionen Jeremia 31 (Der neue Bund) und Tobit (Tobit und der Erzengel Raphael).
+- Heilige Antonius der Große (mit Link zum Leben des Antonius von Athanasius) und Arsenije Sremac (zweiter serbischer Erzbischof), jeweils mit Kalender, Fragen und Quiz.
+- 4 neue Lernkarten. Alle Tests bestanden (ca. 11 600 Inhaltsprüfungen, 42 Bedienungsprüfungen, offline).
 
 ## Version 2.5
 
@@ -82,7 +88,7 @@
 
 ## Tests
 
-- `node tests/content.test.js` – ca. 11 300 Prüfungen: Vollständigkeit DE/SR, keine gemischten Schriften, Quiz-Konsistenz, Links, Kalenderberechnung (Ostern 2024–2030, Fastenzeiten, beide Kalender), Gebete, Heilige des Tages.
+- `node tests/content.test.js` – ca. 11 600 Prüfungen: Vollständigkeit DE/SR, keine gemischten Schriften, Quiz-Konsistenz, Links, Kalenderberechnung (Ostern 2024–2030, Fastenzeiten, beide Kalender), Gebete, Heilige des Tages.
 - `node tests/e2e.js` – 42 Prüfungen im simulierten iPhone-Viewport (Chromium): alle Ansichten in 3 Sprachvarianten, Quiz, Karten, Notizen inkl. Verschlüsselung, Gebetsbuch, Kalenderumschaltung, Fragenhilfe, Speichern nach Neuladen.
 - Offline-Test des Service Workers (Chromium).
 - Nicht automatisiert möglich: Test auf echtem iPhone/Safari – erfolgt durch den Nutzer.
@@ -94,13 +100,13 @@
 - **Heilige des Tages:** nur Heilige, die in der App ein Profil haben; vollständiger Kalender über den Prolog von Ohrid (Link).
 - **Vollständiger Bibeltext** in der App: keine frei lizenzierte deutsche orthodoxe Bibel verfügbar; Verweis auf die eigene Bibel bzw. serbisches NT (Svetosavlje).
 - **Erinnerungen an Gebetszeiten:** Web-Apps auf dem iPhone können nur eingeschränkt benachrichtigen; noch nicht umgesetzt.
-- 12 Bibelbücher haben erst einen Kurzüberblick, noch keine volle Lektion (past, lev, num, josh, chr, ezr, jer, tob, wis, sir, bar, esd).
+- 10 Bibelbücher haben erst einen Kurzüberblick, noch keine volle Lektion (past, lev, num, josh, chr, ezr, wis, sir, bar, esd).
 - Serbische Texte sollten von einem Muttersprachler bzw. Priester gegengelesen werden.
 
 ## Nächste Schritte (Reihenfolge)
 
-1. Weitere volle Bibellektionen für die 12 Bücher mit Kurzüberblick (z. B. Jeremia 31, Tobit, Jesus Sirach, Josua 3, 1 Tim 2).
-2. Weitere Heilige mit Gedenktagen (z. B. hl. Arsenije Sremac, hl. Ignatius von Antiochien, hl. Antonius der Große, hl. Johannes von Rila).
+1. Weitere volle Bibellektionen für die 10 Bücher mit Kurzüberblick (z. B. Jesus Sirach 2, Weisheit 3, Josua 3, 1 Tim 2, Levitikus 19).
+2. Weitere Heilige mit Gedenktagen (z. B. hl. Ignatius von Antiochien, hl. Johannes von Rila, hl. Jovan Vladimir, hl. Petar Cetinjski).
 3. Gebetsbuch erweitern (z. B. Gebete vor und nach der Kommunion – nur mit geprüftem Wortlaut); echter Test auf dem iPhone durch den Nutzer.
 4. Tägliche Schriftlesungen (Leseordnung) – nur, wenn eine verlässliche Quelle eingebunden werden kann.
 5. Anleitung für Gebetserinnerungen über die iOS-Kurzbefehle-App.
