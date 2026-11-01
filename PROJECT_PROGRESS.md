@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 2.3.0 (1. November 2026)
+**Aktuelle Version:** 2.4.0 (1. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -20,18 +20,28 @@
 
 | Bereich | Stand |
 |---|---|
-| Bibelschule | 33 volle Lektionen (je 11 Teile, Fragen, Quiz) + 27 Kurzüberblicke → alle 39 Bucheinträge abgedeckt |
-| Theologie-Akademie | Kurs A (7), Paisios-Kurs (9), Kurs D (4), Kurs E Liturgie & Kirchenjahr (5), Glaubensbekenntnis |
-| Heilige & Kirchenväter | 10 Kirchenväter, 20 Heilige (inkl. Maria von Ägypten, Lukas von Simferopol, Nikolaus, Georg, Demetrios, Petka, Stefan Dečanski), alle mit Fragen und Quiz |
+| Bibelschule | 35 volle Lektionen (je 11 Teile, Fragen, Quiz) + 27 Kurzüberblicke → alle 39 Bucheinträge abgedeckt |
+| Theologie-Akademie | Kurs A (7), Paisios-Kurs (9), Kurs D (4), Kurs E Liturgie & Kirchenjahr (6, neu: Chrysostomus-, Basilius- und Vorgeweihte Liturgie), Glaubensbekenntnis |
+| Heilige & Kirchenväter | 10 Kirchenväter, 22 Heilige (inkl. Maria von Ägypten, Lukas von Simferopol, Nikolaus, Georg, Demetrios, Petka, Stefan Dečanski, Apostel Andreas, Spyridon), alle mit Fragen und Quiz |
 | Gebetsbuch | Morgen- und Abendordnung, 14 Themen (Essen, Arbeit, Angst, Versuchung, Vergebung, Familie, Kranke, Trauer, Verstorbene, Christus, Gottesgebärerin, Heilige, Dank, Fastenzeit), 30 Gebete, gespeicherte Gebete, Gebetsanliegen |
 | Kirchenkalender | Julianisch / neujulianisch umschaltbar; Ostern selbst berechnet; 39 Feste und Tage (inkl. Triodion, Karwoche, Thomassonntag, Allerheiligen) mit Bedeutung und Lektionsverweis; Heilige des Tages (aus App-Daten); Fastenstatus und überlieferte Fastenregel; Fastenzeiten des Jahres |
 | Lesepläne | Evangelien (89 Lesungen), Neues Testament (260), Psalter in 20 Kathismen – freies Tempo, Fortschrittsanzeige |
 | Liturgie | Göttliche Liturgie Schritt für Schritt (16 Schritte: was geschieht, Bedeutung, was tue ich) |
 | Ikonen-Lexikon | 13 Ikonentypen in Worten (Darstellung, Bedeutung, Verweis auf Lektionen) |
-| Lernen | Lernkarten mit verteilter Wiederholung (122 Karten), Quiz, Glossar (37 Begriffe), Bibliothek (23 Bücher mit geprüften freien Quellen bzw. Beschreibungen) |
+| Lernen | Lernkarten mit verteilter Wiederholung (128 Karten), Quiz, Glossar (37 Begriffe), Bibliothek (23 Bücher mit geprüften freien Quellen bzw. Beschreibungen) |
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
-| Design | Dunkles Design mit Goldakzenten, heller Modus, Schriftgrößen, sanfte Übergänge (abschaltbar über „Bewegung reduzieren“), Wochenpunkte |
+| Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 2.4 – Premium-Design (Autonomie-Auftrag)
+
+- Neues Designsystem für alle Seiten (Farben, Schrift, Abstände, Karten, Listen, Navigation, Dialoge). Google-Fonts-Abhängigkeit entfernt: Schrift ist eingebettet und funktioniert offline, ohne Datenübertragung an Dritte.
+- Alle Emojis/Sonderzeichen in Bedienelementen durch einheitliche SVG-Icons ersetzt (Sprache, Stern, Haken, Stift, Schloss, Plus, Schließen, Pfeile).
+- Startseite: Datum + Begrüßung, Lektionskarte, Schnellzugriff (Gebete, Kalender, Wiederholen mit Zähler, Fragen), Bereich „Entdecken“.
+- „Mehr“ und „Theologie“ in Gruppen mit Symbolen; Seite „Über die App“ mit Versionsnummer.
+- Fehler behoben: Begrüßungskarte klebte am Bildschirmrand; Gebets-Reiter „Mein Gebetsbuch“ lief über; serbische Reiterbeschriftung wurde abgeschnitten (jetzt „Теологија“); Mediävalziffern in Überschriften auf normale Ziffern umgestellt.
+- Inhalte: Lektion „Drei Liturgien“ (Kurs E), Bibellektionen Kol 3 und Dtn 6, Heilige Apostel Andreas und Spyridon (mit Kalender), 6 neue Lernkarten.
+- Tests: ca. 10 900 Inhaltsprüfungen, 41 Bedienungsprüfungen, Offline-Test bestanden; Sichtprüfung per Screenshots (390×844 und 375×667, dunkel und hell, Deutsch und Kyrillisch).
 
 ## Version 2.3
 
@@ -64,7 +74,7 @@
 
 ## Tests
 
-- `node tests/content.test.js` – ca. 10 500 Prüfungen: Vollständigkeit DE/SR, keine gemischten Schriften, Quiz-Konsistenz, Links, Kalenderberechnung (Ostern 2024–2030, Fastenzeiten, beide Kalender), Gebete, Heilige des Tages.
+- `node tests/content.test.js` – ca. 10 900 Prüfungen: Vollständigkeit DE/SR, keine gemischten Schriften, Quiz-Konsistenz, Links, Kalenderberechnung (Ostern 2024–2030, Fastenzeiten, beide Kalender), Gebete, Heilige des Tages.
 - `node tests/e2e.js` – 41 Prüfungen im simulierten iPhone-Viewport (Chromium): alle Ansichten in 3 Sprachvarianten, Quiz, Karten, Notizen inkl. Verschlüsselung, Gebetsbuch, Kalenderumschaltung, Fragenhilfe, Speichern nach Neuladen.
 - Offline-Test des Service Workers (Chromium).
 - Nicht automatisiert möglich: Test auf echtem iPhone/Safari – erfolgt durch den Nutzer.
@@ -76,14 +86,14 @@
 - **Heilige des Tages:** nur Heilige, die in der App ein Profil haben; vollständiger Kalender über den Prolog von Ohrid (Link).
 - **Vollständiger Bibeltext** in der App: keine frei lizenzierte deutsche orthodoxe Bibel verfügbar; Verweis auf die eigene Bibel bzw. serbisches NT (Svetosavlje).
 - **Erinnerungen an Gebetszeiten:** Web-Apps auf dem iPhone können nur eingeschränkt benachrichtigen; noch nicht umgesetzt.
-- 14 Bibelbücher haben erst einen Kurzüberblick, noch keine volle Lektion (col, past, lev, num, deut, josh, chr, ezr, jer, tob, wis, sir, bar, esd).
+- 12 Bibelbücher haben erst einen Kurzüberblick, noch keine volle Lektion (past, lev, num, josh, chr, ezr, jer, tob, wis, sir, bar, esd).
 - Serbische Texte sollten von einem Muttersprachler bzw. Priester gegengelesen werden.
 
 ## Nächste Schritte (Reihenfolge)
 
-1. Weitere volle Bibellektionen für die 14 Bücher mit Kurzüberblick (z. B. Kolosser 3, Deuteronomium 6 „Höre, Israel“, Jeremia 31, Tobit, Jesus Sirach) sowie Genesis 22 (Abraham) und Exodus 3 (brennender Dornbusch).
-2. Weitere Heilige mit Gedenktagen (z. B. Apostel Andreas, hl. Spyridon, hl. Katharina, hl. Prokopios/Prokopije, hl. Arsenije Sremac).
-3. Liturgie des hl. Basilius und Liturgie der vorgeweihten Gaben: Unterschiede erklären.
+1. Weitere volle Bibellektionen für die 12 Bücher mit Kurzüberblick (z. B. Jeremia 31, Tobit, Jesus Sirach, Josua 3, 1 Tim 2) sowie Genesis 22 (Abraham) und Exodus 3 (brennender Dornbusch).
+2. Weitere Heilige mit Gedenktagen (z. B. hl. Katharina, hl. Prokopije, hl. Arsenije Sremac, hl. Ignatius, hl. Antonius der Große).
+3. Design-Feinschliff: Kalenderliste (Fest-Kennzeichnung unter den Titel), Lernkarten-Ansicht, Quiz-Ergebnisseite.
 4. Tägliche Schriftlesungen (Leseordnung) – nur, wenn eine verlässliche Quelle eingebunden werden kann.
 5. Anleitung für Gebetserinnerungen über die iOS-Kurzbefehle-App.
 6. Gegenlesen der serbischen Texte durch Muttersprachler.
