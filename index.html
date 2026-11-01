@@ -346,6 +346,13 @@ main > .wrap { animation: opFade .3s var(--ease); }
   .tile .tl { font-size: .68em; }
   h1 { font-size: 1.95em; }
 }
+
+/* Ergebnisring */
+.ring { --p: 0; width: 132px; height: 132px; margin: 6px auto 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: conic-gradient(var(--gold) calc(var(--p) * 1%), var(--card2) 0); }
+.ring span { width: 112px; height: 112px; border-radius: 50%; background: var(--card); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.ring b { font-family: var(--serif); font-size: 2.4em; line-height: 1; color: var(--gold2); font-variant-numeric: lining-nums; }
+.ring small { color: var(--muted); font-size: .8em; }
 </style>
 </head>
 <body>
@@ -493,6 +500,7 @@ const UI = {
     sourceInfo: "Quellenlage",
     creed: "Glaubensbekenntnis",
     menu: "Menü",
+    quizAgain: "Noch einmal", quizGentle: "Fehler gehören zum Lernen. Beim Wiederholen festigt sich das Wissen.",
     hExplore: "Entdecken", hToday: "Heute", tileCal: "Kalender", tileReview: "Wiederholen", tileAsk: "Fragen",
     gLearn: "Lernen", gFaith: "Glaube und Gottesdienst", gPersonal: "Persönlich", gApp: "App",
     sAbout: "Über die App", aboutText: "OrthodoxPath ist kostenlos, werbefrei und funktioniert ohne Konto. Alle Daten bleiben auf deinem Gerät. Die Inhalte ersetzen nicht das Gespräch mit deinem Priester.",
@@ -693,6 +701,7 @@ const UI = {
     sourceInfo: "Стање извора",
     creed: "Символ вере",
     menu: "Мени",
+    quizAgain: "Још једном", quizGentle: "Грешке су део учења. Понављањем се знање учвршћује.",
     hExplore: "Истражи", hToday: "Данас", tileCal: "Календар", tileReview: "Понављање", tileAsk: "Питања",
     gLearn: "Учење", gFaith: "Вера и богослужење", gPersonal: "Лично", gApp: "Апликација",
     sAbout: "О апликацији", aboutText: "OrthodoxPath је бесплатан, без реклама и ради без налога. Сви подаци остају на вашем уређају. Садржаји не замењују разговор са вашим свештеником.",
@@ -6355,7 +6364,7 @@ function fastPeriods(y, cal) {
         <div class="card stat"><b style="font-size:1.2em">${esc(fmtDate(P2))}</b><span class="small muted">${esc(t("calPascha").replace("{y}", y + 1))}</span></div>
       </div>
       <h2>${esc(t("calUpcoming"))}</h2>
-      <ul class="list">${upcoming.map(f => `<li class="item" style="cursor:default;align-items:flex-start"><span class="grow"><span class="t">${E(f.name)}</span><span class="s">${esc(fmtDate(f.t, true))} · ${esc(f.t === td ? t("calToday") : inDays(f.t))}</span>${f.mean ? `<span class="s">${E(f.mean)}</span>` : ""}</span>${f.great ? `<span class="badge tag-dogma">${esc(t("calGreat"))}</span>` : ""}</li>`).join("")}</ul>
+      <ul class="list">${upcoming.map(f => `<li class="item" style="cursor:default;align-items:flex-start"><span class="grow"><span class="t">${E(f.name)}</span><span class="s">${esc(fmtDate(f.t, true))} · ${esc(f.t === td ? t("calToday") : inDays(f.t))}</span>${f.mean ? `<span class="s">${E(f.mean)}</span>` : ""}${f.great ? `<span class="badge tag-dogma" style="margin:6px 0 0">${esc(t("calGreat"))}</span>` : ""}</span></li>`).join("")}</ul>
       <h2>${esc(t("calFastPeriods").replace("{y}", y))}</h2>
       <div class="card">
         <div class="refline"><b>${E(CAL_FASTS.lent)}</b><span class="grow">${range(fp.lent)}</span></div>
@@ -6582,8 +6591,11 @@ function fastPeriods(y, cal) {
     const l = quizSrc(id); if (!l || !l.quiz) return `<p>${esc(t("notFound"))}</p>`;
     if (!QZ || QZ.id !== id) QZ = { id, i: 0, score: 0, answered: null, order: l.quiz.map(q => shuffle(q.options.map((o, k) => k))) };
     if (QZ.i >= l.quiz.length) {
-      return `<h1>${esc(t("quizResult"))}</h1><div class="card hero stat"><b>${QZ.score} ${esc(t("of"))} ${l.quiz.length}</b><p>${E(quizTitle(l))}</p></div>
-        <div class="btnrow"><a class="btn" href="${backHref(id)}">${esc(t("back"))}</a><button class="btn ghost" id="qzagain">${esc(t("startQuiz"))}</button></div>`;
+      const pct = Math.round(QZ.score / l.quiz.length * 100);
+      return `<div class="eyebrow">${esc(t("quiz"))}</div><h1>${esc(t("quizResult"))}</h1><div class="card hero center">
+          <div class="ring" style="--p:${pct}"><span><b>${QZ.score}</b><small>${esc(t("of"))} ${l.quiz.length}</small></span></div>
+          <h3 style="margin-top:14px">${E(quizTitle(l))}</h3><p class="small muted" style="margin:0">${esc(t("quizGentle"))}</p></div>
+        <a class="btn block" href="${backHref(id)}">${esc(t("back"))}</a><div class="btnrow"><button class="btn ghost block" id="qzagain">${esc(t("quizAgain"))}</button></div>`;
     }
     const q = l.quiz[QZ.i]; const ord = QZ.order[QZ.i];
     return `<div class="eyebrow">${esc(t("quiz"))} · ${QZ.i + 1}/${l.quiz.length}</div><h1 style="font-size:1.4em">${E(q.q)}</h1>

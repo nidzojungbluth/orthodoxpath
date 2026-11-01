@@ -40,6 +40,7 @@
 - Startseite: Datum + Begrüßung, Lektionskarte, Schnellzugriff (Gebete, Kalender, Wiederholen mit Zähler, Fragen), Bereich „Entdecken“.
 - „Mehr“ und „Theologie“ in Gruppen mit Symbolen; Seite „Über die App“ mit Versionsnummer.
 - Fehler behoben: Begrüßungskarte klebte am Bildschirmrand; Gebets-Reiter „Mein Gebetsbuch“ lief über; serbische Reiterbeschriftung wurde abgeschnitten (jetzt „Теологија“); Mediävalziffern in Überschriften auf normale Ziffern umgestellt.
+- Quiz-Ergebnis mit Fortschrittsring und ermutigendem Hinweis (kein Druck); Kalender: „Großes Fest“ steht jetzt unter dem Titel.
 - Inhalte: Lektion „Drei Liturgien“ (Kurs E), Bibellektionen Kol 3 und Dtn 6, Heilige Apostel Andreas und Spyridon (mit Kalender), 6 neue Lernkarten.
 - Tests: ca. 10 900 Inhaltsprüfungen, 41 Bedienungsprüfungen, Offline-Test bestanden; Sichtprüfung per Screenshots (390×844 und 375×667, dunkel und hell, Deutsch und Kyrillisch).
 
@@ -93,7 +94,7 @@
 
 1. Weitere volle Bibellektionen für die 12 Bücher mit Kurzüberblick (z. B. Jeremia 31, Tobit, Jesus Sirach, Josua 3, 1 Tim 2) sowie Genesis 22 (Abraham) und Exodus 3 (brennender Dornbusch).
 2. Weitere Heilige mit Gedenktagen (z. B. hl. Katharina, hl. Prokopije, hl. Arsenije Sremac, hl. Ignatius, hl. Antonius der Große).
-3. Design-Feinschliff: Kalenderliste (Fest-Kennzeichnung unter den Titel), Lernkarten-Ansicht, Quiz-Ergebnisseite.
+3. Design-Feinschliff weiterer Detailansichten (Notiz-Editor, Bücher-Filter, Glossar-Suche); echter Test auf dem iPhone durch den Nutzer.
 4. Tägliche Schriftlesungen (Leseordnung) – nur, wenn eine verlässliche Quelle eingebunden werden kann.
 5. Anleitung für Gebetserinnerungen über die iOS-Kurzbefehle-App.
 6. Gegenlesen der serbischen Texte durch Muttersprachler.
