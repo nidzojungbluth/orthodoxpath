@@ -223,7 +223,7 @@ html[data-theme="light"] .seg button.on { color: #fff; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "1.9.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "1.10.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -2140,6 +2140,375 @@ const BIBLE = {
         { q: { de: "Wer schrieb die älteste erhaltene griechische Auslegung der ganzen Offenbarung?", sr: "Ко је написао најстарије сачувано грчко тумачење целог Откривења?" },
           options: [{ de: "Andreas von Caesarea", sr: "Андреј Кесаријски" }, { de: "Basilius der Große", sr: "Василије Велики" }, { de: "Isaak der Syrer", sr: "Исак Сирин" }], correct: 0 }
       ]
+    },
+    {
+      id: "bib-jon", book: "twelve", order: 21,
+      title: { de: "Jona – der widerwillige Prophet", sr: "Јона – невољни пророк" },
+      ref: { de: "Jona 1–4", sr: "Јона 1–4" },
+      intro: {
+        de: "Das Buch Jona ist kurz und lässt sich in einer Viertelstunde lesen. Es erzählt von einem Propheten, der vor Gottes Auftrag davonläuft, und von einer heidnischen Stadt, die umkehrt. Es gehört zu den zwölf kleinen Propheten.",
+        sr: "Књига пророка Јоне је кратка и може се прочитати за четврт сата. Приповеда о пророку који бежи од Божијег налога и о незнабожачком граду који се каје. Спада у дванаест малих пророка."
+      },
+      introTag: "history",
+      context: {
+        de: "Ninive war die Hauptstadt Assyriens, eines grausamen Feindes Israels. Dass Gott ausgerechnet dieser Stadt einen Propheten schickt, war für Jona unerträglich. Das Buch fragt: Wie weit reicht Gottes Barmherzigkeit?",
+        sr: "Ниневија је била престоница Асирије, сурове непријатељице Израиља. То што Бог баш том граду шаље пророка Јони је било неподношљиво. Књига пита: докле сеже Божија милост?"
+      },
+      reading: [
+        { ref: { de: "Jona 1", sr: "Јона 1" }, note: { de: "Die Flucht, der Sturm und der große Fisch.", sr: "Бекство, бура и велика риба." } },
+        { ref: { de: "Jona 2", sr: "Јона 2" }, note: { de: "Jonas Gebet im Bauch des Fisches.", sr: "Јонина молитва у утроби рибе." } },
+        { ref: { de: "Jona 3–4", sr: "Јона 3–4" }, note: { de: "Ninive kehrt um; Jona ärgert sich über Gottes Güte.", sr: "Ниневија се каје; Јона се љути због Божије доброте." } }
+      ],
+      summary: {
+        de: "Gott sendet Jona nach Ninive, doch er flieht auf einem Schiff in die entgegengesetzte Richtung. Ein Sturm bricht los; Jona bekennt seine Schuld und wird ins Meer geworfen. Ein großer Fisch verschlingt ihn, und nach drei Tagen und drei Nächten speit er ihn ans Land. Nun predigt Jona in Ninive. Die ganze Stadt, vom König bis zu den Tieren, fastet und kehrt um, und Gott verschont sie. Jona ist darüber zornig. Gott zeigt ihm an einer verdorrten Staude, dass er Mitleid mit allen Menschen hat, die er geschaffen hat.",
+        sr: "Бог шаље Јону у Ниневију, али он бежи бродом на супротну страну. Настаје бура; Јона признаје кривицу и бива бачен у море. Велика риба га прогута, и после три дана и три ноћи избацује га на копно. Сада Јона проповеда у Ниневији. Цео град, од цара до стоке, пости и каје се, и Бог га поштеђује. Јона се због тога гневи. Бог му на сасушеној биљци показује да има милости према свим људима које је створио."
+      },
+      interp: {
+        simple: {
+          de: "Man kann vor Gott nicht weglaufen. Und Gottes Barmherzigkeit ist größer als unsere Vorstellungen: Er will, dass alle Menschen umkehren und leben – auch unsere Feinde.",
+          sr: "Од Бога се не може побећи. И Божија милост је већа од наших представа: Он хоће да се сви људи покају и живе – и наши непријатељи."
+        },
+        deeper: {
+          de: "Die Umkehr Ninives mit Fasten, Sacktuch und Gebet wurde in der Kirche zum Vorbild der Buße; die Fastenzeiten greifen dieses Bild auf. Jonas Gebet im Fisch (Kap. 2) gehört zu den biblischen Gesängen, auf denen die 6. Ode der Kanones aufbaut. Das Ende des Buches bleibt offen: Gottes Frage an Jona richtet sich an jeden Leser, der Gottes Güte für andere nicht gönnt.",
+          sr: "Покајање Ниневије постом, кострећу и молитвом постало је у Цркви узор покајања; постови преузимају ту слику. Јонина молитва у риби (гл. 2) спада у библијске песме на којима се заснива 6. песма канона. Крај књиге остаје отворен: Божије питање Јони упућено је сваком читаоцу који другима не прашта Божију доброту."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Christus nennt Jona ein Zeichen: Wie Jona drei Tage im Bauch des Fisches war, so wird der Menschensohn drei Tage im Schoß der Erde sein (Mt 12,40). Jonas Rettung aus der Tiefe ist ein Vorbild der Auferstehung.",
+        sr: "Христос назива Јону знаком: као што је Јона био три дана у утроби рибе, тако ће Син Човечији бити три дана у срцу земље (Мт 12,40). Јонино избављење из дубине праслика је Васкрсења."
+      },
+      links: [
+        { ref: { de: "Mt 12,38–41", sr: "Мт 12,38–41" }, note: { de: "Das Zeichen des Jona.", sr: "Знак Јоне пророка." } },
+        { ref: { de: "1 Tim 2,4", sr: "1 Тим 2,4" }, note: { de: "Gott will, dass alle Menschen gerettet werden.", sr: "Бог хоће да се сви људи спасу." } },
+        { ref: { de: "Ps 138 (139),7–10", sr: "Пс 138 (139),7–10" }, note: { de: "Wohin könnte ich fliehen vor dir?", sr: "Куда бих побегао од Тебе?" } },
+        { ref: { de: "Lk 15,25–32", sr: "Лк 15,25–32" }, note: { de: "Der ältere Bruder – wie Jona unwillig über Gottes Güte.", sr: "Старији брат – као Јона незадовољан Божијом добротом." } }
+      ],
+      fathers: {
+        de: "Der hl. Kyrill von Jerusalem erklärt in seinen Katechesen für die Taufbewerber (Katechese 14 über die Auferstehung) Jona als Vorbild der Auferstehung Christi. Die Katechesen sind in englischer Übersetzung frei zugänglich (NPNF II/7, siehe Bibliothek).",
+        sr: "Свети Кирило Јерусалимски у својим катихезама за оглашене (14. катихеза, о Васкрсењу) објашњава Јону као праслику Христовог Васкрсења. Катихезе су слободно доступне у енглеском преводу (NPNF II/7, види библиотеку)."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Warum wollte Jona nicht nach Ninive?", sr: "Зашто Јона није хтео у Ниневију?" },
+          a: { de: "Ninive war die Hauptstadt der Assyrer, der Feinde Israels. Jona wollte nicht, dass Gott ihnen gnädig ist.", sr: "Ниневија је била престоница Асираца, непријатеља Израиља. Јона није хтео да им Бог буде милостив." } },
+        { q: { de: "Was ist das „Zeichen des Jona“?", sr: "Шта је „знак Јоне пророка“?" },
+          a: { de: "Seine drei Tage im Fisch als Vorausbild der drei Tage Christi im Grab und seiner Auferstehung.", sr: "Његова три дана у риби као праслика Христових три дана у гробу и Његовог Васкрсења." } },
+        { q: { de: "Was lehrt das Ende des Buches?", sr: "Чему учи крај књиге?" },
+          a: { de: "Dass Gottes Mitleid allen Menschen gilt und wir anderen seine Güte gönnen sollen.", sr: "Да је Божија милост за све људе и да другима треба да желимо Његову доброту." } }
+      ],
+      practice: {
+        de: "Gibt es einen Auftrag, vor dem du „davonläufst“ – ein Gespräch, eine Versöhnung, eine Pflicht? Nimm dir einen kleinen ersten Schritt vor und bete dafür.",
+        sr: "Постоји ли задатак од кога „бежите“ – разговор, помирење, обавеза? Одредите мали први корак и помолите се за њега."
+      },
+      review: {
+        de: "Jona flieht vor Gott, wird vom Fisch verschlungen und gerettet, predigt in Ninive, und die Stadt kehrt um. Gottes Barmherzigkeit gilt allen. Jona ist ein Zeichen für Tod und Auferstehung Christi.",
+        sr: "Јона бежи од Бога, риба га гута и он бива спасен, проповеда у Ниневији, и град се каје. Божија милост важи за све. Јона је знак Христове смрти и Васкрсења."
+      },
+      quiz: [
+        { q: { de: "Wohin sollte Jona gehen?", sr: "Куда је Јона требало да иде?" },
+          options: [{ de: "Nach Ninive", sr: "У Ниневију" }, { de: "Nach Jerusalem", sr: "У Јерусалим" }, { de: "Nach Ägypten", sr: "У Египат" }], correct: 0 },
+        { q: { de: "Wie lange war Jona im Bauch des Fisches?", sr: "Колико је Јона био у утроби рибе?" },
+          options: [{ de: "Drei Tage und drei Nächte", sr: "Три дана и три ноћи" }, { de: "Vierzig Tage", sr: "Четрдесет дана" }, { de: "Eine Stunde", sr: "Један сат" }], correct: 0 },
+        { q: { de: "Wann wird das ganze Buch Jona im Gottesdienst gelesen?", sr: "Када се цела Књига пророка Јоне чита на богослужењу?" },
+          options: [{ de: "In der Vesper des Großen Samstags", sr: "На вечерњу Велике суботе" }, { de: "An Weihnachten", sr: "На Божић" }, { de: "An Pfingsten", sr: "На Духове" }], correct: 0 },
+        { q: { de: "Wie reagiert Ninive auf Jonas Predigt?", sr: "Како Ниневија реагује на Јонину проповед?" },
+          options: [{ de: "Die Stadt fastet und kehrt um", sr: "Град пости и каје се" }, { de: "Sie vertreiben Jona", sr: "Протерују Јону" }, { de: "Sie lachen ihn aus", sr: "Исмевају га" }], correct: 0 }
+      ]
+    },
+    {
+      id: "bib-dan3", book: "dan", order: 22,
+      title: { de: "Die drei Jünglinge im Feuerofen", sr: "Три младића у огњеној пећи" },
+      ref: { de: "Daniel 3", sr: "Данило 3" },
+      intro: {
+        de: "Das Buch Daniel spielt im Babylonischen Exil. Kapitel 3 erzählt von drei jungen Juden – Hananja, Mischaël und Asarja, die am Königshof die Namen Schadrach, Meschach und Abed-Nego trugen –, die sich weigern, ein Götzenbild anzubeten. Die orthodoxe Bibel (nach der Septuaginta) enthält in diesem Kapitel auch das Gebet Asarjas und den Lobgesang der drei Jünglinge.",
+        sr: "Књига пророка Данила дешава се у вавилонском изгнанству. Трећа глава приповеда о три млада Јудејца – Ананији, Мисаилу и Азарији, који су на царском двору носили имена Седрах, Мисах и Авденаго –, који одбијају да се поклоне идолу. Православна Библија (по Септуагинти) у овој глави садржи и Азаријину молитву и Песму три младића."
+      },
+      introTag: "history",
+      context: {
+        de: "König Nebukadnezar lässt ein riesiges goldenes Standbild aufstellen und befiehlt allen, sich davor niederzuwerfen. Wer sich weigert, soll in einen brennenden Ofen geworfen werden. Für gläubige Juden ging es um die Treue zum einen Gott.",
+        sr: "Цар Навуходоносор поставља огроман златни кип и заповеда свима да му се поклоне. Ко одбије, биће бачен у ужарену пећ. За верне Јудејце радило се о верности једином Богу."
+      },
+      reading: [
+        { ref: { de: "Dan 3,1–23", sr: "Дан 3,1–23" }, note: { de: "Das goldene Standbild und die Weigerung der drei.", sr: "Златни кип и одбијање тројице." } },
+        { ref: { de: "Dan 3,24–90 (Septuaginta)", sr: "Дан 3,24–90 (Септуагинта)" }, note: { de: "Gebet Asarjas und Lobgesang der drei Jünglinge.", sr: "Азаријина молитва и Песма три младића." } },
+        { ref: { de: "Dan 3,91–97", sr: "Дан 3,91–97" }, note: { de: "Der Vierte im Feuer; der König lobt Gott.", sr: "Четврти у огњу; цар слави Бога." } }
+      ],
+      summary: {
+        de: "Die drei Jünglinge antworten dem König: Unser Gott kann uns retten – und selbst wenn nicht, werden wir dein Bild nicht anbeten. Der Ofen wird siebenmal stärker geheizt, und sie werden hineingeworfen. Doch mitten im Feuer gehen sie umher und loben Gott; ein Engel des Herrn ist bei ihnen, und das Feuer berührt sie nicht. Der König sieht vier Männer im Feuer, und der vierte sieht aus wie ein Sohn Gottes. Die drei kommen unversehrt heraus, und Nebukadnezar preist den Gott Israels.",
+        sr: "Три младића одговарају цару: наш Бог може да нас избави – а ако и не, нећемо се поклонити твом кипу. Пећ се ужари седам пута јаче и они бивају бачени у њу. Али усред огња они ходају и славе Бога; анђео Господњи је с њима и огањ их не дотиче. Цар види четири човека у огњу, а четврти изгледа као син Божији. Тројица излазе неповређени, и Навуходоносор слави Бога Израиљевог."
+      },
+      interp: {
+        simple: {
+          de: "Die drei Jünglinge zeigen: Treue zu Gott ist wichtiger als Sicherheit. Sie vertrauen Gott – „selbst wenn nicht“. Und Gott lässt sie im Feuer nicht allein.",
+          sr: "Три младића показују: верност Богу важнија је од сигурности. Они верују Богу – „а ако и не“. И Бог их не оставља саме у огњу."
+        },
+        deeper: {
+          de: "Der Lobgesang der drei Jünglinge, in dem die ganze Schöpfung zum Lob Gottes aufgerufen wird, ist ein fester Teil des orthodoxen Gottesdienstes: Die 7. und 8. Ode der Kanones bauen darauf auf. Dan 3 gehört zu den Lesungen der Vesper am Großen Samstag. In den Hymnen der Kirche ist der Ofen, der die Jünglinge nicht verbrannte, ein Bild für die Gottesgebärerin, die das göttliche Feuer in sich trug, ohne verzehrt zu werden. Die Kirche gedenkt des Propheten Daniel und der drei Jünglinge am 17. Dezember (30. Dezember).",
+          sr: "Песма три младића, у којој се сва твар позива да слави Бога, чврст је део православног богослужења: 7. и 8. песма канона заснивају се на њој. Дан 3 спада у читања на вечерњу Велике суботе. У црквеним химнама пећ која није сагорела младиће слика је Богородице, која је носила божански огањ, а да није сагорела. Црква прославља пророка Данила и три младића 17. децембра (30. децембра)."
+        },
+        tag: "history"
+      },
+      christ: {
+        de: "Die Väter sehen in dem Vierten, der im Feuer bei den Jünglingen ist, ein Vorausbild des Sohnes Gottes, der zu uns in unsere Not herabsteigt und uns rettet.",
+        sr: "Оци у Четвртом, који је у огњу са младићима, виде праслику Сина Божијег, који силази к нама у нашу невољу и спасава нас."
+      },
+      links: [
+        { ref: { de: "Ex 20,3–5", sr: "Изл 20,3–5" }, note: { de: "Du sollst keine anderen Götter haben.", sr: "Немој имати других богова." } },
+        { ref: { de: "Jes 43,2", sr: "Ис 43,2" }, note: { de: "Wenn du durchs Feuer gehst, wirst du nicht verbrennen.", sr: "Ако пођеш кроз огањ, нећеш изгорети." } },
+        { ref: { de: "Hebr 11,33–34", sr: "Јев 11,33–34" }, note: { de: "Durch Glauben löschten sie die Gewalt des Feuers.", sr: "Вером угасише силу огња." } },
+        { ref: { de: "Apg 5,29", sr: "Дап 5,29" }, note: { de: "Man muss Gott mehr gehorchen als den Menschen.", sr: "Богу се треба више покоравати него људима." } }
+      ],
+      fathers: {
+        de: "Der hl. Hippolyt (3. Jahrhundert) schrieb eine der ältesten christlichen Auslegungen des Buches Daniel. Fragmente davon sind in englischer Übersetzung frei zugänglich (ANF Band 5, siehe Bibliothek).",
+        sr: "Свети Иполит (3. век) написао је једно од најстаријих хришћанских тумачења Књиге пророка Данила. Њени одломци слободно су доступни у енглеском преводу (ANF, том 5, види библиотеку)."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Was bedeutet die Antwort „und selbst wenn nicht“?", sr: "Шта значи одговор „а ако и не“?" },
+          a: { de: "Die Jünglinge bleiben Gott treu, auch wenn er sie nicht sichtbar retten sollte – ihr Glaube hängt nicht vom Ergebnis ab.", sr: "Младићи остају верни Богу чак и ако их не би видљиво избавио – њихова вера не зависи од исхода." } },
+        { q: { de: "Wo begegnet uns der Lobgesang der drei Jünglinge im Gottesdienst?", sr: "Где на богослужењу сусрећемо Песму три младића?" },
+          a: { de: "In der 7. und 8. Ode der Kanones und in den Lesungen des Großen Samstags.", sr: "У 7. и 8. песми канона и у читањима Велике суботе." } },
+        { q: { de: "Warum ist der Ofen ein Bild für die Gottesgebärerin?", sr: "Зашто је пећ слика Богородице?" },
+          a: { de: "Wie das Feuer die Jünglinge nicht verbrannte, so trug Maria Gott in sich, ohne verzehrt zu werden.", sr: "Као што огањ није сагорео младиће, тако је Марија носила Бога у себи, а да није сагорела." } }
+      ],
+      practice: {
+        de: "Gibt es Situationen, in denen du dich dem anpasst, was „alle“ tun, obwohl es dir als Christ widerstrebt? Bitte Gott um Mut, freundlich, aber fest zu bleiben.",
+        sr: "Постоје ли ситуације у којима се прилагођавате ономе што „сви“ раде, иако вам се као хришћанину противи? Молите Бога за храброст да останете љубазни, али чврсти."
+      },
+      review: {
+        de: "Die drei Jünglinge verweigern die Anbetung des Götzenbildes, werden ins Feuer geworfen und von Gott bewahrt. Ihr Lobgesang lebt in der 7. und 8. Ode der Kanones fort.",
+        sr: "Три младића одбијају да се поклоне идолу, бивају бачени у огањ и Бог их чува. Њихова песма живи у 7. и 8. песми канона."
+      },
+      quiz: [
+        { q: { de: "Welcher König ließ das goldene Standbild aufstellen?", sr: "Који цар је поставио златни кип?" },
+          options: [{ de: "Nebukadnezar", sr: "Навуходоносор" }, { de: "Pharao", sr: "Фараон" }, { de: "Herodes", sr: "Ирод" }], correct: 0 },
+        { q: { de: "Wie viele Männer sah der König im Feuer?", sr: "Колико људи је цар видео у огњу?" },
+          options: [{ de: "Vier", sr: "Четири" }, { de: "Drei", sr: "Три" }, { de: "Sieben", sr: "Седам" }], correct: 0 },
+        { q: { de: "Welche Oden der Kanones bauen auf dem Lobgesang der drei Jünglinge auf?", sr: "Које песме канона се заснивају на Песми три младића?" },
+          options: [{ de: "Die 7. und 8. Ode", sr: "7. и 8. песма" }, { de: "Die 1. und 2. Ode", sr: "1. и 2. песма" }, { de: "Die 4. Ode", sr: "4. песма" }], correct: 0 },
+        { q: { de: "Wann gedenkt die Kirche Daniels und der drei Jünglinge?", sr: "Када Црква прославља Данила и три младића?" },
+          options: [{ de: "17. Dezember (30. Dezember)", sr: "17. децембра (30. децембра)" }, { de: "6. August (19. August)", sr: "6. августа (19. августа)" }, { de: "1. Januar (14. Januar)", sr: "1. јануара (14. јануара)" }], correct: 0 }
+      ]
+    },
+    {
+      id: "bib-job", book: "job", order: 23,
+      title: { de: "Ijob – Glaube im Leiden", sr: "Јов – вера у страдању" },
+      ref: { de: "Ijob 1–2; 19,23–27; 38,1–11; 42,1–10", sr: "Јов 1–2; 19,23–27; 38,1–11; 42,1–10" },
+      intro: {
+        de: "Das Buch Ijob ist ein großes Gedicht über eine der schwersten Fragen des Glaubens: Warum leiden Gerechte? Es gehört zu den Weisheitsbüchern. Rahmen und Ende sind erzählt, der Hauptteil besteht aus Reden zwischen Ijob, seinen Freunden und schließlich Gott.",
+        sr: "Књига о Јову је велика песма о једном од најтежих питања вере: зашто праведни страдају? Спада у књиге мудрости. Почетак и крај су приповест, а главни део чине говори Јова, његових пријатеља и најзад Бога."
+      },
+      introTag: "history",
+      context: {
+        de: "Viele Menschen der Antike glaubten: Wem es schlecht geht, der hat gesündigt; wem es gut geht, der ist gerecht. Das Buch Ijob stellt diese einfache Rechnung in Frage.",
+        sr: "Многи људи старог века веровали су: коме је лоше, тај је згрешио; коме је добро, тај је праведан. Књига о Јову доводи у питање ту једноставну рачуницу."
+      },
+      reading: [
+        { ref: { de: "Ijob 1–2", sr: "Јов 1–2" }, note: { de: "Ijob verliert alles und bleibt treu.", sr: "Јов губи све и остаје веран." } },
+        { ref: { de: "Ijob 19,23–27", sr: "Јов 19,23–27" }, note: { de: "Ich weiß, dass mein Erlöser lebt.", sr: "Знам да је жив мој Искупитељ." } },
+        { ref: { de: "Ijob 38,1–11; 42,1–10", sr: "Јов 38,1–11; 42,1–10" }, note: { de: "Gottes Antwort und Ijobs Wiederherstellung.", sr: "Божији одговор и Јовово обновљење." } }
+      ],
+      summary: {
+        de: "Ijob ist gerecht und gottesfürchtig. Der Satan behauptet, er sei nur fromm, weil es ihm gut gehe. Gott lässt Prüfungen zu: Ijob verliert Besitz, Kinder und Gesundheit. Doch er spricht: Der Herr hat gegeben, der Herr hat genommen, der Name des Herrn sei gepriesen. Drei Freunde kommen und erklären, er müsse gesündigt haben. Ijob widerspricht, klagt Gott sein Leid und bekennt doch: Ich weiß, dass mein Erlöser lebt. Schließlich antwortet Gott aus dem Sturm und zeigt Ijob die Wunder der Schöpfung. Ijob erkennt seine Grenzen. Gott weist die Freunde zurecht, Ijob betet für sie, und Gott gibt ihm doppelt so viel zurück.",
+        sr: "Јов је праведан и богобојажљив. Сатана тврди да је побожан само зато што му је добро. Бог допушта искушења: Јов губи имање, децу и здравље. Али он говори: Господ даде, Господ узе, да је благословено име Господње. Три пријатеља долазе и објашњавају да мора да је згрешио. Јов се противи, жали се Богу на своју муку, а ипак исповеда: знам да је жив мој Искупитељ. Најзад Бог одговара из вихора и показује Јову чуда створеног света. Јов увиђа своје границе. Бог прекорева пријатеље, Јов се моли за њих, и Бог му враћа двоструко."
+      },
+      interp: {
+        simple: {
+          de: "Leid ist nicht immer eine Strafe für Sünde. Man darf Gott sein Leid klagen – Ijob tut es offen und wird nicht verworfen. Am Ende steht nicht eine Erklärung, sondern die Begegnung mit Gott.",
+          sr: "Страдање није увек казна за грех. Богу се сме жалити – Јов то чини отворено и не бива одбачен. На крају не стоји објашњење, него сусрет са Богом."
+        },
+        deeper: {
+          de: "Das Buch warnt vor vorschnellen frommen Erklärungen: Die Freunde reden über Gott, Ijob redet zu Gott – und Gott gibt Ijob recht, nicht den Freunden. Die Kirche liest das Buch Ijob in der Karwoche, wenn sie des unschuldigen Leidens Christi gedenkt. Der Jakobusbrief nennt die Geduld Ijobs als Vorbild (Jak 5,11). Die Kirche gedenkt des gerechten Ijob am 6. Mai (19. Mai).",
+          sr: "Књига упозорава на исхитрена побожна објашњења: пријатељи говоре о Богу, а Јов говори Богу – и Бог даје право Јову, а не пријатељима. Црква чита Књигу о Јову у Страсној седмици, када се сећа невиног страдања Христовог. Посланица Јаковљева наводи Јовово трпљење као узор (Јак 5,11). Црква прославља праведног Јова 6. маја (19. маја)."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Ijob ist ein Vorbild Christi, des unschuldig Leidenden. Seine Hoffnung auf einen lebendigen Erlöser erfüllt sich in Christus, der durch sein Leiden und seine Auferstehung den Tod besiegt.",
+        sr: "Јов је праслика Христа, Невиног који страда. Његова нада у живог Искупитеља испуњава се у Христу, који својим страдањем и Васкрсењем побеђује смрт."
+      },
+      links: [
+        { ref: { de: "Jak 5,11", sr: "Јак 5,11" }, note: { de: "Ihr habt von der Geduld Ijobs gehört.", sr: "Чули сте за трпљење Јовово." } },
+        { ref: { de: "Joh 9,1–3", sr: "Јн 9,1–3" }, note: { de: "Weder er noch seine Eltern haben gesündigt.", sr: "Није згрешио ни он ни родитељи његови." } },
+        { ref: { de: "Röm 8,18", sr: "Рим 8,18" }, note: { de: "Die Leiden dieser Zeit sind nicht zu vergleichen mit der kommenden Herrlichkeit.", sr: "Страдања садашњег времена нису ништа према будућој слави." } },
+        { ref: { de: "Ps 21 (22)", sr: "Пс 21 (22)" }, note: { de: "Mein Gott, warum hast du mich verlassen?", sr: "Боже мој, зашто си ме оставио?" } }
+      ],
+      fathers: {
+        de: "Die Väter haben Ijob immer wieder als Vorbild der Geduld dargestellt, und der hl. Johannes Chrysostomus kommt in seinen Predigten oft auf ihn zurück. Für diese Version wurde keine einzelne Väterstelle mit freiem Link geprüft. Sicher belegt sind die Lesungen in der Karwoche und das Zeugnis des Jakobusbriefes.",
+        sr: "Оци су Јова изнова приказивали као узор трпљења, а свети Јован Златоуст често му се враћа у својим беседама. За ово издање није проверено ниједно појединачно светоотачко место са слободном везом. Поуздано су потврђена читања у Страсној седмици и сведочанство Посланице Јаковљеве."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Was ist der Fehler der Freunde Ijobs?", sr: "У чему је грешка Јовових пријатеља?" },
+          a: { de: "Sie meinen, Leid sei immer Strafe für Sünde, und reden über Gott, statt mit Ijob zu leiden.", sr: "Мисле да је страдање увек казна за грех и говоре о Богу, уместо да саосећају са Јовом." } },
+        { q: { de: "Darf man Gott sein Leid klagen?", sr: "Да ли се Богу сме жалити?" },
+          a: { de: "Ja. Ijob klagt offen, bleibt aber im Gespräch mit Gott – und Gott gibt ihm recht.", sr: "Да. Јов се отворено жали, али остаје у разговору са Богом – и Бог му даје право." } },
+        { q: { de: "Wann liest die Kirche das Buch Ijob?", sr: "Када Црква чита Књигу о Јову?" },
+          a: { de: "In der Karwoche, im Gedenken an das unschuldige Leiden Christi.", sr: "У Страсној седмици, у спомен на невино страдање Христово." } }
+      ],
+      practice: {
+        de: "Wenn jemand in deiner Nähe leidet, widerstehe der Versuchung, schnelle Erklärungen zu geben. Sei einfach da, hör zu und bete für ihn. Wenn du selbst leidest, sprich offen mit Gott – und mit einem Menschen deines Vertrauens.",
+        sr: "Када неко у вашој близини пати, одуприте се искушењу да дајете брза објашњења. Само будите ту, саслушајте и молите се за њега. Ако сами патите, отворено разговарајте са Богом – и са човеком од поверења."
+      },
+      review: {
+        de: "Ijob verliert alles und bleibt Gott treu. Die Freunde irren mit einfachen Erklärungen; Gott begegnet Ijob selbst. Ijob ist ein Vorbild Christi und wird in der Karwoche gelesen.",
+        sr: "Јов губи све и остаје веран Богу. Пријатељи греше простим објашњењима; Бог сам сусреће Јова. Јов је праслика Христа и чита се у Страсној седмици."
+      },
+      quiz: [
+        { q: { de: "Was sagt Ijob, nachdem er alles verloren hat?", sr: "Шта Јов говори пошто је све изгубио?" },
+          options: [{ de: "Der Herr hat gegeben, der Herr hat genommen", sr: "Господ даде, Господ узе" }, { de: "Ich verfluche Gott", sr: "Проклињем Бога" }, { de: "Ich gehe nach Ägypten", sr: "Идем у Египат" }], correct: 0 },
+        { q: { de: "Wem gibt Gott am Ende recht?", sr: "Коме Бог на крају даје право?" },
+          options: [{ de: "Ijob", sr: "Јову" }, { de: "Den Freunden", sr: "Пријатељима" }, { de: "Dem Satan", sr: "Сатани" }], correct: 0 },
+        { q: { de: "Welcher neutestamentliche Brief nennt die Geduld Ijobs?", sr: "Која новозаветна посланица помиње Јовово трпљење?" },
+          options: [{ de: "Der Jakobusbrief", sr: "Посланица Јаковљева" }, { de: "Der Galaterbrief", sr: "Посланица Галатима" }, { de: "Der Philemonbrief", sr: "Посланица Филимону" }], correct: 0 }
+      ]
+    },
+    {
+      id: "bib-heb11", book: "heb", order: 24,
+      title: { de: "Die Wolke der Glaubenszeugen", sr: "Облак сведока вере" },
+      ref: { de: "Hebräer 11,1 – 12,2", sr: "Јеврејима 11,1 – 12,2" },
+      intro: {
+        de: "Der Hebräerbrief richtet sich an Christen, die müde und mutlos geworden waren. In Kapitel 11 erinnert er an die großen Glaubenden des Alten Testaments – von Abel bis zu den Propheten – und ermutigt: Lauft mit Ausdauer, den Blick auf Christus gerichtet.",
+        sr: "Посланица Јеврејима упућена је хришћанима који су се уморили и обесхрабрили. У 11. глави подсећа на велике вернике Старог Завета – од Авеља до пророка – и храбри: трчите истрајно, гледајући на Христа."
+      },
+      introTag: "history",
+      context: {
+        de: "Die Empfänger hatten schon Verfolgung erlebt und waren in Gefahr, den Glauben aufzugeben. Der Brief zeigt ihnen, dass Glaube schon immer bedeutete, Gott zu vertrauen, auch ohne die Erfüllung sofort zu sehen.",
+        sr: "Примаоци су већ доживели гоњење и били у опасности да напусте веру. Посланица им показује да је вера одувек значила поверење у Бога, чак и без тренутног виђења испуњења."
+      },
+      reading: [
+        { ref: { de: "Hebr 11,1–16", sr: "Јев 11,1–16" }, note: { de: "Was Glaube ist; Abel, Henoch, Noach, Abraham.", sr: "Шта је вера; Авељ, Енох, Ноје, Авраам." } },
+        { ref: { de: "Hebr 11,17–40", sr: "Јев 11,17–40" }, note: { de: "Isaak, Jakob, Josef, Mose und viele andere.", sr: "Исак, Јаков, Јосиф, Мојсије и многи други." } },
+        { ref: { de: "Hebr 12,1–2", sr: "Јев 12,1–2" }, note: { de: "Lasst uns laufen, auf Christus schauend.", sr: "Трчимо, гледајући на Христа." } }
+      ],
+      summary: {
+        de: "Glaube ist die feste Zuversicht auf das, was man hofft, und die Überzeugung von Dingen, die man nicht sieht. Durch den Glauben brachte Abel ein besseres Opfer dar, baute Noach die Arche, zog Abraham aus, ohne zu wissen wohin, und war bereit, Isaak zu opfern. Durch den Glauben führte Mose das Volk aus Ägypten. Viele andere litten Verfolgung, Spott und Tod. Sie alle haben die Erfüllung der Verheißung noch nicht erlangt, damit sie nicht ohne uns vollendet würden. Darum: Da wir von einer solchen Wolke von Zeugen umgeben sind, lasst uns mit Ausdauer laufen und auf Jesus schauen, den Urheber und Vollender des Glaubens.",
+        sr: "Вера је тврдо поуздање у оно чему се надамо и уверење у оно што се не види. Вером је Авељ принео бољу жртву, Ноје саградио ковчег, Авраам пошао не знајући куда и био спреман да принесе Исака. Вером је Мојсије извео народ из Египта. Многи други су трпели гоњења, руга и смрт. Сви они још нису примили испуњење обећања, да не би без нас достигли савршенство. Зато, имајући око себе толики облак сведока, трчимо истрајно и гледајмо на Исуса, начелника и свршитеља вере."
+      },
+      interp: {
+        simple: {
+          de: "Glaube heißt, Gott zu vertrauen, auch wenn man noch nicht alles sieht. Wir sind nicht allein: Die Heiligen aller Zeiten sind wie eine Wolke von Zeugen um uns und feuern uns an.",
+          sr: "Вера значи веровати Богу, чак и када још не видимо све. Нисмо сами: светитељи свих времена су као облак сведока око нас и храбре нас."
+        },
+        deeper: {
+          de: "Der Gedanke, dass die Gerechten des Alten Bundes „nicht ohne uns“ vollendet werden, zeigt die Einheit der Kirche über die Zeiten hinweg. Darum ehrt die orthodoxe Kirche auch die Gerechten des Alten Testaments als Heilige, etwa die Vorväter in den Sonntagen vor Weihnachten. Die „Wolke von Zeugen“ ist ein biblischer Grund für die Verehrung der Heiligen und ihre Fürbitte. Abschnitte aus Hebr 11 werden am Sonntag der Orthodoxie gelesen.",
+          sr: "Мисао да праведници Старог Завета „не без нас“ достижу савршенство показује јединство Цркве кроз времена. Зато Православна Црква поштује и праведнике Старог Завета као свете, на пример праоце у недељама пред Божић. „Облак сведока“ је библијски основ за поштовање светитеља и њихово заступништво. Одељци из Јев 11 читају се у Недељу православља."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Christus ist der Urheber und Vollender des Glaubens. Er hat das Kreuz erduldet um der Freude willen, die vor ihm lag, und sitzt zur Rechten Gottes. Auf ihn richten sich alle Zeugen des Glaubens aus.",
+        sr: "Христос је начелник и свршитељ вере. Он је претрпео крст ради радости која је била пред Њим и седи с десне стране Бога. На Њега су усмерени сви сведоци вере."
+      },
+      links: [
+        { ref: { de: "Gen 12,1–4", sr: "Пост 12,1–4" }, note: { de: "Abraham zieht aus auf Gottes Wort.", sr: "Авраам полази на Божију реч." } },
+        { ref: { de: "Gen 22,1–14", sr: "Пост 22,1–14" }, note: { de: "Die Bindung Isaaks.", sr: "Принесење Исака." } },
+        { ref: { de: "Röm 4,18–21", sr: "Рим 4,18–21" }, note: { de: "Abraham glaubte gegen alle Hoffnung.", sr: "Авраам је веровао у наду мимо сваке наде." } },
+        { ref: { de: "2 Kor 5,7", sr: "2 Кор 5,7" }, note: { de: "Wir wandeln im Glauben, nicht im Schauen.", sr: "Вером ходимо, а не гледањем." } }
+      ],
+      fathers: {
+        de: "Der hl. Johannes Chrysostomus hat den ganzen Hebräerbrief in Homilien ausgelegt; sie sind in englischer Übersetzung frei zugänglich (NPNF I/14, im Band mit den Homilien zum Johannesevangelium, siehe Bibliothek).",
+        sr: "Свети Јован Златоуст протумачио је целу Посланицу Јеврејима у беседама; слободно су доступне у енглеском преводу (NPNF I/14, у тому са беседама на Јеванђеље по Јовану, види библиотеку)."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Wie definiert Hebr 11,1 den Glauben?", sr: "Како Јев 11,1 одређује веру?" },
+          a: { de: "Als feste Zuversicht auf das Erhoffte und Überzeugung von dem, was man nicht sieht.", sr: "Као тврдо поуздање у оно чему се надамо и уверење у оно што се не види." } },
+        { q: { de: "Was ist die „Wolke von Zeugen“?", sr: "Шта је „облак сведока“?" },
+          a: { de: "Die Glaubenden aller Zeiten, die uns umgeben und ermutigen – eine biblische Grundlage der Heiligenverehrung.", sr: "Верни свих времена који нас окружују и храбре – библијски основ поштовања светитеља." } },
+        { q: { de: "Warum wurden die Gerechten des Alten Bundes „nicht ohne uns“ vollendet?", sr: "Зашто праведници Старог Завета „не без нас“ достижу савршенство?" },
+          a: { de: "Weil alle Glaubenden aller Zeiten in Christus eine einzige Kirche bilden und gemeinsam vollendet werden.", sr: "Зато што сви верни свих времена у Христу чине једну Цркву и заједно достижу савршенство." } }
+      ],
+      practice: {
+        de: "Wähle eine Person aus Hebr 11 und lies ihre Geschichte im Alten Testament nach. Was kannst du von ihrem Vertrauen auf Gott lernen?",
+        sr: "Изаберите једну личност из Јев 11 и прочитајте њену повест у Старом Завету. Шта можете научити из њеног поверења у Бога?"
+      },
+      review: {
+        de: "Glaube ist Vertrauen auf das Unsichtbare. Die Zeugen des Alten Bundes umgeben uns wie eine Wolke. Wir laufen mit Ausdauer, auf Christus schauend, den Vollender des Glaubens.",
+        sr: "Вера је поверење у невидљиво. Сведоци Старог Завета окружују нас као облак. Трчимо истрајно, гледајући на Христа, свршитеља вере."
+      },
+      quiz: [
+        { q: { de: "Wer zog aus, ohne zu wissen wohin?", sr: "Ко је пошао не знајући куда?" },
+          options: [{ de: "Abraham", sr: "Авраам" }, { de: "David", sr: "Давид" }, { de: "Jona", sr: "Јона" }], correct: 0 },
+        { q: { de: "Wie nennt Hebr 12,2 Christus?", sr: "Како Јев 12,2 назива Христа?" },
+          options: [{ de: "Urheber und Vollender des Glaubens", sr: "Начелник и свршитељ вере" }, { de: "Lehrer der Weisheit", sr: "Учитељ мудрости" }, { de: "König von Babel", sr: "Цар вавилонски" }], correct: 0 },
+        { q: { de: "An welchem Sonntag werden Abschnitte aus Hebr 11 gelesen?", sr: "Које недеље се читају одељци из Јев 11?" },
+          options: [{ de: "Am Sonntag der Orthodoxie", sr: "У Недељу православља" }, { de: "Am Palmsonntag", sr: "На Цвети" }, { de: "Am Thomassonntag", sr: "У Томину недељу" }], correct: 0 }
+      ]
+    },
+    {
+      id: "bib-jas", book: "cath", order: 25,
+      title: { de: "Glaube, der lebendig ist", sr: "Вера која је жива" },
+      ref: { de: "Jakobus 2,14–26 und 5,13–16", sr: "Јаковљева 2,14–26 и 5,13–16" },
+      intro: {
+        de: "Der Jakobusbrief wird in der Überlieferung Jakobus, dem „Bruder des Herrn“ und ersten Bischof von Jerusalem, zugeschrieben. Er ist sehr praktisch: Er spricht über Versuchungen, die Zunge, Reichtum und Armut und vor allem über einen Glauben, der sich im Handeln zeigt.",
+        sr: "Посланица Јаковљева се у предању приписује Јакову, „брату Господњем“ и првом епископу јерусалимском. Веома је практична: говори о искушењима, језику, богатству и сиромаштву, а пре свега о вери која се показује у делима."
+      },
+      introTag: "history",
+      context: {
+        de: "Manche Christen meinten, es genüge, den richtigen Glauben zu bekennen, auch ohne danach zu leben. Jakobus antwortet scharf: Auch die Dämonen glauben, dass es einen Gott gibt – und zittern.",
+        sr: "Неки хришћани су мислили да је довољно исповедати праву веру, чак и без живота по њој. Јаков оштро одговара: и демони верују да постоји један Бог – и дрхте."
+      },
+      reading: [
+        { ref: { de: "Jak 2,14–17", sr: "Јак 2,14–17" }, note: { de: "Glaube ohne Werke ist tot.", sr: "Вера без дела мртва је." } },
+        { ref: { de: "Jak 2,18–26", sr: "Јак 2,18–26" }, note: { de: "Abraham und Rahab als Beispiele.", sr: "Авраам и Рава као примери." } },
+        { ref: { de: "Jak 5,13–16", sr: "Јак 5,13–16" }, note: { de: "Gebet, Salbung der Kranken und Bekenntnis der Sünden.", sr: "Молитва, помазање болесних и исповедање грехова." } }
+      ],
+      summary: {
+        de: "Was nützt es, wenn jemand sagt, er habe Glauben, aber keine Werke? Wenn ein Bruder oder eine Schwester ohne Kleidung und Nahrung ist und man nur sagt: Geht in Frieden!, ohne ihnen zu helfen – was nützt das? So ist der Glaube ohne Werke tot. Abraham zeigte seinen Glauben, als er Isaak darbrachte; der Glaube wirkte mit seinen Werken zusammen und wurde durch sie vollendet. Wie der Leib ohne Geist tot ist, so ist der Glaube ohne Werke tot. Am Ende des Briefes: Ist jemand krank, rufe er die Presbyter der Kirche; sie sollen über ihm beten und ihn mit Öl salben im Namen des Herrn. Bekennt einander die Sünden und betet füreinander.",
+        sr: "Каква је корист ако неко каже да има веру, а дела нема? Ако су брат или сестра без одела и хране, а неко им само каже: идите с миром!, а не помогне им – каква је корист? Тако је и вера без дела мртва. Авраам је показао веру када је принео Исака; вера је садејствовала са делима његовим и делима се усавршила. Као што је тело без духа мртво, тако је и вера без дела мртва. На крају посланице: ако је ко болестан, нека дозове презвитере црквене; нека се помоле над њим и помажу га уљем у име Господње. Исповедајте једни другима грехе и молите се једни за друге."
+      },
+      interp: {
+        simple: {
+          de: "Echter Glaube bleibt nicht nur im Kopf. Er zeigt sich in Taten der Liebe – besonders gegenüber Menschen in Not. Glaube und gute Werke gehören zusammen wie Leib und Atem.",
+          sr: "Права вера не остаје само у глави. Показује се у делима љубави – нарочито према људима у невољи. Вера и добра дела иду заједно као тело и дах."
+        },
+        deeper: {
+          de: "Die orthodoxe Kirche liest Paulus und Jakobus nicht als Gegensätze: Paulus betont, dass das Heil Gnade ist und nicht durch die Werke des mosaischen Gesetzes verdient wird; Jakobus betont, dass echter Glaube im Leben wirksam wird. Beides fasst das Wort „Synergie“ zusammen – Gottes Gnade und die freie Antwort des Menschen wirken zusammen (vgl. Jak 2,22). Jak 5,14–16 ist die biblische Grundlage des Mysteriums der Krankensalbung; Jak 5,10–16 wird in diesem Gottesdienst als erste Apostellesung gelesen.",
+          sr: "Православна Црква не чита Павла и Јакова као супротности: Павле наглашава да је спасење благодат и да се не заслужује делима Мојсијевог закона; Јаков наглашава да права вера постаје делотворна у животу. Обоје сажима реч „синергија“ – Божија благодат и слободан одговор човека садејствују (уп. Јак 2,22). Јак 5,14–16 библијски је темељ Свете тајне јелеосвећења; Јак 5,10–16 чита се на том богослужењу као прво апостолско читање."
+        },
+        tag: "dogma"
+      },
+      christ: {
+        de: "Christus selbst sagt, dass wir ihm begegnen, wenn wir Hungrigen zu essen geben und Nackte kleiden (Mt 25,31–46). Ein lebendiger Glaube an ihn wird darum zur tätigen Liebe.",
+        sr: "Сам Христос каже да Њега сусрећемо када гладне нахранимо и наге оденемо (Мт 25,31–46). Зато жива вера у Њега постаје делатна љубав."
+      },
+      links: [
+        { ref: { de: "Mt 25,31–46", sr: "Мт 25,31–46" }, note: { de: "Was ihr dem Geringsten getan habt.", sr: "Што учинисте једном од ове најмање браће." } },
+        { ref: { de: "Gal 5,6", sr: "Гал 5,6" }, note: { de: "Glaube, der durch die Liebe wirksam ist.", sr: "Вера која кроз љубав делује." } },
+        { ref: { de: "Eph 2,8–10", sr: "Еф 2,8–10" }, note: { de: "Aus Gnade gerettet, zu guten Werken geschaffen.", sr: "Благодаћу спасени, саздани за добра дела." } },
+        { ref: { de: "1 Joh 3,17–18", sr: "1 Јн 3,17–18" }, note: { de: "Nicht mit Worten lieben, sondern in Tat und Wahrheit.", sr: "Не љубимо речју, него делом и истином." } }
+      ],
+      fathers: {
+        de: "Für diesen Brief enthält die App noch keine einzeln geprüfte Väterstelle. Sicher belegt sind die liturgische Verwendung von Jak 5 in der Krankensalbung sowie die Verehrung des hl. Apostels Jakobus, des Bruders des Herrn, am 23. Oktober (5. November); ihm wird die alte Jakobusliturgie zugeschrieben.",
+        sr: "За ову посланицу апликација још не садржи појединачно проверено светоотачко место. Поуздано су потврђени богослужбена употреба Јак 5 на јелеосвећењу и поштовање светог апостола Јакова, брата Господњег, 23. октобра (5. новембра); њему се приписује древна Литургија светог Јакова."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Warum ist Glaube ohne Werke „tot“?", sr: "Зашто је вера без дела „мртва“?" },
+          a: { de: "Weil echter Glaube lebendig ist und sich in der Liebe zeigt – wie ein Leib ohne Atem tot ist.", sr: "Зато што је права вера жива и показује се у љубави – као што је тело без даха мртво." } },
+        { q: { de: "Widersprechen sich Paulus und Jakobus?", sr: "Да ли се Павле и Јаков противрече?" },
+          a: { de: "Nein. Paulus betont die Gnade, Jakobus die Wirksamkeit des Glaubens im Leben. Beides gehört zusammen (Synergie).", sr: "Не. Павле наглашава благодат, а Јаков делотворност вере у животу. Обоје иде заједно (синергија)." } },
+        { q: { de: "Welches Mysterium gründet auf Jak 5,14–15?", sr: "Која Света тајна се заснива на Јак 5,14–15?" },
+          a: { de: "Die Krankensalbung.", sr: "Јелеосвећење." } }
+      ],
+      practice: {
+        de: "Tu diese Woche eine konkrete gute Tat für jemanden in Not, ohne darüber zu sprechen – zum Beispiel jemandem einkaufen helfen oder etwas spenden.",
+        sr: "Учините ове недеље једно конкретно добро дело за некога у невољи, а да о томе не говорите – на пример помозите некоме у куповини или нешто даријте."
+      },
+      review: {
+        de: "Glaube ohne Werke ist tot; echter Glaube zeigt sich in der Liebe. Paulus und Jakobus ergänzen sich. Jak 5 ist Grundlage der Krankensalbung.",
+        sr: "Вера без дела мртва је; права вера се показује у љубави. Павле и Јаков допуњују један другога. Јак 5 је темељ јелеосвећења."
+      },
+      quiz: [
+        { q: { de: "Wem wird der Jakobusbrief zugeschrieben?", sr: "Коме се приписује Посланица Јаковљева?" },
+          options: [{ de: "Jakobus, dem Bruder des Herrn", sr: "Јакову, брату Господњем" }, { de: "Dem Apostel Paulus", sr: "Апостолу Павлу" }, { de: "Johannes dem Täufer", sr: "Јовану Крститељу" }], correct: 0 },
+        { q: { de: "Womit vergleicht Jakobus den Glauben ohne Werke?", sr: "Са чим Јаков пореди веру без дела?" },
+          options: [{ de: "Mit einem Leib ohne Geist", sr: "Са телом без духа" }, { de: "Mit einem Haus ohne Dach", sr: "Са кућом без крова" }, { de: "Mit einem Baum ohne Wurzel", sr: "Са дрветом без корена" }], correct: 0 },
+        { q: { de: "Welches Wort fasst das Zusammenwirken von Gnade und menschlicher Antwort zusammen?", sr: "Која реч сажима садејство благодати и људског одговора?" },
+          options: [{ de: "Synergie", sr: "Синергија" }, { de: "Epiklese", sr: "Епиклеза" }, { de: "Typikon", sr: "Типик" }], correct: 0 }
+      ]
     }
   ]
 };
@@ -3275,6 +3644,7 @@ const LINKS = {
   athMarc: { url: "https://bkv.unifr.ch/works/cpg-2097", label: { de: "Brief an Marcellinus über die Psalmen – BKV (deutsch)", sr: "Посланица Маркелину о псалмима – BKV (немачки)" } },
   athAnt: { url: "https://bkv.unifr.ch/works/cpg-2101", label: { de: "Leben des hl. Antonius – BKV (deutsch)", sr: "Житије светог Антонија – BKV (немачки)" } },
   anf01: { url: "https://www.ccel.org/ccel/schaff/anf01.html", label: { de: "Irenäus von Lyon, Gegen die Häresien – ANF Band 1 (englisch, CCEL)", sr: "Иринеј Лионски, Против јереси – ANF, том 1 (енглески, CCEL)" } },
+  anf05: { url: "https://www.ccel.org/ccel/schaff/anf05.html", label: { de: "Hippolyt u. a. – ANF Band 5 (englisch, CCEL)", sr: "Иполит и др. – ANF, том 5 (енглески, CCEL)" } },
   npnf204: { url: "https://www.ccel.org/ccel/schaff/npnf204.html", label: { de: "Athanasius – NPNF II/4 (englisch, CCEL)", sr: "Атанасије – NPNF II/4 (енглески, CCEL)" } },
   npnf205: { url: "https://www.ccel.org/ccel/schaff/npnf205.html", label: { de: "Gregor von Nyssa – NPNF II/5 (englisch, CCEL)", sr: "Григорије Ниски – NPNF II/5 (енглески, CCEL)" } },
   npnf207: { url: "https://www.ccel.org/ccel/schaff/npnf207.html", label: { de: "Gregor von Nazianz – NPNF II/7 (englisch, CCEL)", sr: "Григорије Богослов – NPNF II/7 (енглески, CCEL)" } },
@@ -3771,6 +4141,9 @@ const BOOKS = [
   { id: "b-irenaeus", cat: "fathers", title: { de: "Gegen die Häresien", sr: "Против јереси" },
     author: { de: "Hl. Irenäus von Lyon (2. Jh.)", sr: "Свети Иринеј Лионски (2. век)" }, lang: { de: "Original Griechisch (größtenteils lateinisch erhalten); englische Übersetzung", sr: "изворно грчки (углавном сачуван на латинском); енглески превод" }, level: 3, full: true, link: "anf01",
     desc: { de: "Frühe Verteidigung des apostolischen Glaubens; darin die Lehre von Christus als neuem Adam und Maria als neuer Eva (im Band zusammen mit anderen frühen Vätern).", sr: "Рана одбрана апостолске вере; у њој учење о Христу као новом Адаму и Марији као новој Еви (у тому заједно са другим раним Оцима)." } },
+  { id: "b-hippolytus", cat: "bible", title: { de: "Auslegung des Buches Daniel (Fragmente)", sr: "Тумачење Књиге пророка Данила (одломци)" },
+    author: { de: "Hl. Hippolyt (3. Jh.)", sr: "Свети Иполит (3. век)" }, lang: { de: "Original Griechisch; englische Übersetzung", sr: "изворно грчки; енглески превод" }, level: 3, full: true, link: "anf05",
+    desc: { de: "Eine der ältesten christlichen Auslegungen eines alttestamentlichen Buches (im Band zusammen mit anderen Vätern des 3. Jahrhunderts).", sr: "Једно од најстаријих хришћанских тумачења неке старозаветне књиге (у тому заједно са другим Оцима 3. века)." } },
   { id: "b-basil", cat: "fathers", title: { de: "Über den Heiligen Geist und weitere Schriften", sr: "О Духу Светом и други списи" },
     author: { de: "Hl. Basilius der Große", sr: "Свети Василије Велики" }, lang: { de: "Original Griechisch; englische Übersetzung", sr: "изворно грчки; енглески превод" }, level: 3, full: true, link: "npnf208",
     desc: { de: "Grundlegende Schrift über die Gottheit des Heiligen Geistes, dazu Briefe und das Hexaemeron.", sr: "Темељни спис о божанству Духа Светога, уз посланице и Шестоднев." } },
@@ -3890,6 +4263,11 @@ const EXTRA_CARDS = [
   ["d-bible", "Welcher Psalm beginnt „Der Herr ist mein Hirte“?", "Који псалам почиње „Господ је пастир мој“?", "Psalm 22 (hebräische Zählung 23).", "Псалам 22 (по јеврејској нумерацији 23)."],
   ["d-bible", "Welches NT-Buch wird in der Liturgie nicht gelesen?", "Која новозаветна књига се не чита на Литургији?", "Die Offenbarung des Johannes.", "Откривење Јованово."],
   ["d-bible", "Wo schrieb Johannes die Offenbarung?", "Где је Јован написао Откривење?", "Nach der Überlieferung auf der Insel Patmos.", "Према предању, на острву Патмосу."],
+  ["d-bible", "Was ist das „Zeichen des Jona“?", "Шта је „знак Јоне пророка“?", "Jonas drei Tage im Fisch als Vorbild der Grablegung und Auferstehung Christi (Mt 12,40).", "Јонина три дана у риби као праслика Христовог погребења и Васкрсења (Мт 12,40)."],
+  ["d-bible", "Worauf bauen die 7. und 8. Ode der Kanones auf?", "На чему се заснивају 7. и 8. песма канона?", "Auf dem Lobgesang der drei Jünglinge im Feuerofen (Dan 3).", "На Песми три младића у огњеној пећи (Дан 3)."],
+  ["d-bible", "Wann liest die Kirche das Buch Ijob?", "Када Црква чита Књигу о Јову?", "In der Karwoche.", "У Страсној седмици."],
+  ["d-bible", "Wie definiert Hebr 11,1 den Glauben?", "Како Јев 11,1 одређује веру?", "Feste Zuversicht auf das Erhoffte, Überzeugung vom Unsichtbaren.", "Тврдо поуздање у оно чему се надамо, уверење у невидљиво."],
+  ["d-bible", "Was sagt Jak 2,17 über den Glauben ohne Werke?", "Шта Јак 2,17 каже о вери без дела?", "Er ist tot.", "Да је мртва."],
   ["d-history", "Nizäa 325 – worum ging es?", "Никеја 325 – о чему је било реч?", "Gegen Arius: Der Sohn ist eines Wesens mit dem Vater.", "Против Арија: Син је једносуштан Оцу."],
   ["d-history", "Konstantinopel 381 – worum ging es?", "Цариград 381 – о чему је било реч?", "Gottheit des Heiligen Geistes; Ergänzung des Glaubensbekenntnisses.", "Божанство Духа Светога; допуна Символа вере."],
   ["d-history", "Ephesus 431 – worum ging es?", "Ефес 431 – о чему је било реч?", "Gegen Nestorius: Maria ist Gottesgebärerin.", "Против Несторија: Марија је Богородица."],
