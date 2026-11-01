@@ -364,7 +364,7 @@ main > .wrap { animation: opFade .3s var(--ease); }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "2.6.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "2.7.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -3765,6 +3765,155 @@ const BIBLE = {
         { q: { de: "An welchem Fest gedenkt die Kirche Raphaels?", sr: "На који празник Црква спомиње Рафаила?" },
           options: [{ de: "Synaxis des Erzengels Michael und aller Engel", sr: "Сабор Светог архангела Михаила и свих анђела" }, { de: "Ostern", sr: "Васкрс" }, { de: "Kreuzerhöhung", sr: "Крстовдан" }], correct: 0 }
       ]
+    },
+  {
+      id: "bib-sir2", book: "sir", order: 40,
+      title: { de: "Wenn du dem Herrn dienen willst", sr: "Ако приступаш да служиш Господу" },
+      ref: { de: "Jesus Sirach 2,1–18", sr: "Премудрост Исуса сина Сирахова 2,1–18" },
+      intro: {
+        de: "Das Buch Jesus Sirach gehört zu den Büchern, die die orthodoxe Bibel aus der Septuaginta übernommen hat. Ein Weisheitslehrer in Jerusalem schrieb es um 180 v. Chr. auf Hebräisch; sein Enkel übersetzte es später ins Griechische, wie er im Vorwort selbst erzählt.",
+        sr: "Књига Премудрости Исуса сина Сирахова спада у књиге које је православна Библија преузела из Септуагинте. Један учитељ мудрости у Јерусалиму написао ју је око 180. пре Христа на јеврејском; његов унук ју је касније превео на грчки, како и сам каже у предговору."
+      },
+      introTag: "history",
+      context: {
+        de: "Viele Juden lebten damals unter dem Einfluss der griechischen Kultur, und manche gaben den Glauben der Väter auf. Sirach ermutigt seine Schüler, Gott treu zu bleiben, auch wenn es schwer wird.",
+        sr: "Многи Јудејци живели су тада под утицајем грчке културе, и неки су напуштали веру отаца. Сирах храбри своје ученике да остану верни Богу, и када је тешко."
+      },
+      reading: [
+        { ref: { de: "Sir 2,1–6", sr: "Сир 2,1–6" }, note: { de: "Mach dich auf Prüfung gefasst.", sr: "Припреми душу своју за искушење." } },
+        { ref: { de: "Sir 2,7–11", sr: "Сир 2,7–11" }, note: { de: "Schaut auf die früheren Geschlechter.", sr: "Погледајте на древне нараштаје." } },
+        { ref: { de: "Sir 2,12–18", sr: "Сир 2,12–18" }, note: { de: "In die Hände des Herrn fallen.", sr: "Пасти у руке Господње." } }
+      ],
+      summary: {
+        de: "Mein Kind, wenn du dem Herrn dienen willst, mach dich auf Prüfung gefasst. Sei aufrichtig und standhaft und überstürze nichts in der Zeit der Not. Halte dich an ihn und weiche nicht ab. Nimm an, was über dich kommt, und sei geduldig in Erniedrigung; denn im Feuer wird das Gold geprüft. Vertraue Gott, und er wird dir helfen. Ihr, die ihr den Herrn fürchtet, hofft auf Gutes, auf ewige Freude und Erbarmen. Schaut auf die früheren Geschlechter: Wer hat auf den Herrn vertraut und wurde enttäuscht? Denn der Herr ist barmherzig und gnädig, er vergibt Sünden und rettet in der Not. Lasst uns lieber in die Hände des Herrn fallen als in die Hände der Menschen; denn wie seine Größe, so ist auch sein Erbarmen.",
+        sr: "Чедо, ако приступаш да служиш Господу, припреми душу своју за искушење. Буди искрен и постојан и не журиш у време невоље. Прилепи се уз Њега и не одступај. Прими што те снађе и буди трпељив у понижењу; јер се у огњу злато куша. Веруј Богу, и Он ће ти помоћи. Који се бојите Господа, надајте се добру, вечној радости и милости. Погледајте на древне нараштаје: ко се уздао у Господа и постидео се? Јер је Господ милостив и милосрдан, опрашта грехе и спасава у невољи. Боље да паднемо у руке Господње него у руке људске; јер каква је величина Његова, таква је и милост Његова."
+      },
+      interp: {
+        simple: {
+          de: "Wer mit Gott lebt, wird nicht vor Schwierigkeiten bewahrt, aber er ist darin nicht allein. Prüfungen können den Glauben reinigen wie Feuer das Gold.",
+          sr: "Ко живи са Богом, није поштеђен тешкоћа, али у њима није сам. Искушења могу очистити веру као што огањ чисти злато."
+        },
+        deeper: {
+          de: "Der erste Vers wird in der geistlichen Literatur der Orthodoxie sehr oft angeführt: Wer den geistlichen Weg beginnt, soll mit Versuchungen rechnen und darüber nicht erschrecken. Das Bild vom Gold im Feuer findet sich auch im Neuen Testament (1 Petr 1,6–7). Wichtig ist die Unterscheidung: Gott ist nicht der Urheber des Bösen (Jak 1,13), aber er lässt Prüfungen zu und gibt Kraft, sie zu bestehen (1 Kor 10,13). Die Orthodoxie zählt Sirach zu den „lesenswerten Büchern“ (Anagignoskomena).",
+          sr: "Први стих веома се често наводи у православној духовној литератури: ко почиње духовни пут, треба да рачуна са искушењима и да се не плаши. Слика злата у огњу налази се и у Новом завету (1 Пт 1,6–7). Важно је разликовање: Бог није узрочник зла (Јак 1,13), али допушта искушења и даје снагу да се издрже (1 Кор 10,13). Православље Сираха убраја у „корисне за читање“ књиге (анагиноскомена)."
+        },
+        tag: "counsel"
+      },
+      christ: {
+        de: "Christus selbst wurde nach seiner Taufe in der Wüste versucht (Mt 4,1–11). Weil er selbst gelitten hat und versucht worden ist, kann er denen helfen, die versucht werden (Hebr 2,18).",
+        sr: "Сам Христос је после крштења био кушан у пустињи (Мт 4,1–11). Пошто је сам страдао и био кушан, може помоћи онима који бивају кушани (Јев 2,18)."
+      },
+      links: [
+        { ref: { de: "1 Petr 1,6–7", sr: "1 Пт 1,6–7" }, note: { de: "Der Glaube wird geprüft wie Gold im Feuer.", sr: "Вера се куша као злато огњем." } },
+        { ref: { de: "1 Kor 10,13", sr: "1 Кор 10,13" }, note: { de: "Gott lässt euch nicht über eure Kraft versucht werden.", sr: "Бог неће допустити да будете кушани више него што можете." } },
+        { ref: { de: "Jak 1,2–4.12–13", sr: "Јак 1,2–4.12–13" }, note: { de: "Prüfung bringt Ausdauer; Gott versucht niemanden zum Bösen.", sr: "Искушење доноси трпљење; Бог никога не куша злом." } },
+        { ref: { de: "Hebr 2,18", sr: "Јев 2,18" }, note: { de: "Er kann denen helfen, die versucht werden.", sr: "Може помоћи онима који бивају кушани." } }
+      ],
+      fathers: {
+        de: "Sir 2,1 wird von vielen geistlichen Vätern als Grundsatz für den Anfang des geistlichen Lebens zitiert. Für diese Version wurde kein einzelner freier Väterkommentar geprüft; wörtliche Zitate gibt die App nicht wieder.",
+        sr: "Сир 2,1 многи духовни оци наводе као начело за почетак духовног живота. За ово издање није проверен ниједан појединачан слободан коментар отаца; апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Worauf soll sich gefasst machen, wer dem Herrn dienen will?", sr: "На шта треба да се припреми ко хоће да служи Господу?" },
+          a: { de: "Auf Prüfung und Versuchung (Sir 2,1).", sr: "На искушење (Сир 2,1)." } },
+        { q: { de: "Welches Bild gebraucht Sirach für die Prüfung?", sr: "Коју слику Сирах користи за искушење?" },
+          a: { de: "Gold, das im Feuer geprüft wird.", sr: "Злато које се куша у огњу." } },
+        { q: { de: "Warum ist es besser, in die Hände des Herrn zu fallen?", sr: "Зашто је боље пасти у руке Господње?" },
+          a: { de: "Weil sein Erbarmen so groß ist wie seine Größe.", sr: "Зато што је Његова милост велика као и Његова величина." } }
+      ],
+      practice: {
+        de: "Denke an eine Schwierigkeit, die du gerade erlebst. Sprich diese Woche dazu jeden Tag: „Herr, gib mir Geduld und Vertrauen.“ Frage dich: Was kann ich in dieser Lage lernen?",
+        sr: "Помислите на неку тешкоћу коју сада доживљавате. Говорите ове недеље сваког дана: „Господе, дај ми трпљење и поверење.“ Запитајте се: шта могу да научим у овој ситуацији?"
+      },
+      review: {
+        de: "Wer Gott dient, wird geprüft wie Gold im Feuer. Wer auf den Herrn vertraut, wird nicht enttäuscht, denn er ist barmherzig.",
+        sr: "Ко служи Богу, бива кушан као злато у огњу. Ко се узда у Господа, неће се постидети, јер је Он милостив."
+      },
+      quiz: [
+        { q: { de: "Wann wurde das Buch Jesus Sirach etwa geschrieben?", sr: "Када је отприлике написана књига Исуса сина Сирахова?" },
+          options: [{ de: "Um 180 v. Chr.", sr: "Око 180. пре Христа" }, { de: "Um 1000 v. Chr.", sr: "Око 1000. пре Христа" }, { de: "Um 300 n. Chr.", sr: "Око 300. после Христа" }], correct: 0 },
+        { q: { de: "Wer übersetzte das Buch ins Griechische?", sr: "Ко је превео књигу на грчки?" },
+          options: [{ de: "Der Enkel des Verfassers", sr: "Унук писца" }, { de: "Der Apostel Paulus", sr: "Апостол Павле" }, { de: "Mose", sr: "Мојсије" }], correct: 0 },
+        { q: { de: "Womit vergleicht Sirach die Prüfung?", sr: "Са чим Сирах упоређује искушење?" },
+          options: [{ de: "Mit Gold im Feuer", sr: "Са златом у огњу" }, { de: "Mit Regen", sr: "Са кишом" }, { de: "Mit einem Sturm auf dem Meer", sr: "Са буром на мору" }], correct: 0 },
+        { q: { de: "Ist Gott nach Jak 1,13 der Urheber der Versuchung zum Bösen?", sr: "Да ли је Бог, по Јак 1,13, узрочник кушања злом?" },
+          options: [{ de: "Nein, Gott versucht niemanden zum Bösen", sr: "Не, Бог никога не куша злом" }, { de: "Ja, immer", sr: "Да, увек" }, { de: "Nur manchmal", sr: "Само понекад" }], correct: 0 }
+      ]
+    },
+  {
+      id: "bib-wis3", book: "wis", order: 41,
+      title: { de: "Die Seelen der Gerechten in Gottes Hand", sr: "Душе праведних у руци Божијој" },
+      ref: { de: "Weisheit 2,12–20 und 3,1–9", sr: "Премудрост Соломонова 2,12–20 и 3,1–9" },
+      intro: {
+        de: "Das Buch der Weisheit (Weisheit Salomos) gehört zu den Büchern der Septuaginta. Es entstand auf Griechisch, wahrscheinlich in Alexandrien im 1. Jahrhundert v. Chr. Es spricht über das Schicksal der Gerechten und die Hoffnung auf Unsterblichkeit.",
+        sr: "Књига Премудрости Соломонове спада у књиге Септуагинте. Настала је на грчком, вероватно у Александрији у 1. веку пре Христа. Говори о судбини праведних и нади у бесмртност."
+      },
+      introTag: "history",
+      context: {
+        de: "Gottlose Menschen sagen sich: Das Leben ist kurz, nach dem Tod kommt nichts; lasst uns genießen und den Gerechten unterdrücken, der uns stört (Weish 2,1–11). Das Buch antwortet darauf.",
+        sr: "Безбожни људи говоре: живот је кратак, после смрти нема ништа; уживајмо и угњетавајмо праведника који нам смета (Прем 2,1–11). Књига на то одговара."
+      },
+      reading: [
+        { ref: { de: "Weish 2,12–20", sr: "Прем 2,12–20" }, note: { de: "Der Gerechte wird verfolgt.", sr: "Праведник бива гоњен." } },
+        { ref: { de: "Weish 3,1–9", sr: "Прем 3,1–9" }, note: { de: "Die Seelen der Gerechten sind in Gottes Hand.", sr: "Душе праведних су у руци Божијој." } }
+      ],
+      summary: {
+        de: "Die Gottlosen sagen: Lasst uns dem Gerechten auflauern, denn er ist uns unbequem. Er rühmt sich, Gott zum Vater zu haben, und nennt sich Kind des Herrn. Wir wollen sehen, ob seine Worte wahr sind; wenn er Gottes Sohn ist, wird Gott sich seiner annehmen. Mit Schmach und Qual wollen wir ihn prüfen und zu einem schändlichen Tod verurteilen. Doch das Buch antwortet: Die Seelen der Gerechten sind in Gottes Hand, und keine Qual rührt sie an. In den Augen der Toren scheinen sie gestorben zu sein, sie aber sind in Frieden. Ihre Hoffnung ist voll Unsterblichkeit. Wie Gold im Schmelzofen hat Gott sie geprüft und sie seiner würdig befunden. Die auf ihn vertrauen, werden die Wahrheit erkennen.",
+        sr: "Безбожници говоре: Вребајмо праведника, јер нам је незгодан. Хвали се да му је Бог Отац и назива себе чедом Господњим. Да видимо јесу ли његове речи истините; ако је праведник син Божији, Бог ће га заштитити. Срамотом и мукама искушајмо га и осудимо на срамну смрт. Али књига одговара: Душе праведних су у руци Божијој, и мука их се неће дотаћи. У очима безумних изгледа да су умрли, а они су у миру. Њихова нада је пуна бесмртности. Као злато у пећи искушао их је Бог и нашао их достојним себе. Који се уздају у Њега, познаће истину."
+      },
+      interp: {
+        simple: {
+          de: "Wer Gott treu bleibt, kann von Menschen verspottet und verfolgt werden. Doch wer in Gottes Hand ist, den verliert Gott nicht – auch nicht im Tod.",
+          sr: "Ко остане веран Богу, може бити исмејан и гоњен од људи. Али онај ко је у руци Божијој, Бог га не губи – ни у смрти."
+        },
+        deeper: {
+          de: "Die Kirchenväter lesen Weish 2,12–20 als prophetisches Bild des Leidens Christi: Der Gerechte nennt Gott seinen Vater, wird verspottet mit den Worten „Wenn er Gottes Sohn ist …“ und zum Tod verurteilt – vgl. die Spottworte unter dem Kreuz (Mt 27,43). Weish 3,1–9 wird in der Vesper an Festen von Heiligen, besonders von Märtyrern, gelesen. Der Text bezeugt, dass die Gerechten nach dem Tod bei Gott leben; darauf gründet auch die Verehrung der Heiligen.",
+          sr: "Свети оци Прем 2,12–20 читају као пророчку слику Христовог страдања: праведник назива Бога својим Оцем, бива исмејан речима „Ако је Син Божији …“ и осуђен на смрт – уп. подругљиве речи под крстом (Мт 27,43). Прем 3,1–9 чита се на вечерњу на празнике светих, нарочито мученика. Текст сведочи да праведници после смрти живе код Бога; на томе се заснива и поштовање светих."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Christus ist der Gerechte, der verspottet und getötet wurde, und Gott hat ihn auferweckt. Sterbend betete er: „Vater, in deine Hände befehle ich meinen Geist“ (Lk 23,46).",
+        sr: "Христос је Праведник који је исмејан и убијен, а Бог Га је васкрсао. Умирући се молио: „Оче, у руке Твоје предајем дух свој“ (Лк 23,46)."
+      },
+      links: [
+        { ref: { de: "Mt 27,39–43", sr: "Мт 27,39–43" }, note: { de: "Er hat auf Gott vertraut; der rette ihn jetzt.", sr: "Уздао се у Бога, нека га сад избави." } },
+        { ref: { de: "Lk 23,46", sr: "Лк 23,46" }, note: { de: "In deine Hände befehle ich meinen Geist.", sr: "У руке Твоје предајем дух свој." } },
+        { ref: { de: "Offb 6,9–11", sr: "Отк 6,9–11" }, note: { de: "Die Seelen der Märtyrer unter dem Altar.", sr: "Душе мученика под олтаром." } },
+        { ref: { de: "Joh 10,28–29", sr: "Јн 10,28–29" }, note: { de: "Niemand wird sie aus meiner Hand reißen.", sr: "Нико их неће отети из руке моје." } }
+      ],
+      fathers: {
+        de: "Mehrere Kirchenväter führen Weish 2,12–20 als Vorhersage des Leidens Christi an. Für diese Version wurde kein einzelner freier Link zu diesen Stellen geprüft; wörtliche Zitate gibt die App nicht wieder.",
+        sr: "Више светих отаца наводи Прем 2,12–20 као предсказање Христовог страдања. За ово издање није проверена појединачна слободна веза ка тим местима; апликација не наводи дословне цитате."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Was sagen die Gottlosen über den Gerechten?", sr: "Шта безбожници говоре о праведнику?" },
+          a: { de: "Er ist unbequem; wir wollen prüfen, ob Gott ihm hilft, wenn er Gottes Sohn ist.", sr: "Незгодан је; да видимо да ли ће му Бог помоћи ако је син Божији." } },
+        { q: { de: "Wo sind nach Weish 3,1 die Seelen der Gerechten?", sr: "Где су, по Прем 3,1, душе праведних?" },
+          a: { de: "In Gottes Hand.", sr: "У руци Божијој." } },
+        { q: { de: "Wann liest die Kirche Weish 3,1–9 im Gottesdienst?", sr: "Када Црква чита Прем 3,1–9 на богослужењу?" },
+          a: { de: "In der Vesper an Festen von Heiligen, besonders Märtyrern.", sr: "На вечерњу на празнике светих, нарочито мученика." } }
+      ],
+      practice: {
+        de: "Denke an einen verstorbenen Menschen, den du vermisst. Sprich: „Seine/ihre Seele ist in deiner Hand, Herr.“ Bete für ihn oder sie.",
+        sr: "Помислите на неког упокојеног ко вам недостаје. Реците: „Његова/њена душа је у руци Твојој, Господе.“ Помолите се за њега или њу."
+      },
+      review: {
+        de: "Der Gerechte wird verspottet und verfolgt, doch die Seelen der Gerechten sind in Gottes Hand. Die Väter sehen darin das Leiden Christi vorausgebildet.",
+        sr: "Праведник бива исмејан и гоњен, али душе праведних су у руци Божијој. Оци у томе виде праслику Христовог страдања."
+      },
+      quiz: [
+        { q: { de: "In welcher Sprache entstand das Buch der Weisheit?", sr: "На ком језику је настала књига Премудрости Соломонове?" },
+          options: [{ de: "Griechisch", sr: "На грчком" }, { de: "Latein", sr: "На латинском" }, { de: "Arabisch", sr: "На арапском" }], correct: 0 },
+        { q: { de: "Was rührt die Seelen der Gerechten nach Weish 3,1 nicht an?", sr: "Шта се, по Прем 3,1, неће дотаћи душа праведних?" },
+          options: [{ de: "Keine Qual", sr: "Мука" }, { de: "Kein Licht", sr: "Светлост" }, { de: "Keine Freude", sr: "Радост" }], correct: 0 },
+        { q: { de: "Womit wird die Prüfung der Gerechten verglichen?", sr: "Са чим се упоређује искушење праведних?" },
+          options: [{ de: "Mit Gold im Schmelzofen", sr: "Са златом у пећи" }, { de: "Mit einem Baum", sr: "Са дрветом" }, { de: "Mit einer Reise", sr: "Са путовањем" }], correct: 0 },
+        { q: { de: "Welche Stelle unter dem Kreuz erinnert an Weish 2,18?", sr: "Које место под крстом подсећа на Прем 2,18?" },
+          options: [{ de: "Mt 27,43: Er hat auf Gott vertraut …", sr: "Мт 27,43: Уздао се у Бога …" }, { de: "Joh 3,16", sr: "Јн 3,16" }, { de: "Gen 1,1", sr: "Пост 1,1" }], correct: 0 }
+      ]
     }
   ]
 };
@@ -4939,6 +5088,7 @@ const LINKS = {
   athInc: { url: "https://bkv.unifr.ch/works/cpg-2091", label: { de: "Über die Menschwerdung des Wortes – BKV (deutsch)", sr: "О оваплоћењу Логоса – BKV (немачки)" } },
   athMarc: { url: "https://bkv.unifr.ch/works/cpg-2097", label: { de: "Brief an Marcellinus über die Psalmen – BKV (deutsch)", sr: "Посланица Маркелину о псалмима – BKV (немачки)" } },
   athAnt: { url: "https://bkv.unifr.ch/works/cpg-2101", label: { de: "Leben des hl. Antonius – BKV (deutsch)", sr: "Житије светог Антонија – BKV (немачки)" } },
+  anfIgn: { url: "https://www.ccel.org/ccel/schaff/anf01.html", label: { de: "Briefe des hl. Ignatius von Antiochien – ANF Band 1 (englisch, CCEL)", sr: "Посланице светог Игњатија Антиохијског – ANF том 1 (енглески, CCEL)" } },
   anf01: { url: "https://www.ccel.org/ccel/schaff/anf01.html", label: { de: "Irenäus von Lyon, Gegen die Häresien – ANF Band 1 (englisch, CCEL)", sr: "Иринеј Лионски, Против јереси – ANF, том 1 (енглески, CCEL)" } },
   anf05: { url: "https://www.ccel.org/ccel/schaff/anf05.html", label: { de: "Hippolyt u. a. – ANF Band 5 (englisch, CCEL)", sr: "Иполит и др. – ANF, том 5 (енглески, CCEL)" } },
   npnf204: { url: "https://www.ccel.org/ccel/schaff/npnf204.html", label: { de: "Athanasius – NPNF II/4 (englisch, CCEL)", sr: "Атанасије – NPNF II/4 (енглески, CCEL)" } },
@@ -5201,7 +5351,19 @@ const SAINTS = [
     life: { de: "Arsenije stammte nach der Überlieferung aus Srem (Syrmien), daher sein Beiname. Er war ein Schüler des hl. Sava und wurde von ihm zum Abt des Klosters Žiča bestimmt. 1233 folgte er Sava als zweiter Erzbischof der Serbischen Kirche nach. Unter ihm wurde der Sitz des Erzbistums nach Peć verlegt, wo er die Kirche der Heiligen Apostel errichten ließ. Er leitete die Kirche etwa drei Jahrzehnte. Seine Reliquien ruhen nach der Überlieferung im Kloster Ždrebaonik in Montenegro.", sr: "Арсеније је, према предању, потицао из Срема, отуда његов надимак. Био је ученик светог Саве, који га је поставио за игумана манастира Жиче. Године 1233. наследио је Саву као други архиепископ Српске Цркве. За његово време седиште архиепископије пренето је у Пећ, где је подигао храм Светих апостола. Управљао је Црквом око три деценије. Његове мошти, према предању, почивају у манастиру Ждребаоник у Црној Гори." },
     teaching: { de: "Er führte das Werk des hl. Sava treu weiter: Ordnung der Kirche, Pflege der Klöster und des Gottesdienstes. Er ist ein Vorbild für treue Nachfolge im Dienst.", sr: "Верно је наставио дело светог Саве: уређење Цркве, бригу о манастирима и богослужењу. Узор је верног наслеђивања у служби." },
     meaning: { de: "Die Patriarchenkirche in Peć wurde zum geistlichen Zentrum der Serbischen Kirche; das Patriarchat von Peć ist Teil des UNESCO-Welterbes „Mittelalterliche Denkmäler im Kosovo“.", sr: "Пећка патријаршија постала је духовни центар Српске Цркве; она је део Унесковог светског наслеђа „Средњовековни споменици на Косову“." },
-    tag: "uncertain", read: [], readNote: { de: "Für diese Version wurde keine einzelne freie, rechtmäßige Quelle geprüft. Auskunft gibt dein Priester.", sr: "За ово издање није проверен ниједан појединачан слободан, законито доступан извор. Обавештења даје ваш свештеник." } }
+    tag: "uncertain", read: [], readNote: { de: "Für diese Version wurde keine einzelne freie, rechtmäßige Quelle geprüft. Auskunft gibt dein Priester.", sr: "За ово издање није проверен ниједан појединачан слободан, законито доступан извор. Обавештења даје ваш свештеник." } },
+  { id: "s-ignatius", name: { de: "Hl. Ignatius von Antiochien (der Gottesträger)", sr: "Свети Игњатије Богоносац" },
+    lived: { de: "† um 107/115", sr: "† око 107/115" }, feast: { de: "20. Dez. (2. Jan.)", sr: "20. децембар/2. јануар" },
+    life: { de: "Ignatius war Bischof von Antiochien in Syrien, nach der Überlieferung der dritte Bischof der Stadt nach dem Apostel Petrus. Unter Kaiser Trajan wurde er verhaftet und in Ketten nach Rom gebracht. Auf dieser Reise schrieb er sieben Briefe an Gemeinden und an den hl. Polykarp von Smyrna. In Rom starb er als Märtyrer in der Arena; das genaue Jahr ist unsicher.", sr: "Игњатије је био епископ Антиохије у Сирији, према предању трећи епископ града после апостола Петра. Под царем Трајаном ухапшен је и у оковима одведен у Рим. На том путу написао је седам посланица заједницама и светом Поликарпу Смирнском. У Риму је пострадао као мученик у арени; тачна година је несигурна." },
+    teaching: { de: "Seine Briefe gehören zu den ältesten christlichen Schriften nach dem Neuen Testament. Er betont die Einheit der Kirche um den Bischof und die Eucharistie, die wahre Menschwerdung Christi gegen Irrlehrer und die Bereitschaft zum Martyrium. Er gebraucht als erster bekannter Autor den Ausdruck „katholische (allumfassende) Kirche“.", sr: "Његове посланице спадају међу најстарије хришћанске списе после Новог завета. Наглашава јединство Цркве око епископа и Евхаристије, истинско оваплоћење Христово насупрот јеретицима и спремност на мучеништво. Он је први познати писац који користи израз „саборна (католичанска, свеобухватна) Црква“." },
+    meaning: { de: "Er ist ein wichtiger Zeuge dafür, wie die Kirche schon um das Jahr 100 lebte: mit Bischof, Priestern und Diakonen und mit der Eucharistie als Mitte.", sr: "Он је важан сведок тога како је Црква живела већ око 100. године: са епископом, свештеницима и ђаконима и са Евхаристијом као средиштем." },
+    read: ["anfIgn"] },
+  { id: "s-rila", name: { de: "Hl. Johannes von Rila", sr: "Свети Јован Рилски" },
+    lived: { de: "um 876–946", sr: "око 876–946" }, feast: { de: "19. Okt. (1. Nov.); Übertragung der Reliquien 18. Aug. (31. Aug.)", sr: "19. октобар/1. новембар; пренос моштију 18/31. август" },
+    life: { de: "Johannes lebte im Bulgarischen Reich. Er wurde Mönch und zog sich als Einsiedler in die Wälder und Höhlen des Rila-Gebirges zurück. Viele Menschen suchten ihn auf, und aus der Gemeinschaft seiner Schüler entstand das Rila-Kloster. Er starb 946. Sein geistliches Testament an die Schüler ist überliefert. Seine Reliquien kehrten nach mehreren Übertragungen 1469 in das Rila-Kloster zurück.", sr: "Јован је живео у Бугарском царству. Постао је монах и повукао се као пустињак у шуме и пећине Рилске планине. Многи су га тражили, а из заједнице његових ученика настао је Рилски манастир. Упокојио се 946. Сачувано је његово духовно завештање ученицима. Његове мошти су се после више преноса 1469. вратиле у Рилски манастир." },
+    teaching: { de: "Er ist ein Vorbild der Stille, des Gebets und der Demut. In seinem Testament mahnt er die Mönche zu Einmütigkeit und zum Verzicht auf Besitz.", sr: "Он је узор тишине, молитве и смирења. У завештању опомиње монахе на једнодушност и одрицање од имовине." },
+    meaning: { de: "Er ist der bekannteste Heilige Bulgariens; auch in Serbien wird er verehrt. Das Rila-Kloster gehört zum UNESCO-Welterbe.", sr: "Он је најпознатији светитељ Бугарске; поштује се и у Србији. Рилски манастир налази се на Унесковој листи светске баштине." },
+    tag: "uncertain", read: ["svProlog"] }
 ];
 
 /* Fragen und Quiz für die Heiligen-Profile (Kurs C) */
@@ -5493,6 +5655,28 @@ const SAINT_EXTRA = {
       qz("Woher kommt sein Beiname „Sremac“?", "Одакле потиче његов надимак „Сремац“?", [["Aus der Gegend Srem (Syrmien)", "Из Срема"], ["Von einem Kloster", "Од манастира"], ["Von seinem Vater", "Од његовог оца"]], 0),
       qz("Welche Kirche ließ er in Peć errichten?", "Који храм је подигао у Пећи?", [["Die Kirche der Heiligen Apostel", "Храм Светих апостола"], ["Die Hagia Sophia", "Свету Софију"], ["Die Kirche des hl. Sava", "Храм Светог Саве"]], 0),
       qz("Wann ist sein Gedenktag?", "Када је његов спомен?", [["28. Oktober (10. November)", "28. октобра (10. новембра)"], ["14. Januar (27. Januar)", "14. јануара (27. јануара)"], ["11. November (24. November)", "11. новембра (24. новембра)"]], 0)
+    ]
+  },
+  "s-ignatius": {
+    questions: [
+      qa("Wann schrieb der hl. Ignatius seine Briefe?", "Када је свети Игњатије писао своје посланице?", "Auf dem Weg nach Rom, wo er als Märtyrer starb.", "На путу за Рим, где је пострадао као мученик."),
+      qa("Welche Themen betont er besonders?", "Које теме посебно наглашава?", "Einheit der Kirche um Bischof und Eucharistie, die wahre Menschwerdung Christi und die Treue bis zum Martyrium.", "Јединство Цркве око епископа и Евхаристије, истинско оваплоћење Христово и верност до мучеништва.")
+    ],
+    quiz: [
+      qz("Wo war Ignatius Bischof?", "Где је Игњатије био епископ?", [["In Antiochien", "У Антиохији"], ["In Alexandrien", "У Александрији"], ["In Rom", "У Риму"]], 0),
+      qz("Wie viele Briefe von ihm sind überliefert?", "Колико његових посланица је сачувано?", [["Sieben", "Седам"], ["Zwei", "Две"], ["Vierzehn", "Четрнаест"]], 0),
+      qz("Welchen Beinamen trägt er?", "Који надимак носи?", [["Der Gottesträger", "Богоносац"], ["Der Große", "Велики"], ["Der Theologe", "Богослов"]], 0)
+    ]
+  },
+  "s-rila": {
+    questions: [
+      qa("Wie entstand das Rila-Kloster?", "Како је настао Рилски манастир?", "Aus der Gemeinschaft der Schüler, die sich um den Einsiedler Johannes sammelten.", "Из заједнице ученика који су се окупили око пустињака Јована."),
+      qa("Was hinterließ er seinen Schülern?", "Шта је оставио својим ученицима?", "Ein geistliches Testament.", "Духовно завештање.")
+    ],
+    quiz: [
+      qz("In welchem Gebirge lebte er als Einsiedler?", "У којој планини је живео као пустињак?", [["Im Rila-Gebirge", "На Рилској планини"], ["Am Athos", "На Светој Гори"], ["Im Kaukasus", "На Кавказу"]], 0),
+      qz("Wann ist sein Hauptgedenktag?", "Када је његов главни спомен?", [["19. Oktober (1. November)", "19. октобра (1. новембра)"], ["17. Januar (30. Januar)", "17. јануара (30. јануара)"], ["8. Juli (21. Juli)", "8. јула (21. јула)"]], 0),
+      qz("Wann starb er?", "Када се упокојио?", [["946", "946."], ["1200", "1200."], ["600", "600."]], 0)
     ]
   }
 };
@@ -5804,6 +5988,8 @@ const EXTRA_CARDS = [
   ["d-bible", "Was steht im Heiligenschein Christi auf Ikonen?", "Шта стоји у Христовом ореолу на иконама?", "ὁ ὤν – „der Seiende“ (Ex 3,14 nach der Septuaginta).", "ὁ ὤν – „Онај Који јесте“ (Изл 3,14 по Септуагинти)."],
   ["d-bible", "Wo zitiert das Neue Testament Jeremias Verheißung vom neuen Bund?", "Где Нови завет наводи Јеремијино обећање новог завета?", "In Hebr 8,8–12; Christus spricht beim Abendmahl vom neuen Bund in seinem Blut.", "У Јев 8,8–12; Христос на Тајној вечери говори о новом завету у својој крви."],
   ["d-bible", "Was bedeutet der Name Raphael?", "Шта значи име Рафаило?", "„Gott heilt“ (Buch Tobit).", "„Бог исцељује“ (књига о Товиту)."],
+  ["d-bible", "Worauf soll sich gefasst machen, wer dem Herrn dienen will (Sir 2,1)?", "На шта треба да се припреми ко хоће да служи Господу (Сир 2,1)?", "Auf Prüfung und Versuchung.", "На искушење."],
+  ["d-bible", "Wo sind nach Weish 3,1 die Seelen der Gerechten?", "Где су, по Прем 3,1, душе праведних?", "In Gottes Hand.", "У руци Божијој."],
   ["d-history", "Nizäa 325 – worum ging es?", "Никеја 325 – о чему је било реч?", "Gegen Arius: Der Sohn ist eines Wesens mit dem Vater.", "Против Арија: Син је једносуштан Оцу."],
   ["d-history", "Konstantinopel 381 – worum ging es?", "Цариград 381 – о чему је било реч?", "Gottheit des Heiligen Geistes; Ergänzung des Glaubensbekenntnisses.", "Божанство Духа Светога; допуна Символа вере."],
   ["d-history", "Ephesus 431 – worum ging es?", "Ефес 431 – о чему је било реч?", "Gegen Nestorius: Maria ist Gottesgebärerin.", "Против Несторија: Марија је Богородица."],
@@ -5841,6 +6027,8 @@ const EXTRA_CARDS = [
   ["d-saints", "Nach welchem Heiligen ist die Stadt Prokuplje benannt?", "По ком светитељу је назван град Прокупље?", "Nach dem hl. Großmärtyrer Prokopios.", "По светом великомученику Прокопију."],
   ["d-saints", "Wer gilt als „Vater der Mönche“?", "Ко се сматра „оцем монаха“?", "Der hl. Antonius der Große (Ägypten, † um 356).", "Свети Антоније Велики (Египат, † око 356)."],
   ["d-saints", "Wer war der zweite Erzbischof der Serbischen Kirche?", "Ко је био други архиепископ Српске Цркве?", "Der hl. Arsenije Sremac, Nachfolger des hl. Sava (ab 1233).", "Свети Арсеније Сремац, наследник светог Саве (од 1233)."],
+  ["d-saints", "Wann schrieb der hl. Ignatius von Antiochien seine sieben Briefe?", "Када је свети Игњатије Антиохијски написао својих седам посланица?", "Auf dem Weg zu seinem Martyrium in Rom.", "На путу ка свом мучеништву у Риму."],
+  ["d-saints", "Welches Kloster geht auf den hl. Johannes von Rila zurück?", "Који манастир потиче од светог Јована Рилског?", "Das Rila-Kloster in Bulgarien.", "Рилски манастир у Бугарској."],
   ["d-saints", "Wer sind die Drei Hierarchen?", "Ко су Три Јерарха?", "Basilius der Große, Gregor der Theologe, Johannes Chrysostomus (Fest 30. Jan.).", "Василије Велики, Григорије Богослов, Јован Златоуст (празник 30. јануар)."],
   ["d-saints", "Wer schrieb „Über die Menschwerdung des Wortes“?", "Ко је написао „О оваплоћењу Логоса“?", "Der hl. Athanasius der Große.", "Свети Атанасије Велики."],
   ["d-saints", "Wer verteidigte die zwei Willen Christi bis zum Martyrium?", "Ко је бранио две воље Христове до мучеништва?", "Der hl. Maximus der Bekenner.", "Свети Максим Исповедник."],
@@ -6199,7 +6387,7 @@ const SAINT_DAYS = [
   ["s-seraphim", 1, 2], ["s-seraphim", 7, 19], ["s-kronstadt", 12, 20], ["s-nikolaj", 3, 5], ["s-nikolaj", 4, 20],
   ["s-sava", 1, 14], ["s-lazar", 6, 15], ["s-simeon", 2, 13], ["s-vasilije", 4, 29], ["s-justin", 6, 1],
   ["s-maryegypt", 4, 1], ["s-luke", 5, 29],
-  ["s-nicholas", 5, 9], ["s-george", 11, 3], ["s-demetrios", 10, 26], ["s-petka", 10, 14], ["s-stefan", 11, 11], ["s-andrew", 11, 30], ["s-spyridon", 12, 12], ["s-catherine", 11, 24], ["s-prokopije", 7, 8], ["s-antony", 1, 17], ["s-arsenije", 10, 28]
+  ["s-nicholas", 5, 9], ["s-george", 11, 3], ["s-demetrios", 10, 26], ["s-petka", 10, 14], ["s-stefan", 11, 11], ["s-andrew", 11, 30], ["s-spyridon", 12, 12], ["s-catherine", 11, 24], ["s-prokopije", 7, 8], ["s-antony", 1, 17], ["s-arsenije", 10, 28], ["s-ignatius", 12, 20], ["s-rila", 10, 19], ["s-rila", 8, 18]
 ];
 
 const CAL_FASTS = {
