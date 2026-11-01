@@ -367,11 +367,13 @@ main > .wrap { animation: opFade .3s var(--ease); }
 .steps li::before { content: counter(st); position: absolute; left: 0; top: 5px; width: 26px; height: 26px; border-radius: 50%; background: var(--goldsoft); color: var(--gold2); font-weight: 700; font-size: .82em; display: flex; align-items: center; justify-content: center; }
 /* Lektionsnavigation */
 .lnav .item .s { margin: 0 0 2px; text-transform: uppercase; letter-spacing: .1em; font-size: .68em; font-weight: 700; color: var(--gold); }
+
+.bookcard[hidden] { display: none; }
 </style>
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "2.9.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "3.0.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -451,7 +453,7 @@ const UI = {
     levelEasy: "Einsteiger", levelMid: "Fortgeschritten", levelHard: "Anspruchsvoll",
     access: "Zugang", fullText: "Volltext frei verfügbar", summaryOnly: "Nur Beschreibung in der App – Buch im Handel",
     openSource: "Quelle öffnen",
-    linkCheckNote: "Links zuletzt geprüft im Oktober 2026. Externe Seiten können sich ändern.",
+    linkCheckNote: "Links zuletzt geprüft im Oktober/November 2026. Externe Seiten können sich ändern.", booksEdNote: "Hinweis zu den englischen Ausgaben (NPNF/ANF): Die Texte der Väter sind gemeinfrei übersetzt; Einleitungen und Fußnoten stammen von westlichen (meist protestantischen) Herausgebern des 19. Jahrhunderts und geben nicht immer die orthodoxe Sicht wieder.",
     cardsTitle: "Lernkarten",
     cardsIntro: "Wiederholung mit verteilten Lernintervallen: Schwierige Karten kommen früher wieder.",
     deck: "Stapel", allDecks: "Alle Stapel",
@@ -515,7 +517,7 @@ const UI = {
     creed: "Glaubensbekenntnis",
     menu: "Menü",
     quizAgain: "Noch einmal", quizGentle: "Fehler gehören zum Lernen. Beim Wiederholen festigt sich das Wissen.",
-    glossSearch: "Begriff suchen …", glossNone: "Kein passender Begriff gefunden.",
+    glossSearch: "Begriff suchen …", bookSearch: "Titel, Autor oder Thema suchen …", glossNone: "Kein passender Begriff gefunden.",
     notesExport: "Notizen teilen oder kopieren", notesExported: "Notizen kopiert", notesExportHint: "Text zum Kopieren:",
     prevLesson: "Vorherige Lektion", nextLessonL: "Nächste Lektion", lastOpened: "Zuletzt geöffnet",
     remTitle: "Gebetserinnerungen", remText: "Web-Apps können auf dem iPhone keine zuverlässigen täglichen Erinnerungen senden. Mit der App „Erinnerungen“ geht es trotzdem – ganz ohne Datenweitergabe:",
@@ -658,7 +660,7 @@ const UI = {
     levelEasy: "Почетни", levelMid: "Средњи", levelHard: "Захтеван",
     access: "Приступ", fullText: "Цео текст слободно доступан", summaryOnly: "У апликацији само опис – књига у продаји",
     openSource: "Отвори извор",
-    linkCheckNote: "Везе последњи пут проверене у октобру 2026. Спољне странице се могу променити.",
+    linkCheckNote: "Везе последњи пут проверене у октобру/новембру 2026. Спољне странице се могу променити.", booksEdNote: "Напомена о енглеским издањима (NPNF/ANF): текстови отаца су слободно доступни преводи; уводи и напомене потичу од западних (углавном протестантских) приређивача 19. века и не изражавају увек православно гледиште.",
     cardsTitle: "Картице за учење",
     cardsIntro: "Понављање у размацима: тешке картице се враћају раније.",
     deck: "Шпил", allDecks: "Сви шпилови",
@@ -722,7 +724,7 @@ const UI = {
     creed: "Символ вере",
     menu: "Мени",
     quizAgain: "Још једном", quizGentle: "Грешке су део учења. Понављањем се знање учвршћује.",
-    glossSearch: "Претражи појам …", glossNone: "Није пронађен одговарајући појам.",
+    glossSearch: "Претражи појам …", bookSearch: "Претражи наслов, аутора или тему …", glossNone: "Није пронађен одговарајући појам.",
     notesExport: "Подели или копирај белешке", notesExported: "Белешке копиране", notesExportHint: "Текст за копирање:",
     prevLesson: "Претходна лекција", nextLessonL: "Следећа лекција", lastOpened: "Последње отворено",
     remTitle: "Подсетници за молитву", remText: "Веб-апликације на ајфону не могу да шаљу поуздане дневне подсетнике. Помоћу апликације „Подсетници“ ипак иде – без слања података:",
@@ -5220,6 +5222,856 @@ const BIBLE = {
         "correct": 0
       }
     ]
+  },
+  {
+    "id": "bib-mt25",
+    "book": "mt",
+    "order": 50,
+    "title": {
+      "de": "Das Weltgericht",
+      "sr": "Страшни суд"
+    },
+    "ref": {
+      "de": "Matthäus 25,31–46",
+      "sr": "Матеј 25,31–46"
+    },
+    "intro": {
+      "de": "Am Ende seiner Reden im Matthäusevangelium spricht Christus vom Jüngsten Gericht. Die Kirche liest diesen Abschnitt am Sonntag vom Jüngsten Gericht, eine Woche vor Beginn der Großen Fastenzeit.",
+      "sr": "На крају својих беседа у Јеванђељу по Матеју Христос говори о Страшном суду. Црква чита овај одељак у Недељу месопусну (о Страшном суду), недељу дана пре почетка Великог поста."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Wenige Tage vor seinem Leiden spricht Jesus mit den Jüngern über das Ende der Zeit. Vorher stehen die Gleichnisse von den zehn Jungfrauen und von den anvertrauten Talenten.",
+      "sr": "Неколико дана пре свог страдања Исус говори ученицима о крају времена. Претходе приче о десет девојака и о повереним талантима."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Mt 25,31–40",
+          "sr": "Мт 25,31–40"
+        },
+        "note": {
+          "de": "Was ihr einem dieser Geringsten getan habt.",
+          "sr": "Што учинисте једноме од ове моје најмање браће."
+        }
+      },
+      {
+        "ref": {
+          "de": "Mt 25,41–46",
+          "sr": "Мт 25,41–46"
+        },
+        "note": {
+          "de": "Was ihr nicht getan habt.",
+          "sr": "Што не учинисте."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Wenn der Menschensohn in seiner Herrlichkeit kommt, werden alle Völker vor ihm versammelt, und er scheidet sie wie ein Hirt die Schafe von den Böcken. Zu denen zu seiner Rechten sagt er: Kommt, ihr Gesegneten, erbt das Reich; denn ich war hungrig, und ihr habt mir zu essen gegeben, durstig, fremd, nackt, krank und im Gefängnis, und ihr habt mir geholfen. Sie fragen erstaunt: Wann haben wir dich so gesehen? Er antwortet: Was ihr einem dieser meiner geringsten Brüder getan habt, das habt ihr mir getan. Zu denen zur Linken sagt er das Gegenteil: Was ihr einem dieser Geringsten nicht getan habt, das habt ihr mir nicht getan.",
+      "sr": "Када Син Човечији дође у слави својој, сабраће се пред Њим сви народи, и раздвојиће их као пастир овце од јараца. Онима с десне стране рећи ће: Ходите, благословени, наследите Царство; јер огладнех, и дадосте ми да једем, ожеднех, бејах странац, наг, болестан и у тамници, и помогосте ми. Они ће зачуђено питати: Кад те видесмо таквог? Он ће одговорити: Што учинисте једноме од ове моје најмање браће, мени учинисте. Онима с леве стране рећи ће супротно: Што не учинисте једноме од ових најмањих, ни мени не учинисте."
+    },
+    "interp": {
+      "simple": {
+        "de": "Christus begegnet uns in jedem Menschen, der Hilfe braucht. Am Ende fragt er nicht nach großen Worten, sondern nach der Liebe, die wir im Alltag gezeigt haben.",
+        "sr": "Христос нам долази у сусрет у сваком човеку коме је потребна помоћ. На крају не пита за велике речи, него за љубав коју смо показали у свакодневици."
+      },
+      "deeper": {
+        "de": "Auffällig ist, dass beide Gruppen überrascht sind: Die Gerechten haben nicht aus Berechnung geholfen, sondern aus Liebe. Die Werke der Barmherzigkeit – Hungrige speisen, Fremde aufnehmen, Kranke und Gefangene besuchen – gehören seit jeher zur christlichen Praxis. Dass die Kirche diesen Text vor der Fastenzeit liest, zeigt: Fasten ohne Barmherzigkeit verfehlt sein Ziel. Die Ikone des Jüngsten Gerichts stellt diese Szene oft an der Westwand der Kirchen dar.",
+        "sr": "Упадљиво је да су обе групе изненађене: праведници нису помагали из рачуна, него из љубави. Дела милосрђа – нахранити гладне, примити странце, посетити болесне и затворене – од почетка припадају хришћанској пракси. То што Црква чита овај текст пред пост показује: пост без милосрђа промашује свој циљ. Икона Страшног суда често приказује овај призор на западном зиду храмова."
+      },
+      "tag": "dogma"
+    },
+    "christ": {
+      "de": "Christus ist der Richter, aber zugleich der, der sich mit den Armen eins macht. Er, der für uns arm wurde (2 Kor 8,9), lässt sich in den Geringsten finden.",
+      "sr": "Христос је Судија, али уједно и онај који се поистовећује са сиромашнима. Он, који је ради нас осиромашио (2 Кор 8,9), даје се пронаћи у најмањима."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Jak 2,14–17",
+          "sr": "Јак 2,14–17"
+        },
+        "note": {
+          "de": "Glaube ohne Werke ist tot.",
+          "sr": "Вера без дела је мртва."
+        }
+      },
+      {
+        "ref": {
+          "de": "1 Joh 3,17–18",
+          "sr": "1 Јн 3,17–18"
+        },
+        "note": {
+          "de": "Lasst uns lieben in Tat und Wahrheit.",
+          "sr": "Да љубимо делом и истином."
+        }
+      },
+      {
+        "ref": {
+          "de": "Spr 19,17",
+          "sr": "Прич 19,17"
+        },
+        "note": {
+          "de": "Wer sich des Armen erbarmt, leiht dem Herrn.",
+          "sr": "Ко поклања сиромаху, позајмљује Господу."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Der hl. Johannes Chrysostomus legt Mt 25 in seinen Homilien zum Matthäusevangelium aus (Homilie 79, englisch in NPNF I/10) und betont dort, dass Christus im Armen geehrt werden will. Wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Свети Јован Златоуст тумачи Мт 25 у беседама на Јеванђеље по Матеју (беседа 79, на енглеском у NPNF I/10) и наглашава да Христос жели да буде поштован у сиромаху. Апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Wonach fragt der Richter in Mt 25?",
+          "sr": "За шта Судија пита у Мт 25?"
+        },
+        "a": {
+          "de": "Nach den Werken der Barmherzigkeit an den Geringsten.",
+          "sr": "За дела милосрђа према најмањима."
+        }
+      },
+      {
+        "q": {
+          "de": "Warum sind auch die Gerechten überrascht?",
+          "sr": "Зашто су и праведници изненађени?"
+        },
+        "a": {
+          "de": "Weil sie nicht aus Berechnung, sondern aus Liebe geholfen haben.",
+          "sr": "Зато што нису помагали из рачуна, него из љубави."
+        }
+      },
+      {
+        "q": {
+          "de": "Wann liest die Kirche diesen Text?",
+          "sr": "Када Црква чита овај текст?"
+        },
+        "a": {
+          "de": "Am Sonntag vom Jüngsten Gericht, vor der Großen Fastenzeit.",
+          "sr": "У Недељу месопусну (о Страшном суду), пред Велики пост."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Wähle diese Woche ein Werk der Barmherzigkeit aus Mt 25: jemanden besuchen, der krank oder allein ist, oder einem Bedürftigen helfen.",
+      "sr": "Изаберите ове недеље једно дело милосрђа из Мт 25: посетите некога ко је болестан или сам, или помозите неком у невољи."
+    },
+    "review": {
+      "de": "Am Ende richtet Christus nach der Liebe zu den Geringsten: Was wir ihnen tun, tun wir ihm.",
+      "sr": "На крају Христос суди по љубави према најмањима: што њима чинимо, Њему чинимо."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Womit vergleicht Christus die Scheidung der Völker?",
+          "sr": "Са чим Христос упоређује раздвајање народа?"
+        },
+        "options": [
+          {
+            "de": "Mit einem Hirten, der Schafe und Böcke trennt",
+            "sr": "Са пастиром који раздваја овце и јарце"
+          },
+          {
+            "de": "Mit einer Ernte",
+            "sr": "Са жетвом"
+          },
+          {
+            "de": "Mit einem Fischernetz",
+            "sr": "Са рибарском мрежом"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "An welchem Sonntag wird Mt 25,31–46 gelesen?",
+          "sr": "Које недеље се чита Мт 25,31–46?"
+        },
+        "options": [
+          {
+            "de": "Sonntag vom Jüngsten Gericht",
+            "sr": "У Недељу месопусну (о Страшном суду)"
+          },
+          {
+            "de": "Ostersonntag",
+            "sr": "На Васкрс"
+          },
+          {
+            "de": "Palmsonntag",
+            "sr": "На Цвети"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wem tun wir Gutes, wenn wir den Geringsten helfen?",
+          "sr": "Коме чинимо добро када помажемо најмањима?"
+        },
+        "options": [
+          {
+            "de": "Christus selbst",
+            "sr": "Самом Христу"
+          },
+          {
+            "de": "Nur uns selbst",
+            "sr": "Само себи"
+          },
+          {
+            "de": "Niemandem",
+            "sr": "Никоме"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-jn6",
+    "book": "jn",
+    "order": 51,
+    "title": {
+      "de": "Ich bin das Brot des Lebens",
+      "sr": "Ја сам хлеб живота"
+    },
+    "ref": {
+      "de": "Johannes 6,1–14 und 6,35–58",
+      "sr": "Јован 6,1–14 и 6,35–58"
+    },
+    "intro": {
+      "de": "Johannes 6 beginnt mit der Speisung der Fünftausend und führt dann zu einer großen Rede Jesu in der Synagoge von Kafarnaum. Darin spricht er von sich als dem Brot des Lebens.",
+      "sr": "Јован 6 почиње умножењем хлебова за пет хиљада, а затим води до велике Исусове беседе у синагоги у Капернауму. У њој говори о себи као хлебу живота."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Es ist kurz vor dem Paschafest. Die Menge folgt Jesus, weil sie seine Zeichen gesehen hat. Nach der Speisung wollen sie ihn zum König machen; er aber zieht sich zurück.",
+      "sr": "Близу је Пасха. Народ иде за Исусом јер је видео Његове знаке. После умножења хлебова хоће да Га учине царем; Он се пак повлачи."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Joh 6,1–14",
+          "sr": "Јн 6,1–14"
+        },
+        "note": {
+          "de": "Fünf Brote und zwei Fische.",
+          "sr": "Пет хлебова и две рибе."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 6,35–40",
+          "sr": "Јн 6,35–40"
+        },
+        "note": {
+          "de": "Wer zu mir kommt, wird nicht hungern.",
+          "sr": "Ко долази к мени неће огладнети."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 6,51–58",
+          "sr": "Јн 6,51–58"
+        },
+        "note": {
+          "de": "Mein Fleisch ist wahre Speise.",
+          "sr": "Тело моје је право јело."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Ein Junge hat fünf Gerstenbrote und zwei Fische. Jesus nimmt die Brote, dankt und lässt sie austeilen; alle werden satt, und zwölf Körbe bleiben übrig. Am nächsten Tag sagt Jesus: Ich bin das Brot des Lebens; wer zu mir kommt, wird nie mehr hungern. Eure Väter haben in der Wüste das Manna gegessen und sind gestorben; ich bin das lebendige Brot, das vom Himmel herabgekommen ist. Das Brot, das ich geben werde, ist mein Fleisch für das Leben der Welt. Wer mein Fleisch isst und mein Blut trinkt, hat ewiges Leben, und ich werde ihn auferwecken am letzten Tag. Viele Jünger nehmen Anstoß und gehen weg. Petrus aber sagt: Herr, zu wem sollen wir gehen? Du hast Worte des ewigen Lebens.",
+      "sr": "Један дечак има пет јечмених хлебова и две рибе. Исус узима хлебове, благодари и даје да се поделе; сви се насите, и остане дванаест котарица. Сутрадан Исус каже: Ја сам хлеб живота; ко долази к мени неће огладнети. Оци ваши једоше ману у пустињи и помреше; ја сам хлеб живи који сиђе с неба. Хлеб који ћу ја дати јесте тело моје за живот света. Ко једе моје тело и пије моју крв има живот вечни, и ја ћу га васкрснути у последњи дан. Многи ученици се саблазне и оду. А Петар каже: Господе, коме ћемо ићи? Ти имаш речи живота вечнога."
+    },
+    "interp": {
+      "simple": {
+        "de": "Jesus stillt nicht nur den Hunger des Leibes, sondern schenkt sich selbst als Nahrung für das ewige Leben. Das geschieht in der heiligen Kommunion.",
+        "sr": "Исус не утољава само глад тела, него дарује самог себе као храну за живот вечни. То се збива у светом причешћу."
+      },
+      "deeper": {
+        "de": "Die orthodoxe Kirche versteht Joh 6,51–58 als Rede über die Eucharistie: In der Liturgie werden Brot und Wein durch den Heiligen Geist wirklich Leib und Blut Christi. Darum bereitet man sich mit Gebet, Fasten und – je nach Praxis – Beichte auf die Kommunion vor. Die Speisung (Joh 6,11: nehmen, danken, austeilen) klingt bereits an die Worte des Abendmahls an. Die Antwort des Petrus (6,68) ist ein Bekenntnis für alle, denen der Glaube schwer wird.",
+        "sr": "Православна Црква Јн 6,51–58 схвата као беседу о Евхаристији: на Литургији хлеб и вино Духом Светим заиста постају тело и крв Христова. Зато се на причешће припрема молитвом, постом и – зависно од праксе – исповешћу. Умножење хлебова (Јн 6,11: узети, благодарити, разделити) већ подсећа на речи Тајне вечере. Петров одговор (6,68) исповедање је за све којима је вера тешка."
+      },
+      "tag": "dogma"
+    },
+    "christ": {
+      "de": "Christus ist das wahre Manna, das vom Himmel kommt. Er gibt sein Fleisch für das Leben der Welt am Kreuz und reicht es uns in jeder Göttlichen Liturgie.",
+      "sr": "Христос је права мана која долази с неба. Он даје своје тело за живот света на крсту и пружа нам га на свакој Светој Литургији."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Ex 16,4.14–15",
+          "sr": "Изл 16,4.14–15"
+        },
+        "note": {
+          "de": "Das Manna in der Wüste.",
+          "sr": "Мана у пустињи."
+        }
+      },
+      {
+        "ref": {
+          "de": "1 Kor 10,16–17",
+          "sr": "1 Кор 10,16–17"
+        },
+        "note": {
+          "de": "Ein Brot – ein Leib.",
+          "sr": "Један хлеб – једно тело."
+        }
+      },
+      {
+        "ref": {
+          "de": "1 Kor 11,23–29",
+          "sr": "1 Кор 11,23–29"
+        },
+        "note": {
+          "de": "Wer unwürdig isst …",
+          "sr": "Ко недостојно једе …"
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Der hl. Johannes Chrysostomus legt Joh 6 in seinen Homilien zum Johannesevangelium aus (englisch in NPNF I/14). Wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Свети Јован Златоуст тумачи Јн 6 у беседама на Јеванђеље по Јовану (на енглеском у NPNF I/14). Апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Wie viele Brote und Fische hatte der Junge?",
+          "sr": "Колико хлебова и риба је имао дечак?"
+        },
+        "a": {
+          "de": "Fünf Gerstenbrote und zwei Fische.",
+          "sr": "Пет јечмених хлебова и две рибе."
+        }
+      },
+      {
+        "q": {
+          "de": "Wie versteht die Kirche Joh 6,51–58?",
+          "sr": "Како Црква схвата Јн 6,51–58?"
+        },
+        "a": {
+          "de": "Als Rede über die Eucharistie, in der wir Leib und Blut Christi empfangen.",
+          "sr": "Као беседу о Евхаристији, у којој примамо тело и крв Христову."
+        }
+      },
+      {
+        "q": {
+          "de": "Was antwortet Petrus, als viele weggehen?",
+          "sr": "Шта Петар одговара када многи оду?"
+        },
+        "a": {
+          "de": "Herr, zu wem sollen wir gehen? Du hast Worte des ewigen Lebens.",
+          "sr": "Господе, коме ћемо ићи? Ти имаш речи живота вечнога."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Wenn du das nächste Mal kommunizieren möchtest, sprich mit deinem Priester über die Vorbereitung. Lies vorher Joh 6,51–58.",
+      "sr": "Када следећи пут желите да се причестите, разговарајте са свештеником о припреми. Прочитајте пре тога Јн 6,51–58."
+    },
+    "review": {
+      "de": "Christus speist die Fünftausend und offenbart sich als Brot des Lebens. Wer sein Fleisch isst und sein Blut trinkt, hat ewiges Leben.",
+      "sr": "Христос храни пет хиљада и открива се као хлеб живота. Ко једе Његово тело и пије Његову крв има живот вечни."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Wie viele Körbe blieben übrig?",
+          "sr": "Колико котарица је остало?"
+        },
+        "options": [
+          {
+            "de": "Zwölf",
+            "sr": "Дванаест"
+          },
+          {
+            "de": "Sieben",
+            "sr": "Седам"
+          },
+          {
+            "de": "Drei",
+            "sr": "Три"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wo hielt Jesus die Rede vom Brot des Lebens?",
+          "sr": "Где је Исус одржао беседу о хлебу живота?"
+        },
+        "options": [
+          {
+            "de": "In der Synagoge von Kafarnaum",
+            "sr": "У синагоги у Капернауму"
+          },
+          {
+            "de": "Im Tempel von Jerusalem",
+            "sr": "У Јерусалимском храму"
+          },
+          {
+            "de": "Auf dem Berg Tabor",
+            "sr": "На гори Тавору"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Womit vergleicht Jesus sich selbst?",
+          "sr": "Са чим Исус упоређује себе?"
+        },
+        "options": [
+          {
+            "de": "Mit dem Manna, aber als lebendiges Brot",
+            "sr": "Са маном, али као хлеб живи"
+          },
+          {
+            "de": "Mit Wasser aus dem Felsen",
+            "sr": "Са водом из стене"
+          },
+          {
+            "de": "Mit dem Tempel",
+            "sr": "Са храмом"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-rom8",
+    "book": "rom",
+    "order": 52,
+    "title": {
+      "de": "Nichts kann uns von der Liebe Gottes trennen",
+      "sr": "Ништа нас не може раставити од љубави Божије"
+    },
+    "ref": {
+      "de": "Römer 8,14–39",
+      "sr": "Римљанима 8,14–39"
+    },
+    "intro": {
+      "de": "Römer 8 ist einer der Höhepunkte des Römerbriefes. Nach dem Kampf mit der Sünde in Kapitel 7 spricht Paulus vom Leben im Heiligen Geist und von einer Hoffnung, die nichts zerstören kann.",
+      "sr": "Римљанима 8 је један од врхунаца Посланице Римљанима. После борбе са грехом у 7. глави Павле говори о животу у Духу Светом и о нади коју ништа не може уништити."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Die Christen in Rom erlebten Bedrängnis und Unsicherheit. Paulus erinnert sie daran, wer sie in Christus sind: Kinder Gottes und Erben.",
+      "sr": "Хришћани у Риму доживљавали су невоље и несигурност. Павле их подсећа ко су у Христу: деца Божија и наследници."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Röm 8,14–17",
+          "sr": "Рим 8,14–17"
+        },
+        "note": {
+          "de": "Abba, Vater!",
+          "sr": "Ава, Оче!"
+        }
+      },
+      {
+        "ref": {
+          "de": "Röm 8,18–27",
+          "sr": "Рим 8,18–27"
+        },
+        "note": {
+          "de": "Die ganze Schöpfung seufzt.",
+          "sr": "Сва твар уздише."
+        }
+      },
+      {
+        "ref": {
+          "de": "Röm 8,31–39",
+          "sr": "Рим 8,31–39"
+        },
+        "note": {
+          "de": "Wer kann uns trennen?",
+          "sr": "Ко ће нас раставити?"
+        }
+      }
+    ],
+    "summary": {
+      "de": "Alle, die sich vom Geist Gottes leiten lassen, sind Kinder Gottes; im Geist rufen wir: Abba, Vater! Sind wir Kinder, dann auch Erben, Miterben Christi, wenn wir mit ihm leiden, um mit ihm verherrlicht zu werden. Die Leiden dieser Zeit sind nichts im Vergleich zur kommenden Herrlichkeit. Die ganze Schöpfung seufzt und wartet auf die Befreiung. Der Geist hilft unserer Schwachheit und tritt für uns ein, wenn wir nicht wissen, wie wir beten sollen. Denen, die Gott lieben, wirkt alles zum Guten. Ist Gott für uns, wer ist gegen uns? Weder Tod noch Leben, weder Engel noch Mächte, weder Gegenwärtiges noch Zukünftiges können uns trennen von der Liebe Gottes, die in Christus Jesus ist, unserem Herrn.",
+      "sr": "Сви које води Дух Божији, синови су Божији; у Духу вичемо: Ава, Оче! Ако смо деца, онда и наследници, сунаследници Христови, ако с Њим страдамо, да бисмо се с Њим и прославили. Страдања садашњег времена нису ништа према слави која ће се открити. Сва твар уздише и чека ослобођење. Дух помаже нашој немоћи и посредује за нас када не знамо како да се молимо. Онима који љубе Бога све иде на добро. Ако је Бог за нас, ко ће против нас? Ни смрт ни живот, ни анђели ни силе, ни садашње ни будуће не може нас раставити од љубави Божије која је у Христу Исусу Господу нашем."
+    },
+    "interp": {
+      "simple": {
+        "de": "Durch den Heiligen Geist dürfen wir Gott „Vater“ nennen. Auch im Leid sind wir nicht verlassen: Nichts ist stärker als Gottes Liebe zu uns.",
+        "sr": "Кроз Духа Светога смемо Бога звати „Оче“. Ни у страдању нисмо остављени: ништа није јаче од Божије љубави према нама."
+      },
+      "deeper": {
+        "de": "Röm 8 verbindet die persönliche Gotteskindschaft mit dem Schicksal der ganzen Schöpfung: Auch die Welt wartet auf Verklärung. Das entspricht der orthodoxen Sicht, dass das Heil den Menschen und mit ihm den ganzen Kosmos umfasst. Der Vers „Der Geist tritt für uns ein“ (8,26) erklärt, warum die Kirche jedes Gebet mit der Bitte um den Heiligen Geist beginnt („Himmlischer König …“). „Alles wirkt zum Guten“ (8,28) heißt nicht, dass alles gut ist, sondern dass Gott auch aus Schwerem Gutes wachsen lassen kann.",
+        "sr": "Рим 8 повезује лично синовство Божије са судбином целе твари: и свет чека преображење. То одговара православном гледишту да спасење обухвата човека, а са њим и цео космос. Стих „Дух посредује за нас“ (8,26) објашњава зашто Црква сваку молитву почиње призивом Духа Светога („Царе небески …“). „Све иде на добро“ (8,28) не значи да је све добро, него да Бог и из тешког може да изведе добро."
+      },
+      "tag": "dogma"
+    },
+    "christ": {
+      "de": "Gott hat seinen eigenen Sohn nicht verschont, sondern ihn für uns alle hingegeben (Röm 8,32). Der auferstandene Christus tritt zur Rechten Gottes für uns ein (8,34).",
+      "sr": "Бог свога Сина није поштедео, него Га је предао за све нас (Рим 8,32). Васкрсли Христос посредује за нас с десне стране Бога (8,34)."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Gal 4,6–7",
+          "sr": "Гал 4,6–7"
+        },
+        "note": {
+          "de": "Gott sandte den Geist seines Sohnes in unsere Herzen.",
+          "sr": "Бог посла Духа Сина свога у срца наша."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 14,16–18",
+          "sr": "Јн 14,16–18"
+        },
+        "note": {
+          "de": "Ich lasse euch nicht als Waisen zurück.",
+          "sr": "Нећу вас оставити сироте."
+        }
+      },
+      {
+        "ref": {
+          "de": "Offb 21,1–5",
+          "sr": "Отк 21,1–5"
+        },
+        "note": {
+          "de": "Siehe, ich mache alles neu.",
+          "sr": "Ево, све ново творим."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Der hl. Johannes Chrysostomus legt Röm 8 in seinen Homilien zum Römerbrief aus (Homilien 14–15, englisch in NPNF I/11). Wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Свети Јован Златоуст тумачи Рим 8 у беседама на Посланицу Римљанима (беседе 14–15, на енглеском у NPNF I/11). Апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Wie dürfen wir Gott nach Röm 8,15 im Geist anreden?",
+          "sr": "Како по Рим 8,15 смемо у Духу да се обратимо Богу?"
+        },
+        "a": {
+          "de": "Abba, Vater!",
+          "sr": "Ава, Оче!"
+        }
+      },
+      {
+        "q": {
+          "de": "Worauf wartet nach Röm 8 die ganze Schöpfung?",
+          "sr": "Шта по Рим 8 чека сва твар?"
+        },
+        "a": {
+          "de": "Auf die Befreiung und Verherrlichung zusammen mit den Kindern Gottes.",
+          "sr": "Ослобођење и прослављење заједно са децом Божијом."
+        }
+      },
+      {
+        "q": {
+          "de": "Was kann uns von der Liebe Gottes trennen?",
+          "sr": "Шта нас може раставити од љубави Божије?"
+        },
+        "a": {
+          "de": "Nichts – weder Tod noch Leben noch irgendeine Macht.",
+          "sr": "Ништа – ни смрт ни живот ни било каква сила."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Lerne Röm 8,38–39 auswendig und sprich die Verse in Momenten der Angst. Beginne dein Gebet bewusst mit „Himmlischer König“.",
+      "sr": "Научите напамет Рим 8,38–39 и изговарајте те стихове у тренуцима страха. Почните молитву свесно са „Царе небески“."
+    },
+    "review": {
+      "de": "Im Heiligen Geist sind wir Kinder Gottes und dürfen „Vater“ sagen. Die Schöpfung wartet auf Befreiung, und nichts kann uns von Gottes Liebe in Christus trennen.",
+      "sr": "У Духу Светом смо деца Божија и смемо рећи „Оче“. Твар чека ослобођење, и ништа нас не може раставити од љубави Божије у Христу."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Was ruft der Geist in uns (Röm 8,15)?",
+          "sr": "Шта Дух у нама вапије (Рим 8,15)?"
+        },
+        "options": [
+          {
+            "de": "Abba, Vater!",
+            "sr": "Ава, Оче!"
+          },
+          {
+            "de": "Hosanna!",
+            "sr": "Осана!"
+          },
+          {
+            "de": "Amen!",
+            "sr": "Амин!"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wer tritt nach Röm 8,26 für uns ein, wenn wir nicht wissen, wie wir beten sollen?",
+          "sr": "Ко, по Рим 8,26, посредује за нас када не знамо како да се молимо?"
+        },
+        "options": [
+          {
+            "de": "Der Heilige Geist",
+            "sr": "Дух Свети"
+          },
+          {
+            "de": "Ein Engel",
+            "sr": "Анђео"
+          },
+          {
+            "de": "Mose",
+            "sr": "Мојсије"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Was kann uns nach Röm 8,38–39 von Gottes Liebe trennen?",
+          "sr": "Шта нас, по Рим 8,38–39, може раставити од љубави Божије?"
+        },
+        "options": [
+          {
+            "de": "Nichts",
+            "sr": "Ништа"
+          },
+          {
+            "de": "Der Tod",
+            "sr": "Смрт"
+          },
+          {
+            "de": "Die Engel",
+            "sr": "Анђели"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-isa6",
+    "book": "isa",
+    "order": 53,
+    "title": {
+      "de": "Heilig, heilig, heilig",
+      "sr": "Свет, свет, свет"
+    },
+    "ref": {
+      "de": "Jesaja 6,1–8",
+      "sr": "Исаија 6,1–8"
+    },
+    "intro": {
+      "de": "Im Jahr, als König Usija starb (etwa 740 v. Chr.), wird Jesaja zum Propheten berufen. Er schaut Gott in seiner Herrlichkeit. Der Gesang der Seraphim aus diesem Kapitel erklingt bis heute in jeder Göttlichen Liturgie.",
+      "sr": "Године када је умро цар Озија (око 740. пре Христа), Исаија бива позван за пророка. Он гледа Бога у слави. Песма серафима из ове главе и данас звучи на свакој Светој Литургији."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Juda erlebt eine Zeit des Wohlstands, aber auch der Ungerechtigkeit und des Götzendienstes. Gott sucht einen Boten, der seinem Volk die Wahrheit sagt.",
+      "sr": "Јудеја доживљава време благостања, али и неправде и идолопоклонства. Бог тражи весника који ће Његовом народу рећи истину."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Jes 6,1–4",
+          "sr": "Ис 6,1–4"
+        },
+        "note": {
+          "de": "Die Seraphim rufen: Heilig, heilig, heilig.",
+          "sr": "Серафими вичу: Свет, свет, свет."
+        }
+      },
+      {
+        "ref": {
+          "de": "Jes 6,5–7",
+          "sr": "Ис 6,5–7"
+        },
+        "note": {
+          "de": "Die glühende Kohle berührt die Lippen.",
+          "sr": "Живи угљен дотиче усне."
+        }
+      },
+      {
+        "ref": {
+          "de": "Jes 6,8",
+          "sr": "Ис 6,8"
+        },
+        "note": {
+          "de": "Hier bin ich, sende mich.",
+          "sr": "Ево мене, пошаљи мене."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Jesaja sieht den Herrn auf einem hohen und erhabenen Thron; der Saum seines Gewandes füllt den Tempel. Seraphim stehen über ihm, jeder mit sechs Flügeln, und rufen einander zu: Heilig, heilig, heilig ist der Herr Sabaoth, die ganze Erde ist voll seiner Herrlichkeit. Die Schwellen erbeben, und das Haus füllt sich mit Rauch. Jesaja ruft: Weh mir, ich bin verloren, denn ich bin ein Mensch mit unreinen Lippen. Da fliegt einer der Seraphim zu ihm, eine glühende Kohle in der Hand, die er mit einer Zange vom Altar genommen hat. Er berührt Jesajas Mund und sagt: Siehe, dies hat deine Lippen berührt; deine Schuld ist getilgt. Dann hört Jesaja die Stimme des Herrn: Wen soll ich senden? Er antwortet: Hier bin ich, sende mich!",
+      "sr": "Исаија види Господа на престолу високом и уздигнутом; скути Његове одеће испуњавају храм. Серафими стоје изнад Њега, сваки са шест крила, и довикују један другом: Свет, свет, свет Господ Саваот, пуна је сва земља славе Његове. Прагови се затресу, и дом се испуни димом. Исаија виче: Тешко мени, пропадох, јер сам човек нечистих усана. Тада долети к њему један од серафима са живим угљем у руци, који је клештима узео са олтара. Дотакне Исаијина уста и каже: Ево, ово се дотаче усана твојих; безакоње твоје се уклони. Затим Исаија чује глас Господњи: Кога ћу послати? Он одговара: Ево мене, пошаљи мене!"
+    },
+    "interp": {
+      "simple": {
+        "de": "Vor Gottes Heiligkeit erkennt der Mensch seine Unwürdigkeit. Doch Gott reinigt ihn und sendet ihn aus. Wer Gottes Vergebung erfährt, wird bereit, ihm zu dienen.",
+        "sr": "Пред светошћу Божијом човек увиђа своју недостојност. Али Бог га очишћује и шаље. Ко искуси Божији опроштај, постаје спреман да Му служи."
+      },
+      "deeper": {
+        "de": "Der Gesang der Seraphim ist in die Göttliche Liturgie eingegangen: Beim eucharistischen Hochgebet singt die Gemeinde „Heilig, heilig, heilig, Herr Sabaoth …“. So stimmt die Kirche in den Lobgesang der Engel ein. Die Kirchenväter sehen in der glühenden Kohle, die mit einer Zange gereicht wird, ein Vorausbild der Eucharistie: Christus, göttliches Feuer, berührt unsere Lippen. Nach der Kommunion spricht der Priester Worte aus Jes 6,7: „Siehe, dies hat deine Lippen berührt …“. Das dreifache „Heilig“ wird von den Vätern auch als Hinweis auf die Dreieinigkeit gelesen.",
+        "sr": "Песма серафима ушла је у Свету Литургију: при евхаристијској молитви сабрање пева „Свет, свет, свет Господ Саваот …“. Тако Црква пристаје уз хвалоспев анђела. Свети оци у живом угљу, који се пружа клештима, виде праслику Евхаристије: Христос, божански огањ, дотиче наше усне. После причешћа свештеник изговара речи из Ис 6,7: „Ево, ово се дотаче усана твојих …“. Троструко „Свет“ оци читају и као наговештај Свете Тројице."
+      },
+      "tag": "opinion"
+    },
+    "christ": {
+      "de": "Der Evangelist Johannes sagt, Jesaja habe die Herrlichkeit Christi gesehen (Joh 12,41). In der Kommunion empfangen wir ihn selbst, das Feuer, das reinigt und nicht verbrennt.",
+      "sr": "Јеванђелист Јован каже да је Исаија видео славу Христову (Јн 12,41). У причешћу примамо Њега самог, огањ који очишћује, а не сагорева."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Offb 4,8",
+          "sr": "Отк 4,8"
+        },
+        "note": {
+          "de": "Heilig, heilig, heilig ist der Herr.",
+          "sr": "Свет, свет, свет Господ."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 12,41",
+          "sr": "Јн 12,41"
+        },
+        "note": {
+          "de": "Jesaja sah seine Herrlichkeit.",
+          "sr": "Исаија виде славу Његову."
+        }
+      },
+      {
+        "ref": {
+          "de": "Lk 5,8–10",
+          "sr": "Лк 5,8–10"
+        },
+        "note": {
+          "de": "Petrus: Geh weg von mir, ich bin ein Sünder.",
+          "sr": "Петар: Изиђи од мене, јер сам човек грешан."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Mehrere Väter, darunter der hl. Johannes von Damaskus, deuten die glühende Kohle auf den Leib Christi in der Eucharistie. Für diese Version wurde kein einzelner Link zu dieser Stelle geprüft; wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Више отаца, међу њима свети Јован Дамаскин, тумачи живи угаљ као тело Христово у Евхаристији. За ово издање није проверена појединачна веза ка том месту; апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Was rufen die Seraphim?",
+          "sr": "Шта вичу серафими?"
+        },
+        "a": {
+          "de": "Heilig, heilig, heilig ist der Herr Sabaoth; die ganze Erde ist voll seiner Herrlichkeit.",
+          "sr": "Свет, свет, свет Господ Саваот; пуна је сва земља славе Његове."
+        }
+      },
+      {
+        "q": {
+          "de": "Wo singt die Kirche diesen Gesang?",
+          "sr": "Где Црква пева ову песму?"
+        },
+        "a": {
+          "de": "In jeder Göttlichen Liturgie beim eucharistischen Hochgebet.",
+          "sr": "На свакој Светој Литургији при евхаристијској молитви."
+        }
+      },
+      {
+        "q": {
+          "de": "Wie antwortet Jesaja auf Gottes Frage?",
+          "sr": "Како Исаија одговара на Божије питање?"
+        },
+        "a": {
+          "de": "Hier bin ich, sende mich!",
+          "sr": "Ево мене, пошаљи мене!"
+        }
+      }
+    ],
+    "practice": {
+      "de": "Achte bei der nächsten Liturgie auf das „Heilig, heilig, heilig“ und sing oder sprich innerlich mit. Frage dich: Wofür könnte Gott heute mich senden?",
+      "sr": "На следећој Литургији обратите пажњу на „Свет, свет, свет“ и певајте или изговарајте у себи. Запитајте се: где би ме Бог данас могао послати?"
+    },
+    "review": {
+      "de": "Jesaja schaut Gottes Herrlichkeit, wird durch die glühende Kohle gereinigt und gesandt. Der Gesang der Seraphim erklingt in jeder Liturgie.",
+      "sr": "Исаија гледа славу Божију, бива очишћен живим угљем и послат. Песма серафима звучи на свакој Литургији."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Wie viele Flügel hat jeder Seraph?",
+          "sr": "Колико крила има сваки серафим?"
+        },
+        "options": [
+          {
+            "de": "Sechs",
+            "sr": "Шест"
+          },
+          {
+            "de": "Zwei",
+            "sr": "Два"
+          },
+          {
+            "de": "Vier",
+            "sr": "Четири"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Womit wurden Jesajas Lippen gereinigt?",
+          "sr": "Чиме су Исаијине усне очишћене?"
+        },
+        "options": [
+          {
+            "de": "Mit einer glühenden Kohle vom Altar",
+            "sr": "Живим угљем са олтара"
+          },
+          {
+            "de": "Mit Wasser",
+            "sr": "Водом"
+          },
+          {
+            "de": "Mit Öl",
+            "sr": "Уљем"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Worauf deuten die Väter die glühende Kohle?",
+          "sr": "Како оци тумаче живи угаљ?"
+        },
+        "options": [
+          {
+            "de": "Auf die Eucharistie",
+            "sr": "Као Евхаристију"
+          },
+          {
+            "de": "Auf die Sonne",
+            "sr": "Као сунце"
+          },
+          {
+            "de": "Auf das Gericht",
+            "sr": "Као суд"
+          }
+        ],
+        "correct": 0
+      }
+    ]
   }
   ]
 };
@@ -6395,6 +7247,9 @@ const LINKS = {
   athMarc: { url: "https://bkv.unifr.ch/works/cpg-2097", label: { de: "Brief an Marcellinus über die Psalmen – BKV (deutsch)", sr: "Посланица Маркелину о псалмима – BKV (немачки)" } },
   athAnt: { url: "https://bkv.unifr.ch/works/cpg-2101", label: { de: "Leben des hl. Antonius – BKV (deutsch)", sr: "Житије светог Антонија – BKV (немачки)" } },
   anfIgn: { url: "https://www.ccel.org/ccel/schaff/anf01.html", label: { de: "Briefe des hl. Ignatius von Antiochien – ANF Band 1 (englisch, CCEL)", sr: "Посланице светог Игњатија Антиохијског – ANF том 1 (енглески, CCEL)" } },
+  npnf201: { url: "https://www.ccel.org/ccel/schaff/npnf201.html", label: { de: "Eusebius, Kirchengeschichte – NPNF II/1 (englisch, CCEL)", sr: "Јевсевије, Црквена историја – NPNF II/1 (енглески, CCEL)" } },
+  npnf109: { url: "https://www.ccel.org/ccel/schaff/npnf109.html", label: { de: "Chrysostomus, Über das Priestertum u. a. – NPNF I/9 (englisch, CCEL)", sr: "Златоуст, О свештенству и др. – NPNF I/9 (енглески, CCEL)" } },
+  npnf207cyr: { url: "https://www.ccel.org/ccel/schaff/npnf207.html", label: { de: "Kyrill von Jerusalem, Katechesen – NPNF II/7 (englisch, CCEL)", sr: "Кирило Јерусалимски, Катихезе – NPNF II/7 (енглески, CCEL)" } },
   anf01: { url: "https://www.ccel.org/ccel/schaff/anf01.html", label: { de: "Irenäus von Lyon, Gegen die Häresien – ANF Band 1 (englisch, CCEL)", sr: "Иринеј Лионски, Против јереси – ANF, том 1 (енглески, CCEL)" } },
   anf05: { url: "https://www.ccel.org/ccel/schaff/anf05.html", label: { de: "Hippolyt u. a. – ANF Band 5 (englisch, CCEL)", sr: "Иполит и др. – ANF, том 5 (енглески, CCEL)" } },
   npnf204: { url: "https://www.ccel.org/ccel/schaff/npnf204.html", label: { de: "Athanasius – NPNF II/4 (englisch, CCEL)", sr: "Атанасије – NPNF II/4 (енглески, CCEL)" } },
@@ -7191,7 +8046,19 @@ const BOOKS = [
     desc: { de: "Die vom hl. Paisios selbst verfasste Lebensbeschreibung des Heiligen, der ihn taufte. Urheberrechtlich geschützt – nur im Buchhandel.", sr: "Житије светитеља који га је крстио, које је написао сам свети Пајсије. Заштићено ауторским правом – само у књижарама." } },
   { id: "b-isaac", cat: "ascetic", title: { de: "Asketische Reden", sr: "Подвижничке беседе" },
     author: { de: "Hl. Isaak der Syrer", sr: "Свети Исак Сирин" }, lang: { de: "Original Syrisch; Übersetzungen", sr: "изворно сиријски; преводи" }, level: 3, full: false,
-    desc: { de: "Tiefgründige Lehre über Demut, Stille und Gebet. Für diese Version wurde kein freier Volltext geprüft.", sr: "Дубоко учење о смирењу, тишини и молитви. За ово издање није проверен слободан цео текст." } }
+    desc: { de: "Tiefgründige Lehre über Demut, Stille und Gebet. Für diese Version wurde kein freier Volltext geprüft.", sr: "Дубоко учење о смирењу, тишини и молитви. За ово издање није проверен слободан цео текст." } },
+  { id: "b-nyssa", cat: "dogma", title: { de: "Die Große Katechese und weitere Schriften", sr: "Велика катихеза и други списи" },
+    author: { de: "Hl. Gregor von Nyssa", sr: "Свети Григорије Ниски" }, lang: { de: "Original Griechisch; englische Übersetzung", sr: "изворно грчки; енглески превод" }, level: 3, full: true, link: "npnf205",
+    desc: { de: "Die „Große Katechese“ erklärt Dreifaltigkeit, Menschwerdung, Taufe und Eucharistie; dazu Schriften über die Erschaffung des Menschen und über Seele und Auferstehung.", sr: "„Велика катихеза“ објашњава Тројицу, оваплоћење, крштење и Евхаристију; уз то списи о стварању човека и о души и васкрсењу." } },
+  { id: "b-cyril-jer", cat: "dogma", title: { de: "Katechesen für Taufbewerber", sr: "Катихезе за оглашене" },
+    author: { de: "Hl. Kyrill von Jerusalem", sr: "Свети Кирило Јерусалимски" }, lang: { de: "Original Griechisch; englische Übersetzung", sr: "изворно грчки; енглески превод" }, level: 2, full: true, link: "npnf207cyr",
+    desc: { de: "Unterweisungen aus dem 4. Jahrhundert, die Schritt für Schritt das Glaubensbekenntnis und die Sakramente (Mysterien) der Taufe, Myronsalbung und Eucharistie erklären – gut für Einsteiger.", sr: "Поуке из 4. века које корак по корак објашњавају Символ вере и Свете Тајне крштења, миропомазања и Евхаристије – добро за почетнике." } },
+  { id: "b-chrys-priest", cat: "fathers", title: { de: "Über das Priestertum und ausgewählte Predigten", sr: "О свештенству и изабране беседе" },
+    author: { de: "Hl. Johannes Chrysostomus", sr: "Свети Јован Златоуст" }, lang: { de: "Original Griechisch; englische Übersetzung", sr: "изворно грчки; енглески превод" }, level: 2, full: true, link: "npnf109",
+    desc: { de: "Die berühmte Schrift über Würde und Verantwortung des Priesteramtes, dazu Briefe an die Diakonin Olympias und die Schrift „Niemand kann dem schaden, der sich nicht selbst schadet“.", sr: "Чувени спис о достојанству и одговорности свештеничке службе, уз писма ђакониси Олимпијади и спис „Никоме не може нашкодити онај ко сам себи не шкоди“." } },
+  { id: "b-eusebius", cat: "history", title: { de: "Kirchengeschichte", sr: "Црквена историја" },
+    author: { de: "Eusebius von Caesarea", sr: "Јевсевије Кесаријски" }, lang: { de: "Original Griechisch; englische Übersetzung", sr: "изворно грчки; енглески превод" }, level: 3, full: true, link: "npnf201",
+    desc: { de: "Die älteste erhaltene Kirchengeschichte (bis ins frühe 4. Jahrhundert), mit Berichten über Apostel, Bischöfe und Märtyrer. Eusebius war in der Frage des Arianismus zeitweise schwankend; er ist eine wichtige Geschichtsquelle, aber kein Lehrer des Glaubens im Sinne der Kirchenväter.", sr: "Најстарија сачувана црквена историја (до почетка 4. века), са казивањима о апостолима, епископима и мученицима. Јевсевије је у питању аријанства неко време био колебљив; важан је историјски извор, али није учитељ вере у смислу светих отаца." } }
 ];
 
 const GLOSSARY = [
@@ -8563,12 +9430,15 @@ function fastPeriods(y, cal) {
     return `<h1>${esc(t("booksTitle"))}</h1><p class="muted">${esc(t("booksIntro"))}</p>
       <div class="chips" role="tablist"><button class="chip ${bookCat === "all" ? "on" : ""}" data-cat="all">${esc(t("allCategories"))}</button>
         ${BOOK_CATEGORIES.map(c => `<button class="chip ${bookCat === c.id ? "on" : ""}" data-cat="${c.id}">${E(c.name)}</button>`).join("")}</div>
+      <input type="search" id="bookq" placeholder="${esc(t("bookSearch"))}" aria-label="${esc(t("bookSearch"))}" style="margin-bottom:12px">
       ${list.map(b => { const ln = b.link ? LINKS[b.link] : null; const cat = BOOK_CATEGORIES.find(c => c.id === b.cat);
-        return `<div class="card"><div class="eyebrow">${E(cat.name)}</div><h3>${E(b.title)}</h3>
+        return `<div class="card bookcard" data-q="${esc(norm(L(b.title) + " " + L(b.author) + " " + L(b.desc)))}"><div class="eyebrow">${E(cat.name)}</div><h3>${E(b.title)}</h3>
         <p class="small"><b>${esc(t("author"))}:</b> ${E(b.author)}<br><b>${esc(t("language"))}:</b> ${E(b.lang)}<br><b>${esc(t("level"))}:</b> ${esc(t(lv[b.level]))}</p>
         <p>${E(b.desc)}</p>
         <span class="badge ${b.full ? "tag-counsel" : "tag-uncertain"}">${esc(b.full ? t("fullText") : t("summaryOnly"))}</span>
         ${ln ? `<div class="btnrow"><a class="btn ghost" href="${esc(ln.url)}" target="_blank" rel="noopener">${esc(t("openSource"))} ↗</a></div>` : ""}</div>`; }).join("")}
+      <p class="muted" id="booknone" hidden>${esc(t("glossNone"))}</p>
+      <p class="small muted">${esc(t("booksEdNote"))}</p>
       <p class="small muted">${esc(t("linkCheckNote"))}</p>`;
   }
 
@@ -8915,7 +9785,13 @@ function fastPeriods(y, cal) {
     const pa = document.getElementById("practiceall"); if (pa) pa.onclick = () => { RV = { queue: shuffle(CARDS.filter(c => deckSel === "all" || c.deck === deckSel).map(c => c.id)), flipped: false, n: 0, free: true }; go("review"); };
   }
   function bindLesson(r) { const b = document.getElementById("donebtn"); if (b) b.onclick = () => toggleDone(r.slice(7)); }
-  function bindBooks() { app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { bookCat = b.getAttribute("data-cat"); render(); }); }
+  function bindBooks() {
+    app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { bookCat = b.getAttribute("data-cat"); render(); });
+    const q = document.getElementById("bookq");
+    if (q) q.oninput = () => { const v = norm(q.value.trim()); let n = 0;
+      app.querySelectorAll(".bookcard").forEach(c => { const ok = !v || c.getAttribute("data-q").includes(v); c.hidden = !ok; if (ok) n++; });
+      document.getElementById("booknone").hidden = n > 0; };
+  }
 
   function bindHome() { const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
   const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary };
