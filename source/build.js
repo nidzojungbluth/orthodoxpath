@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const R = p => fs.readFileSync(path.join(__dirname, p), "utf8");
-const VERSION = "3.0.0";
+const VERSION = "3.1.0";
 
 /* Eingebettete Schrift (Cormorant Garamond, SIL Open Font License, siehe src/fonts/OFL.txt) – funktioniert offline und ohne externe Server */
 const RANGES = {
@@ -27,6 +27,7 @@ function page({ pwa }) {
 <html lang="de" data-theme="dark">
 <head>
 <meta charset="utf-8">
+${pwa ? `<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">` : ""}
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0b0c">
 <meta name="description" content="OrthodoxPath – zweisprachige orthodoxe Lernakademie (Deutsch/Serbisch)">

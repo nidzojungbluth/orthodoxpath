@@ -11,7 +11,7 @@ const ok = (c, m) => { checks++; if (!c) { fails++; console.log("FAIL:", m); } e
 
 (async () => {
   const browser = await chromium.launch();
-  const ctx = await browser.newContext({
+  const ctx = await browser.newContext({ acceptDownloads: true,
     viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true,
     userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
   });
@@ -200,6 +200,31 @@ const ok = (c, m) => { checks++; if (!c) { fails++; console.log("FAIL:", m); } e
   // Sprachumschaltung über Kopfzeile
   await page.click("#langbtn"); await page.click(".sheet [data-lang='sr-lat']");
   ok(await page.locator("text=Današnja lekcija").isVisible(), "Sprachwechsel über Kopfzeile (Latinica)");
+
+  // Sicherheit: HTML in Notizen wird nicht ausgeführt
+  await page.click("#langbtn"); await page.click(".sheet [data-lang='de']");
+  await page.evaluate(() => { location.hash = "prefs"; }); await page.waitForTimeout(200);
+  if (await page.$("#encoff")) { await page.click("#encoff"); await page.waitForTimeout(200); }
+  await page.evaluate(() => { location.hash = "notes"; }); await page.waitForTimeout(200);
+  if (await page.$("#unlock")) { await page.fill("#pw", "test123"); await page.click("#unlock"); await page.waitForTimeout(400); }
+  await page.click("[data-newnote]"); await page.fill("#nt", "XSS"); await page.fill("#nb", '<img src=x onerror="window.__xss=1">'); await page.click("#nsave"); await page.waitForTimeout(300);
+  ok(await page.evaluate(() => window.__xss === undefined), "HTML in Notizen wird nicht ausgeführt");
+  ok(require("fs").readFileSync(require("path").join(__dirname, "../pwa/index.html"), "utf8").includes('http-equiv="Content-Security-Policy"'), "Content-Security-Policy in der PWA gesetzt");
+
+  // Datensicherung als Datei: speichern → zurücksetzen → laden
+  await page.evaluate(() => { location.hash = "prefs"; }); await page.waitForTimeout(250);
+  const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#fileb")]);
+  const fpath = "/tmp/op-backup-test.json"; await dl.saveAs(fpath);
+  const doneBefore = Object.keys((await page.evaluate(() => window.__OP.state)).done).length;
+  ok((await page.evaluate(() => window.__OP.state)).lastBackup, "Datum der letzten Sicherung gespeichert");
+  await page.evaluate(() => { localStorage.setItem("orthodoxpath_v1", JSON.stringify({ lang: "de", onboarded: true })); });
+  await page.reload(); await page.evaluate(() => { location.hash = "prefs"; }); await page.waitForTimeout(300);
+  await page.setInputFiles("#importfile", fpath); await page.waitForTimeout(400);
+  const st2 = await page.evaluate(() => window.__OP.state);
+  ok(Object.keys(st2.done).length === doneBefore && doneBefore > 0, "Sicherung aus Datei wiederhergestellt (" + doneBefore + " Lektionen)");
+  await page.evaluate(() => { const f = new File(['{"app":"OrthodoxPath","data":{"done":"kaputt","lang":"de","onboarded":true}}'], "x.json"); const dt = new DataTransfer(); dt.items.add(f); const i = document.getElementById("importfile"); i.files = dt.files; i.dispatchEvent(new Event("change")); });
+  await page.waitForTimeout(300);
+  ok(typeof (await page.evaluate(() => window.__OP.state)).done === "object", "Beschädigte Sicherung wird abgefangen");
 
   ok(errors.length === 0, "keine JavaScript-Fehler " + (errors[0] || ""));
   await browser.close();

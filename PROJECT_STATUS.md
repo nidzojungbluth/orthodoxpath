@@ -1,6 +1,6 @@
 # OrthodoxPath – Projektstatus
 
-Stand: 1. November 2026 · Version 3.0.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
+Stand: 1. November 2026 · Version 3.1.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
 
 ## 1. Kurzbeschreibung
 Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe Lern- und Glaubens-App als **Progressive Web App (PWA)** fürs iPhone. Kein Konto, keine Werbung, keine Server-Datenhaltung, offline nutzbar.
@@ -18,7 +18,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 | Authentifizierung | Keine (bewusst). Optionales Passwort nur für die lokale Verschlüsselung der Notizen (AES-GCM, PBKDF2 200 000 Runden) |
 | Hosting | GitHub Pages (Repo `nidzojungbluth/orthodoxpath`: gebaute PWA im Hauptverzeichnis, Quellcode in `source/`) + privates Claude-Artefakt |
 | Offline | Service Worker „cache first“; Offline-Test im Browser bestanden |
-| Tests | `tests/content.test.js` (~13 300 Inhaltsprüfungen), `tests/e2e.js` (47 Bedienungsprüfungen, Chromium, simuliertes iPhone 390×844), `tests/pwa-offline.js` |
+| Tests | `tests/content.test.js` (~13 300 Inhaltsprüfungen), `tests/e2e.js` (52 Bedienungsprüfungen, Chromium, simuliertes iPhone 390×844), `tests/pwa-offline.js` |
 
 ## 3. Funktionen
 
@@ -40,7 +40,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 - Gebetserinnerungen: nur Anleitung (iOS-App „Erinnerungen“), keine echten Push-Nachrichten
 - Heilige des Tages: nur Heilige mit Profil in der App
 - Fragenhilfe: Stichwortsuche, keine echte Frage-Antwort-Logik
-- Sicherung: nur manuelles Kopieren/Einfügen von Text
+- Sicherung: Datei (Teilen-Menü/Download) und Text; Wiederherstellen aus Datei oder Text; keine automatische Cloud-Sicherung (bewusst)
 
 ### Fehlt
 - Tägliche Schriftlesungen (Leseordnung) – keine geprüfte, frei nutzbare Quelle
@@ -51,14 +51,14 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 ## 4. Bekannte Probleme und Risiken (nach Schwere)
 
 1. ~~Quellcode nur in der Arbeitsumgebung~~ – **erledigt (1.11.2026):** Quellcode, Tests und Build-Skript liegen im Repo unter `source/`; frischer Klon baut eine identische App, Tests grün.
-2. **Datenverlust-Risiko im Browser:** Safari kann Website-Daten löschen, wenn die Seite länger nicht genutzt und **nicht** zum Home-Bildschirm hinzugefügt wurde. Die Sicherung ist manuell. → P1-03
+2. **Datenverlust-Risiko im Browser** – entschärft (3.1): Hinweis „Zum Home-Bildschirm“ (nur iPhone-Safari, nicht installiert), Sicherung als Datei + Laden aus Datei, Erinnerung alle 30 Tage (abschaltbar), `navigator.storage.persist()`. Restrisiko: Nutzer muss Sicherungen selbst ablegen.
 3. **Serbische Texte nicht muttersprachlich geprüft** (theologische Fachbegriffe, Grammatik). → P1-04
-4. **Kein Test auf echtem iPhone/Safari** durch Claude möglich (nur Chromium-Simulation). → P1-05
+4. **Kein Test auf echtem iPhone/Safari** durch Claude möglich – Checkliste `TESTPLAN_IPHONE.md` liegt bereit, Durchführung durch den Nutzer offen.
 5. `src/app.js` ist eine große Datei (~1 200 Zeilen); wachsende Wartungskosten, aber stabil. Kein Umbau nötig, solange Tests grün sind.
 6. Ausgabedatei 1,43 MB: lädt einmalig, danach offline; Inhalte wachsen weiter. → P2-06 (Messung, ggf. Inhalte als separate Datei)
 7. Reihenfolge der Bibellektionen folgt dem Hinzufügen (Feld `order`), nicht dem biblischen Kanon. → P2-02
 8. Barrierefreiheit (VoiceOver, Kontraste im hellen Modus) nicht systematisch geprüft. → P2-05
-9. Keine Content-Security-Policy (Meta-Tag möglich). → P1-02
+9. ~~Keine Content-Security-Policy~~ – erledigt (3.1): CSP-Meta-Tag in der PWA (nicht im Claude-Artefakt, damit dessen Laufzeit nicht blockiert wird); Import prüft Felder und Typen; Test bestätigt, dass HTML in Notizen nicht ausgeführt wird.
 10. Link-Prüfung extern nur manuell; Web-Abruf benötigt Freigabe des Nutzers.
 
 ## 5. Zentrale Dateien

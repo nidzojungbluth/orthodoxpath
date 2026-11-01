@@ -16,13 +16,13 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 - Test: frischer Klon → `node build.js` → Tests grün.
 - Fertig, wenn: Klon allein reicht, um die App identisch zu bauen.
 
-**P1-02 Sicherheits-Grundlagen** (P1-01 · S)
+**P1-02 Sicherheits-Grundlagen** ✅ erledigt 1.11.2026 (P1-01 · S)
 - Ziel: Schutz gegen eingeschleusten Code.
 - Umsetzung: `<meta http-equiv="Content-Security-Policy">` in `build.js` (nur eigene Skripte/Stile inline erlaubt, `connect-src 'self'`); Prüfung aller `innerHTML`-Stellen auf `esc()`; externe Links mit `rel="noopener"` (bereits vorhanden – verifizieren).
 - Test: e2e ohne Konsolenfehler; manueller Test mit Notiz `<img onerror>` zeigt Text statt Ausführung.
 - Fertig, wenn: CSP aktiv, keine Verstöße in allen Routen.
 
-**P1-03 Datensicherheit für Nutzer** (P1-01 · M)
+**P1-03 Datensicherheit für Nutzer** ✅ erledigt 1.11.2026 (P1-01 · M)
 - Ziel: Kein unbemerkter Verlust von Notizen/Fortschritt.
 - Umsetzung: (a) Hinweis „Zum Home-Bildschirm hinzufügen“ beim ersten Start in Safari (nicht installiert); (b) Sicherung als Datei teilen (`navigator.share` mit Datei bzw. Download `.json`) und Datei-Import; (c) `navigator.storage.persist()` anfragen, wo verfügbar; (d) dezente Erinnerung an Sicherung alle 30 Tage (abschaltbar).
 - Dateien: `src/app.js` (viewPrefs, bindPrefs, viewHome), `src/i18n.js`.
@@ -35,7 +35,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 - Test: Rundlauf ohne Änderung erzeugt identische Dateien.
 - Fertig, wenn: Export und Import funktionieren; Prüfung selbst ist Aufgabe des Nutzers.
 
-**P1-05 Testplan für echtes iPhone** (keine · S)
+**P1-05 Testplan für echtes iPhone** ✅ erledigt 1.11.2026 – `TESTPLAN_IPHONE.md`; Durchführung durch den Nutzer offen (keine · S)
 - Ziel: Nutzer kann in 10 Minuten die wichtigsten Abläufe prüfen.
 - Umsetzung: Checkliste (Installation, Offline, Sprache, Kalender, Notiz verschlüsselt, Sicherung) als Seite in der App oder Dokument.
 - Fertig, wenn: Checkliste vorhanden; Rückmeldungen werden als Fehler-Aufgaben erfasst.

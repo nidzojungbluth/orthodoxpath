@@ -346,3 +346,8 @@ main > .wrap { animation: opFade .3s var(--ease); }
 .lnav .item .s { margin: 0 0 2px; text-transform: uppercase; letter-spacing: .1em; font-size: .68em; font-weight: 700; color: var(--gold); }
 
 .bookcard[hidden] { display: none; }
+
+/* Hinweise auf der Startseite */
+.card.notice { border-color: color-mix(in srgb, var(--gold) 40%, transparent); }
+.card.notice h3 { font-size: 1.2em; }
+label.btn { margin: 0; font-size: 1em; }

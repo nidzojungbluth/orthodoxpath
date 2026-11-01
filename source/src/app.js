@@ -9,7 +9,7 @@
     lang: null, theme: "dark", font: 1, onboarded: false,
     done: {}, quiz: {}, cards: {}, newToday: { date: "", n: 0 },
     newPerDay: 10, lessonsPerWeek: 3, activity: [], verses: [],
-    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null
+    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null, lastBackup: null, backupAsk: null, backupRemind: "on", a2hsDismissed: false
   };
   function load() {
     try {
@@ -331,6 +331,7 @@
     const tile = (href, iconName, label, badge) => `<a class="tile" href="#${href}"><span class="ico">${ic(iconName)}</span><span class="tl">${esc(label)}</span>${badge ? `<span class="pill">${badge}</span>` : ""}</a>`;
     return `
       <div class="pagehead"><div class="eyebrow">${esc(fmtDate(todayUTC(), true))}</div><h1>${esc(greet)}</h1></div>
+      ${homeNotices()}
       <div class="card hero">
         <div class="eyebrow">${esc(t("todayLesson"))}</div>
         ${nl ? `<h2 class="herotitle">${E(nl.title)}</h2>${nl.ref ? `<p class="muted">${E(nl.ref)}</p>` : ""}
@@ -1071,6 +1072,11 @@
         <input type="text" id="linkbox" readonly hidden style="margin-top:8px">
         <p class="small muted" style="margin:8px 0 0">${esc(t("remNote"))}</p></div>
       <div class="card"><h3>${esc(t("sBackup"))}</h3><p class="small">${esc(t("backupText"))}</p>
+        <p class="small"><b>${esc(t("lastBackupL"))}:</b> ${esc(S.lastBackup || t("never"))}</p>
+        <button class="btn block" id="fileb">${ic("note")} ${esc(t("fileBackup"))}</button>
+        <label class="btn ghost block" for="importfile" style="margin-top:10px">${esc(t("fileImport"))}</label><input type="file" id="importfile" accept=".json,application/json,text/plain" class="sr-only">
+        <label style="margin-top:14px">${esc(t("backupRemindL"))}</label>${seg("backupRemind", [["on", t("on")], ["off", t("off")]], S.backupRemind || "on")}
+        <div style="height:12px"></div>
         <button class="btn ghost block" id="copyb">${esc(t("copyBackup"))}</button>
         <textarea id="backupbox" rows="4" readonly hidden></textarea>
         <label for="importbox">${esc(t("importBackup"))}</label><textarea id="importbox" rows="3"></textarea>
@@ -1078,6 +1084,33 @@
       <div class="card"><h3>${esc(t("sAbout"))}</h3><p class="small">${esc(t("aboutText"))}</p><p class="small">${esc(t("disclaimer"))}</p>
         <p class="small muted">${esc(lang() === "de" ? t("deTranslationNote") : t("srTranslationNote"))}</p>
         <button class="btn danger" id="reset">${esc(t("resetAll"))}</button></div>`;
+  }
+  /* Sicherung: Text erzeugen, einlesen, Zeitpunkt merken */
+  function backupText() { const copy = Object.assign({}, S); if (S.enc) copy.notes = []; return JSON.stringify({ app: "OrthodoxPath", v: 1, date: today(), data: copy }); }
+  function markBackup() { S.lastBackup = today(); save(); }
+  function importBackup(text) {
+    try {
+      const obj = JSON.parse(text);
+      if (!obj || obj.app !== "OrthodoxPath" || !obj.data || typeof obj.data !== "object") throw new Error("format");
+      /* Nur bekannte Felder mit passendem Typ übernehmen (Schutz vor beschädigten oder fremden Dateien) */
+      const kind = v => v === null ? "null" : Array.isArray(v) ? "array" : typeof v;
+      const base = JSON.parse(JSON.stringify(DEFAULT)); const d = obj.data;
+      Object.keys(base).forEach(k => { if (!(k in d)) return; const kb = kind(base[k]), kd = kind(d[k]);
+        if (kb === kd || (base[k] === null && ["string", "object", "number"].includes(kd)) || (k === "enc" && (kd === "object" || kd === "null"))) base[k] = d[k]; });
+      base.lastBackup = today();
+      S = base; unlockedNotes = null; encKey = null; save(); toast(t("importOk")); render();
+    } catch (e) { toast(t("importFail")); }
+  }
+  function hasData() { return Object.keys(S.done).length >= 2 || (S.notes && S.notes.length) || S.enc || S.verses.length || Object.keys(S.cards).length >= 10; }
+  function daysSince(iso) { if (!iso) return 9999; return Math.round((new Date(today() + "T12:00:00") - new Date(iso + "T12:00:00")) / 86400000); }
+  function homeNotices() {
+    let h = "";
+    const standalone = (window.navigator.standalone === true) || (window.matchMedia && matchMedia("(display-mode: standalone)").matches);
+    if (window.OP_PWA && !standalone && !S.a2hsDismissed && /iPhone|iPad|iPod/.test(navigator.userAgent))
+      h += `<div class="card notice"><h3>${esc(t("a2Title"))}</h3><p class="small">${esc(t("a2Text"))}</p><button class="btn ghost block" id="a2ok">${esc(t("a2Ok"))}</button></div>`;
+    if (S.backupRemind !== "off" && hasData() && daysSince(S.lastBackup) > 30 && daysSince(S.backupAsk) > 30)
+      h += `<div class="card notice"><h3>${esc(t("bkTitle"))}</h3><p class="small">${esc(t("bkText"))}</p><div class="btnrow"><a class="btn" href="#prefs" id="bknow">${esc(t("bkNow"))}</a><button class="btn ghost" id="bklater">${esc(t("later"))}</button></div></div>`;
+    return h;
   }
   function bindPrefs() {
     const cl = document.getElementById("copylink");
@@ -1107,18 +1140,28 @@
       if (!unlockedNotes) { go("notes"); return; }
       S.notes = unlockedNotes; S.enc = null; unlockedNotes = null; encKey = null; save(); render();
     };
+    document.getElementById("fileb").onclick = async () => {
+      const text = backupText(); const name = "orthodoxpath-sicherung-" + today() + ".json";
+      try {
+        const file = new File([text], name, { type: "application/json" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: "OrthodoxPath" }); markBackup(); return; }
+      } catch (e) { if (e && e.name === "AbortError") return; }
+      const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: "application/json" })); a.download = name;
+      document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); markBackup();
+    };
+    document.getElementById("importfile").onchange = e => {
+      const f = e.target.files && e.target.files[0]; if (!f) return;
+      const r = new FileReader(); r.onload = () => importBackup(String(r.result)); r.onerror = () => toast(t("importFail")); r.readAsText(f);
+    };
     document.getElementById("copyb").onclick = async () => {
-      const copy = Object.assign({}, S); if (S.enc) copy.notes = [];
-      const text = JSON.stringify({ app: "OrthodoxPath", v: 1, data: copy });
+      const text = backupText(); markBackup();
       const box = document.getElementById("backupbox"); box.value = text; box.hidden = false;
       try { await navigator.clipboard.writeText(text); toast(t("copied")); }
       catch (e) { box.focus(); box.select(); toast(t("copyFailed")); }
     };
     document.getElementById("importb").onclick = () => {
       try {
-        const obj = JSON.parse(document.getElementById("importbox").value);
-        if (!obj || obj.app !== "OrthodoxPath" || !obj.data) throw new Error("format");
-        S = Object.assign(JSON.parse(JSON.stringify(DEFAULT)), obj.data); unlockedNotes = null; encKey = null; save(); toast(t("importOk")); render();
+        importBackup(document.getElementById("importbox").value);
       } catch (e) { toast(t("importFail")); }
     };
     document.getElementById("reset").onclick = () => confirmBox(t("confirmDelete"), () => {
@@ -1141,13 +1184,18 @@
       document.getElementById("booknone").hidden = n > 0; };
   }
 
-  function bindHome() { const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
+  function bindHome() {
+    const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
+    const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
+    const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
   const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };
 
   /* PWA: Service Worker nur in der eigenständigen Version */
+  /* Dauerhaften Speicher anfragen (wo der Browser es unterstützt) */
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => { }); } catch (e) { }
   if (window.OP_PWA && "serviceWorker" in navigator) {
     try { navigator.serviceWorker.register("sw.js").catch(() => { }); } catch (e) { }
   }
