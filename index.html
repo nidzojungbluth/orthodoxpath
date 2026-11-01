@@ -223,7 +223,7 @@ html[data-theme="light"] .seg button.on { color: #fff; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "1.10.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "1.11.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -2509,6 +2509,372 @@ const BIBLE = {
         { q: { de: "Welches Wort fasst das Zusammenwirken von Gnade und menschlicher Antwort zusammen?", sr: "Која реч сажима садејство благодати и људског одговора?" },
           options: [{ de: "Synergie", sr: "Синергија" }, { de: "Epiklese", sr: "Епиклеза" }, { de: "Typikon", sr: "Типик" }], correct: 0 }
       ]
+    },
+    {
+      id: "bib-phil2", book: "phil", order: 26,
+      title: { de: "Der Christushymnus – Gott erniedrigt sich", sr: "Химна Христу – Бог понизи себе" },
+      ref: { de: "Philipper 2,1–11", sr: "Филипљанима 2,1–11" },
+      intro: {
+        de: "Paulus schreibt aus der Gefangenschaft an die Gemeinde in Philippi. Er bittet sie um Einheit und Demut und zeigt ihnen dafür das größte Vorbild: Christus selbst. Die Verse 6–11 sind vermutlich ein frühchristlicher Hymnus.",
+        sr: "Павле пише из тамнице заједници у Филипима. Моли их за јединство и смирење и показује им највећи узор: самог Христа. Стихови 6–11 вероватно су ранохришћанска химна."
+      },
+      introTag: "history",
+      context: {
+        de: "In der Gemeinde gab es Rivalität und Eitelkeit. Paulus antwortet nicht mit Regeln, sondern mit dem Blick auf den Weg Christi.",
+        sr: "У заједници је било супарништва и сујете. Павле не одговара правилима, него погледом на Христов пут."
+      },
+      reading: [
+        { ref: { de: "Phil 2,1–4", sr: "Флп 2,1–4" }, note: { de: "Einmütig und demütig – jeder achte den anderen höher.", sr: "Једнодушни и смирени – сваки нека другога сматра већим." } },
+        { ref: { de: "Phil 2,5–11", sr: "Флп 2,5–11" }, note: { de: "Der Weg Christi: Erniedrigung und Erhöhung.", sr: "Христов пут: понижење и узвишење." } }
+      ],
+      summary: {
+        de: "Seid eines Sinnes, tut nichts aus Streitsucht oder Eitelkeit, sondern achtet in Demut einander höher als euch selbst. Habt dieselbe Gesinnung wie Christus Jesus: Er war in der Gestalt Gottes, hielt aber nicht daran fest, Gott gleich zu sein, sondern entäußerte sich, nahm die Gestalt eines Knechtes an und wurde den Menschen gleich. Er erniedrigte sich und wurde gehorsam bis zum Tod, ja bis zum Tod am Kreuz. Darum hat Gott ihn hoch erhöht und ihm den Namen gegeben, der über allen Namen ist, damit sich jedes Knie beugt und jede Zunge bekennt: Jesus Christus ist der Herr – zur Ehre Gottes, des Vaters.",
+        sr: "Будите истомишљеници, ништа не чините из свађе или сујете, него у смирењу сматрајте један другога већим од себе. Нека у вама буду исте мисли као и у Христу Исусу: Он, будући у обличју Божијем, није сматрао отимањем бити једнак Богу, него је понизио себе узевши обличје слуге и поставши сличан људима. Понизио је себе и био послушан до смрти, и то смрти на крсту. Зато Га је Бог узвисио и даровао Му име које је изнад свакога имена, да се у име Исусово поклони свако колено и сваки језик исповеди да је Исус Христос Господ, у славу Бога Оца."
+      },
+      interp: {
+        simple: {
+          de: "Der ewige Sohn Gottes hat sich klein gemacht – er wurde Mensch und Diener. Wer Christus folgt, soll nicht groß sein wollen, sondern anderen dienen.",
+          sr: "Вечни Син Божији учинио се малим – постао је човек и слуга. Ко следи Христа, не треба да жели да буде велик, него да служи другима."
+        },
+        deeper: {
+          de: "Das griechische Wort für „sich entäußern“ ist kenosis („Entleerung“). Die Väter betonen: Christus hörte dabei nicht auf, Gott zu sein. Er verbarg seine göttliche Herrlichkeit und nahm unsere ganze menschliche Natur an. Dieser Abschnitt ist eine wichtige Grundlage für die Lehre der Konzilien über Christus als wahren Gott und wahren Menschen. Die Kirche liest Phil 2,5–11 an den Festen der Gottesgebärerin: Sie, die demütige Magd, hat den Gott getragen, der sich selbst erniedrigte.",
+          sr: "Грчка реч за „понизити себе“ гласи кеносис („испражњење“). Оци наглашавају: Христос притом није престао да буде Бог. Сакрио је своју божанску славу и примио целу нашу људску природу. Овај одељак важан је основ саборског учења о Христу као истинитом Богу и истинитом човеку. Црква чита Флп 2,5–11 на богородичне празнике: она, смирена слушкиња, носила је Бога који је понизио себе."
+        },
+        tag: "dogma"
+      },
+      christ: {
+        de: "Der Hymnus fasst den ganzen Weg Christi zusammen: ewige Gottheit, Menschwerdung, Gehorsam bis zum Kreuz, Erhöhung und das Bekenntnis aller: Jesus Christus ist der Herr.",
+        sr: "Химна сажима цео Христов пут: вечно Божанство, оваплоћење, послушност до крста, узвишење и исповедање свих: Исус Христос је Господ."
+      },
+      links: [
+        { ref: { de: "Joh 1,1.14", sr: "Јн 1,1.14" }, note: { de: "Das Wort war Gott und wurde Fleisch.", sr: "Реч беше Бог и постаде тело." } },
+        { ref: { de: "Joh 13,1–15", sr: "Јн 13,1–15" }, note: { de: "Christus wäscht den Jüngern die Füße.", sr: "Христос пере ноге ученицима." } },
+        { ref: { de: "Jes 45,23", sr: "Ис 45,23" }, note: { de: "Vor mir wird sich jedes Knie beugen.", sr: "Мени ће се поклонити свако колено." } },
+        { ref: { de: "Mk 10,43–45", sr: "Мк 10,43–45" }, note: { de: "Der Menschensohn kam, um zu dienen.", sr: "Син Човечији дође да служи." } }
+      ],
+      fathers: {
+        de: "Der hl. Johannes Chrysostomus legt den Philipperbrief in Homilien aus und verteidigt an dieser Stelle die volle Gottheit und volle Menschheit Christi. Die Homilien sind in englischer Übersetzung frei zugänglich (NPNF I/13, siehe Bibliothek).",
+        sr: "Свети Јован Златоуст тумачи Посланицу Филипљанима у беседама и на овом месту брани пуно Божанство и пуно човештво Христово. Беседе су слободно доступне у енглеском преводу (NPNF I/13, види библиотеку)."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Was bedeutet kenosis?", sr: "Шта значи кеносис?" },
+          a: { de: "„Entleerung“: Christus verbarg seine göttliche Herrlichkeit und wurde Mensch und Diener, ohne aufzuhören, Gott zu sein.", sr: "„Испражњење“: Христос је сакрио своју божанску славу и постао човек и слуга, не престајући да буде Бог." } },
+        { q: { de: "Warum stellt Paulus der Gemeinde Christus vor Augen?", sr: "Зашто Павле заједници ставља пред очи Христа?" },
+          a: { de: "Gegen Streit und Eitelkeit: Wer Christus folgt, lebt in Demut und dient anderen.", sr: "Против свађе и сујете: ко следи Христа, живи у смирењу и служи другима." } },
+        { q: { de: "An welchen Festen wird Phil 2,5–11 gelesen?", sr: "На које празнике се чита Флп 2,5–11?" },
+          a: { de: "An den Festen der Gottesgebärerin.", sr: "На богородичне празнике." } }
+      ],
+      practice: {
+        de: "Übernimm diese Woche bewusst eine kleine Aufgabe, die niemand gern macht – ohne dafür Anerkennung zu erwarten.",
+        sr: "Ове недеље свесно преузмите један мали задатак који нико радо не ради – не очекујући признање."
+      },
+      review: {
+        de: "Christus, wahrer Gott, erniedrigte sich, wurde Mensch und gehorsam bis zum Kreuz; darum hat Gott ihn erhöht. Christen sollen dieselbe demütige Gesinnung haben.",
+        sr: "Христос, истинити Бог, понизио је себе, постао човек и био послушан до крста; зато Га је Бог узвисио. Хришћани треба да имају исти смирени начин мишљења."
+      },
+      quiz: [
+        { q: { de: "Wie heißt das griechische Wort für die „Entäußerung“ Christi?", sr: "Како гласи грчка реч за Христово „понижење“?" },
+          options: [{ de: "Kenosis", sr: "Кеносис" }, { de: "Theosis", sr: "Теосис" }, { de: "Metanoia", sr: "Метаноја" }], correct: 0 },
+        { q: { de: "Bis wohin war Christus gehorsam?", sr: "Докле је Христос био послушан?" },
+          options: [{ de: "Bis zum Tod am Kreuz", sr: "До смрти на крсту" }, { de: "Bis zur Taufe", sr: "До крштења" }, { de: "Bis zum Einzug in Jerusalem", sr: "До уласка у Јерусалим" }], correct: 0 },
+        { q: { de: "Aus welcher Lage schrieb Paulus diesen Brief?", sr: "У каквом стању је Павле писао ову посланицу?" },
+          options: [{ de: "Aus der Gefangenschaft", sr: "Из тамнице" }, { de: "Von einer Reise nach Spanien", sr: "Са пута у Шпанију" }, { de: "Aus Jerusalem als Bischof", sr: "Из Јерусалима као епископ" }], correct: 0 }
+      ]
+    },
+    {
+      id: "bib-gal5", book: "gal", order: 27,
+      title: { de: "Freiheit und die Frucht des Geistes", sr: "Слобода и плод Духа" },
+      ref: { de: "Galater 5,13–26", sr: "Галатима 5,13–26" },
+      intro: {
+        de: "Im Galaterbrief verteidigt Paulus die Freiheit, die Christus schenkt. In Kapitel 5 zeigt er, was diese Freiheit nicht ist – ein Freibrief für Egoismus – und was sie ist: ein Leben in der Kraft des Heiligen Geistes.",
+        sr: "У Посланици Галатима Павле брани слободу коју дарује Христос. У петој глави показује шта та слобода није – дозвола за себичност – и шта јесте: живот у сили Духа Светога."
+      },
+      introTag: "history",
+      context: {
+        de: "Nachdem Paulus betont hat, dass Christen nicht unter das Gesetz des Mose gestellt werden müssen, hätten manche meinen können, dann sei alles erlaubt. Paulus stellt klar: Die Freiheit soll in der Liebe gelebt werden.",
+        sr: "Пошто је Павле нагласио да хришћани не морају бити стављени под Мојсијев закон, неки су могли помислити да је онда све дозвољено. Павле појашњава: слобода треба да се живи у љубави."
+      },
+      reading: [
+        { ref: { de: "Gal 5,13–15", sr: "Гал 5,13–15" }, note: { de: "Zur Freiheit berufen – dient einander in Liebe.", sr: "Позвани на слободу – служите једни другима у љубави." } },
+        { ref: { de: "Gal 5,16–21", sr: "Гал 5,16–21" }, note: { de: "Fleisch und Geist im Widerstreit.", sr: "Тело и Дух у сукобу." } },
+        { ref: { de: "Gal 5,22–26", sr: "Гал 5,22–26" }, note: { de: "Die Frucht des Geistes.", sr: "Плод Духа." } }
+      ],
+      summary: {
+        de: "Ihr seid zur Freiheit berufen, aber nutzt sie nicht als Vorwand für das „Fleisch“, sondern dient einander in Liebe; denn das ganze Gesetz ist in dem einen Wort erfüllt: Liebe deinen Nächsten wie dich selbst. Lebt im Geist, dann werdet ihr die Begierden des Fleisches nicht erfüllen. Die Werke des Fleisches sind offenkundig: Unzucht, Götzendienst, Feindschaft, Streit, Eifersucht, Zorn, Neid, Trunkenheit und Ähnliches. Die Frucht des Geistes aber ist Liebe, Freude, Friede, Langmut, Freundlichkeit, Güte, Treue, Sanftmut und Enthaltsamkeit. Die zu Christus gehören, haben das Fleisch mit seinen Leidenschaften gekreuzigt. Wenn wir im Geist leben, lasst uns auch im Geist wandeln.",
+        sr: "Ви сте позвани на слободу, али не користите слободу као повод телу, него љубављу служите једни другима; јер се сав закон испуњава у једној речи: љуби ближњега свога као самога себе. Живите по Духу, па нећете извршавати жеље тела. Дела тела су позната: блуд, идолопоклонство, непријатељства, свађе, љубомора, гнев, зависти, пијанства и слично. А плод Духа је: љубав, радост, мир, дуготрпљење, благост, доброта, вера, кротост, уздржање. Који су Христови, распели су тело са страстима. Ако живимо Духом, Духом и да ходимо."
+      },
+      interp: {
+        simple: {
+          de: "Christliche Freiheit heißt nicht: Ich tue, was ich will. Sie heißt: Ich bin frei von der Herrschaft der Sünde und kann lieben. Die guten Eigenschaften wachsen in uns wie Früchte, wenn wir mit dem Heiligen Geist leben.",
+          sr: "Хришћанска слобода не значи: радим шта хоћу. Она значи: слободан сам од власти греха и могу да љубим. Добре особине расту у нама као плодови када живимо са Духом Светим."
+        },
+        deeper: {
+          de: "„Fleisch“ meint bei Paulus nicht den Körper als etwas Schlechtes, sondern den Menschen, der sich von Gott abwendet und seinen Leidenschaften folgt. Die orthodoxe Askese – Gebet, Fasten, Wachsamkeit – ist der Weg, die Leidenschaften mit Christus zu „kreuzigen“ und dem Geist Raum zu geben. Paulus spricht von der Frucht (Einzahl) des Geistes: Alle Tugenden wachsen gemeinsam aus der Liebe. Gal 5,22 – 6,2 wird als Apostellesung an Gedenktagen heiliger Mönche gelesen.",
+          sr: "„Тело“ код Павла не значи тело као нешто лоше, него човека који се одвраћа од Бога и следи своје страсти. Православни подвиг – молитва, пост, трезвоумље – пут је да се страсти „распну“ са Христом и да се да места Духу. Павле говори о плоду (једнина) Духа: све врлине расту заједно из љубави. Гал 5,22 – 6,2 чита се као апостолско читање на спомене преподобних (светих монаха)."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Christus hat uns frei gemacht. Wer zu ihm gehört, hat durch die Taufe Anteil an seinem Kreuz und lebt aus seinem Geist.",
+        sr: "Христос нас је ослободио. Ко припада Њему, кроз крштење има удела у Његовом крсту и живи из Његовог Духа."
+      },
+      links: [
+        { ref: { de: "Joh 8,31–36", sr: "Јн 8,31–36" }, note: { de: "Die Wahrheit wird euch frei machen.", sr: "Истина ће вас ослободити." } },
+        { ref: { de: "Röm 8,1–11", sr: "Рим 8,1–11" }, note: { de: "Leben nach dem Geist.", sr: "Живот по Духу." } },
+        { ref: { de: "Mt 7,16–20", sr: "Мт 7,16–20" }, note: { de: "An ihren Früchten werdet ihr sie erkennen.", sr: "По плодовима њиховим познаћете их." } },
+        { ref: { de: "1 Kor 13,4–7", sr: "1 Кор 13,4–7" }, note: { de: "Die Liebe ist langmütig und gütig.", sr: "Љубав дуго трпи, благотворна је." } }
+      ],
+      fathers: {
+        de: "Der hl. Johannes Chrysostomus hat einen Kommentar zum Galaterbrief verfasst; er ist in englischer Übersetzung frei zugänglich (NPNF I/13, siehe Bibliothek).",
+        sr: "Свети Јован Златоуст написао је тумачење Посланице Галатима; слободно је доступно у енглеском преводу (NPNF I/13, види библиотеку)."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Was meint Paulus mit „Fleisch“?", sr: "Шта Павле подразумева под „телом“?" },
+          a: { de: "Nicht den Körper an sich, sondern den Menschen, der sich von Gott abwendet und seinen Leidenschaften folgt.", sr: "Не тело само по себи, него човека који се одвраћа од Бога и следи своје страсти." } },
+        { q: { de: "Warum spricht Paulus von der „Frucht“ (Einzahl) des Geistes?", sr: "Зашто Павле говори о „плоду“ (једнина) Духа?" },
+          a: { de: "Weil alle Tugenden zusammen aus der Liebe wachsen – sie gehören untrennbar zusammen.", sr: "Зато што све врлине заједно расту из љубави – неодвојиво припадају једна другој." } },
+        { q: { de: "Wofür soll die christliche Freiheit genutzt werden?", sr: "Чему треба да служи хришћанска слобода?" },
+          a: { de: "Um einander in Liebe zu dienen.", sr: "Да једни другима служимо у љубави." } }
+      ],
+      practice: {
+        de: "Wähle eine Frucht des Geistes, die dir besonders fehlt, zum Beispiel Geduld oder Sanftmut. Bete jeden Morgen dieser Woche darum und achte abends darauf, wo sie gewachsen ist.",
+        sr: "Изаберите један плод Духа који вам нарочито недостаје, на пример стрпљење или кротост. Молите се за њега свако јутро ове недеље и увече обратите пажњу где је узрастао."
+      },
+      review: {
+        de: "Christliche Freiheit ist Freiheit zur Liebe. Die Werke des Fleisches stehen der Frucht des Geistes gegenüber: Liebe, Freude, Friede, Langmut, Freundlichkeit, Güte, Treue, Sanftmut, Enthaltsamkeit.",
+        sr: "Хришћанска слобода је слобода за љубав. Делима тела супротставља се плод Духа: љубав, радост, мир, дуготрпљење, благост, доброта, вера, кротост, уздржање."
+      },
+      quiz: [
+        { q: { de: "Wie viele Eigenschaften nennt Paulus als Frucht des Geistes?", sr: "Колико особина Павле наводи као плод Духа?" },
+          options: [{ de: "Neun", sr: "Девет" }, { de: "Drei", sr: "Три" }, { de: "Zwölf", sr: "Дванаест" }], correct: 0 },
+        { q: { de: "In welchem Gebot ist nach Gal 5,14 das ganze Gesetz erfüllt?", sr: "У којој заповести се према Гал 5,14 испуњава сав закон?" },
+          options: [{ de: "Liebe deinen Nächsten wie dich selbst", sr: "Љуби ближњега свога као самога себе" }, { de: "Halte den Sabbat", sr: "Држи суботу" }, { de: "Bringe Opfer dar", sr: "Приноси жртве" }], correct: 0 },
+        { q: { de: "An welchen Gedenktagen wird Gal 5,22 – 6,2 gelesen?", sr: "На које спомене се чита Гал 5,22 – 6,2?" },
+          options: [{ de: "An Gedenktagen heiliger Mönche", sr: "На спомене преподобних" }, { de: "Nur an Ostern", sr: "Само на Васкрс" }, { de: "Bei der Trauung", sr: "На венчању" }], correct: 0 }
+      ]
+    },
+    {
+      id: "bib-elijah", book: "kgdm", order: 28,
+      title: { de: "Elija auf dem Karmel und am Horeb", sr: "Илија на Кармилу и на Хориву" },
+      ref: { de: "3. Königtümer (1 Kön) 18,20–39; 19,1–13", sr: "3. Царстава 18,20–39; 19,1–13" },
+      intro: {
+        de: "Der Prophet Elija ist einer der größten Propheten Israels. Er wirkte im 9. Jahrhundert v. Chr. im Nordreich Israel, als König Ahab und Königin Isebel den Götzen Baal förderten. Die Geschichten über ihn stehen im 3. und 4. Buch der Königtümer (in anderen Ausgaben 1. und 2. Könige).",
+        sr: "Пророк Илија један је од највећих пророка Израиља. Деловао је у 9. веку пре Христа у северном царству Израиљу, када су цар Ахав и царица Језавеља подржавали идола Вала. Повести о њему налазе се у 3. и 4. књизи Царстава."
+      },
+      introTag: "history",
+      context: {
+        de: "Das Volk schwankte zwischen dem Herrn und Baal, dem Gott der Fruchtbarkeit und des Regens. Nach einer langen Dürre fordert Elija die Propheten Baals zu einer Entscheidung auf dem Berg Karmel heraus.",
+        sr: "Народ се колебао између Господа и Вала, бога плодности и кише. После дуге суше Илија позива Валове пророке на одлуку на гори Кармилу."
+      },
+      reading: [
+        { ref: { de: "3 Kön (1 Kön) 18,20–39", sr: "3 Цар 18,20–39" }, note: { de: "Das Gottesurteil auf dem Karmel.", sr: "Божији суд на Кармилу." } },
+        { ref: { de: "3 Kön (1 Kön) 19,1–8", sr: "3 Цар 19,1–8" }, note: { de: "Elijas Erschöpfung und die Stärkung durch den Engel.", sr: "Илијина исцрпљеност и окрепљење од анђела." } },
+        { ref: { de: "3 Kön (1 Kön) 19,9–13", sr: "3 Цар 19,9–13" }, note: { de: "Gott im sanften, leisen Säuseln.", sr: "Бог у тихом и благом ћарлијању." } }
+      ],
+      summary: {
+        de: "Elija fragt das Volk: Wie lange wollt ihr auf beiden Seiten hinken? Ist der Herr Gott, so folgt ihm; ist es Baal, so folgt ihm. Die Propheten Baals rufen ihren Gott den ganzen Tag an, doch nichts geschieht. Elija baut den Altar des Herrn wieder auf, lässt ihn mit Wasser übergießen und betet. Feuer fällt vom Himmel und verzehrt das Opfer. Das Volk ruft: Der Herr ist Gott! Danach muss Elija vor Isebel fliehen. Erschöpft wünscht er sich in der Wüste den Tod, doch ein Engel stärkt ihn mit Brot und Wasser. Am Berg Horeb begegnet ihm Gott nicht im Sturm, nicht im Erdbeben und nicht im Feuer, sondern in einem sanften, leisen Säuseln.",
+        sr: "Илија пита народ: докле ћете хромати на обе стране? Ако је Господ Бог, идите за Њим; ако је Вал, идите за њим. Валови пророци цео дан призивају свог бога, али се ништа не догађа. Илија обнавља жртвеник Господњи, налаже да се полије водом и моли се. Огањ пада с неба и спаљује жртву. Народ виче: Господ је Бог! Потом Илија мора да бежи од Језавеље. Исцрпљен, у пустињи пожели смрт, али га анђео окрепљује хлебом и водом. На гори Хориву Бог му се јавља не у вихору, не у земљотресу и не у огњу, него у тихом и благом ћарлијању."
+      },
+      interp: {
+        simple: {
+          de: "Man kann nicht zwei Herren dienen – Elija ruft zu einer klaren Entscheidung für Gott. Und selbst der große Prophet wird müde und mutlos. Gott stärkt ihn und zeigt sich ihm in der Stille.",
+          sr: "Не може се служити двојици господара – Илија позива на јасну одлуку за Бога. А и велики пророк се умара и обесхрабрује. Бог га окрепљује и јавља му се у тишини."
+        },
+        deeper: {
+          de: "Die Begegnung am Horeb ist für die orthodoxe Überlieferung des Gebets bedeutsam: Gott offenbart sich nicht im Lärm, sondern in der Stille des Herzens. Elija gilt als Vorbild des Mönchtums – er lebte in der Wüste, fastete und betete. Das Brot, das der Engel bringt und das Elija stärkt, sehen die Väter als Vorausbild der Eucharistie. Elija erscheint bei der Verklärung Christi auf dem Berg Tabor. Die Kirche feiert den Propheten Elija am 20. Juli (2. August) – in Serbien Ilindan.",
+          sr: "Сусрет на Хориву значајан је за православно предање молитве: Бог се не открива у буци, него у тишини срца. Илија важи као узор монаштва – живео је у пустињи, постио и молио се. Хлеб који анђео доноси и којим се Илија окрепљује Оци виде као праслику Евхаристије. Илија се јавља при Преображењу Христовом на гори Тавору. Црква прославља пророка Илију 20. јула (2. августа) – Илиндан."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Bei der Verklärung erscheinen Mose und Elija neben Christus: Gesetz und Propheten bezeugen ihn. Johannes der Täufer kam „im Geist und in der Kraft des Elija“ (Lk 1,17), um Christus den Weg zu bereiten.",
+        sr: "При Преображењу Мојсије и Илија јављају се поред Христа: Закон и пророци сведоче о Њему. Јован Крститељ је дошао „у духу и сили Илијиној“ (Лк 1,17) да Христу припреми пут."
+      },
+      links: [
+        { ref: { de: "Mt 17,1–8", sr: "Мт 17,1–8" }, note: { de: "Elija bei der Verklärung.", sr: "Илија при Преображењу." } },
+        { ref: { de: "Jak 5,17–18", sr: "Јак 5,17–18" }, note: { de: "Das Gebet des Elija.", sr: "Илијина молитва." } },
+        { ref: { de: "Mt 6,24", sr: "Мт 6,24" }, note: { de: "Niemand kann zwei Herren dienen.", sr: "Нико не може служити двојици господара." } },
+        { ref: { de: "4 Kön (2 Kön) 2,1–14", sr: "4 Цар 2,1–14" }, note: { de: "Elija wird in den Himmel aufgenommen.", sr: "Илија бива узнесен на небо." } }
+      ],
+      fathers: {
+        de: "Für diesen Abschnitt enthält die App noch keine einzeln geprüfte Väterstelle mit freiem Link. Sicher belegt sind das Zeugnis des Neuen Testaments (Verklärung, Jak 5,17–18) und das Fest des Propheten am 20. Juli (2. August).",
+        sr: "За овај одељак апликација још не садржи појединачно проверено светоотачко место са слободном везом. Поуздано су потврђени сведочанство Новог Завета (Преображење, Јак 5,17–18) и празник пророка 20. јула (2. августа)."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Wozu fordert Elija das Volk auf dem Karmel auf?", sr: "На шта Илија позива народ на Кармилу?" },
+          a: { de: "Zu einer klaren Entscheidung: nicht länger zwischen dem Herrn und Baal zu schwanken.", sr: "На јасну одлуку: да се више не колеба између Господа и Вала." } },
+        { q: { de: "Wie begegnet Gott dem Elija am Horeb?", sr: "Како се Бог јавља Илији на Хориву?" },
+          a: { de: "Nicht im Sturm, Erdbeben oder Feuer, sondern in einem sanften, leisen Säuseln – in der Stille.", sr: "Не у вихору, земљотресу или огњу, него у тихом и благом ћарлијању – у тишини." } },
+        { q: { de: "Was zeigt Elijas Erschöpfung nach dem großen Sieg?", sr: "Шта показује Илијина исцрпљеност после велике победе?" },
+          a: { de: "Auch große Heilige kennen Müdigkeit und Mutlosigkeit. Gott verurteilt Elija nicht, sondern stärkt ihn.", sr: "И велики свети познају умор и малодушност. Бог не осуђује Илију, него га окрепљује." } }
+      ],
+      practice: {
+        de: "Nimm dir heute fünf Minuten völlige Stille – ohne Handy, ohne Musik. Sag zu Beginn nur: „Rede, Herr, dein Diener hört.“ Und dann höre einfach.",
+        sr: "Издвојите данас пет минута потпуне тишине – без телефона, без музике. На почетку само реците: „Говори, Господе, јер слуга Твој слуша.“ А онда само слушајте."
+      },
+      review: {
+        de: "Elija ruft das Volk zur Entscheidung für Gott; Feuer fällt auf dem Karmel. Erschöpft wird er von einem Engel gestärkt und begegnet Gott am Horeb in der Stille. Er erscheint bei der Verklärung Christi.",
+        sr: "Илија позива народ да се одлучи за Бога; огањ пада на Кармилу. Исцрпљеног га анђео окрепљује и на Хориву сусреће Бога у тишини. Јавља се при Преображењу Христовом."
+      },
+      quiz: [
+        { q: { de: "Auf welchem Berg forderte Elija die Propheten Baals heraus?", sr: "На којој гори је Илија изазвао Валове пророке?" },
+          options: [{ de: "Karmel", sr: "Кармил" }, { de: "Tabor", sr: "Тавор" }, { de: "Sinai", sr: "Синај" }], correct: 0 },
+        { q: { de: "Wie begegnete Gott Elija am Horeb?", sr: "Како се Бог јавио Илији на Хориву?" },
+          options: [{ de: "In einem sanften, leisen Säuseln", sr: "У тихом и благом ћарлијању" }, { de: "Im Erdbeben", sr: "У земљотресу" }, { de: "Im Feuer", sr: "У огњу" }], correct: 0 },
+        { q: { de: "Wann feiert die Kirche den Propheten Elija?", sr: "Када Црква прославља пророка Илију?" },
+          options: [{ de: "20. Juli (2. August)", sr: "20. јула (2. августа)" }, { de: "6. Januar (19. Januar)", sr: "6. јануара (19. јануара)" }, { de: "29. Juni (12. Juli)", sr: "29. јуна (12. јула)" }], correct: 0 }
+      ]
+    },
+    {
+      id: "bib-ezek37", book: "ezek", order: 29,
+      title: { de: "Die Totengebeine werden lebendig", sr: "Суве кости оживљавају" },
+      ref: { de: "Ezechiel 37,1–14", sr: "Језекиљ 37,1–14" },
+      intro: {
+        de: "Ezechiel wirkte als Prophet unter den Verbannten in Babylon. Nach der Zerstörung Jerusalems schien Israel wie tot. In einer berühmten Vision zeigt Gott ihm ein Feld voller trockener Knochen – und was er daraus macht.",
+        sr: "Језекиљ је деловао као пророк међу изгнаницима у Вавилону. После разарања Јерусалима Израиљ је изгледао као мртав. У чувеној визији Бог му показује поље пуно сувих костију – и шта Он од њих чини."
+      },
+      introTag: "history",
+      context: {
+        de: "Die Verbannten sagten: Unsere Gebeine sind vertrocknet, unsere Hoffnung ist dahin. Die Vision ist Gottes Antwort auf diese Verzweiflung.",
+        sr: "Изгнаници су говорили: кости наше су се осушиле, нада наша је пропала. Визија је Божији одговор на то очајање."
+      },
+      reading: [
+        { ref: { de: "Ez 37,1–6", sr: "Јез 37,1–6" }, note: { de: "Können diese Gebeine wieder lebendig werden?", sr: "Могу ли ове кости оживети?" } },
+        { ref: { de: "Ez 37,7–10", sr: "Јез 37,7–10" }, note: { de: "Der Geist kommt, und sie leben.", sr: "Дух долази, и они оживљавају." } },
+        { ref: { de: "Ez 37,11–14", sr: "Јез 37,11–14" }, note: { de: "Ich öffne eure Gräber.", sr: "Отворићу гробове ваше." } }
+      ],
+      summary: {
+        de: "Der Geist des Herrn führt Ezechiel in ein Tal voller sehr trockener Gebeine. Gott fragt: Können diese Gebeine wieder lebendig werden? Ezechiel antwortet: Herr, du weißt es. Er soll ihnen das Wort Gottes verkünden. Da rauscht es, die Knochen fügen sich zusammen, Sehnen, Fleisch und Haut kommen darüber – doch noch ist kein Lebensatem in ihnen. Auf Gottes Befehl ruft Ezechiel den Geist aus den vier Winden herbei; der Geist kommt in sie, sie werden lebendig und stellen sich auf – ein großes Heer. Gott erklärt: Diese Gebeine sind das ganze Haus Israel. Ich öffne eure Gräber, gebe meinen Geist in euch, und ihr werdet leben.",
+        sr: "Дух Господњи води Језекиља у долину пуну веома сувих костију. Бог пита: могу ли ове кости оживети? Језекиљ одговара: Господе, Ти знаш. Он треба да им објави реч Божију. Тада настаје шум, кости се спајају, жиле, месо и кожа долазе на њих – али још нема даха живота у њима. По Божијој заповести Језекиљ призива дух од четири ветра; дух улази у њих, оживљавају и устају на ноге – велика војска. Бог објашњава: ове кости су сав дом Израиљев. Отворићу гробове ваше, даћу Духа свога у вас, и бићете живи."
+      },
+      interp: {
+        simple: {
+          de: "Für Gott gibt es keine hoffnungslose Lage. Er kann auch das wieder lebendig machen, was völlig tot erscheint – ein Volk, eine Seele, und am Ende unsere Leiber in der Auferstehung.",
+          sr: "За Бога нема безнадежног стања. Он може да оживи и оно што изгледа потпуно мртво – народ, душу, а на крају и наша тела у васкрсењу."
+        },
+        deeper: {
+          de: "Das hebräische Wort ruach bedeutet zugleich Wind, Atem und Geist; die Vision spielt bewusst damit. Wie Gott dem ersten Menschen den Lebensatem einhauchte (Gen 2,7), so schenkt der Geist neues Leben. Die Kirche liest diese Vision im Morgengottesdienst des Großen Samstags, wenn Christus im Grab ruht und den Tod von innen besiegt. Die Väter sehen in ihr ein Bild der leiblichen Auferstehung der Toten, die wir im Glaubensbekenntnis erwarten.",
+          sr: "Јеврејска реч руах значи истовремено ветар, дах и дух; визија се свесно служи тим значењима. Као што је Бог првом човеку удахнуо дах живота (Пост 2,7), тако Дух дарује нов живот. Црква чита ову визију на јутрењу Велике суботе, када Христос почива у гробу и изнутра побеђује смрт. Оци у њој виде слику телесног васкрсења мртвих, које очекујемо у Символу вере."
+        },
+        tag: "opinion"
+      },
+      christ: {
+        de: "Christus ist die Auferstehung und das Leben (Joh 11,25). Durch seine Auferstehung öffnet er die Gräber, und durch den Heiligen Geist, den er sendet, schenkt er neues Leben.",
+        sr: "Христос је васкрсење и живот (Јн 11,25). Својим Васкрсењем отвара гробове, а кроз Духа Светога кога шаље дарује нов живот."
+      },
+      links: [
+        { ref: { de: "Gen 2,7", sr: "Пост 2,7" }, note: { de: "Gott haucht dem Menschen den Lebensatem ein.", sr: "Бог удахњује човеку дах живота." } },
+        { ref: { de: "Joh 5,25–29", sr: "Јн 5,25–29" }, note: { de: "Die Toten werden die Stimme des Sohnes Gottes hören.", sr: "Мртви ће чути глас Сина Божијег." } },
+        { ref: { de: "Joh 11,25–26", sr: "Јн 11,25–26" }, note: { de: "Ich bin die Auferstehung und das Leben.", sr: "Ја сам васкрсење и живот." } },
+        { ref: { de: "Röm 8,11", sr: "Рим 8,11" }, note: { de: "Der Geist wird auch eure sterblichen Leiber lebendig machen.", sr: "Дух ће оживети и смртна тела ваша." } }
+      ],
+      fathers: {
+        de: "Der hl. Kyrill von Jerusalem führt in seiner Katechese über die Auferstehung des Fleisches (Katechese 18) die Vision Ezechiels als Zeugnis für die Auferstehung der Toten an. Die Katechesen sind in englischer Übersetzung frei zugänglich (NPNF II/7, siehe Bibliothek).",
+        sr: "Свети Кирило Јерусалимски у катихези о васкрсењу тела (18. катихеза) наводи Језекиљеву визију као сведочанство о васкрсењу мртвих. Катихезе су слободно доступне у енглеском преводу (NPNF II/7, види библиотеку)."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Was bedeutet das hebräische Wort ruach?", sr: "Шта значи јеврејска реч руах?" },
+          a: { de: "Wind, Atem und Geist zugleich.", sr: "Истовремено ветар, дах и дух." } },
+        { q: { de: "Wann liest die Kirche diese Vision?", sr: "Када Црква чита ову визију?" },
+          a: { de: "Im Morgengottesdienst des Großen Samstags.", sr: "На јутрењу Велике суботе." } },
+        { q: { de: "Welche Hoffnung drückt die Vision für Christen aus?", sr: "Коју наду визија изражава за хришћане?" },
+          a: { de: "Die Hoffnung auf die leibliche Auferstehung der Toten und auf Gottes Kraft, auch Hoffnungsloses neu zu beleben.", sr: "Наду у телесно васкрсење мртвих и у Божију силу да оживи и безнадежно." } }
+      ],
+      practice: {
+        de: "Gibt es in deinem Leben etwas, das „wie tot“ erscheint – eine Beziehung, eine Hoffnung, dein Gebet? Lege es heute bewusst in Gottes Hand und bitte: Herr, du weißt es.",
+        sr: "Постоји ли у вашем животу нешто што изгледа „као мртво“ – однос, нада, ваша молитва? Свесно то данас предајте у Божије руке и молите: Господе, Ти знаш."
+      },
+      review: {
+        de: "Gott macht ein Feld trockener Gebeine durch seinen Geist lebendig. Die Vision verheißt die Wiederherstellung Israels und weist auf die Auferstehung hin. Sie wird am Großen Samstag gelesen.",
+        sr: "Бог својим Духом оживљава поље сувих костију. Визија обећава обнову Израиља и указује на васкрсење. Чита се на Велику суботу."
+      },
+      quiz: [
+        { q: { de: "Was antwortet Ezechiel auf die Frage, ob die Gebeine leben können?", sr: "Шта Језекиљ одговара на питање могу ли кости оживети?" },
+          options: [{ de: "Herr, du weißt es", sr: "Господе, Ти знаш" }, { de: "Nein, niemals", sr: "Не, никада" }, { de: "Ja, durch Medizin", sr: "Да, лековима" }], correct: 0 },
+        { q: { de: "An welchem Tag wird Ez 37 im Gottesdienst gelesen?", sr: "Ког дана се Јез 37 чита на богослужењу?" },
+          options: [{ de: "Am Großen Samstag", sr: "На Велику суботу" }, { de: "An Weihnachten", sr: "На Божић" }, { de: "Am Thomassonntag", sr: "У Томину недељу" }], correct: 0 },
+        { q: { de: "Wo lebte Ezechiel als Prophet?", sr: "Где је Језекиљ живео као пророк?" },
+          options: [{ de: "Unter den Verbannten in Babylon", sr: "Међу изгнаницима у Вавилону" }, { de: "In Ägypten", sr: "У Египту" }, { de: "In Rom", sr: "У Риму" }], correct: 0 }
+      ]
+    },
+    {
+      id: "bib-macc7", book: "macc", order: 30,
+      title: { de: "Die Mutter und ihre sieben Söhne", sr: "Мајка и њених седам синова" },
+      ref: { de: "2. Makkabäer 6,18–31 und 7", sr: "2. Макавејска 6,18–31 и 7" },
+      intro: {
+        de: "Die Makkabäerbücher gehören zu den Büchern, die die orthodoxe Bibel aus der Septuaginta übernommen hat. Das 2. Buch erzählt von Märtyrern, die um 167 v. Chr. lieber starben, als Gottes Gebote zu brechen.",
+        sr: "Књиге о Макавејима спадају у књиге које је православна Библија преузела из Септуагинте. Друга књига приповеда о мученицима који су око 167. пре Христа радије умрли него да прекрше Божије заповести."
+      },
+      introTag: "history",
+      context: {
+        de: "Der syrische König Antiochos IV. wollte den jüdischen Glauben verbieten. Er zwang Juden, Schweinefleisch zu essen und Götzen zu opfern. Wer sich weigerte, wurde gefoltert und getötet.",
+        sr: "Сиријски цар Антиох IV хтео је да забрани јудејску веру. Приморавао је Јудејце да једу свињетину и да приносе жртве идолима. Ко је одбијао, био је мучен и убијан."
+      },
+      reading: [
+        { ref: { de: "2 Makk 6,18–31", sr: "2 Мак 6,18–31" }, note: { de: "Der alte Eleasar bleibt treu.", sr: "Старац Елеазар остаје веран." } },
+        { ref: { de: "2 Makk 7,1–19", sr: "2 Мак 7,1–19" }, note: { de: "Die ersten sechs Brüder.", sr: "Првих шест браће." } },
+        { ref: { de: "2 Makk 7,20–41", sr: "2 Мак 7,20–41" }, note: { de: "Die Mutter ermutigt den jüngsten Sohn.", sr: "Мајка храбри најмлађег сина." } }
+      ],
+      summary: {
+        de: "Der neunzigjährige Schriftgelehrte Eleasar weigert sich, Verbotenes zu essen oder auch nur so zu tun, um der Jugend kein schlechtes Beispiel zu geben, und stirbt standhaft. Dann werden sieben Brüder mit ihrer Mutter vor den König gebracht. Einer nach dem anderen wird gefoltert, doch keiner gibt nach. Sie bekennen: Der König der Welt wird uns, die wir für seine Gesetze sterben, zu neuem, ewigem Leben auferwecken. Die Mutter sieht alle ihre Söhne an einem Tag sterben und ermutigt sie dennoch. Den jüngsten bittet sie, Himmel und Erde anzusehen und zu erkennen, dass Gott alles nicht aus Seiendem geschaffen hat. Zuletzt stirbt auch die Mutter.",
+        sr: "Деведесетогодишњи књижевник Елеазар одбија да једе забрањено, па чак и да се само претвара, да не би младима дао лош пример, и умире постојано. Затим седам браће са мајком бивају доведени пред цара. Један за другим бивају мучени, али ниједан не попушта. Исповедају: Цар света васкрснуће нас, који умиремо за Његове законе, за нов, вечни живот. Мајка гледа како сви њени синови умиру у једном дану, а ипак их храбри. Најмлађег моли да погледа небо и земљу и да позна да је Бог све створио не од онога што постоји. На крају умире и мајка."
+      },
+      interp: {
+        simple: {
+          de: "Diese Märtyrer zeigen, dass Treue zu Gott wichtiger ist als das eigene Leben. Ihre Kraft kam aus der festen Hoffnung auf die Auferstehung.",
+          sr: "Ови мученици показују да је верност Богу важнија од сопственог живота. Њихова снага долазила је из чврсте наде у васкрсење."
+        },
+        deeper: {
+          de: "2 Makk 7 ist eines der deutlichsten Zeugnisse des Alten Testaments für die Hoffnung auf die leibliche Auferstehung. Zugleich bezeugt 2 Makk 7,28 die Schöpfung „aus dem Nichts“. Die Kirche ehrt die makkabäischen Märtyrer als Heilige, obwohl sie vor Christus lebten; die Überlieferung nennt die Mutter Solomonia. Ihr Gedenktag ist der 1. August (14. August), der erste Tag des Entschlafungsfastens. Eleasars Sorge um das Vorbild für die Jugend zeigt, dass unser Verhalten immer auch andere prägt.",
+          sr: "2 Мак 7 једно је од најјаснијих старозаветних сведочанстава наде у телесно васкрсење. Уједно 2 Мак 7,28 сведочи о стварању „ни из чега“. Црква поштује мученике Макавеје као свете, иако су живели пре Христа; предање мајку назива Соломонија. Њихов спомен је 1. августа (14. августа), првог дана Госпојинског поста. Елеазарова брига о примеру за младе показује да наше понашање увек обликује и друге."
+        },
+        tag: "history"
+      },
+      christ: {
+        de: "Die Hoffnung der Makkabäer auf die Auferstehung erfüllt sich in Christus, dem Erstling der Entschlafenen (1 Kor 15,20). Sie sind Vorläufer der christlichen Märtyrer, die für Christus ihr Leben gaben.",
+        sr: "Нада Макавеја у васкрсење испуњава се у Христу, првенцу уснулих (1 Кор 15,20). Они су претече хришћанских мученика, који су живот свој дали за Христа."
+      },
+      links: [
+        { ref: { de: "Hebr 11,35", sr: "Јев 11,35" }, note: { de: "Andere wurden gefoltert, um eine bessere Auferstehung zu erlangen.", sr: "Други бише мучени, да би добили боље васкрсење." } },
+        { ref: { de: "Mt 10,28", sr: "Мт 10,28" }, note: { de: "Fürchtet euch nicht vor denen, die den Leib töten.", sr: "Не бојте се оних који убијају тело." } },
+        { ref: { de: "1 Kor 15,20", sr: "1 Кор 15,20" }, note: { de: "Christus, der Erstling der Entschlafenen.", sr: "Христос, првенац уснулих." } },
+        { ref: { de: "Offb 2,10", sr: "Отк 2,10" }, note: { de: "Sei treu bis zum Tod.", sr: "Буди веран до смрти." } }
+      ],
+      fathers: {
+        de: "Der hl. Gregor von Nazianz hielt eine Lobrede auf die Makkabäer (Rede 15), und auch der hl. Johannes Chrysostomus predigte über sie. Für diese Version wurde kein freier Link zu diesen Texten geprüft. Sicher belegt ist ihr Gedenktag am 1. August (14. August).",
+        sr: "Свети Григорије Богослов одржао је похвалну беседу Макавејима (беседа 15), а о њима је проповедао и свети Јован Златоуст. За ово издање није проверена слободна веза ка тим текстовима. Поуздано је потврђен њихов спомен 1. августа (14. августа)."
+      },
+      fathersTag: "history",
+      questions: [
+        { q: { de: "Warum weigerte sich Eleasar, auch nur zum Schein Verbotenes zu essen?", sr: "Зашто је Елеазар одбио чак и да се претвара да једе забрањено?" },
+          a: { de: "Um der Jugend kein schlechtes Beispiel zu geben und Gott treu zu bleiben.", sr: "Да не би младима дао лош пример и да би остао веран Богу." } },
+        { q: { de: "Woher nahmen die sieben Brüder ihre Kraft?", sr: "Одакле су седморица браће црпела снагу?" },
+          a: { de: "Aus der festen Hoffnung, dass Gott sie zu ewigem Leben auferwecken wird.", sr: "Из чврсте наде да ће их Бог васкрснути за вечни живот." } },
+        { q: { de: "Welche zwei Glaubenswahrheiten bezeugt 2 Makk 7 besonders?", sr: "Које две истине вере посебно сведочи 2 Мак 7?" },
+          a: { de: "Die Auferstehung der Toten und die Schöpfung aus dem Nichts (2 Makk 7,28).", sr: "Васкрсење мртвих и стварање ни из чега (2 Мак 7,28)." } }
+      ],
+      practice: {
+        de: "Denke daran, wer auf dein Beispiel schaut – jüngere Geschwister, Freunde, Kollegen. Wo kannst du diese Woche ein gutes Vorbild im Glauben sein?",
+        sr: "Помислите ко гледа на ваш пример – млађа браћа и сестре, пријатељи, колеге. Где ове недеље можете бити добар пример у вери?"
+      },
+      review: {
+        de: "Eleasar, die sieben Brüder und ihre Mutter sterben lieber, als Gottes Gesetz zu brechen, in der Hoffnung auf die Auferstehung. Die Kirche ehrt sie am 1. August (14. August).",
+        sr: "Елеазар, седморица браће и њихова мајка радије умиру него да прекрше Божији закон, у нади на васкрсење. Црква их прославља 1. августа (14. августа)."
+      },
+      quiz: [
+        { q: { de: "Welcher König verfolgte die Makkabäer?", sr: "Који цар је гонио Макавеје?" },
+          options: [{ de: "Antiochos IV.", sr: "Антиох IV" }, { de: "Nebukadnezar", sr: "Навуходоносор" }, { de: "Herodes", sr: "Ирод" }], correct: 0 },
+        { q: { de: "Wie viele Söhne hatte die Mutter in 2 Makk 7?", sr: "Колико синова је имала мајка у 2 Мак 7?" },
+          options: [{ de: "Sieben", sr: "Седам" }, { de: "Zwölf", sr: "Дванаест" }, { de: "Drei", sr: "Три" }], correct: 0 },
+        { q: { de: "Welche Lehre bezeugt 2 Makk 7,28?", sr: "Које учење сведочи 2 Мак 7,28?" },
+          options: [{ de: "Die Schöpfung aus dem Nichts", sr: "Стварање ни из чега" }, { de: "Die Seelenwanderung", sr: "Сеобу душа" }, { de: "Viele Götter", sr: "Многобоштво" }], correct: 0 },
+        { q: { de: "Wann ist der Gedenktag der makkabäischen Märtyrer?", sr: "Када је спомен мученика Макавеја?" },
+          options: [{ de: "1. August (14. August)", sr: "1. августа (14. августа)" }, { de: "25. März (7. April)", sr: "25. марта (7. априла)" }, { de: "14. September (27. September)", sr: "14. септембра (27. септембра)" }], correct: 0 }
+      ]
     }
   ]
 };
@@ -3655,6 +4021,7 @@ const LINKS = {
   chrysMt: { url: "https://www.ccel.org/ccel/schaff/npnf110.html", label: { de: "Chrysostomus, Homilien zu Matthäus – NPNF I/10 (englisch, CCEL)", sr: "Златоуст, беседе на Матеја – NPNF I/10 (енглески, CCEL)" } },
   chrysActs: { url: "https://www.ccel.org/ccel/schaff/npnf111.html", label: { de: "Chrysostomus, Homilien zur Apostelgeschichte und zum Römerbrief – NPNF I/11 (englisch, CCEL)", sr: "Златоуст, беседе на Дела апостолска и Посланицу Римљанима – NPNF I/11 (енглески, CCEL)" } },
   chrys1Cor: { url: "https://www.ccel.org/ccel/schaff/npnf112.html", label: { de: "Chrysostomus, Homilien zu den Korintherbriefen – NPNF I/12 (englisch, CCEL)", sr: "Златоуст, беседе на посланице Коринћанима – NPNF I/12 (енглески, CCEL)" } },
+  chrysPaul: { url: "https://www.ccel.org/ccel/schaff/npnf113.html", label: { de: "Chrysostomus, Homilien zu Galater bis Philemon – NPNF I/13 (englisch, CCEL)", sr: "Златоуст, беседе на посланице од Галатима до Филимону – NPNF I/13 (енглески, CCEL)" } },
   chrysJn: { url: "https://www.ccel.org/ccel/schaff/npnf114.html", label: { de: "Chrysostomus, Homilien zu Johannes und Hebräer – NPNF I/14 (englisch, CCEL)", sr: "Златоуст, беседе на Јована и Јеврејима – NPNF I/14 (енглески, CCEL)" } },
   svNT: { url: "https://svetosavlje.org/novi-zavjet-gospoda-naseg-isusa-hrista/", label: { de: "Neues Testament, Übersetzung der Kommission des Hl. Synods der SPC – Svetosavlje (serbisch)", sr: "Нови Завет, превод Комисије Светог архијерејског синода СПЦ – Светосавље" } },
   svLib: { url: "https://svetosavlje.org/biblioteka-index/", label: { de: "Bibliothek Svetosavlje (serbisch, orthodox)", sr: "Библиотека Светосавље" } },
@@ -4129,6 +4496,9 @@ const BOOKS = [
   { id: "b-chrys-cor", cat: "bible", title: { de: "Homilien zu den Korintherbriefen", sr: "Беседе на посланице Коринћанима" },
     author: { de: "Hl. Johannes Chrysostomus", sr: "Свети Јован Златоуст" }, lang: { de: "Original Griechisch; englische Übersetzung", sr: "изворно грчки; енглески превод" }, level: 2, full: true, link: "chrys1Cor",
     desc: { de: "Auslegung des ersten und zweiten Korintherbriefes, darunter das Hohelied der Liebe (1 Kor 13).", sr: "Тумачење Прве и Друге посланице Коринћанима, међу њима и химне љубави (1 Кор 13)." } },
+  { id: "b-chrys-paul", cat: "bible", title: { de: "Homilien zu den Paulusbriefen (Galater bis Philemon)", sr: "Беседе на Павлове посланице (од Галатима до Филимону)" },
+    author: { de: "Hl. Johannes Chrysostomus", sr: "Свети Јован Златоуст" }, lang: { de: "Original Griechisch; englische Übersetzung", sr: "изворно грчки; енглески превод" }, level: 2, full: true, link: "chrysPaul",
+    desc: { de: "Auslegung der Briefe an die Galater, Epheser, Philipper, Kolosser, Thessalonicher, an Timotheus, Titus und Philemon.", sr: "Тумачење посланица Галатима, Ефесцима, Филипљанима, Колошанима, Солуњанима, Тимотеју, Титу и Филимону." } },
   { id: "b-ath-inc", cat: "fathers", title: { de: "Über die Menschwerdung des Wortes", sr: "О оваплоћењу Логоса" },
     author: { de: "Hl. Athanasius der Große", sr: "Свети Атанасије Велики" }, lang: { de: "Original Griechisch; deutsche Übersetzung (BKV)", sr: "изворно грчки; немачки превод (BKV)" }, level: 2, full: true, link: "athInc",
     desc: { de: "Klassische Erklärung, warum Gott Mensch wurde – eine ideale erste Väterlektüre.", sr: "Класично објашњење зашто је Бог постао човек – идеално прво светоотачко штиво." } },
@@ -4268,6 +4638,11 @@ const EXTRA_CARDS = [
   ["d-bible", "Wann liest die Kirche das Buch Ijob?", "Када Црква чита Књигу о Јову?", "In der Karwoche.", "У Страсној седмици."],
   ["d-bible", "Wie definiert Hebr 11,1 den Glauben?", "Како Јев 11,1 одређује веру?", "Feste Zuversicht auf das Erhoffte, Überzeugung vom Unsichtbaren.", "Тврдо поуздање у оно чему се надамо, уверење у невидљиво."],
   ["d-bible", "Was sagt Jak 2,17 über den Glauben ohne Werke?", "Шта Јак 2,17 каже о вери без дела?", "Er ist tot.", "Да је мртва."],
+  ["d-bible", "Was bedeutet kenosis (Phil 2,7)?", "Шта значи кеносис (Флп 2,7)?", "„Entleerung“: Christus wurde Mensch und Diener, ohne aufzuhören, Gott zu sein.", "„Испражњење“: Христос је постао човек и слуга, не престајући да буде Бог."],
+  ["d-bible", "Wie heißt die Frucht des Geistes (Gal 5,22–23)?", "Који је плод Духа (Гал 5,22–23)?", "Liebe, Freude, Friede, Langmut, Freundlichkeit, Güte, Treue, Sanftmut, Enthaltsamkeit.", "Љубав, радост, мир, дуготрпљење, благост, доброта, вера, кротост, уздржање."],
+  ["d-bible", "Wie begegnete Gott Elija am Horeb?", "Како се Бог јавио Илији на Хориву?", "In einem sanften, leisen Säuseln – in der Stille.", "У тихом и благом ћарлијању – у тишини."],
+  ["d-bible", "Was bedeutet das hebräische ruach?", "Шта значи јеврејска реч руах?", "Wind, Atem und Geist zugleich (Ez 37).", "Ветар, дах и дух истовремено (Јез 37)."],
+  ["d-bible", "Was bezeugt 2 Makk 7 besonders?", "Шта посебно сведочи 2 Мак 7?", "Die Hoffnung auf die Auferstehung und die Schöpfung aus dem Nichts.", "Наду у васкрсење и стварање ни из чега."],
   ["d-history", "Nizäa 325 – worum ging es?", "Никеја 325 – о чему је било реч?", "Gegen Arius: Der Sohn ist eines Wesens mit dem Vater.", "Против Арија: Син је једносуштан Оцу."],
   ["d-history", "Konstantinopel 381 – worum ging es?", "Цариград 381 – о чему је било реч?", "Gottheit des Heiligen Geistes; Ergänzung des Glaubensbekenntnisses.", "Божанство Духа Светога; допуна Символа вере."],
   ["d-history", "Ephesus 431 – worum ging es?", "Ефес 431 – о чему је било реч?", "Gegen Nestorius: Maria ist Gottesgebärerin.", "Против Несторија: Марија је Богородица."],
@@ -5235,10 +5610,10 @@ function nextGreatFeast(t) {
     const toks = norm(q).split(/\s+/).filter(w => w.length > 2);
     if (!toks.length) return [];
     return IDX.map(e => {
-      let sc = 0; const ht = norm(L(e.title));
+      let sc = 0; const ht = norm((e.title.de || "") + " " + (e.title.sr || ""));
       toks.forEach(w => { const stem = w.length > 5 ? w.slice(0, w.length - 2) : w; if (e.hay.includes(stem)) sc += 1; if (ht.includes(stem)) sc += 2; });
       return { e, sc };
-    }).filter(x => x.sc > 0).sort((a, b) => b.sc - a.sc).slice(0, 8).map(x => x.e);
+    }).filter(x => x.sc > 0).sort((a, b) => b.sc - a.sc).slice(0, 10).map(x => x.e);
   }
   function viewAsk() {
     const res = lastQuery ? runSearch(lastQuery) : null;
