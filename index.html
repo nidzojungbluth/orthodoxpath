@@ -379,7 +379,7 @@ label.btn { margin: 0; font-size: 1em; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "3.1.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "3.2.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -529,11 +529,12 @@ const UI = {
     backupRemindL: "An Sicherung erinnern (alle 30 Tage)", on: "An", off: "Aus",
     bkTitle: "Zeit für eine Sicherung", bkText: "Deine Notizen und dein Fortschritt sind nur auf diesem Gerät gespeichert. Eine Sicherung als Datei schützt vor Verlust.", bkNow: "Jetzt sichern", later: "Später",
     a2Title: "Tipp: Zum Home-Bildschirm hinzufügen", a2Text: "So startet OrthodoxPath wie eine App, funktioniert offline, und das iPhone löscht deine Daten nicht so leicht. Tippe in Safari auf das Teilen-Symbol (Quadrat mit Pfeil) und dann auf „Zum Home-Bildschirm“.", a2Ok: "Verstanden",
+    tPray: "Gebet", tRead: "Heutige Lesung", tStartPlan: "Einen Leseplan beginnen", tCalMore: "Kalender öffnen",
     prevLesson: "Vorherige Lektion", nextLessonL: "Nächste Lektion", lastOpened: "Zuletzt geöffnet",
     remTitle: "Gebetserinnerungen", remText: "Web-Apps können auf dem iPhone keine zuverlässigen täglichen Erinnerungen senden. Mit der App „Erinnerungen“ geht es trotzdem – ganz ohne Datenweitergabe:",
     remS1: "Tippe unten auf „Link kopieren“ – das ist der Link zum Gebetsbuch.", remS2: "Öffne die App „Erinnerungen“ und lege eine neue Erinnerung an, z. B. „Morgengebet“.", remS3: "Tippe auf „i“ (Details), aktiviere Datum und Uhrzeit und wähle bei „Wiederholen“ „Täglich“.", remS4: "Füge den Link im Feld „URL“ ein. Beim Tippen auf die Erinnerung öffnet sich das Gebetsbuch.",
     remNote: "Die Bezeichnungen können je nach iOS-Version leicht abweichen.", remCopy: "Link kopieren", remCopied: "Link kopiert",
-    hExplore: "Entdecken", hToday: "Heute", tileCal: "Kalender", tileReview: "Wiederholen", tileAsk: "Fragen",
+    hExplore: "Entdecken", hToday: "Heute", tileCal: "Kalender", tilePlans: "Lesepläne", tileNotes: "Notizen", tileReview: "Wiederholen", tileAsk: "Fragen",
     gLearn: "Lernen", gFaith: "Glaube und Gottesdienst", gPersonal: "Persönlich", gApp: "App",
     sAbout: "Über die App", aboutText: "OrthodoxPath ist kostenlos, werbefrei und funktioniert ohne Konto. Alle Daten bleiben auf deinem Gerät. Die Inhalte ersetzen nicht das Gespräch mit deinem Priester.",
     iconsTitle: "Ikonen-Lexikon", iconsIntro: "Die wichtigsten Ikonentypen in Worten erklärt: was dargestellt ist und was es bedeutet. Schau dir die Ikonen in deiner Kirche an und entdecke sie wieder.",
@@ -740,11 +741,12 @@ const UI = {
     backupRemindL: "Подсећај на резервну копију (сваких 30 дана)", on: "Укључено", off: "Искључено",
     bkTitle: "Време је за резервну копију", bkText: "Ваше белешке и напредак сачувани су само на овом уређају. Резервна копија као датотека штити од губитка.", bkNow: "Направи сада", later: "Касније",
     a2Title: "Савет: додајте на почетни екран", a2Text: "Тако се OrthodoxPath покреће као апликација, ради без интернета, а ајфон не брише тако лако ваше податке. У Сафарију додирните симбол за дељење (квадрат са стрелицом), а затим „Додај на почетни екран“.", a2Ok: "Разумем",
+    tPray: "Молитва", tRead: "Данашње читање", tStartPlan: "Започните план читања", tCalMore: "Отвори календар",
     prevLesson: "Претходна лекција", nextLessonL: "Следећа лекција", lastOpened: "Последње отворено",
     remTitle: "Подсетници за молитву", remText: "Веб-апликације на ајфону не могу да шаљу поуздане дневне подсетнике. Помоћу апликације „Подсетници“ ипак иде – без слања података:",
     remS1: "Додирните доле „Копирај везу“ – то је веза ка молитвенику.", remS2: "Отворите апликацију „Подсетници“ и направите нови подсетник, нпр. „Јутарња молитва“.", remS3: "Додирните „i“ (детаљи), укључите датум и време и код „Понављај“ изаберите „Дневно“.", remS4: "Налепите везу у поље „URL“. Када додирнете подсетник, отвара се молитвеник.",
     remNote: "Називи се могу мало разликовати зависно од верзије система.", remCopy: "Копирај везу", remCopied: "Веза копирана",
-    hExplore: "Истражи", hToday: "Данас", tileCal: "Календар", tileReview: "Понављање", tileAsk: "Питања",
+    hExplore: "Истражи", hToday: "Данас", tileCal: "Календар", tilePlans: "Планови", tileNotes: "Белешке", tileReview: "Понављање", tileAsk: "Питања",
     gLearn: "Учење", gFaith: "Вера и богослужење", gPersonal: "Лично", gApp: "Апликација",
     sAbout: "О апликацији", aboutText: "OrthodoxPath је бесплатан, без реклама и ради без налога. Сви подаци остају на вашем уређају. Садржаји не замењују разговор са вашим свештеником.",
     iconsTitle: "Лексикон икона", iconsIntro: "Најважнији типови икона објашњени речима: шта је приказано и шта значи. Погледајте иконе у свом храму и откријте их поново.",
@@ -8996,8 +8998,9 @@ function fastPeriods(y, cal) {
     const due = dueCount();
     const tile = (href, iconName, label, badge) => `<a class="tile" href="#${href}"><span class="ico">${ic(iconName)}</span><span class="tl">${esc(label)}</span>${badge ? `<span class="pill">${badge}</span>` : ""}</a>`;
     return `
-      <div class="pagehead"><div class="eyebrow">${esc(fmtDate(todayUTC(), true))}</div><h1>${esc(greet)}</h1></div>
+      <div class="pagehead"><h1>${esc(greet)}</h1></div>
       ${homeNotices()}
+      ${calCard()}
       <div class="card hero">
         <div class="eyebrow">${esc(t("todayLesson"))}</div>
         ${nl ? `<h2 class="herotitle">${E(nl.title)}</h2>${nl.ref ? `<p class="muted">${E(nl.ref)}</p>` : ""}
@@ -9005,9 +9008,8 @@ function fastPeriods(y, cal) {
       </div>
       ${(() => { const lo = S.lastLesson; return lo && ALL_LESSONS[lo] && lo !== nid && !S.done[lo] ? `<ul class="list">${navItem("lesson-" + lo, "bible", L(ALL_LESSONS[lo].title), t("lastOpened"))}</ul>` : ""; })()}
       <div class="tiles">
-        ${tile("prayers", "candle", t("prayersTitle"))}${tile("calendar", "calendar", t("tileCal"))}${tile("review", "repeat", t("tileReview"), due || "")}${tile("ask", "search", t("tileAsk"))}
+        ${tile("review", "repeat", t("tileReview"), due || "")}${tile("plans", "list", t("tilePlans"))}${tile("notes", "note", t("tileNotes"))}${tile("ask", "search", t("tileAsk"))}
       </div>
-      ${calCard()}
       ${weekCard()}
       <div class="card"><div class="row"><span class="grow"><span class="eyebrow">${esc(t("weekGoal"))}</span><br><b class="big">${wk}/${goal}</b> <span class="small muted">${esc(t("lessonsThisWeek"))}</span></span></div>
         <div class="progressbar" style="margin-top:10px"><i style="width:${Math.min(100, Math.round(wk / goal * 100))}%"></i></div></div>
@@ -9095,14 +9097,21 @@ function fastPeriods(y, cal) {
     return `<h3 style="margin-bottom:4px">${E(f.name)}</h3>${f.mean ? `<p class="small" style="margin-bottom:4px">${E(f.mean)}</p>` : ""}${link}`;
   }
   function calCard() {
-    const td = todayUTC(); const fi = fastInfo(td, cal()); const fe = feastsOn(td, cal()); const nx = nextGreatFeast(td, cal()); const sts = saintsOn(td, cal());
-    return `<a class="card" href="#calendar" style="display:block;text-decoration:none;color:inherit">
-      <div class="eyebrow">${esc(t("calTitle"))}</div>
-      ${fe.map(f => `<p style="margin-bottom:4px"><b>${E(f.name)}</b></p>`).join("")}
-      ${sts.length ? `<p class="small" style="margin-bottom:6px">${ic("cross", "gold")} ${sts.map(id => E(PEOPLE[id].name)).join(" · ")}</p>` : ""}
-      ${fastBadge(fi.kind)}
-      ${nx ? `<p class="small muted" style="margin:6px 0 0">${esc(t("calNextFeast"))}: <b>${E(nx.name)}</b> – ${esc(fmtDate(nx.t))} (${esc(inDays(nx.t))})</p>` : ""}
-    </a>`;
+    const td = todayUTC(); const c = cal(); const fi = fastInfo(td, c); const fe = feastsOn(td, c); const nx = nextGreatFeast(td, c); const sts = saintsOn(td, c);
+    const evening = new Date().getHours() >= 15;
+    const active = PLANS.map(p => ({ p, st: planState(p.id), nx: planNext(p) })).filter(x => x.st.done.length && x.nx >= 0).sort((a, b) => b.st.done.length - a.st.done.length)[0];
+    const fasting = !["none", "free"].includes(fi.kind);
+    return `<div class="card today">
+      <div class="eyebrow">${esc(t("hToday"))} · ${esc(fmtDate(td, true))}</div>
+      ${fe.map(f => `<h3 style="margin:2px 0 4px">${E(f.name)}</h3>`).join("")}
+      ${sts.length ? `<p class="small" style="margin-bottom:6px">${ic("cross", "gold")} ${sts.map(id => `<a href="#person-${id}">${E(PEOPLE[id].name)}</a>`).join(" · ")}</p>` : ""}
+      ${fastBadge(fi.kind)}${fasting ? `<p class="small muted" style="margin:2px 0 0">${E(CAL_FAST_RULES[fi.kind])}</p>` : ""}
+      <ul class="list" style="margin-top:10px">
+        ${navItem("prayers", "candle", t("tPray"), t(evening ? "prEvening" : "prMorning"))}
+        ${active ? navItem("plan-" + active.p.id, "bible", t("tRead"), L(active.p.days[active.nx])) : navItem("plans", "bible", t("tStartPlan"))}
+        ${navItem("calendar", "calendar", t("tCalMore"), nx ? t("calNextFeast") + ": " + L(nx.name) + " – " + fmtDate(nx.t) + " (" + inDays(nx.t) + ")" : "")}
+      </ul>
+    </div>`;
   }
   function viewCalendar() {
     const td = todayUTC(); const y = new Date(td).getUTCFullYear(); const c = cal();

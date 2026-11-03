@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.1.0 (1. November 2026)
+**Aktuelle Version:** 3.2.0 (3. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,11 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.2 (ROADMAP P1-04, P2-01)
+
+- Werkzeuge für die muttersprachliche Prüfung: `tools/sr-export.js` erzeugt eine CSV-Tabelle aller serbischen Texte (Nr, Bereich, Deutsch, Serbisch, Korrektur, Anmerkung; Reihenfolge nach Wichtigkeit: Oberfläche, Gebete, Kalender …); `tools/sr-import.js` spielt Korrekturen exakt ein (mit Probelauf `--dry`).
+- Startseite: neue Karte „Heute“ ganz oben – Datum, Fest/Heilige (verlinkt), Fasten mit überlieferter Regel, Gebet passend zur Tageszeit, heutige Lesung aus dem laufenden Leseplan, nächstes großes Fest. Schnellzugriff ohne Doppelungen (Wiederholen, Lesepläne, Notizen, Fragen).
 
 ## Version 3.1 – Fundament (ROADMAP P1-01 bis P1-03, P1-05)
 

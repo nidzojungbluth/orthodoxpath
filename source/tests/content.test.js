@@ -153,6 +153,13 @@ ok(LITURGY_STEPS.length === 16 && LITURGY_STEPS.every(s => s.what && s.mean && s
 const all = JSON.stringify({ BIBLE, THEOLOGY, FATHERS, SAINTS, BOOKS });
 ok(!/Katechismus der Katholischen Kirche|Augsburger Bekenntnis|Heidelberger Katechismus|newadvent/i.test(all), "ausgeschlossene Quelle gefunden");
 
+// Werkzeuge für die serbische Prüfung: Export erzeugt Zeilen, Probelauf ohne Korrekturen ändert nichts
+{ const cp = require("child_process"), os = require("os"), pth = require("path"); const tmp = pth.join(os.tmpdir(), "op-sr-test.csv");
+  const out = cp.execFileSync("node", [pth.join(__dirname, "../tools/sr-export.js"), tmp]).toString();
+  ok(/\d{4,} serbische Texte/.test(out), "Serbisch-Export erzeugt Tabelle");
+  const dry = cp.execFileSync("node", [pth.join(__dirname, "../tools/sr-import.js"), tmp, "--dry"]).toString();
+  ok(dry.startsWith("0 Korrekturen"), "Serbisch-Import ohne Korrekturen ändert nichts"); }
+
 console.log(`\n${checks} Prüfungen, ${fails} Fehler.`);
 if (warnings.length) { console.log(`\nHinweise – lateinische Zeichen in serbischen Texten (${warnings.length}), bitte prüfen:`); warnings.forEach(w => console.log("  " + w)); }
 process.exit(fails ? 1 : 0);

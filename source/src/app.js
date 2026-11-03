@@ -330,8 +330,9 @@
     const due = dueCount();
     const tile = (href, iconName, label, badge) => `<a class="tile" href="#${href}"><span class="ico">${ic(iconName)}</span><span class="tl">${esc(label)}</span>${badge ? `<span class="pill">${badge}</span>` : ""}</a>`;
     return `
-      <div class="pagehead"><div class="eyebrow">${esc(fmtDate(todayUTC(), true))}</div><h1>${esc(greet)}</h1></div>
+      <div class="pagehead"><h1>${esc(greet)}</h1></div>
       ${homeNotices()}
+      ${calCard()}
       <div class="card hero">
         <div class="eyebrow">${esc(t("todayLesson"))}</div>
         ${nl ? `<h2 class="herotitle">${E(nl.title)}</h2>${nl.ref ? `<p class="muted">${E(nl.ref)}</p>` : ""}
@@ -339,9 +340,8 @@
       </div>
       ${(() => { const lo = S.lastLesson; return lo && ALL_LESSONS[lo] && lo !== nid && !S.done[lo] ? `<ul class="list">${navItem("lesson-" + lo, "bible", L(ALL_LESSONS[lo].title), t("lastOpened"))}</ul>` : ""; })()}
       <div class="tiles">
-        ${tile("prayers", "candle", t("prayersTitle"))}${tile("calendar", "calendar", t("tileCal"))}${tile("review", "repeat", t("tileReview"), due || "")}${tile("ask", "search", t("tileAsk"))}
+        ${tile("review", "repeat", t("tileReview"), due || "")}${tile("plans", "list", t("tilePlans"))}${tile("notes", "note", t("tileNotes"))}${tile("ask", "search", t("tileAsk"))}
       </div>
-      ${calCard()}
       ${weekCard()}
       <div class="card"><div class="row"><span class="grow"><span class="eyebrow">${esc(t("weekGoal"))}</span><br><b class="big">${wk}/${goal}</b> <span class="small muted">${esc(t("lessonsThisWeek"))}</span></span></div>
         <div class="progressbar" style="margin-top:10px"><i style="width:${Math.min(100, Math.round(wk / goal * 100))}%"></i></div></div>
@@ -429,14 +429,21 @@
     return `<h3 style="margin-bottom:4px">${E(f.name)}</h3>${f.mean ? `<p class="small" style="margin-bottom:4px">${E(f.mean)}</p>` : ""}${link}`;
   }
   function calCard() {
-    const td = todayUTC(); const fi = fastInfo(td, cal()); const fe = feastsOn(td, cal()); const nx = nextGreatFeast(td, cal()); const sts = saintsOn(td, cal());
-    return `<a class="card" href="#calendar" style="display:block;text-decoration:none;color:inherit">
-      <div class="eyebrow">${esc(t("calTitle"))}</div>
-      ${fe.map(f => `<p style="margin-bottom:4px"><b>${E(f.name)}</b></p>`).join("")}
-      ${sts.length ? `<p class="small" style="margin-bottom:6px">${ic("cross", "gold")} ${sts.map(id => E(PEOPLE[id].name)).join(" · ")}</p>` : ""}
-      ${fastBadge(fi.kind)}
-      ${nx ? `<p class="small muted" style="margin:6px 0 0">${esc(t("calNextFeast"))}: <b>${E(nx.name)}</b> – ${esc(fmtDate(nx.t))} (${esc(inDays(nx.t))})</p>` : ""}
-    </a>`;
+    const td = todayUTC(); const c = cal(); const fi = fastInfo(td, c); const fe = feastsOn(td, c); const nx = nextGreatFeast(td, c); const sts = saintsOn(td, c);
+    const evening = new Date().getHours() >= 15;
+    const active = PLANS.map(p => ({ p, st: planState(p.id), nx: planNext(p) })).filter(x => x.st.done.length && x.nx >= 0).sort((a, b) => b.st.done.length - a.st.done.length)[0];
+    const fasting = !["none", "free"].includes(fi.kind);
+    return `<div class="card today">
+      <div class="eyebrow">${esc(t("hToday"))} · ${esc(fmtDate(td, true))}</div>
+      ${fe.map(f => `<h3 style="margin:2px 0 4px">${E(f.name)}</h3>`).join("")}
+      ${sts.length ? `<p class="small" style="margin-bottom:6px">${ic("cross", "gold")} ${sts.map(id => `<a href="#person-${id}">${E(PEOPLE[id].name)}</a>`).join(" · ")}</p>` : ""}
+      ${fastBadge(fi.kind)}${fasting ? `<p class="small muted" style="margin:2px 0 0">${E(CAL_FAST_RULES[fi.kind])}</p>` : ""}
+      <ul class="list" style="margin-top:10px">
+        ${navItem("prayers", "candle", t("tPray"), t(evening ? "prEvening" : "prMorning"))}
+        ${active ? navItem("plan-" + active.p.id, "bible", t("tRead"), L(active.p.days[active.nx])) : navItem("plans", "bible", t("tStartPlan"))}
+        ${navItem("calendar", "calendar", t("tCalMore"), nx ? t("calNextFeast") + ": " + L(nx.name) + " – " + fmtDate(nx.t) + " (" + inDays(nx.t) + ")" : "")}
+      </ul>
+    </div>`;
   }
   function viewCalendar() {
     const td = todayUTC(); const y = new Date(td).getUTCFullYear(); const c = cal();

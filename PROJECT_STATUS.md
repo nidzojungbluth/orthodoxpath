@@ -1,6 +1,6 @@
 # OrthodoxPath – Projektstatus
 
-Stand: 1. November 2026 · Version 3.1.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
+Stand: 3. November 2026 · Version 3.2.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
 
 ## 1. Kurzbeschreibung
 Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe Lern- und Glaubens-App als **Progressive Web App (PWA)** fürs iPhone. Kein Konto, keine Werbung, keine Server-Datenhaltung, offline nutzbar.
@@ -18,7 +18,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 | Authentifizierung | Keine (bewusst). Optionales Passwort nur für die lokale Verschlüsselung der Notizen (AES-GCM, PBKDF2 200 000 Runden) |
 | Hosting | GitHub Pages (Repo `nidzojungbluth/orthodoxpath`: gebaute PWA im Hauptverzeichnis, Quellcode in `source/`) + privates Claude-Artefakt |
 | Offline | Service Worker „cache first“; Offline-Test im Browser bestanden |
-| Tests | `tests/content.test.js` (~13 300 Inhaltsprüfungen), `tests/e2e.js` (52 Bedienungsprüfungen, Chromium, simuliertes iPhone 390×844), `tests/pwa-offline.js` |
+| Tests | `tests/content.test.js` (~13 300 Inhaltsprüfungen), `tests/e2e.js` (52 Bedienungsprüfungen; `content.test.js` prüft auch die Serbisch-Werkzeuge, Chromium, simuliertes iPhone 390×844), `tests/pwa-offline.js` |
 
 ## 3. Funktionen
 
@@ -52,7 +52,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 
 1. ~~Quellcode nur in der Arbeitsumgebung~~ – **erledigt (1.11.2026):** Quellcode, Tests und Build-Skript liegen im Repo unter `source/`; frischer Klon baut eine identische App, Tests grün.
 2. **Datenverlust-Risiko im Browser** – entschärft (3.1): Hinweis „Zum Home-Bildschirm“ (nur iPhone-Safari, nicht installiert), Sicherung als Datei + Laden aus Datei, Erinnerung alle 30 Tage (abschaltbar), `navigator.storage.persist()`. Restrisiko: Nutzer muss Sicherungen selbst ablegen. Einschränkung: In der Claude-Artefakt-Version kann „Als Datei sichern“ per Download nicht funktionieren (Artefakt erlaubt keine Downloads); dort „Sicherung kopieren“ nutzen. Hauptversion ist die GitHub-PWA.
-3. **Serbische Texte nicht muttersprachlich geprüft** (theologische Fachbegriffe, Grammatik). → P1-04
+3. **Serbische Texte nicht muttersprachlich geprüft** – Prüftabelle bereit (`node tools/sr-export.js` → CSV mit 5 300+ Texten, Spalte „Korrektur“; Rückweg `node tools/sr-import.js datei.csv`). Prüfung durch Muttersprachler/Priester offen.
 4. **Kein Test auf echtem iPhone/Safari** durch Claude möglich – Checkliste `TESTPLAN_IPHONE.md` liegt bereit, Durchführung durch den Nutzer offen.
 5. `src/app.js` ist eine große Datei (~1 200 Zeilen); wachsende Wartungskosten, aber stabil. Kein Umbau nötig, solange Tests grün sind.
 6. Ausgabedatei 1,43 MB: lädt einmalig, danach offline; Inhalte wachsen weiter. → P2-06 (Messung, ggf. Inhalte als separate Datei)

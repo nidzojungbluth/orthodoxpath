@@ -29,7 +29,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 - Test: e2e Export → Reset → Import stellt Zustand wieder her.
 - Fertig, wenn: Rundlauf-Test grün, Hinweise in DE/SR.
 
-**P1-04 Muttersprachliche Prüfung Serbisch vorbereiten** (keine · S für Claude, Prüfung durch Menschen)
+**P1-04 Muttersprachliche Prüfung Serbisch vorbereiten** ✅ Werkzeuge erledigt 3.11.2026 (`tools/sr-export.js`, `tools/sr-import.js`); Prüfung durch Menschen offen (keine · S)
 - Ziel: Prüfer (Priester/Muttersprachler) kann effizient korrigieren.
 - Umsetzung: Skript erzeugt eine Liste aller serbischen Texte (Datei, Schlüssel, Text) als `.csv`/Tabelle zum Download; Rückweg: korrigierte Tabelle → Skript spielt Änderungen ein.
 - Test: Rundlauf ohne Änderung erzeugt identische Dateien.
@@ -42,7 +42,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 
 ## Priorität 2 – Zentrale Produktfunktionen
 
-**P2-01 Tagesansicht „Heute“ schärfen** (P1 · M)
+**P2-01 Tagesansicht „Heute“ schärfen** ✅ erledigt 3.11.2026 (P1 · M)
 - Ziel: Startseite beantwortet in 5 Sekunden: Welcher Tag im Kirchenjahr? Fasten? Was bete/lese ich heute?
 - Umsetzung: kompakter Tageskopf (Fest/Heilige/Fasten), passender Gebetsvorschlag (Morgen/Abend nach Uhrzeit), nächste Lesung aus aktivem Leseplan, nächste Lektion. Vorhandene Komponenten wiederverwenden (calCard, weekCard, plans).
 - Test: e2e Home zeigt alle Blöcke; Kalenderdaten gegen Tests.
