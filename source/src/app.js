@@ -9,7 +9,7 @@
     lang: null, theme: "dark", font: 1, onboarded: false,
     done: {}, quiz: {}, cards: {}, newToday: { date: "", n: 0 },
     newPerDay: 10, lessonsPerWeek: 3, activity: [], verses: [],
-    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null, lastBackup: null, backupAsk: null, backupRemind: "on", a2hsDismissed: false
+    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null, bibleView: "path", lastBackup: null, backupAsk: null, backupRemind: "on", a2hsDismissed: false
   };
   function load() {
     try {
@@ -114,6 +114,10 @@
     bg.innerHTML = `<div class="sheet" role="dialog" aria-modal="true">${html}</div>`;
     bg.addEventListener("click", e => { if (e.target === bg) bg.remove(); });
     document.body.appendChild(bg); if (onMount) onMount(bg.firstElementChild, () => bg.remove());
+    /* Barrierefreiheit: Fokus in den Dialog setzen, Escape schließt */
+    const prev = document.activeElement; const close = () => { bg.remove(); if (prev && prev.focus) prev.focus(); };
+    bg.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+    const f = bg.querySelector("button, input, textarea, a[href]"); if (f) setTimeout(() => f.focus(), 30);
     return bg;
   }
   function confirmBox(text, onYes) {
@@ -203,7 +207,7 @@
     return `
       <header class="top"><div class="wrap">
         ${parent ? `<a class="iconbtn backbtn" href="#${parent}" aria-label="${esc(t("back"))}">${ic("chev", "flip")}<span>${esc(t("back"))}</span></a>` : ""}
-        <a class="brand" href="#home">${CROSS}<span>${parent ? "" : esc(t("appName"))}</span></a>
+        <a class="brand" href="#home" aria-label="OrthodoxPath – ${esc(t("navHome"))}">${CROSS}<span>${parent ? "" : esc(t("appName"))}</span></a>
         <button class="iconbtn" id="langbtn" aria-label="${esc(t("sLanguage"))}">${ic("globe")}<span>${langLabel()}</span></button>
       </div></header>
       <main><div class="wrap">
@@ -483,13 +487,17 @@
   function bindCalendar() { app.querySelectorAll("[data-cal]").forEach(b => b.onclick = () => { S.calendar = b.getAttribute("data-cal"); save(); render(); }); }
 
   /* ---------- Bibel ---------- */
+  function bibleView() { return S.bibleView === "books" ? "books" : "path"; }
   function viewBible() {
     const byBook = {}; BIBLE_LESSONS.forEach(l => (byBook[l.book] = byBook[l.book] || []).push(l));
     const doneN = BIBLE_LESSONS.filter(l => S.done[l.id]).length;
     let html = `<h1>${esc(t("biblePlan"))}</h1><p class="muted">${esc(t("bibleIntro"))}</p>
       <div class="progressbar" style="margin:6px 0 16px"><i style="width:${Math.round(doneN / BIBLE_LESSONS.length * 100)}%"></i></div>
       <a class="item" href="#plans"><span class="grow"><span class="t">${esc(t("plansTitle"))}</span><span class="s">${PLANS.map(p => E(p.title)).join(" · ")}</span></span><span class="chev">${ic("chev")}</span></a>
-      <ul class="list">${BIBLE_LESSONS.map((l, i) => lessonItem(l, i + 1)).join("")}</ul>
+      <div class="seg" style="margin-bottom:12px" role="group" aria-label="${esc(t("bvLabel"))}">${[["path", "bvPath"], ["books", "bvBooks"]].map(([v, k]) => `<button data-bview="${v}" class="${bibleView() === v ? "on" : ""}" aria-pressed="${bibleView() === v}">${esc(t(k))}</button>`).join("")}</div>
+      ${bibleView() === "books" ? BIBLE.groups.map(g => { const ls = BIBLE.books.filter(b => b[1] === g.id).flatMap(b => byBook[b[0]] || []);
+          return ls.length ? `<div class="sh">${E(g.name)}</div><ul class="list">${ls.map(l => lessonItem(l, BIBLE_LESSONS.indexOf(l) + 1)).join("")}</ul>` : ""; }).join("")
+        : `<ul class="list">${BIBLE_LESSONS.map((l, i) => lessonItem(l, i + 1)).join("")}</ul>`}
       <details class="card"><summary>${esc(t("canonNoteTitle"))}</summary><p>${E(BIBLE.canonNote)}</p><p class="muted small">${E(BIBLE.readingNote)}</p></details>
       <h2>${esc(t("bookOverview"))}</h2>`;
     BIBLE.groups.forEach(g => {
@@ -784,7 +792,7 @@
     const lv = { 1: "levelEasy", 2: "levelMid", 3: "levelHard" };
     const list = BOOKS.filter(b => bookCat === "all" || b.cat === bookCat);
     return `<h1>${esc(t("booksTitle"))}</h1><p class="muted">${esc(t("booksIntro"))}</p>
-      <div class="chips" role="tablist"><button class="chip ${bookCat === "all" ? "on" : ""}" data-cat="all">${esc(t("allCategories"))}</button>
+      <div class="chips" role="group" aria-label="${esc(t("allCategories"))}"><button class="chip ${bookCat === "all" ? "on" : ""}" data-cat="all">${esc(t("allCategories"))}</button>
         ${BOOK_CATEGORIES.map(c => `<button class="chip ${bookCat === c.id ? "on" : ""}" data-cat="${c.id}">${E(c.name)}</button>`).join("")}</div>
       <input type="search" id="bookq" placeholder="${esc(t("bookSearch"))}" aria-label="${esc(t("bookSearch"))}" style="margin-bottom:12px">
       ${list.map(b => { const ln = b.link ? LINKS[b.link] : null; const cat = BOOK_CATEGORIES.find(c => c.id === b.cat);
@@ -1182,6 +1190,7 @@
     const sr = document.getElementById("startrev"); if (sr) sr.onclick = () => { RV = null; };
     const pa = document.getElementById("practiceall"); if (pa) pa.onclick = () => { RV = { queue: shuffle(CARDS.filter(c => deckSel === "all" || c.deck === deckSel).map(c => c.id)), flipped: false, n: 0, free: true }; go("review"); };
   }
+  function bindBible() { app.querySelectorAll("[data-bview]").forEach(b => b.onclick = () => { S.bibleView = b.getAttribute("data-bview"); save(); render(); }); }
   function bindLesson(r) { const b = document.getElementById("donebtn"); if (b) b.onclick = () => toggleDone(r.slice(7)); }
   function bindBooks() {
     app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { bookCat = b.getAttribute("data-cat"); render(); });
@@ -1195,7 +1204,7 @@
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };

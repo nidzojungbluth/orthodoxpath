@@ -58,8 +58,8 @@ html[data-theme="light"] {
   --hair: rgba(60, 40, 10, .09);
   --text: #231c14;
   --muted: #6c5f4c;
-  --gold: #94702a;
-  --gold2: #7a5b1d;
+  --gold: #7f5f1c;
+  --gold2: #6c5018;
   --goldsoft: rgba(148, 112, 42, .10);
   --onGold: #fffaf0;
   --shadow: 0 6px 20px rgba(60, 40, 10, .08);
@@ -230,11 +230,11 @@ html[data-theme="light"] .list { box-shadow: var(--shadow); }
 .tag-opinion { color: #bba3dc; }
 .tag-counsel { color: #8cbf87; }
 .tag-uncertain { color: #e3967a; }
-html[data-theme="light"] .tag-dogma { color: #8a6514; }
-html[data-theme="light"] .tag-history { color: #2f5d8a; }
-html[data-theme="light"] .tag-opinion { color: #6a4a99; }
-html[data-theme="light"] .tag-counsel { color: #3d7a38; }
-html[data-theme="light"] .tag-uncertain { color: #a54a25; }
+html[data-theme="light"] .tag-dogma { color: #765610; }
+html[data-theme="light"] .tag-history { color: #285079; }
+html[data-theme="light"] .tag-opinion { color: #5a3f86; }
+html[data-theme="light"] .tag-counsel { color: #31652d; }
+html[data-theme="light"] .tag-uncertain { color: #8e3f1e; }
 
 /* Lektionen */
 .sec { margin-bottom: 14px; }
@@ -379,7 +379,7 @@ label.btn { margin: 0; font-size: 1em; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "3.2.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "3.3.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -530,6 +530,7 @@ const UI = {
     bkTitle: "Zeit für eine Sicherung", bkText: "Deine Notizen und dein Fortschritt sind nur auf diesem Gerät gespeichert. Eine Sicherung als Datei schützt vor Verlust.", bkNow: "Jetzt sichern", later: "Später",
     a2Title: "Tipp: Zum Home-Bildschirm hinzufügen", a2Text: "So startet OrthodoxPath wie eine App, funktioniert offline, und das iPhone löscht deine Daten nicht so leicht. Tippe in Safari auf das Teilen-Symbol (Quadrat mit Pfeil) und dann auf „Zum Home-Bildschirm“.", a2Ok: "Verstanden",
     tPray: "Gebet", tRead: "Heutige Lesung", tStartPlan: "Einen Leseplan beginnen", tCalMore: "Kalender öffnen",
+    bvLabel: "Anordnung der Lektionen", bvPath: "Lernweg", bvBooks: "Nach Büchern",
     prevLesson: "Vorherige Lektion", nextLessonL: "Nächste Lektion", lastOpened: "Zuletzt geöffnet",
     remTitle: "Gebetserinnerungen", remText: "Web-Apps können auf dem iPhone keine zuverlässigen täglichen Erinnerungen senden. Mit der App „Erinnerungen“ geht es trotzdem – ganz ohne Datenweitergabe:",
     remS1: "Tippe unten auf „Link kopieren“ – das ist der Link zum Gebetsbuch.", remS2: "Öffne die App „Erinnerungen“ und lege eine neue Erinnerung an, z. B. „Morgengebet“.", remS3: "Tippe auf „i“ (Details), aktiviere Datum und Uhrzeit und wähle bei „Wiederholen“ „Täglich“.", remS4: "Füge den Link im Feld „URL“ ein. Beim Tippen auf die Erinnerung öffnet sich das Gebetsbuch.",
@@ -742,6 +743,7 @@ const UI = {
     bkTitle: "Време је за резервну копију", bkText: "Ваше белешке и напредак сачувани су само на овом уређају. Резервна копија као датотека штити од губитка.", bkNow: "Направи сада", later: "Касније",
     a2Title: "Савет: додајте на почетни екран", a2Text: "Тако се OrthodoxPath покреће као апликација, ради без интернета, а ајфон не брише тако лако ваше податке. У Сафарију додирните симбол за дељење (квадрат са стрелицом), а затим „Додај на почетни екран“.", a2Ok: "Разумем",
     tPray: "Молитва", tRead: "Данашње читање", tStartPlan: "Започните план читања", tCalMore: "Отвори календар",
+    bvLabel: "Распоред лекција", bvPath: "Пут учења", bvBooks: "По књигама",
     prevLesson: "Претходна лекција", nextLessonL: "Следећа лекција", lastOpened: "Последње отворено",
     remTitle: "Подсетници за молитву", remText: "Веб-апликације на ајфону не могу да шаљу поуздане дневне подсетнике. Помоћу апликације „Подсетници“ ипак иде – без слања података:",
     remS1: "Додирните доле „Копирај везу“ – то је веза ка молитвенику.", remS2: "Отворите апликацију „Подсетници“ и направите нови подсетник, нпр. „Јутарња молитва“.", remS3: "Додирните „i“ (детаљи), укључите датум и време и код „Понављај“ изаберите „Дневно“.", remS4: "Налепите везу у поље „URL“. Када додирнете подсетник, отвара се молитвеник.",
@@ -8677,7 +8679,7 @@ function fastPeriods(y, cal) {
     lang: null, theme: "dark", font: 1, onboarded: false,
     done: {}, quiz: {}, cards: {}, newToday: { date: "", n: 0 },
     newPerDay: 10, lessonsPerWeek: 3, activity: [], verses: [],
-    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null, lastBackup: null, backupAsk: null, backupRemind: "on", a2hsDismissed: false
+    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null, bibleView: "path", lastBackup: null, backupAsk: null, backupRemind: "on", a2hsDismissed: false
   };
   function load() {
     try {
@@ -8782,6 +8784,10 @@ function fastPeriods(y, cal) {
     bg.innerHTML = `<div class="sheet" role="dialog" aria-modal="true">${html}</div>`;
     bg.addEventListener("click", e => { if (e.target === bg) bg.remove(); });
     document.body.appendChild(bg); if (onMount) onMount(bg.firstElementChild, () => bg.remove());
+    /* Barrierefreiheit: Fokus in den Dialog setzen, Escape schließt */
+    const prev = document.activeElement; const close = () => { bg.remove(); if (prev && prev.focus) prev.focus(); };
+    bg.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+    const f = bg.querySelector("button, input, textarea, a[href]"); if (f) setTimeout(() => f.focus(), 30);
     return bg;
   }
   function confirmBox(text, onYes) {
@@ -8871,7 +8877,7 @@ function fastPeriods(y, cal) {
     return `
       <header class="top"><div class="wrap">
         ${parent ? `<a class="iconbtn backbtn" href="#${parent}" aria-label="${esc(t("back"))}">${ic("chev", "flip")}<span>${esc(t("back"))}</span></a>` : ""}
-        <a class="brand" href="#home">${CROSS}<span>${parent ? "" : esc(t("appName"))}</span></a>
+        <a class="brand" href="#home" aria-label="OrthodoxPath – ${esc(t("navHome"))}">${CROSS}<span>${parent ? "" : esc(t("appName"))}</span></a>
         <button class="iconbtn" id="langbtn" aria-label="${esc(t("sLanguage"))}">${ic("globe")}<span>${langLabel()}</span></button>
       </div></header>
       <main><div class="wrap">
@@ -9151,13 +9157,17 @@ function fastPeriods(y, cal) {
   function bindCalendar() { app.querySelectorAll("[data-cal]").forEach(b => b.onclick = () => { S.calendar = b.getAttribute("data-cal"); save(); render(); }); }
 
   /* ---------- Bibel ---------- */
+  function bibleView() { return S.bibleView === "books" ? "books" : "path"; }
   function viewBible() {
     const byBook = {}; BIBLE_LESSONS.forEach(l => (byBook[l.book] = byBook[l.book] || []).push(l));
     const doneN = BIBLE_LESSONS.filter(l => S.done[l.id]).length;
     let html = `<h1>${esc(t("biblePlan"))}</h1><p class="muted">${esc(t("bibleIntro"))}</p>
       <div class="progressbar" style="margin:6px 0 16px"><i style="width:${Math.round(doneN / BIBLE_LESSONS.length * 100)}%"></i></div>
       <a class="item" href="#plans"><span class="grow"><span class="t">${esc(t("plansTitle"))}</span><span class="s">${PLANS.map(p => E(p.title)).join(" · ")}</span></span><span class="chev">${ic("chev")}</span></a>
-      <ul class="list">${BIBLE_LESSONS.map((l, i) => lessonItem(l, i + 1)).join("")}</ul>
+      <div class="seg" style="margin-bottom:12px" role="group" aria-label="${esc(t("bvLabel"))}">${[["path", "bvPath"], ["books", "bvBooks"]].map(([v, k]) => `<button data-bview="${v}" class="${bibleView() === v ? "on" : ""}" aria-pressed="${bibleView() === v}">${esc(t(k))}</button>`).join("")}</div>
+      ${bibleView() === "books" ? BIBLE.groups.map(g => { const ls = BIBLE.books.filter(b => b[1] === g.id).flatMap(b => byBook[b[0]] || []);
+          return ls.length ? `<div class="sh">${E(g.name)}</div><ul class="list">${ls.map(l => lessonItem(l, BIBLE_LESSONS.indexOf(l) + 1)).join("")}</ul>` : ""; }).join("")
+        : `<ul class="list">${BIBLE_LESSONS.map((l, i) => lessonItem(l, i + 1)).join("")}</ul>`}
       <details class="card"><summary>${esc(t("canonNoteTitle"))}</summary><p>${E(BIBLE.canonNote)}</p><p class="muted small">${E(BIBLE.readingNote)}</p></details>
       <h2>${esc(t("bookOverview"))}</h2>`;
     BIBLE.groups.forEach(g => {
@@ -9452,7 +9462,7 @@ function fastPeriods(y, cal) {
     const lv = { 1: "levelEasy", 2: "levelMid", 3: "levelHard" };
     const list = BOOKS.filter(b => bookCat === "all" || b.cat === bookCat);
     return `<h1>${esc(t("booksTitle"))}</h1><p class="muted">${esc(t("booksIntro"))}</p>
-      <div class="chips" role="tablist"><button class="chip ${bookCat === "all" ? "on" : ""}" data-cat="all">${esc(t("allCategories"))}</button>
+      <div class="chips" role="group" aria-label="${esc(t("allCategories"))}"><button class="chip ${bookCat === "all" ? "on" : ""}" data-cat="all">${esc(t("allCategories"))}</button>
         ${BOOK_CATEGORIES.map(c => `<button class="chip ${bookCat === c.id ? "on" : ""}" data-cat="${c.id}">${E(c.name)}</button>`).join("")}</div>
       <input type="search" id="bookq" placeholder="${esc(t("bookSearch"))}" aria-label="${esc(t("bookSearch"))}" style="margin-bottom:12px">
       ${list.map(b => { const ln = b.link ? LINKS[b.link] : null; const cat = BOOK_CATEGORIES.find(c => c.id === b.cat);
@@ -9850,6 +9860,7 @@ function fastPeriods(y, cal) {
     const sr = document.getElementById("startrev"); if (sr) sr.onclick = () => { RV = null; };
     const pa = document.getElementById("practiceall"); if (pa) pa.onclick = () => { RV = { queue: shuffle(CARDS.filter(c => deckSel === "all" || c.deck === deckSel).map(c => c.id)), flipped: false, n: 0, free: true }; go("review"); };
   }
+  function bindBible() { app.querySelectorAll("[data-bview]").forEach(b => b.onclick = () => { S.bibleView = b.getAttribute("data-bview"); save(); render(); }); }
   function bindLesson(r) { const b = document.getElementById("donebtn"); if (b) b.onclick = () => toggleDone(r.slice(7)); }
   function bindBooks() {
     app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { bookCat = b.getAttribute("data-cat"); render(); });
@@ -9863,7 +9874,7 @@ function fastPeriods(y, cal) {
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };

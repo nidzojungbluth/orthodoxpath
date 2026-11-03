@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.2.0 (3. November 2026)
+**Aktuelle Version:** 3.3.0 (3. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,12 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.3 (ROADMAP P2-02, P2-05, P2-06)
+
+- Bibelschule: Umschalter „Lernweg / Nach Büchern“ (Gruppen wie Evangelien, Briefe, Gesetz …), Auswahl wird gespeichert.
+- Barrierefreiheit: Startseiten-Link mit Namen für Bildschirmleser, Kategorie-Auswahl korrekt ausgezeichnet, Kontraste im hellen Modus erhöht (Gold, Kennzeichnungen), Dialoge setzen den Fokus und schließen mit Escape. Neuer Test `tests/a11y.js`: 0 Verstöße.
+- Performance gemessen, kein Umbau nötig (Werte in ROADMAP P2-06).
 
 ## Version 3.2 (ROADMAP P1-04, P2-01)
 

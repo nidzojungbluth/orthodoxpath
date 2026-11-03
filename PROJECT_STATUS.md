@@ -1,6 +1,6 @@
 # OrthodoxPath – Projektstatus
 
-Stand: 3. November 2026 · Version 3.2.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
+Stand: 3. November 2026 · Version 3.3.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
 
 ## 1. Kurzbeschreibung
 Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe Lern- und Glaubens-App als **Progressive Web App (PWA)** fürs iPhone. Kein Konto, keine Werbung, keine Server-Datenhaltung, offline nutzbar.
@@ -18,7 +18,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 | Authentifizierung | Keine (bewusst). Optionales Passwort nur für die lokale Verschlüsselung der Notizen (AES-GCM, PBKDF2 200 000 Runden) |
 | Hosting | GitHub Pages (Repo `nidzojungbluth/orthodoxpath`: gebaute PWA im Hauptverzeichnis, Quellcode in `source/`) + privates Claude-Artefakt |
 | Offline | Service Worker „cache first“; Offline-Test im Browser bestanden |
-| Tests | `tests/content.test.js` (~13 300 Inhaltsprüfungen), `tests/e2e.js` (52 Bedienungsprüfungen; `content.test.js` prüft auch die Serbisch-Werkzeuge, Chromium, simuliertes iPhone 390×844), `tests/pwa-offline.js` |
+| Tests | `tests/a11y.js` (Barrierefreiheit, axe-core) · `tests/content.test.js` (~13 300 Inhaltsprüfungen), `tests/e2e.js` (53 Bedienungsprüfungen; `content.test.js` prüft auch die Serbisch-Werkzeuge, Chromium, simuliertes iPhone 390×844), `tests/pwa-offline.js` |
 
 ## 3. Funktionen
 
@@ -55,9 +55,9 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 3. **Serbische Texte nicht muttersprachlich geprüft** – Prüftabelle bereit (`node tools/sr-export.js` → CSV mit 5 300+ Texten, Spalte „Korrektur“; Rückweg `node tools/sr-import.js datei.csv`). Prüfung durch Muttersprachler/Priester offen.
 4. **Kein Test auf echtem iPhone/Safari** durch Claude möglich – Checkliste `TESTPLAN_IPHONE.md` liegt bereit, Durchführung durch den Nutzer offen.
 5. `src/app.js` ist eine große Datei (~1 200 Zeilen); wachsende Wartungskosten, aber stabil. Kein Umbau nötig, solange Tests grün sind.
-6. Ausgabedatei 1,43 MB: lädt einmalig, danach offline; Inhalte wachsen weiter. → P2-06 (Messung, ggf. Inhalte als separate Datei)
-7. Reihenfolge der Bibellektionen folgt dem Hinzufügen (Feld `order`), nicht dem biblischen Kanon. → P2-02
-8. Barrierefreiheit (VoiceOver, Kontraste im hellen Modus) nicht systematisch geprüft. → P2-05
+6. Ausgabedatei 1,44 MB (gzip ≈ 0,5 MB): gemessen ≈ 1,5 s bis zum ersten Bildschirm (gedrosselt), danach offline sofort. Grenze für Umbau: 2 MB.
+7. ~~Reihenfolge der Bibellektionen~~ – erledigt (3.3): Umschalter „Lernweg / Nach Büchern“.
+8. Barrierefreiheit – geprüft (3.3): `tests/a11y.js` (axe-core) ohne Verstöße; Kontraste im hellen Modus angehoben, Dialoge mit Fokus und Escape. Offen: Test mit echtem VoiceOver.
 9. ~~Keine Content-Security-Policy~~ – erledigt (3.1): CSP-Meta-Tag in der PWA (nicht im Claude-Artefakt, damit dessen Laufzeit nicht blockiert wird); Import prüft Felder und Typen; Test bestätigt, dass HTML in Notizen nicht ausgeführt wird.
 10. Link-Prüfung extern nur manuell; Web-Abruf benötigt Freigabe des Nutzers.
 

@@ -48,7 +48,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 - Test: e2e Home zeigt alle Blöcke; Kalenderdaten gegen Tests.
 - Fertig, wenn: keine doppelte Information, alles mit einem Tipp erreichbar.
 
-**P2-02 Bibelschule nach Kanon ordnen** (keine · S)
+**P2-02 Bibelschule nach Kanon ordnen** ✅ erledigt 3.11.2026 (keine · S)
 - Ziel: Lektionen in Buchreihenfolge oder als Lernweg wählbar.
 - Umsetzung: Umschalter „Lernweg / Nach Büchern“ in `viewBible`; `order` bleibt für den Lernweg.
 - Test: e2e beide Ansichten; alle 53 Lektionen erreichbar.
@@ -64,13 +64,13 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 - Umsetzung: Monatsraster aus `fastInfo`/`feastsOn`; ICS-Erzeugung lokal.
 - Test: Unit-Tests für 2 Jahre × 2 Kalender; e2e Monatswechsel.
 
-**P2-05 Barrierefreiheit** (keine · M)
+**P2-05 Barrierefreiheit** ✅ erledigt 3.11.2026 – axe-core: 0 Verstöße WCAG 2 A/AA in 18 Ansichten × 2 Themen; echter VoiceOver-Test durch Nutzer offen (keine · M)
 - Ziel: Bedienbar mit VoiceOver und großer Schrift.
 - Umsetzung: Kontrastmessung (beide Themen), `aria-label` an allen Symbol-Knöpfen, Fokus-Reihenfolge in Dialogen, Überschriften-Hierarchie.
 - Test: automatisierte Kontrastprüfung im e2e; axe-core lokal.
 - Fertig, wenn: keine kritischen axe-Befunde.
 
-**P2-06 Performance-Budget** (P1-01 · S–M)
+**P2-06 Performance-Budget** ✅ gemessen 3.11.2026 – kein Umbau nötig: 1,44 MB (gzip ≈ 0,50 MB), erster Bildschirm ≈ 1,5 s bei 4× gedrosselter CPU und ungezipter Übertragung, Seitenwechsel ≈ 0,1 s; erneut prüfen, wenn die Datei 2 MB übersteigt (P1-01 · S–M)
 - Ziel: Erster Start < 2 s auf Mobilfunk, App-Datei unter Kontrolle.
 - Umsetzung: Messung; falls > 1,6 MB: Inhalte (Lektionen) in separate, vom Service Worker zwischengespeicherte JSON-Datei; Schrift-Teilmengen prüfen.
 - Test: Lighthouse lokal (Performance ≥ 90), Offline-Test.

@@ -181,6 +181,13 @@ const ok = (c, m) => { checks++; if (!c) { fails++; console.log("FAIL:", m); } e
   await page.fill("#bookq", "eusebius"); await page.waitForTimeout(150);
   const b1 = await page.$$eval(".bookcard:not([hidden])", e => e.length);
   ok(b0 > 20 && b1 >= 1 && b1 < b0, "Bibliothek-Suche filtert (" + b0 + " → " + b1 + ")");
+  // Bibelschule: Anordnung nach Büchern
+  await page.evaluate(() => { location.hash = "bible"; }); await page.waitForTimeout(200);
+  await page.click('[data-bview="books"]'); await page.waitForTimeout(200);
+  const grouped = await page.$$eval("main .sh", e => e.length);
+  const nLess = await page.$$eval('main a.item[href^="#lesson-bib-"]', e => e.length);
+  ok(grouped >= 8 && nLess >= 53, "Bibelschule nach Büchern gruppiert (" + grouped + " Gruppen, " + nLess + " Lektionen)");
+  await page.click('[data-bview="path"]'); await page.waitForTimeout(150);
   // Glossar-Filter
   await page.evaluate(() => { location.hash = "glossary"; }); await page.waitForTimeout(250);
   const before = await page.$$eval(".glo:not([hidden])", e => e.length);

@@ -34,8 +34,8 @@ html[data-theme="light"] {
   --hair: rgba(60, 40, 10, .09);
   --text: #231c14;
   --muted: #6c5f4c;
-  --gold: #94702a;
-  --gold2: #7a5b1d;
+  --gold: #7f5f1c;
+  --gold2: #6c5018;
   --goldsoft: rgba(148, 112, 42, .10);
   --onGold: #fffaf0;
   --shadow: 0 6px 20px rgba(60, 40, 10, .08);
@@ -206,11 +206,11 @@ html[data-theme="light"] .list { box-shadow: var(--shadow); }
 .tag-opinion { color: #bba3dc; }
 .tag-counsel { color: #8cbf87; }
 .tag-uncertain { color: #e3967a; }
-html[data-theme="light"] .tag-dogma { color: #8a6514; }
-html[data-theme="light"] .tag-history { color: #2f5d8a; }
-html[data-theme="light"] .tag-opinion { color: #6a4a99; }
-html[data-theme="light"] .tag-counsel { color: #3d7a38; }
-html[data-theme="light"] .tag-uncertain { color: #a54a25; }
+html[data-theme="light"] .tag-dogma { color: #765610; }
+html[data-theme="light"] .tag-history { color: #285079; }
+html[data-theme="light"] .tag-opinion { color: #5a3f86; }
+html[data-theme="light"] .tag-counsel { color: #31652d; }
+html[data-theme="light"] .tag-uncertain { color: #8e3f1e; }
 
 /* Lektionen */
 .sec { margin-bottom: 14px; }
