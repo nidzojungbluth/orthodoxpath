@@ -401,7 +401,7 @@ label.btn { margin: 0; font-size: 1em; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "3.8.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "3.9.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -556,6 +556,8 @@ const UI = {
     mTitle: "Monatsübersicht", mPrev: "Vorheriger Monat", mNext: "Nächster Monat", mLegend: "Legende", mStrict: "strenges Fasten", mFast: "Fasten (oft mit Fisch)", mLight: "ohne Fleisch", mFree: "fastenfrei", mFeast: "Fest", mGreat: "Großes Fest",
     icsOne: "In den Kalender übernehmen", icsAll: "Alle Feste der nächsten 12 Monate in den Kalender", icsNote: "Es wird eine Kalenderdatei (.ics) erzeugt. Auf dem iPhone öffnet sich danach „Zum Kalender hinzufügen“. Die Daten folgen der in der App gewählten Kalenderart.", icsDone: "Kalenderdatei erstellt",
     prSource: "Herkunft", prCommNote: "Die Vorbereitung auf die Kommunion (Gebetsregel, Fasten, Beichte) besprichst du mit deinem Priester. In vielen Gebetbüchern gibt es eine ausführlichere „Ordnung vor der heiligen Kommunion“.",
+    gfTitle: "Die zwölf großen Feste", gfIntro: "Neben Ostern, dem „Fest der Feste“, feiert die Kirche zwölf große Feste: acht Herrenfeste und vier Feste der Gottesgebärerin. Hier findest du zu jedem Fest die Ikone in Worten, die Bedeutung und die Lesungen der Göttlichen Liturgie.",
+    gfIcon: "Die Ikone in Worten", gfMean: "Bedeutung", gfReadings: "Lesungen der Göttlichen Liturgie", gfApostle: "Apostel", gfGospel: "Evangelium", gfReadNote: "Nach der allgemeinen Leseordnung; örtliche Abweichungen sind möglich. Lies die Stellen in deiner Bibel.", gfLord: "Herrenfest", gfTheotokos: "Fest der Gottesgebärerin", gfNext: "Nächster Termin", gfPascha: "Ostern – das Fest der Feste",
     prevLesson: "Vorherige Lektion", nextLessonL: "Nächste Lektion", lastOpened: "Zuletzt geöffnet",
     remTitle: "Gebetserinnerungen", remText: "Web-Apps können auf dem iPhone keine zuverlässigen täglichen Erinnerungen senden. Mit der App „Erinnerungen“ geht es trotzdem – ganz ohne Datenweitergabe:",
     remS1: "Tippe unten auf „Link kopieren“ – das ist der Link zum Gebetsbuch.", remS2: "Öffne die App „Erinnerungen“ und lege eine neue Erinnerung an, z. B. „Morgengebet“.", remS3: "Tippe auf „i“ (Details), aktiviere Datum und Uhrzeit und wähle bei „Wiederholen“ „Täglich“.", remS4: "Füge den Link im Feld „URL“ ein. Beim Tippen auf die Erinnerung öffnet sich das Gebetsbuch.",
@@ -772,6 +774,8 @@ const UI = {
     mTitle: "Месечни преглед", mPrev: "Претходни месец", mNext: "Следећи месец", mLegend: "Легенда", mStrict: "строги пост", mFast: "пост (често уз рибу)", mLight: "без меса", mFree: "мрсно", mFeast: "Празник", mGreat: "Велики празник",
     icsOne: "Додај у календар", icsAll: "Сви празници у наредних 12 месеци у календар", icsNote: "Прави се календарска датотека (.ics). На ајфону се затим отвара „Додај у календар“. Датуми прате врсту календара изабрану у апликацији.", icsDone: "Календарска датотека направљена",
     prSource: "Порекло", prCommNote: "О припреми за причешће (молитвено правило, пост, исповест) разговарајте са својим свештеником. У многим молитвеницима постоји опширније „Правило пред свето причешће“.",
+    gfTitle: "Дванаест великих празника", gfIntro: "Поред Васкрса, „Празника над празницима“, Црква прославља дванаест великих празника: осам Господњих и четири Богородичина. Овде за сваки празник налазите икону описану речима, значење и читања Свете Литургије.",
+    gfIcon: "Икона описана речима", gfMean: "Значење", gfReadings: "Читања на Светој Литургији", gfApostle: "Апостол", gfGospel: "Јеванђеље", gfReadNote: "По општем поретку читања; месне разлике су могуће. Прочитајте места у својој Библији.", gfLord: "Господњи празник", gfTheotokos: "Богородичин празник", gfNext: "Следећи датум", gfPascha: "Васкрс – Празник над празницима",
     prevLesson: "Претходна лекција", nextLessonL: "Следећа лекција", lastOpened: "Последње отворено",
     remTitle: "Подсетници за молитву", remText: "Веб-апликације на ајфону не могу да шаљу поуздане дневне подсетнике. Помоћу апликације „Подсетници“ ипак иде – без слања података:",
     remS1: "Додирните доле „Копирај везу“ – то је веза ка молитвенику.", remS2: "Отворите апликацију „Подсетници“ и направите нови подсетник, нпр. „Јутарња молитва“.", remS3: "Додирните „i“ (детаљи), укључите датум и време и код „Понављај“ изаберите „Дневно“.", remS4: "Налепите везу у поље „URL“. Када додирнете подсетник, отвара се молитвеник.",
@@ -11749,6 +11753,307 @@ const ICONS_LEX = [
     mean: { de: "Die Ikonostase zeigt die ganze Heilsgeschichte und die Gemeinschaft der Heiligen.", sr: "Иконостас приказује целу историју спасења и заједницу светих." }, lesson: "li-liturgy" }
 ];
 
+/* src/content/feasts.js */
+/* Die zwölf großen Feste: Ikone in Worten, Bedeutung, Lesungen der Liturgie (allgemeine Leseordnung; örtliche Abweichungen möglich). Datum und Name kommen aus CAL_FEASTS (calendar.js). */
+const GREAT_FEASTS = [
+ {
+  "id": "theotokos-birth",
+  "order": 1,
+  "group": "theotokos",
+  "icon": {
+   "de": "Die hl. Anna liegt auf einem Lager, Mägde bringen Wasser und baden das neugeborene Kind; Joachim schaut oft aus einem Fenster oder steht dabei.",
+   "sr": "Света Ана лежи на постељи, слушкиње доносе воду и купају новорођенче; Јоаким често гледа кроз прозор или стоји поред."
+  },
+  "mean": {
+   "de": "Nach der Überlieferung wurde Maria den betagten Eltern Joachim und Anna als Antwort auf ihr Gebet geschenkt. Mit ihrer Geburt beginnt die Vorbereitung auf die Menschwerdung Gottes. Das Fest eröffnet den Reigen der Feste im neuen Kirchenjahr (das am 1. September beginnt).",
+   "sr": "Према предању, Марија је дарована старим родитељима Јоакиму и Ани као одговор на њихову молитву. Њеним рођењем почиње припрема за оваплоћење Божије. Празник отвара низ празника у новој црквеној години (која почиње 1. септембра)."
+  },
+  "gospel": {
+   "de": "Lk 10,38–42; 11,27–28",
+   "sr": "Лк 10,38–42; 11,27–28"
+  },
+  "epistle": {
+   "de": "Phil 2,5–11",
+   "sr": "Флп 2,5–11"
+  },
+  "lessons": [],
+  "note": {
+   "de": "Die Geburt Marias ist nicht in der Bibel beschrieben, sondern in der kirchlichen Überlieferung (u. a. im Protoevangelium des Jakobus) bewahrt.",
+   "sr": "Рођење Маријино није описано у Библији, него је сачувано у црквеном предању (између осталог у Протојеванђељу Јаковљевом)."
+  }
+ },
+ {
+  "id": "exaltation",
+  "order": 2,
+  "group": "lord",
+  "icon": {
+   "de": "Der Bischof steht erhöht und hebt das Kreuz über die Menge; ringsum Volk, Kaiser Konstantin und die hl. Helena.",
+   "sr": "Епископ стоји на узвишењу и подиже крст изнад народа; около народ, цар Константин и света Јелена."
+  },
+  "mean": {
+   "de": "Erinnert an die Auffindung des Kreuzes Christi in Jerusalem durch die hl. Kaiserin Helena (4. Jh.) und seine feierliche Erhöhung vor dem Volk. Das Kreuz, einst Werkzeug der Schande, ist Zeichen des Sieges über den Tod. Der Tag ist ein strenger Fasttag.",
+   "sr": "Подсећа на проналажење Крста Христовог у Јерусалиму од свете царице Јелене (4. век) и његово свечано уздизање пред народом. Крст, некада оруђе срамоте, знак је победе над смрћу. Дан је строги посни дан."
+  },
+  "gospel": {
+   "de": "Joh 19,6–35 (Auswahl)",
+   "sr": "Јн 19,6–35 (избор)"
+  },
+  "epistle": {
+   "de": "1 Kor 1,18–24",
+   "sr": "1 Кор 1,18–24"
+  },
+  "lessons": [
+   "bib-jn19"
+  ]
+ },
+ {
+  "id": "entry",
+  "order": 3,
+  "group": "theotokos",
+  "icon": {
+   "de": "Das Kind Maria steigt die Stufen des Tempels hinauf und wird vom Hohenpriester Zacharias empfangen; dahinter Joachim, Anna und junge Mädchen mit Kerzen.",
+   "sr": "Девојчица Марија пење се уз степенице храма и прима је првосвештеник Захарија; иза Јоаким, Ана и девојке са свећама."
+  },
+  "mean": {
+   "de": "Nach der Überlieferung brachten Joachim und Anna die dreijährige Maria in den Tempel, wo sie aufwuchs. Sie, die selbst lebendiger Tempel Gottes werden sollte, tritt in den Tempel ein. Das Fest fällt in die Weihnachtsfastenzeit.",
+   "sr": "Према предању, Јоаким и Ана довели су трогодишњу Марију у храм, где је одрасла. Она која је сама требало да постане живи храм Божији улази у храм. Празник пада у Божићни пост."
+  },
+  "gospel": {
+   "de": "Lk 10,38–42; 11,27–28",
+   "sr": "Лк 10,38–42; 11,27–28"
+  },
+  "epistle": {
+   "de": "Hebr 9,1–7",
+   "sr": "Јев 9,1–7"
+  },
+  "lessons": [],
+  "note": {
+   "de": "Das Ereignis ist in der kirchlichen Überlieferung, nicht in der Bibel beschrieben.",
+   "sr": "Догађај је описан у црквеном предању, а не у Библији."
+  }
+ },
+ {
+  "id": "nativity",
+  "order": 4,
+  "group": "lord",
+  "icon": {
+   "de": "In einer dunklen Höhle liegt das Kind in Windeln in einer Krippe, die einem Grab gleicht; daneben Ochs und Esel (Jes 1,3), Maria ruhend, Josef nachdenklich, Engel, Hirten, die Weisen und der Stern.",
+   "sr": "У тамној пећини дете лежи повијено у јаслама које личе на гроб; поред во и магарац (Ис 1,3), Марија одмара, Јосиф замишљен, анђели, пастири, мудраци и звезда."
+  },
+  "mean": {
+   "de": "Gott wird Mensch: Der ewige Sohn wird von der Jungfrau Maria geboren, um die Menschen zu retten. Vor dem Fest liegt das vierzigtägige Weihnachtsfasten. In Serbien prägen Badnjak (Heiligabend) und das Fest selbst viele Bräuche.",
+   "sr": "Бог постаје човек: вечни Син рађа се од Дјеве Марије да спасе људе. Пред празником је четрдесетодневни Божићни пост. У Србији Бадњи дан и сам празник обележавају многи обичаји."
+  },
+  "gospel": {
+   "de": "Mt 2,1–12",
+   "sr": "Мт 2,1–12"
+  },
+  "epistle": {
+   "de": "Gal 4,4–7",
+   "sr": "Гал 4,4–7"
+  },
+  "lessons": [
+   "bib-lk2",
+   "th-incarnation"
+  ]
+ },
+ {
+  "id": "theophany",
+  "order": 5,
+  "group": "lord",
+  "icon": {
+   "de": "Christus steht im Jordan, Johannes legt ihm die Hand auf, von oben kommt der Heilige Geist als Taube, ein Lichtstrahl aus dem Himmel; am Ufer Engel mit Tüchern.",
+   "sr": "Христос стоји у Јордану, Јован полаже руку на Њега, одозго силази Дух Свети као голуб, зрак светлости са неба; на обали анђели са убрусима."
+  },
+  "mean": {
+   "de": "Bei der Taufe Christi im Jordan offenbart sich die Heilige Dreieinigkeit: Die Stimme des Vaters bezeugt den Sohn, der Geist kommt in Gestalt einer Taube. Am Fest wird das Wasser feierlich geweiht (Große Wasserweihe).",
+   "sr": "На крштењу Христовом у Јордану јавља се Света Тројица: глас Оца сведочи Сина, Дух силази у виду голуба. На празник се свечано освећује вода (велико водоосвећење)."
+  },
+  "gospel": {
+   "de": "Mt 3,13–17",
+   "sr": "Мт 3,13–17"
+  },
+  "epistle": {
+   "de": "Tit 2,11–14; 3,4–7",
+   "sr": "Тит 2,11–14; 3,4–7"
+  },
+  "lessons": [
+   "bib-josh3",
+   "th-trinity"
+  ]
+ },
+ {
+  "id": "meeting",
+  "order": 6,
+  "group": "lord",
+  "icon": {
+   "de": "Im Tempel übergibt Maria das Kind dem greisen Simeon, der es auf verhüllten Händen empfängt; dahinter Josef mit zwei Tauben und die Prophetin Hanna.",
+   "sr": "У храму Марија предаје дете старцу Симеону, који Га прима на покривеним рукама; иза Јосиф са два голуба и пророчица Ана."
+  },
+  "mean": {
+   "de": "Vierzig Tage nach der Geburt bringen Maria und Josef das Kind in den Tempel. Simeon erkennt in ihm das Heil Gottes und das Licht der Völker. Das Fest verbindet Alten und Neuen Bund.",
+   "sr": "Четрдесет дана после рођења Марија и Јосиф доносе дете у храм. Симеон у Њему препознаје спасење Божије и светлост народима. Празник повезује Стари и Нови завет."
+  },
+  "gospel": {
+   "de": "Lk 2,22–40",
+   "sr": "Лк 2,22–40"
+  },
+  "epistle": {
+   "de": "Hebr 7,7–17",
+   "sr": "Јев 7,7–17"
+  },
+  "lessons": [
+   "bib-lk2"
+  ]
+ },
+ {
+  "id": "annunciation",
+  "order": 7,
+  "group": "theotokos",
+  "icon": {
+   "de": "Der Erzengel Gabriel tritt mit erhobener Hand grüßend heran; Maria, sitzend oder stehend, hält oft eine Spindel mit purpurner Wolle für den Tempelvorhang; ein Strahl vom Himmel deutet den Heiligen Geist an.",
+   "sr": "Арханђел Гаврило прилази подигнуте руке у поздрав; Марија, седећи или стојећи, често држи вретено са пурпурном вуном за храмовну завесу; зрак са неба указује на Духа Светога."
+  },
+  "mean": {
+   "de": "Gabriel verkündet Maria, dass sie den Sohn Gottes empfangen wird; sie antwortet: Siehe, ich bin die Magd des Herrn. Die Kirche nennt das Fest den „Anfang unseres Heils“. Es fällt meist in die Große Fastenzeit; Fisch ist an diesem Tag traditionell erlaubt.",
+   "sr": "Гаврило благовести Марији да ће зачети Сина Божијег; она одговара: Ево слушкиње Господње. Црква празник назива „почетак нашег спасења“. Обично пада у Велики пост; риба је тог дана традиционално дозвољена."
+  },
+  "gospel": {
+   "de": "Lk 1,24–38",
+   "sr": "Лк 1,24–38"
+  },
+  "epistle": {
+   "de": "Hebr 2,11–18",
+   "sr": "Јев 2,11–18"
+  },
+  "lessons": [
+   "bib-lk1"
+  ]
+ },
+ {
+  "id": "palm",
+  "order": 8,
+  "group": "lord",
+  "icon": {
+   "de": "Christus reitet auf einem Esel nach Jerusalem, gefolgt von den Aposteln; Kinder breiten Kleider aus, Menschen mit Palmzweigen kommen aus dem Stadttor.",
+   "sr": "Христос јаше на магарцу у Јерусалим, за Њим апостоли; деца простиру хаљине, људи са палминим гранама излазе из градске капије."
+  },
+  "mean": {
+   "de": "Eine Woche vor Ostern zieht Christus als demütiger König in Jerusalem ein; am Vortag erweckte er Lazarus. In der Kirche werden Palm- bzw. Weidenzweige gesegnet. Fisch ist an diesem Tag traditionell erlaubt.",
+   "sr": "Недељу дана пре Васкрса Христос улази у Јерусалим као смирени Цар; дан раније васкрсао је Лазара. У храму се освећују палмове, односно врбове гранчице. Риба је тог дана традиционално дозвољена."
+  },
+  "gospel": {
+   "de": "Joh 12,1–18",
+   "sr": "Јн 12,1–18"
+  },
+  "epistle": {
+   "de": "Phil 4,4–9",
+   "sr": "Флп 4,4–9"
+  },
+  "lessons": []
+ },
+ {
+  "id": "ascension",
+  "order": 9,
+  "group": "lord",
+  "icon": {
+   "de": "Christus thront in einer runden Lichtglorie, von Engeln emporgetragen; unten die Apostel und in der Mitte die Gottesgebärerin, ruhig betend, mit zwei Engeln in weißen Gewändern.",
+   "sr": "Христос седи у округлој слави светлости, коју носе анђели; доле апостоли, а у средини Богородица, мирно се молећи, са два анђела у белим хаљинама."
+  },
+  "mean": {
+   "de": "Vierzig Tage nach Ostern fährt der Auferstandene vor den Augen der Jünger in den Himmel auf. Er nimmt die menschliche Natur mit in die Herrlichkeit des Vaters und verheißt den Heiligen Geist.",
+   "sr": "Четрдесет дана после Васкрса Васкрсли се пред ученицима узноси на небо. Узноси људску природу у славу Очеву и обећава Духа Светога."
+  },
+  "gospel": {
+   "de": "Lk 24,36–53",
+   "sr": "Лк 24,36–53"
+  },
+  "epistle": {
+   "de": "Apg 1,1–12",
+   "sr": "Дап 1,1–12"
+  },
+  "lessons": [
+   "bib-lk24"
+  ]
+ },
+ {
+  "id": "pentecost",
+  "order": 10,
+  "group": "lord",
+  "icon": {
+   "de": "Die zwölf Apostel sitzen im Halbkreis, über ihnen Feuerzungen; unten in einem dunklen Bogen ein gekrönter alter Mann, „Kosmos“, der die Welt darstellt, die das Evangelium erwartet.",
+   "sr": "Дванаест апостола седе у полукругу, изнад њих огњени језици; доле у тамном луку крунисани старац, „Космос“, који представља свет што чека Јеванђеље."
+  },
+  "mean": {
+   "de": "Fünfzig Tage nach Ostern kommt der Heilige Geist auf die Apostel herab. Die Kirche feiert diesen Tag als Fest der Heiligen Dreieinigkeit und als Geburtstag der Kirche. Am Nachmittag wird die Vesper mit Kniegebeten gefeiert.",
+   "sr": "Педесет дана после Васкрса Дух Свети силази на апостоле. Црква тај дан слави као празник Свете Тројице и рођендан Цркве. Поподне се служи вечерње са коленопреклоним молитвама."
+  },
+  "gospel": {
+   "de": "Joh 7,37–52; 8,12",
+   "sr": "Јн 7,37–52; 8,12"
+  },
+  "epistle": {
+   "de": "Apg 2,1–11",
+   "sr": "Дап 2,1–11"
+  },
+  "lessons": [
+   "bib-acts2",
+   "th-trinity"
+  ]
+ },
+ {
+  "id": "transfiguration",
+  "order": 11,
+  "group": "lord",
+  "icon": {
+   "de": "Christus in leuchtend weißen Gewändern auf dem Berggipfel, umgeben von Lichtstrahlen; neben ihm Mose und Elija; unten die drei Apostel Petrus, Jakobus und Johannes, vom Licht zu Boden geworfen.",
+   "sr": "Христос у сјајно белим хаљинама на врху горе, окружен зрацима светлости; поред Њега Мојсије и Илија; доле три апостола, Петар, Јаков и Јован, оборени светлошћу."
+  },
+  "mean": {
+   "de": "Auf dem Berg Tabor zeigt Christus drei Jüngern seine göttliche Herrlichkeit, um sie für sein Leiden zu stärken. Das Licht des Tabor ist für die orthodoxe Spiritualität das ungeschaffene Licht Gottes. Traditionell werden Trauben und Früchte gesegnet; Fisch ist erlaubt, obwohl das Fest im Entschlafungsfasten liegt.",
+   "sr": "На гори Тавору Христос показује тројици ученика своју божанску славу да их утврди за своје страдање. Таворска светлост је за православну духовност нестворена светлост Божија. Традиционално се освећује грожђе и воће; риба је дозвољена, иако празник пада у Госпојински пост."
+  },
+  "gospel": {
+   "de": "Mt 17,1–9",
+   "sr": "Мт 17,1–9"
+  },
+  "epistle": {
+   "de": "2 Petr 1,10–19",
+   "sr": "2 Пт 1,10–19"
+  },
+  "lessons": [
+   "bib-elijah"
+  ]
+ },
+ {
+  "id": "dormition",
+  "order": 12,
+  "group": "theotokos",
+  "icon": {
+   "de": "Die Gottesgebärerin liegt auf dem Totenbett, umgeben von den Aposteln; dahinter steht Christus in einer Glorie und hält ihre Seele wie ein kleines, in Weiß gehülltes Kind.",
+   "sr": "Богородица лежи на одру, окружена апостолима; иза стоји Христос у слави и држи њену душу као мало дете повијено у бело."
+  },
+  "mean": {
+   "de": "Die Kirche gedenkt des Entschlafens der Gottesgebärerin. Nach der Überlieferung waren die Apostel versammelt, und Christus selbst nahm ihre Seele auf; nach drei Tagen wurde ihr Grab leer gefunden. Vorher liegt das zweiwöchige Entschlafungsfasten.",
+   "sr": "Црква спомиње уснуће Богородице. Према предању, апостоли су били сабрани, а сам Христос је примио њену душу; после три дана њен гроб је нађен празан. Пре празника је двонедељни Госпојински пост."
+  },
+  "gospel": {
+   "de": "Lk 10,38–42; 11,27–28",
+   "sr": "Лк 10,38–42; 11,27–28"
+  },
+  "epistle": {
+   "de": "Phil 2,5–11",
+   "sr": "Флп 2,5–11"
+  },
+  "lessons": [],
+  "note": {
+   "de": "Das Entschlafen der Gottesgebärerin ist in der kirchlichen Überlieferung, nicht in der Bibel beschrieben.",
+   "sr": "Уснуће Богородице описано је у црквеном предању, а не у Библији."
+  }
+ }
+];
+
+
 /* src/calendar.js */
 /* OrthodoxPath – Kirchenkalender.
    Feste Daten werden nach dem kirchlichen Kalender (Monat/Tag) gespeichert und je nach Einstellung umgerechnet:
@@ -12097,7 +12402,7 @@ function fastPeriods(y, cal) {
   function tabFor(r) {
     if (r.startsWith("quiz-")) return tabFor(backHref(r.slice(5)).slice(1));
     if (r.startsWith("lesson-bib") || r === "bible" || r.startsWith("book-") || r === "plans" || r.startsWith("plan-")) return "bible";
-    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons") return "theology";
+    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons" || r === "feasts" || r.startsWith("feast-")) return "theology";
     if (r.startsWith("person-") || r === "saints") return "saints";
     if (r === "cards" || r === "review") return "cards";
     if (r === "home" || r === "ask" || r === "calendar" || r === "prayers" || r.startsWith("prayercat-")) return "home";
@@ -12110,7 +12415,8 @@ function fastPeriods(y, cal) {
     if (r.startsWith("quiz-")) return backHref(r.slice(5)).slice(1);
     if (r.startsWith("course-") || r === "creed") return "theology";
     if (r === "liturgy") return "course-L";
-    if (r === "icons") return "theology";
+    if (r === "icons" || r === "feasts") return "theology";
+    if (r.startsWith("feast-")) return "feasts";
     if (r.startsWith("person-")) return "saints";
     if (r === "review") return "cards";
     if (r === "ask") return "home";
@@ -12175,6 +12481,8 @@ function fastPeriods(y, cal) {
       else if (r === "plans") html = viewPlans();
       else if (r === "liturgy") html = viewLiturgy();
       else if (r === "icons") html = viewIcons();
+      else if (r === "feasts") html = viewFeasts();
+      else if (r.startsWith("feast-")) html = viewFeast(r.slice(6));
       else if (r.startsWith("plan-")) html = viewPlan(r.slice(5));
       else if (r === "prayers") html = viewPrayers();
       else if (r.startsWith("prayercat-")) html = viewPrayerCat(r.slice(10));
@@ -12370,6 +12678,35 @@ function fastPeriods(y, cal) {
       </ul>
     </div>`;
   }
+  /* ---------- Die zwölf großen Feste ---------- */
+  function feastDate(id) {
+    const td = todayUTC(); const y = new Date(td).getUTCFullYear(); const c = cal();
+    const f = feastsOfYear(y, c).concat(feastsOfYear(y + 1, c)).filter(x => x.id === id && x.t >= td).sort((a, b) => a.t - b.t)[0];
+    return f || null;
+  }
+  function viewFeasts() {
+    const P = feastDate("pascha");
+    return `<h1>${esc(t("gfTitle"))}</h1><p class="muted">${esc(t("gfIntro"))}</p>
+      <ul class="list">${P ? navItem("lesson-bib-jn20", "cross", t("gfPascha"), fmtDate(P.t, true) + " · " + inDays(P.t)) : ""}</ul>
+      <ul class="list">${GREAT_FEASTS.slice().sort((a, b) => a.order - b.order).map(g => { const f = feastDate(g.id); const cf = CAL_FEASTS.find(x => x.id === g.id);
+        return `<li><a class="item" href="#feast-${g.id}"><span class="medal">${g.order}</span><span class="grow"><span class="t">${E(cf.name)}</span><span class="s">${esc(t(g.group === "lord" ? "gfLord" : "gfTheotokos"))}${f ? " · " + esc(fmtDate(f.t, true)) + " · " + esc(inDays(f.t)) : ""}</span></span><span class="chev">${ic("chev")}</span></a></li>`; }).join("")}</ul>`;
+  }
+  function viewFeast(id) {
+    const g = GREAT_FEASTS.find(x => x.id === id); const cf = CAL_FEASTS.find(x => x.id === id); if (!g || !cf) return `<p>${esc(t("notFound"))}</p>`;
+    const f = feastDate(id);
+    return `<div class="eyebrow">${esc(t(g.group === "lord" ? "gfLord" : "gfTheotokos"))}${f ? " · " + esc(fmtDate(f.t, true)) : ""}</div><h1>${E(cf.name)}</h1>
+      ${g.note ? `<div class="card notice">${tagBadge("history")}<p class="small" style="margin:0">${E(g.note)}</p></div>` : ""}
+      <section class="card sec"><h3>${esc(t("gfMean"))}</h3><p>${E(g.mean)}</p></section>
+      <section class="card sec"><h3>${esc(t("gfIcon"))}</h3>${tagBadge("history")}<p>${E(g.icon)}</p><a class="small" href="#icons">${esc(t("iconsTitle"))} ›</a></section>
+      <section class="card sec"><h3>${esc(t("gfReadings"))}</h3>
+        <div class="refline"><b>${esc(t("gfApostle"))}</b><span class="grow">${E(g.epistle)}</span></div>
+        <div class="refline"><b>${esc(t("gfGospel"))}</b><span class="grow">${E(g.gospel)}</span></div>
+        <p class="small muted" style="margin:8px 0 0">${esc(t("gfReadNote"))}</p></section>
+      ${g.lessons.filter(l => ALL_LESSONS[l]).length ? `<ul class="list">${g.lessons.filter(l => ALL_LESSONS[l]).map(l => navItem("lesson-" + l, ALL_LESSONS[l].kind === "bible" ? "bible" : "theology", L(ALL_LESSONS[l].title), t("lesson"))).join("")}</ul>` : ""}
+      ${f ? `<button class="btn ghost block" data-gfics="${id}">${ic("calendar")} ${esc(t("icsOne"))}</button>` : ""}`;
+  }
+  function bindFeast() { app.querySelectorAll("[data-gfics]").forEach(b => b.onclick = () => { const f = feastDate(b.getAttribute("data-gfics")); if (f) saveIcs(icsFor([f]), "orthodoxpath-" + f.id + ".ics"); }); }
+
   /* ---------- Monatsübersicht und Kalenderdatei ---------- */
   let calMonth = null, calDay = null;
   const FAST_CLASS = { lent: "strict", dormition: "strict", single: "strict", apostles: "fast", nativity: "fast", wedfri: "fast", cheese: "light", free: "free", none: "" };
@@ -12391,7 +12728,7 @@ function fastPeriods(y, cal) {
     if (calDay != null) {
       const fi = fastInfo(calDay, c); const fe = feastsOn(calDay, c); const sts = saintsOn(calDay, c);
       detail = `<div class="mdetail"><div class="eyebrow">${esc(fmtDate(calDay, true))}</div>
-        ${fe.map(f => `<p style="margin:0 0 4px"><b>${E(f.name)}</b></p>`).join("")}
+        ${fe.map(f => `<p style="margin:0 0 4px"><b>${GREAT_FEASTS.some(g => g.id === f.id) ? `<a href="#feast-${f.id}">${E(f.name)}</a>` : E(f.name)}</b></p>`).join("")}
         ${sts.length ? `<p class="small" style="margin:0 0 6px">${ic("cross", "gold")} ${sts.map(id => `<a href="#person-${id}">${E(PEOPLE[id].name)}</a>`).join(" · ")}</p>` : ""}
         ${fastBadge(fi.kind)}${!["none", "free"].includes(fi.kind) ? `<p class="small muted" style="margin:2px 0 0">${E(CAL_FAST_RULES[fi.kind])}</p>` : ""}
         ${fe.length ? `<button class="btn ghost block" style="margin-top:10px" data-ics="${calDay}">${ic("calendar")} ${esc(t("icsOne"))}</button>` : ""}</div>`;
@@ -12441,6 +12778,7 @@ function fastPeriods(y, cal) {
       </div>
       <h2>${esc(t("mTitle"))}</h2>
       ${monthCard()}
+      <ul class="list">${navItem("feasts", "cross", t("gfTitle"))}</ul>
       <h2>${esc(t("calUpcoming"))}</h2>
       <button class="btn ghost block" id="icsall" style="margin-bottom:6px">${ic("calendar")} ${esc(t("icsAll"))}</button>
       <p class="small muted">${esc(t("icsNote"))}</p>
@@ -12664,7 +13002,7 @@ function fastPeriods(y, cal) {
         ${ci(byId("A"))}${navItem("saints", "library", t("courseB"), FATHERS.length + " " + t("fathers"))}${navItem("saints", "saints", t("courseC"), SAINTS.length + " " + t("saints"))}${COURSES.filter(c => c.id !== "A").map(ci).join("")}
       </ul>
       <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
-        ${navItem("creed", "text", t("creed"))}${navItem("icons", "frame", t("iconsTitle"), String(ICONS_LEX.length))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("glossary", "list", t("glossary"), t("glossaryIntro"))}
+        ${navItem("feasts", "calendar", t("gfTitle"))}${navItem("creed", "text", t("creed"))}${navItem("icons", "frame", t("iconsTitle"), String(ICONS_LEX.length))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("glossary", "list", t("glossary"), t("glossaryIntro"))}
       </ul>
       <div class="card legend"><h3>${esc(t("legendTitle"))}</h3>${["dogma", "history", "opinion", "counsel", "uncertain"].map(tagBadge).join("")}</div>`;
   }
@@ -13037,7 +13375,7 @@ function fastPeriods(y, cal) {
   function viewMore() {
     return `<h1>${esc(t("navMore"))}</h1>
       <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
-        ${navItem("prayers", "candle", t("prayersTitle"))}${navItem("calendar", "calendar", t("calTitle"))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("icons", "frame", t("iconsTitle"))}
+        ${navItem("prayers", "candle", t("prayersTitle"))}${navItem("calendar", "calendar", t("calTitle"))}${navItem("feasts", "cross", t("gfTitle"))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("icons", "frame", t("iconsTitle"))}
       </ul>
       <div class="sh">${esc(t("gLearn"))}</div><ul class="list">
         ${navItem("books", "library", t("navBooks"), t("booksIntro"))}${navItem("glossary", "text", t("glossary"))}${navItem("ask", "search", t("askTitle"))}
@@ -13188,7 +13526,7 @@ function fastPeriods(y, cal) {
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };

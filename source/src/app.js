@@ -177,7 +177,7 @@
   function tabFor(r) {
     if (r.startsWith("quiz-")) return tabFor(backHref(r.slice(5)).slice(1));
     if (r.startsWith("lesson-bib") || r === "bible" || r.startsWith("book-") || r === "plans" || r.startsWith("plan-")) return "bible";
-    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons") return "theology";
+    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons" || r === "feasts" || r.startsWith("feast-")) return "theology";
     if (r.startsWith("person-") || r === "saints") return "saints";
     if (r === "cards" || r === "review") return "cards";
     if (r === "home" || r === "ask" || r === "calendar" || r === "prayers" || r.startsWith("prayercat-")) return "home";
@@ -190,7 +190,8 @@
     if (r.startsWith("quiz-")) return backHref(r.slice(5)).slice(1);
     if (r.startsWith("course-") || r === "creed") return "theology";
     if (r === "liturgy") return "course-L";
-    if (r === "icons") return "theology";
+    if (r === "icons" || r === "feasts") return "theology";
+    if (r.startsWith("feast-")) return "feasts";
     if (r.startsWith("person-")) return "saints";
     if (r === "review") return "cards";
     if (r === "ask") return "home";
@@ -255,6 +256,8 @@
       else if (r === "plans") html = viewPlans();
       else if (r === "liturgy") html = viewLiturgy();
       else if (r === "icons") html = viewIcons();
+      else if (r === "feasts") html = viewFeasts();
+      else if (r.startsWith("feast-")) html = viewFeast(r.slice(6));
       else if (r.startsWith("plan-")) html = viewPlan(r.slice(5));
       else if (r === "prayers") html = viewPrayers();
       else if (r.startsWith("prayercat-")) html = viewPrayerCat(r.slice(10));
@@ -450,6 +453,35 @@
       </ul>
     </div>`;
   }
+  /* ---------- Die zwölf großen Feste ---------- */
+  function feastDate(id) {
+    const td = todayUTC(); const y = new Date(td).getUTCFullYear(); const c = cal();
+    const f = feastsOfYear(y, c).concat(feastsOfYear(y + 1, c)).filter(x => x.id === id && x.t >= td).sort((a, b) => a.t - b.t)[0];
+    return f || null;
+  }
+  function viewFeasts() {
+    const P = feastDate("pascha");
+    return `<h1>${esc(t("gfTitle"))}</h1><p class="muted">${esc(t("gfIntro"))}</p>
+      <ul class="list">${P ? navItem("lesson-bib-jn20", "cross", t("gfPascha"), fmtDate(P.t, true) + " · " + inDays(P.t)) : ""}</ul>
+      <ul class="list">${GREAT_FEASTS.slice().sort((a, b) => a.order - b.order).map(g => { const f = feastDate(g.id); const cf = CAL_FEASTS.find(x => x.id === g.id);
+        return `<li><a class="item" href="#feast-${g.id}"><span class="medal">${g.order}</span><span class="grow"><span class="t">${E(cf.name)}</span><span class="s">${esc(t(g.group === "lord" ? "gfLord" : "gfTheotokos"))}${f ? " · " + esc(fmtDate(f.t, true)) + " · " + esc(inDays(f.t)) : ""}</span></span><span class="chev">${ic("chev")}</span></a></li>`; }).join("")}</ul>`;
+  }
+  function viewFeast(id) {
+    const g = GREAT_FEASTS.find(x => x.id === id); const cf = CAL_FEASTS.find(x => x.id === id); if (!g || !cf) return `<p>${esc(t("notFound"))}</p>`;
+    const f = feastDate(id);
+    return `<div class="eyebrow">${esc(t(g.group === "lord" ? "gfLord" : "gfTheotokos"))}${f ? " · " + esc(fmtDate(f.t, true)) : ""}</div><h1>${E(cf.name)}</h1>
+      ${g.note ? `<div class="card notice">${tagBadge("history")}<p class="small" style="margin:0">${E(g.note)}</p></div>` : ""}
+      <section class="card sec"><h3>${esc(t("gfMean"))}</h3><p>${E(g.mean)}</p></section>
+      <section class="card sec"><h3>${esc(t("gfIcon"))}</h3>${tagBadge("history")}<p>${E(g.icon)}</p><a class="small" href="#icons">${esc(t("iconsTitle"))} ›</a></section>
+      <section class="card sec"><h3>${esc(t("gfReadings"))}</h3>
+        <div class="refline"><b>${esc(t("gfApostle"))}</b><span class="grow">${E(g.epistle)}</span></div>
+        <div class="refline"><b>${esc(t("gfGospel"))}</b><span class="grow">${E(g.gospel)}</span></div>
+        <p class="small muted" style="margin:8px 0 0">${esc(t("gfReadNote"))}</p></section>
+      ${g.lessons.filter(l => ALL_LESSONS[l]).length ? `<ul class="list">${g.lessons.filter(l => ALL_LESSONS[l]).map(l => navItem("lesson-" + l, ALL_LESSONS[l].kind === "bible" ? "bible" : "theology", L(ALL_LESSONS[l].title), t("lesson"))).join("")}</ul>` : ""}
+      ${f ? `<button class="btn ghost block" data-gfics="${id}">${ic("calendar")} ${esc(t("icsOne"))}</button>` : ""}`;
+  }
+  function bindFeast() { app.querySelectorAll("[data-gfics]").forEach(b => b.onclick = () => { const f = feastDate(b.getAttribute("data-gfics")); if (f) saveIcs(icsFor([f]), "orthodoxpath-" + f.id + ".ics"); }); }
+
   /* ---------- Monatsübersicht und Kalenderdatei ---------- */
   let calMonth = null, calDay = null;
   const FAST_CLASS = { lent: "strict", dormition: "strict", single: "strict", apostles: "fast", nativity: "fast", wedfri: "fast", cheese: "light", free: "free", none: "" };
@@ -471,7 +503,7 @@
     if (calDay != null) {
       const fi = fastInfo(calDay, c); const fe = feastsOn(calDay, c); const sts = saintsOn(calDay, c);
       detail = `<div class="mdetail"><div class="eyebrow">${esc(fmtDate(calDay, true))}</div>
-        ${fe.map(f => `<p style="margin:0 0 4px"><b>${E(f.name)}</b></p>`).join("")}
+        ${fe.map(f => `<p style="margin:0 0 4px"><b>${GREAT_FEASTS.some(g => g.id === f.id) ? `<a href="#feast-${f.id}">${E(f.name)}</a>` : E(f.name)}</b></p>`).join("")}
         ${sts.length ? `<p class="small" style="margin:0 0 6px">${ic("cross", "gold")} ${sts.map(id => `<a href="#person-${id}">${E(PEOPLE[id].name)}</a>`).join(" · ")}</p>` : ""}
         ${fastBadge(fi.kind)}${!["none", "free"].includes(fi.kind) ? `<p class="small muted" style="margin:2px 0 0">${E(CAL_FAST_RULES[fi.kind])}</p>` : ""}
         ${fe.length ? `<button class="btn ghost block" style="margin-top:10px" data-ics="${calDay}">${ic("calendar")} ${esc(t("icsOne"))}</button>` : ""}</div>`;
@@ -521,6 +553,7 @@
       </div>
       <h2>${esc(t("mTitle"))}</h2>
       ${monthCard()}
+      <ul class="list">${navItem("feasts", "cross", t("gfTitle"))}</ul>
       <h2>${esc(t("calUpcoming"))}</h2>
       <button class="btn ghost block" id="icsall" style="margin-bottom:6px">${ic("calendar")} ${esc(t("icsAll"))}</button>
       <p class="small muted">${esc(t("icsNote"))}</p>
@@ -744,7 +777,7 @@
         ${ci(byId("A"))}${navItem("saints", "library", t("courseB"), FATHERS.length + " " + t("fathers"))}${navItem("saints", "saints", t("courseC"), SAINTS.length + " " + t("saints"))}${COURSES.filter(c => c.id !== "A").map(ci).join("")}
       </ul>
       <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
-        ${navItem("creed", "text", t("creed"))}${navItem("icons", "frame", t("iconsTitle"), String(ICONS_LEX.length))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("glossary", "list", t("glossary"), t("glossaryIntro"))}
+        ${navItem("feasts", "calendar", t("gfTitle"))}${navItem("creed", "text", t("creed"))}${navItem("icons", "frame", t("iconsTitle"), String(ICONS_LEX.length))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("glossary", "list", t("glossary"), t("glossaryIntro"))}
       </ul>
       <div class="card legend"><h3>${esc(t("legendTitle"))}</h3>${["dogma", "history", "opinion", "counsel", "uncertain"].map(tagBadge).join("")}</div>`;
   }
@@ -1117,7 +1150,7 @@
   function viewMore() {
     return `<h1>${esc(t("navMore"))}</h1>
       <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
-        ${navItem("prayers", "candle", t("prayersTitle"))}${navItem("calendar", "calendar", t("calTitle"))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("icons", "frame", t("iconsTitle"))}
+        ${navItem("prayers", "candle", t("prayersTitle"))}${navItem("calendar", "calendar", t("calTitle"))}${navItem("feasts", "cross", t("gfTitle"))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("icons", "frame", t("iconsTitle"))}
       </ul>
       <div class="sh">${esc(t("gLearn"))}</div><ul class="list">
         ${navItem("books", "library", t("navBooks"), t("booksIntro"))}${navItem("glossary", "text", t("glossary"))}${navItem("ask", "search", t("askTitle"))}
@@ -1268,7 +1301,7 @@
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };

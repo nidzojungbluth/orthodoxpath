@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.8.0 (4. November 2026)
+**Aktuelle Version:** 3.9.0 (4. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,11 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.9 (ROADMAP P3-04)
+
+- Neuer Bereich „Die zwölf großen Feste“ (`src/content/feasts.js`): Liste nach Kirchenjahr mit nächstem Termin (nach gewählter Kalenderart), Ostern als „Fest der Feste“ vorangestellt; je Fest: Bedeutung, Ikone in Worten, Apostel- und Evangeliumslesung der Liturgie, Verweise auf passende Lektionen, „In den Kalender übernehmen“. Erreichbar über Theologie, Mehr und Kirchenkalender; große Feste in der Monatsübersicht verlinkt. Feste, die nur in der Überlieferung beschrieben sind, sind gekennzeichnet. Keine Troparien ohne geprüfte Quelle.
+- Fehler behoben: fehlender Text „Vorherige Lektion“ (durch automatischen Test entdeckt).
 
 ## Version 3.8 (ROADMAP P3-01)
 

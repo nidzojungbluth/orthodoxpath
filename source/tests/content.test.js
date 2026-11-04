@@ -157,6 +157,13 @@ ok(!/Katechismus der Katholischen Kirche|Augsburger Bekenntnis|Heidelberger Kate
 { const P = require("../src/content/prayers.js"); const cat = P.PRAYER_CATS.find(c => c.id === "communion");
   ok(cat, "Kategorie Kommunion vorhanden");
   (cat ? cat.items : []).map(i => Array.isArray(i) ? i[0] : i).filter(id => P.PRAYER_TEXTS[id] && id !== "glorythee").forEach(id => ok(P.PRAYER_TEXTS[id].source && P.PRAYER_TEXTS[id].source.de && P.PRAYER_TEXTS[id].source.sr, "Gebet ohne Herkunft: " + id)); }
+// Die zwölf großen Feste: vollständig, mit Kalendereintrag und gültigen Lektionen
+{ const { GREAT_FEASTS } = require("../src/content/feasts.js");
+  ok(GREAT_FEASTS.length === 12, "12 große Feste");
+  GREAT_FEASTS.forEach(g => { ok(CAL.CAL_FEASTS.some(f => f.id === g.id && f.great), "Großes Fest nicht im Kalender: " + g.id);
+    ["icon", "mean", "gospel", "epistle"].forEach(k => ok(g[k] && g[k].de && g[k].sr, `Fest ${g.id} ohne ${k}`));
+    g.lessons.forEach(l => ok([...BIBLE.lessons, ...THEOLOGY].some(x => x.id === l), "Fest verweist auf fehlende Lektion " + l)); });
+  walk({ GREAT_FEASTS }, "feasts"); }
 // Werkzeuge für die serbische Prüfung: Export erzeugt Zeilen, Probelauf ohne Korrekturen ändert nichts
 { const cp = require("child_process"), os = require("os"), pth = require("path"); const tmp = pth.join(os.tmpdir(), "op-sr-test.csv");
   const out = cp.execFileSync("node", [pth.join(__dirname, "../tools/sr-export.js"), tmp]).toString();

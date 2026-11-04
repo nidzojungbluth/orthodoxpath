@@ -80,7 +80,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 **P3-01 Weitere Bibellektionen** (S je Lektion): ✅ Apg 15, Ps 103 (104), Lk 10, Joh 17, Lk 2, Mt 16, Hebr 4–5, Gen 28, Ex 20 (4.11.2026). Weitere Kandidaten: Lk 19 (Zachäus), Joh 9 (Blindgeborener), Joh 4 (Samariterin), Mt 14 (Gang auf dem Wasser), 1 Kor 15, Offb 4–5. Je Lektion: Fakten/Lesungen geprüft, Kennzeichnung, Quiz, Lernkarten, e2e-Route.
 **P3-02 Kurs „Mysterien (Sakramente)“** ✅ erledigt 4.11.2026 (Kurs F, 7 Lektionen) (M): Taufe, Myronsalbung, Eucharistie, Beichte, Ehe, Priesterweihe, Krankensalbung – je Modul Lehre/Praxis/Hinweis auf Priester.
 **P3-03 Fastenwissen** (S–M): Sinn des Fastens, Ausnahmen (Krankheit, Schwangerschaft, Arbeit) nur als allgemeiner Hinweis + Priester; keine Ernährungspläne.
-**P3-04 Kirchenjahr-Begleiter** (M): zu den 12 großen Festen je eine Seite (Ikone in Worten, Troparion nur mit geprüfter Quelle, Lesungen, Bedeutung) – verknüpft mit Kalender.
+**P3-04 Kirchenjahr-Begleiter** ✅ erledigt 4.11.2026 (ohne Troparien – nur mit geprüfter Quelle nachtragen) (M): zu den 12 großen Festen je eine Seite (Ikone in Worten, Troparion nur mit geprüfter Quelle, Lesungen, Bedeutung) – verknüpft mit Kalender.
 **P3-05 Heilige** – pausiert auf Wunsch des Nutzers.
 
 ## Priorität 4 – Langfristig (nur wenn zur Vision passend)
