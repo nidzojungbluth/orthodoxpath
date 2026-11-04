@@ -93,7 +93,7 @@ ok(/[А-Яа-яЂђЈјЉљЊњЋћЏџ]/.test(translit(UI.sr.welcomeText)) === 
 // 6b. Keine gemischten Schriften in einem Wort (z. B. lateinisches „a“ in kyrillischem Wort)
 const mixed = JSON.stringify({ UI, BIBLE, THEOLOGY, CREED, FATHERS, SAINTS, BOOKS, GLOSSARY, EXTRA_CARDS }).replace(/\\[nrt"]/g, " ").match(/[\u0400-\u04FF]+[A-Za-z]+|[A-Za-z]+[\u0400-\u04FF]+/g);
 ok(!mixed, "gemischte Schrift: " + (mixed || []).slice(0, 5).join(", "));
-ok(BIBLE.lessons.length >= 57, "mindestens 57 Bibellektionen");
+ok(BIBLE.lessons.length >= 62, "mindestens 62 Bibellektionen");
 
 // 6c. Kirchenkalender
 const iso = ms => new Date(ms).toISOString().slice(0, 10);

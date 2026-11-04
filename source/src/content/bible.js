@@ -6106,6 +6106,1071 @@ const BIBLE = {
         "correct": 0
       }
     ]
+  },
+  {
+    "id": "bib-lk2",
+    "book": "lk",
+    "order": 58,
+    "title": {
+      "de": "Geburt Christi und Begegnung im Tempel",
+      "sr": "Рођење Христово и Сретење"
+    },
+    "ref": {
+      "de": "Lukas 2,1–20 und 2,22–40",
+      "sr": "Лука 2,1–20 и 2,22–40"
+    },
+    "intro": {
+      "de": "Lukas erzählt von der Geburt Jesu in Betlehem und davon, wie Maria und Josef das Kind vierzig Tage später in den Tempel bringen. Dort begegnen ihm der greise Simeon und die Prophetin Hanna.",
+      "sr": "Лука приповеда о рођењу Исуса у Витлејему и о томе како Марија и Јосиф четрдесет дана касније доносе дете у храм. Тамо Га сусрећу старац Симеон и пророчица Ана."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Kaiser Augustus ordnet eine Volkszählung an. Josef zieht mit Maria von Nazareth nach Betlehem, in die Stadt Davids, aus dessen Geschlecht der Messias kommen sollte (Mi 5,1).",
+      "sr": "Цар Август наређује попис. Јосиф иде са Маријом из Назарета у Витлејем, град Давидов, из чијег рода је требало да дође Месија (Мих 5,2)."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Lk 2,1–7",
+          "sr": "Лк 2,1–7"
+        },
+        "note": {
+          "de": "In einer Krippe geboren.",
+          "sr": "Рођен у јаслама."
+        }
+      },
+      {
+        "ref": {
+          "de": "Lk 2,8–20",
+          "sr": "Лк 2,8–20"
+        },
+        "note": {
+          "de": "Die Hirten und die Engel.",
+          "sr": "Пастири и анђели."
+        }
+      },
+      {
+        "ref": {
+          "de": "Lk 2,22–40",
+          "sr": "Лк 2,22–40"
+        },
+        "note": {
+          "de": "Simeon und Hanna im Tempel.",
+          "sr": "Симеон и Ана у храму."
+        }
+      }
+    ],
+    "summary": {
+      "de": "In Betlehem bringt Maria ihren erstgeborenen Sohn zur Welt, wickelt ihn in Windeln und legt ihn in eine Krippe, weil in der Herberge kein Platz ist. Hirten auf dem Feld hören die Botschaft des Engels: Euch ist heute der Retter geboren, Christus, der Herr. Ein himmlisches Heer lobt Gott: Ehre sei Gott in der Höhe, und auf Erden Friede, unter den Menschen Wohlgefallen. Die Hirten finden das Kind und erzählen, was sie gehört haben; Maria bewahrt alles in ihrem Herzen. Vierzig Tage später bringen Maria und Josef das Kind in den Tempel. Der gerechte Simeon nimmt es in die Arme und lobt Gott: Nun entlässt du deinen Knecht in Frieden, denn meine Augen haben dein Heil gesehen. Zu Maria sagt er: Ein Schwert wird durch deine Seele dringen. Auch die greise Prophetin Hanna preist Gott.",
+      "sr": "У Витлејему Марија рађа свог првенца, повија Га и полаже у јасле, јер у гостионици није било места. Пастири у пољу чују вест анђела: Данас вам се роди Спаситељ, Христос Господ. Мноштво војске небеске хвали Бога: Слава на висини Богу, и на земљи мир, међу људима добра воља. Пастири налазе дете и причају шта су чули; Марија чува све у срцу свом. Четрдесет дана касније Марија и Јосиф доносе дете у храм. Праведни Симеон узима Га у наручје и хвали Бога: Сада отпушташ слугу свога с миром, јер видеше очи моје спасење Твоје. Марији каже: И теби самој пробошће мач душу. И стара пророчица Ана слави Бога."
+    },
+    "interp": {
+      "simple": {
+        "de": "Gott kommt nicht in Macht und Reichtum, sondern als armes Kind. Die Einfachen – Hirten, alte Menschen – erkennen ihn zuerst.",
+        "sr": "Бог не долази у моћи и богатству, него као сиромашно дете. Прости – пастири, стари људи – први Га препознају."
+      },
+      "deeper": {
+        "de": "Die Kirche feiert die Geburt Christi am 25. Dezember und die Begegnung des Herrn im Tempel (Hypapante) am 2. Februar; das Evangelium dieses Festes ist Lk 2,22–40. Der Lobgesang des Simeon wird täglich in der Vesper gesungen. Der Gesang der Engel („Ehre sei Gott in der Höhe“) erklingt in der Großen Doxologie des Morgengottesdienstes. Die Ikone der Geburt zeigt das Kind in einer Höhle, die Krippe gleicht einem Grab – schon hier wird auf Tod und Auferstehung hingewiesen.",
+        "sr": "Црква прославља Рођење Христово 25. децембра, а Сретење Господње 2. фебруара; Јеванђеље тог празника је Лк 2,22–40. Песма Симеонова пева се свакодневно на вечерњу. Песма анђела („Слава на висини Богу“) звучи у великом славословљу јутрења. Икона Рођења приказује дете у пећини, а јасле личе на гроб – већ ту се указује на смрт и васкрсење."
+      },
+      "tag": "history"
+    },
+    "christ": {
+      "de": "Das Kind in der Krippe ist der ewige Sohn Gottes, der Mensch geworden ist. Simeon erkennt in ihm das Heil Gottes und das Licht für alle Völker.",
+      "sr": "Дете у јаслама је вечни Син Божији, који је постао човек. Симеон у Њему препознаје спасење Божије и светлост за све народе."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Mi 5,1 (in vielen Ausgaben 5,2)",
+          "sr": "Мих 5,2"
+        },
+        "note": {
+          "de": "Aus Betlehem kommt der Herrscher.",
+          "sr": "Из Витлејема излази владалац."
+        }
+      },
+      {
+        "ref": {
+          "de": "Jes 9,5",
+          "sr": "Ис 9,6"
+        },
+        "note": {
+          "de": "Ein Kind ist uns geboren.",
+          "sr": "Дете нам се роди."
+        }
+      },
+      {
+        "ref": {
+          "de": "Gal 4,4–5",
+          "sr": "Гал 4,4–5"
+        },
+        "note": {
+          "de": "Als die Zeit erfüllt war.",
+          "sr": "Кад дође пуњење времена."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Der hl. Gregor von Nazianz hielt eine berühmte Weihnachtspredigt (Rede 38, englisch in NPNF II/7). Wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Свети Григорије Богослов одржао је чувену божићну беседу (беседа 38, на енглеском у NPNF II/7). Апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Wer erfuhr zuerst von der Geburt Christi?",
+          "sr": "Ко је први сазнао за рођење Христово?"
+        },
+        "a": {
+          "de": "Die Hirten auf dem Feld, durch einen Engel.",
+          "sr": "Пастири у пољу, преко анђела."
+        }
+      },
+      {
+        "q": {
+          "de": "Was sagt Simeon, als er das Kind sieht?",
+          "sr": "Шта Симеон каже када види дете?"
+        },
+        "a": {
+          "de": "Nun entlässt du deinen Knecht in Frieden, denn meine Augen haben dein Heil gesehen.",
+          "sr": "Сада отпушташ слугу свога с миром, јер видеше очи моје спасење Твоје."
+        }
+      },
+      {
+        "q": {
+          "de": "Wann feiert die Kirche die Begegnung im Tempel?",
+          "sr": "Када Црква прославља Сретење?"
+        },
+        "a": {
+          "de": "Am 2. Februar (julianisch 15. Februar).",
+          "sr": "2. фебруара (по јулијанском 15. фебруара)."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Sprich diese Woche am Abend den Lobgesang des Simeon (im Gebetsbuch dieser App) und danke für den vergangenen Tag.",
+      "sr": "Изговарајте ове недеље увече песму Симеонову (у молитвенику ове апликације) и захвалите за протекли дан."
+    },
+    "review": {
+      "de": "Christus wird arm in Betlehem geboren; Hirten, Simeon und Hanna erkennen ihn. Die Kirche feiert Geburt (25. Dez.) und Begegnung (2. Febr.).",
+      "sr": "Христос се рађа сиромашан у Витлејему; пастири, Симеон и Ана Га препознају. Црква прославља Рођење (25. дец.) и Сретење (2. феб.)."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Wohin wurde das Kind gelegt?",
+          "sr": "Где је дете положено?"
+        },
+        "options": [
+          {
+            "de": "In eine Krippe",
+            "sr": "У јасле"
+          },
+          {
+            "de": "In einen Palast",
+            "sr": "У дворац"
+          },
+          {
+            "de": "In den Tempel",
+            "sr": "У храм"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wie heißt die Prophetin im Tempel?",
+          "sr": "Како се зове пророчица у храму?"
+        },
+        "options": [
+          {
+            "de": "Hanna",
+            "sr": "Ана"
+          },
+          {
+            "de": "Sara",
+            "sr": "Сара"
+          },
+          {
+            "de": "Rut",
+            "sr": "Рута"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Welcher Gesang stammt aus Lk 2,14?",
+          "sr": "Која песма потиче из Лк 2,14?"
+        },
+        "options": [
+          {
+            "de": "Ehre sei Gott in der Höhe",
+            "sr": "Слава на висини Богу"
+          },
+          {
+            "de": "Heilig, heilig, heilig",
+            "sr": "Свет, свет, свет"
+          },
+          {
+            "de": "Christus ist auferstanden",
+            "sr": "Христос васкрсе"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-mt16",
+    "book": "mt",
+    "order": 59,
+    "title": {
+      "de": "Das Bekenntnis des Petrus",
+      "sr": "Петрово исповедање"
+    },
+    "ref": {
+      "de": "Matthäus 16,13–28",
+      "sr": "Матеј 16,13–28"
+    },
+    "intro": {
+      "de": "In der Gegend von Caesarea Philippi fragt Jesus seine Jünger, für wen sie ihn halten. Petrus antwortet mit dem grundlegenden Bekenntnis des christlichen Glaubens. Mt 16,13–19 ist das Evangelium am Fest der Apostel Petrus und Paulus.",
+      "sr": "У крајевима Кесарије Филипове Исус пита ученике за кога Га сматрају. Петар одговара темељним исповедањем хришћанске вере. Мт 16,13–19 је Јеванђеље на празник апостола Петра и Павла."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Die Menschen hatten unterschiedliche Meinungen über Jesus: Johannes der Täufer, Elija, Jeremia oder ein anderer Prophet. Jesus will wissen, was die Jünger selbst glauben.",
+      "sr": "Људи су имали различита мишљења о Исусу: Јован Крститељ, Илија, Јеремија или неки други пророк. Исус жели да зна шта сами ученици верују."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Mt 16,13–20",
+          "sr": "Мт 16,13–20"
+        },
+        "note": {
+          "de": "Du bist der Christus.",
+          "sr": "Ти си Христос."
+        }
+      },
+      {
+        "ref": {
+          "de": "Mt 16,21–23",
+          "sr": "Мт 16,21–23"
+        },
+        "note": {
+          "de": "Die erste Leidensankündigung.",
+          "sr": "Прво најављивање страдања."
+        }
+      },
+      {
+        "ref": {
+          "de": "Mt 16,24–28",
+          "sr": "Мт 16,24–28"
+        },
+        "note": {
+          "de": "Sein Kreuz auf sich nehmen.",
+          "sr": "Узети крст свој."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Jesus fragt: Ihr aber, für wen haltet ihr mich? Simon Petrus antwortet: Du bist der Christus, der Sohn des lebendigen Gottes. Jesus sagt: Selig bist du, denn nicht Fleisch und Blut haben dir das offenbart, sondern mein Vater im Himmel. Du bist Petrus, und auf diesen Felsen werde ich meine Kirche bauen, und die Pforten der Unterwelt werden sie nicht überwältigen. Danach kündigt Jesus an, dass er in Jerusalem leiden, getötet werden und am dritten Tag auferstehen muss. Petrus will ihn davon abhalten, doch Jesus weist ihn zurecht. Dann sagt er allen: Wer mir nachfolgen will, verleugne sich selbst, nehme sein Kreuz auf sich und folge mir.",
+      "sr": "Исус пита: А ви, шта велите ко сам ја? Симон Петар одговара: Ти си Христос, Син Бога живога. Исус каже: Блажен си, јер ти то не јавише тело и крв, него Отац мој који је на небесима. Ти си Петар, и на овом камену сазидаћу Цркву своју, и врата паклена неће је надвладати. Затим Исус најављује да мора у Јерусалиму да пострада, да буде убијен и трећи дан да васкрсне. Петар хоће да Га од тога одврати, али Исус га прекорева. Тада свима каже: Ко хоће за мном да иде, нека се одрекне себе, и узме крст свој, и иде за мном."
+    },
+    "interp": {
+      "simple": {
+        "de": "Wer Jesus wirklich ist, erkennt man nicht aus eigener Kraft, sondern weil Gott es offenbart. Auf dieses Bekenntnis ist die Kirche gebaut. Christus nachfolgen heißt auch, das Kreuz anzunehmen.",
+        "sr": "Ко је Исус заиста, не сазнаје се сопственом снагом, него зато што Бог открива. На овом исповедању сазидана је Црква. Ићи за Христом значи и прихватити крст."
+      },
+      "deeper": {
+        "de": "Die orthodoxe Kirche versteht den „Felsen“ vor allem als den Glauben, den Petrus bekennt – den Glauben an Christus, den Sohn Gottes, der selbst der Eckstein ist (1 Kor 3,11; Eph 2,20). Viele Väter, darunter der hl. Johannes Chrysostomus, legen die Stelle so aus. Petrus wird als Erster unter den Aposteln hoch geehrt; eine Herrschaftsgewalt eines einzelnen Bischofs über die ganze Kirche leitet die Orthodoxie daraus nicht ab. Die gleiche Vollmacht zu binden und zu lösen erhalten in Mt 18,18 alle Apostel.",
+        "sr": "Православна Црква „камен“ пре свега схвата као веру коју Петар исповеда – веру у Христа, Сина Божијег, који је сам камен угаони (1 Кор 3,11; Еф 2,20). Многи оци, међу њима свети Јован Златоуст, тако тумаче ово место. Петар се високо поштује као први међу апостолима; власт једног епископа над целом Црквом Православље из тога не изводи. Исту власт да вежу и решавају у Мт 18,18 добијају сви апостоли."
+      },
+      "tag": "dogma"
+    },
+    "christ": {
+      "de": "Christus ist der Sohn des lebendigen Gottes und das Fundament der Kirche. Er geht freiwillig den Weg des Kreuzes, der zur Auferstehung führt.",
+      "sr": "Христос је Син Бога живога и темељ Цркве. Он добровољно иде путем крста, који води у васкрсење."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "1 Kor 3,11",
+          "sr": "1 Кор 3,11"
+        },
+        "note": {
+          "de": "Einen anderen Grund kann niemand legen.",
+          "sr": "Другог темеља нико не може поставити."
+        }
+      },
+      {
+        "ref": {
+          "de": "Mt 18,18",
+          "sr": "Мт 18,18"
+        },
+        "note": {
+          "de": "Alle Apostel: binden und lösen.",
+          "sr": "Сви апостоли: везати и решити."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 6,68–69",
+          "sr": "Јн 6,68–69"
+        },
+        "note": {
+          "de": "Du bist der Heilige Gottes.",
+          "sr": "Ти си Светац Божији."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Der hl. Johannes Chrysostomus deutet in seinen Homilien zum Matthäusevangelium (Homilie 54, englisch in NPNF I/10) den Felsen auf den Glauben des Bekenntnisses. Wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Свети Јован Златоуст у беседама на Јеванђеље по Матеју (беседа 54, на енглеском у NPNF I/10) камен тумачи као веру исповедања. Апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Was bekennt Petrus?",
+          "sr": "Шта Петар исповеда?"
+        },
+        "a": {
+          "de": "Du bist der Christus, der Sohn des lebendigen Gottes.",
+          "sr": "Ти си Христос, Син Бога живога."
+        }
+      },
+      {
+        "q": {
+          "de": "Wie versteht die orthodoxe Kirche den „Felsen“?",
+          "sr": "Како Православна Црква схвата „камен“?"
+        },
+        "a": {
+          "de": "Vor allem als den Glauben an Christus, den Petrus bekennt; Christus selbst ist das Fundament.",
+          "sr": "Пре свега као веру у Христа коју Петар исповеда; сам Христос је темељ."
+        }
+      },
+      {
+        "q": {
+          "de": "Was gehört nach Mt 16,24 zur Nachfolge?",
+          "sr": "Шта по Мт 16,24 припада следовању?"
+        },
+        "a": {
+          "de": "Sich selbst verleugnen und sein Kreuz auf sich nehmen.",
+          "sr": "Одрећи се себе и узети крст свој."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Sprich diese Woche jeden Morgen das Bekenntnis des Petrus als kurzes Gebet: „Du bist der Christus, der Sohn des lebendigen Gottes.“",
+      "sr": "Изговарајте ове недеље свако јутро Петрово исповедање као кратку молитву: „Ти си Христос, Син Бога живога.“"
+    },
+    "review": {
+      "de": "Petrus bekennt Jesus als Christus und Sohn Gottes; auf diesen Glauben ist die Kirche gebaut. Nachfolge heißt, das Kreuz anzunehmen.",
+      "sr": "Петар исповеда Исуса као Христа и Сина Божијег; на тој вери сазидана је Црква. Следовање значи прихватити крст."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Wo fand das Bekenntnis statt?",
+          "sr": "Где се збило исповедање?"
+        },
+        "options": [
+          {
+            "de": "Bei Caesarea Philippi",
+            "sr": "Код Кесарије Филипове"
+          },
+          {
+            "de": "In Jerusalem",
+            "sr": "У Јерусалиму"
+          },
+          {
+            "de": "In Rom",
+            "sr": "У Риму"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "An welchem Fest wird Mt 16,13–19 gelesen?",
+          "sr": "На који празник се чита Мт 16,13–19?"
+        },
+        "options": [
+          {
+            "de": "Petrus und Paulus",
+            "sr": "Петровдан (апостоли Петар и Павле)"
+          },
+          {
+            "de": "Ostern",
+            "sr": "Васкрс"
+          },
+          {
+            "de": "Weihnachten",
+            "sr": "Божић"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wer erhält in Mt 18,18 die Vollmacht zu binden und zu lösen?",
+          "sr": "Ко у Мт 18,18 добија власт да веже и решава?"
+        },
+        "options": [
+          {
+            "de": "Alle Apostel",
+            "sr": "Сви апостоли"
+          },
+          {
+            "de": "Nur Johannes",
+            "sr": "Само Јован"
+          },
+          {
+            "de": "Niemand",
+            "sr": "Нико"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-heb4",
+    "book": "heb",
+    "order": 60,
+    "title": {
+      "de": "Christus, unser Hoherpriester",
+      "sr": "Христос, наш Првосвештеник"
+    },
+    "ref": {
+      "de": "Hebräer 4,14–5,10",
+      "sr": "Јеврејима 4,14–5,10"
+    },
+    "intro": {
+      "de": "Der Hebräerbrief erklärt, wie Christus den alten Tempeldienst erfüllt. Hebr 4,14–5,6 ist die Lesung am Sonntag der Kreuzverehrung, dem dritten Sonntag der Großen Fastenzeit.",
+      "sr": "Посланица Јеврејима објашњава како Христос испуњава старо храмовно служење. Јев 4,14–5,6 је Апостол у Крстопоклону недељу, трећу недељу Великог поста."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Die Empfänger des Briefes waren Christen jüdischer Herkunft, die unter Druck standen und versucht waren, den Glauben aufzugeben. Der Brief ermutigt sie, an Christus festzuhalten.",
+      "sr": "Примаоци посланице били су хришћани јудејског порекла, који су били под притиском и у искушењу да напусте веру. Посланица их храбри да се држе Христа."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Hebr 4,14–16",
+          "sr": "Јев 4,14–16"
+        },
+        "note": {
+          "de": "Lasst uns mit Zuversicht hinzutreten.",
+          "sr": "Приступимо са слободом."
+        }
+      },
+      {
+        "ref": {
+          "de": "Hebr 5,1–6",
+          "sr": "Јев 5,1–6"
+        },
+        "note": {
+          "de": "Priester nach der Ordnung Melchisedeks.",
+          "sr": "Свештеник по чину Мелхиседекову."
+        }
+      },
+      {
+        "ref": {
+          "de": "Hebr 5,7–10",
+          "sr": "Јев 5,7–10"
+        },
+        "note": {
+          "de": "Mit lautem Schreien und Tränen.",
+          "sr": "Са јаким вапајем и сузама."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Weil wir einen großen Hohenpriester haben, Jesus, den Sohn Gottes, der die Himmel durchschritten hat, lasst uns am Bekenntnis festhalten. Er kann mit unseren Schwächen mitfühlen, denn er wurde in allem versucht wie wir, aber ohne Sünde. Darum lasst uns mit Zuversicht zum Thron der Gnade hintreten, damit wir Erbarmen und Hilfe finden. Jeder Hohepriester wird aus den Menschen genommen und von Gott berufen. So hat auch Christus sich nicht selbst diese Würde gegeben; Gott hat ihn berufen: Du bist Priester in Ewigkeit nach der Ordnung Melchisedeks. In den Tagen seines irdischen Lebens hat er mit lautem Schreien und Tränen gebetet und durch Leiden Gehorsam gelernt; so ist er für alle, die ihm gehorchen, der Urheber des ewigen Heils geworden.",
+      "sr": "Пошто имамо великог Првосвештеника, Исуса, Сина Божијег, који је прошао небеса, држимо се исповедања. Он може да саосећа са нашим слабостима, јер је у свему био кушан као и ми, али без греха. Зато приступимо са слободом престолу благодати, да примимо милост и нађемо помоћ. Сваки првосвештеник узима се између људи и Бог га позива. Тако ни Христос није сам себи дао ово достојанство; Бог Га је позвао: Ти си свештеник довека по чину Мелхиседекову. У дане свог земаљског живота молио се са јаким вапајем и сузама и кроз страдање научио послушности; тако је постао узрок вечног спасења за све који Га слушају."
+    },
+    "interp": {
+      "simple": {
+        "de": "Christus kennt unsere Schwachheit aus eigener Erfahrung. Darum dürfen wir mit Vertrauen zu Gott kommen, auch wenn wir versagt haben.",
+        "sr": "Христос познаје нашу слабост из сопственог искуства. Зато смемо са поверењем да приђемо Богу, и када смо посрнули."
+      },
+      "deeper": {
+        "de": "Christus ist wahrer Gott und wahrer Mensch: Als Mensch wurde er versucht, litt und betete unter Tränen; als Gott ist er ohne Sünde und schenkt ewiges Heil. Dass die Kirche diese Lesung in der Mitte der Fastenzeit am Sonntag der Kreuzverehrung liest, verbindet das Kreuz mit dem Hohenpriester, der sich selbst als Opfer darbringt. Der Hinweis auf Melchisedek (Gen 14,18) – Priester mit Brot und Wein – wird von den Vätern auf die Eucharistie bezogen.",
+        "sr": "Христос је истинити Бог и истинити човек: као човек био је кушан, страдао и молио се са сузама; као Бог је без греха и дарује вечно спасење. То што Црква ово читање чита усред поста у Крстопоклону недељу, повезује крст са Првосвештеником који самог себе приноси као жртву. Помен Мелхиседека (Пост 14,18) – свештеника са хлебом и вином – оци односе на Евхаристију."
+      },
+      "tag": "dogma"
+    },
+    "christ": {
+      "de": "Christus ist Priester und Opfer zugleich. In jeder Liturgie betet der Priester: Du bist es, der darbringt und dargebracht wird.",
+      "sr": "Христос је истовремено свештеник и жртва. На свакој Литургији свештеник се моли: Ти си Онај који приноси и који се приноси."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Gen 14,18–20",
+          "sr": "Пост 14,18–20"
+        },
+        "note": {
+          "de": "Melchisedek bringt Brot und Wein.",
+          "sr": "Мелхиседек износи хлеб и вино."
+        }
+      },
+      {
+        "ref": {
+          "de": "Ps 109,4 (LXX; hebr. 110,4)",
+          "sr": "Пс 109,4 (по Септуагинти; јевр. 110,4)"
+        },
+        "note": {
+          "de": "Priester in Ewigkeit.",
+          "sr": "Свештеник довека."
+        }
+      },
+      {
+        "ref": {
+          "de": "Mt 26,38–39",
+          "sr": "Мт 26,38–39"
+        },
+        "note": {
+          "de": "Das Gebet in Getsemani.",
+          "sr": "Молитва у Гетсиманији."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Der hl. Johannes Chrysostomus legt den Hebräerbrief in Homilien aus (englisch in NPNF I/14). Wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Свети Јован Златоуст тумачи Посланицу Јеврејима у беседама (на енглеском у NPNF I/14). Апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Warum kann Christus mit unseren Schwächen mitfühlen?",
+          "sr": "Зашто Христос може да саосећа са нашим слабостима?"
+        },
+        "a": {
+          "de": "Weil er in allem versucht wurde wie wir, aber ohne Sünde.",
+          "sr": "Зато што је у свему био кушан као и ми, али без греха."
+        }
+      },
+      {
+        "q": {
+          "de": "Nach welcher Ordnung ist Christus Priester?",
+          "sr": "По ком чину је Христос свештеник?"
+        },
+        "a": {
+          "de": "Nach der Ordnung Melchisedeks.",
+          "sr": "По чину Мелхиседекову."
+        }
+      },
+      {
+        "q": {
+          "de": "Wann liest die Kirche Hebr 4,14–5,6?",
+          "sr": "Када Црква чита Јев 4,14–5,6?"
+        },
+        "a": {
+          "de": "Am Sonntag der Kreuzverehrung, mitten in der Großen Fastenzeit.",
+          "sr": "У Крстопоклону недељу, усред Великог поста."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Wenn du dich diese Woche schwach oder schuldig fühlst, sprich: „Herr, du kennst meine Schwachheit. Mit Vertrauen komme ich zu dir.“",
+      "sr": "Када се ове недеље осетите слабим или кривим, реците: „Господе, Ти знаш моју слабост. Са поверењем долазим к Теби.“"
+    },
+    "review": {
+      "de": "Christus ist der Hohepriester, der unsere Schwachheit kennt und ohne Sünde ist. Darum treten wir mit Zuversicht zum Thron der Gnade.",
+      "sr": "Христос је Првосвештеник који зна нашу слабост и без греха је. Зато са слободом приступамо престолу благодати."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Zu welchem Thron sollen wir mit Zuversicht hintreten?",
+          "sr": "Ком престолу треба да приступимо са слободом?"
+        },
+        "options": [
+          {
+            "de": "Zum Thron der Gnade",
+            "sr": "Престолу благодати"
+          },
+          {
+            "de": "Zum Thron des Kaisers",
+            "sr": "Престолу цара"
+          },
+          {
+            "de": "Zum Richterstuhl",
+            "sr": "Судијској столици"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wer war Melchisedek?",
+          "sr": "Ко је био Мелхиседек?"
+        },
+        "options": [
+          {
+            "de": "Priester und König, der Brot und Wein darbrachte",
+            "sr": "Свештеник и цар који је изнео хлеб и вино"
+          },
+          {
+            "de": "Ein Prophet in Babylon",
+            "sr": "Пророк у Вавилону"
+          },
+          {
+            "de": "Ein Apostel",
+            "sr": "Апостол"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "An welchem Sonntag wird die Stelle gelesen?",
+          "sr": "Које недеље се чита ово место?"
+        },
+        "options": [
+          {
+            "de": "Sonntag der Kreuzverehrung",
+            "sr": "Крстопоклона недеља"
+          },
+          {
+            "de": "Palmsonntag",
+            "sr": "Цвети"
+          },
+          {
+            "de": "Thomassonntag",
+            "sr": "Томина недеља"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-gen28",
+    "book": "gen",
+    "order": 61,
+    "title": {
+      "de": "Die Himmelsleiter",
+      "sr": "Јаковљеве лествице"
+    },
+    "ref": {
+      "de": "Genesis 28,10–22",
+      "sr": "Постање 28,10–22"
+    },
+    "intro": {
+      "de": "Jakob flieht vor seinem Bruder Esau. Unterwegs schläft er unter freiem Himmel und sieht im Traum eine Leiter, die Himmel und Erde verbindet. Gen 28,10–17 ist eine Lesung der Vesper an Festen der Gottesgebärerin.",
+      "sr": "Јаков бежи од свог брата Исава. На путу спава под ведрим небом и у сну види лествице које спајају небо и земљу. Пост 28,10–17 је читање на вечерњу празника Богородице."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Jakob hatte sich den Segen seines Vaters Isaak mit List erschlichen. Nun ist er allein, auf der Flucht, ohne Besitz – und gerade hier begegnet ihm Gott.",
+      "sr": "Јаков је лукавством добио благослов свог оца Исака. Сада је сам, у бегству, без имања – и баш ту га сусреће Бог."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Gen 28,10–15",
+          "sr": "Пост 28,10–15"
+        },
+        "note": {
+          "de": "Die Leiter und Gottes Verheißung.",
+          "sr": "Лествице и Божије обећање."
+        }
+      },
+      {
+        "ref": {
+          "de": "Gen 28,16–19",
+          "sr": "Пост 28,16–19"
+        },
+        "note": {
+          "de": "Hier ist das Haus Gottes.",
+          "sr": "Ово је дом Божији."
+        }
+      },
+      {
+        "ref": {
+          "de": "Gen 28,20–22",
+          "sr": "Пост 28,20–22"
+        },
+        "note": {
+          "de": "Jakobs Gelübde.",
+          "sr": "Јаковљев завет."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Jakob legt einen Stein unter seinen Kopf und schläft ein. Er sieht eine Leiter, die auf der Erde steht und bis zum Himmel reicht; Engel Gottes steigen auf und nieder. Oben steht der Herr und spricht: Ich bin der Gott Abrahams und Isaaks. Das Land, auf dem du liegst, will ich dir und deinen Nachkommen geben; durch dich sollen alle Geschlechter der Erde gesegnet werden. Ich bin mit dir und behüte dich, wohin du auch gehst. Jakob erwacht und sagt: Wahrhaftig, der Herr ist an diesem Ort, und ich wusste es nicht. Wie ehrfurchtgebietend ist diese Stätte! Hier ist nichts anderes als das Haus Gottes und das Tor des Himmels. Er richtet den Stein als Denkmal auf, gießt Öl darauf und nennt den Ort Bet-El, Haus Gottes.",
+      "sr": "Јаков ставља камен под главу и заспи. Види лествице које стоје на земљи и досежу до неба; анђели Божији се пењу и силазе. Горе стоји Господ и говори: Ја сам Бог Авраамов и Исаков. Земљу на којој лежиш даћу теби и потомству твоме; кроз тебе ће се благословити сва племена на земљи. Ја сам с тобом и чуваћу те куда год пођеш. Јаков се буди и каже: Заиста је Господ на овом месту, а ја нисам знао. Како је страшно ово место! Ово није друго него дом Божији и врата небеска. Подиже камен као спомен, излива уље на њега и место назива Ветиљ, дом Божији."
+    },
+    "interp": {
+      "simple": {
+        "de": "Gott begegnet Jakob gerade dann, als er allein und schuldig auf der Flucht ist. Gott verbindet Himmel und Erde und bleibt bei dem Menschen, wohin er auch geht.",
+        "sr": "Бог сусреће Јакова баш када је сам и крив у бегству. Бог спаја небо и земљу и остаје са човеком куда год пође."
+      },
+      "deeper": {
+        "de": "Christus bezieht die Leiter auf sich: Ihr werdet die Engel Gottes auf- und niedersteigen sehen über dem Menschensohn (Joh 1,51). Er ist die Verbindung zwischen Gott und Mensch. Die Hymnen der Kirche nennen auch die Gottesgebärerin „Leiter“, über die Gott zu den Menschen herabstieg; darum wird der Text an ihren Festen gelesen. Jakobs Worte „Wie ehrfurchtgebietend ist diese Stätte … das Haus Gottes“ werden mit dem Kirchenraum verbunden.",
+        "sr": "Христос лествице односи на себе: Видећете анђеле Божије како се пењу и силазе над Сином Човечијим (Јн 1,51). Он је веза између Бога и човека. Химне Цркве и Богородицу називају „лествицама“ по којима је Бог сишао људима; зато се текст чита на њене празнике. Јаковљеве речи „Како је страшно ово место … дом Божији“ повезују се са храмом."
+      },
+      "tag": "opinion"
+    },
+    "christ": {
+      "de": "Christus ist die wahre Leiter zwischen Himmel und Erde: In ihm ist Gott Mensch geworden, damit der Mensch zu Gott aufsteigen kann (Joh 1,51).",
+      "sr": "Христос је праве лествице између неба и земље: у Њему је Бог постао човек, да би се човек могао узнети к Богу (Јн 1,51)."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Joh 1,51",
+          "sr": "Јн 1,51"
+        },
+        "note": {
+          "de": "Engel über dem Menschensohn.",
+          "sr": "Анђели над Сином Човечијим."
+        }
+      },
+      {
+        "ref": {
+          "de": "Ps 120,7–8 (LXX; hebr. 121)",
+          "sr": "Пс 120,7–8 (по Септуагинти; јевр. 121)"
+        },
+        "note": {
+          "de": "Der Herr behütet dich.",
+          "sr": "Господ ће те чувати."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 14,6",
+          "sr": "Јн 14,6"
+        },
+        "note": {
+          "de": "Ich bin der Weg.",
+          "sr": "Ја сам пут."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Viele Väter deuten Jakobs Leiter auf Christus und auf die Menschwerdung; der hl. Johannes Klimakos benannte nach ihr seine Schrift über den geistlichen Aufstieg („Die Leiter“). Für diese Version wurde kein freier Link geprüft; wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Многи оци Јаковљеве лествице тумаче као Христа и оваплоћење; свети Јован Лествичник по њима је назвао свој спис о духовном узрастању („Лествица“). За ово издање није проверена слободна веза; апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Was sah Jakob im Traum?",
+          "sr": "Шта је Јаков видео у сну?"
+        },
+        "a": {
+          "de": "Eine Leiter von der Erde bis zum Himmel, auf der Engel auf- und niederstiegen.",
+          "sr": "Лествице од земље до неба, по којима су се анђели пењали и силазили."
+        }
+      },
+      {
+        "q": {
+          "de": "Wie bezieht Christus die Leiter auf sich?",
+          "sr": "Како Христос лествице односи на себе?"
+        },
+        "a": {
+          "de": "Er sagt, die Engel werden über dem Menschensohn auf- und niedersteigen (Joh 1,51).",
+          "sr": "Каже да ће се анђели пењати и силазити над Сином Човечијим (Јн 1,51)."
+        }
+      },
+      {
+        "q": {
+          "de": "Warum wird Gen 28 an Festen der Gottesgebärerin gelesen?",
+          "sr": "Зашто се Пост 28 чита на празнике Богородице?"
+        },
+        "a": {
+          "de": "Weil die Kirche sie als Leiter besingt, über die Gott zu den Menschen herabstieg.",
+          "sr": "Зато што је Црква опева као лествице по којима је Бог сишао људима."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Sprich beim Betreten einer Kirche leise Jakobs Worte: „Hier ist nichts anderes als das Haus Gottes und das Tor des Himmels.“",
+      "sr": "При уласку у храм тихо изговорите Јаковљеве речи: „Ово није друго него дом Божији и врата небеска.“"
+    },
+    "review": {
+      "de": "Jakob sieht die Himmelsleiter und erkennt: Gott ist an diesem Ort. Christus ist die wahre Verbindung zwischen Himmel und Erde.",
+      "sr": "Јаков види лествице и спознаје: Бог је на овом месту. Христос је права веза између неба и земље."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Vor wem floh Jakob?",
+          "sr": "Од кога је Јаков бежао?"
+        },
+        "options": [
+          {
+            "de": "Vor seinem Bruder Esau",
+            "sr": "Од брата Исава"
+          },
+          {
+            "de": "Vor dem Pharao",
+            "sr": "Од фараона"
+          },
+          {
+            "de": "Vor Laban",
+            "sr": "Од Лавана"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wie nannte Jakob den Ort?",
+          "sr": "Како је Јаков назвао место?"
+        },
+        "options": [
+          {
+            "de": "Bet-El (Haus Gottes)",
+            "sr": "Ветиљ (дом Божији)"
+          },
+          {
+            "de": "Betlehem",
+            "sr": "Витлејем"
+          },
+          {
+            "de": "Sinai",
+            "sr": "Синај"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Welcher Heilige benannte seine Schrift nach der Leiter?",
+          "sr": "Који светитељ је по лествицама назвао свој спис?"
+        },
+        "options": [
+          {
+            "de": "Johannes Klimakos",
+            "sr": "Јован Лествичник"
+          },
+          {
+            "de": "Basilius der Große",
+            "sr": "Василије Велики"
+          },
+          {
+            "de": "Sava",
+            "sr": "Сава"
+          }
+        ],
+        "correct": 0
+      }
+    ]
+  },
+  {
+    "id": "bib-ex20",
+    "book": "ex",
+    "order": 62,
+    "title": {
+      "de": "Die Zehn Gebote",
+      "sr": "Десет заповести"
+    },
+    "ref": {
+      "de": "Exodus 20,1–17",
+      "sr": "Излазак 20,1–17"
+    },
+    "intro": {
+      "de": "Am Berg Sinai gibt Gott seinem befreiten Volk die Zehn Gebote. Sie sind keine Fesseln, sondern Wegweiser für ein Leben in Freiheit mit Gott und den Mitmenschen.",
+      "sr": "На гори Синају Бог даје свом ослобођеном народу Десет заповести. Оне нису окови, него путокази за живот у слободи са Богом и ближњима."
+    },
+    "introTag": "history",
+    "context": {
+      "de": "Gott hat Israel aus der Sklaverei in Ägypten befreit. Bevor er Gebote gibt, erinnert er an diese Befreiung: Zuerst kommt die Gnade, dann die Antwort des Menschen.",
+      "sr": "Бог је извео Израиљ из ропства у Египту. Пре него што да заповести, подсећа на то ослобођење: прво долази благодат, па одговор човека."
+    },
+    "reading": [
+      {
+        "ref": {
+          "de": "Ex 20,1–11",
+          "sr": "Изл 20,1–11"
+        },
+        "note": {
+          "de": "Die Gebote gegenüber Gott.",
+          "sr": "Заповести према Богу."
+        }
+      },
+      {
+        "ref": {
+          "de": "Ex 20,12–17",
+          "sr": "Изл 20,12–17"
+        },
+        "note": {
+          "de": "Die Gebote gegenüber den Menschen.",
+          "sr": "Заповести према људима."
+        }
+      }
+    ],
+    "summary": {
+      "de": "Gott spricht: Ich bin der Herr, dein Gott, der dich aus Ägypten, aus dem Sklavenhaus, geführt hat. 1. Du sollst keine anderen Götter neben mir haben. 2. Du sollst dir kein Götzenbild machen und es nicht anbeten. 3. Du sollst den Namen des Herrn, deines Gottes, nicht missbrauchen. 4. Gedenke des Sabbats, ihn zu heiligen. 5. Ehre deinen Vater und deine Mutter. 6. Du sollst nicht morden. 7. Du sollst nicht ehebrechen. 8. Du sollst nicht stehlen. 9. Du sollst nicht falsch gegen deinen Nächsten aussagen. 10. Du sollst nicht begehren, was deinem Nächsten gehört.",
+      "sr": "Бог говори: Ја сам Господ Бог твој, који сам те извео из Египта, из дома ропства. 1. Немој имати других богова осим мене. 2. Не прави себи идола и не клањај му се. 3. Не узимај узалуд имена Господа Бога свога. 4. Сећај се дана одмора да га светкујеш. 5. Поштуј оца свога и матер своју. 6. Не убиј. 7. Не чини прељубе. 8. Не укради. 9. Не сведочи лажно на ближњега свога. 10. Не пожели ништа што је ближњега твога."
+    },
+    "interp": {
+      "simple": {
+        "de": "Die ersten Gebote ordnen unser Verhältnis zu Gott, die übrigen unser Verhältnis zu den Menschen. Christus fasst alles im Gebot der Liebe zu Gott und zum Nächsten zusammen.",
+        "sr": "Прве заповести уређују наш однос према Богу, остале наш однос према људима. Христос све сажима у заповести љубави према Богу и ближњем."
+      },
+      "deeper": {
+        "de": "In der orthodoxen Zählung ist das Verbot von Götzenbildern das zweite Gebot. Die Ikonen widersprechen ihm nicht: Das Siebte Ökumenische Konzil (787) lehrte, dass die Verehrung einer Ikone auf die dargestellte Person übergeht und Anbetung allein Gott gebührt; weil Gott in Christus sichtbar Mensch geworden ist, darf er dargestellt werden. Der Sabbat wird in der Kirche durch den Sonntag, den Tag der Auferstehung, erfüllt. Christus vertieft die Gebote: Schon Zorn und begehrlicher Blick verletzen sie (Mt 5,21–28).",
+        "sr": "По православном бројању забрана идола је друга заповест. Иконе јој не противрече: Седми васељенски сабор (787) учио је да поштовање иконе прелази на насликану личност, а поклоњење припада само Богу; пошто је Бог у Христу постао видљиви човек, сме да буде насликан. Субота се у Цркви испуњава недељом, даном Васкрсења. Христос продубљује заповести: већ гнев и пожудан поглед их повређују (Мт 5,21–28)."
+      },
+      "tag": "dogma"
+    },
+    "christ": {
+      "de": "Christus ist nicht gekommen, das Gesetz aufzuheben, sondern zu erfüllen (Mt 5,17). Er schreibt Gottes Gebot durch den Heiligen Geist in unsere Herzen.",
+      "sr": "Христос није дошао да укине закон, него да га испуни (Мт 5,17). Он Духом Светим уписује Божију заповест у наша срца."
+    },
+    "links": [
+      {
+        "ref": {
+          "de": "Mt 22,37–40",
+          "sr": "Мт 22,37–40"
+        },
+        "note": {
+          "de": "Das größte Gebot.",
+          "sr": "Највећа заповест."
+        }
+      },
+      {
+        "ref": {
+          "de": "Mt 5,17–28",
+          "sr": "Мт 5,17–28"
+        },
+        "note": {
+          "de": "Erfüllung und Vertiefung des Gesetzes.",
+          "sr": "Испуњење и продубљење закона."
+        }
+      },
+      {
+        "ref": {
+          "de": "Röm 13,8–10",
+          "sr": "Рим 13,8–10"
+        },
+        "note": {
+          "de": "Die Liebe ist die Erfüllung des Gesetzes.",
+          "sr": "Љубав је испуњење закона."
+        }
+      }
+    ],
+    "fathers": {
+      "de": "Die Unterscheidung zwischen Verehrung und Anbetung ist in den Beschlüssen des Siebten Ökumenischen Konzils festgehalten (englisch in NPNF II/14). Wörtliche Zitate gibt die App nicht wieder.",
+      "sr": "Разликовање поштовања и поклоњења записано је у одлукама Седмог васељенског сабора (на енглеском у NPNF II/14). Апликација не наводи дословне цитате."
+    },
+    "fathersTag": "history",
+    "questions": [
+      {
+        "q": {
+          "de": "Woran erinnert Gott, bevor er die Gebote gibt?",
+          "sr": "На шта Бог подсећа пре него што да заповести?"
+        },
+        "a": {
+          "de": "An die Befreiung aus der Sklaverei in Ägypten.",
+          "sr": "На ослобођење из ропства у Египту."
+        }
+      },
+      {
+        "q": {
+          "de": "Warum widersprechen Ikonen nicht dem zweiten Gebot?",
+          "sr": "Зашто иконе не противрече другој заповести?"
+        },
+        "a": {
+          "de": "Weil die Verehrung auf die dargestellte Person übergeht, Anbetung allein Gott gebührt und Gott in Christus sichtbar Mensch wurde.",
+          "sr": "Зато што поштовање прелази на насликану личност, поклоњење припада само Богу, а Бог је у Христу постао видљиви човек."
+        }
+      },
+      {
+        "q": {
+          "de": "Wie fasst Christus die Gebote zusammen?",
+          "sr": "Како Христос сажима заповести?"
+        },
+        "a": {
+          "de": "Im Gebot der Liebe zu Gott und zum Nächsten.",
+          "sr": "У заповести љубави према Богу и ближњем."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Nutze die Zehn Gebote diese Woche für eine Gewissensprüfung am Abend – ein Gebot pro Tag.",
+      "sr": "Користите ове недеље Десет заповести за испитивање савести увече – по једну заповест сваког дана."
+    },
+    "review": {
+      "de": "Am Sinai gibt Gott die Zehn Gebote als Wegweiser in die Freiheit. Christus erfüllt und vertieft sie im Gebot der Liebe.",
+      "sr": "На Синају Бог даје Десет заповести као путоказе у слободу. Христос их испуњава и продубљује у заповести љубави."
+    },
+    "quiz": [
+      {
+        "q": {
+          "de": "Auf welchem Berg gab Gott die Zehn Gebote?",
+          "sr": "На којој гори је Бог дао Десет заповести?"
+        },
+        "options": [
+          {
+            "de": "Sinai",
+            "sr": "Синај"
+          },
+          {
+            "de": "Tabor",
+            "sr": "Тавор"
+          },
+          {
+            "de": "Karmel",
+            "sr": "Кармил"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Welches Gebot ist in der orthodoxen Zählung das zweite?",
+          "sr": "Која заповест је по православном бројању друга?"
+        },
+        "options": [
+          {
+            "de": "Kein Götzenbild machen",
+            "sr": "Не прави себи идола"
+          },
+          {
+            "de": "Nicht stehlen",
+            "sr": "Не укради"
+          },
+          {
+            "de": "Den Sabbat heiligen",
+            "sr": "Светкуј дан одмора"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Welches Konzil erklärte die Ikonenverehrung?",
+          "sr": "Који сабор је објаснио поштовање икона?"
+        },
+        "options": [
+          {
+            "de": "Das Siebte Ökumenische Konzil (787)",
+            "sr": "Седми васељенски сабор (787)"
+          },
+          {
+            "de": "Das Apostelkonzil",
+            "sr": "Апостолски сабор"
+          },
+          {
+            "de": "Das Konzil von Trient",
+            "sr": "Тридентски сабор"
+          }
+        ],
+        "correct": 0
+      }
+    ]
   }
   ]
 };
