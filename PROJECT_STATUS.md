@@ -1,6 +1,6 @@
 # OrthodoxPath – Projektstatus
 
-Stand: 3. November 2026 · Version 3.3.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
+Stand: 4. November 2026 · Version 3.4.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
 
 ## 1. Kurzbeschreibung
 Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe Lern- und Glaubens-App als **Progressive Web App (PWA)** fürs iPhone. Kein Konto, keine Werbung, keine Server-Datenhaltung, offline nutzbar.
@@ -18,7 +18,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 | Authentifizierung | Keine (bewusst). Optionales Passwort nur für die lokale Verschlüsselung der Notizen (AES-GCM, PBKDF2 200 000 Runden) |
 | Hosting | GitHub Pages (Repo `nidzojungbluth/orthodoxpath`: gebaute PWA im Hauptverzeichnis, Quellcode in `source/`) + privates Claude-Artefakt |
 | Offline | Service Worker „cache first“; Offline-Test im Browser bestanden |
-| Tests | `tests/a11y.js` (Barrierefreiheit, axe-core) · `tests/content.test.js` (~13 300 Inhaltsprüfungen), `tests/e2e.js` (53 Bedienungsprüfungen; `content.test.js` prüft auch die Serbisch-Werkzeuge, Chromium, simuliertes iPhone 390×844), `tests/pwa-offline.js` |
+| Tests | `tests/a11y.js` (Barrierefreiheit, axe-core) · `tests/content.test.js` (~13 300 Inhaltsprüfungen), `tests/e2e.js` (58 Bedienungsprüfungen; `content.test.js` prüft auch die Serbisch-Werkzeuge, Chromium, simuliertes iPhone 390×844), `tests/pwa-offline.js` |
 
 ## 3. Funktionen
 
@@ -28,7 +28,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 - Theologie: Kurs A (7), Paisios (9), D (4), E Liturgie (6); Glaubensbekenntnis; Liturgie in 16 Schritten; Ikonen-Lexikon (13); Glossar (37, Suche)
 - 10 Kirchenväter, 28 Heilige mit Fragen/Quiz (Heilige vorerst pausiert – Wunsch des Nutzers)
 - Gebetsbuch: Morgen/Abend, 14 Themen, 30 Texte, Favoriten, Anliegen, „Heute gebetet“
-- Kirchenkalender julianisch/neujulianisch: Ostern berechnet, 39 Feste, 48 Gedenktage, Fasten-Status + überlieferte Regel
+- Kirchenkalender julianisch/neujulianisch: Ostern berechnet, 39 Feste, 48 Gedenktage, Fasten-Status + überlieferte Regel; Monatsübersicht (Fastenart je Tag, Feste, Tagesdetails); Feste als Kalenderdatei (.ics) exportierbar
 - Lernkarten (140) mit verteilter Wiederholung, Quiz, Fortschritt, Wochenübersicht ohne Druck
 - Notizbuch (Verschlüsselung, Export/Teilen), gespeicherte Bibelstellen
 - Bibliothek (27 Werke, Kategorien, Suche, Linkhinweise)

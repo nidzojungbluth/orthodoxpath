@@ -188,6 +188,19 @@ const ok = (c, m) => { checks++; if (!c) { fails++; console.log("FAIL:", m); } e
   const nLess = await page.$$eval('main a.item[href^="#lesson-bib-"]', e => e.length);
   ok(grouped >= 8 && nLess >= 53, "Bibelschule nach Büchern gruppiert (" + grouped + " Gruppen, " + nLess + " Lektionen)");
   await page.click('[data-bview="path"]'); await page.waitForTimeout(150);
+  // Kalender: Monatsübersicht, Tag wählen, Kalenderdatei
+  await page.evaluate(() => { location.hash = "calendar"; }); await page.waitForTimeout(250);
+  const cells = await page.$$eval(".mc[data-day]", e => e.length);
+  ok(cells >= 28 && cells <= 31, "Monatsübersicht zeigt " + cells + " Tage");
+  await page.click('[data-mnav="1"]'); await page.waitForTimeout(150);
+  const cells2 = await page.$$eval(".mc[data-day]", e => e.length);
+  ok(cells2 >= 28, "Monat weiterblättern");
+  await page.click(".mc[data-day]"); await page.waitForTimeout(150);
+  ok(await page.$(".mdetail") !== null, "Tagesdetails nach Antippen");
+  const ics = await page.evaluate(() => window.__OP.icsFor([{ id: "test", t: Date.UTC(2027, 0, 7), name: { de: "Christi Geburt, Test; ok", sr: "Рождество" }, mean: { de: "Zeile\nzwei", sr: "x" } }]));
+  ok(ics.startsWith("BEGIN:VCALENDAR") && ics.includes("DTSTART;VALUE=DATE:20270107") && ics.includes("DTEND;VALUE=DATE:20270108") && ics.includes("Christi Geburt\\, Test\\; ok") && ics.includes("\r\n"), "Kalenderdatei (.ics) korrekt aufgebaut");
+  const [icsDl] = await Promise.all([page.waitForEvent("download"), page.click("#icsall")]);
+  ok(/\.ics$/.test(icsDl.suggestedFilename()), "Alle Feste als .ics herunterladbar");
   // Glossar-Filter
   await page.evaluate(() => { location.hash = "glossary"; }); await page.waitForTimeout(250);
   const before = await page.$$eval(".glo:not([hidden])", e => e.length);

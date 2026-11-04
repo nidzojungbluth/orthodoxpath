@@ -59,7 +59,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 - Test: Content-Test erzwingt `source` für neue Gebete.
 - Fertig, wenn: jedes Gebet hat Quelle und Kennzeichnung.
 
-**P2-04 Kalender-Erweiterungen** (keine · M)
+**P2-04 Kalender-Erweiterungen** ✅ erledigt 4.11.2026 – Monatsübersicht mit Fastenpunkten/Festen/Tagesdetails, .ics-Export (einzeln und 12 Monate); Import in den iPhone-Kalender durch Nutzer zu prüfen (keine · M)
 - Ziel: Fastenkalender als Monatsübersicht; Export eines Festes in den iPhone-Kalender (`.ics`-Datei).
 - Umsetzung: Monatsraster aus `fastInfo`/`feastsOn`; ICS-Erzeugung lokal.
 - Test: Unit-Tests für 2 Jahre × 2 Kalender; e2e Monatswechsel.

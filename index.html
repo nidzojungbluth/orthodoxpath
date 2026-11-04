@@ -375,11 +375,33 @@ main > .wrap { animation: opFade .3s var(--ease); }
 .card.notice { border-color: color-mix(in srgb, var(--gold) 40%, transparent); }
 .card.notice h3 { font-size: 1.2em; }
 label.btn { margin: 0; font-size: 1em; }
+
+/* Monatsübersicht */
+.month .mhead { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.month .mhead h3 { margin: 0; text-transform: capitalize; }
+.mgrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.mw { text-align: center; font-size: .7em; font-weight: 700; color: var(--muted); padding: 2px 0 4px; text-transform: uppercase; }
+.mc { position: relative; aspect-ratio: 1; min-height: 40px; border-radius: 10px; border: 1px solid transparent; background: var(--card2); font-size: .88em; font-weight: 600; cursor: pointer; color: var(--text); padding: 0; }
+.mc.empty { background: transparent; cursor: default; }
+.mc::after { content: ""; position: absolute; left: 50%; bottom: 5px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: transparent; }
+.mc.fk-strict::after, .mlegend .fk-strict { background: #c0525e; }
+.mc.fk-fast::after, .mlegend .fk-fast { background: #d79a4a; }
+.mc.fk-light::after, .mlegend .fk-light { background: #c9b26a; }
+.mc.fk-free::after, .mlegend .fk-free { background: #6f9a68; }
+.mc.feast { border-color: color-mix(in srgb, var(--gold) 45%, transparent); }
+.mc.great { border-color: var(--gold); background: var(--goldsoft); color: var(--gold2); }
+.mc.today { box-shadow: 0 0 0 2px var(--gold) inset; }
+.mc.sel { background: var(--gold); color: var(--onGold); }
+.mlegend { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 10px; font-size: .75em; color: var(--muted); }
+.mlegend span { display: inline-flex; align-items: center; gap: 5px; }
+.mlegend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.mlegend .lg-great { border-radius: 3px; border: 1.5px solid var(--gold); background: var(--goldsoft); width: 10px; height: 10px; }
+.mdetail { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hair); }
 </style>
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "3.3.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "3.4.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -531,6 +553,8 @@ const UI = {
     a2Title: "Tipp: Zum Home-Bildschirm hinzufügen", a2Text: "So startet OrthodoxPath wie eine App, funktioniert offline, und das iPhone löscht deine Daten nicht so leicht. Tippe in Safari auf das Teilen-Symbol (Quadrat mit Pfeil) und dann auf „Zum Home-Bildschirm“.", a2Ok: "Verstanden",
     tPray: "Gebet", tRead: "Heutige Lesung", tStartPlan: "Einen Leseplan beginnen", tCalMore: "Kalender öffnen",
     bvLabel: "Anordnung der Lektionen", bvPath: "Lernweg", bvBooks: "Nach Büchern",
+    mTitle: "Monatsübersicht", mPrev: "Vorheriger Monat", mNext: "Nächster Monat", mLegend: "Legende", mStrict: "strenges Fasten", mFast: "Fasten (oft mit Fisch)", mLight: "ohne Fleisch", mFree: "fastenfrei", mFeast: "Fest", mGreat: "Großes Fest",
+    icsOne: "In den Kalender übernehmen", icsAll: "Alle Feste der nächsten 12 Monate in den Kalender", icsNote: "Es wird eine Kalenderdatei (.ics) erzeugt. Auf dem iPhone öffnet sich danach „Zum Kalender hinzufügen“. Die Daten folgen der in der App gewählten Kalenderart.", icsDone: "Kalenderdatei erstellt",
     prevLesson: "Vorherige Lektion", nextLessonL: "Nächste Lektion", lastOpened: "Zuletzt geöffnet",
     remTitle: "Gebetserinnerungen", remText: "Web-Apps können auf dem iPhone keine zuverlässigen täglichen Erinnerungen senden. Mit der App „Erinnerungen“ geht es trotzdem – ganz ohne Datenweitergabe:",
     remS1: "Tippe unten auf „Link kopieren“ – das ist der Link zum Gebetsbuch.", remS2: "Öffne die App „Erinnerungen“ und lege eine neue Erinnerung an, z. B. „Morgengebet“.", remS3: "Tippe auf „i“ (Details), aktiviere Datum und Uhrzeit und wähle bei „Wiederholen“ „Täglich“.", remS4: "Füge den Link im Feld „URL“ ein. Beim Tippen auf die Erinnerung öffnet sich das Gebetsbuch.",
@@ -744,6 +768,8 @@ const UI = {
     a2Title: "Савет: додајте на почетни екран", a2Text: "Тако се OrthodoxPath покреће као апликација, ради без интернета, а ајфон не брише тако лако ваше податке. У Сафарију додирните симбол за дељење (квадрат са стрелицом), а затим „Додај на почетни екран“.", a2Ok: "Разумем",
     tPray: "Молитва", tRead: "Данашње читање", tStartPlan: "Започните план читања", tCalMore: "Отвори календар",
     bvLabel: "Распоред лекција", bvPath: "Пут учења", bvBooks: "По књигама",
+    mTitle: "Месечни преглед", mPrev: "Претходни месец", mNext: "Следећи месец", mLegend: "Легенда", mStrict: "строги пост", mFast: "пост (често уз рибу)", mLight: "без меса", mFree: "мрсно", mFeast: "Празник", mGreat: "Велики празник",
+    icsOne: "Додај у календар", icsAll: "Сви празници у наредних 12 месеци у календар", icsNote: "Прави се календарска датотека (.ics). На ајфону се затим отвара „Додај у календар“. Датуми прате врсту календара изабрану у апликацији.", icsDone: "Календарска датотека направљена",
     prevLesson: "Претходна лекција", nextLessonL: "Следећа лекција", lastOpened: "Последње отворено",
     remTitle: "Подсетници за молитву", remText: "Веб-апликације на ајфону не могу да шаљу поуздане дневне подсетнике. Помоћу апликације „Подсетници“ ипак иде – без слања података:",
     remS1: "Додирните доле „Копирај везу“ – то је веза ка молитвенику.", remS2: "Отворите апликацију „Подсетници“ и направите нови подсетник, нпр. „Јутарња молитва“.", remS3: "Додирните „i“ (детаљи), укључите датум и време и код „Понављај“ изаберите „Дневно“.", remS4: "Налепите везу у поље „URL“. Када додирнете подсетник, отвара се молитвеник.",
@@ -9119,6 +9145,54 @@ function fastPeriods(y, cal) {
       </ul>
     </div>`;
   }
+  /* ---------- Monatsübersicht und Kalenderdatei ---------- */
+  let calMonth = null, calDay = null;
+  const FAST_CLASS = { lent: "strict", dormition: "strict", single: "strict", apostles: "fast", nativity: "fast", wedfri: "fast", cheese: "light", free: "free", none: "" };
+  function monthCard() {
+    const td = todayUTC(); const c = cal();
+    if (calMonth == null) { const d = new Date(td); calMonth = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1); }
+    const m0 = new Date(calMonth); const y = m0.getUTCFullYear(), mo = m0.getUTCMonth();
+    const days = new Date(Date.UTC(y, mo + 1, 0)).getUTCDate(); const lead = (m0.getUTCDay() + 6) % 7;
+    const wd = Array.from({ length: 7 }, (_, i) => { try { return new Date(Date.UTC(2024, 0, 1 + i)).toLocaleDateString(locale(), { weekday: "narrow", timeZone: "UTC" }); } catch (e) { return ""; } });
+    let title; try { title = m0.toLocaleDateString(locale(), { month: "long", year: "numeric", timeZone: "UTC" }); } catch (e) { title = (mo + 1) + "/" + y; }
+    let cells = "";
+    for (let i = 0; i < lead; i++) cells += `<span class="mc empty"></span>`;
+    for (let d = 1; d <= days; d++) {
+      const ts = Date.UTC(y, mo, d); const fk = FAST_CLASS[fastInfo(ts, c).kind] || ""; const fe = feastsOn(ts, c);
+      const great = fe.some(f => f.great); const lbl = fmtDate(ts, true) + (fe.length ? ", " + fe.map(f => L(f.name)).join(", ") : "") + ", " + L(CAL_FASTS[fastInfo(ts, c).kind]);
+      cells += `<button class="mc ${fk ? "fk-" + fk : ""} ${fe.length ? (great ? "great" : "feast") : ""} ${ts === td ? "today" : ""} ${ts === calDay ? "sel" : ""}" data-day="${ts}" aria-label="${esc(lbl)}">${d}</button>`;
+    }
+    let detail = "";
+    if (calDay != null) {
+      const fi = fastInfo(calDay, c); const fe = feastsOn(calDay, c); const sts = saintsOn(calDay, c);
+      detail = `<div class="mdetail"><div class="eyebrow">${esc(fmtDate(calDay, true))}</div>
+        ${fe.map(f => `<p style="margin:0 0 4px"><b>${E(f.name)}</b></p>`).join("")}
+        ${sts.length ? `<p class="small" style="margin:0 0 6px">${ic("cross", "gold")} ${sts.map(id => `<a href="#person-${id}">${E(PEOPLE[id].name)}</a>`).join(" · ")}</p>` : ""}
+        ${fastBadge(fi.kind)}${!["none", "free"].includes(fi.kind) ? `<p class="small muted" style="margin:2px 0 0">${E(CAL_FAST_RULES[fi.kind])}</p>` : ""}
+        ${fe.length ? `<button class="btn ghost block" style="margin-top:10px" data-ics="${calDay}">${ic("calendar")} ${esc(t("icsOne"))}</button>` : ""}</div>`;
+    }
+    return `<div class="card month"><div class="mhead"><button class="iconbtn" data-mnav="-1" aria-label="${esc(t("mPrev"))}">${ic("chev", "flip")}</button><h3>${esc(title)}</h3><button class="iconbtn" data-mnav="1" aria-label="${esc(t("mNext"))}">${ic("chev")}</button></div>
+      <div class="mgrid">${wd.map(w => `<span class="mw">${esc(w)}</span>`).join("")}${cells}</div>
+      <div class="mlegend"><span><i class="fk-strict"></i>${esc(t("mStrict"))}</span><span><i class="fk-fast"></i>${esc(t("mFast"))}</span><span><i class="fk-light"></i>${esc(t("mLight"))}</span><span><i class="fk-free"></i>${esc(t("mFree"))}</span><span><i class="lg-great"></i>${esc(t("mGreat"))}</span></div>
+      ${detail}</div>`;
+  }
+  function icsEscape(x) { return String(x).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n"); }
+  function icsFold(line) { const out = []; while (line.length > 70) { out.push(line.slice(0, 70)); line = " " + line.slice(70); } out.push(line); return out.join("\r\n"); }
+  function icsFor(feasts) {
+    const ymd = ts => new Date(ts).toISOString().slice(0, 10).replace(/-/g, "");
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
+    const ev = feasts.map(f => ["BEGIN:VEVENT", "UID:" + f.id + "-" + ymd(f.t) + "-" + cal() + "@orthodoxpath", "DTSTAMP:" + stamp,
+      "DTSTART;VALUE=DATE:" + ymd(f.t), "DTEND;VALUE=DATE:" + ymd(f.t + 86400000), "SUMMARY:" + icsEscape(L(f.name)),
+      f.mean ? "DESCRIPTION:" + icsEscape(L(f.mean)) : null, "TRANSP:TRANSPARENT", "END:VEVENT"].filter(Boolean).map(icsFold).join("\r\n"));
+    return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//OrthodoxPath//DE", "CALSCALE:GREGORIAN", ...ev, "END:VCALENDAR"].join("\r\n") + "\r\n";
+  }
+  async function saveIcs(text, name) {
+    try { const file = new File([text], name, { type: "text/calendar" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: "OrthodoxPath" }); return; } }
+    catch (e) { if (e && e.name === "AbortError") return; }
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: "text/calendar" })); a.download = name;
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); toast(t("icsDone"));
+  }
   function viewCalendar() {
     const td = todayUTC(); const y = new Date(td).getUTCFullYear(); const c = cal();
     const fi = fastInfo(td, c); const fe = feastsOn(td, c); const sts = saintsOn(td, c);
@@ -9140,7 +9214,11 @@ function fastPeriods(y, cal) {
         <div class="card stat"><b style="font-size:1.2em">${esc(fmtDate(P))}</b><span class="small muted">${esc(t("calPascha").replace("{y}", y))}</span></div>
         <div class="card stat"><b style="font-size:1.2em">${esc(fmtDate(P2))}</b><span class="small muted">${esc(t("calPascha").replace("{y}", y + 1))}</span></div>
       </div>
+      <h2>${esc(t("mTitle"))}</h2>
+      ${monthCard()}
       <h2>${esc(t("calUpcoming"))}</h2>
+      <button class="btn ghost block" id="icsall" style="margin-bottom:6px">${ic("calendar")} ${esc(t("icsAll"))}</button>
+      <p class="small muted">${esc(t("icsNote"))}</p>
       <ul class="list">${upcoming.map(f => `<li class="item" style="cursor:default;align-items:flex-start"><span class="grow"><span class="t">${E(f.name)}</span><span class="s">${esc(fmtDate(f.t, true))} · ${esc(f.t === td ? t("calToday") : inDays(f.t))}</span>${f.mean ? `<span class="s">${E(f.mean)}</span>` : ""}${f.great ? `<span class="badge tag-dogma" style="margin:6px 0 0">${esc(t("calGreat"))}</span>` : ""}</span></li>`).join("")}</ul>
       <h2>${esc(t("calFastPeriods").replace("{y}", y))}</h2>
       <div class="card">
@@ -9154,7 +9232,17 @@ function fastPeriods(y, cal) {
       <a class="item" href="#lesson-li-fasting"><span class="grow"><span class="t">${E(ALL_LESSONS["li-fasting"].title)}</span></span><span class="chev">${ic("chev")}</span></a>
       <a class="item" href="#lesson-li-calendar"><span class="grow"><span class="t">${E(ALL_LESSONS["li-calendar"].title)}</span></span><span class="chev">${ic("chev")}</span></a>`;
   }
-  function bindCalendar() { app.querySelectorAll("[data-cal]").forEach(b => b.onclick = () => { S.calendar = b.getAttribute("data-cal"); save(); render(); }); }
+  function bindCalendar() {
+    app.querySelectorAll("[data-cal]").forEach(b => b.onclick = () => { S.calendar = b.getAttribute("data-cal"); save(); render(); });
+    const keep = () => { const y = window.scrollY; render(); window.scrollTo(0, y); };
+    app.querySelectorAll("[data-mnav]").forEach(b => b.onclick = () => { const d = new Date(calMonth); calMonth = Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + parseInt(b.getAttribute("data-mnav"), 10), 1); calDay = null; keep(); });
+    app.querySelectorAll(".mc[data-day]").forEach(b => b.onclick = () => { const v = parseInt(b.getAttribute("data-day"), 10); calDay = calDay === v ? null : v; keep(); });
+    app.querySelectorAll("[data-ics]").forEach(b => b.onclick = () => { const ts = parseInt(b.getAttribute("data-ics"), 10); const fe = feastsOn(ts, cal()); if (fe.length) saveIcs(icsFor(fe), "orthodoxpath-" + new Date(ts).toISOString().slice(0, 10) + ".ics"); });
+    const all = document.getElementById("icsall");
+    if (all) all.onclick = () => { const td = todayUTC(); const y = new Date(td).getUTCFullYear();
+      const fe = feastsOfYear(y, cal()).concat(feastsOfYear(y + 1, cal())).filter(f => f.t >= td && f.t < td + 366 * 86400000);
+      saveIcs(icsFor(fe), "orthodoxpath-feste-" + y + ".ics"); };
+  }
 
   /* ---------- Bibel ---------- */
   function bibleView() { return S.bibleView === "books" ? "books" : "path"; }
@@ -9877,7 +9965,7 @@ function fastPeriods(y, cal) {
   const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
-  window.__OP = { get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };
+  window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };
 
   /* PWA: Service Worker nur in der eigenständigen Version */
   /* Dauerhaften Speicher anfragen (wo der Browser es unterstützt) */

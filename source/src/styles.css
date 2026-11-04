@@ -351,3 +351,25 @@ main > .wrap { animation: opFade .3s var(--ease); }
 .card.notice { border-color: color-mix(in srgb, var(--gold) 40%, transparent); }
 .card.notice h3 { font-size: 1.2em; }
 label.btn { margin: 0; font-size: 1em; }
+
+/* Monatsübersicht */
+.month .mhead { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.month .mhead h3 { margin: 0; text-transform: capitalize; }
+.mgrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.mw { text-align: center; font-size: .7em; font-weight: 700; color: var(--muted); padding: 2px 0 4px; text-transform: uppercase; }
+.mc { position: relative; aspect-ratio: 1; min-height: 40px; border-radius: 10px; border: 1px solid transparent; background: var(--card2); font-size: .88em; font-weight: 600; cursor: pointer; color: var(--text); padding: 0; }
+.mc.empty { background: transparent; cursor: default; }
+.mc::after { content: ""; position: absolute; left: 50%; bottom: 5px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: transparent; }
+.mc.fk-strict::after, .mlegend .fk-strict { background: #c0525e; }
+.mc.fk-fast::after, .mlegend .fk-fast { background: #d79a4a; }
+.mc.fk-light::after, .mlegend .fk-light { background: #c9b26a; }
+.mc.fk-free::after, .mlegend .fk-free { background: #6f9a68; }
+.mc.feast { border-color: color-mix(in srgb, var(--gold) 45%, transparent); }
+.mc.great { border-color: var(--gold); background: var(--goldsoft); color: var(--gold2); }
+.mc.today { box-shadow: 0 0 0 2px var(--gold) inset; }
+.mc.sel { background: var(--gold); color: var(--onGold); }
+.mlegend { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 10px; font-size: .75em; color: var(--muted); }
+.mlegend span { display: inline-flex; align-items: center; gap: 5px; }
+.mlegend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.mlegend .lg-great { border-radius: 3px; border: 1.5px solid var(--gold); background: var(--goldsoft); width: 10px; height: 10px; }
+.mdetail { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hair); }

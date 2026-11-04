@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.3.0 (3. November 2026)
+**Aktuelle Version:** 3.4.0 (4. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,12 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.4 (ROADMAP P2-04)
+
+- Kirchenkalender: Monatsübersicht mit Blätterfunktion; jeder Tag zeigt die Fastenart als farbigen Punkt (streng / mit Fisch / ohne Fleisch / fastenfrei), Feste und große Feste sind umrandet; Antippen zeigt Fest, Heilige und Fastenregel des Tages.
+- Kalenderdatei (.ics): einzelnes Fest oder alle Feste der nächsten 12 Monate in den iPhone-Kalender übernehmen (Daten nach gewählter Kalenderart).
+- 5 neue Bedienungstests (58 insgesamt), Barrierefreiheitstest weiter ohne Verstöße.
 
 ## Version 3.3 (ROADMAP P2-02, P2-05, P2-06)
 
