@@ -96,7 +96,7 @@
   const CARDS = [];
   GLOSSARY.forEach(g => CARDS.push({ id: "g-" + g[0], deck: "d-basics", front: { de: g[1], sr: g[2] }, back: { de: g[3], sr: g[4] } }));
   EXTRA_CARDS.forEach((c, i) => CARDS.push({ id: "x-" + i, deck: c[0], front: { de: c[1], sr: c[2] }, back: { de: c[3], sr: c[4] } }));
-  const LEARN_PATH = BIBLE_LESSONS.map(l => l.id).concat(THEOLOGY.filter(l => l.course === "A").map(l => l.id), THEOLOGY.filter(l => l.course === "P").map(l => l.id), THEOLOGY.filter(l => l.course === "D").map(l => l.id), THEOLOGY.filter(l => l.course === "L").map(l => l.id));
+  const LEARN_PATH = BIBLE_LESSONS.map(l => l.id).concat(THEOLOGY.filter(l => l.course === "A").map(l => l.id), THEOLOGY.filter(l => l.course === "P").map(l => l.id), THEOLOGY.filter(l => l.course === "D").map(l => l.id), THEOLOGY.filter(l => l.course === "L").map(l => l.id), THEOLOGY.filter(l => l.course === "M").map(l => l.id));
 
   /* ---------- Hilfen UI ---------- */
   const app = document.getElementById("app");
@@ -735,7 +735,7 @@
 
   /* ---------- Theologie ---------- */
   function viewTheology() {
-    const CI = { A: "theology", P: "scroll", D: "cross", L: "chalice" };
+    const CI = { A: "theology", P: "scroll", D: "cross", L: "chalice", M: "candle" };
     const ci = c => { const ls = THEOLOGY.filter(l => l.course === c.id); const d = ls.filter(l => S.done[l.id]).length;
       return navItem("course-" + c.id, CI[c.id] || "theology", t(c.title), L(c.desc) + " · " + d + "/" + ls.length); };
     const byId = id => COURSES.find(c => c.id === id);
@@ -752,6 +752,7 @@
     const c = COURSES.find(x => x.id === cid); if (!c) return `<p>${esc(t("notFound"))}</p>`;
     const ls = THEOLOGY.filter(l => l.course === cid);
     return `<h1>${esc(t(c.title))}</h1><p class="muted">${E(c.desc)}</p>
+      ${cid === "M" ? `<div class="card notice"><p class="small" style="margin:0">${esc(t("myIntro"))}</p></div>` : ""}
       <ul class="list">${ls.map((l, i) => lessonItem(l, i + 1)).join("")}</ul>
       ${cid === "L" ? `<a class="item" href="#liturgy"><span class="grow"><span class="t">${esc(t("litTitle"))}</span></span><span class="chev">${ic("chev")}</span></a>` : ""}
       ${cid === "L" ? `<a class="item" href="#calendar"><span class="grow"><span class="t">${esc(t("calTitle"))}</span></span><span class="chev">${ic("chev")}</span></a>` : ""}

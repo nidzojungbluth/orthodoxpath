@@ -5,6 +5,7 @@ const COURSES = [
   { id: "A", title: "courseA", desc: { de: "Die Grundwahrheiten des Glaubens, einfach und dann vertieft erklärt.", sr: "Основне истине вере, објашњене једноставно, а затим продубљено." } },
   { id: "P", title: "coursePaisios", desc: { de: "Leben und geistliche Lehre des hl. Paisios – mit klarer Quellenkennzeichnung.", sr: "Живот и духовно учење светог Пајсија – са јасним означавањем извора." } },
   { id: "D", title: "courseD", desc: { de: "Glaubensbekenntnis, Konzilien und wichtige Stationen der Kirchengeschichte.", sr: "Символ вере, сабори и важне етапе историје Цркве." } },
+  { id: "M", title: "courseM", desc: { de: "Die heiligen Mysterien (Sakramente): Taufe, Myronsalbung, Eucharistie, Beichte, Ehe, Weihe und Krankensalbung.", sr: "Свете Тајне: крштење, миропомазање, Евхаристија, исповест, венчање, свештенство и јелеосвећење." } },
   { id: "L", title: "courseL", desc: { de: "Göttliche Liturgie, die großen Feste, Fastenzeiten, Kalender und die serbische Slava.", sr: "Света Литургија, велики празници, постови, календар и крсна слава." } },
 ];
 
@@ -861,6 +862,1273 @@ const THEOLOGY = [
       { q: { de: "Mit welchem Gottesdienst ist die Liturgie der Vorgeweihten Gaben verbunden?", sr: "Са којом службом је спојена Литургија Пређеосвећених Дарова?" }, options: [{ de: "Mit der Vesper", sr: "Са вечерњем" }, { de: "Mit der Taufe", sr: "Са крштењем" }, { de: "Mit der Trauung", sr: "Са венчањем" }], correct: 0 }
     ],
     sources: { de: "Typikon und gottesdienstliche Praxis der orthodoxen Kirche; die Tagesangaben entsprechen der allgemeinen Ordnung, die örtliche Praxis kann abweichen. Zuschreibungen an Basilius und Gregor nach der Überlieferung.", sr: "Типик и богослужбена пракса Православне Цркве; наведени дани одговарају општем поретку, месна пракса може да се разликује. Приписивања Василију и Григорију према предању." }
+  },
+  {
+    "id": "my-baptism",
+    "course": "M",
+    "title": {
+      "de": "Die heilige Taufe",
+      "sr": "Свето крштење"
+    },
+    "sections": [
+      {
+        "h": {
+          "de": "Was geschieht in der Taufe?",
+          "sr": "Шта се збива у крштењу?"
+        },
+        "simple": {
+          "de": "In der Taufe wird der Mensch dreimal im Namen des Vaters und des Sohnes und des Heiligen Geistes in das Wasser getaucht. Er stirbt mit Christus der Sünde und steht mit ihm zu einem neuen Leben auf. So wird er Glied der Kirche.",
+          "sr": "У крштењу се човек три пута погружава у воду у име Оца и Сина и Светога Духа. Он са Христом умире греху и са Њим устаје у нови живот. Тако постаје члан Цркве."
+        },
+        "deeper": {
+          "de": "Christus selbst gebot die Taufe (Mt 28,19) und sprach von der Geburt aus Wasser und Geist (Joh 3,5). Paulus erklärt sie als Mitsterben und Mitauferstehen mit Christus (Röm 6,3–5). Die Taufe schenkt Vergebung aller Sünden und wird nur einmal empfangen – „ich bekenne die eine Taufe zur Vergebung der Sünden“, heißt es im Glaubensbekenntnis. Vorher werden die bösen Mächte abgesagt, und der Täufling (oder für ein Kind der Pate) bekennt den Glauben.",
+          "sr": "Сам Христос је заповедио крштење (Мт 28,19) и говорио о рођењу од воде и Духа (Јн 3,5). Павле га објашњава као умирање и васкрсавање са Христом (Рим 6,3–5). Крштење дарује опроштај свих грехова и прима се само једном – „исповедам једно крштење за опроштај грехова“, каже Символ вере. Пре тога се одриче зла, а крштеник (или за дете кум) исповеда веру."
+        },
+        "tag": "dogma"
+      },
+      {
+        "h": {
+          "de": "Kindertaufe und Paten",
+          "sr": "Крштење деце и кумови"
+        },
+        "simple": {
+          "de": "Die orthodoxe Kirche tauft auch kleine Kinder. Paten (in Serbien der Kum) bekennen für sie den Glauben und helfen ihnen später, im Glauben zu wachsen.",
+          "sr": "Православна Црква крштава и малу децу. Кумови за њих исповедају веру и касније им помажу да узрастају у вери."
+        },
+        "deeper": {
+          "de": "Schon das Neue Testament erzählt von der Taufe ganzer Häuser (Apg 16,15.33). Getaufte Kinder empfangen in der Orthodoxie sofort auch die Myronsalbung und die Kommunion. In Lebensgefahr kann nach kirchlicher Praxis im Notfall auch ein Laie taufen; die übrigen Teile werden später vom Priester ergänzt. Wie das genau geht, erfragst du bei deinem Priester.",
+          "sr": "Већ Нови завет приповеда о крштењу целих домова (Дап 16,15.33). Крштена деца у Православљу одмах примају и миропомазање и причешће. У смртној опасности, по црквеној пракси, у нужди може да крсти и лаик; остали делови касније допуњује свештеник. Како се то тачно чини, питајте свог свештеника."
+        },
+        "tag": "history"
+      }
+    ],
+    "keyPoints": [
+      {
+        "de": "Dreimaliges Untertauchen im Namen der Dreieinigkeit.",
+        "sr": "Троструко погружавање у име Свете Тројице."
+      },
+      {
+        "de": "Sterben und Auferstehen mit Christus, Vergebung der Sünden.",
+        "sr": "Умирање и васкрсавање са Христом, опроштај грехова."
+      },
+      {
+        "de": "Einmalig; auch Kinder werden getauft.",
+        "sr": "Једном у животу; крштавају се и деца."
+      }
+    ],
+    "bible": [
+      {
+        "ref": {
+          "de": "Mt 28,19",
+          "sr": "Мт 28,19"
+        },
+        "note": {
+          "de": "Tauft sie im Namen des Vaters …",
+          "sr": "Крстећи их у име Оца …"
+        }
+      },
+      {
+        "ref": {
+          "de": "Röm 6,3–5",
+          "sr": "Рим 6,3–5"
+        },
+        "note": {
+          "de": "Mit Christus begraben und auferweckt.",
+          "sr": "Са Христом сахрањени и васкрснути."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 3,5",
+          "sr": "Јн 3,5"
+        },
+        "note": {
+          "de": "Aus Wasser und Geist geboren.",
+          "sr": "Рођен од воде и Духа."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Finde heraus, an welchem Tag du getauft wurdest, und danke Gott an diesem Tag jedes Jahr.",
+      "sr": "Сазнајте ког дана сте крштени и сваке године тог дана захвалите Богу."
+    },
+    "questions": [
+      {
+        "q": {
+          "de": "Warum wird man nur einmal getauft?",
+          "sr": "Зашто се крштава само једном?"
+        },
+        "a": {
+          "de": "Weil die Taufe die neue Geburt ist; man wird nur einmal geboren. So bekennt es auch das Glaubensbekenntnis.",
+          "sr": "Зато што је крштење ново рођење; човек се рађа само једном. Тако исповеда и Символ вере."
+        }
+      },
+      {
+        "q": {
+          "de": "Was tun die Paten?",
+          "sr": "Шта чине кумови?"
+        },
+        "a": {
+          "de": "Sie bekennen für das Kind den Glauben und begleiten es im Glaubensleben.",
+          "sr": "Исповедају веру за дете и прате га у духовном животу."
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": {
+          "de": "Wie oft wird der Täufling untergetaucht?",
+          "sr": "Колико пута се крштеник погружава?"
+        },
+        "options": [
+          {
+            "de": "Dreimal",
+            "sr": "Три пута"
+          },
+          {
+            "de": "Einmal",
+            "sr": "Једном"
+          },
+          {
+            "de": "Siebenmal",
+            "sr": "Седам пута"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Was empfangen getaufte Kinder in der Orthodoxie zusätzlich sofort?",
+          "sr": "Шта крштена деца у Православљу одмах примају?"
+        },
+        "options": [
+          {
+            "de": "Myronsalbung und Kommunion",
+            "sr": "Миропомазање и причешће"
+          },
+          {
+            "de": "Priesterweihe",
+            "sr": "Рукоположење"
+          },
+          {
+            "de": "Nichts",
+            "sr": "Ништа"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Welches Bibelwort enthält den Taufbefehl?",
+          "sr": "Који библијски стих садржи заповест о крштењу?"
+        },
+        "options": [
+          {
+            "de": "Mt 28,19",
+            "sr": "Мт 28,19"
+          },
+          {
+            "de": "Gen 1,1",
+            "sr": "Пост 1,1"
+          },
+          {
+            "de": "Ps 23",
+            "sr": "Пс 23"
+          }
+        ],
+        "correct": 0
+      }
+    ],
+    "sources": {
+      "de": "Gottesdienstliche Ordnung (Euchologion/Trebnik) und Lehre der orthodoxen Kirche; Einzelheiten der Praxis unterscheiden sich zwischen Ortskirchen – Auskunft gibt dein Priester.",
+      "sr": "Богослужбени поредак (Требник) и учење Православне Цркве; појединости праксе разликују се међу помесним Црквама – обавештења даје ваш свештеник."
+    }
+  },
+  {
+    "id": "my-chrism",
+    "course": "M",
+    "title": {
+      "de": "Die heilige Myronsalbung",
+      "sr": "Свето миропомазање"
+    },
+    "sections": [
+      {
+        "h": {
+          "de": "Das Siegel des Heiligen Geistes",
+          "sr": "Печат дара Духа Светога"
+        },
+        "simple": {
+          "de": "Gleich nach der Taufe salbt der Priester Stirn, Augen, Nase, Mund, Ohren, Brust, Hände und Füße mit dem heiligen Myron und spricht bei jeder Salbung: „Siegel der Gabe des Heiligen Geistes.“ So empfängt der Getaufte den Heiligen Geist.",
+          "sr": "Одмах после крштења свештеник светим миром помазује чело, очи, ноздрве, уста, уши, груди, руке и ноге и при сваком помазању говори: „Печат дара Духа Светога.“ Тако крштени прима Духа Светога."
+        },
+        "deeper": {
+          "de": "In der Apostelgeschichte legten die Apostel den Getauften die Hände auf, und sie empfingen den Heiligen Geist (Apg 8,14–17). Später trat an die Stelle der Handauflegung die Salbung mit Myron. Paulus spricht von Gott, der uns gesalbt und versiegelt und den Geist in unsere Herzen gegeben hat (2 Kor 1,21–22). Was an Pfingsten den Aposteln geschah, wird so jedem Christen persönlich geschenkt.",
+          "sr": "У Делима апостолским апостоли су полагали руке на крштене, и они су примали Духа Светога (Дап 8,14–17). Касније је место полагања руку заузело помазање миром. Павле говори о Богу који нас је помазао и запечатио и дао Духа у срца наша (2 Кор 1,21–22). Оно што се на Педесетницу збило апостолима, тако се дарује сваком хришћанину лично."
+        },
+        "tag": "dogma"
+      },
+      {
+        "h": {
+          "de": "Das heilige Myron",
+          "sr": "Свето миро"
+        },
+        "simple": {
+          "de": "Das Myron ist ein Öl mit vielen duftenden Zutaten. Es wird nicht von jedem Priester bereitet, sondern vom Oberhaupt einer Ortskirche feierlich geweiht.",
+          "sr": "Миро је уље са много мирисних састојака. Не припрема га сваки свештеник, него га свечано освећује поглавар помесне Цркве."
+        },
+        "deeper": {
+          "de": "Die Myronweihe findet nicht jedes Jahr statt, sondern bei Bedarf, traditionell am Großen Donnerstag. Dass das Myron vom Patriarchen bzw. Oberhaupt kommt, zeigt die Einheit der Ortskirche um ihren Bischof. Bei der Aufnahme von Christen aus anderen Konfessionen ist die Praxis der Ortskirchen unterschiedlich; das entscheidet der Bischof.",
+          "sr": "Освећење мира не врши се сваке године, него по потреби, по предању на Велики четвртак. То што миро долази од патријарха, односно поглавара, показује јединство помесне Цркве око њеног епископа. При примању хришћана из других вероисповести пракса помесних Цркава је различита; о томе одлучује епископ."
+        },
+        "tag": "history"
+      }
+    ],
+    "keyPoints": [
+      {
+        "de": "Unmittelbar nach der Taufe.",
+        "sr": "Непосредно после крштења."
+      },
+      {
+        "de": "Worte: „Siegel der Gabe des Heiligen Geistes.“",
+        "sr": "Речи: „Печат дара Духа Светога.“"
+      },
+      {
+        "de": "Das Myron weiht das Oberhaupt der Ortskirche.",
+        "sr": "Миро освећује поглавар помесне Цркве."
+      }
+    ],
+    "bible": [
+      {
+        "ref": {
+          "de": "Apg 8,14–17",
+          "sr": "Дап 8,14–17"
+        },
+        "note": {
+          "de": "Sie empfingen den Heiligen Geist.",
+          "sr": "Примише Духа Светога."
+        }
+      },
+      {
+        "ref": {
+          "de": "2 Kor 1,21–22",
+          "sr": "2 Кор 1,21–22"
+        },
+        "note": {
+          "de": "Gesalbt und versiegelt.",
+          "sr": "Помазао и запечатио."
+        }
+      },
+      {
+        "ref": {
+          "de": "1 Joh 2,20.27",
+          "sr": "1 Јн 2,20.27"
+        },
+        "note": {
+          "de": "Ihr habt die Salbung vom Heiligen.",
+          "sr": "Имате помазање од Светога."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Bete heute bewusst „Himmlischer König“ und denke daran, dass der Heilige Geist dir bei der Myronsalbung geschenkt wurde.",
+      "sr": "Помолите се данас свесно „Царе небески“ и сетите се да вам је Дух Свети дарован при миропомазању."
+    },
+    "questions": [
+      {
+        "q": {
+          "de": "Welche Worte spricht der Priester bei der Salbung?",
+          "sr": "Које речи свештеник говори при помазању?"
+        },
+        "a": {
+          "de": "„Siegel der Gabe des Heiligen Geistes.“",
+          "sr": "„Печат дара Духа Светога.“"
+        }
+      },
+      {
+        "q": {
+          "de": "Was trat an die Stelle der Handauflegung der Apostel?",
+          "sr": "Шта је заузело место апостолског полагања руку?"
+        },
+        "a": {
+          "de": "Die Salbung mit dem heiligen Myron.",
+          "sr": "Помазање светим миром."
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": {
+          "de": "Wann wird die Myronsalbung gespendet?",
+          "sr": "Када се врши миропомазање?"
+        },
+        "options": [
+          {
+            "de": "Gleich nach der Taufe",
+            "sr": "Одмах после крштења"
+          },
+          {
+            "de": "Mit 18 Jahren",
+            "sr": "Са 18 година"
+          },
+          {
+            "de": "Bei der Hochzeit",
+            "sr": "На венчању"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wer weiht das heilige Myron?",
+          "sr": "Ко освећује свето миро?"
+        },
+        "options": [
+          {
+            "de": "Das Oberhaupt der Ortskirche",
+            "sr": "Поглавар помесне Цркве"
+          },
+          {
+            "de": "Jeder Gläubige",
+            "sr": "Сваки верник"
+          },
+          {
+            "de": "Der Kirchenchor",
+            "sr": "Хор"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Welche Gabe wird geschenkt?",
+          "sr": "Који дар се дарује?"
+        },
+        "options": [
+          {
+            "de": "Der Heilige Geist",
+            "sr": "Дух Свети"
+          },
+          {
+            "de": "Ein Name",
+            "sr": "Име"
+          },
+          {
+            "de": "Ein Amt",
+            "sr": "Служба"
+          }
+        ],
+        "correct": 0
+      }
+    ],
+    "sources": {
+      "de": "Gottesdienstliche Ordnung (Euchologion/Trebnik) und Lehre der orthodoxen Kirche; Einzelheiten der Praxis unterscheiden sich zwischen Ortskirchen – Auskunft gibt dein Priester.",
+      "sr": "Богослужбени поредак (Требник) и учење Православне Цркве; појединости праксе разликују се међу помесним Црквама – обавештења даје ваш свештеник."
+    }
+  },
+  {
+    "id": "my-eucharist",
+    "course": "M",
+    "title": {
+      "de": "Die heilige Eucharistie",
+      "sr": "Света Евхаристија"
+    },
+    "sections": [
+      {
+        "h": {
+          "de": "Leib und Blut Christi",
+          "sr": "Тело и Крв Христова"
+        },
+        "simple": {
+          "de": "In der Göttlichen Liturgie werden Brot und Wein durch das Herabkommen des Heiligen Geistes wirklich Leib und Blut Christi. Die Gläubigen empfangen beides mit einem Löffel. Die Eucharistie ist die Mitte des kirchlichen Lebens.",
+          "sr": "На Светој Литургији хлеб и вино силаском Духа Светога заиста постају Тело и Крв Христова. Верни примају и једно и друго кашичицом. Евхаристија је средиште црквеног живота."
+        },
+        "deeper": {
+          "de": "Christus setzte die Eucharistie beim Abendmahl ein (Lk 22,19–20) und sagte: Wer mein Fleisch isst und mein Blut trinkt, hat ewiges Leben (Joh 6,54). Die orthodoxe Kirche erklärt die Wandlung nicht philosophisch, sondern bekennt sie als Geheimnis (Mysterium). Verwendet werden gesäuertes Brot und Wein, dem warmes Wasser beigegeben wird. Auch Kinder kommunizieren von ihrer Taufe an.",
+          "sr": "Христос је установио Евхаристију на Тајној вечери (Лк 22,19–20) и рекао: Ко једе тело моје и пије крв моју има живот вечни (Јн 6,54). Православна Црква претварање не објашњава философски, него га исповеда као Тајну. Користи се квасни хлеб и вино коме се додаје топла вода. И деца се причешћују од крштења."
+        },
+        "tag": "dogma"
+      },
+      {
+        "h": {
+          "de": "Vorbereitung und Haltung",
+          "sr": "Припрема и став"
+        },
+        "simple": {
+          "de": "Vor der Kommunion bereitet man sich mit Gebet und Fasten vor und versöhnt sich mit den Mitmenschen. Wie oft und wie genau, besprichst du mit deinem Priester.",
+          "sr": "Пред причешће се припрема молитвом и постом и мири се са ближњима. Колико често и како тачно, разговарајте са својим свештеником."
+        },
+        "deeper": {
+          "de": "Paulus mahnt, sich selbst zu prüfen und nicht unwürdig zu empfangen (1 Kor 11,27–29). Zugleich betont die Kirche, dass niemand die Kommunion „verdient“: Man empfängt sie als Kranker, der den Arzt braucht. Die Praxis (Häufigkeit, Fastenregel, Beichte vorher) unterscheidet sich zwischen Ortskirchen und wird mit dem Beichtvater abgesprochen.",
+          "sr": "Павле опомиње да човек испита себе и да не прима недостојно (1 Кор 11,27–29). Истовремено Црква наглашава да нико не „заслужује“ причешће: прима се као болесник коме треба лекар. Пракса (учесталост, пост, исповест пре) разликује се међу помесним Црквама и договара се са духовником."
+        },
+        "tag": "counsel"
+      }
+    ],
+    "keyPoints": [
+      {
+        "de": "Brot und Wein werden wirklich Leib und Blut Christi.",
+        "sr": "Хлеб и вино заиста постају Тело и Крв Христова."
+      },
+      {
+        "de": "Empfang mit dem Löffel; auch Kinder.",
+        "sr": "Причешће кашичицом; и деца."
+      },
+      {
+        "de": "Vorbereitung mit Gebet, Fasten, Versöhnung – mit dem Priester absprechen.",
+        "sr": "Припрема молитвом, постом, помирењем – договор са свештеником."
+      }
+    ],
+    "bible": [
+      {
+        "ref": {
+          "de": "Lk 22,19–20",
+          "sr": "Лк 22,19–20"
+        },
+        "note": {
+          "de": "Das ist mein Leib … mein Blut.",
+          "sr": "Ово је тело моје … крв моја."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 6,53–56",
+          "sr": "Јн 6,53–56"
+        },
+        "note": {
+          "de": "Wer mein Fleisch isst …",
+          "sr": "Ко једе тело моје …"
+        }
+      },
+      {
+        "ref": {
+          "de": "1 Kor 11,23–29",
+          "sr": "1 Кор 11,23–29"
+        },
+        "note": {
+          "de": "Der Mensch prüfe sich selbst.",
+          "sr": "Нека човек испита себе."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Lies die Gebete vor der Kommunion im Gebetsbuch dieser App und sprich mit deinem Priester über deine Vorbereitung.",
+      "sr": "Прочитајте молитве пред причешће у молитвенику ове апликације и разговарајте са свештеником о својој припреми."
+    },
+    "questions": [
+      {
+        "q": {
+          "de": "Wodurch werden Brot und Wein Leib und Blut Christi?",
+          "sr": "Чиме хлеб и вино постају Тело и Крв Христова?"
+        },
+        "a": {
+          "de": "Durch das Herabkommen des Heiligen Geistes in der Liturgie.",
+          "sr": "Силаском Духа Светога на Литургији."
+        }
+      },
+      {
+        "q": {
+          "de": "Mit welcher Haltung empfängt man die Kommunion?",
+          "sr": "Са каквим ставом се прима причешће?"
+        },
+        "a": {
+          "de": "Mit Reue, Glauben und Demut – wie ein Kranker, der den Arzt braucht.",
+          "sr": "Са покајањем, вером и смирењем – као болесник коме треба лекар."
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": {
+          "de": "Welches Brot verwendet die orthodoxe Kirche?",
+          "sr": "Који хлеб користи Православна Црква?"
+        },
+        "options": [
+          {
+            "de": "Gesäuertes Brot",
+            "sr": "Квасни хлеб"
+          },
+          {
+            "de": "Ungesäuertes Brot",
+            "sr": "Бесквасни хлеб"
+          },
+          {
+            "de": "Kein Brot",
+            "sr": "Никакав"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wie empfangen die Gläubigen die Kommunion?",
+          "sr": "Како верни примају причешће?"
+        },
+        "options": [
+          {
+            "de": "Leib und Blut mit einem Löffel",
+            "sr": "Тело и Крв кашичицом"
+          },
+          {
+            "de": "Nur das Brot",
+            "sr": "Само хлеб"
+          },
+          {
+            "de": "Nur einmal im Leben",
+            "sr": "Само једном у животу"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Ab wann dürfen Kinder kommunizieren?",
+          "sr": "Од када деца могу да се причешћују?"
+        },
+        "options": [
+          {
+            "de": "Ab der Taufe",
+            "sr": "Од крштења"
+          },
+          {
+            "de": "Ab 14 Jahren",
+            "sr": "Од 14 година"
+          },
+          {
+            "de": "Ab der Hochzeit",
+            "sr": "Од венчања"
+          }
+        ],
+        "correct": 0
+      }
+    ],
+    "sources": {
+      "de": "Gottesdienstliche Ordnung (Euchologion/Trebnik) und Lehre der orthodoxen Kirche; Einzelheiten der Praxis unterscheiden sich zwischen Ortskirchen – Auskunft gibt dein Priester.",
+      "sr": "Богослужбени поредак (Требник) и учење Православне Цркве; појединости праксе разликују се међу помесним Црквама – обавештења даје ваш свештеник."
+    }
+  },
+  {
+    "id": "my-confession",
+    "course": "M",
+    "title": {
+      "de": "Die heilige Beichte",
+      "sr": "Света исповест"
+    },
+    "sections": [
+      {
+        "h": {
+          "de": "Umkehr und Vergebung",
+          "sr": "Покајање и опроштај"
+        },
+        "simple": {
+          "de": "Wer nach der Taufe sündigt, kann in der Beichte Gott seine Sünden bekennen und Vergebung empfangen. Der Priester ist dabei Zeuge; Christus selbst vergibt.",
+          "sr": "Ко после крштења сагреши, може у исповести Богу исповедити своје грехе и примити опроштај. Свештеник је при томе сведок; сам Христос опрашта."
+        },
+        "deeper": {
+          "de": "Christus gab den Aposteln die Vollmacht, Sünden zu vergeben (Joh 20,22–23). Die Beichte wird darum auch „zweite Taufe“ oder Taufe der Tränen genannt. Am Ende legt der Priester das Epitrachelion (die Stola) auf das Haupt des Beichtenden und spricht das Vergebungsgebet. Was in der Beichte gesagt wird, unterliegt dem Beichtgeheimnis.",
+          "sr": "Христос је апостолима дао власт да опраштају грехе (Јн 20,22–23). Зато се исповест назива и „друго крштење“ или крштење сузама. На крају свештеник ставља епитрахиљ на главу онога који се исповеда и чита молитву разрешења. Оно што се каже на исповести подлеже тајни исповести."
+        },
+        "tag": "dogma"
+      },
+      {
+        "h": {
+          "de": "Wie bereitet man sich vor?",
+          "sr": "Како се припремити?"
+        },
+        "simple": {
+          "de": "Man prüft sein Gewissen, etwa anhand der Zehn Gebote oder der Seligpreisungen, und bittet Gott um Reue. In der Beichte sagt man ehrlich und einfach, was man getan hat, ohne sich zu rechtfertigen.",
+          "sr": "Испитује се савест, на пример по Десет заповести или Блаженствима, и моли се Бога за покајање. На исповести се искрено и једноставно каже шта је учињено, без оправдавања."
+        },
+        "deeper": {
+          "de": "Zur Vorbereitung gehören auch Versöhnung mit anderen und der feste Vorsatz zur Besserung. Der Priester kann einen Rat oder eine geistliche Übung (Epitimie) geben – nicht als Strafe, sondern als Heilmittel. Wie oft man beichtet, ist von Ortskirche zu Ortskirche verschieden; ein fester Beichtvater ist eine große Hilfe.",
+          "sr": "Припреми припада и помирење са другима и чврста одлука за поправљање. Свештеник може дати савет или духовну вежбу (епитимију) – не као казну, него као лек. Колико се често исповеда, разликује се од Цркве до Цркве; стални духовник је велика помоћ."
+        },
+        "tag": "counsel"
+      }
+    ],
+    "keyPoints": [
+      {
+        "de": "Christus vergibt, der Priester ist Zeuge.",
+        "sr": "Христос опрашта, свештеник је сведок."
+      },
+      {
+        "de": "Gewissensprüfung, ehrliches Bekenntnis, Vorsatz zur Besserung.",
+        "sr": "Испитивање савести, искрено исповедање, одлука за поправљање."
+      },
+      {
+        "de": "Beichtgeheimnis; Epitimie als Heilmittel, nicht als Strafe.",
+        "sr": "Тајна исповести; епитимија као лек, а не казна."
+      }
+    ],
+    "bible": [
+      {
+        "ref": {
+          "de": "Joh 20,22–23",
+          "sr": "Јн 20,22–23"
+        },
+        "note": {
+          "de": "Welchen ihr die Sünden vergebt …",
+          "sr": "Којима опростите грехе …"
+        }
+      },
+      {
+        "ref": {
+          "de": "1 Joh 1,8–9",
+          "sr": "1 Јн 1,8–9"
+        },
+        "note": {
+          "de": "Wenn wir unsere Sünden bekennen …",
+          "sr": "Ако исповедамо грехе своје …"
+        }
+      },
+      {
+        "ref": {
+          "de": "Lk 15,17–24",
+          "sr": "Лк 15,17–24"
+        },
+        "note": {
+          "de": "Der verlorene Sohn kehrt heim.",
+          "sr": "Блудни син се враћа."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Nimm dir diese Woche zehn Minuten Zeit für eine ruhige Gewissensprüfung und vereinbare, wenn möglich, einen Termin zur Beichte.",
+      "sr": "Одвојите ове недеље десет минута за мирно испитивање савести и, ако је могуће, договорите исповест."
+    },
+    "questions": [
+      {
+        "q": {
+          "de": "Wer vergibt in der Beichte die Sünden?",
+          "sr": "Ко на исповести опрашта грехе?"
+        },
+        "a": {
+          "de": "Christus selbst; der Priester ist Zeuge und spricht das Vergebungsgebet.",
+          "sr": "Сам Христос; свештеник је сведок и чита молитву разрешења."
+        }
+      },
+      {
+        "q": {
+          "de": "Wozu dient eine Epitimie?",
+          "sr": "Чему служи епитимија?"
+        },
+        "a": {
+          "de": "Als geistliches Heilmittel, nicht als Strafe.",
+          "sr": "Као духовни лек, а не као казна."
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": {
+          "de": "Welches Bibelwort zeigt die Vollmacht zur Sündenvergebung?",
+          "sr": "Који библијски стих показује власт опраштања грехова?"
+        },
+        "options": [
+          {
+            "de": "Joh 20,22–23",
+            "sr": "Јн 20,22–23"
+          },
+          {
+            "de": "Gen 2,7",
+            "sr": "Пост 2,7"
+          },
+          {
+            "de": "Ps 1",
+            "sr": "Пс 1"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Was legt der Priester auf das Haupt des Beichtenden?",
+          "sr": "Шта свештеник ставља на главу онога који се исповеда?"
+        },
+        "options": [
+          {
+            "de": "Das Epitrachelion (Stola)",
+            "sr": "Епитрахиљ"
+          },
+          {
+            "de": "Ein Buch",
+            "sr": "Књигу"
+          },
+          {
+            "de": "Eine Krone",
+            "sr": "Венац"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wie nennt man die Beichte auch?",
+          "sr": "Како се исповест још назива?"
+        },
+        "options": [
+          {
+            "de": "Zweite Taufe",
+            "sr": "Друго крштење"
+          },
+          {
+            "de": "Kleine Hochzeit",
+            "sr": "Мало венчање"
+          },
+          {
+            "de": "Fest der Engel",
+            "sr": "Празник анђела"
+          }
+        ],
+        "correct": 0
+      }
+    ],
+    "sources": {
+      "de": "Gottesdienstliche Ordnung (Euchologion/Trebnik) und Lehre der orthodoxen Kirche; Einzelheiten der Praxis unterscheiden sich zwischen Ortskirchen – Auskunft gibt dein Priester.",
+      "sr": "Богослужбени поредак (Требник) и учење Православне Цркве; појединости праксе разликују се међу помесним Црквама – обавештења даје ваш свештеник."
+    }
+  },
+  {
+    "id": "my-marriage",
+    "course": "M",
+    "title": {
+      "de": "Die heilige Ehe (Trauung)",
+      "sr": "Свето венчање"
+    },
+    "sections": [
+      {
+        "h": {
+          "de": "Die Krönung",
+          "sr": "Венчање"
+        },
+        "simple": {
+          "de": "In der orthodoxen Trauung werden Braut und Bräutigam gekrönt. Die Kronen sind Zeichen der Würde und zugleich des Martyriums: Eheleute schenken einander ihr Leben in Liebe und Opfer.",
+          "sr": "У православном венчању младенци се венчавају венцима. Венци су знак достојанства и уједно мучеништва: супружници једно другом дарују живот у љубави и жртви."
+        },
+        "deeper": {
+          "de": "Die Feier hat zwei Teile: die Verlobung mit dem Austausch der Ringe und die Krönung. Gelesen werden Eph 5,20–33 (die Ehe als Bild für Christus und die Kirche) und Joh 2,1–11 (die Hochzeit zu Kana). Das Paar trinkt aus einem gemeinsamen Kelch und wird vom Priester dreimal um den Tisch geführt. Anders als im Westen gibt es in der traditionellen Ordnung kein gegenseitiges Eheversprechen; die Ehe wird durch das Gebet der Kirche gesegnet. In manchen Ortskirchen wird der freie Wille des Paares erfragt.",
+          "sr": "Обред има два дела: веридбу са разменом прстенова и венчање. Чита се Еф 5,20–33 (брак као слика Христа и Цркве) и Јн 2,1–11 (свадба у Кани). Младенци пију из заједничке чаше, а свештеник их три пута води око стола. За разлику од Запада, у традиционалном поретку нема узајамног брачног завета; брак се благосиља молитвом Цркве. У неким помесним Црквама пита се за слободну вољу младенаца."
+        },
+        "tag": "history"
+      },
+      {
+        "h": {
+          "de": "Die Ehe als Weg",
+          "sr": "Брак као пут"
+        },
+        "simple": {
+          "de": "Die Ehe ist ein Weg zum Heil: Mann und Frau helfen einander, Gott näherzukommen. Die Familie wird eine „kleine Kirche“.",
+          "sr": "Брак је пут спасења: муж и жена помажу једно другом да се приближе Богу. Породица постаје „мала црква“."
+        },
+        "deeper": {
+          "de": "Der Begriff „Hauskirche“ geht auf das Neue Testament zurück (Röm 16,5). Die Kirche segnet nach ihrer Ordnung die Ehe zwischen Mann und Frau. Für Mischehen, Wiederheirat und andere besondere Fragen gelten Regeln, die vom Bischof bzw. Priester erläutert werden.",
+          "sr": "Појам „кућна црква“ потиче из Новог завета (Рим 16,5). Црква по свом поретку благосиља брак између мушкарца и жене. За мешовите бракове, поновни брак и друга посебна питања важе правила која објашњава епископ, односно свештеник."
+        },
+        "tag": "counsel"
+      }
+    ],
+    "keyPoints": [
+      {
+        "de": "Verlobung (Ringe) und Krönung.",
+        "sr": "Веридба (прстенови) и венчање венцима."
+      },
+      {
+        "de": "Lesungen: Eph 5 und Joh 2 (Kana).",
+        "sr": "Читања: Еф 5 и Јн 2 (Кана)."
+      },
+      {
+        "de": "Gemeinsamer Kelch, dreimaliger Umgang.",
+        "sr": "Заједничка чаша, троструки ход око стола."
+      }
+    ],
+    "bible": [
+      {
+        "ref": {
+          "de": "Eph 5,20–33",
+          "sr": "Еф 5,20–33"
+        },
+        "note": {
+          "de": "Ein großes Geheimnis: Christus und die Kirche.",
+          "sr": "Тајна ова велика је: Христос и Црква."
+        }
+      },
+      {
+        "ref": {
+          "de": "Joh 2,1–11",
+          "sr": "Јн 2,1–11"
+        },
+        "note": {
+          "de": "Die Hochzeit zu Kana.",
+          "sr": "Свадба у Кани."
+        }
+      },
+      {
+        "ref": {
+          "de": "Gen 2,24",
+          "sr": "Пост 2,24"
+        },
+        "note": {
+          "de": "Die zwei werden ein Fleisch sein.",
+          "sr": "Биће двоје једно тело."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Bete diese Woche für eine Familie, die du kennst, und – wenn du verheiratet bist – einmal gemeinsam mit deinem Ehepartner.",
+      "sr": "Молите се ове недеље за једну породицу коју познајете и – ако сте у браку – једном заједно са супружником."
+    },
+    "questions": [
+      {
+        "q": {
+          "de": "Was bedeuten die Kronen bei der Trauung?",
+          "sr": "Шта значе венци на венчању?"
+        },
+        "a": {
+          "de": "Würde und Martyrium – die Hingabe des Lebens in Liebe.",
+          "sr": "Достојанство и мучеништво – предавање живота у љубави."
+        }
+      },
+      {
+        "q": {
+          "de": "Welche Lesungen gehören zur Trauung?",
+          "sr": "Која читања припадају венчању?"
+        },
+        "a": {
+          "de": "Eph 5,20–33 und Joh 2,1–11.",
+          "sr": "Еф 5,20–33 и Јн 2,1–11."
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": {
+          "de": "Welches Evangelium wird bei der Trauung gelesen?",
+          "sr": "Које Јеванђеље се чита на венчању?"
+        },
+        "options": [
+          {
+            "de": "Die Hochzeit zu Kana",
+            "sr": "Свадба у Кани"
+          },
+          {
+            "de": "Die Sintflut",
+            "sr": "Потоп"
+          },
+          {
+            "de": "Die Bergpredigt",
+            "sr": "Беседа на гори"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wie oft wird das Paar um den Tisch geführt?",
+          "sr": "Колико пута се младенци воде око стола?"
+        },
+        "options": [
+          {
+            "de": "Dreimal",
+            "sr": "Три пута"
+          },
+          {
+            "de": "Siebenmal",
+            "sr": "Седам пута"
+          },
+          {
+            "de": "Gar nicht",
+            "sr": "Никако"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wie nennt man die christliche Familie?",
+          "sr": "Како се назива хришћанска породица?"
+        },
+        "options": [
+          {
+            "de": "Kleine Kirche",
+            "sr": "Мала црква"
+          },
+          {
+            "de": "Kleines Kloster",
+            "sr": "Мали манастир"
+          },
+          {
+            "de": "Kleiner Staat",
+            "sr": "Мала држава"
+          }
+        ],
+        "correct": 0
+      }
+    ],
+    "sources": {
+      "de": "Gottesdienstliche Ordnung (Euchologion/Trebnik) und Lehre der orthodoxen Kirche; Einzelheiten der Praxis unterscheiden sich zwischen Ortskirchen – Auskunft gibt dein Priester.",
+      "sr": "Богослужбени поредак (Требник) и учење Православне Цркве; појединости праксе разликују се међу помесним Црквама – обавештења даје ваш свештеник."
+    }
+  },
+  {
+    "id": "my-orders",
+    "course": "M",
+    "title": {
+      "de": "Die heilige Weihe (Priestertum)",
+      "sr": "Свештенство (рукоположење)"
+    },
+    "sections": [
+      {
+        "h": {
+          "de": "Drei Weihestufen",
+          "sr": "Три степена свештенства"
+        },
+        "simple": {
+          "de": "Die Kirche kennt drei Weihestufen: Diakon, Priester und Bischof. Geweiht wird durch Handauflegung eines Bischofs; das Volk ruft dabei „Axios!“ – „Er ist würdig!“.",
+          "sr": "Црква познаје три степена: ђакон, свештеник (презвитер) и епископ. Рукополаже се полагањем руку епископа; народ при томе кличе „Аксиос!“ – „Достојан је!“."
+        },
+        "deeper": {
+          "de": "Schon die Apostel setzten Diakone (Apg 6,6) und Älteste ein und legten ihnen die Hände auf (1 Tim 4,14; 2 Tim 1,6). Einen Bischof weihen mehrere Bischöfe. Durch die ununterbrochene Reihe der Weihen (apostolische Sukzession) steht die Kirche in Verbindung mit den Aposteln. Der Bischof ist Vorsteher der Ortskirche; die Priester feiern in seinem Auftrag die Mysterien.",
+          "sr": "Већ су апостоли постављали ђаконе (Дап 6,6) и старешине и полагали на њих руке (1 Тим 4,14; 2 Тим 1,6). Епископа рукополаже више епископа. Кроз непрекинути низ рукоположења (апостолско прејемство) Црква је повезана са апостолима. Епископ је поглавар помесне Цркве; свештеници по његовом благослову служе Свете Тајне."
+        },
+        "tag": "dogma"
+      },
+      {
+        "h": {
+          "de": "Priester und Familie",
+          "sr": "Свештеник и породица"
+        },
+        "simple": {
+          "de": "In der orthodoxen Kirche dürfen Diakone und Priester verheiratet sein, wenn sie vor der Weihe geheiratet haben. Bischöfe werden aus dem Mönchtum gewählt.",
+          "sr": "У Православној Цркви ђакони и свештеници смеју да буду ожењени, ако су се оженили пре рукоположења. Епископи се бирају из монаштва."
+        },
+        "deeper": {
+          "de": "Diese Ordnung geht auf alte Kanones zurück. Das Priestertum ist kein Recht und keine Belohnung, sondern ein Dienst. Alle Gläubigen haben durch Taufe und Myronsalbung Anteil am „königlichen Priestertum“ (1 Petr 2,9), das aber nicht mit dem Weiheamt verwechselt wird.",
+          "sr": "Овај поредак потиче из древних канона. Свештенство није право ни награда, него служба. Сви верни кроз крштење и миропомазање имају удела у „царском свештенству“ (1 Пт 2,9), које се ипак не меша са свештеничким чином."
+        },
+        "tag": "history"
+      }
+    ],
+    "keyPoints": [
+      {
+        "de": "Diakon, Priester, Bischof.",
+        "sr": "Ђакон, свештеник, епископ."
+      },
+      {
+        "de": "Handauflegung durch den Bischof; Ruf „Axios!“.",
+        "sr": "Полагање руку епископа; клицање „Аксиос!“."
+      },
+      {
+        "de": "Verheiratete Priester möglich; Bischöfe aus dem Mönchtum.",
+        "sr": "Ожењени свештеници могући; епископи из монаштва."
+      }
+    ],
+    "bible": [
+      {
+        "ref": {
+          "de": "Apg 6,1–6",
+          "sr": "Дап 6,1–6"
+        },
+        "note": {
+          "de": "Die ersten Diakone.",
+          "sr": "Први ђакони."
+        }
+      },
+      {
+        "ref": {
+          "de": "1 Tim 3,1–13",
+          "sr": "1 Тим 3,1–13"
+        },
+        "note": {
+          "de": "Über Bischöfe und Diakone.",
+          "sr": "О епископима и ђаконима."
+        }
+      },
+      {
+        "ref": {
+          "de": "2 Tim 1,6",
+          "sr": "2 Тим 1,6"
+        },
+        "note": {
+          "de": "Die Gnade durch Handauflegung.",
+          "sr": "Дар кроз полагање руку."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Bete diese Woche für deinen Priester und deinen Bischof – mit Namen.",
+      "sr": "Молите се ове недеље за свог свештеника и епископа – по имену."
+    },
+    "questions": [
+      {
+        "q": {
+          "de": "Welche drei Weihestufen gibt es?",
+          "sr": "Која три степена свештенства постоје?"
+        },
+        "a": {
+          "de": "Diakon, Priester und Bischof.",
+          "sr": "Ђакон, свештеник и епископ."
+        }
+      },
+      {
+        "q": {
+          "de": "Was bedeutet der Ruf „Axios“?",
+          "sr": "Шта значи клицање „Аксиос“?"
+        },
+        "a": {
+          "de": "„Er ist würdig!“",
+          "sr": "„Достојан је!“"
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": {
+          "de": "Wer weiht einen Priester?",
+          "sr": "Ко рукополаже свештеника?"
+        },
+        "options": [
+          {
+            "de": "Ein Bischof",
+            "sr": "Епископ"
+          },
+          {
+            "de": "Die Gemeinde",
+            "sr": "Парохија"
+          },
+          {
+            "de": "Ein Diakon",
+            "sr": "Ђакон"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Aus welchem Stand werden Bischöfe gewählt?",
+          "sr": "Из ког реда се бирају епископи?"
+        },
+        "options": [
+          {
+            "de": "Aus dem Mönchtum",
+            "sr": "Из монаштва"
+          },
+          {
+            "de": "Aus den Kirchenchören",
+            "sr": "Из хорова"
+          },
+          {
+            "de": "Aus den Regierungen",
+            "sr": "Из влада"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wann darf ein orthodoxer Priester verheiratet sein?",
+          "sr": "Када православни свештеник сме да буде ожењен?"
+        },
+        "options": [
+          {
+            "de": "Wenn er vor der Weihe geheiratet hat",
+            "sr": "Ако се оженио пре рукоположења"
+          },
+          {
+            "de": "Nie",
+            "sr": "Никада"
+          },
+          {
+            "de": "Nur als Bischof",
+            "sr": "Само као епископ"
+          }
+        ],
+        "correct": 0
+      }
+    ],
+    "sources": {
+      "de": "Gottesdienstliche Ordnung (Euchologion/Trebnik) und Lehre der orthodoxen Kirche; Einzelheiten der Praxis unterscheiden sich zwischen Ortskirchen – Auskunft gibt dein Priester.",
+      "sr": "Богослужбени поредак (Требник) и учење Православне Цркве; појединости праксе разликују се међу помесним Црквама – обавештења даје ваш свештеник."
+    }
+  },
+  {
+    "id": "my-unction",
+    "course": "M",
+    "title": {
+      "de": "Die heilige Krankensalbung (Ölweihe)",
+      "sr": "Свето јелеосвећење"
+    },
+    "sections": [
+      {
+        "h": {
+          "de": "Gebet für Kranke",
+          "sr": "Молитва за болесне"
+        },
+        "simple": {
+          "de": "In der Krankensalbung beten Priester für die Heilung von Seele und Leib und salben den Kranken mit geweihtem Öl. Sie ist nicht nur für Sterbende, sondern für alle, die an Leib oder Seele leiden.",
+          "sr": "У јелеосвећењу свештеници се моле за исцељење душе и тела и помазују болесног освећеним уљем. Оно није само за умируће, него за све који пате телом или душом."
+        },
+        "deeper": {
+          "de": "Die Grundlage ist Jak 5,14–15: Ist jemand krank, rufe er die Ältesten der Kirche; sie sollen über ihm beten und ihn mit Öl salben im Namen des Herrn, und die Sünden werden ihm vergeben. Die vollständige Ordnung sieht sieben Priester, sieben Lesungen aus Apostel und Evangelium und sieben Salbungen vor; wo das nicht möglich ist, feiern auch weniger Priester. Heilung wird erbeten, aber nicht garantiert – das Gebet vertraut den Kranken Gottes Willen an.",
+          "sr": "Основ је Јак 5,14–15: Болује ли ко, нека призове старешине црквене, и нека се помоле над њим и помажу га уљем у име Господње, и опростиће му се греси. Потпуни поредак предвиђа седам свештеника, седам читања из Апостола и Јеванђеља и седам помазања; где то није могуће, служи и мање свештеника. Исцељење се моли, али није загарантовано – молитва болесног предаје вољи Божијој."
+        },
+        "tag": "dogma"
+      },
+      {
+        "h": {
+          "de": "Praxis",
+          "sr": "Пракса"
+        },
+        "simple": {
+          "de": "Die Krankensalbung kann zu Hause, im Krankenhaus oder in der Kirche gefeiert werden. In manchen Ortskirchen wird sie in der Karwoche für alle Gläubigen gemeinsam gefeiert.",
+          "sr": "Јелеосвећење се може служити код куће, у болници или у храму. У неким помесним Црквама служи се у Страсној седмици заједнички за све вернике."
+        },
+        "deeper": {
+          "de": "Ob und wann die Krankensalbung gemeinsam für Gesunde gefeiert wird, ist Brauch der jeweiligen Ortskirche. Die Kirche verbindet das Gebet um Heilung immer mit dem Gebrauch ärztlicher Hilfe; Glaube und Medizin schließen sich nicht aus (vgl. Sir 38,1–15).",
+          "sr": "Да ли и када се јелеосвећење служи заједнички и за здраве, обичај је сваке помесне Цркве. Црква молитву за исцељење увек повезује са коришћењем лекарске помоћи; вера и медицина се не искључују (уп. Сир 38,1–15)."
+        },
+        "tag": "uncertain"
+      }
+    ],
+    "keyPoints": [
+      {
+        "de": "Grundlage: Jak 5,14–15.",
+        "sr": "Основ: Јак 5,14–15."
+      },
+      {
+        "de": "Für Heilung von Seele und Leib, nicht nur für Sterbende.",
+        "sr": "За исцељење душе и тела, не само за умируће."
+      },
+      {
+        "de": "Idealform: sieben Priester, sieben Lesungen, sieben Salbungen.",
+        "sr": "Потпуни облик: седам свештеника, седам читања, седам помазања."
+      }
+    ],
+    "bible": [
+      {
+        "ref": {
+          "de": "Jak 5,14–15",
+          "sr": "Јак 5,14–15"
+        },
+        "note": {
+          "de": "Sie sollen ihn mit Öl salben.",
+          "sr": "Нека га помажу уљем."
+        }
+      },
+      {
+        "ref": {
+          "de": "Mk 6,13",
+          "sr": "Мк 6,13"
+        },
+        "note": {
+          "de": "Sie salbten viele Kranke mit Öl.",
+          "sr": "Помазаше уљем многе болесне."
+        }
+      },
+      {
+        "ref": {
+          "de": "Sir 38,1–15",
+          "sr": "Сир 38,1–15"
+        },
+        "note": {
+          "de": "Ehre den Arzt.",
+          "sr": "Поштуј лекара."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Wenn ein Mensch in deiner Umgebung krank ist: Bete für ihn und frage, ob er sich einen Besuch des Priesters wünscht.",
+      "sr": "Ако је неко у вашој околини болестан: молите се за њега и питајте да ли жели посету свештеника."
+    },
+    "questions": [
+      {
+        "q": {
+          "de": "Ist die Krankensalbung nur für Sterbende?",
+          "sr": "Да ли је јелеосвећење само за умируће?"
+        },
+        "a": {
+          "de": "Nein, für alle, die an Leib oder Seele leiden.",
+          "sr": "Не, за све који пате телом или душом."
+        }
+      },
+      {
+        "q": {
+          "de": "Welches Bibelwort ist die Grundlage?",
+          "sr": "Који библијски стих је основ?"
+        },
+        "a": {
+          "de": "Jak 5,14–15.",
+          "sr": "Јак 5,14–15."
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": {
+          "de": "Wie viele Priester sieht die vollständige Ordnung vor?",
+          "sr": "Колико свештеника предвиђа потпуни поредак?"
+        },
+        "options": [
+          {
+            "de": "Sieben",
+            "sr": "Седам"
+          },
+          {
+            "de": "Einen",
+            "sr": "Једног"
+          },
+          {
+            "de": "Zwölf",
+            "sr": "Дванаест"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Womit wird der Kranke gesalbt?",
+          "sr": "Чиме се болесни помазује?"
+        },
+        "options": [
+          {
+            "de": "Mit geweihtem Öl",
+            "sr": "Освећеним уљем"
+          },
+          {
+            "de": "Mit Wasser",
+            "sr": "Водом"
+          },
+          {
+            "de": "Mit Wein",
+            "sr": "Вином"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Wie steht die Kirche zur ärztlichen Hilfe?",
+          "sr": "Какав је став Цркве према лекарској помоћи?"
+        },
+        "options": [
+          {
+            "de": "Gebet und Medizin gehören zusammen",
+            "sr": "Молитва и медицина иду заједно"
+          },
+          {
+            "de": "Ärzte sind verboten",
+            "sr": "Лекари су забрањени"
+          },
+          {
+            "de": "Nur Medizin zählt",
+            "sr": "Важи само медицина"
+          }
+        ],
+        "correct": 0
+      }
+    ],
+    "sources": {
+      "de": "Gottesdienstliche Ordnung (Euchologion/Trebnik) und Lehre der orthodoxen Kirche; Einzelheiten der Praxis unterscheiden sich zwischen Ortskirchen – Auskunft gibt dein Priester.",
+      "sr": "Богослужбени поредак (Требник) и учење Православне Цркве; појединости праксе разликују се међу помесним Црквама – обавештења даје ваш свештеник."
+    }
   }
 ];
 
