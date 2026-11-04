@@ -20,6 +20,7 @@ Svetosavlje.org: Dobrotoljublje (Philokalie), Prolog von Ohrid (hl. Nikolaj), We
 
 ## Gebete und liturgische Texte
 - Derzeit: kurze, weit verbreitete traditionelle Gebete (Kreuzzeichen, Trisagion, Vaterunser, Himmlischer König, Jesusgebet u. a.) in eigener Arbeitsübersetzung, gekennzeichnet; Bibelverse als „Bibelvers“.
+- Kommunion (4.11.2026): „Ich glaube, Herr“, „Deines geheimnisvollen Abendmahls“, „Nicht zum Gericht“, „Wir haben das wahre Licht gesehen“ – Texte aus der Göttlichen Liturgie (alter liturgischer Text, gemeinfrei), eigene deutsche und serbische Wiedergabe, in Gemeinden kann der Wortlaut abweichen; Lobgesang des Simeon = Lk 2,29–32. Jedes Gebet trägt ein Feld `source`.
 - Für Erweiterungen (Kommunion-, Beicht-Gebete, Troparien) nur: gemeinfreie Ausgaben (z. B. ältere gedruckte Gebetbücher, deren Übersetzer > 70 Jahre verstorben sind) oder ausdrückliche Freigabe einer Diözese. Moderne Übersetzungen (z. B. Gebetbücher deutscher orthodoxer Diözesen, Kloster-Ausgaben) sind urheberrechtlich geschützt → nicht übernehmen ohne Erlaubnis.
 - Serbische liturgische Texte: kirchenslawische/serbische Fassungen nur aus freigegebenen Quellen.
 

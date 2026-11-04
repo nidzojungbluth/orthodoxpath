@@ -401,7 +401,7 @@ label.btn { margin: 0; font-size: 1em; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "3.4.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "3.5.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -555,6 +555,7 @@ const UI = {
     bvLabel: "Anordnung der Lektionen", bvPath: "Lernweg", bvBooks: "Nach Büchern",
     mTitle: "Monatsübersicht", mPrev: "Vorheriger Monat", mNext: "Nächster Monat", mLegend: "Legende", mStrict: "strenges Fasten", mFast: "Fasten (oft mit Fisch)", mLight: "ohne Fleisch", mFree: "fastenfrei", mFeast: "Fest", mGreat: "Großes Fest",
     icsOne: "In den Kalender übernehmen", icsAll: "Alle Feste der nächsten 12 Monate in den Kalender", icsNote: "Es wird eine Kalenderdatei (.ics) erzeugt. Auf dem iPhone öffnet sich danach „Zum Kalender hinzufügen“. Die Daten folgen der in der App gewählten Kalenderart.", icsDone: "Kalenderdatei erstellt",
+    prSource: "Herkunft", prCommNote: "Die Vorbereitung auf die Kommunion (Gebetsregel, Fasten, Beichte) besprichst du mit deinem Priester. In vielen Gebetbüchern gibt es eine ausführlichere „Ordnung vor der heiligen Kommunion“.",
     prevLesson: "Vorherige Lektion", nextLessonL: "Nächste Lektion", lastOpened: "Zuletzt geöffnet",
     remTitle: "Gebetserinnerungen", remText: "Web-Apps können auf dem iPhone keine zuverlässigen täglichen Erinnerungen senden. Mit der App „Erinnerungen“ geht es trotzdem – ganz ohne Datenweitergabe:",
     remS1: "Tippe unten auf „Link kopieren“ – das ist der Link zum Gebetsbuch.", remS2: "Öffne die App „Erinnerungen“ und lege eine neue Erinnerung an, z. B. „Morgengebet“.", remS3: "Tippe auf „i“ (Details), aktiviere Datum und Uhrzeit und wähle bei „Wiederholen“ „Täglich“.", remS4: "Füge den Link im Feld „URL“ ein. Beim Tippen auf die Erinnerung öffnet sich das Gebetsbuch.",
@@ -770,6 +771,7 @@ const UI = {
     bvLabel: "Распоред лекција", bvPath: "Пут учења", bvBooks: "По књигама",
     mTitle: "Месечни преглед", mPrev: "Претходни месец", mNext: "Следећи месец", mLegend: "Легенда", mStrict: "строги пост", mFast: "пост (често уз рибу)", mLight: "без меса", mFree: "мрсно", mFeast: "Празник", mGreat: "Велики празник",
     icsOne: "Додај у календар", icsAll: "Сви празници у наредних 12 месеци у календар", icsNote: "Прави се календарска датотека (.ics). На ајфону се затим отвара „Додај у календар“. Датуми прате врсту календара изабрану у апликацији.", icsDone: "Календарска датотека направљена",
+    prSource: "Порекло", prCommNote: "О припреми за причешће (молитвено правило, пост, исповест) разговарајте са својим свештеником. У многим молитвеницима постоји опширније „Правило пред свето причешће“.",
     prevLesson: "Претходна лекција", nextLessonL: "Следећа лекција", lastOpened: "Последње отворено",
     remTitle: "Подсетници за молитву", remText: "Веб-апликације на ајфону не могу да шаљу поуздане дневне подсетнике. Помоћу апликације „Подсетници“ ипак иде – без слања података:",
     remS1: "Додирните доле „Копирај везу“ – то је веза ка молитвенику.", remS2: "Отворите апликацију „Подсетници“ и направите нови подсетник, нпр. „Јутарња молитва“.", remS3: "Додирните „i“ (детаљи), укључите датум и време и код „Понављај“ изаберите „Дневно“.", remS4: "Налепите везу у поље „URL“. Када додирнете подсетник, отвара се молитвеник.",
@@ -8286,6 +8288,21 @@ const PRAYER_TEXTS = {
     text: { de: "Gottesgebärerin, Jungfrau, freue dich, begnadete Maria, der Herr ist mit dir. Gesegnet bist du unter den Frauen, und gesegnet ist die Frucht deines Leibes, denn du hast den Retter unserer Seelen geboren.", sr: "Богородице Дјево, радуј се, благодатна Марија, Господ је с тобом; благословена си ти међу женама и благословен је плод утробе твоје, јер си родила Спаса душа наших." } },
   axion: { title: { de: "Würdig ist es", sr: "Достојно јест" },
     text: { de: "Würdig ist es wahrhaft, dich selig zu preisen, Gottesgebärerin, die allzeit selige und ganz untadelige Mutter unseres Gottes. Die du ehrwürdiger bist als die Cherubim und unvergleichlich herrlicher als die Seraphim, die du unversehrt Gott das Wort geboren hast, wahrhafte Gottesgebärerin, dich preisen wir hoch.", sr: "Достојно је ваистину да блажимо Тебе, Богородицу, увек блажену и свенепорочну и Мајку Бога нашега. Тебе, часнију од Херувима и неупоредиво славнију од Серафима, која си без истлења родила Бога Логоса, ваистину Богородицу, величамо." } },
+  believe: { title: { de: "Ich glaube, Herr, und bekenne", sr: "Верујем, Господе, и исповедам" },
+    text: { de: "Ich glaube, Herr, und bekenne, dass du wahrhaft Christus bist, der Sohn des lebendigen Gottes, der in die Welt gekommen ist, die Sünder zu retten, von denen ich der erste bin. Auch glaube ich, dass dies dein allreiner Leib selbst und dies dein kostbares Blut selbst ist. Darum bitte ich dich: Erbarme dich meiner und vergib mir meine Verfehlungen, die gewollten und die ungewollten, in Wort und Tat, wissentlich und unwissentlich, und würdige mich, ohne Verurteilung an deinen allreinen Mysterien teilzuhaben zur Vergebung der Sünden und zum ewigen Leben. Amen.", sr: "Верујем, Господе, и исповедам да си Ти заиста Христос, Син Бога живога, који си дошао у свет да спасеш грешнике, од којих сам први ја. Још верујем да је ово само пречисто Тело Твоје и да је ово сама часна Крв Твоја. Зато Те молим: помилуј ме и опрости ми сагрешења моја, вољна и невољна, речју и делом, свесна и несвесна, и удостоји ме да се неосуђено причестим пречистим Тајнама Твојим, за опроштај грехова и за живот вечни. Амин." },
+    source: { de: "Göttliche Liturgie, Gebet vor der Kommunion (nach der Überlieferung des hl. Johannes Chrysostomus)", sr: "Света Литургија, молитва пред причешће (по предању светог Јована Златоуста)" } },
+  mysticsupper: { title: { de: "Deines geheimnisvollen Abendmahls", sr: "Вечери Твоје тајне" },
+    text: { de: "Deines geheimnisvollen Abendmahls lass mich heute teilhaftig werden, Sohn Gottes; denn ich werde deinen Feinden das Geheimnis nicht verraten und dir keinen Kuss geben wie Judas, sondern wie der Schächer bekenne ich dich: Gedenke meiner, Herr, in deinem Reich.", sr: "Вечери Твоје тајне данас, Сине Божји, мене причесника прими; јер нећу тајну Твоју казати непријатељима Твојим, нити ћу Ти дати целив као Јуда, него као разбојник исповедам Те: Помени ме, Господе, у Царству Своме." },
+    source: { de: "Göttliche Liturgie, Gebet vor der Kommunion", sr: "Света Литургија, молитва пред причешће" } },
+  notjudgment: { title: { de: "Nicht zum Gericht", sr: "Да не буде на суд" },
+    text: { de: "Nicht zum Gericht und nicht zur Verurteilung gereiche mir die Teilhabe an deinen heiligen Mysterien, Herr, sondern zur Heilung der Seele und des Leibes.", sr: "Нека ми не буде на суд или на осуду причешће Светих Тајни Твојих, Господе, него на исцељење душе и тела." },
+    source: { de: "Göttliche Liturgie, Gebet vor der Kommunion", sr: "Света Литургија, молитва пред причешће" } },
+  truelight: { title: { de: "Wir haben das wahre Licht gesehen", sr: "Видесмо светлост истиниту" },
+    text: { de: "Wir haben das wahre Licht gesehen, wir haben den himmlischen Geist empfangen, wir haben den wahren Glauben gefunden: Wir beten die unteilbare Dreiheit an, denn sie hat uns gerettet.", sr: "Видесмо светлост истиниту, примисмо Духа небеснога, нађосмо веру истиниту, нераздељивој Тројици клањајући се, јер нас Она спасе." },
+    source: { de: "Göttliche Liturgie, Gesang nach der Kommunion", sr: "Света Литургија, песма после причешћа" } },
+  simeon: { title: { de: "Lobgesang des Simeon", sr: "Песма Симеона Богопримца" }, kind: "bible",
+    text: { de: "Nun entlässt du, Gebieter, deinen Knecht nach deinem Wort in Frieden; denn meine Augen haben dein Heil gesehen, das du bereitet hast vor dem Angesicht aller Völker: ein Licht zur Erleuchtung der Heiden und zur Herrlichkeit deines Volkes Israel.", sr: "Ниње отпушташ слугу Свога, Владико, по речи Својој, с миром; јер видеше очи моје спасење Твоје, које си припремио пред лицем свих народа, светлост за просвећење незнабожаца и славу народа Твога Израиља." },
+    source: { de: "Lk 2,29–32; Teil der Dankgebete nach der Kommunion und der Vesper", sr: "Лк 2,29–32; део благодарних молитава после причешћа и вечерња" } },
   jesus: { title: { de: "Jesusgebet", sr: "Исусова молитва" },
     text: { de: "Herr Jesus Christus, Sohn Gottes, erbarme dich meiner.", sr: "Господе Исусе Христе, Сине Божији, помилуј ме." },
     note: { de: "Kann jederzeit still wiederholt werden. Für eine intensive Übung frage deinen Priester.", sr: "Може се у свако доба тихо понављати. За интензивну праксу питајте свог свештеника." } },
@@ -8369,6 +8386,8 @@ const PRAYER_CATS = [
   { id: "theotokos", title: { de: "Zur Gottesgebärerin", sr: "Пресветој Богородици" }, items: ["theotokos", "subtuum", "axion", "theotokossave"] },
   { id: "saints", title: { de: "Zu den Heiligen", sr: "Светима" }, items: ["saintcall", "allsaints"] },
   { id: "thanks", title: { de: "Dank", sr: "Благодарност" }, items: ["gloryall", "glorythee", "gloria"] },
+  { id: "communion", title: { de: "Vor und nach der Kommunion", sr: "Пре и после причешћа" }, items: [["believe", "Vor der Kommunion", "Пред причешће"], "mysticsupper", "notjudgment", ["truelight", "Nach der Kommunion", "После причешћа"], "simeon", "glorythee"] },
+  { id: "confession", title: { de: "Vor der Beichte", sr: "Пред исповест" }, items: ["taxcollector", "ps50", "ephrem", "jesus"] },
   { id: "lent", title: { de: "In der Fastenzeit", sr: "У време поста" }, items: ["ephrem", "taxcollector"] }
 ];
 
@@ -9071,7 +9090,7 @@ function fastPeriods(y, cal) {
     return `<div class="card">${label ? `<div class="eyebrow">${E(label)}</div>` : ""}
       <div class="row"><h3 class="grow" style="margin:0">${E(p.title)}</h3><button class="star ${fav ? "on" : ""}" data-pfav="${id}" aria-label="${esc(t("prSaveFav"))}">${starIc(fav)}</button></div>
       ${kindBadge}${p.repeat ? `<span class="badge tag-history">${esc(t("prTimes").replace("{n}", p.repeat))}</span>` : ""}
-      <p class="creed">${E(p.text)}</p>${p.note ? `<p class="small muted">${E(p.note)}</p>` : ""}</div>`;
+      <p class="creed">${E(p.text)}</p>${p.note ? `<p class="small muted">${E(p.note)}</p>` : ""}${p.source ? `<p class="small muted"><b>${esc(t("prSource"))}:</b> ${E(p.source)}</p>` : ""}</div>`;
   }
   function prayerTabs() {
     const tabs = [["morning", "prMorning"], ["evening", "prEvening"], ["topics", "prTopics"], ["mine", "prMineShort"]];
@@ -9098,6 +9117,7 @@ function fastPeriods(y, cal) {
   function viewPrayerCat(cid) {
     const c = PRAYER_CATS.find(x => x.id === cid); if (!c) return `<p>${esc(t("notFound"))}</p>`;
     return `<div class="eyebrow">${esc(t("prayersTitle"))}</div><h1>${E(c.title)}</h1>
+      ${cid === "communion" || cid === "confession" ? `<div class="card notice"><p class="small" style="margin:0">${ic("cross", "gold")} ${esc(t("prCommNote"))}</p></div>` : ""}
       ${c.items.map(it => Array.isArray(it) ? prayerCard(it[0], { de: it[1], sr: it[2] }) : prayerCard(it)).join("")}
       <p class="small muted">${esc(lang() === "de" ? t("prTransDe") : t("prTransSr"))}</p>`;
   }

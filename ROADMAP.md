@@ -53,7 +53,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 - Umsetzung: Umschalter „Lernweg / Nach Büchern“ in `viewBible`; `order` bleibt für den Lernweg.
 - Test: e2e beide Ansichten; alle 53 Lektionen erreichbar.
 
-**P2-03 Gebetsbuch vervollständigen** (CONTENT_SOURCES · M–L)
+**P2-03 Gebetsbuch vervollständigen** 🟡 Teil 1 erledigt 4.11.2026 – Kategorien „Vor und nach der Kommunion“ (5 neue Texte aus der Göttlichen Liturgie bzw. Lk 2) und „Vor der Beichte“, Feld `source` mit Anzeige und Test. Offen: vollständige „Ordnung vor der Kommunion“ und Dankgebete (längere Texte) nur mit gemeinfreier Vorlage (CONTENT_SOURCES · M–L)
 - Ziel: Gebete vor/nach der Kommunion, Gebet vor der Beichte, Trisagion-Gebete vollständig – nur mit geprüftem Wortlaut.
 - Umsetzung: Texte aus gemeinfreien oder freigegebenen Quellen (siehe CONTENT_SOURCES), deutsche Übertragungen klar als „Arbeitsübersetzung“ gekennzeichnet; Feld `source` pro Gebet ergänzen und anzeigen.
 - Test: Content-Test erzwingt `source` für neue Gebete.

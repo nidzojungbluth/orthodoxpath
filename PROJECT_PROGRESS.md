@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.4.0 (4. November 2026)
+**Aktuelle Version:** 3.5.0 (4. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,11 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.5 (ROADMAP P2-03, Teil 1)
+
+- Gebetsbuch: neue Themen „Vor und nach der Kommunion“ (Ich glaube, Herr; Deines geheimnisvollen Abendmahls; Nicht zum Gericht; Wir haben das wahre Licht gesehen; Lobgesang des Simeon; Ehre sei dir, Gott) und „Vor der Beichte“ (Zöllnergebet, Psalm 50, Gebet des hl. Ephräm, Jesusgebet), jeweils mit Hinweis auf das Gespräch mit dem Priester.
+- Neues Feld „Herkunft“ bei Gebeten (z. B. „Göttliche Liturgie, Gebet vor der Kommunion“); Inhaltstest erzwingt es für die Kommuniongebete.
 
 ## Version 3.4 (ROADMAP P2-04)
 

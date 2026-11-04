@@ -153,6 +153,10 @@ ok(LITURGY_STEPS.length === 16 && LITURGY_STEPS.every(s => s.what && s.mean && s
 const all = JSON.stringify({ BIBLE, THEOLOGY, FATHERS, SAINTS, BOOKS });
 ok(!/Katechismus der Katholischen Kirche|Augsburger Bekenntnis|Heidelberger Katechismus|newadvent/i.test(all), "ausgeschlossene Quelle gefunden");
 
+// Gebete vor/nach der Kommunion: jedes hat eine Herkunftsangabe
+{ const P = require("../src/content/prayers.js"); const cat = P.PRAYER_CATS.find(c => c.id === "communion");
+  ok(cat, "Kategorie Kommunion vorhanden");
+  (cat ? cat.items : []).map(i => Array.isArray(i) ? i[0] : i).filter(id => P.PRAYER_TEXTS[id] && id !== "glorythee").forEach(id => ok(P.PRAYER_TEXTS[id].source && P.PRAYER_TEXTS[id].source.de && P.PRAYER_TEXTS[id].source.sr, "Gebet ohne Herkunft: " + id)); }
 // Werkzeuge für die serbische Prüfung: Export erzeugt Zeilen, Probelauf ohne Korrekturen ändert nichts
 { const cp = require("child_process"), os = require("os"), pth = require("path"); const tmp = pth.join(os.tmpdir(), "op-sr-test.csv");
   const out = cp.execFileSync("node", [pth.join(__dirname, "../tools/sr-export.js"), tmp]).toString();

@@ -375,7 +375,7 @@
     return `<div class="card">${label ? `<div class="eyebrow">${E(label)}</div>` : ""}
       <div class="row"><h3 class="grow" style="margin:0">${E(p.title)}</h3><button class="star ${fav ? "on" : ""}" data-pfav="${id}" aria-label="${esc(t("prSaveFav"))}">${starIc(fav)}</button></div>
       ${kindBadge}${p.repeat ? `<span class="badge tag-history">${esc(t("prTimes").replace("{n}", p.repeat))}</span>` : ""}
-      <p class="creed">${E(p.text)}</p>${p.note ? `<p class="small muted">${E(p.note)}</p>` : ""}</div>`;
+      <p class="creed">${E(p.text)}</p>${p.note ? `<p class="small muted">${E(p.note)}</p>` : ""}${p.source ? `<p class="small muted"><b>${esc(t("prSource"))}:</b> ${E(p.source)}</p>` : ""}</div>`;
   }
   function prayerTabs() {
     const tabs = [["morning", "prMorning"], ["evening", "prEvening"], ["topics", "prTopics"], ["mine", "prMineShort"]];
@@ -402,6 +402,7 @@
   function viewPrayerCat(cid) {
     const c = PRAYER_CATS.find(x => x.id === cid); if (!c) return `<p>${esc(t("notFound"))}</p>`;
     return `<div class="eyebrow">${esc(t("prayersTitle"))}</div><h1>${E(c.title)}</h1>
+      ${cid === "communion" || cid === "confession" ? `<div class="card notice"><p class="small" style="margin:0">${ic("cross", "gold")} ${esc(t("prCommNote"))}</p></div>` : ""}
       ${c.items.map(it => Array.isArray(it) ? prayerCard(it[0], { de: it[1], sr: it[2] }) : prayerCard(it)).join("")}
       <p class="small muted">${esc(lang() === "de" ? t("prTransDe") : t("prTransSr"))}</p>`;
   }

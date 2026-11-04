@@ -1,6 +1,6 @@
 # OrthodoxPath – Projektstatus
 
-Stand: 4. November 2026 · Version 3.4.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
+Stand: 4. November 2026 · Version 3.5.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
 
 ## 1. Kurzbeschreibung
 Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe Lern- und Glaubens-App als **Progressive Web App (PWA)** fürs iPhone. Kein Konto, keine Werbung, keine Server-Datenhaltung, offline nutzbar.
@@ -27,7 +27,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 - 3 Lesepläne (Evangelien, NT, Psalter/Kathismen) mit Fortschritt
 - Theologie: Kurs A (7), Paisios (9), D (4), E Liturgie (6); Glaubensbekenntnis; Liturgie in 16 Schritten; Ikonen-Lexikon (13); Glossar (37, Suche)
 - 10 Kirchenväter, 28 Heilige mit Fragen/Quiz (Heilige vorerst pausiert – Wunsch des Nutzers)
-- Gebetsbuch: Morgen/Abend, 14 Themen, 30 Texte, Favoriten, Anliegen, „Heute gebetet“
+- Gebetsbuch: Morgen/Abend, 16 Themen (neu: vor/nach der Kommunion, vor der Beichte), 35 Texte mit Herkunftsangabe bei den Kommuniongebeten, Favoriten, Anliegen, „Heute gebetet“
 - Kirchenkalender julianisch/neujulianisch: Ostern berechnet, 39 Feste, 48 Gedenktage, Fasten-Status + überlieferte Regel; Monatsübersicht (Fastenart je Tag, Feste, Tagesdetails); Feste als Kalenderdatei (.ics) exportierbar
 - Lernkarten (140) mit verteilter Wiederholung, Quiz, Fortschritt, Wochenübersicht ohne Druck
 - Notizbuch (Verschlüsselung, Export/Teilen), gespeicherte Bibelstellen
@@ -46,7 +46,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 - Tägliche Schriftlesungen (Leseordnung) – keine geprüfte, frei nutzbare Quelle
 - Vollständiger Bibeltext (keine frei lizenzierte deutsche orthodoxe Übersetzung)
 - KI-Begleiter (keine kostenlose Lösung ohne laufende Kosten)
-- Gebete vor/nach der Kommunion, Akathisten, Kanones (Wortlaut-Prüfung nötig)
+- Ausführliche „Ordnung vor der Kommunion“, Dankgebete, Akathisten, Kanones (nur mit gemeinfreier oder freigegebener Vorlage)
 
 ## 4. Bekannte Probleme und Risiken (nach Schwere)
 
