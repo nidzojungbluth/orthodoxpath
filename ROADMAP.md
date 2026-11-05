@@ -79,7 +79,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 
 **P3-01 Weitere Bibellektionen** (S je Lektion): ✅ Apg 15, Ps 103 (104), Lk 10, Joh 17, Lk 2, Mt 16, Hebr 4–5, Gen 28, Ex 20 (4.11.2026). Weitere Kandidaten: Lk 19 (Zachäus), Joh 9 (Blindgeborener), Joh 4 (Samariterin), Mt 14 (Gang auf dem Wasser), 1 Kor 15, Offb 4–5. Je Lektion: Fakten/Lesungen geprüft, Kennzeichnung, Quiz, Lernkarten, e2e-Route.
 **P3-02 Kurs „Mysterien (Sakramente)“** ✅ erledigt 4.11.2026 (Kurs F, 7 Lektionen) (M): Taufe, Myronsalbung, Eucharistie, Beichte, Ehe, Priesterweihe, Krankensalbung – je Modul Lehre/Praxis/Hinweis auf Priester.
-**P3-03 Fastenwissen** (S–M): Sinn des Fastens, Ausnahmen (Krankheit, Schwangerschaft, Arbeit) nur als allgemeiner Hinweis + Priester; keine Ernährungspläne.
+**P3-03 Fastenwissen** ✅ erledigt 5.11.2026 – Lektion „Fasten im Alltag“ (Kurs E) (S–M): Sinn des Fastens, Ausnahmen (Krankheit, Schwangerschaft, Arbeit) nur als allgemeiner Hinweis + Priester; keine Ernährungspläne.
 **P3-04 Kirchenjahr-Begleiter** ✅ erledigt 4.11.2026 (ohne Troparien – nur mit geprüfter Quelle nachtragen) (M): zu den 12 großen Festen je eine Seite (Ikone in Worten, Troparion nur mit geprüfter Quelle, Lesungen, Bedeutung) – verknüpft mit Kalender.
 **P3-05 Heilige** – pausiert auf Wunsch des Nutzers.
 
@@ -92,6 +92,12 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 **P4-05 Native App (App Store)** (L): nur bei Bedarf (z. B. echte Benachrichtigungen); erfordert Apple-Entwicklerkonto (Kosten) und Computer mit Xcode.
 
 ---
+
+## Stand 5.11.2026 – offene Punkte
+- P2-03 Teil 2: ausführliche Kommunion-Ordnung und Dankgebete, Troparien der Feste – nur mit gemeinfreier/freigegebener Vorlage (Quellensuche braucht Freigabe für Web-Abruf).
+- P3-01 laufend: weitere Bibellektionen (Kandidaten in P3-01).
+- Nutzer: iPhone-Test (`TESTPLAN_IPHONE.md`), serbische Prüfung (CSV), echter VoiceOver-Test.
+- Technik: Größe beobachten (1,65 MB; ab 2 MB Inhalte auslagern, P2-06).
 
 ## Reihenfolge für „Setze Orthodox Path fort“
 1. P1-01 → P1-02 → P1-03 → P1-05 → P1-04 (Export-Teil)

@@ -756,6 +756,202 @@ const THEOLOGY = [
     sources: { de: "Typikon und Kirchenkalender; die genaue Praxis unterscheidet sich zwischen Ortskirchen, Klöstern und Gemeinden.", sr: "Типик и црквени календар; тачна пракса разликује се међу помесним Црквама, манастирима и парохијама." }
   },
   {
+    "id": "li-fastlife",
+    "course": "L",
+    "title": {
+      "de": "Fasten im Alltag: Sinn, Maß und Hilfen",
+      "sr": "Пост у свакодневици: смисао, мера и помоћ"
+    },
+    "sections": [
+      {
+        "h": {
+          "de": "Fasten mit Leib und Seele",
+          "sr": "Пост телом и душом"
+        },
+        "simple": {
+          "de": "Zum Fasten gehört nicht nur, worauf man beim Essen verzichtet. Die Kirche spricht auch vom Fasten der Augen, der Ohren und der Zunge: weniger Ablenkung, kein Streit, keine üble Nachrede. So wird das Fasten zur Zeit der Umkehr.",
+          "sr": "Посту не припада само оно чега се човек одриче у јелу. Црква говори и о посту очију, ушију и језика: мање расејаности, без свађе, без оговарања. Тако пост постаје време покајања."
+        },
+        "deeper": {
+          "de": "In der ersten Woche der Großen Fastenzeit singt die Kirche, dass wahres Fasten die Entfremdung vom Bösen ist: Zügelung der Zunge, Abkehr von Zorn, Lüge und böser Lust. Christus selbst mahnt, im Verborgenen zu fasten und nicht vor den Menschen (Mt 6,16–18). Fasten, Gebet und Barmherzigkeit gehören untrennbar zusammen; was man durch Verzicht spart, kann man Bedürftigen geben.",
+          "sr": "У првој седмици Великог поста Црква пева да је прави пост отуђење од зла: обуздавање језика, уздржање од гнева, лажи и зле похоте. Сам Христос опомиње да се пости у тајности, а не пред људима (Мт 6,16–18). Пост, молитва и милосрђе нераздвојно иду заједно; оно што се уштеди одрицањем може се дати онима који су у потреби."
+        },
+        "tag": "counsel"
+      },
+      {
+        "h": {
+          "de": "Das richtige Maß",
+          "sr": "Права мера"
+        },
+        "simple": {
+          "de": "Fasten soll stärken, nicht schaden. Wer neu anfängt, beginnt mit einem kleinen Schritt und steigert langsam. Wer krank ist, schwanger, stillend, ein Kind oder schwer arbeitet, fastet milder – das persönliche Maß bespricht man mit dem Priester und bei gesundheitlichen Fragen auch mit dem Arzt.",
+          "sr": "Пост треба да оснажи, а не да шкоди. Ко почиње, почиње малим кораком и постепено повећава. Ко је болестан, трудна, дојиља, дете или тешко ради, пости блаже – личну меру човек договара са свештеником, а у здравственим питањима и са лекаром."
+        },
+        "deeper": {
+          "de": "Die Väter warnen vor zwei Abwegen: Nachlässigkeit und übertriebener Strenge aus Stolz. Wer andere wegen ihres Fastens beurteilt, verfehlt den Sinn (Röm 14,3). Gelingt das Fasten einmal nicht, ist das kein Grund zur Verzweiflung, sondern zum neuen Anfang. Vor der Kommunion fastet man nach kirchlicher Praxis eine Zeit lang ganz von Speise und Trank (meist ab Mitternacht); Dauer und Ausnahmen regelt der Priester.",
+          "sr": "Оци упозоравају на две странпутице: немар и претерану строгост из гордости. Ко осуђује друге због њиховог поста, промашује смисао (Рим 14,3). Ако пост једном не успе, то није разлог за очајање, него за нов почетак. Пред причешће се, по црквеној пракси, неко време потпуно пости од јела и пића (обично од поноћи); трајање и изузетке одређује свештеник."
+        },
+        "tag": "counsel"
+      },
+      {
+        "h": {
+          "de": "Hilfen in der Großen Fastenzeit",
+          "sr": "Помоћ у Великом посту"
+        },
+        "simple": {
+          "de": "Die Kirche begleitet die Fastenzeit mit besonderen Gottesdiensten: dem Vergebungssonntag am Anfang, dem Gebet des hl. Ephräm, dem Großen Kanon des hl. Andreas von Kreta und der Liturgie der Vorgeweihten Gaben.",
+          "sr": "Црква прати Велики пост посебним богослужењима: Недељом опроштаја на почетку, молитвом светог Јефрема, Великим каноном светог Андреја Критског и Литургијом Пређеосвећених Дарова."
+        },
+        "deeper": {
+          "de": "Am Vergebungssonntag bitten sich die Gläubigen gegenseitig um Vergebung, bevor die Fastenzeit beginnt. Der Große Bußkanon des hl. Andreas von Kreta wird in der ersten Fastenwoche in vier Teilen und am Donnerstag der fünften Woche ganz gesungen. Das Gebet des hl. Ephräm („Herr und Gebieter meines Lebens“) wird an den Wochentagen mit Verneigungen gebetet. Die Sonntage der Fastenzeit erinnern an den Triumph der Orthodoxie, den hl. Gregor Palamas, das Kreuz, den hl. Johannes Klimakos und die hl. Maria von Ägypten.",
+          "sr": "У Недељу опроштаја верници моле једни друге за опроштај пре него што почне пост. Велики покајни канон светог Андреја Критског пева се у првој седмици поста у четири дела и у четвртак пете седмице у целини. Молитва светог Јефрема („Господе и Владико живота мога“) моли се радним данима са метанијама. Недеље поста подсећају на Тријумф Православља, светог Григорија Паламу, Крст, светог Јована Лествичника и свету Марију Египћанку."
+        },
+        "tag": "history"
+      }
+    ],
+    "keyPoints": [
+      {
+        "de": "Fasten der Zunge und des Herzens gehört dazu.",
+        "sr": "Пост језика и срца припада посту."
+      },
+      {
+        "de": "Klein anfangen; persönliches Maß mit Priester (und bei Gesundheitsfragen Arzt).",
+        "sr": "Почети мало; лична мера са свештеником (а у здравственим питањима и са лекаром)."
+      },
+      {
+        "de": "Gottesdienste der Fastenzeit: Vergebungssonntag, Ephräm-Gebet, Großer Kanon, Vorgeweihte Gaben.",
+        "sr": "Богослужења поста: Недеља опроштаја, молитва Јефремова, Велики канон, Пређеосвећени Дарови."
+      }
+    ],
+    "bible": [
+      {
+        "ref": {
+          "de": "Mt 6,16–18",
+          "sr": "Мт 6,16–18"
+        },
+        "note": {
+          "de": "Fastet im Verborgenen.",
+          "sr": "Постите у тајности."
+        }
+      },
+      {
+        "ref": {
+          "de": "Jes 58,6–7",
+          "sr": "Ис 58,6–7"
+        },
+        "note": {
+          "de": "Das Fasten, das Gott gefällt.",
+          "sr": "Пост који је Богу угодан."
+        }
+      },
+      {
+        "ref": {
+          "de": "Röm 14,3",
+          "sr": "Рим 14,3"
+        },
+        "note": {
+          "de": "Wer fastet, verachte nicht den, der nicht fastet.",
+          "sr": "Који пости нека не осуђује онога који не пости."
+        }
+      }
+    ],
+    "practice": {
+      "de": "Wähle für die nächste Fastenzeit ein „Fasten der Zunge“: zum Beispiel eine Woche lang über niemanden schlecht zu reden. Sprich vorher mit deinem Priester über dein Speisefasten.",
+      "sr": "Изаберите за следећи пост „пост језика“: на пример недељу дана ни о коме не говорити лоше. Пре тога разговарајте са свештеником о посту у јелу."
+    },
+    "questions": [
+      {
+        "q": {
+          "de": "Was meint die Kirche mit dem „Fasten der Zunge“?",
+          "sr": "Шта Црква мисли под „постом језика“?"
+        },
+        "a": {
+          "de": "Den Verzicht auf Streit, Lüge und üble Nachrede.",
+          "sr": "Уздржавање од свађе, лажи и оговарања."
+        }
+      },
+      {
+        "q": {
+          "de": "Was tut man, wenn das Fasten einmal nicht gelingt?",
+          "sr": "Шта чинити ако пост једном не успе?"
+        },
+        "a": {
+          "de": "Nicht verzweifeln, sondern neu beginnen – und nicht über andere urteilen.",
+          "sr": "Не очајавати, него почети изнова – и не осуђивати друге."
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": {
+          "de": "Wann wird der Große Kanon des hl. Andreas ganz gesungen?",
+          "sr": "Када се Велики канон светог Андреја пева у целини?"
+        },
+        "options": [
+          {
+            "de": "Am Donnerstag der fünften Fastenwoche",
+            "sr": "У четвртак пете седмице поста"
+          },
+          {
+            "de": "An Weihnachten",
+            "sr": "На Божић"
+          },
+          {
+            "de": "Am Ostersonntag",
+            "sr": "На Васкрс"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Was geschieht am Vergebungssonntag?",
+          "sr": "Шта се збива у Недељу опроштаја?"
+        },
+        "options": [
+          {
+            "de": "Die Gläubigen bitten einander um Vergebung",
+            "sr": "Верници моле једни друге за опроштај"
+          },
+          {
+            "de": "Das Fasten endet",
+            "sr": "Пост се завршава"
+          },
+          {
+            "de": "Es wird getauft",
+            "sr": "Крштава се"
+          }
+        ],
+        "correct": 0
+      },
+      {
+        "q": {
+          "de": "Mit wem bespricht man das persönliche Maß des Fastens?",
+          "sr": "Са ким се договара лична мера поста?"
+        },
+        "options": [
+          {
+            "de": "Mit dem Priester (bei Gesundheitsfragen auch mit dem Arzt)",
+            "sr": "Са свештеником (у здравственим питањима и са лекаром)"
+          },
+          {
+            "de": "Mit niemandem",
+            "sr": "Ни са ким"
+          },
+          {
+            "de": "Nur mit Freunden",
+            "sr": "Само са пријатељима"
+          }
+        ],
+        "correct": 0
+      }
+    ],
+    "sources": {
+      "de": "Triodion und Typikon der orthodoxen Kirche; Bergpredigt (Mt 6). Allgemeine Hinweise ohne Ernährungsplan; das persönliche Maß legt der Priester fest.",
+      "sr": "Триод и Типик Православне Цркве; Беседа на гори (Мт 6). Општа упутства без плана исхране; личну меру одређује свештеник."
+    }
+  },
+  {
     id: "li-calendar", course: "L",
     title: { de: "Julianischer und neuer Kalender", sr: "Јулијански и нови календар" },
     sections: [

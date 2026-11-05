@@ -542,7 +542,7 @@
         ${fe.map(feastLine).join("<div style='height:10px'></div>")}
         <div style="margin-top:10px">${fastBadge(fi.kind)}</div>
         <p class="small" style="margin:6px 0 0"><b>${esc(t("calFastRule"))}:</b> ${E(CAL_FAST_RULES[fi.kind])}</p>
-        <p class="small muted" style="margin-top:6px">${esc(t("calFastNote"))}</p></div>
+        <p class="small muted" style="margin-top:6px">${esc(t("calFastNote"))}</p><a class="small" href="#lesson-li-fastlife">${E(ALL_LESSONS["li-fastlife"].title)} ›</a></div>
       <div class="card"><h3>${esc(t("calSaintsToday"))}</h3>
         ${sts.length ? `<ul class="list">${sts.map(id => `<li><a class="item" href="#person-${id}"><span class="grow"><span class="t">${E(PEOPLE[id].name)}</span><span class="s">${E(PEOPLE[id].lived)}</span></span><span class="chev">${ic("chev")}</span></a></li>`).join("")}</ul>` : `<p class="small muted">${esc(t("calNoSaintsApp"))}</p>`}
         ${LINKS.svProlog ? `<p class="small"><a href="${esc(LINKS.svProlog.url)}" target="_blank" rel="noopener">${E(LINKS.svProlog.label)} ↗</a></p>` : ""}
@@ -568,6 +568,7 @@
         <p class="small muted" style="margin-top:8px">${esc(t("calFastNote"))}</p>
       </div>
       <a class="item" href="#lesson-li-fasting"><span class="grow"><span class="t">${E(ALL_LESSONS["li-fasting"].title)}</span></span><span class="chev">${ic("chev")}</span></a>
+      <a class="item" href="#lesson-li-fastlife"><span class="grow"><span class="t">${E(ALL_LESSONS["li-fastlife"].title)}</span></span><span class="chev">${ic("chev")}</span></a>
       <a class="item" href="#lesson-li-calendar"><span class="grow"><span class="t">${E(ALL_LESSONS["li-calendar"].title)}</span></span><span class="chev">${ic("chev")}</span></a>`;
   }
   function bindCalendar() {

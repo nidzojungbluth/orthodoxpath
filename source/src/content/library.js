@@ -213,6 +213,7 @@ const EXTRA_CARDS = [
   ["d-bible", "Warum kann Christus mit unseren Schwächen mitfühlen (Hebr 4,15)?", "Зашто Христос може да саосећа са нашим слабостима (Јев 4,15)?", "Er wurde in allem versucht wie wir, aber ohne Sünde.", "У свему је био кушан као и ми, али без греха."],
   ["d-bible", "Wie nannte Jakob den Ort seines Traums?", "Како је Јаков назвао место свог сна?", "Bet-El – Haus Gottes und Tor des Himmels.", "Ветиљ – дом Божији и врата небеска."],
   ["d-bible", "Welches ist in der orthodoxen Zählung das zweite Gebot?", "Која је по православном бројању друга заповест?", "Du sollst dir kein Götzenbild machen.", "Не прави себи идола."],
+  ["d-basics", "Was ist das „Fasten der Zunge“?", "Шта је „пост језика“?", "Verzicht auf Streit, Lüge und üble Nachrede – Teil des wahren Fastens.", "Уздржавање од свађе, лажи и оговарања – део правог поста."],
   ["d-history", "Nizäa 325 – worum ging es?", "Никеја 325 – о чему је било реч?", "Gegen Arius: Der Sohn ist eines Wesens mit dem Vater.", "Против Арија: Син је једносуштан Оцу."],
   ["d-history", "Konstantinopel 381 – worum ging es?", "Цариград 381 – о чему је било реч?", "Gottheit des Heiligen Geistes; Ergänzung des Glaubensbekenntnisses.", "Божанство Духа Светога; допуна Символа вере."],
   ["d-history", "Ephesus 431 – worum ging es?", "Ефес 431 – о чему је било реч?", "Gegen Nestorius: Maria ist Gottesgebärerin.", "Против Несторија: Марија је Богородица."],

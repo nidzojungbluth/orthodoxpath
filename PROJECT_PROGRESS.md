@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.9.0 (4. November 2026)
+**Aktuelle Version:** 3.10.0 (5. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,10 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.10 (ROADMAP P3-03)
+
+- Neue Lektion „Fasten im Alltag: Sinn, Maß und Hilfen“ (Kurs E): Fasten der Zunge und des Herzens, das richtige Maß (klein anfangen, Ausnahmen, Priester und bei Gesundheitsfragen Arzt), kein Urteilen über andere, Fasten vor der Kommunion, Gottesdienste der Großen Fastenzeit (Vergebungssonntag, Ephräm-Gebet, Großer Kanon, Vorgeweihte Gaben, Sonntage der Fastenzeit). Bewusst ohne Ernährungsplan. Verlinkt im Kirchenkalender. 1 neue Lernkarte.
 
 ## Version 3.9 (ROADMAP P3-04)
 
