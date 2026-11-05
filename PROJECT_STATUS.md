@@ -1,6 +1,6 @@
 # OrthodoxPath – Projektstatus
 
-Stand: 5. November 2026 · Version 3.10.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
+Stand: 5. November 2026 · Version 3.11.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
 
 ## 1. Kurzbeschreibung
 Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe Lern- und Glaubens-App als **Progressive Web App (PWA)** fürs iPhone. Kein Konto, keine Werbung, keine Server-Datenhaltung, offline nutzbar.
@@ -23,7 +23,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 ## 3. Funktionen
 
 ### Funktioniert (automatisch getestet)
-- Bibelschule: 62 volle Lektionen (11 Teile, Fragen, Quiz), jedes der 39 Bucheinträge abgedeckt, 27 Kurzüberblicke, Vor/Zurück-Navigation, „Zuletzt geöffnet“
+- Bibelschule: 66 volle Lektionen (11 Teile, Fragen, Quiz), jedes der 39 Bucheinträge abgedeckt, 27 Kurzüberblicke, Vor/Zurück-Navigation, „Zuletzt geöffnet“
 - 3 Lesepläne (Evangelien, NT, Psalter/Kathismen) mit Fortschritt
 - Theologie: Kurs A (7), Paisios (9), D (4), E Liturgie (7, inkl. „Fasten im Alltag“), F Heilige Mysterien (7); Glaubensbekenntnis; Liturgie in 16 Schritten; Ikonen-Lexikon (13); Glossar (37, Suche)
 - 10 Kirchenväter, 28 Heilige mit Fragen/Quiz (Heilige vorerst pausiert – Wunsch des Nutzers)
@@ -56,7 +56,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 3. **Serbische Texte nicht muttersprachlich geprüft** – Prüftabelle bereit (`node tools/sr-export.js` → CSV mit 5 300+ Texten, Spalte „Korrektur“; Rückweg `node tools/sr-import.js datei.csv`). Prüfung durch Muttersprachler/Priester offen.
 4. **Kein Test auf echtem iPhone/Safari** durch Claude möglich – Checkliste `TESTPLAN_IPHONE.md` liegt bereit, Durchführung durch den Nutzer offen.
 5. `src/app.js` ist eine große Datei (~1 200 Zeilen); wachsende Wartungskosten, aber stabil. Kein Umbau nötig, solange Tests grün sind.
-6. Ausgabedatei 1,65 MB (gzip ≈ 0,56 MB): gemessen ≈ 1,5 s bis zum ersten Bildschirm (gedrosselt), danach offline sofort. Grenze für Umbau: 2 MB.
+6. Ausgabedatei 1,69 MB (gzip ≈ 0,57 MB): gemessen ≈ 1,5 s bis zum ersten Bildschirm (gedrosselt), danach offline sofort. Grenze für Umbau: 2 MB.
 7. ~~Reihenfolge der Bibellektionen~~ – erledigt (3.3): Umschalter „Lernweg / Nach Büchern“.
 8. Barrierefreiheit – geprüft (3.3): `tests/a11y.js` (axe-core) ohne Verstöße; Kontraste im hellen Modus angehoben, Dialoge mit Fokus und Escape. Offen: Test mit echtem VoiceOver.
 9. ~~Keine Content-Security-Policy~~ – erledigt (3.1): CSP-Meta-Tag in der PWA (nicht im Claude-Artefakt, damit dessen Laufzeit nicht blockiert wird); Import prüft Felder und Typen; Test bestätigt, dass HTML in Notizen nicht ausgeführt wird.

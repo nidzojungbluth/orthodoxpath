@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.10.0 (5. November 2026)
+**Aktuelle Version:** 3.11.0 (5. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -20,7 +20,7 @@
 
 | Bereich | Stand |
 |---|---|
-| Bibelschule | 62 volle Lektionen (je 11 Teile, Fragen, Quiz) + 27 Kurzüberblicke → **jeder der 39 Bucheinträge hat jetzt mindestens eine volle Lektion**; Vor-/Zurück-Navigation, „Zuletzt geöffnet“ |
+| Bibelschule | 66 volle Lektionen (je 11 Teile, Fragen, Quiz) + 27 Kurzüberblicke → **jeder der 39 Bucheinträge hat jetzt mindestens eine volle Lektion**; Vor-/Zurück-Navigation, „Zuletzt geöffnet“ |
 | Theologie-Akademie | Kurs A (7), Paisios-Kurs (9), Kurs D (4), Kurs E Liturgie & Kirchenjahr (6, neu: Chrysostomus-, Basilius- und Vorgeweihte Liturgie), Glaubensbekenntnis |
 | Heilige & Kirchenväter | 10 Kirchenväter, 28 Heilige (inkl. Maria von Ägypten, Lukas von Simferopol, Nikolaus, Georg, Demetrios, Petka, Stefan Dečanski, Apostel Andreas, Spyridon, Katharina, Prokopios, Antonius der Große, Arsenije Sremac, Ignatius von Antiochien, Johannes von Rila), alle mit Fragen und Quiz |
 | Gebetsbuch | Morgen- und Abendordnung, 14 Themen (Essen, Arbeit, Angst, Versuchung, Vergebung, Familie, Kranke, Trauer, Verstorbene, Christus, Gottesgebärerin, Heilige, Dank, Fastenzeit), 30 Gebete, gespeicherte Gebete, Gebetsanliegen |
@@ -32,6 +32,10 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.11 (ROADMAP P3-01)
+
+- Bibellektionen Johannes 4 (Die Samariterin), Johannes 9 (Der Blindgeborene), Lukas 19 (Zachäus), 1 Korinther 15 (Die Auferstehung der Toten); 4 neue Lernkarten.
 
 ## Version 3.10 (ROADMAP P3-03)
 
