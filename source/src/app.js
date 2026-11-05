@@ -682,13 +682,17 @@
       <figcaption class="small muted">${E(i.img.credit)} · ${esc(t("iconPd"))} · <a href="${u.page}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></figcaption></figure>`;
   }
   function viewIcons() {
-    return `<div class="eyebrow">${esc(t("theologyTitle"))}</div><h1>${esc(t("iconsTitle"))}</h1><p class="muted">${esc(t("iconsIntro"))}</p><p class="small muted">${esc(t("iconImgNote"))}</p>
-      ${ICONS_LEX.map(i => `<section class="card sec" id="icon-${i.id}"><h3>${E(i.name)}</h3>${i.tag ? tagBadge(i.tag) : ""}${iconFigure(i)}
+    const byId = Object.fromEntries(ICONS_LEX.map(i => [i.id, i]));
+    const card = i => `<section class="card sec" id="icon-${i.id}"><h3>${E(i.name)}</h3>${i.tag ? tagBadge(i.tag) : ""}${iconFigure(i)}
         <p><b>${esc(t("iconLook"))}:</b> ${E(i.look)}</p><p style="margin-bottom:${i.lesson || i.saint ? "6px" : "0"}"><b>${esc(t("iconMean"))}:</b> ${E(i.mean)}</p>
         ${i.lesson && ALL_LESSONS[i.lesson] ? `<a class="small" href="#lesson-${i.lesson}">${esc(t("calToLesson"))} ›</a>` : ""}
-        ${i.saint ? `<a class="small" href="#person-${i.saint}">${esc(t("iconToSaint"))} ›</a>` : ""}</section>`).join("")}`;
+        ${i.saint ? `<a class="small" href="#person-${i.saint}">${esc(t("iconToSaint"))} ›</a>` : ""}</section>`;
+    return `<div class="eyebrow">${esc(t("theologyTitle"))}</div><h1>${esc(t("iconsTitle"))}</h1><p class="muted">${esc(t("iconsIntro"))}</p><p class="small muted">${esc(t("iconImgNote"))}</p>
+      <div class="chips" role="navigation" aria-label="${esc(t("iconsTitle"))}">${ICON_GROUPS.map(g => `<a class="chip" href="#icons" data-jump="ig-${g.id}">${E(g.name).split(" (")[0]} (${ICON_ORDER[g.id].length})</a>`).join("")}</div>
+      ${ICON_GROUPS.map(g => `<h2 id="ig-${g.id}">${E(g.name)}</h2>${ICON_ORDER[g.id].map(id => byId[id]).filter(Boolean).map(card).join("")}`).join("")}`;
   }
   function bindIcons() {
+    app.querySelectorAll("[data-jump]").forEach(a => a.onclick = ev => { ev.preventDefault(); const el = document.getElementById(a.dataset.jump); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); });
     app.querySelectorAll(".iconimg img").forEach(im => {
       im.onerror = () => { if (!im.dataset.tried) { im.dataset.tried = "1"; im.src = im.dataset.full; } else im.closest("figure").hidden = true; };
     });

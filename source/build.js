@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const R = p => fs.readFileSync(path.join(__dirname, p), "utf8");
-const VERSION = "3.12.0";
+const VERSION = "3.13.0";
 
 /* Eingebettete Schrift (Cormorant Garamond, SIL Open Font License, siehe src/fonts/OFL.txt) – funktioniert offline und ohne externe Server */
 const RANGES = {

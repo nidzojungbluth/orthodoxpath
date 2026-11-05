@@ -1,5 +1,5 @@
 /* OrthodoxPath Service Worker – Offline-Zwischenspeicher */
-const CACHE = "orthodoxpath-3.12.0";
+const CACHE = "orthodoxpath-3.13.0";
 const IMG_CACHE = "orthodoxpath-icons-v1"; /* gemeinfreie Ikonenbilder, bleibt über Versionen erhalten */
 const FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))); self.skipWaiting(); });

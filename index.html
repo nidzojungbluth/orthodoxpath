@@ -406,7 +406,7 @@ label.btn { margin: 0; font-size: 1em; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "3.12.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "3.13.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -12770,6 +12770,15 @@ const LITURGY_PARTS = {
 /* src/content/icons.js */
 /* OrthodoxPath – Ikonen-Lexikon. Bilder: nur jahrhundertealte, gemeinfreie Ikonen von Wikimedia Commons
    (originalgetreue Fotos 2D-gemeinfreier Werke, PD-Art). path = md5-Verzeichnis für upload.wikimedia.org. */
+const ICON_GROUPS = [
+  { id: "christ", name: { de: "Christus", sr: "Христос" } },
+  { id: "theotokos", name: { de: "Gottesgebärerin", sr: "Богородица" } },
+  { id: "feasts", name: { de: "Feste (in der Reihenfolge des Kirchenjahres)", sr: "Празници (редом црквене године)" } },
+  { id: "saints", name: { de: "Engel und Heilige", sr: "Анђели и светитељи" } },
+  { id: "church", name: { de: "Im Kirchenraum", sr: "У храму" } }
+];
+/* Reihenfolge in der Anzeige: nach Gruppe, innerhalb der Gruppe nach ICON_ORDER */
+const ICON_ORDER = {"christ": ["pantokrator", "mandylion", "saviour-powers"], "theotokos": ["hodigitria", "eleousa", "platytera", "don", "sign-miracle"], "feasts": ["nativity-theotokos", "presentation-theotokos", "annunciation", "nativity", "meeting", "theophany", "transfiguration", "lazarus", "entry", "crucifixion", "entombment", "anastasis", "thomas", "ascension", "pentecost", "trinity", "dormition", "exaltation", "pokrov"], "saints": ["deesis", "john-baptist", "archangels", "paul", "chrysostom", "desert-fathers", "elijah", "george", "nicholas"], "church": ["iconostasis"]};
 const ICONS_LEX = [
   { id: "pantokrator", img: { file: "Spas_na_Ilyine_-_Christ_Pantocrator_01.jpg", path: "3/35", credit: { de: "Theophanes der Grieche, Kuppelfresko der Erlöserkirche an der Iljina-Straße, Nowgorod, 1378", sr: "Теофан Грк, фреска у куполи цркве Спаса на Иљиној улици, Новгород, 1378." }, license: "PD-Art" },
     name: { de: "Christus Pantokrator (Allherrscher)", sr: "Христос Пантократор (Сведржитељ)" },
@@ -12818,7 +12827,8 @@ const ICONS_LEX = [
   { id: "mandylion", name: { de: "Das nicht von Händen gemachte Bild (Mandylion)", sr: "Нерукотворени образ (Мандилион)" },
     look: { de: "Das Antlitz Christi auf einem Tuch.", sr: "Христово лице на убрусу." },
     mean: { de: "Nach der Überlieferung drückte Christus sein Gesicht in ein Tuch für König Abgar von Edessa. Die Ikone bezeugt: Weil Gott Mensch wurde, darf er dargestellt werden.", sr: "Према предању, Христос је утиснуо своје лице у убрус за цара Авгара едеског. Икона сведочи: пошто је Бог постао човек, сме се изображавати." }, tag: "uncertain", lesson: "dg-icons" },
-  { id: "iconostasis", name: { de: "Aufbau der Ikonostase", sr: "Устројство иконостаса" },
+  { id: "iconostasis", img: { file: "Russian_-_Great_Deesis_with_Prophets_-_Walters_37625.jpg", path: "2/23", credit: { de: "Deesis- und Prophetenreihe einer Ikonostase, Russland, 16. Jh., Walters Art Museum", sr: "Деисисни и пророчки ред иконостаса, Русија, 16. век, Музеј Волтерс" }, license: "PD-Art" },
+    name: { de: "Aufbau der Ikonostase", sr: "Устројство иконостаса" },
     look: { de: "In der Mitte die Königlichen Türen (oft mit Verkündigung und den Evangelisten), rechts Christus, links die Gottesgebärerin. Darüber, je nach Kirche, Reihen mit den Festen, den Aposteln (Deesis) und den Propheten.", sr: "У средини царске двери (често са Благовестима и јеванђелистима), десно Христос, лево Богородица. Изнад, зависно од храма, редови са празницима, апостолима (Деисис) и пророцима." },
     mean: { de: "Die Ikonostase zeigt die ganze Heilsgeschichte und die Gemeinschaft der Heiligen.", sr: "Иконостас приказује целу историју спасења и заједницу светих." }, lesson: "li-liturgy" },
   { id: "annunciation",
@@ -12876,7 +12886,85 @@ const ICONS_LEX = [
     name: { de: "Hl. Nikolaus der Wundertäter", sr: "Свети Никола Чудотворац" },
     look: { de: "Der Bischof von Myra mit hoher Stirn und kurzem weißem Bart, im Bischofsgewand mit Omophorion (Schulterband mit Kreuzen); die Rechte segnet, die Linke hält das Evangelienbuch.", sr: "Епископ мирликијски високог чела и кратке беле браде, у архијерејској одежди са омофором; десном руком благосиља, у левој држи Јеванђеље." },
     mean: { de: "Ein Vorbild des guten Hirten: treu im Glauben, barmherzig zu den Armen. Er gehört zu den am meisten verehrten Heiligen; in Serbien ist sein Fest (19. Dezember) die häufigste Slava.", sr: "Узор доброг пастира: веран у вери, милосрдан према сиромашнима. Један је од најпоштованијих светитеља; у Србији је његов празник (19. децембар) најчешћа слава." },
-    saint: "s-nicholas" }
+    saint: "s-nicholas" },
+  { id: "nativity-theotokos",
+    img: { file: "Nativity_of_Theotokos.jpg", path: "1/11", credit: { de: "Geburt der Gottesgebärerin, russische Ikone, 18. Jh.", sr: "Рођење Пресвете Богородице, руска икона, 18. век" }, license: "PD-Art" },
+    name: { de: "Geburt der Gottesgebärerin", sr: "Рођење Пресвете Богородице (Мала Госпојина)" },
+    look: { de: "Die hl. Anna ruht auf einem Lager, Frauen bringen ihr Speisen und Gaben. Vorne baden Hebammen das neugeborene Kind Maria; Joachim schaut von der Seite zu.", sr: "Света Ана почива на постељи, жене јој доносе јело и дарове. Напред бабице купају новорођену Марију; Јоаким посматра са стране." },
+    mean: { de: "Das erste große Fest des Kirchenjahres (das am 1. September beginnt): Mit der Geburt der künftigen Mutter des Herrn beginnt die Vorbereitung unseres Heils. Die Einzelheiten stammen aus der Überlieferung (Protoevangelium des Jakobus), nicht aus den Evangelien.", sr: "Први велики празник црквене године (која почиње 1. септембра): рођењем будуће Мајке Господње почиње припрема нашег спасења. Појединости потичу из предања (Протојеванђеље Јаковљево), а не из Јеванђеља." },
+    tag: "history" },
+  { id: "presentation-theotokos",
+    name: { de: "Einführung der Gottesgebärerin in den Tempel", sr: "Ваведење Пресвете Богородице" },
+    look: { de: "Joachim und Anna führen die kleine Maria zum Tempel, begleitet von Mädchen mit Kerzen. Der Priester Zacharias empfängt sie an der Treppe. Oben sitzt Maria im Allerheiligsten, und ein Engel bringt ihr Speise.", sr: "Јоаким и Ана воде малу Марију у храм, а прате их девојке са свећама. Свештеник Захарија је дочекује на степеницама. Горе Марија седи у Светињи над светињама, а анђео јој доноси храну." },
+    mean: { de: "Maria wird selbst zum lebendigen Tempel vorbereitet, in dem Gott wohnen wird. Auch hier stammt die Erzählung aus der Überlieferung (Protoevangelium des Jakobus).", sr: "Марија се припрема да сама постане живи храм у коме ће Бог обитавати. И овде прича потиче из предања (Протојеванђеље Јаковљево)." },
+    tag: "history" },
+  { id: "meeting",
+    name: { de: "Begegnung des Herrn (Darstellung im Tempel)", sr: "Сретење Господње" },
+    look: { de: "Im Tempel reicht Maria das Kind dem greisen Simeon, der es mit verhüllten Händen empfängt. Josef trägt zwei Tauben, daneben die Prophetin Hanna mit einer Schriftrolle.", sr: "У храму Марија пружа Дете старцу Симеону, који Га прима покривеним рукама. Јосиф носи две грлице, поред њега пророчица Ана са свитком." },
+    mean: { de: "Der Alte Bund begegnet dem Herrn: Simeon erkennt in dem Kind das „Licht zur Erleuchtung der Heiden“ (Lk 2,22–38). Sein Lobgesang wird in jeder Vesper gebetet.", sr: "Стари Завет сусреће Господа: Симеон у Детету препознаје „светлост за просвећење незнабожаца“ (Лк 2,22–38). Његова песма пева се на свакој вечерњи." },
+    lesson: "bib-lk2" },
+  { id: "lazarus",
+    name: { de: "Auferweckung des Lazarus", sr: "Васкрсење Лазарево" },
+    look: { de: "Christus segnet zum Grab hin. Im Höhleneingang steht Lazarus, noch in Grabtücher gewickelt; ein Mann wickelt ihn aus, Umstehende halten sich die Nase zu. Martha und Maria liegen Christus zu Füßen.", sr: "Христос благосиља ка гробу. На улазу у пећину стоји Лазар, још увијен у покров; један човек га одмотава, а присутни заклањају нос. Марта и Марија леже Христу пред ногама." },
+    mean: { de: "Christus, der „die Auferstehung und das Leben“ ist (Joh 11,25), weckt einen seit vier Tagen Toten auf – ein Unterpfand der allgemeinen Auferstehung. Gefeiert am Lazarus-Samstag vor dem Palmsonntag.", sr: "Христос, који је „васкрсење и живот“ (Јн 11,25), подиже из мртвих четвородневног покојника – залог општег васкрсења. Празнује се на Лазареву суботу пред Цвети." } },
+  { id: "exaltation",
+    name: { de: "Kreuzerhöhung", sr: "Воздвижење Часног Крста (Крстовдан)" },
+    look: { de: "Ein Bischof steht auf einem Podest vor der Kirche und hebt das Kreuz hoch; Diakone stützen seine Arme. Unten das Volk, oft auch Kaiser Konstantin und Kaiserin Helena.", sr: "Епископ стоји на узвишењу пред храмом и подиже крст; ђакони му придржавају руке. Доле народ, често и цар Константин и царица Јелена." },
+    mean: { de: "Erinnerung an die Auffindung des Kreuzes in Jerusalem durch die hl. Helena (4. Jh.) und seine Erhöhung vor dem Volk. Das Werkzeug des Todes ist zum Zeichen des Sieges geworden. Der Tag ist ein strenger Fasttag.", sr: "Спомен на проналазак Крста у Јерусалиму од свете Јелене (4. век) и његово уздизање пред народом. Оруђе смрти постало је знак победе. Тај дан је строги пост." },
+    tag: "history" },
+  { id: "pokrov",
+    name: { de: "Schutz der Gottesgebärerin (Pokrov)", sr: "Покров Пресвете Богородице" },
+    look: { de: "Die Gottesgebärerin steht oben in einer Kirche und breitet ihren Schleier über die Betenden aus. Darunter weist der hl. Andreas der Narr in Christo seinen Schüler auf die Erscheinung hin; in der Mitte singt der hl. Romanos der Melode.", sr: "Богородица стоји горе у храму и простире свој покров над онима који се моле. Испод свети Андреј Христа ради јуродиви показује свом ученику на виђење; у средини пева свети Роман Слаткопојац." },
+    mean: { de: "Nach der Überlieferung sah der hl. Andreas in der Blachernenkirche in Konstantinopel, wie die Gottesgebärerin für die Gläubigen betete und sie mit ihrem Schleier bedeckte. Das Fest wird besonders in der russischen Kirche groß gefeiert.", sr: "Према предању, свети Андреј је у Влахернској цркви у Цариграду видео како се Богородица моли за вернике и покрива их својим покровом. Празник се посебно свечано слави у Руској цркви." },
+    tag: "history" },
+  { id: "don",
+    img: { file: "Feofan_Donskaja.jpg", path: "7/7b", credit: { de: "Gottesmutter vom Don, Theophanes dem Griechen zugeschrieben, Ende 14. Jh., Tretjakow-Galerie", sr: "Донска икона Богородице, приписује се Теофану Грку, крај 14. века, Третјаковска галерија" }, license: "PD-Art" },
+    name: { de: "Gottesmutter vom Don", sr: "Донска икона Богородице" },
+    look: { de: "Eine Eleousa: Maria hält das Kind, das seine Wange an ihre schmiegt; das Kind hat nackte Füße. Auf der Rückseite derselben Tafel ist die Entschlafung der Gottesgebärerin gemalt.", sr: "Елеуса: Марија држи Дете које се образом приљубљује уз њен; Дете има босе ноге. На полеђини исте даске насликано је Успење Богородице." },
+    mean: { de: "Ein Beispiel dafür, wie ein Ikonentyp (Eleousa) in berühmten einzelnen Ikonen weiterlebt. Die Überlieferung verbindet sie mit der Schlacht auf dem Kulikovo-Feld (1380); Herkunft und Datierung sind unter Fachleuten umstritten.", sr: "Пример како један тип иконе (Елеуса) живи у појединим чувеним иконама. Предање је повезује са Куликовском битком (1380); порекло и датовање су међу стручњацима спорни." },
+    tag: "uncertain" },
+  { id: "sign-miracle",
+    img: { file: "Battle_between_Novgorod_and_Suzdal.jpg", path: "6/69", credit: { de: "Wunder von der Ikone des Zeichens, Nowgorod, Mitte 15. Jh.", sr: "Чудо од иконе Знамења, Новгород, средина 15. века" }, license: "PD-Art" },
+    name: { de: "Das Wunder von der Ikone des Zeichens (Nowgorod 1170)", sr: "Чудо од иконе Знамења (Новгород 1170)" },
+    look: { de: "Eine Erzählikone in drei Streifen: Oben wird die Ikone der Gottesmutter des Zeichens auf die Stadtmauer getragen; in der Mitte treffen Pfeile der Belagerer die Ikone; unten reiten die Verteidiger, angeführt von heiligen Kriegern, aus der Stadt.", sr: "Наративна икона у три појаса: горе се икона Богородице Знамење износи на градски зид; у средини стреле опсађивача погађају икону; доле браниоци, предвођени светим ратницима, излазе из града." },
+    mean: { de: "Ikonen erzählen auch Geschichte: Die Novgoroder schrieben ihre Rettung der Fürbitte der Gottesgebärerin zu. Die ausführliche Erzählung wurde erst Jahrhunderte später aufgeschrieben; daher als Überlieferung gekennzeichnet.", sr: "Иконе причају и историју: Новгородци су своје избављење приписали заступништву Богородице. Опширна прича записана је тек вековима касније; зато је означена као предање." },
+    tag: "uncertain" },
+  { id: "john-baptist",
+    img: { file: "Feofan_predtecha.jpg", path: "1/1c", credit: { de: "Theophanes der Grieche, Deesis-Reihe der Verkündigungskathedrale im Moskauer Kreml, um 1405", sr: "Теофан Грк, деисисни ред Благовештенског сабора у Московском Кремљу, око 1405." }, license: "PD-Art" },
+    name: { de: "Johannes der Täufer (der Vorläufer)", sr: "Свети Јован Крститељ (Претеча)" },
+    look: { de: "In der Deesis steht er Christus zugewandt, die Hände bittend erhoben. Auf eigenen Ikonen trägt er ein Gewand aus Kamelhaar und oft Flügel („Engel der Wüste“, nach Mal 3,1) und hält eine Schriftrolle mit dem Ruf zur Umkehr.", sr: "У Деисису стоји окренут Христу, руку подигнутих у молитви. На засебним иконама носи одећу од камиље длаке, често и крила („Анђео пустиње“, по Мал 3,1), и држи свитак са позивом на покајање." },
+    mean: { de: "Der letzte Prophet des Alten Bundes, der auf Christus zeigt: „Seht, das Lamm Gottes“ (Joh 1,29). Christus nennt ihn den Größten unter den von Frauen Geborenen (Mt 11,11).", sr: "Последњи пророк Старог Завета, који показује на Христа: „Ево Јагњета Божјег“ (Јн 1,29). Христос га назива највећим међу рођенима од жена (Мт 11,11)." },
+    lesson: "bib-mk1" },
+  { id: "archangels",
+    img: { file: "Gabriel_from_Vladimirskiy_chin_(15th_c.,_GTG).jpg", path: "f/f0", credit: { de: "Hl. Andrej Rubljow (zugeschrieben), Erzengel Gabriel aus der Deesis-Reihe der Entschlafungskathedrale in Wladimir, 1408, Tretjakow-Galerie", sr: "Свети Андреј Рубљов (приписује се), арханђел Гаврило из деисисног реда Успенског сабора у Владимиру, 1408, Третјаковска галерија" }, license: "PD-Art" },
+    name: { de: "Die Erzengel – hier Gabriel", sr: "Арханђели – овде Гаврило" },
+    look: { de: "Ein Engel mit Flügeln in Gewändern des Hofes, mit einem Stab als Bote. Bänder im Haar zeigen, dass er auf Gottes Willen hört. Michael wird oft mit Schwert als Anführer der himmlischen Heerscharen gemalt.", sr: "Анђео са крилима у дворској одећи, са штапом гласника. Траке у коси показују да слуша вољу Божју. Михаило се често слика са мачем као војвода небеских сила." },
+    mean: { de: "Engel sind geschaffene, körperlose Diener Gottes. Gabriel bringt die frohe Botschaft (Lk 1), Michael kämpft gegen das Böse (Offb 12,7). Gemeinsames Fest: Synaxis der Erzengel am 8./21. November – in Serbien eine häufige Slava (Aranđelovdan).", sr: "Анђели су створене, бестелесне слуге Божје. Гаврило доноси благу вест (Лк 1), Михаило се бори против зла (Отк 12,7). Заједнички празник: Сабор арханђела 8/21. новембра – у Србији честа слава (Аранђеловдан)." } },
+  { id: "paul",
+    img: { file: "Rublev_Paul.jpg", path: "0/02", credit: { de: "Hl. Andrej Rubljow (zugeschrieben), Apostel Paulus aus der Swenigoroder Reihe, um 1410–1420, Tretjakow-Galerie", sr: "Свети Андреј Рубљов (приписује се), апостол Павле из Звенигородског реда, око 1410–1420, Третјаковска галерија" }, license: "PD-Art" },
+    name: { de: "Apostel Paulus", sr: "Свети апостол Павле" },
+    look: { de: "Hohe Stirn, wenig Haar, dunkler, spitz zulaufender Bart; er hält das Buch seiner Briefe, manchmal auch ein Schwert als Zeichen seines Martyriums.", sr: "Високо чело, проређена коса, тамна шиљата брада; држи књигу својих посланица, понекад и мач као знак мучеништва." },
+    mean: { de: "Vom Verfolger zum Apostel der Völker (Apg 9). Seine Briefe sind ein großer Teil des Neuen Testaments. Er wird zusammen mit Petrus am 29. Juni / 12. Juli gefeiert (Petrovdan).", sr: "Од гонитеља до апостола народа (Дап 9). Његове посланице чине велики део Новог Завета. Празнује се заједно са Петром 29. јуна / 12. јула (Петровдан)." },
+    lesson: "bib-acts9" },
+  { id: "chrysostom",
+    img: { file: "John_Chrysostom_(Dionisius).jpg", path: "f/fe", credit: { de: "Dionisij, Hl. Johannes Chrysostomos, um 1500", sr: "Дионисије, Свети Јован Златоуст, око 1500." }, license: "PD-Art" },
+    name: { de: "Hl. Johannes Chrysostomos", sr: "Свети Јован Златоуст" },
+    look: { de: "Ein Bischof mit schmalem, asketischem Gesicht, hoher Stirn und kurzem, dunklem Bart, im Bischofsgewand mit Omophorion, das Evangelienbuch in der Hand.", sr: "Архијереј уског, подвижничког лица, високог чела и кратке тамне браде, у архијерејској одежди са омофором, са Јеванђељем у руци." },
+    mean: { de: "Erzbischof von Konstantinopel (gest. 407), großer Prediger („Goldmund“). Die meistgefeierte Göttliche Liturgie trägt seinen Namen. Mit Basilius und Gregor gehört er zu den Drei Hierarchen (30. Januar / 12. Februar).", sr: "Архиепископ цариградски (†407), велики проповедник („Златоуст“). Најчешће служена Божанствена литургија носи његово име. Са Василијем и Григоријем спада у Три јерарха (30. јануара / 12. фебруара)." },
+    lesson: "li-liturgy",
+    saint: "f-chrysostom" },
+  { id: "desert-fathers",
+    img: { file: "Spas_na_Ilyine_-_Saint_Macarius_the_Great.jpg", path: "1/1e", credit: { de: "Theophanes der Grieche, Hl. Makarios der Große, Fresko der Erlöserkirche an der Iljina-Straße, Nowgorod, 1378", sr: "Теофан Грк, Свети Макарије Велики, фреска цркве Спаса на Иљиној улици, Новгород, 1378." }, license: "PD-Art" },
+    name: { de: "Die Wüstenväter – hier der hl. Makarios der Große", sr: "Пустињски оци – овде свети Макарије Велики" },
+    look: { de: "Ein greiser Mönch mit sehr langem weißem Bart im Mönchsgewand, oft mit erhobenen Händen im Gebet; bei Theophanes in strengen, lichtdurchzogenen Farben.", sr: "Седи монах веома дуге беле браде у монашкој одећи, често са рукама подигнутим у молитви; код Теофана у строгим бојама прожетим светлошћу." },
+    mean: { de: "Im 4. Jahrhundert zogen Männer und Frauen in die ägyptische Wüste, um ganz für Gott zu leben – der Anfang des Mönchtums (mit dem hl. Antonius). Ihre Worte und ihr Gebet prägen die orthodoxe Spiritualität bis heute.", sr: "У 4. веку мушкарци и жене одлазили су у египатску пустињу да живе потпуно за Бога – почетак монаштва (са светим Антонијем). Њихове речи и молитва обликују православну духовност до данас." },
+    saint: "s-antony" },
+  { id: "elijah",
+    img: { file: "Iliya_prorok_ikona_Pskov.jpg", path: "e/e4", credit: { de: "Prophet Elija in der Wüste, mit Lebensszenen, aus der Kirche in Wybuty bei Pskow, Ende 13. Jh., Tretjakow-Galerie", sr: "Пророк Илија у пустињи, са житијем, из цркве у Вибутима код Пскова, крај 13. века, Третјаковска галерија" }, license: "PD-Art" },
+    name: { de: "Prophet Elija", sr: "Свети пророк Илија" },
+    look: { de: "Der Prophet sitzt in der Wüste, ein Rabe bringt ihm Brot (1 Kön 17,6). Ringsum kleine Bilder aus seinem Leben, darunter die Himmelfahrt im feurigen Wagen (2 Kön 2,11).", sr: "Пророк седи у пустињи, гавран му доноси хлеб (1 Цар 17,6 – у Септуагинти 3 Цар). Унаоколо мале слике из његовог живота, међу њима вазнесење у огњеним колима (2 Цар 2,11 – у Септуагинти 4 Цар)." },
+    mean: { de: "Ein Vorbild des Eifers für Gott und des Gebets; bei der Verklärung erscheint er neben Christus. In Serbien ist sein Fest am 20. Juli / 2. August (Ilindan) weit verbreitet.", sr: "Узор ревности за Бога и молитве; на Преображењу се јавља поред Христа. У Србији је његов празник 20. јула / 2. августа (Илиндан) веома распрострањен." },
+    lesson: "bib-elijah" }
 ];
 
 /* src/content/feasts.js */
@@ -14033,13 +14121,17 @@ function fastPeriods(y, cal) {
       <figcaption class="small muted">${E(i.img.credit)} · ${esc(t("iconPd"))} · <a href="${u.page}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></figcaption></figure>`;
   }
   function viewIcons() {
-    return `<div class="eyebrow">${esc(t("theologyTitle"))}</div><h1>${esc(t("iconsTitle"))}</h1><p class="muted">${esc(t("iconsIntro"))}</p><p class="small muted">${esc(t("iconImgNote"))}</p>
-      ${ICONS_LEX.map(i => `<section class="card sec" id="icon-${i.id}"><h3>${E(i.name)}</h3>${i.tag ? tagBadge(i.tag) : ""}${iconFigure(i)}
+    const byId = Object.fromEntries(ICONS_LEX.map(i => [i.id, i]));
+    const card = i => `<section class="card sec" id="icon-${i.id}"><h3>${E(i.name)}</h3>${i.tag ? tagBadge(i.tag) : ""}${iconFigure(i)}
         <p><b>${esc(t("iconLook"))}:</b> ${E(i.look)}</p><p style="margin-bottom:${i.lesson || i.saint ? "6px" : "0"}"><b>${esc(t("iconMean"))}:</b> ${E(i.mean)}</p>
         ${i.lesson && ALL_LESSONS[i.lesson] ? `<a class="small" href="#lesson-${i.lesson}">${esc(t("calToLesson"))} ›</a>` : ""}
-        ${i.saint ? `<a class="small" href="#person-${i.saint}">${esc(t("iconToSaint"))} ›</a>` : ""}</section>`).join("")}`;
+        ${i.saint ? `<a class="small" href="#person-${i.saint}">${esc(t("iconToSaint"))} ›</a>` : ""}</section>`;
+    return `<div class="eyebrow">${esc(t("theologyTitle"))}</div><h1>${esc(t("iconsTitle"))}</h1><p class="muted">${esc(t("iconsIntro"))}</p><p class="small muted">${esc(t("iconImgNote"))}</p>
+      <div class="chips" role="navigation" aria-label="${esc(t("iconsTitle"))}">${ICON_GROUPS.map(g => `<a class="chip" href="#icons" data-jump="ig-${g.id}">${E(g.name).split(" (")[0]} (${ICON_ORDER[g.id].length})</a>`).join("")}</div>
+      ${ICON_GROUPS.map(g => `<h2 id="ig-${g.id}">${E(g.name)}</h2>${ICON_ORDER[g.id].map(id => byId[id]).filter(Boolean).map(card).join("")}`).join("")}`;
   }
   function bindIcons() {
+    app.querySelectorAll("[data-jump]").forEach(a => a.onclick = ev => { ev.preventDefault(); const el = document.getElementById(a.dataset.jump); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); });
     app.querySelectorAll(".iconimg img").forEach(im => {
       im.onerror = () => { if (!im.dataset.tried) { im.dataset.tried = "1"; im.src = im.dataset.full; } else im.closest("figure").hidden = true; };
     });
