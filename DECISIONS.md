@@ -26,6 +26,7 @@
 9. Bibel: Septuaginta-Zählung bei Psalmen zuerst; deuterokanonische Bücher (Anagignoskomena) als Teil der orthodoxen Bibel.
 10. KI darf keine theologischen Aussagen als kirchliche Lehre ausgeben (siehe ROADMAP P4-03).
 11. Nutzerwunsch (1.11.2026): vorerst keine weiteren Heiligen.
+12. Ikonenbilder (5.11.2026, Nutzerwunsch): externe Bilder nur von upload.wikimedia.org (CSP img-src), ohne Referrer, erst beim Öffnen des Ikonen-Lexikons (lazy), danach im eigenen Service-Worker-Cache „orthodoxpath-icons-v1“. Bewusst nicht in die App eingebettet, damit die Datei klein bleibt (sonst +2–4 MB). Datenschutz: Wikimedia sieht beim ersten Laden die IP-Adresse; Hinweis steht im Lexikon.
 
 ## Verworfen bzw. zurückgestellt
 - KI-Begleiter: keine kostenlose Lösung ohne laufende Kosten und ohne Datenweitergabe.

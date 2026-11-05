@@ -14,3 +14,8 @@ Bitte in Safari über den GitHub-Link öffnen. Bei jedem Punkt: ✅ klappt / ❌
 10. **Teilen:** Notizbuch → „Notizen teilen oder kopieren“. Öffnet sich das Teilen-Menü?
 
 Rückmeldung einfach als Liste an Claude schicken, z. B. „3 ❌: In Latinica ist der Knopf X abgeschnitten“.
+
+
+## Ikonenbilder (ab 3.12)
+- [ ] Mehr → Ikonen-Lexikon öffnen (mit Internet): Erscheinen die Bilder? Welche fehlen?
+- [ ] Danach Flugmodus an, Lexikon erneut öffnen: Bilder sollten aus dem Speicher kommen, Texte immer.

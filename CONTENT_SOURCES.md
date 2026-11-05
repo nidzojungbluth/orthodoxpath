@@ -40,5 +40,7 @@ Svetosavlje.org: Dobrotoljublje (Philokalie), Prolog von Ohrid (hl. Nikolaj), We
 1. Keine Zitate ≥ 15 Wörter aus geschützten Texten; Väter zusammenfassen.
 2. Keine Liedtexte/Hymnen aus geschützten Übersetzungen.
 3. Jede neue Quelle hier eintragen (Name, URL, Rechte, Prüfdatum).
-4. Bilder: keine fremden Ikonen-Fotos; Ikonen werden in Worten beschrieben.
+4. Bilder (seit 3.12, Nutzerwunsch): nur jahrhundertealte, gemeinfreie Ikonen (11.–16. Jh.) von Wikimedia Commons, als originalgetreue Fotos zweidimensionaler gemeinfreier Werke (PD-Art; in Deutschland § 68 UrhG). Jedes Bild mit Werk, Zeit, Ort, „gemeinfrei“ und Link zur Commons-Dateiseite. Keine modernen Ikonen, keine Fotos von Kirchenräumen (diese sind oft CC-lizenziert). Dateinamen per Websuche auf Commons geprüft; das automatische Laden konnte in der Testumgebung nicht geprüft werden (kein Netz) – fällt ein Bild aus, wird es ausgeblendet, der Text bleibt.
+   - 19 Bilder: Theophanes (Pantokrator 1378, Verklärung, Entschlafung), Dionisij (Hodigitria, Höllenfahrt, Kreuzigung 1500, Thomas, Erlöser in den Mächten, Nikolaus), Gottesmutter von Wladimir (12. Jh.), Große Panagia Jaroslawl, Deesis Pskow (13. Jh.), Festtagsreihe Verkündigungskathedrale (Geburt, Taufe, um 1405), Rubljow-Dreifaltigkeit, Verkündigung von Ustjug (12. Jh.), Grablegung Nowgorod (15. Jh.), Pfingsten Sergius-Lawra (1420er), Georg Nowgorod (15. Jh.).
+   - Ohne Bild (kein gesichertes gemeinfreies Foto gefunden): Mandylion, Ikonostase, Einzug in Jerusalem, Himmelfahrt.
 5. Schrift: Cormorant Garamond, SIL Open Font License (`src/fonts/OFL.txt`).

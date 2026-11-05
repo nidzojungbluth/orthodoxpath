@@ -231,6 +231,20 @@ const ok = (c, m) => { checks++; if (!c) { fails++; console.log("FAIL:", m); } e
   ok(await page.evaluate(() => window.__xss === undefined), "HTML in Notizen wird nicht ausgeführt");
   ok(require("fs").readFileSync(require("path").join(__dirname, "../pwa/index.html"), "utf8").includes('http-equiv="Content-Security-Policy"'), "Content-Security-Policy in der PWA gesetzt");
 
+  { const pwaHtml = require("fs").readFileSync(require("path").join(__dirname, "../pwa/index.html"), "utf8");
+    ok(/img-src[^;]*https:\/\/upload\.wikimedia\.org/.test(pwaHtml), "CSP erlaubt nur Wikimedia als externe Bildquelle");
+    ok(/script-src 'self' 'unsafe-inline';/.test(pwaHtml) && !/connect-src[^;]*wikimedia/.test(pwaHtml), "CSP: keine weiteren externen Quellen");
+    await page.route(/upload\.wikimedia\.org/, r => r.abort());
+    await page.evaluate(() => { location.hash = "icons"; }); await page.waitForTimeout(300);
+    const figs = await page.$$eval(".iconimg img", ims => ims.map(i => ({ src: i.getAttribute("src"), alt: i.alt, ref: i.getAttribute("referrerpolicy"), lazy: i.getAttribute("loading") })));
+    ok(figs.length >= 18, "Ikonen-Lexikon zeigt Bilder (" + figs.length + ")");
+    ok(figs.every(f => f.src.startsWith("https://upload.wikimedia.org/wikipedia/commons/") && f.alt && f.ref === "no-referrer" && f.lazy === "lazy"), "Ikonenbilder: Wikimedia, Alt-Text, kein Referrer, lazy");
+    ok(await page.$$eval(".iconimg figcaption a", as => as.every(a => a.href.startsWith("https://commons.wikimedia.org/wiki/File:") && a.rel.includes("noopener"))), "Ikonenbilder: Quellenlink zu Commons");
+    const hid = await page.waitForFunction(() => document.querySelector(".iconimg").hidden, null, { timeout: 8000 }).then(() => true, () => false);
+    ok(hid && await page.$eval("#icon-pantokrator", s => s.textContent.length > 100), "Ohne Internet wird ein fehlendes Bild ausgeblendet, Text bleibt");
+    ok(await page.$$eval("#icon-george a[href='#person-s-george']", a => a.length === 1), "Ikone verlinkt Heiligen");
+  }
+
   // Datensicherung als Datei: speichern → zurücksetzen → laden
   await page.evaluate(() => { location.hash = "prefs"; }); await page.waitForTimeout(250);
   const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#fileb")]);

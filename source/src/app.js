@@ -671,11 +671,27 @@
 
 
   /* ---------- Ikonen-Lexikon ---------- */
+  function iconImgUrls(im) {
+    const f = encodeURIComponent(im.file), base = "https://upload.wikimedia.org/wikipedia/commons/";
+    return { thumb: `${base}thumb/${im.path}/${f}/330px-${f}`, full: `${base}${im.path}/${f}`, page: `https://commons.wikimedia.org/wiki/File:${f}` };
+  }
+  function iconFigure(i) {
+    if (!i.img) return "";
+    const u = iconImgUrls(i.img);
+    return `<figure class="iconimg"><img src="${u.thumb}" data-full="${u.full}" alt="${esc(L(i.name))}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+      <figcaption class="small muted">${E(i.img.credit)} · ${esc(t("iconPd"))} · <a href="${u.page}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></figcaption></figure>`;
+  }
   function viewIcons() {
-    return `<div class="eyebrow">${esc(t("theologyTitle"))}</div><h1>${esc(t("iconsTitle"))}</h1><p class="muted">${esc(t("iconsIntro"))}</p>
-      ${ICONS_LEX.map(i => `<section class="card sec" id="icon-${i.id}"><h3>${E(i.name)}</h3>${i.tag ? tagBadge(i.tag) : ""}
-        <p><b>${esc(t("iconLook"))}:</b> ${E(i.look)}</p><p style="margin-bottom:${i.lesson ? "6px" : "0"}"><b>${esc(t("iconMean"))}:</b> ${E(i.mean)}</p>
-        ${i.lesson && ALL_LESSONS[i.lesson] ? `<a class="small" href="#lesson-${i.lesson}">${esc(t("calToLesson"))} ›</a>` : ""}</section>`).join("")}`;
+    return `<div class="eyebrow">${esc(t("theologyTitle"))}</div><h1>${esc(t("iconsTitle"))}</h1><p class="muted">${esc(t("iconsIntro"))}</p><p class="small muted">${esc(t("iconImgNote"))}</p>
+      ${ICONS_LEX.map(i => `<section class="card sec" id="icon-${i.id}"><h3>${E(i.name)}</h3>${i.tag ? tagBadge(i.tag) : ""}${iconFigure(i)}
+        <p><b>${esc(t("iconLook"))}:</b> ${E(i.look)}</p><p style="margin-bottom:${i.lesson || i.saint ? "6px" : "0"}"><b>${esc(t("iconMean"))}:</b> ${E(i.mean)}</p>
+        ${i.lesson && ALL_LESSONS[i.lesson] ? `<a class="small" href="#lesson-${i.lesson}">${esc(t("calToLesson"))} ›</a>` : ""}
+        ${i.saint ? `<a class="small" href="#person-${i.saint}">${esc(t("iconToSaint"))} ›</a>` : ""}</section>`).join("")}`;
+  }
+  function bindIcons() {
+    app.querySelectorAll(".iconimg img").forEach(im => {
+      im.onerror = () => { if (!im.dataset.tried) { im.dataset.tried = "1"; im.src = im.dataset.full; } else im.closest("figure").hidden = true; };
+    });
   }
 
   /* ---------- Buchüberblick ---------- */
@@ -1302,7 +1318,7 @@
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };

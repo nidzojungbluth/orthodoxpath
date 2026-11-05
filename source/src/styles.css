@@ -373,3 +373,8 @@ label.btn { margin: 0; font-size: 1em; }
 .mlegend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 .mlegend .lg-great { border-radius: 3px; border: 1.5px solid var(--gold); background: var(--goldsoft); width: 10px; height: 10px; }
 .mdetail { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hair); }
+
+/* Ikonenbilder (gemeinfrei, Wikimedia Commons) */
+.iconimg { margin: 10px 0 12px; text-align: center; }
+.iconimg img { display: block; margin: 0 auto; max-width: 100%; max-height: 360px; width: auto; height: auto; border-radius: 10px; background: var(--card2, rgba(127,127,127,.12)); box-shadow: 0 4px 18px rgba(0,0,0,.35); }
+.iconimg figcaption { margin-top: 6px; line-height: 1.35; }

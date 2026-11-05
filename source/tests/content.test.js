@@ -146,6 +146,21 @@ ok(PLANS.find(p => p.id === "gospels").days.length === 89, "Evangelienplan: 89 L
 ok(KATHISMATA.length === 20 && KATHISMATA[0][0] === 1 && KATHISMATA[19][1] === 150, "20 Kathismen, Psalm 1–150");
 KATHISMATA.forEach((k, i) => { if (i) ok(k[0] === KATHISMATA[i - 1][1] + 1, "Kathismen lückenlos " + (i + 1)); });
 walk({ PLANS, LITURGY_STEPS, LITURGY_PARTS, ICONS_LEX }, "plans");
+{ const crypto = require("crypto"); const ids = new Set();
+  ICONS_LEX.forEach(i => {
+    ok(!ids.has(i.id), "Ikone doppelt " + i.id); ids.add(i.id);
+    if (i.saint) ok(SAINTS.some(x => x.id === i.saint), "Ikone: Heiliger fehlt " + i.saint);
+    if (!i.img) return;
+    const m = i.img;
+    ok(typeof m.file === "string" && /\.(jpe?g|png)$/i.test(m.file) && !/\s/.test(m.file), "Ikonenbild: Dateiname " + i.id);
+    const h = crypto.createHash("md5").update(m.file).digest("hex");
+    ok(m.path === h[0] + "/" + h.slice(0, 2), "Ikonenbild: md5-Pfad falsch " + i.id);
+    ok(m.license === "PD-Art", "Ikonenbild: nur gemeinfreie Werke (PD-Art) " + i.id);
+    ok(m.credit && m.credit.de && m.credit.sr, "Ikonenbild: Herkunftsangabe fehlt " + i.id);
+    ok(/\d{2,4}|Jh\./.test(m.credit.de), "Ikonenbild: Entstehungszeit fehlt " + i.id);
+  });
+  ok(ICONS_LEX.length >= 20, "Ikonen-Lexikon: mindestens 20 Einträge");
+}
 ICONS_LEX.forEach(i => { ok(i.look && i.mean, "Ikone unvollständig " + i.id); if (i.lesson) ok([...BIBLE.lessons, ...THEOLOGY].some(l => l.id === i.lesson), "Ikone: Lektion fehlt " + i.lesson); });
 ok(LITURGY_STEPS.length === 16 && LITURGY_STEPS.every(s => s.what && s.mean && s.do && LITURGY_PARTS[s.part]), "Liturgie: 16 vollständige Schritte");
 

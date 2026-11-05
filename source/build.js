@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const R = p => fs.readFileSync(path.join(__dirname, p), "utf8");
-const VERSION = "3.11.0";
+const VERSION = "3.12.0";
 
 /* Eingebettete Schrift (Cormorant Garamond, SIL Open Font License, siehe src/fonts/OFL.txt) – funktioniert offline und ohne externe Server */
 const RANGES = {
@@ -27,7 +27,7 @@ function page({ pwa }) {
 <html lang="de" data-theme="dark">
 <head>
 <meta charset="utf-8">
-${pwa ? `<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">` : ""}
+${pwa ? `<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://upload.wikimedia.org; font-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">` : ""}
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0b0c">
 <meta name="description" content="OrthodoxPath – zweisprachige orthodoxe Lernakademie (Deutsch/Serbisch)">
@@ -61,11 +61,19 @@ fs.writeFileSync(path.join(__dirname, "pwa/manifest.webmanifest"), JSON.stringif
 }, null, 2));
 fs.writeFileSync(path.join(__dirname, "pwa/sw.js"), `/* OrthodoxPath Service Worker – Offline-Zwischenspeicher */
 const CACHE = "orthodoxpath-${VERSION}";
+const IMG_CACHE = "orthodoxpath-icons-v1"; /* gemeinfreie Ikonenbilder, bleibt über Versionen erhalten */
 const FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))); self.skipWaiting(); });
-self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k))))); self.clients.claim(); });
+self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE && k !== IMG_CACHE).map(k => caches.delete(k))))); self.clients.claim(); });
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
+  if (new URL(e.request.url).hostname === "upload.wikimedia.org") {
+    e.respondWith(caches.open(IMG_CACHE).then(c => c.match(e.request).then(r => r || fetch(e.request).then(res => {
+      if (res.ok || res.type === "opaque") c.put(e.request, res.clone());
+      return res;
+    }))));
+    return;
+  }
   e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(res => {
     if (res.ok && (new URL(e.request.url).origin === location.origin)) { const cp = res.clone(); caches.open(CACHE).then(c => c.put(e.request, cp)); }
     return res;

@@ -82,6 +82,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 **P3-03 Fastenwissen** ✅ erledigt 5.11.2026 – Lektion „Fasten im Alltag“ (Kurs E) (S–M): Sinn des Fastens, Ausnahmen (Krankheit, Schwangerschaft, Arbeit) nur als allgemeiner Hinweis + Priester; keine Ernährungspläne.
 **P3-04 Kirchenjahr-Begleiter** ✅ erledigt 4.11.2026 (ohne Troparien – nur mit geprüfter Quelle nachtragen) (M): zu den 12 großen Festen je eine Seite (Ikone in Worten, Troparion nur mit geprüfter Quelle, Lesungen, Bedeutung) – verknüpft mit Kalender.
 **P3-05 Heilige** – pausiert auf Wunsch des Nutzers.
+**P3-06 Ikonen mit Bildern** ✅ erledigt 5.11.2026 (Nutzerwunsch, v3.12): 23 Ikonentypen, 19 mit gemeinfreiem historischem Bild (Wikimedia Commons). Offen: Bilder für Mandylion, Einzug, Himmelfahrt, sobald ein gemeinfreies Foto sicher bestimmt ist; Bildanzeige auf echtem iPhone prüfen (TESTPLAN).
 
 ## Priorität 4 – Langfristig (nur wenn zur Vision passend)
 
@@ -97,7 +98,8 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 - P2-03 Teil 2: ausführliche Kommunion-Ordnung und Dankgebete, Troparien der Feste – nur mit gemeinfreier/freigegebener Vorlage (Quellensuche braucht Freigabe für Web-Abruf).
 - P3-01 laufend: weitere Bibellektionen (Kandidaten in P3-01).
 - Nutzer: iPhone-Test (`TESTPLAN_IPHONE.md`), serbische Prüfung (CSV), echter VoiceOver-Test.
-- Technik: Größe beobachten (1,65 MB; ab 2 MB Inhalte auslagern, P2-06).
+- Nutzer: im Ikonen-Lexikon prüfen, ob alle Bilder erscheinen (Testumgebung hatte kein Internet).
+- Technik: Größe beobachten (1,71 MB; ab 2 MB Inhalte auslagern, P2-06).
 
 ## Reihenfolge für „Setze Orthodox Path fort“
 1. P1-01 → P1-02 → P1-03 → P1-05 → P1-04 (Export-Teil)

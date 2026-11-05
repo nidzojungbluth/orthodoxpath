@@ -1,6 +1,0 @@
-dist/
-pwa/
-node_modules/
-*.tgz
-*.zip
-tests/shots/

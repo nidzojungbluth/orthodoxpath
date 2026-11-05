@@ -1,6 +1,6 @@
 # OrthodoxPath – Projektstatus
 
-Stand: 5. November 2026 · Version 3.11.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
+Stand: 5. November 2026 · Version 3.12.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
 
 ## 1. Kurzbeschreibung
 Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe Lern- und Glaubens-App als **Progressive Web App (PWA)** fürs iPhone. Kein Konto, keine Werbung, keine Server-Datenhaltung, offline nutzbar.
@@ -25,7 +25,7 @@ Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe
 ### Funktioniert (automatisch getestet)
 - Bibelschule: 66 volle Lektionen (11 Teile, Fragen, Quiz), jedes der 39 Bucheinträge abgedeckt, 27 Kurzüberblicke, Vor/Zurück-Navigation, „Zuletzt geöffnet“
 - 3 Lesepläne (Evangelien, NT, Psalter/Kathismen) mit Fortschritt
-- Theologie: Kurs A (7), Paisios (9), D (4), E Liturgie (7, inkl. „Fasten im Alltag“), F Heilige Mysterien (7); Glaubensbekenntnis; Liturgie in 16 Schritten; Ikonen-Lexikon (13); Glossar (37, Suche)
+- Theologie: Kurs A (7), Paisios (9), D (4), E Liturgie (7, inkl. „Fasten im Alltag“), F Heilige Mysterien (7); Glaubensbekenntnis; Liturgie in 16 Schritten; Ikonen-Lexikon (23, davon 19 mit gemeinfreiem Bild); Glossar (37, Suche)
 - 10 Kirchenväter, 28 Heilige mit Fragen/Quiz (Heilige vorerst pausiert – Wunsch des Nutzers)
 - Gebetsbuch: Morgen/Abend, 16 Themen (neu: vor/nach der Kommunion, vor der Beichte), 35 Texte mit Herkunftsangabe bei den Kommuniongebeten, Favoriten, Anliegen, „Heute gebetet“
 - Kirchenkalender julianisch/neujulianisch: Ostern berechnet, 39 Feste, 48 Gedenktage, Fasten-Status + überlieferte Regel; Monatsübersicht (Fastenart je Tag, Feste, Tagesdetails); Feste als Kalenderdatei (.ics) exportierbar
