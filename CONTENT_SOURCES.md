@@ -48,3 +48,4 @@ Svetosavlje.org: Dobrotoljublje (Philokalie), Prolog von Ohrid (hl. Nikolaj), We
 5. Schrift: Cormorant Garamond, SIL Open Font License (`src/fonts/OFL.txt`).
 
 - Ab 3.16 liegen die Ikonenbilder als verkleinerte Kopien (max. 360×540 px) in der App unter img/icons/<id>.jpg; Herkunft und Lizenz unverändert (Commons, gemeinfrei), Quellenlink bleibt beim Bild.
+- Ab 3.17 Bilder zu Heiligen/Vätern (src/content/saint-images.js): nur alte Ikonen/Fresken (PD-Art) oder Fotos vor 1925 (PD); Heilige des 20. Jh. ohne freies Bild bleiben ohne Bild.

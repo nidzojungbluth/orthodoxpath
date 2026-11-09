@@ -244,6 +244,12 @@ const ok = (c, m) => { checks++; if (!c) { fails++; console.log("FAIL:", m); } e
     const loaded = await page.waitForFunction(() => [...document.querySelectorAll(".iconimg img")].every(i => i.complete && i.naturalWidth > 100), null, { timeout: 15000 }).then(() => true, () => false);
     ok(loaded, "Alle Ikonenbilder laden ohne Internet (Wikimedia gesperrt)");
     ok(await page.$eval("#icon-pantokrator", s => s.textContent.length > 100), "Ikonentext vorhanden");
+    await page.evaluate(() => { location.hash = "person-s-sava"; }); await page.waitForTimeout(400);
+    ok(await page.$$eval(".iconimg img", ims => ims.length === 1 && ims[0].getAttribute("src") === "img/icons/s-sava.jpg"), "Heiligenseite zeigt Bild (hl. Sava)");
+    ok(await page.waitForFunction(() => { const i = document.querySelector(".iconimg img"); return i && i.complete && i.naturalWidth > 100; }, null, { timeout: 8000 }).then(() => true, () => false), "Heiligenbild lädt offline");
+    await page.evaluate(() => { location.hash = "saints"; }); await page.waitForTimeout(400);
+    ok(await page.$$eval(".medal.photo img", a => a.length) >= 28, "Heiligenliste mit Bildern");
+    await page.evaluate(() => { location.hash = "icons"; }); await page.waitForTimeout(400);
     ok(await page.$$eval("#icon-george a[href='#person-s-george']", a => a.length === 1), "Ikone verlinkt Heiligen");
     await page.evaluate(() => { location.hash = "feast-palm"; }); await page.waitForTimeout(300);
     ok(await page.$$eval(".iconimg img", ims => ims.length === 1 && ims[0].alt.length > 3) && await page.$$eval("a[href='#icons-entry']", a => a.length === 1), "Festseite zeigt Ikonenbild und Direktlink");

@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const R = p => fs.readFileSync(path.join(__dirname, p), "utf8");
-const VERSION = "3.16.1";
+const VERSION = "3.17.0";
 
 /* Eingebettete Schrift (Cormorant Garamond, SIL Open Font License, siehe src/fonts/OFL.txt) – funktioniert offline und ohne externe Server */
 const RANGES = {
@@ -19,7 +19,7 @@ const fontCss = [600, 700].map(w => Object.entries(RANGES).map(([sub, range]) =>
 }).join("\n")).join("\n");
 
 const css = fontCss + "\n" + R("src/styles.css");
-const js = ["src/i18n.js", "src/content/bible.js", "src/content/overviews.js", "src/content/theology.js", "src/content/saints.js", "src/content/library.js", "src/content/prayers.js", "src/content/plans.js", "src/content/liturgysteps.js", "src/content/icons.js", "src/content/feasts.js", "src/calendar.js", "src/app.js"]
+const js = ["src/i18n.js", "src/content/bible.js", "src/content/overviews.js", "src/content/theology.js", "src/content/saints.js", "src/content/saint-images.js", "src/content/library.js", "src/content/prayers.js", "src/content/plans.js", "src/content/liturgysteps.js", "src/content/icons.js", "src/content/feasts.js", "src/calendar.js", "src/app.js"]
   .map(f => `/* ${f} */\n` + R(f).replace(/if \(typeof module !== "undefined"\)[^\n]*\n?/g, "")).join("\n");
 
 function page({ pwa }) {

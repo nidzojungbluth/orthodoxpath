@@ -886,8 +886,16 @@
 
   /* ---------- Heilige ---------- */
   function initialOf(p) { const n = L(p.name).replace(/^(Hl\.|Свети|Света|Sveti|Sveta|Преподобни|Prepodobni)\s+/, "").replace(/^(Großmärtyrer|König|Fürst|великомученик|краљ|кнез|velikomučenik|kralj|knez|владика|vladika)\s+/, ""); return n.charAt(0); }
+  function personThumb(p) {
+    const m = SAINT_IMGS[p.id];
+    if (!m) return `<span class="medal">${esc(initialOf(p))}</span>`;
+    return `<span class="medal photo" data-initial="${esc(initialOf(p))}"><img src="img/icons/${m.icon || p.id}.jpg" alt="" loading="lazy" decoding="async"></span>`;
+  }
+  function bindSaints() {
+    app.querySelectorAll(".medal.photo img").forEach(im => { im.onerror = () => { const m = im.parentNode; m.classList.remove("photo"); m.textContent = m.dataset.initial; }; });
+  }
   function viewSaints() {
-    const item = p => `<li><a class="item" href="#person-${p.id}"><span class="medal">${esc(initialOf(p))}</span><span class="grow"><span class="t">${E(p.name)}</span><span class="s">${E(p.lived)} · ${esc(t("feast"))}: ${E(p.feast)}</span></span><span class="chev">${ic("chev")}</span></a></li>`;
+    const item = p => `<li><a class="item" href="#person-${p.id}">${personThumb(p)}<span class="grow"><span class="t">${E(p.name)}</span><span class="s">${E(p.lived)} · ${esc(t("feast"))}: ${E(p.feast)}</span></span><span class="chev">${ic("chev")}</span></a></li>`;
     return `<h1>${esc(t("saintsTitle"))}</h1>
       <h2>${esc(t("courseB"))}</h2><ul class="list">${FATHERS.map(item).join("")}</ul>
       <h2>${esc(t("courseC"))}</h2><ul class="list">${SAINTS.map(item).join("")}</ul>
@@ -896,12 +904,20 @@
   function linkList(keys) {
     return keys.map(k => LINKS[k]).filter(Boolean).map(x => `<div class="refline"><span class="grow"><a href="${esc(x.url)}" target="_blank" rel="noopener">${E(x.label)}</a></span></div>`).join("");
   }
+  function personFigure(id, p) {
+    const m = SAINT_IMGS[id]; if (!m) return "";
+    const ic = m.icon ? ICON_BY_ID[m.icon] : null;
+    const file = ic ? ic.img.file : m.file, credit = ic ? ic.img.credit : m.credit;
+    const src = `img/icons/${ic ? ic.id : id}.jpg`, page = "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file);
+    return `<div class="card"><figure class="iconimg" style="margin:0"><img src="${src}" alt="${esc(L(p.name))}" loading="lazy" decoding="async">
+      <figcaption class="small muted">${E(credit)} · ${esc(t("iconPd"))} · <a href="${page}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></figcaption></figure></div>`;
+  }
   function viewPerson(id) {
     const p = PEOPLE[id]; if (!p) return `<p>${esc(t("notFound"))}</p>`;
     const block = (h, body, tag) => body ? `<section class="card sec"><h3>${esc(h)}</h3>${tag ? tagBadge(tag) : ""}${body}</section>` : "";
     const read = (p.read && p.read.length) ? linkList(p.read) + `<p class="small muted">${esc(t("linkCheckNote"))}</p>` : `<p>${(p.readNote ? E(p.readNote) : esc(t("noFreeText")))}</p>`;
     let html = `<div class="eyebrow">${esc(p.kind === "father" ? t("fathers") : t("saints"))}</div><h1>${E(p.name)}</h1>
-      <div class="card"><div class="refline"><b>${esc(t("lived"))}</b><span class="grow">${E(p.lived)}</span></div><div class="refline"><b>${esc(t("feast"))}</b><span class="grow">${E(p.feast)}</span></div></div>`;
+      <div class="card"><div class="refline"><b>${esc(t("lived"))}</b><span class="grow">${E(p.lived)}</span></div><div class="refline"><b>${esc(t("feast"))}</b><span class="grow">${E(p.feast)}</span></div></div>${personFigure(id, p)}`;
     if (p.kind === "father") {
       html += block(t("qWho"), `<p>${E(p.who)}</p>`) + block(t("qWhen"), `<p>${E(p.when)}</p>`, "history") + block(t("qTaught"), `<p>${E(p.taught)}</p>`, "dogma")
         + block(t("qWorks"), `<p>${E(p.works)}</p>`, "history") + block(t("qMeaning"), `<p>${E(p.meaning)}</p>`) + block(t("qBible"), `<p>${E(p.bible)}</p>`)
@@ -1349,7 +1365,7 @@
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore, person: bindIconImgs, saints: bindSaints };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };

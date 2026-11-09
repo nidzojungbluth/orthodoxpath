@@ -408,11 +408,13 @@ label.btn { margin: 0; font-size: 1em; }
 @media (prefers-reduced-motion: reduce) { .card.flash { animation: none; outline: 2px solid var(--gold); } }
 /* Sprungziele nicht unter der festen Kopfleiste verstecken */
 section[id^="icon-"], h2[id^="ig-"] { scroll-margin-top: calc(72px + env(safe-area-inset-top)); }
+.medal.photo { padding: 0; overflow: hidden; background: var(--card2, #1d1d20); }
+.medal.photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; display: block; }
 </style>
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "3.16.1";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "3.17.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -12267,6 +12269,44 @@ const FATHER_EXTRA = {
 FATHERS.forEach(f => Object.assign(f, FATHER_EXTRA[f.id] || {}));
 
 
+/* src/content/saint-images.js */
+/* OrthodoxPath – Bilder zu Heiligen und Kirchenvätern.
+   Nur gemeinfreie Werke (alte Ikonen/Fresken, „PD-Art“) bzw. alte Fotos (vor 1925, „PD“), Herkunft Wikimedia Commons
+   (Lizenz dort über die API geprüft am 9.11.2026). Datei liegt in der App: img/icons/<id>.jpg.
+   icon: "<id>" = gleiches Bild wie im Ikonen-Lexikon. Für Heilige des 20. Jh. ohne sicher freies Bild: kein Eintrag. */
+const SAINT_IMGS = {
+  "f-athanasius": { file: "Rila_Mon._-_Fresco_mir._icon_018_Athanasius_of_Alexandria.jpg", license: "PD-Art", credit: { de: "Fresko im Rila-Kloster, 1843", sr: "Фреска у Рилском манастиру, 1843." } },
+  "f-basil": { file: "Vasiliy_by_Dionisius_(Kirillo-Belozersk).jpg", license: "PD-Art", credit: { de: "Dionisij, um 1502, aus dem Kirillo-Beloserski-Kloster", sr: "Дионисије, око 1502, из Кирило-Белозерског манастира" } },
+  "f-gregnaz": { file: "Gregory_of_Nazianzus_from_Vasilyevskiy_chin_(15th_c.,_GTG).jpg", license: "PD-Art", credit: { de: "Deesis-Reihe („Wassiljewski-Reihe“), Moskau, 1408, Tretjakow-Galerie", sr: "Деисисни ред („Васиљевски ред“), Москва, 1408, Третјаковска галерија" } },
+  "f-gregnys": { file: "St._Gregory_of_Nyssa,_prothesis.jpg", license: "PD-Art", credit: { de: "Fresko, Kirche der Gottesgebärerin Peribleptos in Ohrid, 13. Jh.", sr: "Фреска, црква Богородице Перивлепте у Охриду, 13. век" } },
+  "f-chrysostom": { icon: "chrysostom" },
+  "f-cyril": { file: "Fresco_Icon_of_Saint_Kyrillos_of_Alexandria_3.jpg", license: "PD-Art", credit: { de: "Fresko vom Berg Athos, 1545", sr: "Фреска са Свете Горе, 1545." } },
+  "f-maximus": { file: "Athonite_Fresco_Icon_of_Saint_Maximos_the_Confessor.jpg", license: "PD-Art", credit: { de: "Fresko vom Berg Athos, 14./15. Jh.", sr: "Фреска са Свете Горе, 14/15. век" } },
+  "f-damascus": { file: "Athonite_Fresco_Icon_of_Saint_John_of_Damascus_2.jpg", license: "PD-Art", credit: { de: "Fresko vom Berg Athos, 14./15. Jh.", sr: "Фреска са Свете Горе, 14/15. век" } },
+  "f-ephrem": { file: "Dormition_of_Saint_Ephraim_the_Syrian_(Cretan,_15th_c.,_Byzantine_museum).jpg", license: "PD-Art", credit: { de: "Entschlafung des hl. Ephräm, kretische Ikone, 15. Jh., Byzantinisches Museum", sr: "Упокојење светог Јефрема, критска икона, 15. век, Византијски музеј" } },
+  "s-antony": { file: "Cretan_Icon_Saint_Anthony_the_Great.jpg", license: "PD-Art", credit: { de: "Kretische Ikone, 15.–17. Jh.", sr: "Критска икона, 15–17. век" } },
+  "s-ignatius": { file: "Byzantine_-_Saint_Ignatius_of_Antioch_-_Walters_4820867.jpg", license: "PD-Art", credit: { de: "Byzantinische Bildkachel, 10. Jh., Walters Art Museum", sr: "Византијска керамичка плоча, 10. век, Музеј Волтерс" } },
+  "s-andrew": { file: "Andrew_from_Vasilyevskiy_chin_(15th_c.,_GTG).jpg", license: "PD-Art", credit: { de: "Deesis-Reihe („Wassiljewski-Reihe“), Moskau, 1408, Tretjakow-Galerie", sr: "Деисисни ред („Васиљевски ред“), Москва, 1408, Третјаковска галерија" } },
+  "s-catherine": { file: "IconEcaterina.jpeg", license: "PD-Art", credit: { de: "Ikone, 13. Jh.", sr: "Икона, 13. век" } },
+  "s-demetrios": { file: "Св._Дмитрий_Солунский_-_Google_Art_Project.jpg", license: "PD-Art", credit: { de: "Mosaik aus dem Michaelskloster in Kiew, um 1108–1113, Tretjakow-Galerie", sr: "Мозаик из Михајловског манастира у Кијеву, око 1108–1113, Третјаковска галерија" } },
+  "s-spyridon": { file: "Saint_Spyridon_Icon_from_Gorno_Statitsa_1720.jpg", license: "PD-Art", credit: { de: "Ikone aus Ano Melas (Gorno Statitsa), 1720", sr: "Икона из Ано Меласа (Горња Статица), 1720." } },
+  "s-maryegypt": { file: "Icon_of_Mary_of_Egypt_(Mstera,_19th_c.).jpg", license: "PD-Art", credit: { de: "Vita-Ikone, Mstjora (Russland), spätes 19. Jh.", sr: "Икона са житијем, Мстера (Русија), крај 19. века" } },
+  "s-prokopije": { file: "St._Procopius_Icon.jpg", license: "PD-Art", credit: { de: "Metallikone, 10. Jh., aus Chersones (Sewastopol)", sr: "Метална икона, 10. век, из Херсонеса (Севастопољ)" } },
+  "s-petka": { file: "Parascheva_of_the_Balkans.jpg", license: "PD-Art", credit: { de: "Druckgrafik, 1817", sr: "Графика, 1817." } },
+  "s-rila": { file: "Saint_John_of_Rila._Icon._National_Museum_of_Rila_Monastery._Bulgaria.jpg", license: "PD-Art", credit: { de: "Ikone, 14. Jh., Museum des Rila-Klosters", sr: "Икона, 14. век, музеј Рилског манастира" } },
+  "s-sava": { file: "Saint_Sava,_fresco_from_Mileševa.jpg", license: "PD-Art", credit: { de: "Fresko im Kloster Mileševa, 13. Jh.", sr: "Фреска у манастиру Милешеви, 13. век" } },
+  "s-simeon": { file: "Nemanja_Simeon_Sopocani.jpg", license: "PD-Art", credit: { de: "Fresko im Kloster Sopoćani, 2. Hälfte 13. Jh.", sr: "Фреска у манастиру Сопоћанима, друга половина 13. века" } },
+  "s-lazar": { file: "Knez_Lazar_i_kneginja_Milica.jpg", license: "PD-Art", credit: { de: "Fürst Lazar mit Fürstin Milica, Fresko im Kloster Ljubostinja, um 1405", sr: "Кнез Лазар и кнегиња Милица, фреска у манастиру Љубостињи, око 1405." } },
+  "s-stefan": { file: "Stefan_Decanski_ktitor.jpg", license: "PD-Art", credit: { de: "Stifterbild im Kloster Visoki Dečani, 14. Jh.", sr: "Ктиторски портрет у манастиру Високи Дечани, 14. век" } },
+  "s-vasilije": { file: "Vasily_Ostrojsky.jpg", license: "PD-Art", credit: { de: "Ikone, 19. Jh., Kloster Ostrog", sr: "Икона, 19. век, манастир Острог" } },
+  "s-arsenije": { file: "Saint_Arsenije_I_Sremac.jpeg", license: "PD-Art", credit: { de: "Fresko, 14./15. Jh.", sr: "Фреска, 14/15. век" } },
+  "s-seraphim": { file: "Seraphim_of_Sarov_(portrait).jpg", license: "PD-Art", credit: { de: "Bildnis, 19. Jh.", sr: "Портрет, 19. век" } },
+  "s-kronstadt": { file: "Ioann_of_Kronstadt.jpeg", license: "PD", credit: { de: "Foto, 1900", sr: "Фотографија, 1900." } },
+  "s-nikolaj": { file: "Jeromonah-Nikolaj-Velimirovic-1915.jpg", license: "PD", credit: { de: "Foto als Hieromonach, 1915", sr: "Фотографија као јеромонах, 1915." } },
+  "s-nicholas": { icon: "nicholas" },
+  "s-george": { icon: "george" }
+};
+
 /* src/content/library.js */
 /* OrthodoxPath – Bücherbibliothek, Glossar und Lernkarten. */
 
@@ -14344,8 +14384,16 @@ function fastPeriods(y, cal) {
 
   /* ---------- Heilige ---------- */
   function initialOf(p) { const n = L(p.name).replace(/^(Hl\.|Свети|Света|Sveti|Sveta|Преподобни|Prepodobni)\s+/, "").replace(/^(Großmärtyrer|König|Fürst|великомученик|краљ|кнез|velikomučenik|kralj|knez|владика|vladika)\s+/, ""); return n.charAt(0); }
+  function personThumb(p) {
+    const m = SAINT_IMGS[p.id];
+    if (!m) return `<span class="medal">${esc(initialOf(p))}</span>`;
+    return `<span class="medal photo" data-initial="${esc(initialOf(p))}"><img src="img/icons/${m.icon || p.id}.jpg" alt="" loading="lazy" decoding="async"></span>`;
+  }
+  function bindSaints() {
+    app.querySelectorAll(".medal.photo img").forEach(im => { im.onerror = () => { const m = im.parentNode; m.classList.remove("photo"); m.textContent = m.dataset.initial; }; });
+  }
   function viewSaints() {
-    const item = p => `<li><a class="item" href="#person-${p.id}"><span class="medal">${esc(initialOf(p))}</span><span class="grow"><span class="t">${E(p.name)}</span><span class="s">${E(p.lived)} · ${esc(t("feast"))}: ${E(p.feast)}</span></span><span class="chev">${ic("chev")}</span></a></li>`;
+    const item = p => `<li><a class="item" href="#person-${p.id}">${personThumb(p)}<span class="grow"><span class="t">${E(p.name)}</span><span class="s">${E(p.lived)} · ${esc(t("feast"))}: ${E(p.feast)}</span></span><span class="chev">${ic("chev")}</span></a></li>`;
     return `<h1>${esc(t("saintsTitle"))}</h1>
       <h2>${esc(t("courseB"))}</h2><ul class="list">${FATHERS.map(item).join("")}</ul>
       <h2>${esc(t("courseC"))}</h2><ul class="list">${SAINTS.map(item).join("")}</ul>
@@ -14354,12 +14402,20 @@ function fastPeriods(y, cal) {
   function linkList(keys) {
     return keys.map(k => LINKS[k]).filter(Boolean).map(x => `<div class="refline"><span class="grow"><a href="${esc(x.url)}" target="_blank" rel="noopener">${E(x.label)}</a></span></div>`).join("");
   }
+  function personFigure(id, p) {
+    const m = SAINT_IMGS[id]; if (!m) return "";
+    const ic = m.icon ? ICON_BY_ID[m.icon] : null;
+    const file = ic ? ic.img.file : m.file, credit = ic ? ic.img.credit : m.credit;
+    const src = `img/icons/${ic ? ic.id : id}.jpg`, page = "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file);
+    return `<div class="card"><figure class="iconimg" style="margin:0"><img src="${src}" alt="${esc(L(p.name))}" loading="lazy" decoding="async">
+      <figcaption class="small muted">${E(credit)} · ${esc(t("iconPd"))} · <a href="${page}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></figcaption></figure></div>`;
+  }
   function viewPerson(id) {
     const p = PEOPLE[id]; if (!p) return `<p>${esc(t("notFound"))}</p>`;
     const block = (h, body, tag) => body ? `<section class="card sec"><h3>${esc(h)}</h3>${tag ? tagBadge(tag) : ""}${body}</section>` : "";
     const read = (p.read && p.read.length) ? linkList(p.read) + `<p class="small muted">${esc(t("linkCheckNote"))}</p>` : `<p>${(p.readNote ? E(p.readNote) : esc(t("noFreeText")))}</p>`;
     let html = `<div class="eyebrow">${esc(p.kind === "father" ? t("fathers") : t("saints"))}</div><h1>${E(p.name)}</h1>
-      <div class="card"><div class="refline"><b>${esc(t("lived"))}</b><span class="grow">${E(p.lived)}</span></div><div class="refline"><b>${esc(t("feast"))}</b><span class="grow">${E(p.feast)}</span></div></div>`;
+      <div class="card"><div class="refline"><b>${esc(t("lived"))}</b><span class="grow">${E(p.lived)}</span></div><div class="refline"><b>${esc(t("feast"))}</b><span class="grow">${E(p.feast)}</span></div></div>${personFigure(id, p)}`;
     if (p.kind === "father") {
       html += block(t("qWho"), `<p>${E(p.who)}</p>`) + block(t("qWhen"), `<p>${E(p.when)}</p>`, "history") + block(t("qTaught"), `<p>${E(p.taught)}</p>`, "dogma")
         + block(t("qWorks"), `<p>${E(p.works)}</p>`, "history") + block(t("qMeaning"), `<p>${E(p.meaning)}</p>`) + block(t("qBible"), `<p>${E(p.bible)}</p>`)
@@ -14807,7 +14863,7 @@ function fastPeriods(y, cal) {
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore, person: bindIconImgs, saints: bindSaints };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };

@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.16.1 (5. November 2026)
+**Aktuelle Version:** 3.17.0 (5. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,12 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.17 (Nutzerwunsch: Ikonen zu den Heiligen)
+
+- 30 von 38 Heiligen und Kirchenvätern haben jetzt ein Bild (Seite der Person + kleines Rundbild in der Liste): alte Ikonen und Fresken, darunter Sava (Mileševa), Simeon (Sopoćani), Lazar (Ljubostinja), Stefan Dečanski (Dečani); für Johannes von Kronstadt (1900) und Nikolaj Velimirović (1915) alte Fotos. Lizenz jeweils über die Commons-API geprüft; Bilder liegen in der App (img/icons/<id>.jpg), neue Datei src/content/saint-images.js.
+- Ohne Bild (kein sicher gemeinfreies Bild): Paisios, Porphyrios, Sophrony, Siluan, Nektarios, Lukas von Simferopol, Justin Popović, Isaak der Syrer – moderne Ikonen sind urheberrechtlich geschützt.
+- Tests: Datei/Lizenz/Herkunft je Bild, Heiligenseite zeigt und lädt Bild offline, Liste mit Bildern.
 
 ## Version 3.16.1 (Fehler: iPhone blieb auf 3.12 hängen)
 

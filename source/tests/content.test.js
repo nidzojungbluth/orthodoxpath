@@ -74,6 +74,20 @@ ok(CAL.saintsOn(Date.UTC(2026, 10, 24), "julian").includes("s-stefan"), "24.11. 
 ok(CAL.feastsOn(Date.UTC(2026, 11, 19), "julian").some(f => f.saint === "s-nicholas"), "19.12. Nikoljdan mit Heiligenprofil");
 CAL.SAINT_DAYS.forEach(([id]) => ok(FATHERS.some(f => f.id === id) || SAINTS.some(s => s.id === id), "Kalender: unbekannter Heiliger " + id));
 CAL.CAL_FEASTS.forEach(f => { if (f.lesson) ok([...BIBLE.lessons, ...THEOLOGY].some(l => l.id === f.lesson), "Kalender: Lektion fehlt " + f.lesson); if (f.saint) ok(SAINTS.some(s => s.id === f.saint), "Kalender: Heiliger fehlt " + f.saint); });
+{ const { SAINT_IMGS } = require("../src/content/saint-images.js"); const fs = require("fs"), pth = require("path");
+  const persons = new Set([...SAINTS, ...FATHERS].map(x => x.id));
+  Object.entries(SAINT_IMGS).forEach(([id, m]) => {
+    ok(persons.has(id), "Heiligenbild: unbekannte Person " + id);
+    if (m.icon) { ok(ICONS_LEX.some(i => i.id === m.icon && i.img), "Heiligenbild: Ikone fehlt " + m.icon); return; }
+    ok(m.file && /\.(jpe?g|png)$/i.test(m.file) && !/\s/.test(m.file), "Heiligenbild: Dateiname " + id);
+    ok(m.license === "PD-Art" || m.license === "PD", "Heiligenbild: nur gemeinfrei " + id);
+    ok(m.credit && m.credit.de && m.credit.sr && /\d{3,4}|Jh\./.test(m.credit.de), "Heiligenbild: Herkunft mit Zeitangabe " + id);
+    const f = pth.join(__dirname, "../src/img/icons/" + id + ".jpg"); ok(fs.existsSync(f), "Heiligenbild-Datei fehlt " + id);
+    if (fs.existsSync(f)) { const b = fs.readFileSync(f); ok(b[0] === 0xFF && b[1] === 0xD8 && b.length > 5000 && b.length < 140000, "Heiligenbild JPEG/Größe " + id); }
+  });
+  ok(Object.keys(SAINT_IMGS).length >= 28, "mindestens 28 Heiligenbilder");
+  walk({ SAINT_IMGS }, "saintimgs");
+}
 FATHERS.forEach(f => {
   ok(f.quiz && f.quiz.length >= 3, "Kirchenvater ohne 3 Quizfragen: " + f.id);
   ok(f.questions && f.questions.length >= 2, "Kirchenvater ohne 2 Verständnisfragen: " + f.id);
