@@ -412,7 +412,7 @@ section[id^="icon-"], h2[id^="ig-"] { scroll-margin-top: calc(72px + env(safe-ar
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "3.16.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "3.16.1";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -569,7 +569,7 @@ const UI = {
     prSource: "Herkunft", prCommNote: "Die Vorbereitung auf die Kommunion (Gebetsregel, Fasten, Beichte) besprichst du mit deinem Priester. In vielen Gebetbüchern gibt es eine ausführlichere „Ordnung vor der heiligen Kommunion“.",
     gfTitle: "Die zwölf großen Feste", gfIntro: "Neben Ostern, dem „Fest der Feste“, feiert die Kirche zwölf große Feste: acht Herrenfeste und vier Feste der Gottesgebärerin. Hier findest du zu jedem Fest die Ikone in Worten, die Bedeutung und die Lesungen der Göttlichen Liturgie.",
     gfIcon: "Die Festikone", gfMean: "Bedeutung", gfReadings: "Lesungen der Göttlichen Liturgie", gfApostle: "Apostel", gfGospel: "Evangelium", gfReadNote: "Nach der allgemeinen Leseordnung; örtliche Abweichungen sind möglich. Lies die Stellen in deiner Bibel.", gfLord: "Herrenfest", gfTheotokos: "Fest der Gottesgebärerin", gfNext: "Nächster Termin", gfPascha: "Ostern – das Fest der Feste",
-    iconInLex: "Im Ikonen-Lexikon", iconPd: "gemeinfrei", iconToSaint: "Zum Heiligen", iconImgNote: "Die Bilder sind jahrhundertealte, gemeinfreie Ikonen (Quelle: Wikimedia Commons). Sie sind in der App gespeichert und funktionieren auch ohne Internet.",
+    updCheck: "Nach neuer Version suchen", updRunning: "Wird geladen …", iconInLex: "Im Ikonen-Lexikon", iconPd: "gemeinfrei", iconToSaint: "Zum Heiligen", iconImgNote: "Die Bilder sind jahrhundertealte, gemeinfreie Ikonen (Quelle: Wikimedia Commons). Sie sind in der App gespeichert und funktionieren auch ohne Internet.",
     prevLesson: "Vorherige Lektion", nextLessonL: "Nächste Lektion", lastOpened: "Zuletzt geöffnet",
     remTitle: "Gebetserinnerungen", remText: "Web-Apps können auf dem iPhone keine zuverlässigen täglichen Erinnerungen senden. Mit der App „Erinnerungen“ geht es trotzdem – ganz ohne Datenweitergabe:",
     remS1: "Tippe unten auf „Link kopieren“ – das ist der Link zum Gebetsbuch.", remS2: "Öffne die App „Erinnerungen“ und lege eine neue Erinnerung an, z. B. „Morgengebet“.", remS3: "Tippe auf „i“ (Details), aktiviere Datum und Uhrzeit und wähle bei „Wiederholen“ „Täglich“.", remS4: "Füge den Link im Feld „URL“ ein. Beim Tippen auf die Erinnerung öffnet sich das Gebetsbuch.",
@@ -788,7 +788,7 @@ const UI = {
     prSource: "Порекло", prCommNote: "О припреми за причешће (молитвено правило, пост, исповест) разговарајте са својим свештеником. У многим молитвеницима постоји опширније „Правило пред свето причешће“.",
     gfTitle: "Дванаест великих празника", gfIntro: "Поред Васкрса, „Празника над празницима“, Црква прославља дванаест великих празника: осам Господњих и четири Богородичина. Овде за сваки празник налазите икону описану речима, значење и читања Свете Литургије.",
     gfIcon: "Празнична икона", gfMean: "Значење", gfReadings: "Читања на Светој Литургији", gfApostle: "Апостол", gfGospel: "Јеванђеље", gfReadNote: "По општем поретку читања; месне разлике су могуће. Прочитајте места у својој Библији.", gfLord: "Господњи празник", gfTheotokos: "Богородичин празник", gfNext: "Следећи датум", gfPascha: "Васкрс – Празник над празницима",
-    iconInLex: "У лексикону икона", iconPd: "јавно добро", iconToSaint: "Ка светитељу", iconImgNote: "Слике су вековима старе иконе које су јавно добро (извор: Викимедија Комонс). Сачуване су у апликацији и раде и без интернета.",
+    updCheck: "Потражи ново издање", updRunning: "Учитава се …", iconInLex: "У лексикону икона", iconPd: "јавно добро", iconToSaint: "Ка светитељу", iconImgNote: "Слике су вековима старе иконе које су јавно добро (извор: Викимедија Комонс). Сачуване су у апликацији и раде и без интернета.",
     prevLesson: "Претходна лекција", nextLessonL: "Следећа лекција", lastOpened: "Последње отворено",
     remTitle: "Подсетници за молитву", remText: "Веб-апликације на ајфону не могу да шаљу поуздане дневне подсетнике. Помоћу апликације „Подсетници“ ипак иде – без слања података:",
     remS1: "Додирните доле „Копирај везу“ – то је веза ка молитвенику.", remS2: "Отворите апликацију „Подсетници“ и направите нови подсетник, нпр. „Јутарња молитва“.", remS3: "Додирните „i“ (детаљи), укључите датум и време и код „Понављај“ изаберите „Дневно“.", remS4: "Налепите везу у поље „URL“. Када додирнете подсетник, отвара се молитвеник.",
@@ -14641,6 +14641,18 @@ function fastPeriods(y, cal) {
   }
 
   /* ---------- Mehr ---------- */
+  function bindMore() {
+    const b = document.getElementById("updcheck"); if (!b) return;
+    b.onclick = async () => {
+      b.disabled = true; b.textContent = t("updRunning");
+      try {
+        /* Programm-Zwischenspeicher leeren (Bilder und Daten bleiben), dann neu laden – holt die neueste Version */
+        if (window.caches) { const ks = await caches.keys(); await Promise.all(ks.filter(k => !k.includes("-img-")).map(k => caches.delete(k))); }
+        if (window.__OP_SW) await window.__OP_SW.update().catch(() => { });
+      } catch (e) { }
+      location.reload();
+    };
+  }
   function viewMore() {
     return `<h1>${esc(t("navMore"))}</h1>
       <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
@@ -14655,7 +14667,7 @@ function fastPeriods(y, cal) {
       <div class="sh">${esc(t("gApp"))}</div><ul class="list">
         ${navItem("prefs", "gear", t("navSettings"))}
       </ul>
-      <div class="card"><h3>${esc(t("sAbout"))}</h3><p class="small muted" style="margin:0">${esc(t("aboutText"))}</p><p class="small muted" style="margin:8px 0 0">Version ${esc(window.OP_VERSION || "")}</p></div>`;
+      <div class="card"><h3>${esc(t("sAbout"))}</h3><p class="small muted" style="margin:0">${esc(t("aboutText"))}</p><p class="small muted" style="margin:8px 0 0">Version ${esc(window.OP_VERSION || "")}</p>${window.OP_PWA ? `<button class="btn ghost" id="updcheck" style="margin-top:10px">${esc(t("updCheck"))}</button>` : ""}</div>`;
   }
 
   /* ---------- Einstellungen ---------- */
@@ -14795,7 +14807,7 @@ function fastPeriods(y, cal) {
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };
@@ -14804,7 +14816,19 @@ function fastPeriods(y, cal) {
   /* Dauerhaften Speicher anfragen (wo der Browser es unterstützt) */
   try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => { }); } catch (e) { }
   if (window.OP_PWA && "serviceWorker" in navigator) {
-    try { navigator.serviceWorker.register("sw.js").catch(() => { }); } catch (e) { }
+    try {
+      /* Updates zuverlässig holen: sw.js nie aus dem HTTP-Cache, bei jedem Start und beim Zurückkehren in die App prüfen.
+         Übernimmt eine neue Version die Kontrolle, wird die Seite einmal neu geladen (nicht beim allerersten Installieren). */
+      const hadController = !!navigator.serviceWorker.controller;
+      let reloaded = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => { if (hadController && !reloaded) { reloaded = true; location.reload(); } });
+      navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(reg => {
+        window.__OP_SW = reg;
+        const check = () => { try { reg.update().catch(() => { }); } catch (e) { } };
+        check();
+        document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") check(); });
+      }).catch(() => { });
+    } catch (e) { }
   }
   render();
 })();

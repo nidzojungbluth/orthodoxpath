@@ -33,3 +33,5 @@
 - Tägliche Lesungen: keine geprüfte, frei nutzbare Leseordnungs-Quelle.
 - Vollständiger deutscher Bibeltext: keine frei lizenzierte orthodoxe Übersetzung.
 - Push-Benachrichtigungen: auf iOS für Web-Apps nur eingeschränkt; Ersatz: Anleitung für die App „Erinnerungen“.
+
+13. Aktualisierung (9.11.2026): Startseite network-first mit 4-s-Rückfall auf den Speicher statt cache-first, damit iPhone-Web-Apps neue Versionen sofort bekommen. Alles andere bleibt cache-first (schnell, offline).

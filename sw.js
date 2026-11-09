@@ -1,5 +1,5 @@
 /* OrthodoxPath Service Worker – Offline-Zwischenspeicher */
-const CACHE = "orthodoxpath-3.16.0";
+const CACHE = "orthodoxpath-3.16.1";
 const IMG_CACHE = "orthodoxpath-img-v2"; /* Ikonenbilder der App, bleiben über Versionen erhalten */
 const IMGS = ["./img/icons/anastasis.jpg","./img/icons/annunciation.jpg","./img/icons/archangels.jpg","./img/icons/ascension.jpg","./img/icons/chrysostom.jpg","./img/icons/crucifixion.jpg","./img/icons/deesis.jpg","./img/icons/desert-fathers.jpg","./img/icons/don.jpg","./img/icons/dormition.jpg","./img/icons/eleousa.jpg","./img/icons/elijah.jpg","./img/icons/entombment.jpg","./img/icons/entry.jpg","./img/icons/exaltation.jpg","./img/icons/george.jpg","./img/icons/hodigitria.jpg","./img/icons/iconostasis.jpg","./img/icons/john-baptist.jpg","./img/icons/lazarus.jpg","./img/icons/mandylion.jpg","./img/icons/meeting.jpg","./img/icons/nativity-theotokos.jpg","./img/icons/nativity.jpg","./img/icons/nicholas.jpg","./img/icons/pantokrator.jpg","./img/icons/paul.jpg","./img/icons/pentecost.jpg","./img/icons/platytera.jpg","./img/icons/pokrov.jpg","./img/icons/presentation-theotokos.jpg","./img/icons/saviour-powers.jpg","./img/icons/sign-miracle.jpg","./img/icons/theophany.jpg","./img/icons/thomas.jpg","./img/icons/transfiguration.jpg","./img/icons/trinity.jpg"];
 const FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
@@ -12,6 +12,19 @@ self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   if (new URL(e.request.url).pathname.includes("/img/icons/")) {
     e.respondWith(caches.open(IMG_CACHE).then(c => c.match(e.request).then(r => r || fetch(e.request).then(res => { if (res.ok) c.put(e.request, res.clone()); return res; }))));
+    return;
+  }
+  /* Seitenaufruf: zuerst Netz (neueste Version), bei Funkloch nach 4 s oder offline aus dem Speicher */
+  if (e.request.mode === "navigate") {
+    e.respondWith(new Promise(resolve => {
+      let done = false;
+      const fromCache = () => caches.match("./index.html").then(r => r || caches.match("./"));
+      const timer = setTimeout(() => fromCache().then(r => { if (r && !done) { done = true; resolve(r); } }), 4000);
+      fetch(e.request, { cache: "no-store" }).then(res => {
+        if (res.ok) { const cp = res.clone(); caches.open(CACHE).then(c => c.put("./index.html", cp)); }
+        if (!done) { done = true; clearTimeout(timer); resolve(res); }
+      }).catch(() => fromCache().then(r => { if (!done) { done = true; clearTimeout(timer); resolve(r || Response.error()); } }));
+    }));
     return;
   }
   e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(res => {

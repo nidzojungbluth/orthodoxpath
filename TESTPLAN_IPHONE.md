@@ -19,3 +19,6 @@ Rückmeldung einfach als Liste an Claude schicken, z. B. „3 ❌: In Latinica i
 ## Ikonenbilder (ab 3.12)
 - [ ] Mehr → Ikonen-Lexikon öffnen (mit Internet): Erscheinen die Bilder? Welche fehlen?
 - [ ] Danach Flugmodus an, Lexikon erneut öffnen: Bilder sollten aus dem Speicher kommen, Texte immer.
+
+## Aktualisierung (ab 3.16.1)
+- [ ] Mehr → unten steht die Version. „Nach neuer Version suchen“ antippen: App lädt neu, Daten und Fortschritt sind noch da.

@@ -1183,6 +1183,18 @@
   }
 
   /* ---------- Mehr ---------- */
+  function bindMore() {
+    const b = document.getElementById("updcheck"); if (!b) return;
+    b.onclick = async () => {
+      b.disabled = true; b.textContent = t("updRunning");
+      try {
+        /* Programm-Zwischenspeicher leeren (Bilder und Daten bleiben), dann neu laden – holt die neueste Version */
+        if (window.caches) { const ks = await caches.keys(); await Promise.all(ks.filter(k => !k.includes("-img-")).map(k => caches.delete(k))); }
+        if (window.__OP_SW) await window.__OP_SW.update().catch(() => { });
+      } catch (e) { }
+      location.reload();
+    };
+  }
   function viewMore() {
     return `<h1>${esc(t("navMore"))}</h1>
       <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
@@ -1197,7 +1209,7 @@
       <div class="sh">${esc(t("gApp"))}</div><ul class="list">
         ${navItem("prefs", "gear", t("navSettings"))}
       </ul>
-      <div class="card"><h3>${esc(t("sAbout"))}</h3><p class="small muted" style="margin:0">${esc(t("aboutText"))}</p><p class="small muted" style="margin:8px 0 0">Version ${esc(window.OP_VERSION || "")}</p></div>`;
+      <div class="card"><h3>${esc(t("sAbout"))}</h3><p class="small muted" style="margin:0">${esc(t("aboutText"))}</p><p class="small muted" style="margin:8px 0 0">Version ${esc(window.OP_VERSION || "")}</p>${window.OP_PWA ? `<button class="btn ghost" id="updcheck" style="margin-top:10px">${esc(t("updCheck"))}</button>` : ""}</div>`;
   }
 
   /* ---------- Einstellungen ---------- */
@@ -1337,7 +1349,7 @@
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };
@@ -1346,7 +1358,19 @@
   /* Dauerhaften Speicher anfragen (wo der Browser es unterstützt) */
   try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => { }); } catch (e) { }
   if (window.OP_PWA && "serviceWorker" in navigator) {
-    try { navigator.serviceWorker.register("sw.js").catch(() => { }); } catch (e) { }
+    try {
+      /* Updates zuverlässig holen: sw.js nie aus dem HTTP-Cache, bei jedem Start und beim Zurückkehren in die App prüfen.
+         Übernimmt eine neue Version die Kontrolle, wird die Seite einmal neu geladen (nicht beim allerersten Installieren). */
+      const hadController = !!navigator.serviceWorker.controller;
+      let reloaded = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => { if (hadController && !reloaded) { reloaded = true; location.reload(); } });
+      navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(reg => {
+        window.__OP_SW = reg;
+        const check = () => { try { reg.update().catch(() => { }); } catch (e) { } };
+        check();
+        document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") check(); });
+      }).catch(() => { });
+    } catch (e) { }
   }
   render();
 })();

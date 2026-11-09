@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const R = p => fs.readFileSync(path.join(__dirname, p), "utf8");
-const VERSION = "3.16.0";
+const VERSION = "3.16.1";
 
 /* Eingebettete Schrift (Cormorant Garamond, SIL Open Font License, siehe src/fonts/OFL.txt) – funktioniert offline und ohne externe Server */
 const RANGES = {
@@ -80,6 +80,19 @@ self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   if (new URL(e.request.url).pathname.includes("/img/icons/")) {
     e.respondWith(caches.open(IMG_CACHE).then(c => c.match(e.request).then(r => r || fetch(e.request).then(res => { if (res.ok) c.put(e.request, res.clone()); return res; }))));
+    return;
+  }
+  /* Seitenaufruf: zuerst Netz (neueste Version), bei Funkloch nach 4 s oder offline aus dem Speicher */
+  if (e.request.mode === "navigate") {
+    e.respondWith(new Promise(resolve => {
+      let done = false;
+      const fromCache = () => caches.match("./index.html").then(r => r || caches.match("./"));
+      const timer = setTimeout(() => fromCache().then(r => { if (r && !done) { done = true; resolve(r); } }), 4000);
+      fetch(e.request, { cache: "no-store" }).then(res => {
+        if (res.ok) { const cp = res.clone(); caches.open(CACHE).then(c => c.put("./index.html", cp)); }
+        if (!done) { done = true; clearTimeout(timer); resolve(res); }
+      }).catch(() => fromCache().then(r => { if (!done) { done = true; clearTimeout(timer); resolve(r || Response.error()); } }));
+    }));
     return;
   }
   e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(res => {

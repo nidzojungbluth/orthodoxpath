@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.16.0 (5. November 2026)
+**Aktuelle Version:** 3.16.1 (5. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,12 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.16.1 (Fehler: iPhone blieb auf 3.12 hängen)
+
+- Ursache: Der Service Worker lieferte die Startseite immer zuerst aus dem Speicher (cache-first); eine iPhone-Web-App, die nur aus dem Hintergrund geholt wird, bekommt neue Versionen dadurch sehr spät.
+- Lösung: Startseite jetzt zuerst aus dem Netz (nach 4 s oder offline aus dem Speicher); sw.js wird nie aus dem HTTP-Cache geholt; Update-Prüfung bei jedem Start und bei jeder Rückkehr in die App; übernimmt eine neue Version, lädt die App einmal neu. Neuer Knopf „Nach neuer Version suchen“ unter Mehr (leert nur den Programmspeicher, Daten und Bilder bleiben).
+- Test pwa-offline: Knopf vorhanden, danach neue Version, Bilder-Speicher erhalten, offline weiter nutzbar.
 
 ## Version 3.16 (Fehler: Ikonenbilder erschienen beim Nutzer nicht)
 
