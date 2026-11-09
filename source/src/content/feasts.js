@@ -194,7 +194,7 @@ const GREAT_FEASTS = [
    "de": "Phil 4,4–9",
    "sr": "Флп 4,4–9"
   },
-  "lessons": []
+  "lessons": ["bib-jn11"]
  },
  {
   "id": "ascension",

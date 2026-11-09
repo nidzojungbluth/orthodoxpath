@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.14.0 (5. November 2026)
+**Aktuelle Version:** 3.15.0 (5. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,12 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.15 (ROADMAP P3-01, Teil 2)
+
+- 6 neue Bibellektionen (jetzt 72): Auferweckung des Lazarus (Joh 11), Zöllner und Pharisäer (Lk 18), Gang auf dem Wasser (Mt 14), Gelähmter in Kafarnaum (Mk 2), Gelähmter am Teich Betesda (Joh 5), Thron Gottes und Lamm (Offb 4–5); jeweils mit liturgischem Ort (Lesungstag), Fragen, Übung, Quiz; 6 neue Lernkarten.
+- Festseiten zeigen das Bild der Festikone und springen direkt zur Ikone im Lexikon (neue Adresse #icons-<id>); Suche springt ebenfalls direkt zur Ikone. Palmsonntag verweist auf die Lazarus-Lektion.
+- Ikonenbilder mit fester Höhe, damit die Seite beim Laden nicht springt.
 
 ## Version 3.14
 
