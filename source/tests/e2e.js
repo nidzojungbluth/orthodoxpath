@@ -237,7 +237,7 @@ const ok = (c, m) => { checks++; if (!c) { fails++; console.log("FAIL:", m); } e
     await page.route(/upload\.wikimedia\.org/, r => r.abort());
     await page.evaluate(() => { location.hash = "icons"; }); await page.waitForTimeout(300);
     const figs = await page.$$eval(".iconimg img", ims => ims.map(i => ({ src: i.getAttribute("src"), alt: i.alt, ref: i.getAttribute("referrerpolicy"), lazy: i.getAttribute("loading") })));
-    ok(figs.length >= 28, "Ikonen-Lexikon zeigt Bilder (" + figs.length + ")");
+    ok(figs.length >= 37, "Ikonen-Lexikon zeigt Bilder (" + figs.length + ")");
     ok(figs.every(f => f.src.startsWith("https://upload.wikimedia.org/wikipedia/commons/") && f.alt && f.ref === "no-referrer" && f.lazy === "lazy"), "Ikonenbilder: Wikimedia, Alt-Text, kein Referrer, lazy");
     ok(await page.$$eval(".iconimg figcaption a", as => as.every(a => a.href.startsWith("https://commons.wikimedia.org/wiki/File:") && a.rel.includes("noopener"))), "Ikonenbilder: Quellenlink zu Commons");
     const hid = await page.waitForFunction(() => document.querySelector(".iconimg").hidden, null, { timeout: 8000 }).then(() => true, () => false);

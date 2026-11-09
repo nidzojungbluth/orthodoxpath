@@ -406,7 +406,7 @@ label.btn { margin: 0; font-size: 1em; }
 </head>
 <body>
 <div id="app"><noscript>OrthodoxPath benötigt JavaScript. · OrthodoxPath захтева JavaScript.</noscript></div>
-<script>window.OP_PWA = true; window.OP_VERSION = "3.13.0";</script>
+<script>window.OP_PWA = true; window.OP_VERSION = "3.14.0";</script>
 <script>
 /* src/i18n.js */
 /* OrthodoxPath – zentrale Übersetzungen der Benutzeroberfläche.
@@ -12824,7 +12824,8 @@ const ICONS_LEX = [
     name: { de: "Die Dreifaltigkeit (Gastfreundschaft Abrahams)", sr: "Света Тројица (Гостољубље Аврамово)" },
     look: { de: "Drei Engel sitzen an einem Tisch mit einem Kelch, wie die drei Besucher bei Abraham (Gen 18). Die berühmteste Fassung malte der hl. Andrej Rubljow im 15. Jahrhundert.", sr: "Три анђела седе за трпезом са чашом, као три посетиоца код Аврама (Пост 18). Најпознатију верзију насликао је свети Андреј Рубљов у 15. веку." },
     mean: { de: "Ein Bild für die Gemeinschaft der drei göttlichen Personen; der unsichtbare Vater selbst wird in der Ikonographie nicht direkt dargestellt.", sr: "Слика заједнице три божанска Лица; невидљиви Отац сам у иконографији се не приказује непосредно." }, lesson: "th-trinity" },
-  { id: "mandylion", name: { de: "Das nicht von Händen gemachte Bild (Mandylion)", sr: "Нерукотворени образ (Мандилион)" },
+  { id: "mandylion", img: { file: "Спас_Нерукотворный_-_Google_Art_Project.jpg", path: "1/13", credit: { de: "Das nicht von Händen gemachte Bild, Nowgorod, 2. Hälfte 12. Jh., Tretjakow-Galerie", sr: "Нерукотворени образ, Новгород, друга половина 12. века, Третјаковска галерија" }, license: "PD-Art" },
+    name: { de: "Das nicht von Händen gemachte Bild (Mandylion)", sr: "Нерукотворени образ (Мандилион)" },
     look: { de: "Das Antlitz Christi auf einem Tuch.", sr: "Христово лице на убрусу." },
     mean: { de: "Nach der Überlieferung drückte Christus sein Gesicht in ein Tuch für König Abgar von Edessa. Die Ikone bezeugt: Weil Gott Mensch wurde, darf er dargestellt werden.", sr: "Према предању, Христос је утиснуо своје лице у убрус за цара Авгара едеског. Икона сведочи: пошто је Бог постао човек, сме се изображавати." }, tag: "uncertain", lesson: "dg-icons" },
   { id: "iconostasis", img: { file: "Russian_-_Great_Deesis_with_Prophets_-_Walters_37625.jpg", path: "2/23", credit: { de: "Deesis- und Prophetenreihe einer Ikonostase, Russland, 16. Jh., Walters Art Museum", sr: "Деисисни и пророчки ред иконостаса, Русија, 16. век, Музеј Волтерс" }, license: "PD-Art" },
@@ -12837,7 +12838,7 @@ const ICONS_LEX = [
     look: { de: "Der Erzengel Gabriel tritt mit erhobener, segnender Hand auf Maria zu; sie neigt sich ihm zu, oft mit einem Spinnfaden in der Hand. Von oben kommt ein Strahl aus dem Himmel.", sr: "Арханђел Гаврило прилази Марији са подигнутом руком која благосиља; она се окреће према њему, често са предивом у руци. Одозго силази зрак са неба." },
     mean: { de: "Der Beginn unseres Heils: Durch das „Ja“ der Gottesgebärerin wird der Sohn Gottes in ihr Mensch (Lk 1,26–38). Deshalb ist die Verkündigung oft auf den Königlichen Türen dargestellt.", sr: "Почетак нашег спасења: кроз „да“ Богородице Син Божји у њој постаје човек (Лк 1,26–38). Зато су Благовести често насликане на царским дверима." },
     lesson: "bib-lk1" },
-  { id: "entry",
+  { id: "entry", img: { file: "Entry_into_Jerusalem_(Annunciation_Cathedral_in_Moscow).jpg", path: "d/d0", credit: { de: "Festtagsreihe der Verkündigungskathedrale im Moskauer Kreml, 15. Jh.", sr: "Празнични ред Благовештенског сабора у Московском Кремљу, 15. век" }, license: "PD-Art" },
     name: { de: "Einzug in Jerusalem (Palmsonntag)", sr: "Улазак Господњи у Јерусалим (Цвети)" },
     look: { de: "Christus reitet auf einem Esel auf die Stadt zu, hinter ihm die Apostel. Aus dem Stadttor kommen ihm Menschen entgegen, Kinder breiten Kleider auf dem Weg aus und schneiden Zweige von einem Baum.", sr: "Христос јаше на магарцу ка граду, за Њим апостоли. Из градске капије Му излазе људи у сусрет, деца простиру хаљине по путу и секу гране са дрвета." },
     mean: { de: "Christus kommt als König des Friedens, nicht als weltlicher Herrscher (vgl. Sach 9,9; Joh 12,12–15). Das Fest eröffnet die Karwoche.", sr: "Христос долази као Цар мира, а не као земаљски владар (уп. Зах 9,9; Јн 12,12–15). Празник отвара Страсну седмицу." } },
@@ -12859,7 +12860,7 @@ const ICONS_LEX = [
     look: { de: "Der Auferstandene steht vor einer verschlossenen Tür, mitten unter den Jüngern, und zeigt Thomas seine Seite; Thomas berührt die Wunde.", sr: "Васкрсли Христос стоји пред затвореним вратима, посред ученика, и показује Томи своје ребро; Тома додирује рану." },
     mean: { de: "Der Auferstandene hat einen wirklichen Leib, der durch verschlossene Türen geht. Thomas bekennt: „Mein Herr und mein Gott!“ (Joh 20,28). Die Ikone gehört zum Sonntag nach Ostern.", sr: "Васкрсли има стварно тело које пролази кроз затворена врата. Тома исповеда: „Господ мој и Бог мој!“ (Јн 20,28). Икона припада недељи после Васкрса (Томина недеља)." },
     lesson: "bib-jn20" },
-  { id: "ascension",
+  { id: "ascension", img: { file: "Ascention_(Annunciation_Cathedral_in_Moscow).jpg", path: "2/22", credit: { de: "Festtagsreihe der Verkündigungskathedrale im Moskauer Kreml, 15. Jh.", sr: "Празнични ред Благовештенског сабора у Московском Кремљу, 15. век" }, license: "PD-Art" },
     name: { de: "Himmelfahrt Christi", sr: "Вазнесење Господње" },
     look: { de: "Christus thront oben in einem Kreis aus Licht, von Engeln getragen. Unten steht die Gottesgebärerin in der Mitte, flankiert von zwei Engeln in Weiß, um sie die Apostel.", sr: "Христос горе на престолу у кругу светлости, који носе анђели. Доле у средини стоји Богородица, поред ње два анђела у белом, око ње апостоли." },
     mean: { de: "Christus erhebt die menschliche Natur zur Rechten des Vaters. Die Engel verkünden, dass er wiederkommen wird (Apg 1,11). Maria steht für die Kirche, die auf ihn wartet.", sr: "Христос узноси људску природу с десне стране Оца. Анђели објављују да ће поново доћи (Дап 1,11). Марија представља Цркву која Га чека." } },
@@ -12893,26 +12894,26 @@ const ICONS_LEX = [
     look: { de: "Die hl. Anna ruht auf einem Lager, Frauen bringen ihr Speisen und Gaben. Vorne baden Hebammen das neugeborene Kind Maria; Joachim schaut von der Seite zu.", sr: "Света Ана почива на постељи, жене јој доносе јело и дарове. Напред бабице купају новорођену Марију; Јоаким посматра са стране." },
     mean: { de: "Das erste große Fest des Kirchenjahres (das am 1. September beginnt): Mit der Geburt der künftigen Mutter des Herrn beginnt die Vorbereitung unseres Heils. Die Einzelheiten stammen aus der Überlieferung (Protoevangelium des Jakobus), nicht aus den Evangelien.", sr: "Први велики празник црквене године (која почиње 1. септембра): рођењем будуће Мајке Господње почиње припрема нашег спасења. Појединости потичу из предања (Протојеванђеље Јаковљево), а не из Јеванђеља." },
     tag: "history" },
-  { id: "presentation-theotokos",
+  { id: "presentation-theotokos", img: { file: "Presentation_(Kirillo-Belozersk).jpg", path: "d/d9", credit: { de: "Festtagsreihe der Entschlafungskathedrale des Kirillo-Beloserski-Klosters, um 1497", sr: "Празнични ред Успенског сабора Кирило-Белозерског манастира, око 1497." }, license: "PD-Art" },
     name: { de: "Einführung der Gottesgebärerin in den Tempel", sr: "Ваведење Пресвете Богородице" },
     look: { de: "Joachim und Anna führen die kleine Maria zum Tempel, begleitet von Mädchen mit Kerzen. Der Priester Zacharias empfängt sie an der Treppe. Oben sitzt Maria im Allerheiligsten, und ein Engel bringt ihr Speise.", sr: "Јоаким и Ана воде малу Марију у храм, а прате их девојке са свећама. Свештеник Захарија је дочекује на степеницама. Горе Марија седи у Светињи над светињама, а анђео јој доноси храну." },
     mean: { de: "Maria wird selbst zum lebendigen Tempel vorbereitet, in dem Gott wohnen wird. Auch hier stammt die Erzählung aus der Überlieferung (Protoevangelium des Jakobus).", sr: "Марија се припрема да сама постане живи храм у коме ће Бог обитавати. И овде прича потиче из предања (Протојеванђеље Јаковљево)." },
     tag: "history" },
-  { id: "meeting",
+  { id: "meeting", img: { file: "Sretenie_(Annunciation_Cathedral_in_Moscow).jpg", path: "e/ea", credit: { de: "Festtagsreihe der Verkündigungskathedrale im Moskauer Kreml, 15. Jh.", sr: "Празнични ред Благовештенског сабора у Московском Кремљу, 15. век" }, license: "PD-Art" },
     name: { de: "Begegnung des Herrn (Darstellung im Tempel)", sr: "Сретење Господње" },
     look: { de: "Im Tempel reicht Maria das Kind dem greisen Simeon, der es mit verhüllten Händen empfängt. Josef trägt zwei Tauben, daneben die Prophetin Hanna mit einer Schriftrolle.", sr: "У храму Марија пружа Дете старцу Симеону, који Га прима покривеним рукама. Јосиф носи две грлице, поред њега пророчица Ана са свитком." },
     mean: { de: "Der Alte Bund begegnet dem Herrn: Simeon erkennt in dem Kind das „Licht zur Erleuchtung der Heiden“ (Lk 2,22–38). Sein Lobgesang wird in jeder Vesper gebetet.", sr: "Стари Завет сусреће Господа: Симеон у Детету препознаје „светлост за просвећење незнабожаца“ (Лк 2,22–38). Његова песма пева се на свакој вечерњи." },
     lesson: "bib-lk2" },
-  { id: "lazarus",
+  { id: "lazarus", img: { file: "Resurrection_of_Lazarus_(Annunciation_Cathedral_in_Moscow).jpg", path: "c/ce", credit: { de: "Festtagsreihe der Verkündigungskathedrale im Moskauer Kreml, 15. Jh.", sr: "Празнични ред Благовештенског сабора у Московском Кремљу, 15. век" }, license: "PD-Art" },
     name: { de: "Auferweckung des Lazarus", sr: "Васкрсење Лазарево" },
     look: { de: "Christus segnet zum Grab hin. Im Höhleneingang steht Lazarus, noch in Grabtücher gewickelt; ein Mann wickelt ihn aus, Umstehende halten sich die Nase zu. Martha und Maria liegen Christus zu Füßen.", sr: "Христос благосиља ка гробу. На улазу у пећину стоји Лазар, још увијен у покров; један човек га одмотава, а присутни заклањају нос. Марта и Марија леже Христу пред ногама." },
     mean: { de: "Christus, der „die Auferstehung und das Leben“ ist (Joh 11,25), weckt einen seit vier Tagen Toten auf – ein Unterpfand der allgemeinen Auferstehung. Gefeiert am Lazarus-Samstag vor dem Palmsonntag.", sr: "Христос, који је „васкрсење и живот“ (Јн 11,25), подиже из мртвих четвородневног покојника – залог општег васкрсења. Празнује се на Лазареву суботу пред Цвети." } },
-  { id: "exaltation",
+  { id: "exaltation", img: { file: "Exaltation_of_the_Cross_by_O.Chirikov_(Hermitage).jpg", path: "5/56", credit: { de: "Ossip Tschirikow, Kreuzerhöhung, 19. Jh., Eremitage", sr: "Осип Чириков, Воздвижење Часног Крста, 19. век, Ермитаж" }, license: "PD-Art" },
     name: { de: "Kreuzerhöhung", sr: "Воздвижење Часног Крста (Крстовдан)" },
     look: { de: "Ein Bischof steht auf einem Podest vor der Kirche und hebt das Kreuz hoch; Diakone stützen seine Arme. Unten das Volk, oft auch Kaiser Konstantin und Kaiserin Helena.", sr: "Епископ стоји на узвишењу пред храмом и подиже крст; ђакони му придржавају руке. Доле народ, често и цар Константин и царица Јелена." },
     mean: { de: "Erinnerung an die Auffindung des Kreuzes in Jerusalem durch die hl. Helena (4. Jh.) und seine Erhöhung vor dem Volk. Das Werkzeug des Todes ist zum Zeichen des Sieges geworden. Der Tag ist ein strenger Fasttag.", sr: "Спомен на проналазак Крста у Јерусалиму од свете Јелене (4. век) и његово уздизање пред народом. Оруђе смрти постало је знак победе. Тај дан је строги пост." },
     tag: "history" },
-  { id: "pokrov",
+  { id: "pokrov", img: { file: "Pokrov_(icon,_1399).jpeg", path: "6/65", credit: { de: "Schutz der Gottesgebärerin, aus dem Swerin-Kloster in Nowgorod, 1399", sr: "Покров Пресвете Богородице, из Зверињског манастира у Новгороду, 1399." }, license: "PD-Art" },
     name: { de: "Schutz der Gottesgebärerin (Pokrov)", sr: "Покров Пресвете Богородице" },
     look: { de: "Die Gottesgebärerin steht oben in einer Kirche und breitet ihren Schleier über die Betenden aus. Darunter weist der hl. Andreas der Narr in Christo seinen Schüler auf die Erscheinung hin; in der Mitte singt der hl. Romanos der Melode.", sr: "Богородица стоји горе у храму и простире свој покров над онима који се моле. Испод свети Андреј Христа ради јуродиви показује свом ученику на виђење; у средини пева свети Роман Слаткопојац." },
     mean: { de: "Nach der Überlieferung sah der hl. Andreas in der Blachernenkirche in Konstantinopel, wie die Gottesgebärerin für die Gläubigen betete und sie mit ihrem Schleier bedeckte. Das Fest wird besonders in der russischen Kirche groß gefeiert.", sr: "Према предању, свети Андреј је у Влахернској цркви у Цариграду видео како се Богородица моли за вернике и покрива их својим покровом. Празник се посебно свечано слави у Руској цркви." },
