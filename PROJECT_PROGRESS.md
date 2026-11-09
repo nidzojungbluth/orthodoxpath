@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.15.0 (5. November 2026)
+**Aktuelle Version:** 3.15.1 (5. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -37,7 +37,7 @@
 
 - 6 neue Bibellektionen (jetzt 72): Auferweckung des Lazarus (Joh 11), Zöllner und Pharisäer (Lk 18), Gang auf dem Wasser (Mt 14), Gelähmter in Kafarnaum (Mk 2), Gelähmter am Teich Betesda (Joh 5), Thron Gottes und Lamm (Offb 4–5); jeweils mit liturgischem Ort (Lesungstag), Fragen, Übung, Quiz; 6 neue Lernkarten.
 - Festseiten zeigen das Bild der Festikone und springen direkt zur Ikone im Lexikon (neue Adresse #icons-<id>); Suche springt ebenfalls direkt zur Ikone. Palmsonntag verweist auf die Lazarus-Lektion.
-- Ikonenbilder mit fester Höhe, damit die Seite beim Laden nicht springt.
+- Ikonenbilder mit fester Höhe, damit die Seite beim Laden nicht springt. 3.15.1: Sprungziel nicht mehr unter der Kopfleiste (im echten Chrome geprüft).
 
 ## Version 3.14
 

@@ -246,7 +246,7 @@ const ok = (c, m) => { checks++; if (!c) { fails++; console.log("FAIL:", m); } e
     await page.evaluate(() => { location.hash = "feast-palm"; }); await page.waitForTimeout(300);
     ok(await page.$$eval(".iconimg img", ims => ims.length === 1 && ims[0].alt.length > 3) && await page.$$eval("a[href='#icons-entry']", a => a.length === 1), "Festseite zeigt Ikonenbild und Direktlink");
     await page.evaluate(() => { location.hash = "icons-lazarus"; }); await page.waitForTimeout(500);
-    ok(await page.evaluate(() => { const r = document.getElementById("icon-lazarus").getBoundingClientRect(); return r.top >= -5 && r.top < 200; }), "Direktlink springt zur Ikone " + await page.evaluate(() => Math.round(document.getElementById("icon-lazarus").getBoundingClientRect().top) + "/" + scrollY));
+    ok(await page.evaluate(() => { const r = document.getElementById("icon-lazarus").getBoundingClientRect(); return r.top >= 40 && r.top < 200; }), "Direktlink springt zur Ikone " + await page.evaluate(() => Math.round(document.getElementById("icon-lazarus").getBoundingClientRect().top) + "/" + scrollY));
     ok(await page.$$eval("#icon-lazarus a[href='#lesson-bib-jn11']", a => a.length === 1), "Lazarus-Ikone verlinkt neue Lektion");
     await page.evaluate(() => { location.hash = "icons"; }); await page.waitForTimeout(300);
     ok(await page.$$eval("#ig-feasts ~ section", s => s.length) >= 19 && await page.$$eval("[data-jump]", a => a.length) === 5, "Ikonen nach Gruppen geordnet, Sprungleiste");

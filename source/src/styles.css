@@ -382,3 +382,5 @@ label.btn { margin: 0; font-size: 1em; }
 .card.flash { animation: opflash 1.6s ease-out 1; }
 @keyframes opflash { 0% { box-shadow: 0 0 0 2px var(--gold); } 100% { box-shadow: 0 0 0 0 transparent; } }
 @media (prefers-reduced-motion: reduce) { .card.flash { animation: none; outline: 2px solid var(--gold); } }
+/* Sprungziele nicht unter der festen Kopfleiste verstecken */
+section[id^="icon-"], h2[id^="ig-"] { scroll-margin-top: calc(72px + env(safe-area-inset-top)); }
