@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.15.1 (5. November 2026)
+**Aktuelle Version:** 3.16.0 (5. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,13 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.16 (Fehler: Ikonenbilder erschienen beim Nutzer nicht)
+
+- Ursache: Bilder wurden zur Laufzeit von upload.wikimedia.org geladen – scheitert in der Claude-App (Artefakt), bei alter zwischengespeicherter App-Version und bei Wikimedia-Ratenbegrenzung (429, beim Herunterladen selbst beobachtet).
+- Lösung: alle 37 Bilder einmalig heruntergeladen, auf max. 360×540 px verkleinert (JPEG, zusammen 1,6 MB) und in die App gelegt (img/icons/<id>.jpg). Service Worker legt sie bei der Installation in einen eigenen Speicher „orthodoxpath-img-v2“ → offline verfügbar. CSP erlaubt keine fremden Bildquellen mehr. Quellenangabe und Link zu Commons bleiben.
+- Tests: Bilder laden bei gesperrtem Wikimedia (e2e), offline über den Service Worker (pwa-offline), Dateien vorhanden/JPEG/Größe (content).
+- Festseiten: Überschrift „Die Festikone“.
 
 ## Version 3.15 (ROADMAP P3-01, Teil 2)
 

@@ -46,3 +46,5 @@ Svetosavlje.org: Dobrotoljublje (Philokalie), Prolog von Ohrid (hl. Nikolaj), We
    - Ab 3.14 alle 37 mit Bild: Mandylion (Nowgorod, 12. Jh.), Einzug, Himmelfahrt, Begegnung, Lazarus (Festtagsreihe Verkündigungskathedrale, 15. Jh.), Tempelgang (Kirillo-Beloserski, um 1497), Pokrov (Nowgorod, 1399), Kreuzerhöhung (Ossip Tschirikow, 19. Jh. – jüngstes Bild, Maler gest. 1882). Lizenz jeweils über die Commons-API geprüft („Public domain“); alle 37 Bilder am 9.11.2026 im echten Chrome von der veröffentlichten App aus erfolgreich geladen.
    - Erzählungen aus dem Protoevangelium des Jakobus und Legenden (Georg, Don, Nowgorod 1170) sind als Überlieferung bzw. unsicher gekennzeichnet.
 5. Schrift: Cormorant Garamond, SIL Open Font License (`src/fonts/OFL.txt`).
+
+- Ab 3.16 liegen die Ikonenbilder als verkleinerte Kopien (max. 360×540 px) in der App unter img/icons/<id>.jpg; Herkunft und Lizenz unverändert (Commons, gemeinfrei), Quellenlink bleibt beim Bild.

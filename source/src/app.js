@@ -673,15 +673,12 @@
   /* ---------- Ikonen-Lexikon ---------- */
   const ICON_BY_ID = Object.fromEntries(ICONS_LEX.map(i => [i.id, i]));
   const FEAST_ICON = { "theotokos-birth": "nativity-theotokos", exaltation: "exaltation", entry: "presentation-theotokos", nativity: "nativity", theophany: "theophany", meeting: "meeting", annunciation: "annunciation", palm: "entry", ascension: "ascension", pentecost: "pentecost", transfiguration: "transfiguration", dormition: "dormition" };
-  function iconImgUrls(im) {
-    const f = encodeURIComponent(im.file), base = "https://upload.wikimedia.org/wikipedia/commons/";
-    return { thumb: `${base}thumb/${im.path}/${f}/330px-${f}`, full: `${base}${im.path}/${f}`, page: `https://commons.wikimedia.org/wiki/File:${f}` };
-  }
   function iconFigure(i) {
     if (!i.img) return "";
-    const u = iconImgUrls(i.img);
-    return `<figure class="iconimg"><img src="${u.thumb}" data-full="${u.full}" alt="${esc(L(i.name))}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
-      <figcaption class="small muted">${E(i.img.credit)} · ${esc(t("iconPd"))} · <a href="${u.page}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></figcaption></figure>`;
+    const page = "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(i.img.file);
+    /* Bild liegt in der App selbst (img/icons/<id>.jpg) – funktioniert offline und ohne fremde Server */
+    return `<figure class="iconimg"><img src="img/icons/${i.id}.jpg" alt="${esc(L(i.name))}" loading="lazy" decoding="async">
+      <figcaption class="small muted">${E(i.img.credit)} · ${esc(t("iconPd"))} · <a href="${page}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></figcaption></figure>`;
   }
   function viewIcons() {
     const byId = Object.fromEntries(ICONS_LEX.map(i => [i.id, i]));
@@ -696,8 +693,9 @@
   let iconAnchor = null;
   function bindIconImgs() {
     app.querySelectorAll(".iconimg img").forEach(im => {
-      im.onload = () => { im.dataset.ok = "1"; };
-      im.onerror = () => { if (!im.dataset.tried) { im.dataset.tried = "1"; im.src = im.dataset.full; } else { im.closest("figure").hidden = true; if (iconAnchor) iconAnchor(); } };
+      const ok = () => { im.dataset.ok = "1"; };
+      if (im.complete && im.naturalWidth) ok(); else im.onload = ok;
+      im.onerror = () => { im.closest("figure").hidden = true; if (iconAnchor) iconAnchor(); };
     });
   }
   function bindIcons(r) {

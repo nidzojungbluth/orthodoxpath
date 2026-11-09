@@ -232,16 +232,18 @@ const ok = (c, m) => { checks++; if (!c) { fails++; console.log("FAIL:", m); } e
   ok(require("fs").readFileSync(require("path").join(__dirname, "../pwa/index.html"), "utf8").includes('http-equiv="Content-Security-Policy"'), "Content-Security-Policy in der PWA gesetzt");
 
   { const pwaHtml = require("fs").readFileSync(require("path").join(__dirname, "../pwa/index.html"), "utf8");
-    ok(/img-src[^;]*https:\/\/upload\.wikimedia\.org/.test(pwaHtml), "CSP erlaubt nur Wikimedia als externe Bildquelle");
-    ok(/script-src 'self' 'unsafe-inline';/.test(pwaHtml) && !/connect-src[^;]*wikimedia/.test(pwaHtml), "CSP: keine weiteren externen Quellen");
-    await page.route(/upload\.wikimedia\.org/, r => r.abort());
+    ok(/img-src 'self' data: blob:;/.test(pwaHtml) && !/wikimedia/.test(pwaHtml.match(/Content-Security-Policy[^>]*/)[0]), "CSP: Bilder nur aus der App selbst");
+    ok(/script-src 'self' 'unsafe-inline';/.test(pwaHtml), "CSP: keine externen Skripte");
+    await page.route(/wikimedia\.org/, r => r.abort());
     await page.evaluate(() => { location.hash = "icons"; }); await page.waitForTimeout(300);
-    const figs = await page.$$eval(".iconimg img", ims => ims.map(i => ({ src: i.getAttribute("src"), alt: i.alt, ref: i.getAttribute("referrerpolicy"), lazy: i.getAttribute("loading") })));
+    const figs = await page.$$eval(".iconimg img", ims => ims.map(i => ({ src: i.getAttribute("src"), alt: i.alt, lazy: i.getAttribute("loading") })));
     ok(figs.length >= 37, "Ikonen-Lexikon zeigt Bilder (" + figs.length + ")");
-    ok(figs.every(f => f.src.startsWith("https://upload.wikimedia.org/wikipedia/commons/") && f.alt && f.ref === "no-referrer" && f.lazy === "lazy"), "Ikonenbilder: Wikimedia, Alt-Text, kein Referrer, lazy");
+    ok(figs.every(f => /^img\/icons\/[a-z-]+\.jpg$/.test(f.src) && f.alt && f.lazy === "lazy"), "Ikonenbilder: aus der App, Alt-Text, lazy");
     ok(await page.$$eval(".iconimg figcaption a", as => as.every(a => a.href.startsWith("https://commons.wikimedia.org/wiki/File:") && a.rel.includes("noopener"))), "Ikonenbilder: Quellenlink zu Commons");
-    const hid = await page.waitForFunction(() => document.querySelector(".iconimg").hidden, null, { timeout: 8000 }).then(() => true, () => false);
-    ok(hid && await page.$eval("#icon-pantokrator", s => s.textContent.length > 100), "Ohne Internet wird ein fehlendes Bild ausgeblendet, Text bleibt");
+    await page.$$eval(".iconimg img", ims => ims.forEach(i => { i.loading = "eager"; }));
+    const loaded = await page.waitForFunction(() => [...document.querySelectorAll(".iconimg img")].every(i => i.complete && i.naturalWidth > 100), null, { timeout: 15000 }).then(() => true, () => false);
+    ok(loaded, "Alle Ikonenbilder laden ohne Internet (Wikimedia gesperrt)");
+    ok(await page.$eval("#icon-pantokrator", s => s.textContent.length > 100), "Ikonentext vorhanden");
     ok(await page.$$eval("#icon-george a[href='#person-s-george']", a => a.length === 1), "Ikone verlinkt Heiligen");
     await page.evaluate(() => { location.hash = "feast-palm"; }); await page.waitForTimeout(300);
     ok(await page.$$eval(".iconimg img", ims => ims.length === 1 && ims[0].alt.length > 3) && await page.$$eval("a[href='#icons-entry']", a => a.length === 1), "Festseite zeigt Ikonenbild und Direktlink");

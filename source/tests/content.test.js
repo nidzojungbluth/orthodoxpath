@@ -157,6 +157,8 @@ walk({ PLANS, LITURGY_STEPS, LITURGY_PARTS, ICONS_LEX }, "plans");
     const h = crypto.createHash("md5").update(m.file).digest("hex");
     ok(m.path === h[0] + "/" + h.slice(0, 2), "Ikonenbild: md5-Pfad falsch " + i.id);
     ok(m.license === "PD-Art", "Ikonenbild: nur gemeinfreie Werke (PD-Art) " + i.id);
+    { const f = require("path").join(__dirname, "../src/img/icons/" + i.id + ".jpg"); const ex = require("fs").existsSync(f);
+      ok(ex, "Ikonenbild-Datei fehlt " + i.id); if (ex) { const st = require("fs").statSync(f).size; ok(st > 5000 && st < 140000, "Ikonenbild-Größe " + i.id + " " + st); const b = require("fs").readFileSync(f); ok(b[0] === 0xFF && b[1] === 0xD8, "Ikonenbild ist JPEG " + i.id); } }
     ok(m.credit && m.credit.de && m.credit.sr, "Ikonenbild: Herkunftsangabe fehlt " + i.id);
     ok(/\d{2,4}|Jh\./.test(m.credit.de), "Ikonenbild: Entstehungszeit fehlt " + i.id);
   });
