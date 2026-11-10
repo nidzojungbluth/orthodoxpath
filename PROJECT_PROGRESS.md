@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.17.0 (5. November 2026)
+**Aktuelle Version:** 3.18.0 (5. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,12 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.18 (Nutzerwunsch: schärfere Bilder, Ikonen-Galerie)
+
+- Bilder waren unscharf: Vorlagen nur 330 px breit, auf dem iPhone 2–3-fach hochgezogen. Jetzt aus den Originalen (über commons.wikimedia.org/w/thumb.php, weil upload.wikimedia.org unsere Abrufe gesperrt hat) neu erzeugt: große Bilder bis 720×960 px (img/icons, zusammen ca. 9 MB, werden beim Ansehen gespeichert) und scharfe Vorschaubilder 300×400 px (img/thumbs, 1,9 MB, bei Installation gespeichert, auch für die runden Bilder in der Heiligenliste). Ohne Netz springt ein großes Bild automatisch auf das Vorschaubild. Speichername orthodoxpath-img-v3. Einige Werke gibt es nur klein (z. B. Sava 350 px, Georg 255 px).
+- Neue Ansicht „Ikonen-Galerie“ (Theologie und Mehr): Raster aller 64 Bilder mit Namen und Zeitangabe, Filter nach Bereich (Christus, Gottesgebärerin, Feste, Engel und Heilige, Kirchenraum, Heilige und Kirchenväter); Detailansicht mit großem Bild, Darstellung/Bedeutung bzw. Lebenszeit/Gedenktag, Herkunft, Blättern per Knopf oder Wischen, Link ins Lexikon bzw. zur Heiligenseite.
+- Tests: Galerie, Filter, Großbild ≥ 600 px, Blättern; a11y jetzt 22 Ansichten.
 
 ## Version 3.17 (Nutzerwunsch: Ikonen zu den Heiligen)
 

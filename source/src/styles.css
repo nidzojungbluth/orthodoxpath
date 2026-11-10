@@ -386,3 +386,17 @@ label.btn { margin: 0; font-size: 1em; }
 section[id^="icon-"], h2[id^="ig-"] { scroll-margin-top: calc(72px + env(safe-area-inset-top)); }
 .medal.photo { padding: 0; overflow: hidden; background: var(--card2, #1d1d20); }
 .medal.photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; display: block; }
+
+/* Ikonen-Galerie */
+.galgrid { list-style: none; margin: 14px 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 12px; }
+.galgrid li[hidden] { display: none; }
+.galgrid a { display: block; text-decoration: none; color: inherit; }
+.galgrid img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 10px; background: rgba(127,127,127,.14); box-shadow: 0 3px 12px rgba(0,0,0,.35); }
+.galgrid span { display: block; margin-top: 6px; font-size: 13px; line-height: 1.25; }
+.chips button.chip[aria-pressed="true"] { background: var(--gold); color: var(--onGold); border-color: var(--gold); font-weight: 650; }
+.galbig { margin: 8px 0 12px; text-align: center; }
+.galbig img { display: block; margin: 0 auto; max-width: 100%; max-height: 72vh; width: auto; height: auto; border-radius: 12px; box-shadow: 0 6px 24px rgba(0,0,0,.4); touch-action: pan-y; }
+.galbig figcaption { margin-top: 8px; }
+.galnav { display: flex; gap: 10px; margin-bottom: 12px; }
+.galnav .btn { flex: 1; text-align: center; }
+.galgrid small { display: block; margin-top: 2px; font-size: 12px; color: var(--muted, #9a9a9f); }

@@ -83,9 +83,11 @@ CAL.CAL_FEASTS.forEach(f => { if (f.lesson) ok([...BIBLE.lessons, ...THEOLOGY].s
     ok(m.license === "PD-Art" || m.license === "PD", "Heiligenbild: nur gemeinfrei " + id);
     ok(m.credit && m.credit.de && m.credit.sr && /\d{3,4}|Jh\./.test(m.credit.de), "Heiligenbild: Herkunft mit Zeitangabe " + id);
     const f = pth.join(__dirname, "../src/img/icons/" + id + ".jpg"); ok(fs.existsSync(f), "Heiligenbild-Datei fehlt " + id);
-    if (fs.existsSync(f)) { const b = fs.readFileSync(f); ok(b[0] === 0xFF && b[1] === 0xD8 && b.length > 5000 && b.length < 140000, "Heiligenbild JPEG/Größe " + id); }
+    if (fs.existsSync(f)) { const b = fs.readFileSync(f); ok(b[0] === 0xFF && b[1] === 0xD8 && b.length > 5000 && b.length < 400000, "Heiligenbild JPEG/Größe " + id); }
   });
   ok(Object.keys(SAINT_IMGS).length >= 28, "mindestens 28 Heiligenbilder");
+  /* Jedes große Bild braucht ein scharfes Vorschaubild (Galerie, Liste) */
+  fs.readdirSync(pth.join(__dirname, "../src/img/icons")).forEach(f => { const t = pth.join(__dirname, "../src/img/thumbs", f); ok(fs.existsSync(t) && fs.statSync(t).size > 4000 && fs.statSync(t).size < 80000, "Vorschaubild fehlt/Größe " + f); });
   walk({ SAINT_IMGS }, "saintimgs");
 }
 FATHERS.forEach(f => {
@@ -172,7 +174,7 @@ walk({ PLANS, LITURGY_STEPS, LITURGY_PARTS, ICONS_LEX }, "plans");
     ok(m.path === h[0] + "/" + h.slice(0, 2), "Ikonenbild: md5-Pfad falsch " + i.id);
     ok(m.license === "PD-Art", "Ikonenbild: nur gemeinfreie Werke (PD-Art) " + i.id);
     { const f = require("path").join(__dirname, "../src/img/icons/" + i.id + ".jpg"); const ex = require("fs").existsSync(f);
-      ok(ex, "Ikonenbild-Datei fehlt " + i.id); if (ex) { const st = require("fs").statSync(f).size; ok(st > 5000 && st < 140000, "Ikonenbild-Größe " + i.id + " " + st); const b = require("fs").readFileSync(f); ok(b[0] === 0xFF && b[1] === 0xD8, "Ikonenbild ist JPEG " + i.id); } }
+      ok(ex, "Ikonenbild-Datei fehlt " + i.id); if (ex) { const st = require("fs").statSync(f).size; ok(st > 5000 && st < 400000, "Ikonenbild-Größe " + i.id + " " + st); const b = require("fs").readFileSync(f); ok(b[0] === 0xFF && b[1] === 0xD8, "Ikonenbild ist JPEG " + i.id); } }
     ok(m.credit && m.credit.de && m.credit.sr, "Ikonenbild: Herkunftsangabe fehlt " + i.id);
     ok(/\d{2,4}|Jh\./.test(m.credit.de), "Ikonenbild: Entstehungszeit fehlt " + i.id);
   });

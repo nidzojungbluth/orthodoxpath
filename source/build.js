@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const R = p => fs.readFileSync(path.join(__dirname, p), "utf8");
-const VERSION = "3.17.0";
+const VERSION = "3.18.0";
 
 /* Eingebettete Schrift (Cormorant Garamond, SIL Open Font License, siehe src/fonts/OFL.txt) – funktioniert offline und ohne externe Server */
 const RANGES = {
@@ -51,12 +51,17 @@ ${js}
 
 fs.mkdirSync(path.join(__dirname, "dist"), { recursive: true });
 fs.mkdirSync(path.join(__dirname, "pwa"), { recursive: true });
-/* Ikonenbilder in beide Ausgaben kopieren */
-const IMG_SRC = path.join(__dirname, "src/img/icons");
-const ICON_IMGS = fs.existsSync(IMG_SRC) ? fs.readdirSync(IMG_SRC).filter(f => f.endsWith(".jpg")).sort().map(f => "./img/icons/" + f) : [];
-for (const out of ["dist", "pwa"]) {
-  const d = path.join(__dirname, out, "img/icons"); fs.rmSync(d, { recursive: true, force: true }); fs.mkdirSync(d, { recursive: true });
-  ICON_IMGS.forEach(u => fs.copyFileSync(path.join(IMG_SRC, path.basename(u)), path.join(d, path.basename(u))));
+/* Bilder in beide Ausgaben kopieren: img/icons = groß (beim Ansehen gespeichert), img/thumbs = Vorschau (bei Installation gespeichert) */
+const IMG_DIRS = ["icons", "thumbs"];
+const ICON_IMGS = [];
+for (const dir of IMG_DIRS) {
+  const src = path.join(__dirname, "src/img", dir); if (!fs.existsSync(src)) continue;
+  const files = fs.readdirSync(src).filter(f => f.endsWith(".jpg")).sort();
+  if (dir === "thumbs") files.forEach(f => ICON_IMGS.push("./img/thumbs/" + f));
+  for (const out of ["dist", "pwa"]) {
+    const d = path.join(__dirname, out, "img", dir); fs.rmSync(d, { recursive: true, force: true }); fs.mkdirSync(d, { recursive: true });
+    files.forEach(f => fs.copyFileSync(path.join(src, f), path.join(d, f)));
+  }
 }
 fs.writeFileSync(path.join(__dirname, "dist/index.html"), page({ pwa: false }));
 fs.writeFileSync(path.join(__dirname, "pwa/index.html"), page({ pwa: true }));
@@ -68,7 +73,7 @@ fs.writeFileSync(path.join(__dirname, "pwa/manifest.webmanifest"), JSON.stringif
 }, null, 2));
 fs.writeFileSync(path.join(__dirname, "pwa/sw.js"), `/* OrthodoxPath Service Worker – Offline-Zwischenspeicher */
 const CACHE = "orthodoxpath-${VERSION}";
-const IMG_CACHE = "orthodoxpath-img-v2"; /* Ikonenbilder der App, bleiben über Versionen erhalten */
+const IMG_CACHE = "orthodoxpath-img-v3"; /* Ikonenbilder der App, bleiben über Versionen erhalten */
 const IMGS = ${JSON.stringify(ICON_IMGS)};
 const FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(Promise.all([
@@ -78,7 +83,7 @@ self.addEventListener("install", e => { e.waitUntil(Promise.all([
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE && k !== IMG_CACHE).map(k => caches.delete(k))))); self.clients.claim(); });
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
-  if (new URL(e.request.url).pathname.includes("/img/icons/")) {
+  if (["/img/icons/", "/img/thumbs/"].some(d => new URL(e.request.url).pathname.includes(d))) {
     e.respondWith(caches.open(IMG_CACHE).then(c => c.match(e.request).then(r => r || fetch(e.request).then(res => { if (res.ok) c.put(e.request, res.clone()); return res; }))));
     return;
   }

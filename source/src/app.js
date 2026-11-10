@@ -177,7 +177,7 @@
   function tabFor(r) {
     if (r.startsWith("quiz-")) return tabFor(backHref(r.slice(5)).slice(1));
     if (r.startsWith("lesson-bib") || r === "bible" || r.startsWith("book-") || r === "plans" || r.startsWith("plan-")) return "bible";
-    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons" || r.startsWith("icons-") || r === "feasts" || r.startsWith("feast-")) return "theology";
+    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons" || r.startsWith("icons-") || r === "gallery" || r.startsWith("gallery-") || r === "feasts" || r.startsWith("feast-")) return "theology";
     if (r.startsWith("person-") || r === "saints") return "saints";
     if (r === "cards" || r === "review") return "cards";
     if (r === "home" || r === "ask" || r === "calendar" || r === "prayers" || r.startsWith("prayercat-")) return "home";
@@ -190,7 +190,8 @@
     if (r.startsWith("quiz-")) return backHref(r.slice(5)).slice(1);
     if (r.startsWith("course-") || r === "creed") return "theology";
     if (r === "liturgy") return "course-L";
-    if (r === "icons" || r.startsWith("icons-") || r === "feasts") return "theology";
+    if (r === "icons" || r.startsWith("icons-") || r === "gallery" || r === "feasts") return "theology";
+    if (r.startsWith("gallery-")) return "gallery";
     if (r.startsWith("feast-")) return "feasts";
     if (r.startsWith("person-")) return "saints";
     if (r === "review") return "cards";
@@ -256,6 +257,8 @@
       else if (r === "plans") html = viewPlans();
       else if (r === "liturgy") html = viewLiturgy();
       else if (r === "icons" || r.startsWith("icons-")) html = viewIcons();
+      else if (r === "gallery") html = viewGallery();
+      else if (r.startsWith("gallery-")) html = viewGalleryItem(r.slice(8));
       else if (r === "feasts") html = viewFeasts();
       else if (r.startsWith("feast-")) html = viewFeast(r.slice(6));
       else if (r.startsWith("plan-")) html = viewPlan(r.slice(5));
@@ -680,6 +683,64 @@
     return `<figure class="iconimg"><img src="img/icons/${i.id}.jpg" alt="${esc(L(i.name))}" loading="lazy" decoding="async">
       <figcaption class="small muted">${E(i.img.credit)} · ${esc(t("iconPd"))} · <a href="${page}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></figcaption></figure>`;
   }
+  /* ---------- Ikonen-Galerie: alle Bilder (Ikonen-Lexikon + Heilige) ---------- */
+  let GAL = null;
+  function galleryItems() {
+    if (GAL) return GAL;
+    const byId = Object.fromEntries(ICONS_LEX.map(i => [i.id, i]));
+    const icons = ICON_GROUPS.flatMap(g => ICON_ORDER[g.id].map(id => byId[id]).filter(i => i && i.img).map(i => ({
+      id: i.id, group: g.id, name: i.name, credit: i.img.credit, file: i.img.file, href: "#icons-" + i.id, tag: i.tag,
+      info: [[t("iconLook"), i.look], [t("iconMean"), i.mean]] })));
+    const persons = [...FATHERS, ...SAINTS].filter(p => SAINT_IMGS[p.id] && !SAINT_IMGS[p.id].icon).map(p => ({
+      id: p.id, group: "persons", name: p.name, credit: SAINT_IMGS[p.id].credit, file: SAINT_IMGS[p.id].file, href: "#person-" + p.id,
+      info: [[t("lived"), p.lived], [t("feast"), p.feast]] }));
+    GAL = icons.concat(persons);
+    return GAL;
+  }
+  const GAL_GROUPS = () => [...ICON_GROUPS.map(g => ({ id: g.id, name: g.name })), { id: "persons", name: { de: "Heilige und Kirchenväter", sr: "Светитељи и Свети оци" } }];
+  /* Kurze Zeitangabe aus der Herkunft („13. Jh.“, „um 1405“) für die Galerie-Kacheln */
+  function galWhen(i) { const m = L(i.credit).match(/(\d{1,2}\.(?:\/\d{1,2}\.)?\s?(?:Jh\.|век|vek)|(?:um |около |oko )?\d{4}(?:er Jahre)?)/); return m ? m[0] : ""; }
+  function viewGallery() {
+    const items = galleryItems();
+    const chip = (id, label, n) => `<button class="chip" data-gal="${id}" aria-pressed="${id === "all"}">${esc(label)} (${n})</button>`;
+    return `<div class="eyebrow">${esc(t("theologyTitle"))}</div><h1>${esc(t("galTitle"))}</h1><p class="muted">${esc(t("galIntro"))}</p>
+      <div class="chips" role="group" aria-label="${esc(t("galFilter"))}">${chip("all", t("galAll"), items.length)}${GAL_GROUPS().map(g => chip(g.id, L(g.name).split(" (")[0], items.filter(i => i.group === g.id).length)).join("")}</div>
+      <ul class="galgrid">${items.map(i => `<li data-g="${i.group}"><a href="#gallery-${i.id}"><img src="img/thumbs/${i.id}.jpg" alt="" loading="lazy" decoding="async" width="300" height="400"><span>${E(i.name)}</span>${galWhen(i) ? `<small>${esc(galWhen(i))}</small>` : ""}</a></li>`).join("")}</ul>
+      <p class="small muted">${esc(t("galNote"))}</p>`;
+  }
+  function viewGalleryItem(id) {
+    const items = galleryItems(), k = items.findIndex(i => i.id === id);
+    if (k < 0) return `<p>${esc(t("notFound"))}</p>`;
+    const i = items[k], prev = items[(k - 1 + items.length) % items.length], next = items[(k + 1) % items.length];
+    const page = "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(i.file);
+    const grp = GAL_GROUPS().find(g => g.id === i.group);
+    return `<div class="eyebrow">${esc(t("galTitle"))} · ${esc(grp ? L(grp.name).split(" (")[0] : "")} · ${k + 1}/${items.length}</div><h1>${E(i.name)}</h1>
+      <figure class="galbig"><img src="img/icons/${i.id}.jpg" data-thumb="img/thumbs/${i.id}.jpg" alt="${esc(L(i.name))}" decoding="async">
+        <figcaption class="small muted">${E(i.credit)} · ${esc(t("iconPd"))} · <a href="${page}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></figcaption></figure>
+      <div class="galnav"><a class="btn ghost" href="#gallery-${prev.id}" aria-label="${esc(t("galPrev"))}: ${esc(L(prev.name))}">‹ ${esc(t("galPrev"))}</a><a class="btn ghost" href="#gallery-${next.id}" aria-label="${esc(t("galNext"))}: ${esc(L(next.name))}">${esc(t("galNext"))} ›</a></div>
+      <section class="card sec">${i.tag ? tagBadge(i.tag) : ""}${i.info.map(([h, v]) => `<p><b>${esc(h)}:</b> ${E(v)}</p>`).join("")}
+        <a class="small" href="${i.href}">${esc(i.group === "persons" ? t("galToPerson") : t("iconInLex"))} ›</a></section>`;
+  }
+  function bindGallery() {
+    app.querySelectorAll("[data-gal]").forEach(b => b.onclick = () => {
+      const g = b.dataset.gal;
+      app.querySelectorAll("[data-gal]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      app.querySelectorAll(".galgrid li").forEach(li => { li.hidden = g !== "all" && li.dataset.g !== g; });
+    });
+    app.querySelectorAll(".galgrid img").forEach(im => { im.onerror = () => { im.style.visibility = "hidden"; }; });
+    /* Detailansicht: großes Bild, bei Fehler (offline, noch nicht geladen) Vorschaubild; Wischen zum Blättern */
+    const big = app.querySelector(".galbig img");
+    if (big) {
+      big.onerror = () => { if (big.dataset.thumb && !big.dataset.fell) { big.dataset.fell = "1"; big.src = big.dataset.thumb; } };
+      const nav = app.querySelectorAll(".galnav a");
+      let x0 = null, y0 = null;
+      big.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+      big.addEventListener("touchend", e => {
+        if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+        if (Math.abs(dx) > 60 && Math.abs(dx) > 2 * Math.abs(dy)) location.hash = nav[dx < 0 ? 1 : 0].getAttribute("href").slice(1);
+      }, { passive: true });
+    }
+  }
   function viewIcons() {
     const byId = Object.fromEntries(ICONS_LEX.map(i => [i.id, i]));
     const card = i => `<section class="card sec" id="icon-${i.id}"><h3>${E(i.name)}</h3>${i.tag ? tagBadge(i.tag) : ""}${iconFigure(i)}
@@ -695,7 +756,12 @@
     app.querySelectorAll(".iconimg img").forEach(im => {
       const ok = () => { im.dataset.ok = "1"; };
       if (im.complete && im.naturalWidth) ok(); else im.onload = ok;
-      im.onerror = () => { im.closest("figure").hidden = true; if (iconAnchor) iconAnchor(); };
+      im.onerror = () => {
+        /* großes Bild nicht da (offline, noch nie geöffnet): scharfes Vorschaubild nehmen, sonst ausblenden */
+        const th = im.getAttribute("src").replace("img/icons/", "img/thumbs/");
+        if (!im.dataset.fell && th !== im.getAttribute("src")) { im.dataset.fell = "1"; im.src = th; return; }
+        im.closest("figure").hidden = true; if (iconAnchor) iconAnchor();
+      };
     });
   }
   function bindIcons(r) {
@@ -813,7 +879,7 @@
         ${ci(byId("A"))}${navItem("saints", "library", t("courseB"), FATHERS.length + " " + t("fathers"))}${navItem("saints", "saints", t("courseC"), SAINTS.length + " " + t("saints"))}${COURSES.filter(c => c.id !== "A").map(ci).join("")}
       </ul>
       <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
-        ${navItem("feasts", "calendar", t("gfTitle"))}${navItem("creed", "text", t("creed"))}${navItem("icons", "frame", t("iconsTitle"), String(ICONS_LEX.length))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("glossary", "list", t("glossary"), t("glossaryIntro"))}
+        ${navItem("feasts", "calendar", t("gfTitle"))}${navItem("creed", "text", t("creed"))}${navItem("gallery", "frame", t("galTitle"), String(galleryItems().length))}${navItem("icons", "frame", t("iconsTitle"), String(ICONS_LEX.length))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("glossary", "list", t("glossary"), t("glossaryIntro"))}
       </ul>
       <div class="card legend"><h3>${esc(t("legendTitle"))}</h3>${["dogma", "history", "opinion", "counsel", "uncertain"].map(tagBadge).join("")}</div>`;
   }
@@ -889,7 +955,7 @@
   function personThumb(p) {
     const m = SAINT_IMGS[p.id];
     if (!m) return `<span class="medal">${esc(initialOf(p))}</span>`;
-    return `<span class="medal photo" data-initial="${esc(initialOf(p))}"><img src="img/icons/${m.icon || p.id}.jpg" alt="" loading="lazy" decoding="async"></span>`;
+    return `<span class="medal photo" data-initial="${esc(initialOf(p))}"><img src="img/thumbs/${m.icon || p.id}.jpg" alt="" loading="lazy" decoding="async"></span>`;
   }
   function bindSaints() {
     app.querySelectorAll(".medal.photo img").forEach(im => { im.onerror = () => { const m = im.parentNode; m.classList.remove("photo"); m.textContent = m.dataset.initial; }; });
@@ -1214,7 +1280,7 @@
   function viewMore() {
     return `<h1>${esc(t("navMore"))}</h1>
       <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
-        ${navItem("prayers", "candle", t("prayersTitle"))}${navItem("calendar", "calendar", t("calTitle"))}${navItem("feasts", "cross", t("gfTitle"))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("icons", "frame", t("iconsTitle"))}
+        ${navItem("prayers", "candle", t("prayersTitle"))}${navItem("calendar", "calendar", t("calTitle"))}${navItem("feasts", "cross", t("gfTitle"))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("gallery", "frame", t("galTitle"))}${navItem("icons", "frame", t("iconsTitle"))}
       </ul>
       <div class="sh">${esc(t("gLearn"))}</div><ul class="list">
         ${navItem("books", "library", t("navBooks"), t("booksIntro"))}${navItem("glossary", "text", t("glossary"))}${navItem("ask", "search", t("askTitle"))}
@@ -1365,7 +1431,7 @@
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore, person: bindIconImgs, saints: bindSaints };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore, person: bindIconImgs, saints: bindSaints, gallery: bindGallery };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };

@@ -9,7 +9,7 @@ const { chromium } = require("playwright");
   await ctx.setOffline(true);
   await p.reload(); await p.waitForTimeout(800);
   const txt = await p.evaluate(() => document.body.innerText.slice(0, 80));
-  const imgs = await p.evaluate(async () => { const names = ["trinity", "lazarus", "pokrov"]; let n = 0; for (const id of names) { const ok = await new Promise(r => { const i = new Image(); i.onload = () => r(i.naturalWidth > 100); i.onerror = () => r(false); i.src = "img/icons/" + id + ".jpg"; }); if (ok) n++; } return n + "/" + names.length; });
+  const imgs = await p.evaluate(async () => { const names = ["trinity", "lazarus", "pokrov"]; let n = 0; for (const id of names) { const ok = await new Promise(r => { const i = new Image(); i.onload = () => r(i.naturalWidth > 100); i.onerror = () => r(false); i.src = "img/thumbs/" + id + ".jpg"; }); if (ok) n++; } return n + "/" + names.length; });
   await ctx.setOffline(false);
   await p.reload(); await p.waitForTimeout(600);
   if (await p.$("[data-lang=de]")) { await p.click("[data-lang=de]"); await p.click("#onbstart"); await p.waitForTimeout(300); }

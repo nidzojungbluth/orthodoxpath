@@ -6,7 +6,7 @@ const axe = fs.readFileSync(axePath,'utf8');
 const FILE = 'file://' + path.resolve(__dirname, '../dist/index.html');
 (async()=>{ const b=await chromium.launch(); const p=await (await b.newContext({viewport:{width:390,height:844}})).newPage();
  await p.goto(FILE); await p.click('[data-lang=de]'); await p.click('#onbstart');
- const routes=['home','bible','lesson-bib-mk1','quiz-bib-mk1','prayers','calendar','saints','person-s-sava','theology','cards','review','notes','glossary','books','prefs','more','plans','ask'];
+ const routes=['home','bible','lesson-bib-mk1','quiz-bib-mk1','prayers','calendar','saints','person-s-sava','theology','cards','review','notes','glossary','books','prefs','more','plans','ask','gallery','gallery-trinity','icons','feast-palm'];
  const agg={};
  for (const theme of ['dark','light']) {
   await p.evaluate(th=>{const s=JSON.parse(localStorage.getItem('orthodoxpath_v1'));s.theme=th;localStorage.setItem('orthodoxpath_v1',JSON.stringify(s));},theme); await p.reload();
