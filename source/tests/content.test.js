@@ -90,6 +90,20 @@ CAL.CAL_FEASTS.forEach(f => { if (f.lesson) ok([...BIBLE.lessons, ...THEOLOGY].s
   fs.readdirSync(pth.join(__dirname, "../src/img/icons")).forEach(f => { const t = pth.join(__dirname, "../src/img/thumbs", f); ok(fs.existsSync(t) && fs.statSync(t).size > 4000 && fs.statSync(t).size < 80000, "Vorschaubild fehlt/Größe " + f); });
   walk({ SAINT_IMGS }, "saintimgs");
 }
+{ const { DAILY } = require("../src/content/daily.js");
+  ok(DAILY.d.length >= 365 * 5 && DAILY.start === "2026-01-01", "Tageslesungen: mindestens 5 Jahre");
+  const known = ["Mt","Mk","Lk","Jn","Acts","Rom","1Cor","2Cor","Gal","Eph","Phil","Col","1Thess","2Thess","1Tim","2Tim","Tit","Heb","Jas","1Pet","2Pet","1Jn","2Jn","3Jn","Jude"];
+  DAILY.d.forEach((d, i) => { ok(Array.isArray(d) && d.length === 5 && [0,1,2,3,4,5,9].includes(d[0]) && d[1] >= 0 && d[1] < 64, "Tagesdaten Format " + i);
+    (d[2] ? d[2].split("|") : []).forEach(r => { ok(/^[EG]/.test(r), "Lesung Art " + i); (r.match(/\{(\w+)\}/g) || []).forEach(b => ok(known.includes(b.slice(1, -1)), "Buch unbekannt " + b)); }); });
+  const at = iso => DAILY.d[Math.round((Date.parse(iso) - Date.parse(DAILY.start)) / 864e5)];
+  ok(at("2027-01-07")[2] === "E{Gal}4.4-7|G{Mt}2.1-12", "Lesung Weihnachten (7.1.2027)");
+  ok(at("2027-05-02")[2] === "E{Acts}1.1-8|G{Jn}1.1-17" && at("2027-05-02")[0] === 9, "Lesung Ostern 2027, fastenfrei");
+  ok(at("2027-03-15")[1] === 63, "Reiner Montag 2027: strenges Fasten");
+}
+{ const { PRAYER_TEXTS, PRAYER_CATS } = require("../src/content/prayers.js");
+  const tc = PRAYER_CATS.find(c => c.id === "troparia"); ok(tc && tc.items.length === 13, "13 Troparien");
+  tc.items.forEach(id => ok(PRAYER_TEXTS[id] && PRAYER_TEXTS[id].text.de.length > 60 && PRAYER_TEXTS[id].text.sr.length > 60 && PRAYER_TEXTS[id].source, "Troparion vollständig " + id));
+}
 FATHERS.forEach(f => {
   ok(f.quiz && f.quiz.length >= 3, "Kirchenvater ohne 3 Quizfragen: " + f.id);
   ok(f.questions && f.questions.length >= 2, "Kirchenvater ohne 2 Verständnisfragen: " + f.id);
@@ -109,7 +123,7 @@ ok(/[А-Яа-яЂђЈјЉљЊњЋћЏџ]/.test(translit(UI.sr.welcomeText)) === 
 // 6b. Keine gemischten Schriften in einem Wort (z. B. lateinisches „a“ in kyrillischem Wort)
 const mixed = JSON.stringify({ UI, BIBLE, THEOLOGY, CREED, FATHERS, SAINTS, BOOKS, GLOSSARY, EXTRA_CARDS }).replace(/\\[nrt"]/g, " ").match(/[\u0400-\u04FF]+[A-Za-z]+|[A-Za-z]+[\u0400-\u04FF]+/g);
 ok(!mixed, "gemischte Schrift: " + (mixed || []).slice(0, 5).join(", "));
-ok(BIBLE.lessons.length >= 72, "mindestens 72 Bibellektionen");
+ok(BIBLE.lessons.length >= 76, "mindestens 76 Bibellektionen");
 
 // 6c. Kirchenkalender
 const iso = ms => new Date(ms).toISOString().slice(0, 10);

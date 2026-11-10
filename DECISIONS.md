@@ -36,3 +36,5 @@
 
 13. Aktualisierung (9.11.2026): Startseite network-first mit 4-s-Rückfall auf den Speicher statt cache-first, damit iPhone-Web-Apps neue Versionen sofort bekommen. Alles andere bleibt cache-first (schnell, offline).
 14. Bilder in zwei Größen (10.11.2026): Vorschau 300×400 wird bei der Installation gespeichert (offline), große Bilder 720×960 nur beim Ansehen (sonst +9 MB bei jeder Installation). Bilder neu herunterladen nur über commons.wikimedia.org/w/thumb.php mit langsamen Abständen; upload.wikimedia.org sperrt Massenabrufe (429, Robot-Policy).
+15. Tageslesungen (10.11.2026) nicht selbst berechnet (Lukas-Sprung, Feste, Ausnahmen sind fehleranfällig), sondern als geprüfte Datentabelle von orthocal.info bis Ende 2031 eingebaut; vor 2032 neu abrufen. Nur bei julianischem Kalender angezeigt.
+16. Troparien als eigene Übertragung statt fremder Übersetzungen (Urheberrecht); deutlich gekennzeichnet.

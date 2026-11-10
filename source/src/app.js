@@ -9,7 +9,7 @@
     lang: null, theme: "dark", font: 1, onboarded: false,
     done: {}, quiz: {}, cards: {}, newToday: { date: "", n: 0 },
     newPerDay: 10, lessonsPerWeek: 3, activity: [], verses: [],
-    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null, bibleView: "path", lastBackup: null, backupAsk: null, backupRemind: "on", a2hsDismissed: false
+    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null, bibleView: "path", lastBackup: null, backupAsk: null, backupRemind: "on", a2hsDismissed: false, marks: [], readMode: false, iconQuiz: { right: 0, total: 0 }, remindTime: "07:00"
   };
   function load() {
     try {
@@ -177,7 +177,7 @@
   function tabFor(r) {
     if (r.startsWith("quiz-")) return tabFor(backHref(r.slice(5)).slice(1));
     if (r.startsWith("lesson-bib") || r === "bible" || r.startsWith("book-") || r === "plans" || r.startsWith("plan-")) return "bible";
-    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons" || r.startsWith("icons-") || r === "gallery" || r.startsWith("gallery-") || r === "feasts" || r.startsWith("feast-")) return "theology";
+    if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons" || r.startsWith("icons-") || r === "gallery" || r.startsWith("gallery-") || r === "iconquiz" || r === "feasts" || r.startsWith("feast-")) return "theology";
     if (r.startsWith("person-") || r === "saints") return "saints";
     if (r === "cards" || r === "review") return "cards";
     if (r === "home" || r === "ask" || r === "calendar" || r === "prayers" || r.startsWith("prayercat-")) return "home";
@@ -196,7 +196,8 @@
     if (r.startsWith("person-")) return "saints";
     if (r === "review") return "cards";
     if (r === "ask") return "home";
-    if (["books", "progress", "notes", "glossary", "prefs"].includes(r)) return "more";
+    if (["books", "progress", "notes", "glossary", "prefs", "marks"].includes(r)) return "more";
+    if (r === "iconquiz") return "gallery";
     if (r === "calendar" || r === "prayers") return "home";
     if (r.startsWith("prayercat-")) return "prayers";
     return null;
@@ -258,6 +259,8 @@
       else if (r === "liturgy") html = viewLiturgy();
       else if (r === "icons" || r.startsWith("icons-")) html = viewIcons();
       else if (r === "gallery") html = viewGallery();
+      else if (r === "marks") html = viewMarks();
+      else if (r === "iconquiz") html = viewIconQuiz();
       else if (r.startsWith("gallery-")) html = viewGalleryItem(r.slice(8));
       else if (r === "feasts") html = viewFeasts();
       else if (r.startsWith("feast-")) html = viewFeast(r.slice(6));
@@ -265,6 +268,10 @@
       else if (r === "prayers") html = viewPrayers();
       else if (r.startsWith("prayercat-")) html = viewPrayerCat(r.slice(10));
       else html = `<div class="card"><p>${esc(t("notFound"))}</p><a class="btn" href="#home">${esc(t("home"))}</a></div>`;
+      const readable = READABLE.some(x => r === x || r.startsWith(x + "-"));
+      document.documentElement.classList.toggle("readmode", !!S.readMode && readable);
+      const mk = markKeyFor(r);
+      if (readable || mk) html = `<div class="toolbar">${mk ? markBtn(mk) : ""}${readable ? `<button class="btn ghost small" id="readbtn" aria-pressed="${!!S.readMode}">${esc(t(S.readMode ? "readOff" : "readOn"))}</button>` : ""}</div>` + html;
       app.innerHTML = shell(html, r);
       bindCommon();
       const binder = BINDERS[r.split("-")[0]] || BINDERS[r];
@@ -275,6 +282,77 @@
     }
   }
 
+  /* ---------- Merkliste und Lesemodus ---------- */
+  const READABLE = ["lesson", "prayers", "prayercat", "feast", "creed", "person"];
+  function markKeyFor(r) {
+    if (r.startsWith("lesson-") && ALL_LESSONS[r.slice(7)]) return "lesson:" + r.slice(7);
+    if (r.startsWith("person-") && PEOPLE[r.slice(7)]) return "person:" + r.slice(7);
+    if (r.startsWith("gallery-")) return "gal:" + r.slice(8);
+    if (r.startsWith("feast-")) return "feast:" + r.slice(6);
+    return null;
+  }
+  function markBtn(key) { const on = S.marks.includes(key); return `<button class="star ${on ? "on" : ""}" data-mark="${esc(key)}" aria-pressed="${on}" aria-label="${esc(t(on ? "markRemove" : "markAdd"))}">${starIc(on)}<span>${esc(t(on ? "marked" : "markAdd"))}</span></button>`; }
+  function markInfo(key) {
+    const [type, id] = key.split(":");
+    if (type === "lesson" && ALL_LESSONS[id]) return { href: "#lesson-" + id, name: ALL_LESSONS[id].title, group: "markLessons" };
+    if (type === "person" && PEOPLE[id]) return { href: "#person-" + id, name: PEOPLE[id].name, group: "markPersons" };
+    if (type === "feast") { const g = GREAT_FEASTS.find(x => x.id === id); if (g) return { href: "#feast-" + id, name: g.name, group: "markFeasts" }; }
+    if (type === "gal") { const g = galleryItems().find(x => x.id === id); if (g) return { href: "#gallery-" + id, name: g.name, group: "markGallery", thumb: "img/thumbs/" + id + ".jpg" }; }
+    return null;
+  }
+  function viewMarks() {
+    const items = S.marks.map(k => ({ k, i: markInfo(k) })).filter(x => x.i);
+    const groups = ["markLessons", "markFeasts", "markPersons", "markGallery"];
+    const favs = S.prayerFavs.filter(id => PRAYER_TEXTS[id]);
+    let html = `<h1>${esc(t("marksTitle"))}</h1><p class="muted">${esc(t("marksIntro"))}</p>`;
+    if (!items.length && !favs.length && !S.verses.length) html += `<div class="card"><p class="muted" style="margin:0">${esc(t("marksEmpty"))}</p></div>`;
+    groups.forEach(g => { const xs = items.filter(x => x.i.group === g); if (xs.length) html += `<h2>${esc(t(g))}</h2><ul class="list">${xs.map(x => `<li><a class="item" href="${x.i.href}">${x.i.thumb ? `<span class="medal photo"><img src="${x.i.thumb}" alt="" loading="lazy"></span>` : ""}<span class="grow"><span class="t">${E(x.i.name)}</span></span><span class="chev">${ic("chev")}</span></a></li>`).join("")}</ul>`; });
+    if (favs.length) html += `<h2>${esc(t("markPrayers"))}</h2><ul class="list">${favs.map(id => `<li><a class="item" href="#prayers"><span class="grow"><span class="t">${E(PRAYER_TEXTS[id].title)}</span></span><span class="chev">${ic("chev")}</span></a></li>`).join("")}</ul>`;
+    if (S.verses.length) html += `<h2>${esc(t("markVerses"))}</h2><ul class="list">${S.verses.map(v => `<li><a class="item" href="#lesson-${esc(v.lid || "")}"><span class="grow"><span class="t">${esc(v.ref)}</span></span><span class="chev">${ic("chev")}</span></a></li>`).join("")}</ul>`;
+    return html;
+  }
+  /* ---------- Ikonen-Quiz: Bild zeigen, Namen wählen ---------- */
+  let iq = null;
+  function newIconQuestion() {
+    const all = galleryItems(); const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+    let item = pick(all); if (iq && iq.item && all.length > 1) while (item.id === iq.item.id) item = pick(all);
+    const same = all.filter(x => x.id !== item.id && x.group === item.group), other = all.filter(x => x.id !== item.id && x.group !== item.group);
+    const opts = [item]; const pool = same.slice().sort(() => Math.random() - .5).concat(other.slice().sort(() => Math.random() - .5));
+    while (opts.length < 4 && pool.length) opts.push(pool.shift());
+    iq = { item, opts: opts.sort(() => Math.random() - .5), answered: null };
+  }
+  function viewIconQuiz() {
+    if (!iq) newIconQuestion();
+    const q = iq, sc = S.iconQuiz;
+    return `<div class="eyebrow">${esc(t("galTitle"))}</div><h1>${esc(t("iqTitle"))}</h1><p class="muted">${esc(t("iqIntro"))}</p>
+      <p class="small"><b>${esc(t("iqScore"))}:</b> ${sc.right} / ${sc.total}</p>
+      <figure class="galbig"><img src="img/icons/${q.item.id}.jpg" data-thumb="img/thumbs/${q.item.id}.jpg" alt="${esc(t("iqImgAlt"))}" decoding="async"></figure>
+      <div class="opts">${q.opts.map((o, k) => { const st = q.answered == null ? "" : o.id === q.item.id ? "right" : k === q.answered ? "wrong" : "";
+        return `<button class="opt ${st}" data-iq="${k}" ${q.answered != null ? "disabled" : ""}>${E(o.name)}</button>`; }).join("")}</div>
+      ${q.answered != null ? `<div class="card" role="status"><p style="margin:0 0 6px"><b>${esc(t(q.opts[q.answered].id === q.item.id ? "iqRight" : "iqWrong"))}</b> ${E(q.item.name)}</p>
+        <p class="small muted" style="margin:0 0 8px">${E(q.item.credit)}</p><a class="small" href="${q.item.href}">${esc(t("iqMore"))} ›</a>
+        <button class="btn block" id="iqnext" style="margin-top:12px">${esc(t("iqNext"))}</button></div>` : ""}
+      <button class="btn ghost small" id="iqreset" style="margin-top:8px">${esc(t("iqReset"))}</button>`;
+  }
+  function bindIconQuiz() {
+    const big = app.querySelector(".galbig img"); if (big) big.onerror = () => { if (!big.dataset.fell) { big.dataset.fell = "1"; big.src = big.dataset.thumb; } };
+    app.querySelectorAll("[data-iq]").forEach(b => b.onclick = () => {
+      if (iq.answered != null) return; iq.answered = +b.dataset.iq;
+      S.iconQuiz.total++; if (iq.opts[iq.answered].id === iq.item.id) S.iconQuiz.right++; save(); render();
+    });
+    const nx = document.getElementById("iqnext"); if (nx) nx.onclick = () => { newIconQuestion(); render(); window.scrollTo(0, 0); };
+    const rs = document.getElementById("iqreset"); if (rs) rs.onclick = () => { S.iconQuiz = { right: 0, total: 0 }; save(); render(); };
+  }
+  /* ---------- Tägliche Erinnerung als Kalendereintrag (.ics, wiederholt täglich) ---------- */
+  function reminderIcs(time) {
+    const [hh, mm] = time.split(":"); const d = new Date(); d.setDate(d.getDate() + 1);
+    const ymd = d.getFullYear() + String(d.getMonth() + 1).padStart(2, "0") + String(d.getDate()).padStart(2, "0");
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
+    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//OrthodoxPath//DE", "CALSCALE:GREGORIAN", "BEGIN:VEVENT", "UID:daily-reminder-" + Date.now() + "@orthodoxpath", "DTSTAMP:" + stamp,
+      "DTSTART:" + ymd + "T" + hh + mm + "00", "DURATION:PT10M", "RRULE:FREQ=DAILY", "SUMMARY:" + icsEscape(t("dremSummary")), "DESCRIPTION:" + icsEscape(t("dremDesc")),
+      "URL:https://nidzojungbluth.github.io/orthodoxpath/", "BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + icsEscape(t("dremSummary")), "TRIGGER:PT0M", "END:VALARM", "END:VEVENT", "END:VCALENDAR"];
+    return lines.map(icsFold).join("\r\n") + "\r\n";
+  }
   function bindCommon() {
     const lb = document.getElementById("langbtn");
     if (lb) lb.onclick = openLangSheet;
@@ -290,6 +368,12 @@
       save();
     });
     app.querySelectorAll("[data-newnote]").forEach(b => b.onclick = () => openNoteEditor(null, b.getAttribute("data-newnote")));
+    app.querySelectorAll("[data-mark]").forEach(b => b.onclick = () => {
+      const k = b.dataset.mark, i = S.marks.indexOf(k);
+      if (i >= 0) { S.marks.splice(i, 1); toast(t("markRemoved")); } else { S.marks.push(k); toast(t("markSaved")); }
+      save(); const y = window.scrollY; render(); window.scrollTo(0, y);
+    });
+    const rb = document.getElementById("readbtn"); if (rb) rb.onclick = () => { S.readMode = !S.readMode; save(); const y = window.scrollY; render(); window.scrollTo(0, y); };
   }
 
   function openLangSheet() {
@@ -439,6 +523,35 @@
     const link = f.lesson && ALL_LESSONS[f.lesson] ? `<a class="small" href="#lesson-${f.lesson}">${esc(t("calToLesson"))} ›</a>` : (f.saint && PEOPLE[f.saint] ? `<a class="small" href="#person-${f.saint}">${E(PEOPLE[f.saint].name)} ›</a>` : "");
     return `<h3 style="margin-bottom:4px">${E(f.name)}</h3>${f.mean ? `<p class="small" style="margin-bottom:4px">${E(f.mean)}</p>` : ""}${link}`;
   }
+  /* ---------- Tägliche Lesungen und Speiseregeln (Daten: orthocal.info, julianisch/slawisch) ---------- */
+  const BOOKS_SHORT = { Mt: ["Mt", "Мт"], Mk: ["Mk", "Мк"], Lk: ["Lk", "Лк"], Jn: ["Joh", "Јн"], Acts: ["Apg", "Дап"], Rom: ["Röm", "Рим"], "1Cor": ["1 Kor", "1 Кор"], "2Cor": ["2 Kor", "2 Кор"], Gal: ["Gal", "Гал"], Eph: ["Eph", "Еф"], Phil: ["Phil", "Флп"], Col: ["Kol", "Кол"], "1Thess": ["1 Thess", "1 Сол"], "2Thess": ["2 Thess", "2 Сол"], "1Tim": ["1 Tim", "1 Тим"], "2Tim": ["2 Tim", "2 Тим"], Tit: ["Tit", "Тит"], Heb: ["Hebr", "Јев"], Jas: ["Jak", "Јак"], "1Pet": ["1 Petr", "1 Пт"], "2Pet": ["2 Petr", "2 Пт"], "1Jn": ["1 Joh", "1 Јн"], "2Jn": ["2 Joh", "2 Јн"], "3Jn": ["3 Joh", "3 Јн"], Jude: ["Jud", "Јуд"] };
+  const DAILY_T0 = Date.UTC(+DAILY.start.slice(0, 4), +DAILY.start.slice(5, 7) - 1, +DAILY.start.slice(8, 10));
+  function dailyFor(ts) {
+    if (cal() !== "julian") return null;
+    const i = Math.round((ts - DAILY_T0) / 86400000); const d = DAILY.d[i];
+    if (!d) return null;
+    const refs = d[2] ? d[2].split("|").map(x => ({ kind: x[0], ref: x.slice(1) })) : [];
+    return { fast: d[0], mask: d[1], refs, tone: d[3], title: d[4] };
+  }
+  function fmtRef(ref, k) {
+    return ref.replace(/, (?=\d+\.\d)/g, "; ").replace(/\{(\w+)\}/g, (m, b) => (BOOKS_SHORT[b] || [b, b])[k] + " ").replace(/(\d+)\.(\d+)/g, "$1,$2").replace(/-/g, "–");
+  }
+  const FOOD = [["meat", 1], ["dairy", 2], ["eggs", 4], ["fish", 8], ["oil", 16], ["wine", 32]];
+  function foodLine(dd) {
+    if (!dd || !dd.mask) return "";
+    const no = FOOD.filter(([, b]) => dd.mask & b).map(([k]) => t("food_" + k)), yes = FOOD.filter(([, b]) => !(dd.mask & b)).map(([k]) => t("food_" + k));
+    return `<p class="small" style="margin:6px 0 0"><b>${esc(t("foodNo"))}:</b> ${esc(no.join(", "))}${yes.length ? ` · <b>${esc(t("foodYes"))}:</b> ${esc(yes.join(", "))}` : ""}</p>`;
+  }
+  function readingsBlock(ts, compact) {
+    const dd = dailyFor(ts);
+    if (!dd) return cal() === "julian" ? "" : `<p class="small muted" style="margin:6px 0 0">${esc(t("rdOnlyJulian"))}</p>`;
+    const line = r => ({ de: fmtRef(r.ref, 0), sr: fmtRef(r.ref, 1) });
+    const ep = dd.refs.filter(r => r.kind === "E"), go = dd.refs.filter(r => r.kind === "G");
+    const head = [dd.title ? t("rdSundayAfterPentecost").replace("{n}", dd.title.slice(1)) : "", dd.tone ? t("rdTone").replace("{n}", dd.tone) : ""].filter(Boolean).join(" · ");
+    const body = dd.refs.length ? `${ep.length ? `<p class="small" style="margin:4px 0 0"><b>${esc(t("rdApostle"))}:</b> ${ep.map(r => E(line(r))).join(" · ")}</p>` : ""}${go.length ? `<p class="small" style="margin:4px 0 0"><b>${esc(t("rdGospel"))}:</b> ${go.map(r => E(line(r))).join(" · ")}</p>` : ""}`
+      : `<p class="small muted" style="margin:4px 0 0">${esc(t("rdNoLiturgy"))}</p>`;
+    return `<div class="readings"${compact ? "" : ' style="margin-top:10px"'}><div class="eyebrow" style="margin:0">${esc(t("rdTitle"))}${head ? " · " + esc(head) : ""}</div>${body}</div>`;
+  }
   function calCard() {
     const td = todayUTC(); const c = cal(); const fi = fastInfo(td, c); const fe = feastsOn(td, c); const nx = nextGreatFeast(td, c); const sts = saintsOn(td, c);
     const evening = new Date().getHours() >= 15;
@@ -448,7 +561,8 @@
       <div class="eyebrow">${esc(t("hToday"))} · ${esc(fmtDate(td, true))}</div>
       ${fe.map(f => `<h3 style="margin:2px 0 4px">${E(f.name)}</h3>`).join("")}
       ${sts.length ? `<p class="small" style="margin-bottom:6px">${ic("cross", "gold")} ${sts.map(id => `<a href="#person-${id}">${E(PEOPLE[id].name)}</a>`).join(" · ")}</p>` : ""}
-      ${fastBadge(fi.kind)}${fasting ? `<p class="small muted" style="margin:2px 0 0">${E(CAL_FAST_RULES[fi.kind])}</p>` : ""}
+      ${fastBadge(fi.kind)}${fasting ? (dailyFor(td) && dailyFor(td).mask ? foodLine(dailyFor(td)) : `<p class="small muted" style="margin:2px 0 0">${E(CAL_FAST_RULES[fi.kind])}</p>`) : ""}
+      ${readingsBlock(td)}
       <ul class="list" style="margin-top:10px">
         ${navItem("prayers", "candle", t("tPray"), t(evening ? "prEvening" : "prMorning"))}
         ${active ? navItem("plan-" + active.p.id, "bible", t("tRead"), L(active.p.days[active.nx])) : navItem("plans", "bible", t("tStartPlan"))}
@@ -475,7 +589,7 @@
     return `<div class="eyebrow">${esc(t(g.group === "lord" ? "gfLord" : "gfTheotokos"))}${f ? " · " + esc(fmtDate(f.t, true)) : ""}</div><h1>${E(cf.name)}</h1>
       ${g.note ? `<div class="card notice">${tagBadge("history")}<p class="small" style="margin:0">${E(g.note)}</p></div>` : ""}
       <section class="card sec"><h3>${esc(t("gfMean"))}</h3><p>${E(g.mean)}</p></section>
-      <section class="card sec"><h3>${esc(t("gfIcon"))}</h3>${tagBadge("history")}${FEAST_ICON[g.id] && ICON_BY_ID[FEAST_ICON[g.id]] ? iconFigure(ICON_BY_ID[FEAST_ICON[g.id]]) : ""}<p>${E(g.icon)}</p><a class="small" href="#icons${FEAST_ICON[g.id] ? "-" + FEAST_ICON[g.id] : ""}">${esc(t("iconInLex"))} ›</a></section>
+      ${FEAST_TROP[g.id] && PRAYER_TEXTS[FEAST_TROP[g.id]] ? `<section class="card sec"><h3>${esc(t("tropTitle"))}</h3><p class="creed">${E(PRAYER_TEXTS[FEAST_TROP[g.id]].text)}</p><p class="small muted">${E(PRAYER_TEXTS[FEAST_TROP[g.id]].source)}</p><a class="small" href="#prayercat-troparia">${esc(t("tropAll"))} ›</a></section>` : ""}<section class="card sec"><h3>${esc(t("gfIcon"))}</h3>${tagBadge("history")}${FEAST_ICON[g.id] && ICON_BY_ID[FEAST_ICON[g.id]] ? iconFigure(ICON_BY_ID[FEAST_ICON[g.id]]) : ""}<p>${E(g.icon)}</p><a class="small" href="#icons${FEAST_ICON[g.id] ? "-" + FEAST_ICON[g.id] : ""}">${esc(t("iconInLex"))} ›</a></section>
       <section class="card sec"><h3>${esc(t("gfReadings"))}</h3>
         <div class="refline"><b>${esc(t("gfApostle"))}</b><span class="grow">${E(g.epistle)}</span></div>
         <div class="refline"><b>${esc(t("gfGospel"))}</b><span class="grow">${E(g.gospel)}</span></div>
@@ -508,7 +622,8 @@
       detail = `<div class="mdetail"><div class="eyebrow">${esc(fmtDate(calDay, true))}</div>
         ${fe.map(f => `<p style="margin:0 0 4px"><b>${GREAT_FEASTS.some(g => g.id === f.id) ? `<a href="#feast-${f.id}">${E(f.name)}</a>` : E(f.name)}</b></p>`).join("")}
         ${sts.length ? `<p class="small" style="margin:0 0 6px">${ic("cross", "gold")} ${sts.map(id => `<a href="#person-${id}">${E(PEOPLE[id].name)}</a>`).join(" · ")}</p>` : ""}
-        ${fastBadge(fi.kind)}${!["none", "free"].includes(fi.kind) ? `<p class="small muted" style="margin:2px 0 0">${E(CAL_FAST_RULES[fi.kind])}</p>` : ""}
+        ${fastBadge(fi.kind)}${!["none", "free"].includes(fi.kind) ? `<p class="small muted" style="margin:2px 0 0">${E(CAL_FAST_RULES[fi.kind])}</p>` : ""}${foodLine(dailyFor(calDay))}
+        ${readingsBlock(calDay)}
         ${fe.length ? `<button class="btn ghost block" style="margin-top:10px" data-ics="${calDay}">${ic("calendar")} ${esc(t("icsOne"))}</button>` : ""}</div>`;
     }
     return `<div class="card month"><div class="mhead"><button class="iconbtn" data-mnav="-1" aria-label="${esc(t("mPrev"))}">${ic("chev", "flip")}</button><h3>${esc(title)}</h3><button class="iconbtn" data-mnav="1" aria-label="${esc(t("mNext"))}">${ic("chev")}</button></div>
@@ -544,7 +659,8 @@
       <div class="card hero"><div class="eyebrow">${esc(t("calToday"))} · ${esc(fmtDate(td, true))}</div>
         ${fe.map(feastLine).join("<div style='height:10px'></div>")}
         <div style="margin-top:10px">${fastBadge(fi.kind)}</div>
-        <p class="small" style="margin:6px 0 0"><b>${esc(t("calFastRule"))}:</b> ${E(CAL_FAST_RULES[fi.kind])}</p>
+        <p class="small" style="margin:6px 0 0"><b>${esc(t("calFastRule"))}:</b> ${E(CAL_FAST_RULES[fi.kind])}</p>${foodLine(dailyFor(td))}
+        ${readingsBlock(td)}<p class="small muted" style="margin-top:6px">${esc(t("rdSource"))}</p>
         <p class="small muted" style="margin-top:6px">${esc(t("calFastNote"))}</p><a class="small" href="#lesson-li-fastlife">${E(ALL_LESSONS["li-fastlife"].title)} ›</a></div>
       <div class="card"><h3>${esc(t("calSaintsToday"))}</h3>
         ${sts.length ? `<ul class="list">${sts.map(id => `<li><a class="item" href="#person-${id}"><span class="grow"><span class="t">${E(PEOPLE[id].name)}</span><span class="s">${E(PEOPLE[id].lived)}</span></span><span class="chev">${ic("chev")}</span></a></li>`).join("")}</ul>` : `<p class="small muted">${esc(t("calNoSaintsApp"))}</p>`}
@@ -675,6 +791,7 @@
 
   /* ---------- Ikonen-Lexikon ---------- */
   const ICON_BY_ID = Object.fromEntries(ICONS_LEX.map(i => [i.id, i]));
+  const FEAST_TROP = {"theotokos-birth": "tr-theotokos-birth", "exaltation": "tr-exaltation", "entry": "tr-entry", "nativity": "tr-nativity", "theophany": "tr-theophany", "meeting": "tr-meeting", "annunciation": "tr-annunciation", "palm": "tr-palm", "ascension": "tr-ascension", "pentecost": "tr-pentecost", "transfiguration": "tr-transfiguration", "dormition": "tr-dormition"};
   const FEAST_ICON = { "theotokos-birth": "nativity-theotokos", exaltation: "exaltation", entry: "presentation-theotokos", nativity: "nativity", theophany: "theophany", meeting: "meeting", annunciation: "annunciation", palm: "entry", ascension: "ascension", pentecost: "pentecost", transfiguration: "transfiguration", dormition: "dormition" };
   function iconFigure(i) {
     if (!i.img) return "";
@@ -706,6 +823,7 @@
     return `<div class="eyebrow">${esc(t("theologyTitle"))}</div><h1>${esc(t("galTitle"))}</h1><p class="muted">${esc(t("galIntro"))}</p>
       <div class="chips" role="group" aria-label="${esc(t("galFilter"))}">${chip("all", t("galAll"), items.length)}${GAL_GROUPS().map(g => chip(g.id, L(g.name).split(" (")[0], items.filter(i => i.group === g.id).length)).join("")}</div>
       <ul class="galgrid">${items.map(i => `<li data-g="${i.group}"><a href="#gallery-${i.id}"><img src="img/thumbs/${i.id}.jpg" alt="" loading="lazy" decoding="async" width="300" height="400"><span>${E(i.name)}</span>${galWhen(i) ? `<small>${esc(galWhen(i))}</small>` : ""}</a></li>`).join("")}</ul>
+      <a class="btn ghost block" href="#iconquiz" style="margin:6px 0 10px">${esc(t("iqTitle"))} ›</a>
       <p class="small muted">${esc(t("galNote"))}</p>`;
   }
   function viewGalleryItem(id) {
@@ -879,7 +997,7 @@
         ${ci(byId("A"))}${navItem("saints", "library", t("courseB"), FATHERS.length + " " + t("fathers"))}${navItem("saints", "saints", t("courseC"), SAINTS.length + " " + t("saints"))}${COURSES.filter(c => c.id !== "A").map(ci).join("")}
       </ul>
       <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
-        ${navItem("feasts", "calendar", t("gfTitle"))}${navItem("creed", "text", t("creed"))}${navItem("gallery", "frame", t("galTitle"), String(galleryItems().length))}${navItem("icons", "frame", t("iconsTitle"), String(ICONS_LEX.length))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("glossary", "list", t("glossary"), t("glossaryIntro"))}
+        ${navItem("feasts", "calendar", t("gfTitle"))}${navItem("creed", "text", t("creed"))}${navItem("gallery", "frame", t("galTitle"), String(galleryItems().length))}${navItem("iconquiz", "check", t("iqTitle"))}${navItem("icons", "frame", t("iconsTitle"), String(ICONS_LEX.length))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("glossary", "list", t("glossary"), t("glossaryIntro"))}
       </ul>
       <div class="card legend"><h3>${esc(t("legendTitle"))}</h3>${["dogma", "history", "opinion", "counsel", "uncertain"].map(tagBadge).join("")}</div>`;
   }
@@ -1283,7 +1401,7 @@
         ${navItem("prayers", "candle", t("prayersTitle"))}${navItem("calendar", "calendar", t("calTitle"))}${navItem("feasts", "cross", t("gfTitle"))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("gallery", "frame", t("galTitle"))}${navItem("icons", "frame", t("iconsTitle"))}
       </ul>
       <div class="sh">${esc(t("gLearn"))}</div><ul class="list">
-        ${navItem("books", "library", t("navBooks"), t("booksIntro"))}${navItem("glossary", "text", t("glossary"))}${navItem("ask", "search", t("askTitle"))}
+        ${navItem("marks", "star", t("marksTitle"), S.marks.length + S.prayerFavs.length ? String(S.marks.length + S.prayerFavs.length) : "")}${navItem("books", "library", t("navBooks"), t("booksIntro"))}${navItem("glossary", "text", t("glossary"))}${navItem("ask", "search", t("askTitle"))}
       </ul>
       <div class="sh">${esc(t("gPersonal"))}</div><ul class="list">
         ${navItem("progress", "chart", t("navProgress"))}${navItem("notes", "note", t("notebook"))}
@@ -1301,7 +1419,11 @@
       <div class="card"><h3>${esc(t("sLanguage"))}</h3>${seg("lang", [["de", "Deutsch"], ["sr-cyr", "Ћирилица"], ["sr-lat", "Latinica"]], lang())}</div>
       <div class="card"><h3>${esc(t("calSetting"))}</h3>${seg("calendar", [["julian", t("calJulian")], ["revised", t("calRevised")]], cal())}<p class="small muted" style="margin-top:8px">${esc(t("calSettingHelp"))}</p></div>
       <div class="card"><h3>${esc(t("sTheme"))}</h3>${seg("theme", [["dark", t("themeDark")], ["light", t("themeLight")]], S.theme)}
-        <h3 style="margin-top:14px">${esc(t("sFont"))}</h3>${seg("font", [["0.9", "A−"], ["1", "A"], ["1.15", "A+"], ["1.3", "A++"]], S.font)}</div>
+        <h3 style="margin-top:14px">${esc(t("sFont"))}</h3>${seg("font", [["0.9", "A−"], ["1", "A"], ["1.15", "A+"], ["1.3", "A++"], ["1.5", "A+++"]], S.font)}
+        <h3 style="margin-top:14px">${esc(t("readTitle"))}</h3><p class="small muted">${esc(t("readHint"))}</p>${seg("readMode", [["false", t("off")], ["true", t("on")]], String(!!S.readMode))}</div>
+      <div class="card"><h3>${esc(t("dremTitle"))}</h3><p class="small muted">${esc(t("dremHint"))}</p>
+        <label for="remtime">${esc(t("dremTime"))}</label><select id="remtime">${["06:00", "06:30", "07:00", "07:30", "08:00", "12:00", "18:00", "19:00", "20:00", "21:00", "22:00"].map(x => `<option ${x === S.remindTime ? "selected" : ""}>${x}</option>`).join("")}</select>
+        <button class="btn block" id="remics" style="margin-top:10px">${ic("calendar")} ${esc(t("dremAdd"))}</button></div>
       <div class="card"><h3>${esc(t("sPace"))}</h3><label>${esc(t("sCardsPerDay"))}</label>${seg("newPerDay", [[5, "5"], [10, "10"], [20, "20"], [40, "40"]], S.newPerDay)}
         <label>${esc(t("sLessonsPerWeek"))}</label>${seg("lessonsPerWeek", [[1, "1"], [3, "3"], [5, "5"], [7, "7"]], S.lessonsPerWeek)}</div>
       <div class="card"><h3>${esc(t("sPrivacy"))}</h3><p class="small">${esc(t("privacyText"))}</p>
@@ -1355,6 +1477,8 @@
     return h;
   }
   function bindPrefs() {
+    const rt = document.getElementById("remtime"); if (rt) rt.onchange = () => { S.remindTime = rt.value; save(); };
+    const ri = document.getElementById("remics"); if (ri) ri.onclick = () => saveIcs(reminderIcs(S.remindTime), "orthodoxpath-erinnerung.ics");
     const cl = document.getElementById("copylink");
     if (cl) cl.onclick = async () => {
       const url = location.href.split("#")[0] + "#prayers"; const box = document.getElementById("linkbox");
@@ -1364,6 +1488,7 @@
     app.querySelectorAll("[data-seg]").forEach(sg => sg.querySelectorAll("button").forEach(b => b.onclick = () => {
       const name = sg.getAttribute("data-seg"); let v = b.getAttribute("data-v");
       if (["font"].includes(name)) v = parseFloat(v); if (["newPerDay", "lessonsPerWeek"].includes(name)) v = parseInt(v, 10);
+      if (name === "readMode") v = v === "true";
       S[name] = v; save(); IDX = null; render();
     }));
     const msg = m => { const el = document.getElementById("encmsg"); if (el) el.textContent = m; };
@@ -1431,7 +1556,7 @@
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore, person: bindIconImgs, saints: bindSaints, gallery: bindGallery };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore, person: bindIconImgs, saints: bindSaints, gallery: bindGallery, iconquiz: bindIconQuiz };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };

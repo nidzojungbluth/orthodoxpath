@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.18.0 (5. November 2026)
+**Aktuelle Version:** 3.19.0 (5. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,16 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.19 (Nutzerwunsch: alle Vorschläge umsetzen)
+
+- Tägliche Lesungen: Apostel und Evangelium der Liturgie für jeden Tag 2026–2031 (julianischer Kalender, slawische Ordnung), mit Ton und „n. Sonntag nach Pfingsten“; auf der Startseite, im Kalender („Heute“) und bei jedem Tag im Monatskalender. Daten von orthocal.info (MIT-Lizenz), neue Datei src/content/daily.js (107 KB). Geprüft: Weihnachten, Theophanie, Ostern, Pfingsten, Entschlafung, Reiner Montag.
+- Fastenkalender erweitert: pro Tag genaue Speiseregel (worauf verzichtet wird, was erlaubt ist) aus derselben Quelle; Hinweis auf örtliche Abweichungen.
+- 13 Troparien (Ostern + 12 große Feste) als eigene, wortgetreue Übertragung aus dem gemeinfreien griechischen Original, klar gekennzeichnet; neue Gebetskategorie, auf jeder Festseite. Die kurzen Kommuniongebete waren schon vorhanden; die langen Kommuniongebete (Kanon) fehlen weiter (Länge, Quelle).
+- 4 neue Bibellektionen (jetzt 76): reicher Mann und armer Lazarus, Bartimäus, Besessener von Gerasa, Hochzeit zu Kana; 4 Lernkarten.
+- Merkliste (Stern „Merken“ auf Lektionen, Festen, Heiligen, Galeriebildern; dazu Gebete und Verse), Lesemodus (blendet untere Leiste aus, ruhiger Satz), Schriftgröße A+++, Ikonen-Quiz (Bild zeigen, 4 Namen), tägliche Erinnerung als wiederkehrender Kalendereintrag (.ics) mit wählbarer Uhrzeit.
+- Technik: Programmcode der PWA als eigene, versionierte Datei app-<Version>.js (index.html nur noch 0,2 MB); Start bei 4× langsamerer CPU: erster Aufruf ca. 0,5 s, wiederholt ca. 0,2 s. Helles Thema: gedämpfte Schrift etwas dunkler (Kontrast).
+- Tests: Lesungen (Format, Bücher, Stichtage), Troparien, Merkliste, Lesemodus, Ikonen-Quiz; a11y 27 Ansichten.
 
 ## Version 3.18 (Nutzerwunsch: schärfere Bilder, Ikonen-Galerie)
 

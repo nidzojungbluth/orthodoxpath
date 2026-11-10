@@ -33,7 +33,7 @@ html[data-theme="light"] {
   --line: #e3d8c4;
   --hair: rgba(60, 40, 10, .09);
   --text: #231c14;
-  --muted: #6c5f4c;
+  --muted: #5f5341;
   --gold: #7f5f1c;
   --gold2: #6c5018;
   --goldsoft: rgba(148, 112, 42, .10);
@@ -400,3 +400,17 @@ section[id^="icon-"], h2[id^="ig-"] { scroll-margin-top: calc(72px + env(safe-ar
 .galnav { display: flex; gap: 10px; margin-bottom: 12px; }
 .galnav .btn { flex: 1; text-align: center; }
 .galgrid small { display: block; margin-top: 2px; font-size: 12px; color: var(--muted, #9a9a9f); }
+
+/* Werkzeugleiste (Merken, Lesemodus) */
+.toolbar { display: flex; gap: 8px; justify-content: flex-end; align-items: center; margin: 0 0 8px; }
+.toolbar .star { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); color: inherit; font-size: .88em; }
+.toolbar .btn.small { min-height: 40px; padding: 6px 14px; font-size: .88em; width: auto; }
+/* Lesemodus */
+html.readmode nav.tabs { display: none; }
+html.readmode main .wrap { max-width: 40em; }
+html.readmode main p, html.readmode .creed { line-height: 1.8; }
+html.readmode main { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
+/* Ikonen-Quiz */
+.opts .opt.right { border-color: #3f9b5a; background: rgba(63,155,90,.18); }
+.opts .opt.wrong { border-color: #c0504d; background: rgba(192,80,77,.16); }
+.readings { border-top: 1px solid var(--line); padding-top: 8px; }

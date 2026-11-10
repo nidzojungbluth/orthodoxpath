@@ -111,3 +111,7 @@ Ein ruhiger, verlässlicher täglicher Begleiter für orthodoxe Christen und Suc
 - Inhalte über kleine Generator-Skripte (JSON) einfügen statt große Dateien zu lesen.
 - Pro Sitzung bündeln: 1 Funktionspaket + Tests + 1 Veröffentlichung.
 - Screenshots nur bei sichtbaren Änderungen.
+
+## Stand 10.11.2026 (v3.19)
+- ✅ Tageslesungen, Speiseregeln, Troparien, 4 Lektionen, Merkliste, Lesemodus, Ikonen-Quiz, Kalender-Erinnerung, Code-Aufteilung.
+- Offen: lange Kommuniongebete (gesicherte freie Quelle fehlt); Tageslesungen vor Ende 2031 erneuern; Nutzer: iPhone-Test, Serbisch-Prüfung, VoiceOver.
