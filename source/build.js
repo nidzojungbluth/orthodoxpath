@@ -4,7 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const R = p => fs.readFileSync(path.join(__dirname, p), "utf8");
-const VERSION = "3.20.0";
+const VERSION = "3.21.0";
 
 /* Eingebettete Schrift (Cormorant Garamond, SIL Open Font License, siehe src/fonts/OFL.txt) – funktioniert offline und ohne externe Server */
 const RANGES = {
@@ -19,7 +19,7 @@ const fontCss = [600, 700].map(w => Object.entries(RANGES).map(([sub, range]) =>
 }).join("\n")).join("\n");
 
 const css = fontCss + "\n" + R("src/styles.css");
-const js = ["src/i18n.js", "src/content/bible.js", "src/content/overviews.js", "src/content/theology.js", "src/content/saints.js", "src/content/saint-images.js", "src/content/library.js", "src/content/prayers.js", "src/content/plans.js", "src/content/liturgysteps.js", "src/content/icons.js", "src/content/feasts.js", "src/content/daily.js", "src/calendar.js", "src/app.js"]
+const js = ["src/i18n.js", "src/content/bible.js", "src/content/overviews.js", "src/content/theology.js", "src/content/saints.js", "src/content/saint-images.js", "src/content/library.js", "src/content/prayers.js", "src/content/plans.js", "src/content/liturgysteps.js", "src/content/icons.js", "src/content/feasts.js", "src/content/daily.js", "src/content/slava.js", "src/content/confess.js", "src/content/lent.js", "src/calendar.js", "src/app.js"]
   .map(f => `/* ${f} */\n` + R(f).replace(/if \(typeof module !== "undefined"\)[^\n]*\n?/g, "")).join("\n");
 
 function page({ pwa }) {
@@ -54,6 +54,11 @@ fs.mkdirSync(path.join(__dirname, "pwa"), { recursive: true });
 /* PWA: Programmcode als eigene, versionierte Datei – der Browser kann ihn so zwischenspeichern und schneller starten */
 fs.readdirSync(path.join(__dirname, "pwa")).filter(f => /^app-.*\.js$/.test(f)).forEach(f => fs.unlinkSync(path.join(__dirname, "pwa", f)));
 fs.writeFileSync(path.join(__dirname, "pwa", "app-" + VERSION + ".js"), js);
+/* Bibeltexte (data/) in beide Ausgaben kopieren */
+for (const out of ["dist", "pwa"]) {
+  const d = path.join(__dirname, out, "data"); fs.rmSync(d, { recursive: true, force: true });
+  if (fs.existsSync(path.join(__dirname, "src/data"))) fs.cpSync(path.join(__dirname, "src/data"), d, { recursive: true });
+}
 /* Bilder in beide Ausgaben kopieren: img/icons = groß (beim Ansehen gespeichert), img/thumbs = Vorschau (bei Installation gespeichert) */
 const IMG_DIRS = ["icons", "thumbs"];
 const ICON_IMGS = [];
@@ -86,7 +91,7 @@ self.addEventListener("install", e => { e.waitUntil(Promise.all([
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE && k !== IMG_CACHE).map(k => caches.delete(k))))); self.clients.claim(); });
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
-  if (["/img/icons/", "/img/thumbs/"].some(d => new URL(e.request.url).pathname.includes(d))) {
+  if (["/img/icons/", "/img/thumbs/", "/data/"].some(d => new URL(e.request.url).pathname.includes(d))) {
     e.respondWith(caches.open(IMG_CACHE).then(c => c.match(e.request).then(r => r || fetch(e.request).then(res => { if (res.ok) c.put(e.request, res.clone()); return res; }))));
     return;
   }

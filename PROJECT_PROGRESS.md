@@ -255,6 +255,17 @@
 5. Anleitung für Gebetserinnerungen über die iOS-Kurzbefehle-App.
 6. Gegenlesen der serbischen Texte durch Muttersprachler.
 
+## Version 3.21.0 (10.11.2026)
+
+- Bibeltext des Neuen Testaments in der App (Deutsch Luther 1912, Serbisch Daničić–Karadžić); Tageslesungen öffnen den Text direkt; offline ladbar.
+- Gebetsschnur (Zähler für das Jesusgebet, Ziel 33/50/100/300).
+- Krsna slava: Heiligen wählen, nächstes Datum, Countdown auf der Startseite, Kalendertermin, Erklärung des Brauchs.
+- Geführte Beichtvorbereitung in fünf Schritten; nichts wird gespeichert.
+- Vorlesen (Sprachausgabe des Geräts) auf Lese-Seiten.
+- Begleiter durch die Große Fastenzeit (sechs Wochen, Karwoche, tägliche Übung, Gebet des hl. Ephräm).
+- Design 3 im Apple-Stil, Farben unverändert.
+- Tests: Inhalt 31 148, Bedienung 86, Funktionen über http 17, Barrierefreiheit 31 Ansichten × 2 Themen, Offline-Test – alle ohne Fehler (simuliertes iPhone, kein echtes Gerät).
+
 ## Sicherungspunkte
 
 - Git-Historie im Repository `nidzojungbluth/orthodoxpath` (jede Version ein Commit).

@@ -38,3 +38,7 @@
 14. Bilder in zwei Größen (10.11.2026): Vorschau 300×400 wird bei der Installation gespeichert (offline), große Bilder 720×960 nur beim Ansehen (sonst +9 MB bei jeder Installation). Bilder neu herunterladen nur über commons.wikimedia.org/w/thumb.php mit langsamen Abständen; upload.wikimedia.org sperrt Massenabrufe (429, Robot-Policy).
 15. Tageslesungen (10.11.2026) nicht selbst berechnet (Lukas-Sprung, Feste, Ausnahmen sind fehleranfällig), sondern als geprüfte Datentabelle von orthocal.info bis Ende 2031 eingebaut; vor 2032 neu abrufen. Nur bei julianischem Kalender angezeigt.
 16. Troparien als eigene Übertragung statt fremder Übersetzungen (Urheberrecht); deutlich gekennzeichnet.
+17. Bibeltext (10.11.2026): gemeinfreie Übersetzungen (Luther 1912, Daničić–Karadžić) als Dateien, die erst beim Lesen geladen werden; offen gekennzeichnet, dass es keine orthodoxen Übersetzungen sind.
+18. Beichtvorbereitung speichert nichts (auch nicht im Gerät) – Angetipptes lebt nur, solange die App offen ist.
+19. Vorlesen über die Sprachausgabe des Geräts (keine Übertragung ins Netz); ohne serbische Stimme wird mit kroatischer Stimme in lateinischer Umschrift gelesen.
+20. Design 3 im Apple-Stil (Systemschrift, große Titel, gruppierte Listen, durchscheinende Leisten); Farben unverändert, Serifenschrift nur noch für Gebete und Bibeltext.

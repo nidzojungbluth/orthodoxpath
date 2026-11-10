@@ -9,7 +9,7 @@
     lang: null, theme: "dark", font: 1, onboarded: false,
     done: {}, quiz: {}, cards: {}, newToday: { date: "", n: 0 },
     newPerDay: 10, lessonsPerWeek: 3, activity: [], verses: [],
-    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null, bibleView: "path", lastBackup: null, backupAsk: null, backupRemind: "on", a2hsDismissed: false, marks: [], readMode: false, iconQuiz: { right: 0, total: 0 }, remindTime: "07:00"
+    notes: [], enc: null, prayerFavs: [], intentions: [], prayed: [], calendar: "julian", plans: {}, lastLesson: null, bibleView: "path", lastBackup: null, backupAsk: null, backupRemind: "on", a2hsDismissed: false, ropeGoal: 100, slava: null, marks: [], readMode: false, iconQuiz: { right: 0, total: 0 }, remindTime: "07:00"
   };
   function load() {
     try {
@@ -126,6 +126,7 @@
   }
   const CROSS = `<svg width="22" height="28" viewBox="0 0 22 28" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M11 1v26"/><path d="M6 5h10"/><path d="M2 11h18"/><path d="M6 21l10 -3"/></g></svg>`;
   const ICONS = {
+    speaker: '<path d="M4 9.5v5h3.5L12 18V6L7.5 9.5z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>',
     home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
     bible: '<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/><path d="M12 7v5M9.5 9h5"/>',
     theology: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M6 10v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>',
@@ -176,7 +177,9 @@
 
   function tabFor(r) {
     if (r.startsWith("quiz-")) return tabFor(backHref(r.slice(5)).slice(1));
-    if (r.startsWith("lesson-bib") || r === "bible" || r.startsWith("book-") || r === "plans" || r.startsWith("plan-")) return "bible";
+    if (r.startsWith("lesson-bib") || r === "bible" || r.startsWith("book-") || r === "plans" || r.startsWith("plan-") || r === "nt" || r.startsWith("read-")) return "bible";
+    if (r === "rope") return "home";
+    if (r === "slava" || r === "confess" || r === "lent") return "home";
     if (r.startsWith("lesson-") || r.startsWith("course-") || r === "theology" || r === "creed" || r === "liturgy" || r === "icons" || r.startsWith("icons-") || r === "gallery" || r.startsWith("gallery-") || r === "iconquiz" || r === "feasts" || r.startsWith("feast-")) return "theology";
     if (r.startsWith("person-") || r === "saints") return "saints";
     if (r === "cards" || r === "review") return "cards";
@@ -184,7 +187,11 @@
     return "more";
   }
   function parentOf(r) {
-    if (r.startsWith("lesson-bib") || r.startsWith("book-") || r === "plans") return "bible";
+    if (r.startsWith("lesson-bib") || r.startsWith("book-") || r === "plans" || r === "nt") return "bible";
+    if (r.startsWith("read-")) return "nt";
+    if (r === "rope") return "prayers";
+    if (r === "slava" || r === "lent") return "calendar";
+    if (r === "confess") return "prayers";
     if (r.startsWith("plan-")) return "plans";
     if (r.startsWith("lesson-")) { const l = ALL_LESSONS[r.slice(7)]; return l ? "course-" + l.course : "theology"; }
     if (r.startsWith("quiz-")) return backHref(r.slice(5)).slice(1);
@@ -237,6 +244,12 @@
       let html;
       if (r === "home") html = viewHome();
       else if (r === "bible") html = viewBible();
+      else if (r === "nt") html = viewNT();
+      else if (r.startsWith("read-")) html = viewRead(decodeURIComponent(r.slice(5)));
+      else if (r === "rope") html = viewRope();
+      else if (r === "slava") html = viewSlava();
+      else if (r === "confess") html = viewConfess();
+      else if (r === "lent") html = viewLent();
       else if (r === "theology") html = viewTheology();
       else if (r.startsWith("course-")) html = viewCourse(r.slice(7));
       else if (r.startsWith("lesson-")) html = viewLesson(r.slice(7));
@@ -271,7 +284,8 @@
       const readable = READABLE.some(x => r === x || r.startsWith(x + "-"));
       document.documentElement.classList.toggle("readmode", !!S.readMode && readable);
       const mk = markKeyFor(r);
-      if (readable || mk) html = `<div class="toolbar">${mk ? markBtn(mk) : ""}${readable ? `<button class="btn ghost small" id="readbtn" aria-pressed="${!!S.readMode}">${esc(t(S.readMode ? "readOff" : "readOn"))}</button>` : ""}</div>` + html;
+      const speakable = canSpeak() && (readable || SPEAKABLE.some(x => r === x || r.startsWith(x + "-")));
+      if (readable || mk || speakable) html = `<div class="toolbar">${mk ? markBtn(mk) : ""}${speakable ? `<button class="btn ghost small" id="speakbtn" aria-pressed="${speaking}">${ic("speaker")} <span>${esc(t(speaking ? "speakStop" : "speakStart"))}</span></button>` : ""}${readable ? `<button class="btn ghost small" id="readbtn" aria-pressed="${!!S.readMode}">${esc(t(S.readMode ? "readOff" : "readOn"))}</button>` : ""}</div>` + html;
       app.innerHTML = shell(html, r);
       bindCommon();
       const binder = BINDERS[r.split("-")[0]] || BINDERS[r];
@@ -282,6 +296,43 @@
     }
   }
 
+  /* ---------- Vorlesen (Sprachausgabe des Geräts, nichts wird übertragen) ---------- */
+  const SPEAKABLE = ["read", "slava", "lent", "confess"];
+  let speaking = false, speakRun = 0;
+  function canSpeak() { return typeof window.speechSynthesis !== "undefined" && typeof window.SpeechSynthesisUtterance !== "undefined"; }
+  function speakStop() { speakRun++; speaking = false; try { if (canSpeak()) speechSynthesis.cancel(); } catch (e) { } speakLabel(); }
+  function speakLabel() { const b = document.getElementById("speakbtn"); if (b) { b.setAttribute("aria-pressed", String(speaking)); const sp = b.querySelector("span"); if (sp) sp.textContent = t(speaking ? "speakStop" : "speakStart"); } }
+  function speakTexts() {
+    const w = document.querySelector("main .wrap") || document.querySelector("main") || app; const c = w.cloneNode(true);
+    c.querySelectorAll(".toolbar, button, select, input, sup, .badge, .chev, svg, nav, figure, .seg, .galnav, .chgrid, .eyebrow, .mgrid, .mlegend, details:not([open]) > :not(summary)").forEach(x => x.remove());
+    const out = []; c.querySelectorAll("h1, h2, h3, p, li, legend, label, summary").forEach(el => {
+      if (el.querySelector("p, li, h3")) return; const x = el.textContent.replace(/\s+/g, " ").trim(); if (x) out.push(x); });
+    const chunks = []; out.forEach(x => (x.match(/[^.!?;:…]+[.!?;:…]*["“”«»‘’)]*\s*/g) || [x]).forEach(sen => {
+      sen = sen.trim(); if (!sen) return; while (sen.length > 220) { let i = sen.lastIndexOf(" ", 220); if (i < 60) i = 220; chunks.push(sen.slice(0, i)); sen = sen.slice(i).trim(); } if (sen) chunks.push(sen); }));
+    return chunks;
+  }
+  function speakVoice() {
+    let vs = []; try { vs = speechSynthesis.getVoices() || []; } catch (e) { }
+    const find = re => vs.find(v => re.test(v.lang) && v.localService) || vs.find(v => re.test(v.lang));
+    if (!isSr()) return { voice: find(/^de/i), lang: "de-DE", latin: false };
+    const sr = find(/^sr/i); if (sr) return { voice: sr, lang: sr.lang, latin: /latn/i.test(sr.lang) };
+    const hr = find(/^(hr|bs)/i); return { voice: hr, lang: hr ? hr.lang : "hr-HR", latin: true };
+  }
+  function speakStart() {
+    const chunks = speakTexts(); if (!chunks.length) return;
+    const v = speakVoice(); const run = ++speakRun; speaking = true; speakLabel(); let i = 0;
+    try { speechSynthesis.cancel(); } catch (e) { }
+    const next = () => {
+      if (run !== speakRun) return; if (i >= chunks.length) { speaking = false; speakLabel(); return; }
+      let x = chunks[i++]; if (v.latin) x = translit(x);
+      const u = new SpeechSynthesisUtterance(x); u.lang = v.lang; if (v.voice) u.voice = v.voice; u.rate = 0.95;
+      u.onend = next; u.onerror = ev => { if (run !== speakRun) return; if (ev && (ev.error === "interrupted" || ev.error === "canceled")) return; speaking = false; speakLabel(); toast(t("speakErr")); };
+      speechSynthesis.speak(u);
+    };
+    next();
+  }
+  window.addEventListener("hashchange", () => { if (speaking) speakStop(); });
+  window.addEventListener("pagehide", () => { if (speaking) speakStop(); });
   /* ---------- Merkliste und Lesemodus ---------- */
   const READABLE = ["lesson", "prayers", "prayercat", "feast", "creed", "person"];
   function markKeyFor(r) {
@@ -373,6 +424,7 @@
       if (i >= 0) { S.marks.splice(i, 1); toast(t("markRemoved")); } else { S.marks.push(k); toast(t("markSaved")); }
       save(); const y = window.scrollY; render(); window.scrollTo(0, y);
     });
+    const sb = document.getElementById("speakbtn"); if (sb) sb.onclick = () => { if (speaking) speakStop(); else speakStart(); };
     const rb = document.getElementById("readbtn"); if (rb) rb.onclick = () => { S.readMode = !S.readMode; save(); const y = window.scrollY; render(); window.scrollTo(0, y); };
   }
 
@@ -426,6 +478,8 @@
     return `
       <div class="pagehead"><h1>${esc(greet)}</h1></div>
       ${homeNotices()}
+      ${slavaCard()}
+      ${lentCard()}
       ${calCard()}
       <div class="card hero">
         <div class="eyebrow">${esc(t("todayLesson"))}</div>
@@ -486,7 +540,7 @@
             <button class="iconbtn" data-idone="${i.id}">${esc(i.done ? t("prIntentReopen") : t("prIntentDone"))}</button><button class="iconbtn" data-idel="${i.id}" aria-label="${esc(t("delete"))}">${ic("close")}</button></li>`).join("")}</ul>` : `<p class="muted">${esc(t("prNoIntent"))}</p>`}
         <h2>${esc(t("prFavs"))}</h2>${favs.length ? favs.map(id => prayerCard(id)).join("") : `<p class="muted">${esc(t("prNoFavs"))}</p>`}`;
     }
-    return `<h1>${esc(t("prayersTitle"))}</h1><p class="muted small">${esc(t("prayersIntro"))}</p>${prayerTabs()}${body}
+    return `<h1>${esc(t("prayersTitle"))}</h1><p class="muted small">${esc(t("prayersIntro"))}</p><ul class="list" style="margin-bottom:12px">${navItem("rope", "candle", t("ropeTitle"), t("ropeSub"))}${navItem("confess", "cross", t("confTitle"), t("confSub"))}</ul>${prayerTabs()}${body}
       <p class="small muted">${esc(lang() === "de" ? t("prTransDe") : t("prTransSr"))}</p>`;
   }
   function viewPrayerCat(cid) {
@@ -523,6 +577,201 @@
     const link = f.lesson && ALL_LESSONS[f.lesson] ? `<a class="small" href="#lesson-${f.lesson}">${esc(t("calToLesson"))} ›</a>` : (f.saint && PEOPLE[f.saint] ? `<a class="small" href="#person-${f.saint}">${E(PEOPLE[f.saint].name)} ›</a>` : "");
     return `<h3 style="margin-bottom:4px">${E(f.name)}</h3>${f.mean ? `<p class="small" style="margin-bottom:4px">${E(f.mean)}</p>` : ""}${link}`;
   }
+  /* ---------- Bibeltext (Neues Testament): Luther 1912 / Daničić-Karadžić 1868, beide gemeinfrei ---------- */
+  const NT_BOOKS = ["Mt", "Mk", "Lk", "Jn", "Acts", "Rom", "1Cor", "2Cor", "Gal", "Eph", "Phil", "Col", "1Thess", "2Thess", "1Tim", "2Tim", "Tit", "Phlm", "Heb", "Jas", "1Pet", "2Pet", "1Jn", "2Jn", "3Jn", "Jude", "Rev"];
+  const NT_NAMES = { Mt: ["Matthäus", "Матеј"], Mk: ["Markus", "Марко"], Lk: ["Lukas", "Лука"], Jn: ["Johannes", "Јован"], Acts: ["Apostelgeschichte", "Дела апостолска"], Rom: ["Römer", "Римљанима"], "1Cor": ["1. Korinther", "1. Коринћанима"], "2Cor": ["2. Korinther", "2. Коринћанима"], Gal: ["Galater", "Галатима"], Eph: ["Epheser", "Ефесцима"], Phil: ["Philipper", "Филипљанима"], Col: ["Kolosser", "Колошанима"], "1Thess": ["1. Thessalonicher", "1. Солуњанима"], "2Thess": ["2. Thessalonicher", "2. Солуњанима"], "1Tim": ["1. Timotheus", "1. Тимотеју"], "2Tim": ["2. Timotheus", "2. Тимотеју"], Tit: ["Titus", "Титу"], Phlm: ["Philemon", "Филимону"], Heb: ["Hebräer", "Јеврејима"], Jas: ["Jakobus", "Јаковљева"], "1Pet": ["1. Petrus", "1. Петрова"], "2Pet": ["2. Petrus", "2. Петрова"], "1Jn": ["1. Johannes", "1. Јованова"], "2Jn": ["2. Johannes", "2. Јованова"], "3Jn": ["3. Johannes", "3. Јованова"], Jude: ["Judas", "Јудина"], Rev: ["Offenbarung", "Откривење"] };
+  const NT_CH = { Mt: 28, Mk: 16, Lk: 24, Jn: 21, Acts: 28, Rom: 16, "1Cor": 16, "2Cor": 13, Gal: 6, Eph: 6, Phil: 4, Col: 4, "1Thess": 5, "2Thess": 3, "1Tim": 6, "2Tim": 4, Tit: 3, Phlm: 1, Heb: 13, Jas: 5, "1Pet": 5, "2Pet": 3, "1Jn": 5, "2Jn": 1, "3Jn": 1, Jude: 1, Rev: 22 };
+  const bibleCache = {};
+  function bibleLang() { return lang() === "de" ? "de" : "sr"; }
+  function loadBook(b) {
+    const k = bibleLang() + "/" + b;
+    if (!bibleCache[k]) bibleCache[k] = fetch("data/bible/" + k + ".json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).catch(e => { delete bibleCache[k]; throw e; });
+    return bibleCache[k];
+  }
+  /* "{Lk}10.38-42, 11.27-28; {Gal}3.13-14" → [{book, ch, from, toCh, to}] ; "{Lk}11" → ganzes Kapitel */
+  function parseRef(raw) {
+    const out = []; let book = null, ch = null;
+    raw.split(/;\s*/).forEach(part => {
+      const m = part.match(/^\{(\w+)\}(.*)$/); if (m) { book = m[1]; part = m[2]; }
+      part.split(/,\s*/).forEach(seg => {
+        seg = seg.trim(); let x;
+        if ((x = seg.match(/^(\d+)\.(\d+)-(\d+)\.(\d+)$/))) { ch = +x[3]; out.push({ book, ch: +x[1], from: +x[2], toCh: +x[3], to: +x[4] }); }
+        else if ((x = seg.match(/^(\d+)\.(\d+)-(\d+)$/))) { ch = +x[1]; out.push({ book, ch, from: +x[2], toCh: ch, to: +x[3] }); }
+        else if ((x = seg.match(/^(\d+)\.(\d+)$/))) { ch = +x[1]; out.push({ book, ch, from: +x[2], toCh: ch, to: +x[2] }); }
+        else if ((x = seg.match(/^(\d+)-(\d+)$/)) && ch) out.push({ book, ch, from: +x[1], toCh: ch, to: +x[2] });
+        else if ((x = seg.match(/^(\d+)$/))) { if (ch && out.length && !m) out.push({ book, ch, from: +x[1], toCh: ch, to: +x[1] }); else { ch = +x[1]; out.push({ book, ch, from: 1, toCh: ch, to: 999 }); } }
+      });
+    });
+    return out.filter(s => NT_CH[s.book]);
+  }
+  function refLabel(raw) { return { de: fmtRef(raw, 0), sr: fmtRef(raw, 1) }; }
+  function readLink(raw) { return parseRef(raw).length ? `<a href="#read-${encodeURIComponent(raw)}">${E(refLabel(raw))}</a>` : E(refLabel(raw)); }
+  function viewNT() {
+    return `<div class="eyebrow">${esc(t("navBible"))}</div><h1>${esc(t("ntTitle"))}</h1><p class="muted">${esc(t("ntIntro"))}</p>
+      <ul class="list">${NT_BOOKS.map(b => `<li><details class="ntbook"><summary class="item"><span class="grow"><span class="t">${esc(isSr() ? tr(NT_NAMES[b][1]) : NT_NAMES[b][0])}</span><span class="s">${NT_CH[b]} ${esc(t("ntChapters"))}</span></span><span class="chev">${ic("chev")}</span></summary>
+        <div class="chgrid">${Array.from({ length: NT_CH[b] }, (_, i) => `<a href="#read-${encodeURIComponent("{" + b + "}" + (i + 1))}">${i + 1}</a>`).join("")}</div></details></li>`).join("")}</ul>
+      <button class="btn ghost block" id="ntoffline" style="margin-top:10px">${esc(t("ntOffline"))}</button>
+      <p class="small muted" style="margin-top:8px">${esc(t("ntSource"))}</p>`;
+  }
+  function viewRead(raw) {
+    const segs = parseRef(raw); if (!segs.length) return `<p>${esc(t("notFound"))}</p>`;
+    const whole = segs.length === 1 && segs[0].to === 999;
+    const b = segs[0].book, c = segs[0].ch;
+    const nav = whole ? `<div class="galnav">${c > 1 ? `<a class="btn ghost" href="#read-${encodeURIComponent("{" + b + "}" + (c - 1))}">‹ ${c - 1}</a>` : "<span></span>"}${c < NT_CH[b] ? `<a class="btn ghost" href="#read-${encodeURIComponent("{" + b + "}" + (c + 1))}">${c + 1} ›</a>` : "<span></span>"}</div>` : "";
+    const title = whole ? (isSr() ? tr(NT_NAMES[b][1]) : NT_NAMES[b][0]) + " " + c : L(refLabel(raw));
+    return `<div class="eyebrow">${esc(t(whole ? "ntTitle" : "rdTitle"))}</div><h1>${esc(title)}</h1>
+      <div class="card scripture" id="scripture" data-raw="${esc(raw)}" aria-live="polite"><p class="muted">${esc(t("ntLoading"))}</p></div>${nav}
+      <p class="small muted">${esc(t("ntSource"))}</p>`;
+  }
+  async function bindRead(r) {
+    const el = document.getElementById("scripture"); if (!el) return;
+    const segs = parseRef(decodeURIComponent(r.slice(5)));
+    try {
+      let html = "";
+      for (const sg of segs) {
+        const book = await loadBook(sg.book);
+        const parts = [];
+        for (let c = sg.ch; c <= sg.toCh; c++) {
+          const verses = book[c - 1] || []; const a = c === sg.ch ? sg.from : 1, z = c === sg.toCh ? Math.min(sg.to, verses.length) : verses.length;
+          for (let v = a; v <= z; v++) if (verses[v - 1]) parts.push(`<sup>${c !== sg.ch || sg.toCh !== sg.ch ? c + "," : ""}${v}</sup>${esc(isSr() ? tr(verses[v - 1]) : verses[v - 1])}`);
+        }
+        if (segs.length > 1) html += `<h3>${esc(L(refLabel("{" + sg.book + "}" + sg.ch + "." + sg.from + (sg.to !== sg.from ? "-" + (sg.toCh !== sg.ch ? sg.toCh + "." : "") + sg.to : ""))))}</h3>`;
+        html += `<p class="bibletext">${parts.join(" ")}</p>`;
+      }
+      if (document.getElementById("scripture") === el) el.innerHTML = html;
+    } catch (e) { el.innerHTML = `<p class="muted">${esc(t("ntError"))}</p>`; }
+  }
+  function bindNT() {
+    const b = document.getElementById("ntoffline");
+    if (b) b.onclick = async () => {
+      b.disabled = true; let n = 0;
+      for (const bk of NT_BOOKS) { try { await loadBook(bk); n++; b.textContent = t("ntOfflineRun").replace("{n}", n).replace("{m}", NT_BOOKS.length); } catch (e) { } }
+      b.textContent = n === NT_BOOKS.length ? t("ntOfflineDone") : t("ntError"); toast(b.textContent);
+    };
+  }
+  function tr(x) { return lang() === "sr-lat" ? translit(x) : x; }
+  /* ---------- Gebetsschnur (Komboskini/Brojanica) ---------- */
+  let ropeN = 0;
+  function viewRope() {
+    const goal = S.ropeGoal || 100, k = Math.min(ropeN, goal);
+    const r = 92, C = 2 * Math.PI * r;
+    return `<div class="eyebrow">${esc(t("prayersTitle"))}</div><h1>${esc(t("ropeTitle"))}</h1><p class="muted">${esc(t("ropeIntro"))}</p>
+      <p class="ropeprayer">${E(PRAYER_TEXTS.jesus ? PRAYER_TEXTS.jesus.text : { de: "Herr Jesus Christus, Sohn Gottes, erbarme dich meiner, des Sünders.", sr: "Господе Исусе Христе, Сине Божји, помилуј ме грешног." })}</p>
+      <button class="ropebtn" id="ropetap" aria-label="${esc(t("ropeTap"))}: ${k} / ${goal}">
+        <svg viewBox="0 0 220 220" aria-hidden="true"><circle cx="110" cy="110" r="${r}" class="ropebg"/><circle cx="110" cy="110" r="${r}" class="ropefg" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - k / goal)}" transform="rotate(-90 110 110)"/></svg>
+        <span class="ropenum">${k}</span><span class="ropegoal">/ ${goal}</span></button>
+      ${k >= goal ? `<p class="center" role="status"><b>${esc(t("ropeDone"))}</b></p>` : ""}
+      <div class="seg" style="margin:14px 0" data-seg="ropeGoal">${[33, 50, 100, 300].map(n => `<button data-v="${n}" class="${goal === n ? "on" : ""}">${n}</button>`).join("")}</div>
+      <button class="btn ghost block" id="ropereset">${esc(t("ropeReset"))}</button>
+      <p class="small muted" style="margin-top:10px">${esc(t("ropeNote"))}</p>`;
+  }
+  function bindRope() {
+    const tap = document.getElementById("ropetap");
+    if (tap) tap.onclick = () => { const goal = S.ropeGoal || 100; if (ropeN < goal) ropeN++; try { if (navigator.vibrate) navigator.vibrate(ropeN === goal ? [60, 60, 120] : ropeN % 10 === 0 ? 40 : 12); } catch (e) { } render(); };
+    const rs = document.getElementById("ropereset"); if (rs) rs.onclick = () => { ropeN = 0; render(); };
+    app.querySelectorAll('[data-seg="ropeGoal"] button').forEach(b => b.onclick = () => { S.ropeGoal = +b.dataset.v; save(); render(); });
+  }
+  /* ---------- Geführte Beichtvorbereitung (nichts wird gespeichert) ---------- */
+  let confSel = new Set();
+  function confList() {
+    const items = []; CONFESS_Q.forEach((g, gi) => g.q.forEach((q, qi) => { if (confSel.has(gi + "-" + qi)) items.push(q); }));
+    return items.length ? `<ul class="conflist">${items.map(q => `<li>${E(q)}</li>`).join("")}</ul><button class="btn ghost block" id="confclear">${esc(t("confClear"))}</button>` : `<p class="small muted" style="margin:0">${esc(t("confEmpty"))}</p>`;
+  }
+  function viewConfess() {
+    const step = (s, extra) => `<div class="card"><h3>${E(s.h)}</h3>${tagBadge(s.tag)}<p>${E(s.t)}</p>${(s.prayers || []).map(id => PRAYER_TEXTS[id] ? `<p class="creed">${E(PRAYER_TEXTS[id].text)}</p>` : "").join("")}${extra || ""}</div>`;
+    const qs = CONFESS_Q.map((g, gi) => `<fieldset class="confgroup"><legend>${E(g.h)}</legend>${g.q.map((q, qi) => `<label class="confq"><input type="checkbox" data-cq="${gi}-${qi}" ${confSel.has(gi + "-" + qi) ? "checked" : ""}><span>${E(q)}</span></label>`).join("")}</fieldset>`).join("");
+    return `<div class="eyebrow">${esc(t("prayersTitle"))}</div><h1>${esc(t("confTitle"))}</h1><p class="muted">${esc(t("confIntro"))}</p>
+      ${step(CONFESS_STEPS[0], `<a class="small" href="#prayercat-confession">${esc(t("confMorePrayers"))} ›</a>`)}
+      ${step(CONFESS_STEPS[1], qs)}
+      <div class="card"><h3>${esc(t("confMine"))}</h3><p class="small muted">${esc(t("confPrivacy"))}</p><div id="confmine" aria-live="polite">${confList()}</div></div>
+      ${CONFESS_STEPS.slice(2).map(s => step(s)).join("")}
+      <a class="item" href="#lesson-th-repentance" style="margin-bottom:12px"><span class="grow"><span class="t">${esc(t("confLesson"))}</span></span><span class="chev">${ic("chev")}</span></a>
+      <p class="small muted">${E(CONFESS_NOTE)}</p>`;
+  }
+  function bindConfess() {
+    const upd = () => { const m = document.getElementById("confmine"); if (m) { m.innerHTML = confList(); bindClear(); } };
+    const bindClear = () => { const c = document.getElementById("confclear"); if (c) c.onclick = () => { confSel = new Set(); render(); }; };
+    app.querySelectorAll("[data-cq]").forEach(cb => cb.onchange = () => { if (cb.checked) confSel.add(cb.dataset.cq); else confSel.delete(cb.dataset.cq); upd(); });
+    bindClear();
+  }
+  /* ---------- Begleiter durch die Große Fastenzeit ---------- */
+  function lentState(td) {
+    const y = new Date(td).getUTCFullYear(); let P = orthodoxPascha(y); if (td > P) P = orthodoxPascha(y + 1);
+    const rel = Math.round((td - P) / 86400000);
+    return { P, rel, inLent: rel >= -48 && rel <= -1, week: LENT_WEEKS.find(w => rel >= w.from && rel <= w.to), holy: HOLY_WEEK.find(h => h.rel === rel) };
+  }
+  function lentCard() {
+    const st = lentState(todayUTC()); if (!st.inLent) return "";
+    const cur = st.holy || st.week;
+    return `<a class="card hero" href="#lent"><div class="eyebrow">${esc(t("lentTitle"))} · ${esc(t("lentDay").replace("{n}", st.rel + 49))}</div><h2 class="herotitle">${E(cur.h)}</h2>
+      <p class="muted" style="margin:0">${esc(t("lentToPascha").replace("{n}", -st.rel))}</p></a>`;
+  }
+  function viewLent() {
+    const td = todayUTC(); const st = lentState(td);
+    const wk = (w, on) => `<div class="card${on ? " hero" : ""}">${on ? `<div class="eyebrow">${esc(t("lentNow"))}</div>` : ""}<h3>${E(w.h)}</h3>
+      <p class="small muted" style="margin:0 0 8px">${esc(fmtDate(addD(st.P, w.from)))} – ${esc(fmtDate(addD(st.P, w.to)))} · ${E(w.sun)}</p><p>${E(w.t)}</p>
+      <p class="small"><b>${esc(t("lentRead"))}:</b> ${readLink(w.ref)}</p>
+      <p style="margin:0">${tagBadge("counsel")} ${E(w.do)}${w.link ? ` <a href="#${w.link}">${esc(t("confTitle"))} ›</a>` : ""}</p></div>`;
+    const hd = (h, on) => `<div class="card${on ? " hero" : ""}">${on ? `<div class="eyebrow">${esc(t("calToday"))}</div>` : ""}<h3>${E(h.h)}</h3><p class="small muted" style="margin:0 0 8px">${esc(fmtDate(addD(st.P, h.rel), true))}</p><p>${E(h.t)}</p><p class="small" style="margin:0"><b>${esc(t("lentRead"))}:</b> ${readLink(h.ref)}</p></div>`;
+    const head = st.inLent
+      ? `<div class="card"><div class="row"><span class="grow"><span class="eyebrow">${esc(t("lentDay").replace("{n}", st.rel + 49))}</span><br><b class="big">${-st.rel}</b> <span class="small muted">${esc(t("lentDaysLeft"))}</span></span></div>
+          <div class="progressbar" style="margin-top:10px"><i style="width:${Math.round((st.rel + 49) / 48 * 100)}%"></i></div></div>
+         <div class="card"><div class="eyebrow">${esc(t("lentToday"))}</div><p style="margin:6px 0 0">${tagBadge("counsel")} ${E(LENT_PRACTICES[Math.floor(td / 86400000) % LENT_PRACTICES.length])}</p></div>`
+      : `<div class="card"><div class="eyebrow">${esc(t("lentNext"))}</div><p style="margin:6px 0 0"><b>${esc(fmtDate(addD(st.P, -48), true))}</b> – ${esc(t("lentPaschaOn"))} <b>${esc(fmtDate(st.P, true))}</b></p></div>`;
+    const eph = PRAYER_TEXTS.ephrem ? `<div class="card"><h3>${E(PRAYER_TEXTS.ephrem.title)}</h3><p class="creed">${E(PRAYER_TEXTS.ephrem.text)}</p>${PRAYER_TEXTS.ephrem.note ? `<p class="small muted">${E(PRAYER_TEXTS.ephrem.note)}</p>` : ""}</div>` : "";
+    return `<div class="eyebrow">${esc(t("calTitle"))}</div><h1>${esc(t("lentTitle"))}</h1><p class="muted">${esc(t("lentIntro"))}</p>
+      ${head}${eph}
+      <div class="sh">${esc(t("lentWeeks"))}</div>${LENT_WEEKS.map(w => wk(w, st.week === w)).join("")}
+      <div class="sh">${esc(t("lentHoly"))}</div>${HOLY_WEEK.map(h => hd(h, st.holy === h)).join("")}
+      <ul class="list">${navItem("calendar", "calendar", t("calTitle"), t("lentFoodHint"))}${navItem("confess", "cross", t("confTitle"))}${navItem("rope", "candle", t("ropeTitle"))}</ul>
+      <p class="small muted">${E(LENT_NOTE)}</p>`;
+  }
+  /* ---------- Krsna slava ---------- */
+  function slavaNext(s, from) {
+    const y = new Date(from).getUTCFullYear(); const c = cal();
+    const ts = [y - 1, y, y + 1].map(ny => churchDate(ny, s.m, s.d, c)).filter(x => x >= from).sort((a, b) => a - b);
+    return ts[0];
+  }
+  function slavaWhen(days) { return days === 0 ? t("slavaToday") : days === 1 ? t("slavaTomorrow") : t("slavaIn").replace("{n}", days); }
+  function slavaCard() {
+    const s = SLAVAS.find(x => x.id === S.slava); if (!s) return "";
+    const td = todayUTC(); const n = slavaNext(s, td); const days = Math.round((n - td) / 86400000);
+    if (days > 30) return "";
+    return `<a class="card hero slavacard" href="#slava"><div class="eyebrow">${esc(t("slavaTitle"))}</div><h2 class="herotitle">${E(s.name)}</h2>
+      <p class="muted" style="margin:0">${esc(slavaWhen(days))} · ${esc(fmtDate(n, true))}</p></a>`;
+  }
+  function viewSlava() {
+    const td = todayUTC(); const s = SLAVAS.find(x => x.id === S.slava);
+    const opts = SLAVAS.slice().sort((a, b) => (a.m - b.m) || (a.d - b.d));
+    let top = "";
+    if (s) {
+      const n = slavaNext(s, td); const days = Math.round((n - td) / 86400000); const fi = fastInfo(n, cal());
+      const fastDay = fi && fi.kind && fi.kind !== "free" && fi.kind !== "none";
+      top = `<div class="card hero"><div class="eyebrow">${esc(t("slavaYours"))}</div><h2 class="herotitle">${E(s.name)}</h2>
+        <p style="margin:0 0 6px"><b>${esc(fmtDate(n, true))}</b> · ${esc(slavaWhen(days))}</p>
+        ${fastDay ? `<p class="small" style="margin:0 0 8px">${ic("candle", "gold")} ${esc(t("slavaFast"))}</p>` : ""}
+        ${s.person && PEOPLE[s.person] ? `<a class="small" href="#person-${s.person}">${E(PEOPLE[s.person].name)} ›</a>` : ""}
+        <button class="btn block" id="slavaics" style="margin-top:12px">${ic("calendar")} ${esc(t("slavaIcs"))}</button></div>`;
+    }
+    return `<div class="eyebrow">${esc(t("calTitle"))}</div><h1>${esc(t("slavaTitle"))}</h1><p class="muted">${esc(t("slavaIntro"))}</p>
+      ${top}
+      <div class="card"><label for="slavasel">${esc(t("slavaChoose"))}</label>
+        <select id="slavasel"><option value="">${esc(t("slavaNone"))}</option>${opts.map(x => `<option value="${x.id}" ${x.id === S.slava ? "selected" : ""}>${esc(L(x.name))} – ${x.d}.${x.m}. (${esc(t("slavaChurch"))})</option>`).join("")}</select>
+        <p class="small muted" style="margin:8px 0 0">${esc(t("slavaNote"))}</p></div>
+      ${SLAVA_INFO.map(b => `<div class="card"><h3>${E(b.h)}</h3>${tagBadge(b.tag)}<p>${E(b.t)}</p></div>`).join("")}
+`;
+  }
+  function bindSlava() {
+    const sel = document.getElementById("slavasel");
+    if (sel) sel.onchange = () => { S.slava = sel.value || null; save(); render(); };
+    const b = document.getElementById("slavaics");
+    if (b) b.onclick = () => {
+      const s = SLAVAS.find(x => x.id === S.slava); if (!s) return;
+      const y = new Date(todayUTC()).getUTCFullYear(); const list = [];
+      for (let ny = y - 1; ny <= y + 10; ny++) { const ts = churchDate(ny, s.m, s.d, cal()); if (ts >= todayUTC() && list.length < 10) list.push({ id: "slava-" + s.id, t: ts, name: { de: "Slava: " + s.name.de, sr: "Слава: " + s.name.sr } }); }
+      saveIcs(icsFor(list), "slava.ics");
+    };
+  }
   /* ---------- Tägliche Lesungen und Speiseregeln (Daten: orthocal.info, julianisch/slawisch) ---------- */
   const BOOKS_SHORT = { Mt: ["Mt", "Мт"], Mk: ["Mk", "Мк"], Lk: ["Lk", "Лк"], Jn: ["Joh", "Јн"], Acts: ["Apg", "Дап"], Rom: ["Röm", "Рим"], "1Cor": ["1 Kor", "1 Кор"], "2Cor": ["2 Kor", "2 Кор"], Gal: ["Gal", "Гал"], Eph: ["Eph", "Еф"], Phil: ["Phil", "Флп"], Col: ["Kol", "Кол"], "1Thess": ["1 Thess", "1 Сол"], "2Thess": ["2 Thess", "2 Сол"], "1Tim": ["1 Tim", "1 Тим"], "2Tim": ["2 Tim", "2 Тим"], Tit: ["Tit", "Тит"], Heb: ["Hebr", "Јев"], Jas: ["Jak", "Јак"], "1Pet": ["1 Petr", "1 Пт"], "2Pet": ["2 Petr", "2 Пт"], "1Jn": ["1 Joh", "1 Јн"], "2Jn": ["2 Joh", "2 Јн"], "3Jn": ["3 Joh", "3 Јн"], Jude: ["Jud", "Јуд"] };
   const DAILY_T0 = Date.UTC(+DAILY.start.slice(0, 4), +DAILY.start.slice(5, 7) - 1, +DAILY.start.slice(8, 10));
@@ -545,10 +794,10 @@
   function readingsBlock(ts, compact) {
     const dd = dailyFor(ts);
     if (!dd) return cal() === "julian" ? "" : `<p class="small muted" style="margin:6px 0 0">${esc(t("rdOnlyJulian"))}</p>`;
-    const line = r => ({ de: fmtRef(r.ref, 0), sr: fmtRef(r.ref, 1) });
+    const line = r => r.ref;
     const ep = dd.refs.filter(r => r.kind === "E"), go = dd.refs.filter(r => r.kind === "G");
     const head = [dd.title ? t("rdSundayAfterPentecost").replace("{n}", dd.title.slice(1)) : "", dd.tone ? t("rdTone").replace("{n}", dd.tone) : ""].filter(Boolean).join(" · ");
-    const body = dd.refs.length ? `${ep.length ? `<p class="small" style="margin:4px 0 0"><b>${esc(t("rdApostle"))}:</b> ${ep.map(r => E(line(r))).join(" · ")}</p>` : ""}${go.length ? `<p class="small" style="margin:4px 0 0"><b>${esc(t("rdGospel"))}:</b> ${go.map(r => E(line(r))).join(" · ")}</p>` : ""}`
+    const body = dd.refs.length ? `${ep.length ? `<p class="small" style="margin:4px 0 0"><b>${esc(t("rdApostle"))}:</b> ${ep.map(r => readLink(line(r))).join(" · ")}</p>` : ""}${go.length ? `<p class="small" style="margin:4px 0 0"><b>${esc(t("rdGospel"))}:</b> ${go.map(r => readLink(line(r))).join(" · ")}</p>` : ""}`
       : `<p class="small muted" style="margin:4px 0 0">${esc(t("rdNoLiturgy"))}</p>`;
     return `<div class="readings"${compact ? "" : ' style="margin-top:10px"'}><div class="eyebrow" style="margin:0">${esc(t("rdTitle"))}${head ? " · " + esc(head) : ""}</div>${body}</div>`;
   }
@@ -709,6 +958,7 @@
     const doneN = BIBLE_LESSONS.filter(l => S.done[l.id]).length;
     let html = `<h1>${esc(t("biblePlan"))}</h1><p class="muted">${esc(t("bibleIntro"))}</p>
       <div class="progressbar" style="margin:6px 0 16px"><i style="width:${Math.round(doneN / BIBLE_LESSONS.length * 100)}%"></i></div>
+      <a class="item" href="#nt"><span class="grow"><span class="t">${esc(t("ntTitle"))}</span><span class="s">${esc(t("ntSub"))}</span></span><span class="chev">${ic("chev")}</span></a>
       <a class="item" href="#plans"><span class="grow"><span class="t">${esc(t("plansTitle"))}</span><span class="s">${PLANS.map(p => E(p.title)).join(" · ")}</span></span><span class="chev">${ic("chev")}</span></a>
       <div class="seg" style="margin-bottom:12px" role="group" aria-label="${esc(t("bvLabel"))}">${[["path", "bvPath"], ["books", "bvBooks"]].map(([v, k]) => `<button data-bview="${v}" class="${bibleView() === v ? "on" : ""}" aria-pressed="${bibleView() === v}">${esc(t(k))}</button>`).join("")}</div>
       ${bibleView() === "books" ? BIBLE.groups.map(g => { const ls = BIBLE.books.filter(b => b[1] === g.id).flatMap(b => byBook[b[0]] || []);
@@ -1398,7 +1648,7 @@
   function viewMore() {
     return `<h1>${esc(t("navMore"))}</h1>
       <div class="sh">${esc(t("gFaith"))}</div><ul class="list">
-        ${navItem("prayers", "candle", t("prayersTitle"))}${navItem("calendar", "calendar", t("calTitle"))}${navItem("feasts", "cross", t("gfTitle"))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("gallery", "frame", t("galTitle"))}${navItem("icons", "frame", t("iconsTitle"))}
+        ${navItem("prayers", "candle", t("prayersTitle"))}${navItem("calendar", "calendar", t("calTitle"))}${navItem("slava", "candle", t("slavaTitle"), t("slavaSub"))}${navItem("lent", "cross", t("lentTitle"), t("lentSub"))}${navItem("feasts", "cross", t("gfTitle"))}${navItem("liturgy", "chalice", t("litTitle"))}${navItem("gallery", "frame", t("galTitle"))}${navItem("icons", "frame", t("iconsTitle"))}
       </ul>
       <div class="sh">${esc(t("gLearn"))}</div><ul class="list">
         ${navItem("marks", "star", t("marksTitle"), S.marks.length + S.prayerFavs.length ? String(S.marks.length + S.prayerFavs.length) : "")}${navItem("books", "library", t("navBooks"), t("booksIntro"))}${navItem("glossary", "text", t("glossary"))}${navItem("ask", "search", t("askTitle"))}
@@ -1556,7 +1806,7 @@
     const a2 = document.getElementById("a2ok"); if (a2) a2.onclick = () => { S.a2hsDismissed = true; save(); render(); };
     const bl = document.getElementById("bklater"); if (bl) bl.onclick = () => { S.backupAsk = today(); save(); render(); };
     const bn = document.getElementById("bknow"); if (bn) bn.addEventListener("click", () => { S.backupAsk = today(); save(); }); const b = document.getElementById("prayedbtn"); if (b) b.onclick = () => { S.prayed = S.prayed || []; const d = today(); const i = S.prayed.indexOf(d); if (i >= 0) S.prayed.splice(i, 1); else { S.prayed.push(d); S.prayed = S.prayed.slice(-400); } save(); render(); }; }
-  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore, person: bindIconImgs, saints: bindSaints, gallery: bindGallery, iconquiz: bindIconQuiz };
+  const BINDERS = { plan: bindPlan, home: bindHome, calendar: bindCalendar, prayers: bindPrayers, prayercat: bindPrayers, lesson: bindLesson, quiz: bindQuiz, review: bindReview, cards: bindCards, notes: bindNotes, prefs: bindPrefs, ask: bindAsk, books: bindBooks, glossary: bindGlossary, bible: bindBible, feast: bindFeast, icons: bindIcons, more: bindMore, person: bindIconImgs, saints: bindSaints, gallery: bindGallery, iconquiz: bindIconQuiz, read: bindRead, nt: bindNT, rope: bindRope, slava: bindSlava, confess: bindConfess };
 
   /* Test-Schnittstelle (nur lesend + Reset), wird von automatischen Tests genutzt */
   window.__OP = { icsFor: f => icsFor(f), get state() { return JSON.parse(JSON.stringify(S)); }, translit, CARDS, ALL_LESSONS, runSearch: q => runSearch(q).map(e => e.href) };

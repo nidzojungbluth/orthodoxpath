@@ -414,3 +414,115 @@ html.readmode main { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
 .opts .opt.right { border-color: #3f9b5a; background: rgba(63,155,90,.18); }
 .opts .opt.wrong { border-color: #c0504d; background: rgba(192,80,77,.16); }
 .readings { border-top: 1px solid var(--line); padding-top: 8px; }
+
+/* Bibeltext */
+.scripture .bibletext { font-family: "OP Serif", Georgia, serif; font-size: 1.12em; line-height: 1.75; margin: 0 0 10px; }
+.scripture sup { color: var(--gold); font-size: .65em; font-weight: 700; margin: 0 3px 0 4px; font-family: -apple-system, system-ui, sans-serif; }
+.scripture h3 { margin: 10px 0 4px; font-size: 1em; }
+.chgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); gap: 8px; padding: 6px 14px 14px; }
+.chgrid a { display: flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 10px; background: var(--card2); color: inherit; text-decoration: none; font-weight: 600; }
+.ntbook summary { list-style: none; } .ntbook summary::-webkit-details-marker { display: none; }
+.ntbook[open] .chev { transform: rotate(90deg); }
+/* Gebetsschnur */
+.ropeprayer { font-family: "OP Serif", Georgia, serif; font-size: 1.15em; text-align: center; margin: 4px 0 14px; }
+.ropebtn { position: relative; display: block; width: min(78vw, 280px); aspect-ratio: 1; margin: 6px auto; border: 0; background: none; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; color: inherit; }
+.ropebtn svg { width: 100%; height: 100%; }
+.ropebtn .ropebg { fill: var(--card); stroke: var(--line); stroke-width: 14; }
+.ropebtn .ropefg { fill: none; stroke: var(--gold); stroke-width: 14; stroke-linecap: round; transition: stroke-dashoffset .25s; }
+.ropebtn .ropenum { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 3.2em; font-weight: 700; font-variant-numeric: tabular-nums lining-nums; }
+.ropebtn .ropegoal { position: absolute; left: 0; right: 0; bottom: 30%; text-align: center; color: var(--muted); }
+.ropebtn:active { transform: scale(.97); }
+.center { text-align: center; }
+
+/* Beichtvorbereitung */
+.confgroup { border: 0; padding: 0; margin: 14px 0 0; }
+.confgroup legend { font-weight: 600; color: var(--gold); padding: 0; margin-bottom: 4px; }
+.confq { display: flex; gap: 12px; align-items: flex-start; padding: 11px 0; min-height: 44px; border-top: 1px solid var(--line); cursor: pointer; }
+.confq input { width: 22px; height: 22px; flex: none; margin: 1px 0 0; accent-color: var(--gold); }
+.conflist { margin: 0 0 12px; padding-left: 20px; }
+.conflist li { margin: 6px 0; }
+
+/* =========================================================
+   Designsystem 3 – Apple-Stil (iOS), Farben unverändert.
+   Systemschrift für die Oberfläche, Serifenschrift nur für
+   Gebete und Bibeltext; große Titel, gruppierte Listen,
+   durchscheinende Leisten, gefüllte runde Schaltflächen.
+   ========================================================= */
+:root { --radius: 14px; --r-sm: 10px; --rowsep: color-mix(in srgb, var(--text) 13%, transparent); }
+body { font-size: calc(17px * var(--fs)); line-height: 1.47; letter-spacing: -.01em; }
+h1, h2, h3, .big, .stat b, .medal, .ring b, .glo .gt, .top .brand, .card.hero .herotitle { font-family: var(--sans); }
+h1 { font-size: 2em; font-weight: 700; letter-spacing: -.022em; line-height: 1.12; margin-bottom: .35em; }
+h2 { font-size: 1.3em; font-weight: 700; letter-spacing: -.018em; line-height: 1.2; }
+h3 { font-size: 1.06em; font-weight: 600; letter-spacing: -.012em; line-height: 1.3; }
+.card.hero .herotitle { font-size: 1.36em; font-weight: 700; }
+.big, .stat b, .ring b { font-weight: 700; letter-spacing: -.02em; }
+.glo .gt { font-size: 1.05em; }
+b, strong { font-weight: 600; }
+.wrap { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+main { padding-top: 12px; }
+
+/* Leisten: durchscheinend, Haarlinie */
+.top { background: color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: .5px solid var(--rowsep); }
+.top .wrap { height: 44px; }
+.top .brand { font-size: 1em; font-weight: 600; letter-spacing: -.01em; color: var(--text); }
+.top .brand svg { width: 14px; height: 19px; }
+.iconbtn { border: none; background: transparent; color: var(--gold2); height: 44px; padding: 0 6px; font-size: .94em; font-weight: 400; letter-spacing: -.01em; }
+.iconbtn .ic { width: 20px; height: 20px; color: var(--gold2); }
+.backbtn { font-size: 1em; font-weight: 400; margin-left: -8px; }
+.backbtn .ic { width: 24px; height: 24px; }
+.tabs { background: color-mix(in srgb, var(--bg2) 90%, transparent); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-top: .5px solid var(--rowsep); }
+.tab { padding: 7px 2px 4px; min-height: 50px; gap: 2px; font-weight: 500; }
+.tab svg { width: 25px; height: 25px; stroke-width: 1.7; }
+.tab.active::before { display: none; }
+.tab.active svg { stroke-width: 2.1; }
+body { padding-bottom: calc(74px + env(safe-area-inset-bottom)); }
+
+/* Karten und gruppierte Listen */
+.card { border: none; border-radius: var(--radius); padding: 16px; margin-bottom: 16px; box-shadow: none; }
+html[data-theme="light"] .card, html[data-theme="light"] .list { box-shadow: 0 1px 2px rgba(60, 40, 10, .06); }
+.card.hero { border: none; padding: 18px 16px; background: linear-gradient(160deg, var(--goldsoft), transparent 70%), var(--card); }
+a.card { display: block; text-decoration: none; color: inherit; }
+.card.notice { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold) 40%, transparent); }
+.eyebrow { font-size: .76em; letter-spacing: .02em; font-weight: 600; margin-bottom: 4px; }
+.sh { font-size: .78em; letter-spacing: .02em; font-weight: 400; margin: 22px 16px 7px; }
+.list { border: none; border-radius: var(--radius); margin-bottom: 16px; }
+.item { border: none; border-radius: var(--radius); min-height: 44px; padding: 11px 16px; gap: 12px; margin-bottom: 16px; }
+.list > li > .item, .list > li.item { min-height: 44px; }
+.list > li + li > .item::before, .list > li + li.item::before { height: .5px; background: var(--rowsep); }
+.list > li + li > .item:has(.ico, .medal, .check)::before { left: 58px; }
+.item .t { font-weight: 400; font-size: 1em; }
+.item .s { font-size: .82em; margin-top: 1px; }
+.item .ico { width: 30px; height: 30px; border-radius: 7px; background: var(--gold); color: var(--onGold); }
+.item .ico .ic { width: 18px; height: 18px; }
+.item:active, .tile:active { background: var(--card2); }
+.chev { opacity: .45; }
+.chev .ic { width: 14px; height: 14px; stroke-width: 2.4; }
+.tile { border: none; border-radius: var(--radius); }
+.tile .ico { border-radius: 10px; background: var(--gold); color: var(--onGold); }
+.tile .tl { font-weight: 500; }
+details { border-top: .5px solid var(--rowsep); }
+.refline, .qa, .confq { border-color: var(--rowsep); }
+
+/* Schaltflächen und Auswahl */
+.btn { min-height: 50px; border-radius: 14px; border: none; font-weight: 600; letter-spacing: -.01em; transition: opacity .15s; }
+.btn:active { opacity: .7; }
+.btn.ghost { border: none; background: var(--goldsoft); color: var(--gold2); }
+.btn.danger { border: none; background: color-mix(in srgb, var(--red) 16%, transparent); }
+.toolbar .btn.small, .toolbar .star { min-height: 36px; border: none; border-radius: 99px; background: var(--card); font-weight: 500; }
+html[data-theme="light"] .toolbar .btn.small, html[data-theme="light"] .toolbar .star { background: var(--card2); }
+.toolbar { flex-wrap: wrap; }
+.seg { gap: 0; padding: 2px; border: none; border-radius: 9px; background: color-mix(in srgb, var(--text) 10%, transparent); }
+.seg button { min-height: 36px; border-radius: 7px; font-weight: 500; color: var(--text); transition: background .2s var(--ease); }
+.seg button.on { background: var(--gold); color: var(--onGold); font-weight: 600; box-shadow: 0 1px 3px rgba(0, 0, 0, .25); }
+.badge { border: none; font-weight: 600; padding: 3px 9px; background: color-mix(in srgb, currentColor 14%, transparent); }
+.opt { border: none; border-radius: 12px; background: var(--card2); }
+.opt.correct { box-shadow: inset 0 0 0 1.5px var(--green); }
+.opt.wrong { box-shadow: inset 0 0 0 1.5px var(--red); }
+textarea, input[type=text], input[type=password], input[type=search], select { border: none; border-radius: 10px; background: color-mix(in srgb, var(--text) 8%, transparent); }
+select { width: 100%; min-height: 44px; padding: 10px 12px; font: inherit; color: var(--text); }
+label { font-weight: 500; font-size: .88em; color: var(--muted); }
+.confq { font-weight: 400; font-size: 1em; color: var(--text); margin: 0; }
+.progressbar { height: 5px; }
+.toast { border: none; border-radius: 99px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+@media (prefers-reduced-motion: reduce) { .btn, .seg button { transition: none; } }
+html[data-theme="light"] .card .list { box-shadow: none; }

@@ -1,0 +1,43 @@
+/* Funktionen, die echte Dateien vom Server brauchen (Bibeltext), gegen den lokalen PWA-Server: python3 -m http.server 8765 --directory pwa */
+const { chromium } = require("playwright");
+let fails = 0, n = 0; const ok = (c, m) => { n++; if (!c) { fails++; console.log("FAIL:", m); } };
+(async () => {
+  const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 390, height: 844 } }); const p = await ctx.newPage();
+  await p.goto("http://localhost:8765/"); await p.click("[data-lang=de]"); await p.click("#onbstart"); await p.waitForTimeout(300);
+  await p.evaluate(() => { location.hash = "read-" + encodeURIComponent("{Lk}11.1-10"); }); await p.waitForTimeout(1200);
+  ok(await p.evaluate(() => /lehre uns beten/.test(document.getElementById("scripture").textContent) && document.querySelectorAll("#scripture sup").length === 10), "Lesung Lk 11,1–10 (10 Verse, Luther 1912)");
+  await p.evaluate(() => { location.hash = "read-" + encodeURIComponent("{Tit}2.11-14, 3.4-7"); }); await p.waitForTimeout(1200);
+  ok(await p.evaluate(() => document.querySelectorAll("#scripture sup").length === 8 && document.querySelectorAll("#scripture h3").length === 2), "Zusammengesetzte Lesung Tit 2,11–14; 3,4–7");
+  await p.evaluate(() => { location.hash = "read-" + encodeURIComponent("{Jn}1"); }); await p.waitForTimeout(1200);
+  ok(await p.evaluate(() => /Im Anfang war das Wort/.test(document.getElementById("scripture").textContent) && document.querySelectorAll(".galnav a").length === 1), "Ganzes Kapitel Joh 1 mit Weiter-Knopf");
+  await p.evaluate(() => { localStorage.setItem("orthodoxpath_v1", JSON.stringify(Object.assign(JSON.parse(localStorage.getItem("orthodoxpath_v1")), { lang: "sr-cyr" }))); location.hash = "read-" + encodeURIComponent("{Lk}11.1-2"); location.reload(); });
+  await p.waitForTimeout(1500);
+  ok(await p.evaluate(() => /Научи нас молити се/.test(document.getElementById("scripture").textContent)), "Serbisch: Daničić–Karadžić");
+  await p.evaluate(() => { location.hash = "home"; }); await p.waitForTimeout(400);
+  ok(await p.$$eval(".today .readings a[href^='#read-']", a => a.length) >= 1 || await p.evaluate(() => /не служи/.test(document.querySelector(".today").textContent)), "Tageslesungen verlinkt");
+  await p.evaluate(() => { location.hash = "rope"; }); await p.waitForTimeout(300);
+  for (let i = 0; i < 3; i++) { await p.click("#ropetap"); await p.waitForTimeout(80); }
+  ok(await p.$eval(".ropenum", e => e.textContent === "3"), "Gebetsschnur zählt");
+  await p.click('[data-seg="ropeGoal"] button[data-v="33"]'); await p.waitForTimeout(200);
+  ok(await p.$eval(".ropegoal", e => /33/.test(e.textContent)), "Gebetsschnur Ziel 33");
+  await p.evaluate(() => { location.hash = "slava"; }); await p.waitForTimeout(300);
+  await p.selectOption("#slavasel", "nikoljdan"); await p.waitForTimeout(300);
+  ok(await p.evaluate(() => { const h = document.querySelector(".hero"); return h && /Nikolaus|Никола/.test(h.textContent) && /19/.test(h.textContent) && !!document.getElementById("slavaics"); }), "Slava Nikoljdan: 19. Dezember (julianisch)");
+  ok(await p.evaluate(() => JSON.parse(localStorage.getItem("orthodoxpath_v1")).slava === "nikoljdan"), "Slava gespeichert");
+  ok(await p.$$eval(".card .badge", b => b.length >= 4), "Slava-Erklärung mit Kennzeichnung");
+  await p.evaluate(() => { location.hash = "confess"; }); await p.waitForTimeout(300);
+  await p.click('[data-cq="1-1"]'); await p.click('[data-cq="2-1"]'); await p.waitForTimeout(150);
+  ok(await p.$$eval("#confmine li", l => l.length) === 2, "Beichtvorbereitung: Merkliste");
+  ok(await p.evaluate(() => !/confSel|1-1/.test(localStorage.getItem("orthodoxpath_v1")) && !Object.keys(localStorage).some(k => /conf/i.test(k))), "Beichtvorbereitung speichert nichts");
+  await p.click("#confclear"); await p.waitForTimeout(200);
+  ok(await p.$$eval("#confmine li", l => l.length) === 0 && await p.$$eval("[data-cq]:checked", l => l.length) === 0, "Beichtvorbereitung: leeren");
+  await p.evaluate(() => { location.hash = "lent"; }); await p.waitForTimeout(300);
+  ok(await p.evaluate(() => document.querySelectorAll("main .card h3").length >= 13 && document.querySelectorAll("main a[href^='#read-']").length === 12), "Fastenzeit-Begleiter: 6 Wochen + Karwoche mit Lesungen");
+  await p.evaluate(() => { window.__sp = []; const ss = window.speechSynthesis; ss.speak = u => { window.__sp.push([u.lang, u.text]); }; ss.cancel = () => {}; });
+  await p.click("#speakbtn"); await p.waitForTimeout(200);
+  ok(await p.evaluate(() => window.__sp.length === 1 && /^(sr|hr)/.test(window.__sp[0][0]) && document.getElementById("speakbtn").getAttribute("aria-pressed") === "true"), "Vorlesen startet (Serbisch: sr- oder hr-Stimme)");
+  ok(await p.evaluate(() => /^hr/.test(window.__sp[0][0]) ? !/[\u0400-\u04FF]/.test(window.__sp[0][1]) : true), "Vorlesen: ohne serbische Stimme lateinische Umschrift");
+  await p.click("#speakbtn"); await p.waitForTimeout(100);
+  ok(await p.evaluate(() => document.getElementById("speakbtn").getAttribute("aria-pressed") === "false"), "Vorlesen stoppt");
+  console.log(n + " Prüfungen, " + fails + " Fehler."); await b.close(); process.exit(fails ? 1 : 0);
+})();
