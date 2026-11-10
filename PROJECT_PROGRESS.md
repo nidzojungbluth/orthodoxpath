@@ -1,7 +1,7 @@
 # OrthodoxPath – Projektfortschritt
 
 **Live-App:** https://nidzojungbluth.github.io/orthodoxpath/
-**Aktuelle Version:** 3.19.0 (5. November 2026)
+**Aktuelle Version:** 3.20.0 (5. November 2026)
 **Technik:** Installierbare Web-App (PWA), eine HTML-Datei + Service Worker, keine externen Dienste, keine Kosten, offline nutzbar. Sprachen: Deutsch, Serbisch (kyrillisch und lateinisch – Latein wird automatisch aus Kyrillisch erzeugt).
 
 ---
@@ -32,6 +32,11 @@
 | Persönlich | Notizbuch (optional AES-verschlüsselt), gespeicherte Bibelstellen, Wochenübersicht ohne Druck, „Heute gebetet“, Impuls des Tages, Wochenziel, Sicherung kopieren/einfügen |
 | Fragenhilfe | Durchsucht geprüfte Inhalte (keine KI); verweist bei persönlichen Fragen auf den Priester; Krisenhinweis bei entsprechenden Begriffen |
 | Design | Premium-Designsystem 2.4: tiefes Schwarz/Anthrazit, Gold, cremefarbene Schrift; eingebettete Überschriftenschrift (Cormorant Garamond, OFL, offline); einheitliche Linien-Icons statt Emojis; gruppierte Listen im iOS-Stil; Schnellzugriff auf der Startseite; Medaillons im Heiligenverzeichnis; Bottom-Sheets mit Griff; Safe Areas; heller Modus; Schriftgrößen; Bewegung reduzierbar |
+
+## Version 3.20 (Nutzerwunsch: Gebete für mehr Anlässe)
+
+- 12 neue Gebetsthemen mit 23 neuen Texten: nach einer Trennung, für Partner/Ehe, vor und nach dem Training, vor einer Reise, Prüfung/Bewerbung/Arbeitssuche, Zorn und Streit, wichtige Entscheidung, für die, die mir Böses tun, Einsamkeit, für die Kinder, Frieden in der Welt, Dank nach Genesung.
+- Klar gekennzeichnet: 14 „Vorschlag der App – freie Worte“ (keine kirchlichen Texte) und 9 Bibelstellen in eigener Übertragung (Ps 33,19; 1 Kor 13,4–8; 1 Kor 6,19–20; Ps 120,7–8; Mt 6,31–33; Jak 1,19–20; Lk 6,27–28; Ps 26,10), ergänzt um passende vorhandene traditionelle Gebete.
 
 ## Version 3.19 (Nutzerwunsch: alle Vorschläge umsetzen)
 

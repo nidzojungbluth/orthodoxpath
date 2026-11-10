@@ -1,6 +1,6 @@
 # OrthodoxPath – Projektstatus
 
-Stand: 5. November 2026 · Version 3.19.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
+Stand: 5. November 2026 · Version 3.20.0 · erstellt im Rahmen der Planungsphase (keine Code-Änderungen)
 
 ## 1. Kurzbeschreibung
 Kostenlose, zweisprachige (Deutsch / Serbisch kyrillisch + lateinisch) orthodoxe Lern- und Glaubens-App als **Progressive Web App (PWA)** fürs iPhone. Kein Konto, keine Werbung, keine Server-Datenhaltung, offline nutzbar.
